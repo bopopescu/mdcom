@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<resources> 
+	<color name="white">#FFFFFF</color>
+	<color name="black">#000000</color>
+	<color name="title_color">#305773</color>
+	<color name="message">#0c2f4b</color>
+	<color name="message_from">#093655</color>
+	<color name="message_time">#747577</color>
+	<color name="message_backgroud">#e4edf4</color>
+	<color name="divider">#9cb3c3</color>
+	<color name="common_bg">#d8e4ec</color>
+	<color name="login">#403841</color>
+	<color name="contact_color">#0c7dbf</color>
+	<color name="red">#ff0000</color>
+	<color name="box_color">#f7f7f7</color>
+	<color name="gray">#999999</color>
+	<color name="threading">#7f9db0</color>
+	<color name="unread_message_color">#03a6d5</color>
+	<color name="splash_color">#DDE8EF</color>
+</resources>

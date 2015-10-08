@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/btClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/button_common_selector"
+            android:padding="5dp"
+            android:text="@string/close"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvDC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:ellipsize="middle"
+            android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
+            android:text="@string/loading"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/button_floder_selector" />
+
+        <ProgressBar
+            android:id="@+id/pbRefresh"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="7dp"
+            android:layout_toLeftOf="@id/btSelect" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlContent"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1.0"
+        android:background="@color/common_bg"
+        android:visibility="gone" >
+        
+        <TextView
+            android:id="@+id/tvSearchHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/loading"
+            android:textColor="@color/message"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@id/android:list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/tvSearchHeader"
+            android:divider="@color/divider"
+            android:dividerHeight="0.5dp"
+            android:scrollbars="none"
+            android:scrollingCache="true" >
+        </ListView>
+
+        <TextView
+            android:id="@id/android:empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_data" />
+
+        <com.doctorcom.physician.utils.QuickAlphabeticBar
+            android:id="@+id/fast_scroller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="top|right|center"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:src="@drawable/dic_background" />
+
+        <TextView
+            android:id="@+id/fast_position"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_margin="34dip"
+            android:background="@drawable/sort_icon_bg_click"
+            android:gravity="center"
+            android:padding="2dip"
+            android:textColor="#404040"
+            android:textSize="48sp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <ProgressBar
+            android:id="@+id/progressbar_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/linearRetry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="13dp"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/textview_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/search_failed_retry"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/message_from" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="13dp" >
+
+                <Button
+                    android:id="@+id/button_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:text="@string/yes" />
+
+                <Button
+                    android:id="@+id/button_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/no"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:background="@drawable/input"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:contentDescription="@string/no_content"
+            android:src="@drawable/icon_search" />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/framelayout_contacts_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dropdown_top_01" >
+
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/listview_user_select"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@drawable/dropdown_line"
+        android:dividerHeight="0.5dp"
+        android:listSelector="#00000000"
+        android:scrollbars="none" >
+
+    </ListView>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dropdown_bottom_02" >
+
+    </FrameLayout>
+
+</LinearLayout>

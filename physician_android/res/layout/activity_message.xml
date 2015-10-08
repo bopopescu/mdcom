@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bar"
+        android:gravity="center_vertical" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/button_back_selector"
+            android:onClick="onBack"
+            android:text="@string/back"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvDC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/of"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_previous"
+            android:onClick="onPrevious" />
+
+        <Button
+            android:id="@+id/btNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/button_next"
+            android:onClick="onNext" />
+
+        <Button
+            android:id="@+id/btRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/top_button_delete_disable"
+            android:enabled="false"
+            android:onClick="onRemove" />
+
+    </TableRow>
+
+    <FrameLayout
+        android:id="@+id/framelayout_contain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/common_bg" >
+
+    </FrameLayout>
+
+</LinearLayout>

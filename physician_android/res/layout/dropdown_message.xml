@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btReceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dropdown_top_active"
+        android:paddingRight="5dp"
+        android:paddingTop="13dp"
+        android:text="@string/received"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dropdown_bottom"
+        android:paddingBottom="13dp"
+        android:paddingRight="10dp"
+        android:text="@string/sent"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>

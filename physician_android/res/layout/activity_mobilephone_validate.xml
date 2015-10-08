@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/btBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/button_back_selector"
+            android:text="@string/back"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/ivPreferLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="7dp"
+            android:contentDescription="@string/no_content" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/validate_phone"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg"
+        android:orientation="vertical"
+        android:padding="15dp" >
+
+        <TextView
+            android:id="@+id/tvValidateInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.1"
+            android:text="@string/code_send_info"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="17dp"
+            android:gravity="center_vertical" >
+
+            <EditText
+                android:id="@+id/etPinCode"
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/input"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="4" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/btSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/button_state_selector"
+                android:paddingLeft="5dp"
+                android:paddingRight="3dp"
+                android:text="@string/submit"
+                android:textColor="@color/message"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvResendInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="5dp"
+            android:lineSpacingMultiplier="1.1"
+            android:text="@string/code_resend_info"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btResend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_state_selector"
+            android:enabled="false"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="@string/resend"
+            android:textColor="@color/message"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

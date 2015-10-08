@@ -1,0 +1,314 @@
+<resources>
+
+    <string name="app_name">DoctorCom</string>
+    <string name="license_title">END USER LICENSE AGREEMENT</string>
+    <string name="license_content">	   &lt;p>&lt;b>This End User License Agreement (“Agreement”) is a binding legal contract between you (either an individual or a legal entity) and DoctorCom, Inc. (“DoctorCom”).  By downloading, installing, accessing or using the accompanying software (the “Application”) you will be bound by the terms of this Agreement.  If you do not agree to the terms of this Agreement, DoctorCom is not willing to grant you any right to use or access the Application to you.  In such event, you may not download, install, access, use or copy the Application.&lt;/b> &lt;/p> 
+&lt;p>The Application is licensed to you, not sold. Except for the limited license granted in this Agreement, DoctorCom and its licensors retain all right, title and interest in the Application and all proprietary rights in the Application, including copyrights, patents, trademarks and trade secret rights. &lt;/p> 
+&lt;p>&lt;b>1. Grant of License. &lt;/b> DoctorCom grants you a revocable, nontransferable (except as provided below), nonexclusive license to use the object code version of the Application for use on your mobile device.&lt;/p>  
+&lt;p>&lt;b>2. Limitations On License.&lt;/b>  The license granted to you in this Agreement is restricted as follows: &lt;/p> 
+&lt;p>&lt;b>•	Limitations on Copying and Distribution.&lt;/b>  You may not copy or distribute the Application except to the extent that copying is necessary to use the Application for purposes set forth herein. &lt;/p> 
+&lt;p>&lt;b>•	Limitations on Reverse Engineering and Modification.&lt;/b>  You may not reverse engineer, decompile, disassemble, modify or create works derivative of the Application. &lt;/p>
+&lt;p>&lt;b>•	Sublicense, Rental and Third Party Use. &lt;/b> You may not assign, sublicense, rent, timeshare, loan, lease or otherwise transfer the Application, or directly or indirectly permit any third party to use or copy the Application. &lt;/p>   
+&lt;p>&lt;b>•	Proprietary Notices. &lt;/b> You may not remove any proprietary notices (e.g., copyright and trademark notices) from the Application. &lt;/p>
+&lt;p>&lt;b>•	Use in Accordance with Documentation.&lt;/b>  All use of the Application must be in accordance with its then current documentation.&lt;/p>
+&lt;p>&lt;b>•	Compliance with Applicable Law.&lt;/b> You are solely responsible for ensuring your use of the Application is in compliance with all applicable foreign, federal, state and local laws, and rules and regulations.  &lt;/p>
+&lt;p>&lt;b>3. Account Set-Up. &lt;/b> You agree to: (a) provide true, accurate, current, and complete information when registering to use the Application and establishing your account (“Registration Information”) and (b) maintain and promptly update the Registration Information to keep it true, accurate, current, and complete. If you provide any information that is untrue, inaccurate, not current, or incomplete, or DoctorCom has reasonable grounds to suspect that such information is untrue, inaccurate, not current, or incomplete, DoctorCom may suspend or terminate your account. You are entirely responsible for maintaining the confidentiality of any passwords and any usage and activities that occur in connection with your account. You agree not to allow others to access your account or utilize your password.  &lt;/p>
+&lt;p>&lt;b>4. Fees. &lt;/b> You agree to pay the license fees for the rights as set forth in the separate Order Form or similar ordering document provided by DoctorCom describing the license fees and any other fees owed by you. All fees are non-cancellable and non-refundable.&lt;/p> 
+&lt;p>&lt;b>5. Termination.&lt;/b>  This license will automatically terminate in the event you breach any of its terms.  In the event of a claim of intellectual property infringement by any third party relating to the Application, DoctorCom may immediately terminate this Agreement.   &lt;/p>
+&lt;p>&lt;b>6. Privacy. &lt;/b> DoctorCom recognizes the importance of respecting the privacy of those who visit its websites. The DoctorCom Privacy Policy  provides a description of how DoctorCom collects, uses, shares and protects personal information on its website, as well as the choices and access rights you have in regards to such personal information. &lt;/p>
+&lt;p>&lt;b>7. Website Terms of Use. &lt;/b> Your use of the DoctorCom website and services available through the website are governed by DoctorCom’s Website Terms of Use.&lt;/p>
+&lt;p>&lt;b>8. Location-Enabled Features. &lt;/b> Certain location-enabled functionality made available in the Application is provided by Yahoo, Inc. (“Yahoo”).  Your use of that functionality is subject to Yahoo’s terms and conditions, available at  http://info.yahoo.com/privacy/us/yahoo/location/ (as updated from time to time).  You must exercise your own judgment as to the adequacy and appropriatenesavailables of the information.  All location-based information is provided entirely “as-is,” without warranties of any kind.&lt;/p>
+&lt;p>&lt;b>9. Warranty Disclaimer. &lt;/b> THE APPLICATION IS PROVIDED ON AN “AS AVAILABLE,” “AS IS” BASIS.  TO THE MAXIMUM EXTENT PERMITTED BY LAW, DOCTORCOM AND ITS LICENSORS DISCLAIM ALL WARRANTIES WITH RESPECT TO THE APPLICATION, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, TITLE, MERCHANTABILITY, QUITE ENJOYMENT, QUALITY OF INFORMATION, AND FITNESS FOR A PARTICULAR PURPOSE.  DOCTORCOM DOES NOT WARRANT THAT THE APPLICATION WILL MEET YOUR REQUIREMENTS, OR THAT THE OPERATION OF THE APPLICATION WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT DEFECTS IN THE APPLICATION WILL BE CORRECTED.&lt;/p>
+&lt;p>YOUR WIRELESS CARRIER, THE MANUFACTURER AND RETAILER OF YOUR MOBILE DEVICE, THE DEVELOPER OF THE OPERATING SYSTEM FOR YOUR MOBILE DEVICE, AND THE OPERATOR OF ANY APPLICATION STORE OR SIMILAR SERVICE THROUGH WHICH YOU OBTAIN THE APPLICATION (COLLECTIVELY, THE “THIRD PARTIES”) ARE NOT PARTIES TO THIS AGREEMENT AND THEY DO NOT OWN AND ARE NOT RESPONSIBLE FOR THE APPLICATION.  YOU AGREE (I) THE THIRD PARTIES DISCLAIM ALL WARRANTIES, EXPRESS AND IMPLIED, WITH RESPECT TO THE APPLICATION, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, TITLE, MERCHANTABILITY, QUIET ENJOYMENT, QUALITY OF INFORMATION, AND FITNESS FOR A PARTICULAR PURPOSE; (II) IN NO EVENT WILL THE THIRD PARTIES BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, PUNITIVE, EXEMPLARY, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES (WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE) ARISING OUT OF THIS AGREEMENT OR THE APPLICATION, EVEN IF THEY HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR LOSSES; (III) IN ANY EVENT, THE MAXIMUM LIABILITY OF ANY THIRD PARTY FOR ALL CLAIMS (WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE) OF EVERY KIND WILL IN NOT EXCEED FIVE DOLLARS ($5.00); AND (IV) YOU WAIVE ANY AND ALL CLAIMS, NOW KNOWN OR LATER DISCOVERED, THAT YOU MAY HAVE AGAINST THE THIRD PARTIES ARISING OUT OF THE APPLICATION AND THIS AGREEMENT.&lt;/p>
+&lt;p>&lt;b>10. Medical Disclaimer&lt;/b> Any content transferred by, or included on, the Application, including without limitation, text, copy, audio, video, photographs, illustrations, graphics and other visuals, or any medical information or records is for informational purposes only and does not constitute professional medical advice, diagnosis, treatment or recommendations of any kind and should not be used to make final or determinative medical decisions or treatment decisions. You should always review and analyze all original medical records or test information prior to providing professional medical treatment. Reliance on any information appearing on or transferred to the Application, whether provided by the Company, its content provides, its clients, or others, is solely at your own risk. &lt;/p>
+&lt;p>&lt;b>11. Limitation Of Liability. &lt;/b> TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT WILL DOCTORCOM OR ITS SUPPLIERS/LICENSORS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, OR INDIRECT DAMAGES (WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE), WHICH INCLUDE, WITHOUT LIMITATION, DAMAGES FOR PERSONAL INJURY, LOST PROFITS, LOST DATA AND BUSINESS INTERRUPTION, ARISING OUT OF THE USE OR INABILITY TO USE THE APPLICATION, EVEN IF DOCTORCOM HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  IN ANY CASE, THE ENTIRE LIABILITY OF DOCTORCOM AND ITS SUPPLIERS/LICENSORS UNDER THIS AGREEMENT FOR ALL DAMAGES, LOSSES, AND CAUSES OF ACTION (WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE) IS LIMITED TO THE PAID BY YOU, IF ANY, FOR THE APPLICATION.  &lt;/p>
+&lt;p>Some states do not allow the exclusion of incidental or consequential damages, or the limitation on how long an implied warranty lasts, so some of the above may not apply to you.&lt;/p>
+&lt;p>&lt;b>12. General. &lt;/b>This Agreement will be construed, interpreted, and performed exclusively according to the laws of the State of California, United States of America, without giving effect to any principles of conflicts of law.  Any action at law or in equity arising out of or directly or indirectly relating to this Agreement may be instituted only in the Federal or state courts located in Santa Clara, California. You and DoctorCom consent and submit to the personal jurisdiction of those courts for the purposes of any action related to this Agreement, and to extra-territorial service of process. You agree that regardless of any statute or law to the contrary, any claim or cause of action that you may have arising out of or related to this Agreement must be filed within one (1) year after the claim or cause of action arose.  This Agreement constitutes the entire understanding and agreement between DoctorCom and you with respect to the transactions contemplated in this Agreement and supersedes all prior or contemporaneous oral or written communications with respect to the subject matter of this Agreement, all of which are merged in this Agreement.  This Agreement shall not be modified, amended or in any way altered except by an instrument in writing signed by authorized representatives of both parties.  In the event any provision of this Agreement is found invalid or unenforceable pursuant to judicial decree, the remainder of this Agreement will remain valid and enforceable according to its terms.  Any failure by DoctorCom to strictly enforce any provision of this Agreement will not operate as a waiver of that provision or any subsequent breach of that provision.  The disclaimers and limitations of liability will survive any termination or expiration of this Agreement.  This Agreement may be accepted in electronic form (e.g., by an electronic or other means of demonstrating assent) and your acceptance will be deemed binding between you and DoctorCom. Neither you nor DoctorCom will contest the validity or enforceability of this Agreement, including under any applicable statute of frauds, because it was accepted or signed in electronic form. Electronically maintained records when produced in hard copy form shall constitute business records and shall have the same validity as any other generally recognized business records.  IT IS EXPRESSLY UNDERSTOOD AND AGREED THAT IN THE EVENT ANY REMEDY HEREUNDER IS DETERMINED TO HAVE FAILED OF ITS ESSENTIAL PURPOSE, ALL LIMITATIONS OF LIABILITY AND EXCLUSIONS OF DAMAGES WILL REMAIN IN EFFECT.&lt;/p>  </string>
+    <string name="agree">Agree</string>
+    <string name="disagree">Disagree</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="messages">Messages</string>
+    <string name="doctors">Doctors</string>
+    <string name="settings">Settings</string>
+    <string name="tasks">Tasks</string>
+    <string name="invitations">Invitations</string>
+    <string name="user_name">User Name:</string>
+    <string name="password">Password:</string>
+    <string name="login">Login</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="network_not_available">{\&quot;errno\&quot;: \&quot;-1\&quot;, \&quot;descr\&quot;: \&quot;Network is not available&#8230;!\&quot;}</string>
+    <string name="get_data_error">{\&quot;errno\&quot;: \&quot;-1\&quot;, \&quot;descr\&quot;: \&quot;get data error!\&quot;}</string>
+    <string name="cannot_be_empty">&lt;font color=blue&gt;This field cannot be empty!&lt;/font&gt;</string>
+    <string name="field_invalid">&lt;font color=blue&gt;This field is invalid!&lt;/font&gt;</string>
+    <string name="process_text">System is processing&#8230;</string>
+    <string name="system_request_error">System request error,Please try again!</string>
+    <string name="no_data">No Data.</string>
+    <string name="sent_time">Sent Time:</string>
+    <string name="load_more">Load more &#8230;</string>
+    <string name="quit">Quit</string>
+    <string name="logout">Logout</string>
+    <string name="refresh">Refresh</string>
+    <string name="about_doctorcom">About DoctorCom</string>
+    <string name="version_name_colon">Version :</string>
+    <string name="about">About</string>
+    <string name="call">Call</string>
+    <string name="more">More</string>
+    <string name="received">Received</string>
+    <string name="back">Back</string>
+    <string name="sent">Sent</string>
+    <string name="of">of</string>
+    <string name="show_detail">Show Detail</string>
+    <string name="hide_detail">Hide Detail</string>
+    <string name="at">Sent:</string>
+    <string name="reply">Reply</string>
+    <string name="forward">Forward</string>
+    <string name="follow_up">Follow up</string>
+    <string name="delete">Delete</string>
+    <string name="view_attachments">View Attachments</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="cc">Cc:</string>
+    <string name="no_subject">&lt;No Subject&gt;</string>
+    <string name="no_content">&lt;No Content&gt;</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="pdf_download">PDF Download</string>
+    <string name="referring_physician">Referring Physician:</string>
+    <string name="physician_phone">Physician Phone:</string>
+    <string name="office_phone">Office Phone:</string>
+    <string name="practice_name">Practice Name:</string>
+    <string name="city">City:</string>
+    <string name="state">State:</string>
+    <string name="address">Address:</string>
+    <string name="patient_name">Patient Name:</string>
+    <string name="gender">Gender:</string>
+    <string name="date_of_birth">Date of Birth:</string>
+    <string name="phone">Phone:</string>
+    <string name="alternative_phone">Alternative Phone:</string>
+    <string name="refer_mrn">MRN:</string>
+    <string name="refer_ssn">SSN:</string>
+    <string name="refer_address">Address:</string>
+    <string name="prior_authorization_number">Prior Authorization Number:</string>
+    <string name="other_authorization">Other Authorization Number:</string>
+    <string name="internal_tracking_number">Internal Tracking Number:</string>
+    <string name="insurance">Insurance Name:</string>
+    <string name="insurance_id">Insurance ID:</string>
+    <string name="primary_insurance">Primary Insurance:</string>
+    <string name="primary_insurance_id">Primary Insurance ID:</string>
+    <string name="secondary_insurance">Secondary Insurance:</string>
+    <string name="secondary_insurance_id">Secondary Insurance ID:</string>
+    <string name="tertiary_insurance">Tertiary Insurance:</string>
+    <string name="tertiary_insurance_id">Tertiary Insurance ID:</string>
+    <string name="icd_code">ICD:</string>
+    <string name="ops_code">OPS:</string>
+    <string name="medication_list">Medication List:</string>
+    <string name="notes">Refer Notes:</string>
+    <string name="reason_of_refer">Reason of Refer:</string>
+    <string name="attachments">Attachments</string>
+    <string name="speaker_on">Speaker On</string>
+    <string name="speaker_off">Speaker Off</string>
+    <string name="attachments_cannot_load">Attachments cannot be loaded, please try again later.</string>
+    <string name="load_attchment">Loading attchment, please wait</string>
+    <string name="connecting">Connecting</string>
+    <string name="encrypt">Encrypting</string>
+    <string name="done">Done</string>
+    <string name="progress">Progress:</string>
+    <string name="download_file_fail_warning">Download file failed ! </string>
+    <string name="accept_refer">Are you sure you want to accept this referral?</string>
+    <string name="refer_accept_success">Accept Refer Successfully!</string>
+    <string name="decline_refer">Are you sure you want to decline this referral</string>
+    <string name="refer_decline_success">Decline Refer Successfully!</string>
+    <string name="decline_reason">Decline Reason: (Optional)</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete_message_warning">Are you sure to delete this message?</string>
+    <string name="message_deleting">message deleting&#8230;</string>
+    <string name="delete_successfully">Delete successfully!</string>
+    <string name="call_back_title">Call Back #:</string>
+    <string name="call_back">Call Back</string>
+    <string name="close">Close</string>
+    <string name="send">Send</string>
+    <string name="new_message">New Message</string>
+    <string name="subject">Subject:</string>
+    <string name="system">System</string>
+    <string name="exit_affirm">Press again to exit the applicaction.</string>
+    <string name="error_occur">Error occurred</string>
+    <string name="number_enter_warning">Please enter 10 digitals!</string>
+    <string name="action_successed">Successed!</string>
+    <string name="add_favourite">Added to Favorites!</string>
+    <string name="leave_favourite">Removed from Favorites!</string>
+    <string name="page_title">Callback Number</string>
+    <string name="call_back_number">Callback Number:</string>
+    <string name="leave_your_number_here">leave your number here</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="sdcard_unavailable">Sdcard is unavailable.</string>
+    <string name="write_sdcard_fail">Write to sdcard error, please check and try again!</string>
+    <string name="search">Search</string>
+    <string name="no_recipient">No Recipient!</string>
+    <string name="message_sending">Sending message &#8230;</string>
+    <string name="message_checking">Checking &#8230;</string>
+    <string name="sent_successfully">Sent Successfully!</string>
+    <string name="phone_number_warning">Please enter a valid phone number</string>
+    <string name="clean_cache">Clean Cache</string>
+    <string name="site">Site</string>
+    <string name="practice">Practice</string>
+    <string name="call_forwarding">Call Forwarding</string>
+    <string name="answering_services">Answering Services</string>
+    <string name="mobile">Mobile</string>
+    <string name="uploading_avatar">Uploading Avatar</string>
+    <string name="upload_avatar">Upload Avatar</string>
+    <string name="clean_cache_suceffuly">Cache Cleaned.</string>
+    <string name="msg">MSG</string>
+    <string name="page">Page</string>
+    <string name="call_office">Call Office</string>
+    <string name="special_skills">Special Skills:</string>
+    <string name="practice_location">Practice Location:</string>
+    <string name="current_practice">Current Practice:</string>
+    <string name="current_organization">Current Organization:</string>
+    <string name="re">RE:</string>
+    <string name="fw">FW:</string>
+    <string name="reply_message">Reply Message</string>
+    <string name="forward_message">Forward Message</string>
+    <string name="date">Date:</string>
+    <string name="refer_pdf">refer.pdf</string>
+    <string name="due">Due:</string>
+    <string name="edit">Edit</string>
+    <string name="note">Note:</string>
+    <string name="new_task">New Task</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="save">Save</string>
+    <string name="high">High</string>
+    <string name="med">Med</string>
+    <string name="low">Low</string>
+    <string name="priority">Priority:</string>
+    <string name="description">Description:</string>
+    <string name="saved_successfully">Saved Successfully!</string>
+    <string name="task_done">Done:</string>
+    <string name="undone">Undone</string>
+    <string name="warning_title">Warning!</string>
+    <string name="followup_delete_warning_content">Do you want to delete this Task </string>
+    <string name="question_mark">\u003F</string>
+    <string name="task_on">Task on:</string>
+    <string name="recipient">Recipient:</string>
+    <string name="resend">Resend</string>
+    <string name="new_invitation">New Invitation</string>
+    <string name="resend_invitation">Resend Invitation</string>
+    <string name="email_address">Email Address:</string>
+    <string name="input_note">Input Note Here(optional).</string>
+    <string name="invitation_cancel_warning_message">Are you sure to cancel this invitation?</string>
+    <string name="update_phone">Updata Phone</string>
+    <string name="update">Update</string>
+    <string name="phone_update_info">Warning:before you finish this process,your old number will still work.</string>
+    <string name="phone_validate_info">Please validate your mobile phone first.</string>
+    <string name="mobile_phone">Mobile Phone:</string>
+    <string name="validate_phone">Validate Phone</string>
+    <string name="code_send_info">We have sent you one message to your cell phone (number). Please input the 4 digitals pin code in that message.</string>
+    <string name="submit">Submit</string>
+    <string name="cannot_changed">&lt;font color=blue&gt;You does not change the mobile number&lt;/font&gt;</string>
+    <string name="error">Error</string>
+    <string name="phone_number_warning_html">&lt;font color=blue&gt;Please enter a valid phone number&lt;/font&gt;</string>
+    <string name="code_resend_info">If you did not receive that message in %d mimute(s), please click resend button.</string>
+    <string name="cannot_new_code">Sending code for mobile phone has exceeded the max number today, you can\'t get new code. </string>
+    <string name="validate_1">You haven\'t applied validation code. Please apply validation code first.</string>
+    <string name="validate_2">Incorrect validation code. Please try again.</string>
+    <string name="validate_3">The code has been locked. Please valiate code %d hour(s) later or click \&quot;Resend\&quot; to get a new code.</string>
+    <string name="validate_3_5">The code has been locked. Please valiate code %d hour(s) later.</string>
+    <string name="validate_4">Validation code is overdue. Please apply the validation code again.</string>
+    <string name="resend_new_code">We have sent you a new code.</string>
+    <string name="dissociate_warning_title">Logout</string>
+    <string name="dissociate_warning_message">Do you want to logout? It will remove all relational data!</string>
+
+    <string-array name="invitation_options">
+        <item>Invite Doctors to Join Practice</item>
+        <item>Invite Staff to Join Practice</item>
+        <item>Invite Provider to Join DoctorCom</item>
+    </string-array>
+
+    <string name="gcm_message">You have a new message</string>
+
+    <plurals name="unread_messages">
+        <item quantity="one">You have a new message</item>
+        <item quantity="other">You have %d new messages</item>
+    </plurals>
+
+    <string name="decrypting_file">System decrypt file, waiting&#8230;</string>
+    <string name="call_my_doctorcom_number ">Call my DoctorCom number</string>
+    <string name="message_body_empty">Message body cannot be empty!</string>
+    <string name="compress_photo">Picture Compress Options</string>
+
+    <string-array name="photo_compress_item_select">
+        <item>No compress</item>
+        <item>Quality first</item>
+        <item>Speed first</item>
+    </string-array>
+    <string-array name="message_item_select">
+        <item>Copy</item>
+    </string-array>
+
+    <string name="no_mobile">You don not set a mobile phone number!</string>
+    <string name="options">Options</string>
+    <string name="call_c2c_number">Do you want to call this number %s ?</string>
+    <string name="call_from_doctorcom">Call From Doctorcom</string>
+
+    <string-array name="select_server">
+        <item>United States Server</item>
+        <item>Germany Server</item>
+    </string-array>
+    <string-array name="select_server_dev">
+        <item>United States Server</item>
+        <item>Germany Server</item>
+        <item>Dev Server(dev-maint)</item>
+        <item>My Server</item>
+    </string-array>
+
+    <string name="not_support_file_type">Not yet support this file type.</string>
+    <string name="live_operator_backup">Live Operator Back-up</string>
+    <string name="description_empty">Description cannot be empty</string>
+    <string name="insufficient_disk_space">Insufficient disk space!</string>
+    <string name="get_data_error_socket">{\&quot;errno\&quot;: \&quot;408\&quot;, \&quot;descr\&quot;: \&quot;Can\'t connect to the server.\&quot;}</string>
+    <string name="get_data_error_exception">{\&quot;errno\&quot;: \&quot;500\&quot;, \&quot;descr\&quot;: \&quot;Network anomaly.\&quot;}</string>
+    <string name="invalid_url">Invalid URL or IP!</string>
+    <string name="not_valid_server">You can\'t login the server because it\'s an invalid server.</string>
+    <string name="your_server_ip_or_domain">Your server IP or domain</string>
+    <string name="cancelling">Cancelling</string>
+    <string name="dicom_viewer_not_ready">Dicom viewer is not ready, please try it later.</string>
+    <string name="loading_picture">Loading &#8230;\npicture %s</string>
+    <string name="dicom_study_id">Study Id: %s</string>
+    <string name="dicom_study_description">Study description: %s</string>
+    <string name="dicom_series_description">Series description: %s</string>
+    <string name="dicom_acquisition_date">Acquisition date: %s</string>
+    <string name="dicom_acquisition_time">Acquisition time: %s</string>
+    <string name="dicom_slice_location">Slice_location: %s</string>
+    <string name="dicom_patientId">Patient Id: %s</string>
+    <string name="dicom_name">Name: %s</string>
+    <string name="dicom_sex">Sex: %s</string>
+    <string name="dicom_birthday">Birthday: %s</string>
+    <string name="dicom_weight">Weight: %s</string>
+    <string name="message_send_warning">Thank you for your interest in sharing files with DoctorCom’s secure system. This share is compliments of DoctorCom and your file has been sent to the intended party. However, to have full access you’ll need a subscription for only $25/month.</string>
+    <string name="preference">Preference</string>
+    <string name="time_format_setting">Time Format Setting</string>
+    <string name="time_zone_setting">Time Zone Setting</string>
+    <string name="h12">12-hour clocks</string>
+    <string name="h24">24-hour clocks</string>
+    <string name="change_timezone_warning">The time zone you selected is different with your practice time zone, do you want to continue?</string>
+    <string name="have_invitation">You have one invitation</string>
+    <string name="refuse">Refuse</string>
+    <string name="go_to_page">Go to Page!</string>
+    <string name="practice_organization">Practice / Organization</string>
+    <string name="load_failed_retry">Load audio file failed. Do you want to retry?</string>
+    <string name="load_msg_failed_retry">Load message failed. Do you want to retry?</string>
+    <string name="search_failed_retry">Search failed. Do you want to retry?</string>
+    <string name="resolved">Resolved</string>
+    <string name="unresolved">Unresolved</string>
+    <string name="other_orgs">Other Organizations:</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="decline_success">You have declined the invitation!</string>
+    <string name="start">Start</string>
+    <string name="message_get_25_more">Get 25 more messages</string>
+    <string name="user_get_50_more">Get 50 more users</string>
+    <string name="task_get_25_more">Get 25 more tasks</string>
+    <string name="totally_find">Totally find</string>
+    <string name="users">user(s)</string>
+
+</resources>
