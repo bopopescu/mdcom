@@ -1,0 +1,20 @@
+{% extends "tests/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Twilio Tests" %}</h2>
+<ul>
+	<li><a href="/tests/Twilio/CallGather/">{% trans "Call+Gather" %}</a></li>
+	<li><a href="/tests/Twilio/Record/">{% trans "Record Keypresses" %}</a></li>
+</ul>
+
+<h2>{% trans "System Tests" %}</h2>
+<h3>{% trans "DoctorCom" %}</h3>
+<ul>
+	<li><a href="/tests/DoctorCom/Click2Call/">{% trans "Click2Call" %}</a></li>
+	<li><a href="/tests/DoctorCom/Pager/">{% trans "Pager" %}</a></li>
+	<li><a href="/Messages/New/?user_recipients={{user_id}}">{% trans "SMS" %}</a></li>
+</ul>
+{% endblock %}

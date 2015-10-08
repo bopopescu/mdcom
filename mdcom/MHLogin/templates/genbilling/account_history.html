@@ -1,0 +1,26 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block content %}
+
+{% if no_account %} 
+	<div id='billingView' class="ui-corner-all">
+    	<h2>{% trans "You have no account transactions at this time" %}</h2>
+    </div>
+    {% else %}
+<div id='billingView' class="ui-corner-all">{% trans "Transactions Log for account number " %}{{account.account_no}}{% trans ". Registered as " %}{{account}}: </div>
+{% for transaction in transactions %}
+	{% if transaction.tx_type == "0" %}
+	<br><div ALIGN="LEFT">
+	<b>{% trans "INVOICE # " %}</b>{{transaction.reference_no }} {% trans "  amount: " %}<b>{% trans "$" %}{{transaction.amount }}</b>{% trans " - Created On :" %}{{ transaction.created_on }}
+	</div>
+ {% else %}	
+ {% if transaction.tx_type == "1" %}
+	<div ALIGN="LEFT" ><b>{% trans "Total Amount Charged : $" %}{{transaction.amount }} </b> {% trans "- Created On :" %}{{ transaction.created_on }}</div><br>
+ {% else %}
+     <div ALIGN="LEFT" >{{transaction.memo }} {% trans "- amount: $" %}{{transaction.amount }}{% trans " - Created On :" %}{{ transaction.created_on }}</div>
+ {% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endblock %}
+

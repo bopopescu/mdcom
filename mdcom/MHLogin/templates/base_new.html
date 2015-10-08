@@ -1,0 +1,796 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+{% load i18n %}
+{% load admin_static %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% block title %}{% trans "DoctorCom" %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{{STATIC_URL}}/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/menu.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/modify01.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}js/jPlayer/skin/blue.monday/jplayer.blue.monday.css" />
+
+    <link type="text/css" href="{{STATIC_URL}}css/start/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{STATIC_URL}}css/start/jquery.autocomplete.css" type="text/css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}css/datatable_jui.css" type="text/css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}css/datatable.css" type="text/css" />
+    <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}" type="text/css" /> 
+    <link rel="stylesheet" href="{{STATIC_URL}}css/type.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/staffHome.css" />
+
+    <link rel="stylesheet" href="{{STATIC_URL}}css/adjust4language_{{LANGUAGE_CODE}}.css" type="text/css" />
+    
+    <!--
+    If the page's language is decided by client's configuration, use both 2 JS files below.
+    <script type="text/javascript" src="{{STATIC_URL}}js/localization/l10n_en-us.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/localization/l10n_{{LANGUAGE_CODE}}.js"></script>
+    -->
+    <script type="text/javascript" src="{{STATIC_URL}}js/localization/l10n_{{LANGUAGE_CODE}}.js"></script>
+
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.2.min.js"></script>
+    <!--<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-1.8.2.custom.min.js"></script>-->
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-1.8.16.custom.min.js"></script>
+    {% if LANGUAGE_CODE and LANGUAGE_CODE != 'en-us' %}
+        <script type="text/javascript" src="{{STATIC_URL}}js/localization/jquery-ui/jquery.ui.datepicker-{{LANGUAGE_CODE}}.js"></script>
+    {% endif%}
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.filterable.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.bgiframe.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.autocomplete-custom.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.watermark.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.dataTables_mod2.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-cookie.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-extension.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/multiselect.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jPlayer/js/jquery.jplayer.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/flowplayer-3.2.6.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/flowplayer.ipad-3.2.8.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/django_common/js/ajax_form.js"></script>
+
+{% block customImports %}{% endblock %}
+
+<script type="text/javascript">
+var data = [];
+var Constant = {}; 
+//Constant.URL_SCHEME = "{{request.META.wsgi.url_scheme}}";
+Constant.HTTP_HOST = "{{request.META.HTTP_HOST}}";
+if (location.href.indexOf("https")>=0) {
+    Constant.URL_SCHEME = "https";
+} else {
+    Constant.URL_SCHEME = "http";
+}
+Constant.SERVER_TIME_YEAR = {{request.SERVER_TIME_YEAR}};
+Constant.LANGUAGE_CODE = "{{LANGUAGE_CODE}}";
+if (!Constant.LANGUAGE_CODE) {
+    Constant.LANGUAGE_CODE = 'en-us';
+}
+Constant.CALL_ENABLE = "{{request.CALL_ENABLE}}";
+Constant.CALL_ENABLE = BoolUtils.str2bool(Constant.CALL_ENABLE);
+Constant.SITE_URL = Constant.URL_SCHEME + "://" + Constant.HTTP_HOST
+Constant.OpenHandCursor = "url("+Constant.SITE_URL+"/static/img/cursor/openhand.cur),pointer";
+Constant.ClosedHandCursor = "url("+Constant.SITE_URL+"/static/img/cursor/closedhand.cur),pointer";
+Constant.TIME_ZONE = Constant.LANGUAGE_CODE;
+Constant.SEND_CODE_WAITING_TIME = {{request.SEND_CODE_WAITING_TIME}};
+Constant.VALIDATE_LOCK_TIME = {{request.VALIDATE_LOCK_TIME}};
+Constant.TIME_SETTING = {{schedule_time_setting}};
+Constant.CURRENT_ORGANIZATION_TYPE = "{{current_organization_type}}";
+
+</script>
+
+{% block customJSData %}{% if all_providers_box %}{{all_providers_box}}{% endif %}{% endblock %}
+
+<script type="text/javascript">
+    $(function(){
+        jQuery.each($("#affiliation_form select[multiple]"), function () {
+            // "Locations" can be any label you want
+            SelectFilter.init(this.id, "Sites", 0, "{{STATIC_URL}}");
+        });
+    
+        $("#accordion").accordion();
+        setTimeout(adjustTabNavigation,100);
+        var tid3 = null;
+        //$("#tabs").tabs({disabled:[3]});
+        //Add by kada.xinl 2011-08-25
+        var active = parseInt($.cookie('active-accordion'));
+        $("#accordion_messages").accordion({
+            'active': isNaN(active) ? false : active,
+            'autoHeight':false,
+            collapsible: true
+        });
+        $("#accordion_messages").bind('accordionchange',function(event,ui){
+            var index = $(ui.newHeader).index(".header_messages");
+            $.cookie('active-accordion',index);
+        });
+    
+        //$("#followup_title > form").accordion({ disabled: true });
+        $('div[id^="fragment"]').each(function(){
+            var closeFragment = $(this);
+            var tab_type = closeFragment.attr("tab_type");
+            if (!tab_type) {
+                return;
+            }
+            var pTable = closeFragment.find("table");
+            if (pTable.find("tr").size()<=1 && !tab_type == "community_provider" && !tab_type == "clerk") {
+                pTable.replaceWith('<div class="none_found" style="padding:163px 0;">'+tabConfigs[tab_type]["no_record_msg"]+'</div>');
+            } else {
+                setDataTableForTabpage(closeFragment, tab_type);
+                var dataTables_filter;
+                if (tab_type == "community_broker"){
+                    addAdsSubmit(pTable);
+                    dataTables_filter = $('.dataTables_filter_custom');
+                    $('#dataTables_filter_custom').removeClass('hidden');
+                } else if(tab_type=='site_org'){ //add by xlin 0820 for org
+                    var logo_href = $('#tabUl li a[href$="'+closeFragment.attr("id")+'"]').attr("logo");
+                    var dataTables_filter_html = "";
+                    if (logo_href) {
+                        dataTables_filter_html = '<img class="orgLogo_right" src="'+logo_href+'" />';
+                    }
+                    dataTables_filter_html+='<div class="left dataTables_filter_custom orgProviderFilter">'
+                        +'{% trans "Search by Name:" %} <input type="text" class="name"/>&nbsp;&nbsp;&nbsp;&nbsp;{% trans "Specialty:" %} <input type="text" class="orgspecialty"/>&nbsp;&nbsp;&nbsp;&nbsp;{% trans "Hospital:" %} <input type="text" class="hospital"/>'
+                        +'<input type="button" value="Apply" class="apply orgProviderApply"></div><div class="clear"></div>';
+                    dataTables_filter = $(dataTables_filter_html);
+                } else {
+                    dataTables_filter = $('<div class="dataTables_filter_custom">'
+                        +'{% trans "Search by Name:" %} <input type="text" class="name"/>&nbsp;&nbsp;&nbsp;&nbsp;'
+                        +'</div>');
+                }
+                $(".orgspecialty", dataTables_filter).keyup(function(){
+                    var pTable = closeFragment.data("pTable");
+                    if (pTable) {
+                        pTable.fnFilter(this.value, 5);
+                        if (tab_type == "community_broker"){
+                            addAdsSubmit(pTable);
+                        }
+                    }
+                });
+                // name
+                var nameInput = $(".name", dataTables_filter);
+                nameInput.keyup(function(){
+                    var pTable = closeFragment.data("pTable");
+                    if (pTable) {    
+                        pTable.fnFilter(this.value, 4);
+                        if (tab_type == "community_broker"){
+                            addAdsSubmit(pTable);
+                        }
+                    }
+                });
+                
+                if (tab_type == "community_provider" || tab_type == "clerk" || tab_type == "community_broker" || tab_type == "site_provider") {
+                    if (tab_type != "community_broker") {
+                        dataTables_filter.append(
+                            ''
+                            //+'<span>Specialty: <select class="specialty middle_width"><option value="">&nbsp;</option></select></span>'
+                            +'{% trans "Specialty:" %} <input type="text" class="specialty"/>&nbsp;&nbsp;&nbsp;&nbsp;'
+                            +''
+                        );
+                        if(tab_type != "site_provider"){
+                            dataTables_filter.append(
+                                ''
+                                +'{% trans "Proximity:" %} <select class="proximity">'
+                                +'<option value="10">10{% trans "mi" %}</option>'
+                                +'<option value="25">25{% trans "mi" %}</option>'
+                                +'<option value="50" selected="selected">50{% trans "mi" %}</option>'
+                                +'<option value="100">100{% trans "mi" %}</option>'
+                                +'<option value="200">200{% trans "mi" %}</option>'
+                                +'</select>'
+                                +'&nbsp;<input type="text" maxlength="10" class="zip" style="ime-mode: disabled;"/>'
+                                +''
+                            );
+                        dataTables_filter.append('&nbsp;<input type="button" class="apply" value=\'{% trans "Apply" %}\'/>');
+                        }
+                    }
+                    // specialty
+                    $(".specialty", dataTables_filter).keyup(function(){
+                        var pTable = closeFragment.data("pTable");
+                        if (pTable) {
+                            pTable.fnFilter(this.value, 5);
+                            if (tab_type == "community_broker"){
+                                addAdsSubmit(pTable);
+                            }
+                        }
+                    });
+    
+                    // apply
+                    $(".zip", dataTables_filter).val($("#zip").val());
+                    $(".apply", dataTables_filter).click(function(){
+                        var tbar = $(this).closest("div");
+                        var zipVal = $(".zip", tbar).val();
+                        if (zipVal && !StrUtils.isZipCode(zipVal)) {
+                            alert('{% trans "Please input a valid zip code." %}');
+                            return;
+                        }
+                        var proximityVal = $(".proximity", tbar).val();
+                        var nameVal = $(".name", tbar).val();
+                        var specialtyVal = $(".specialty", tbar).val();
+                        var licensureVal = $(".licensure", tbar).val();
+                        $.comAjax({
+                            type:'GET',
+                            url: '/Search/User/AJAX/SearchByProximity/',
+                            data: {zip: zipVal, proximity: proximityVal, tab_type: tab_type, licensure:licensureVal},
+                            success:function(data, status){
+                                if(status=='success'){
+                                    $(".provider-container", closeFragment).remove();
+                                    closeFragment.append(data);
+                                    setDataTableForTabpage(closeFragment, tab_type);
+                                    var pTable = closeFragment.data("pTable");
+                                    if (pTable) {
+                                        pTable.fnFilter(nameVal, 4);
+                                        pTable.fnFilter(specialtyVal, 5);
+                                    }
+                                    if (tab_type == "community_broker"){
+                                        addAdsSubmit(pTable);
+                                    }
+                                }
+                            },
+                            error:function(data, status){
+                                alert('{% trans "Sorry, there was an error getting providers. Please try it again or contact the server administrator." %}');
+                            }
+                        });
+                    });
+                }
+                closeFragment.prepend(dataTables_filter);
+                
+                //apply2 0904 orgProviderApply
+                $(".orgProviderApply", dataTables_filter).click(function(){
+                    var closeFragment = $(this).parent().parent();
+                    var tab_type = $(closeFragment).attr("tab_type");
+                    var orgspecialtyVal = $(this).parent().find('.orgspecialty').val();
+                    var hos = $(this).parent().find('.hospital').val();
+                    var name = $(this).parent().find('.name').val();
+                    var id = $(closeFragment).attr('id').replace('fragment-','');
+                    $.comAjax({
+                        url:'/Search/User/AJAX/GetMembersForOrg/',
+                        type:'POST',
+                        data:{id:id,hosp:hos,name:name},
+                        success:function(data,txtStatus){
+                            if(txtStatus=='success'){
+                                $(".provider-container", closeFragment).remove();
+                                closeFragment.append(data);
+                                setDataTableForTabpage(closeFragment, tab_type);
+                                var pTable = closeFragment.data("pTable");
+                                if (pTable) {
+                                    pTable.fnFilter(name, 4);
+                                    pTable.fnFilter(orgspecialtyVal, 5);
+                                }
+                            }
+                        },
+                        error:function(data,txtStatus){
+                            
+                        }
+                    });
+                });
+            }
+        });
+    
+        $.fn.dataTableExt.oApi.fnGetFilteredData = function ( oSettings ) {
+            var a = [];
+            for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ ) {
+                a.push(oSettings.aoData[ oSettings.aiDisplay[i] ]._aData);
+            }
+            return a;
+        };
+    
+        $(".paginate_button").addClass("ui-corner-all");
+        $(".paginate_active").addClass("ui-corner-all");
+    
+            
+        //$("#allProviders").autocomplete("{%url MHLogin.MHLUsers.views_ajax.search_by_name_old }", {
+        $("#allProviders").autocomplete("/Search/User/AJAX/", {
+                dataType: "json",
+                delay:333, 
+                matchContains:true, 
+                width:145, 
+                max:15,
+                minChars: 3,
+                formatItem: function(row) { 
+                    return row;
+                },
+                parse: function(data) {
+                    var parsed = [];
+                    if(data.length==2) {
+                        if(data[0]=="ok") {
+                            var rows = data[1];
+                            for (var i = 0; i < rows.length; i++) {
+                                var row = rows[i];
+                                if (row) {
+                                    /*
+                                    if(row[2]=='provider'){
+                                        parsed[parsed.length] = { data: row[1], value: "/Provider_View/?provider="+row[0] };    
+                                    }else{
+                                        parsed[parsed.length] = { data: row[1], value: "/Provider_View/?officestaff="+row[0] };
+                                    }*/
+                                    parsed[parsed.length] = { data: $('<div></div>').text(row[1]).html(), value: "/User_View/?user_id="+row[0] };
+                                }
+                            }
+                            if(parsed.length==0) {
+                                parsed[0] = { data: '{% trans "No records found." %}', value: location.href };
+                            }
+                        } else if(data[0]=='err') {
+                            parsed[0] = { data: data[1], value: location.href };
+                        }
+                    }
+                    return parsed;
+                }
+            }).result(function(event, data, result) { 
+                if(location.href != result) {
+                    location.href = result;
+                }
+            });
+        $("#allProviders").Watermark(' {% trans "Search for Users" %}');
+            
+        //add by kada.xinl
+        $("#callMembers").focus(function(){
+            $(this).val('');
+        }).blur(function(){
+            if($(this).val()=='')
+                $(this).val('{% trans "Call Non-Member" %}');
+        });
+        
+        $('#profile-content-table .table_style tr').each(function(i){
+            if(!i%2){
+                $(this).addClass('even');
+            }
+        });
+        
+        $(".inviteButton").hover(function(){
+            $(this).find('a').css({
+                "color":"#000"
+            });
+        });
+
+        $('#id_current').change(function(){
+            var id = $(this).val();
+            $.comAjax({
+                url:'/Profile/ChangeCurrentSite/',
+                type:'POST',
+                data:{current:id},
+                success:function(data,txtStatus){
+                    location.reload();
+                }
+            });
+        });
+    });
+    
+    //add by xlin 20120207 to adjust every tr tag in the table
+    function adjustPosition(i){
+        if(i>7){
+            $(this).css({
+                'position':'absolute',
+                'left':'458px',
+                'top':((i-8)*28+3) +'px'
+            });
+        }else{
+            $(this).css({
+                'position':'absolute',
+                'left':'2px',
+                'top':(i*28+3) +'px'
+            });
+        }
+    }
+    
+    function addAdsSubmit(pTable) {
+        $('#adsSubmit').live('click', function(){
+            var oTable = pTable;
+            oTable = oTable.dataTable();
+            var nodes = oTable.fnGetFilteredData();
+            var message_ids = "";
+            for(node in nodes){
+                tdHtml = nodes[node][0];
+                if(typeof tdHtml!='undefined'){ //add by xlin 121113 for remove undefined element
+                    if(message_ids == ""){
+                        message_ids += $(tdHtml+' input').val();
+                    } else {
+                        message_ids += "," + $(tdHtml+' input').val();
+                    }
+                }
+            }
+            window.location.href="/Messages/NewMulti/?user_recipients="+message_ids;
+        });
+    }
+    
+    function setDataTableForTabpage(obj, tab_type) {
+        obj.removeData("pTable");
+        var pTable = $("table",obj);
+        if (pTable && pTable.size()>0) {
+            pTable = $("table",obj).dataTable({
+                "sPaginationType": "letter_pagination",
+                "bFilter": false,
+                "bJQueryUI": false,
+                "bLengthChange": false,
+                "iDisplayLength": 16,
+                "bSort": false,
+                "iColumnToSort" : "3",
+                "iLetterPaginationShowPages" : "3",
+                "iMinChars": 3,
+                "sDom": 'f<"toolbar">rtip',
+                "fnDrawCallback": function() {
+                    $('#fragment-01').find('#providers tbody tr').each(adjustPosition);
+                    $('#fragment-02').find('#providers tbody tr').each(adjustPosition);
+                    $('#fragment-03').find('#providers tbody tr').each(adjustPosition);
+                    $('#fragment-04').find('#providers tbody tr').each(adjustPosition);
+                    $('#fragment-05').find('#providers tbody tr').each(adjustPosition);
+                    $('#fragment-06').find('#providers tbody tr').each(adjustPosition);
+                    $('#fragment-07').find('#providers tbody tr').each(adjustPosition);
+                    
+                    $('.orgProvider').each(function(){
+                        $(this).find('#providers tbody tr').each(adjustPosition);
+                    });
+                    
+                    $('#loadingPic2').remove();
+                    $('#providers tr').removeClass('hidden');
+                },
+                "aoColumns": [
+                    { "bSearchable": false},
+                    { "bSearchable": false },
+                    { "bSearchable": false },
+                    /*
+                    { 
+                        "bSearchable": true, 
+                        "sType": function(sData){
+                            var jObj = $(sData);
+                            jObj.find(".text").remove();
+                            return jObj.text().replace(/\n/g," ").replace( /<.*?>/g, "" );
+                        },
+                        "sName": "name",
+                        "sSplitChar": " "
+                    },
+                    */
+                    { "bSearchable": false },
+                    //{ "bSearchable": true, "sSplitChar": (tab_type != "practice" ? /\s+/g : "")},
+                    { "bSearchable": true, "bNameSearch": true},
+                    { "bSearchable": true },
+                    { "bSearchable": false }
+                ],
+                "oLanguage": {
+                    "sInfoPostFix": addBrokerSubmit(tab_type)
+                }
+            });
+            obj.data("pTable", pTable);
+        }
+    }
+    
+    var tabConfigs = {
+        org_provider: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "Currently, no site providers are registered." %}'
+        },
+        site_provider: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "Currently, no site providers are registered." %}'
+        },
+        site_staff: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "Currently, no site staff are registered." %}'
+        },
+        community_provider: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "Currently, no community providers are registered in your area." %}'
+        },
+        community_broker: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "Currently, no community providers are registered in your area." %}'
+        },
+        clerk: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "Currently, no site clinical clerks are registered at your current location." %}'
+        },
+        office_staff: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "No practice/office staff could be found." %}'
+        },
+        site_org:{
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "No practice/office staff could be found." %}'
+        },
+        practice_member: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "Currently, no other users are associated with your practice." %}'
+        },
+        hospital_provider: {
+            errorMsg: '{% trans "Sorry, there was an error getting user information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "Currently, no hospital site providers are registered." %}'
+        },
+        practice: {
+            errorMsg: '{% trans "Sorry, there was an error getting office information. Please try it again or contact the server administrator." %}',
+            no_record_msg: '{% trans "No practices could be found nearby." %}'
+        },
+        my_favorite: {
+            errorMsg: '{% trans "Sorry, there was an error getting favorite list. Please try it again or contact the server administrator." %}',
+            no_record_msg: "{% trans "You haven't add any fovarite." %}"
+        },
+    };
+    
+    function addBrokerSubmit(type){
+        if (type == 'community_broker'){
+            return '<input id="adsSubmit" type="button" value="Ads" style="margin-left:5px;" />';
+        } else {
+            return '';
+        }
+    }
+    
+    function getAndShowDetialInfo(obj, url, title, width, isOffice) {
+        var jObj = $(obj);
+        var tab_type = jObj.closest('div[id^="fragment"]').attr("tab_type");
+        var tabConfig = tabConfigs[tab_type];
+        var userId = parseInt(jObj.attr('id'));
+        if(typeof userId == 'undefined' || typeof userId != 'number'){
+            alert('{% trans "There is a error in server. Please refresh." %}');
+            return;
+        }
+        var top = $(window).height() / 2 - 144;
+        var userInfoDialog = $("#userInfoDialog");
+        if (!title) {
+            title = '{% trans "User Information" %}';
+        }
+        if (!width) {
+            width = 590;
+        }
+        if (!url) {
+            url = '/Provider_Info/Office_Staff/';
+        }
+        if (!isOffice) {
+            isOffice = false;
+        } else {
+            isOffice = true;
+        }
+        $.comAjax({
+            type:'GET',
+            url: url,
+            data: {provider:userId},
+            success:function(data, status){
+                if(status=='success'){
+                    var userInfoDialog = $("#userInfoDialog");
+                    var userContent = $('.content', userInfoDialog);
+                    userContent.html(data);
+                    userContent.show();
+                    var buttons = jObj.parent().find('.links');
+					var refer_btn = {
+						'click': function() {
+							var btnObj = $('.refer_btn[available="true"]', buttons);
+							if (btnObj.size()>0) {
+								window.location.href = btnObj.parent().attr("href");
+							}
+						},
+						'text': '{% trans "Refer" %}',
+						'class': 'positive-btn',
+						'hidden': $(".refer_btn", buttons).size()<=0
+					};
+					if ($('.refer_btn[available="true"]', buttons).size()<=0) {
+						refer_btn["disabled"] = true;
+					}
+					var msg_btn =  {
+						'click': function() {
+							var btnObj = $('.msg_btn[available="true"]', buttons);
+							if (btnObj.size()>0) {
+								window.location.href = btnObj.parent().attr("href");
+							}
+						},
+						'text': '{% trans "msg" %}',
+						'hidden': $(".msg_btn", buttons).size()<=0
+					};
+					if ($('.msg_btn[available="true"]', buttons).size()<=0) {
+						msg_btn["disabled"] = true;
+					}
+					var page_btn = {
+						'click': function() {
+							var btnObj = $('.page_btn[available="true"]', buttons);
+							if (btnObj.size()>0) {
+								window.location.href = btnObj.parent().attr("href");
+							}
+						},
+						'text': '{% trans "page" %}',
+						'class': 'ui-button-disabled',
+						'hidden': $(".page_btn", buttons).size()<=0
+					};
+					if ($('.page_btn[available="true"]', buttons).size()<=0) {
+						page_btn["disabled"] = true;
+					}
+					var call_btn = {
+						'click': function() {
+							var btnObj = $('.call_btn[available="true"]', buttons);
+							if (btnObj.size()>0) {
+								window.location.href = btnObj.parent().attr("href");
+							}
+						},
+						'text': '{% trans "call" %}',
+						'hidden': $(".call_btn", buttons).size()<=0
+					};
+					if ($('.call_btn[available="true"]', buttons).size()<=0) {
+						call_btn["disabled"] = true;
+					}
+                    $("#userInfoDialog").comDialog({
+                        width:width,
+                        title: title,
+                        position:['center',top],
+                        dc_buttons: {
+							'Refer': refer_btn,
+							'msg': msg_btn,
+							'page': page_btn,
+							'call': call_btn
+                        }
+                    });
+                }
+            },
+            error:function(data, status){
+                $('#userInfoDialog').dialog('close');
+                alert(tabConfig.errorMsg);
+            }
+        });
+    }
+
+    //add by xlin in 20120504 to show send invatition dialog
+    function showSendInvitationDialog(){
+        $("#send_invitation_dialog").comDialog({
+            title: '{% trans "Send an invitation" %}',
+            height: 240
+        });
+    }
+    
+    function adjustTabNavigation() {
+        //adjust tab length
+        //var tablen = $('#tabs').width();
+        var tablen = $('#tabUl').width();
+        var width = 0;
+        $('#tabUl li').each(function(){
+            var left = parseInt($(this).css('margin-left').replace('px',''));
+            var right = parseInt($(this).css('margin-right').replace('px',''));
+            width += ($(this).outerWidth()+left+right);
+        });
+        if(width>tablen){
+            $('#tabs .tabPrev').removeClass('hidden');
+            $('#tabs .tabNext').removeClass('hidden');
+        }
+    }
+    var tabIndex=-1;
+    function clkTabNext(){
+        var tabw = $('#tabUl').width();
+        var w = 0;
+        $('#tabUl li').each(function(){
+            if(!$(this).hasClass('hidden')){
+                w+=($(this).width()+9);
+            }
+        });
+        if(w>tabw){
+            tabIndex++;
+            $('#tabUl li').eq(tabIndex).addClass('hidden');
+        }
+    }
+    
+    function clkTabPrev(){
+        if(tabIndex>-1){
+            $('#tabUl li').eq(tabIndex).removeClass('hidden');
+            tabIndex--;
+        }
+    }
+    
+    function adjustLogoPosition(obj) {
+        var header_logo = $('#header_logo');
+        var header_logo_h = header_logo.height();
+        var header_logo_img_h = obj.height;
+        var header_logo_img_margin = 0;
+        if (header_logo_h > header_logo_img_h) {
+            header_logo_img_margin = (header_logo_h-header_logo_img_h)/2;
+        }
+        $(obj).css({"margin-top": header_logo_img_margin});
+    }
+    
+    /*** about favorite feature ---- start ***/
+    function toggleFavorite(obj, object_type_flag, object_id, refresh) {
+        var jObj = $(obj);
+        var is_favorite = false;
+        if (jObj.hasClass("is_favorite")) {
+            is_favorite = true;
+        }
+        var is_favorite_new = !is_favorite;
+        $.comAjax({
+            type:'POST',
+            url: '/MyFavorite/Toggle/',
+            data: {object_type_flag: object_type_flag, object_id:object_id, is_favorite: is_favorite_new},
+            success:function(data, status){
+                setFavoriteStatus(obj, is_favorite_new);
+                if (refresh) {
+                    refreshMyFavorites();
+                }
+            }
+        });
+    }
+    
+    function setFavoriteStatus(obj, is_favorite) {
+        var jObj = $(obj);
+        if (is_favorite) {
+            jObj.addClass("is_favorite");
+            jObj.attr("title", "{% trans "Remove from My Favorites" %}");
+        } else {
+            jObj.removeClass("is_favorite");
+            jObj.attr("title", "{% trans "Add to My Favorites" %}");
+        }
+    }
+  
+    function refreshMyFavorites() {
+        $.comAjax({
+            type:'POST',
+            url: '/MyFavorite/',
+            success:function(response, status){
+                if(status=='success'){
+                    //$('#dashboard div[tab_type="my_favorite"]').remove();
+                    var favorite_area = $('#my_favorite_list');
+                    var closeFragment = favorite_area.parent();
+                    var name = $(".name", closeFragment).val();
+                    favorite_area.remove();
+                    var tab_type = $(closeFragment).attr("tab_type");
+                    closeFragment.append(response);
+                    setDataTableForTabpage(closeFragment, tab_type);
+                    var pTable = closeFragment.data("pTable");
+                    if (pTable) {
+                        pTable.fnFilter(name, 4);
+                    }
+                }
+            }
+        });
+    }
+    /*** about favorite feature ---- end ***/
+</script>
+
+<style type="text/css">{% block customCSS %}{% endblock %}</style>
+{% block customJS %}{% endblock %}
+</head>
+
+<body id="container">
+{% if "Office_Manager" in sender_types %}
+    {% include "includes/menu_template_mgr.html" %}
+{% else %}
+{% if "Broker" in sender_types %}
+    {% include "includes/menu_template_broker.html" %}
+{% else %}
+{% if "OfficeStaff" in sender_types %}
+    {% include "includes/menu_template_staff.html" %}
+{% else %}
+    {% comment %}The user is a Provider of some sort.{% endcomment %}
+    {# include "includes/menu_template.html" #}
+    {% include "header.html" %}
+{% endif %}
+{% endif %}
+{% endif %}
+
+
+<!-- content is up first -->
+
+{% block content %}{% endblock %}
+<div id='inviteDialog' class='hidden'>
+<div class='content'></div>
+<div class='line'></div>
+<div class='buttons'>
+    <div class='button'></div>
+    <div class='button'></div>
+</div>
+</div>
+<div id="userInfoDialog" class="overlay_modal hidden">
+    <div class='container'>
+        <div class='content hidden'></div>
+    </div>
+</div>
+
+<div id="send_invitation_dialog" class="hidden">
+    <div class="text">{% trans "Please select who you want to invite:" %}</div>
+    <ul>
+        <li class="inviteList"><input type="button" value='{% trans "Invite Doctors to Join Practice" %}'
+             onclick="{% if current_practice_can_have_any_provider %}location.href='/Practice/Staff?invitationType=1'{%else%}alert('{% trans 'Sorry, you cannot invite a new provider in this organization.' %}');{%endif%}"/>
+        </li>
+        <li class="inviteList"><input type="button" value='{% trans "Invite Staff to Join Practice" %}' 
+            onclick="{% if current_practice_can_have_any_staff %}location.href='/Practice/Staff?invitationType=2'{%else%}alert('{% trans 'Sorry, you cannot invite a new staff in this organization.' %}');{%endif%}"/>
+        </li>
+        <li class="inviteList"><input type="button" value='{% trans "Invite Provider to Join DoctorCom" %}' 
+            onclick="location.href='/Invitations/New/'"/>
+        </li>
+    </ul>
+</div>
+
+{% include "includes/footer.html" %}
+
+{% include "includes/google_analytics.html" %}
+
+</body>
+</html>
+

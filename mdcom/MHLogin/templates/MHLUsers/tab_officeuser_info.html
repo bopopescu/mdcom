@@ -1,0 +1,99 @@
+{% load i18n %}
+<div class="left">
+    <img src="{{photo}}" alt="No Image">
+    {% if skill %}
+        <div class='skill'>
+            <div class='title'>{% trans 'Special Skill:' %}</div>
+            <div class='text' title='{{skill}}'>{{skill}}</div>
+        </div>
+    {% endif %}
+</div>
+<script type="text/javascript">
+	$(function(){
+		var fullname=$('.fullname').html().trim();
+		if (fullname.length > 28){
+			fullname=fullname.slice(0,25)+"...";
+			$('.fullname').html(fullname);
+		}
+	})
+</script>
+<div class="right">
+	<div class='title' title="{{fullname}}">
+		<span class="fullname">
+			{{fullname}}
+		</span>
+		<div class="favorite-btn {%if is_favorite %}is_favorite{% endif %}"
+			 title="{%if is_favorite %}{% trans "Remove from My Favorites" %}{% else %}{% trans "Add to My Favorites" %}{% endif %}"
+			 onclick="toggleFavorite(this, 1, {{mhluser_id}}, true);">
+		</div>
+	</div>
+
+	<p class='address'>
+		{{address1}}
+	</p>
+	{% if address2 %}
+	<p>{{address2 }}</p>
+	{% endif %}
+	<p>
+	{% if city %}{{city}},{% endif %}
+	{% if state %}{{state}}{% endif %} 
+	{% if zip %}{{zip}}{% endif %}
+	</p>
+	{% if specialty %}
+	<p class='spec'>{% trans "Specialty" %}: {{ specialty }}</p>
+	{% endif %}
+	
+	{% if practices %}
+		<div class='head'>{% trans 'Practice Locations:' %}</div>
+		<div class='practice'>
+		{% for p in practices %}
+			<p>{{ p.name }}</p>
+		{% endfor %}
+		</div>
+	{% endif %}
+	
+	{% if sites %}
+		<div class='head'>{% trans 'Hospital Affiliations:' %}</div>
+		<div class='practice'>
+		{% for site in sites %}
+			<p>{{ site.name }}</p>
+		{% endfor %}
+		</div>
+	{% endif %}
+
+	{% if other_orgs %}
+		<div class='head'>{% trans 'Other Organizations:' %}</div>
+		<div class='practice'>
+		{% for org in other_orgs %}
+			<p>{{ org.name }}</p>
+		{% endfor %}
+		</div>
+	{% endif %}
+
+	{% if user.public_notes %}
+		<div class='head'>{% trans 'Public notes:' %}</div>
+			{{user.public_notes|linebreaks}}
+		</div>
+	{% endif %}
+
+</div>
+
+<div class="right_logo">
+{% if custom_logos %}
+    <div class="right_logo_in">
+    {% for custom_logo in custom_logos%}
+        {% if forloop.first %}
+            <div class="large_logo">
+                <img src="{{custom_logo.logo}}"/>
+            </div>
+        {% else %}
+            <div class="small_logo">
+                <img src="{{custom_logo.logo}}"/>
+            </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endif %}
+</div>
+
+<div class='clear'></div>

@@ -1,0 +1,33 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block content %}
+
+<div id='billingView' class="ui-corner-all">
+    	<h3>Invoice # {{invoice_internal}} <br> {{customer}} Invoice {{invoice_no}} <br> Total $ {{inv_amount}}    Created On {{created_on}} <br> Status: {{paid}}</h3>
+</div>
+
+<table border='1' width="800">
+
+<tr>
+ <th>Internal Tx #: </th>
+ <th>Memo: </th>
+ <th> Amount: </th>
+ <th>Created On : </th>
+</tr>
+
+    {% for transaction in transactions %}
+
+      <tr>
+       <td>{{transaction.id }}</td>
+       <td>{{transaction.memo }}</td>
+       <td>${{transaction.amount }}</td>
+       <td>{{ transaction.created_on }}</td>
+      </tr>
+
+{% endfor %}
+</table>
+<table border='0' width="800">
+<tr><td><a href="/billing/billing_menu/">Back to Customer Account Management Menu<a></td></tr>
+</table>
+{% endblock %}
+

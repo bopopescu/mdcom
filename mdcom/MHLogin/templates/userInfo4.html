@@ -1,0 +1,60 @@
+{% load i18n %}
+<div class="provider-container">
+	<table id="providers" class="rowhover dataTables" cellpadding='0' cellspacing='0'>
+		<thead>
+			<tr style="display:none;"><th></th><th></th><th></th><th></th><th style="display:none;"></th><th style="display:none;"></th><th></th></tr>
+		</thead>
+	{% if users %}
+	{% for user in users %}
+		<tr class='hidden'>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td class="name" id="{{user.id}}" title='{% trans "Click on name to view more info." %}' onclick="getAndShowDetialInfo(this, '/Provider_Info/Office_Staff/')" >
+				<span class="warpName">
+					{{ user.fullname }}
+					<span class="text">
+						{% if user.staff_type %}
+						({{user.staff_type}})
+						{% else %}
+						&nbsp;
+						{% endif %}
+					</span>
+				</span>
+			</td>
+			<td style="display:none;">
+				{{ user.last_name }} {{ user.first_name }}
+			</td>
+			<td style="display:none;">
+				{% if user.staff_type %}
+				{{user.staff_type}}
+				{% else %}
+				&nbsp;
+				{% endif %}
+			</td>
+			<td class='sitestafflink links'>
+				<a href="/Messages/New/?user_recipients={{ user.id }}">
+					<div class="msg_btn button btnShow buttonMsgAble" available="true" title='{% trans "Click to send text message." %}'>{% trans "msg" %}</div>
+				</a>
+				{% if user.pager_available %}
+				<a href="/Page/{{ user.id }}/">
+					<div class="page_btn button btnShow buttonPageAble" available="true" title='{% trans "Click to page." %}'>{% trans "page" %}</div>
+				</a>
+				{% else %}
+					<div class="page_btn button btnShow buttonPageDisable textDisable">{% trans "page" %}</div>
+				{% endif %}
+				{% if user.call_available %}
+				<a href="/Call/{{ user.id }}/">
+					<div class="call_btn button btnShow buttonPhoneAble" available="true" title='{% trans "Click to phone." %}'>{% trans "call" %}</div>
+				</a>
+				{% else %}
+					<div class="call_btn button btnShow buttonPhoneDisable textDisable">{% trans "call" %}</div>
+				{% endif %}
+
+
+			</td>
+		</tr>
+	{% endfor %}
+	{% endif %}
+	</table>
+</div>

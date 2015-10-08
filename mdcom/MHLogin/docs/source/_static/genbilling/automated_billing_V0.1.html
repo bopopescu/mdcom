@@ -1,0 +1,487 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.3  (Unix)">
+	<META NAME="AUTHOR" CONTENT="inna vogel">
+	<META NAME="CREATED" CONTENT="20120802;16571800">
+	<META NAME="CHANGEDBY" CONTENT="inna vogel">
+	<META NAME="CHANGED" CONTENT="20120803;22221000">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">DoctorCom
+Customer Billing</FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">Requirements:</FONT></P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">Bill
+	customers once a month, on the the 1<SUP>st</SUP> of each month for
+	products subscribed for each month ahead, AND any other charges that
+	occurred in previous month. </FONT>
+	</P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">Billing
+	should be per Practice Group, which may consist on one or more
+	practice locations.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">Prices
+	per product are set by DoctorCom per each Practice Group. Prices can
+	be changed by DoctorCom via manual update of individual product in
+	set of product for the Practice Group<SPAN STYLE="font-weight: normal">.
+	</SPAN></FONT>
+	</P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">ALL
+	Super Managers of each Practice Group can view account transaction
+	information. But only one who put CC on file can view/edit CC data.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">Only
+	One credit card per  Practice Group is allowed on file. <SPAN STYLE="background: #ffff00">Develop
+	process for changing owner of credit card, in case Super Manger who
+	put it on file leaves practice.</SPAN></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">Prorate
+	first month charge based on training period end. For example if
+	training ended on 6/20, first invoice on 7/1 should include a month
+	charge for July and 10 days charge for June. This applied per
+	product charge NOT per entire account.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">Bill
+	TOTAL amount due at the 1<SUP>st</SUP> of the month to Credit Card
+	in ONE transactions.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">If
+	NO total is due or customer has credit with us, create invoice for
+	that amount, but do NOT process payment.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif">Keep
+	track of each individual charge that are product subscription
+	monthly fees (one for product used by Practice Group, not individual
+	practices) and any other charges that may occur (examples are
+	referral fees, twillio usage fees). Also, keep track of all payments
+	made.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Communication
+	to the end user of auto-payment are done via system messaging.
+	Communication of rejected transactions are done via system
+	messaging. These messages are sent to the user who is the OWNER of
+	billing account associated with group practice. The notifications of
+	rejected transactions are also sent via email to support@mdcom.com</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Flow
+	for failed payments. If braintree rejects our request for recurring
+	payment, we will NOT reprocess payment till next invoice cycle.
+	Meanwhile we will investigate why payment failed, and work with
+	customer to update his billing data. Next invoice will add up
+	previously owed amount into new invoice total and bill to in one
+	single transaction.</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif"><SPAN STYLE="background: #ffff00">Future
+	development:  </SPAN>When account owner updates account billing
+	instrument, if last invoice failed, charge amount of last invoice
+	immediately. Note that new charges that may happen after last
+	rejected payment as referral fees will NOT be added to the immediate
+	charge amount.</FONT></P>
+	<P STYLE="margin-bottom: 0in"></P>
+	<P STYLE="margin-bottom: 0in; page-break-before: always"></P>
+</OL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><B>Set
+up For version 0.1</B></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif"><U>A.
+New Concept to DoctorCom Infrastructure: Practice Groups – entity
+conmosed of one or more practice locations, doctorcom's billing unit.</U></FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">As
+part of version 0.1 roll out following will be done in production.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Current<B>
+MHLPractices_practicegroup_location</B> table which was never used
+will be DRPOPED.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Current
+<B>MHLPractices_practicegroup </B>which was never used will be
+DRPOPED.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Instead
+new  <B>MHLPractices_practicegroup</B> table will be created:</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"> <FONT FACE="Times New Roman, serif">(</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">    <FONT FACE="Times New Roman, serif">`id`
+integer AUTO_INCREMENT NOT NULL PRIMARY KEY,</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">    <FONT FACE="Times New Roman, serif">`description`
+varchar(255),</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">    <FONT FACE="Times New Roman, serif">`address`
+longtext</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">)</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Also
+column `practice_group_id` INT  will be added to current
+MHLPractices_practicelocation table. Intial value is NULL, and manual
+set up is necessary to tie practice locations to practice group.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">On
+	paper, identify ALL locations that will be set up for auto-billing.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">On
+	paper, map ALL locations from 1 into Practice Groups. EACH location
+	MUST have Practice Group, even if it is ONE TO ONE relationship.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Having
+	data from 2, use django admin and create Practice Group.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Then
+	for each location identified in step 1, use django admin and map it
+	to Practice Group.</FONT></P>
+</OL>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif"><U>B.
+Super Manager – Must be office manager of practice location that is
+associated with Practice Group, financially responsible for Practice
+Group</U>. Each Practice Group there must be at least one super
+manager. He/she can be at any practice location of the practice
+group. If there is more than one super manager (for example, there
+are three practice locations in one practice group, and each location
+has super manager) only one of the super manager will put CC on file
+and can change cc info. Also only one will get notification of
+auto-billing or rejected payment. ALL super managers will see account
+transactions. For next version we will revisit requirements for
+multiple super managers within practice group. May be allow manager
+too, where to add link if yes?</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">On
+	paper, for each practice group to be set up for auto-billing, list
+	locations.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">On
+	paper, for each location list managers and mark super managers. On
+	paper, map location managers to practice group.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+	at least one super manager exist for practice group, write him down
+	next to practice group name/number.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+	more than one super manager exist for practice group, write all down
+	next to practice group name/number. Group Practice will have to
+	decide which super manager will put CC on file.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+	no super managers exist in Group Practice, determine, who will put
+	CC on file and use django admin to promote that manager to super
+	manager role.</FONT></P>
+</OL>
+<OL TYPE=I START=100>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"></P>
+</OL>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><U><SPAN STYLE="font-weight: normal">C.
+Products and Subscriptions – products are generic definitions of
+out products. Subscription are basis for billing Practice Groups
+monthly.</SPAN></U></FONT><FONT FACE="Times New Roman, serif"><SPAN STYLE="font-weight: normal">
+Subscription must be for a product existing in Products and for
+existing Practice Group. Subscription must be Active at the time
+invoices are created in order to be </SPAN></FONT><FONT FACE="Times New Roman, serif"><SPAN STYLE="font-weight: normal">charged
+for. Subscription must have start date on or before first day of the
+month invoice is created for.</SPAN></FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Use
+	django admin, verify all Products are set up in products table. If
+	not, enter all products we are billing for.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Use
+	django admin to enter product/practice group Subscription into
+	Subscription table. Make sure start date and active flags are set up
+	for the practice groups you want to set up for auto-billing. For
+	groups composed of multiple locations, create only ONE subscription
+	per product with ONLY price covering all locations.</FONT></P>
+</OL>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Times New Roman, serif"><U><SPAN STYLE="font-weight: normal">D
+Customer accounts – each practice group must provide a CC and set
+up account.</SPAN></U></FONT><FONT FACE="Times New Roman, serif"><SPAN STYLE="font-weight: normal">
+CC are stored at Braintree and account information at our server.
+Account information does not contain any sensitive information, it
+hold account status, last payment date, last payment status. Accounts
+have ONT TO ONE to practice group, and also have ONE owner who is
+super manager at the practice group.</SPAN></FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Contact
+	each super manager of group practice that will participate in 0.1
+	release auto-billing. Provide them with following url:
+	/billing/payments-billing/  and instruct them to put CC on file.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Use
+	django admin and verify that accounts exist for each group practice
+	that we will auto-bill. Take a note of who is account owner.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Make
+	sure no ACTIVE account exist for cutomers not participting in 0.1
+	release. (Status must be that of Active or Grace)</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Use
+	django admin to verify that braintree vaults exist for each of the
+	account owners in step 2.</FONT></P>
+</OL>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">SET
+UP IS DONE.  </FONT>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">MONTHLY
+BILLING:</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Run
+	python manage.py create_invoices.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Use
+	django admin to verify invoices are created correctly (look at
+	accounttransaction and invoice tables)</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Run
+	python manage.py dispatch_invoices</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Use
+	django admin to verify billing went thru (look at
+	accounttransaction, invoice and braintree_paymentlog tables, for
+	failed trasnactions look at failedtransactions table)</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Log
+	in to braintree and see payments transactions and their status.</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">For
+	failed payments, reprocessing can be done at any time by running 
+	python manage.py dispatch_invoices during current month (all failed
+	payments will be retried), or at the next billing cycle amount owed
+	will be added to next invoice. In future versions, amount owed will
+	be charged real time when customer updates CC on file. Need more
+	specification for those who will not update CC, including not
+	reprocessing and suspending accounts.</FONT></P>
+</OL>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Details
+on Monthly billing:</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">           
+<FONT FACE="Times New Roman, serif">Billing consists of two batch
+jobs:</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">create_invoices
+– </FONT>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Looks
+up for active accounts (active or grace status).</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Checks
+if invoice for this month exists, if yes, exit.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+not, retrieves all ACTIVE subscriptions for practice group associates
+with account.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Checks
+if start date is on or before first day or current period. If not, do
+not invoice, go to next subscription.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+yes, create charge line item on customer's account for current month
+using price set in subscription In case start_date was in previous
+month add prorated amount for number of days used in previous month
+to the charge.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">After
+all charge lines are created for each qualifying subscription for
+group practice, retrieve last invoice amount and all all charges and
+payments and create new invoice. </FONT>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">dispatch_invoices
+-</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Looks
+up for active accounts (active or grace status).</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">For
+each account, retrieves invoice. </FONT>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+invoice exists, checks if invoice paid. If yes, skip.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+not, checks if invoice amount is positive. If not, skip.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+yes, checks if vault exists for the owner of the account, if not,</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	updates
+invoice to failed,</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	updates
+account's last bill date, last payment status (to non attempted) and
+last payment failed information</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	sends
+secure message to account owner informing him of the failure </FONT>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	sends
+email to support@mdcom.com informing us of failed transaction</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+yes, send call to braintree to charge customer for this invoice.</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+braintree sends back success, credit card is charged</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	updates
+invoice to paid,</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	creates
+payment account transaction</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	updates
+account's last bill date, last payment status and last payment failed
+information</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	sends
+secure message to account owner informing him of the charge	</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">If
+charge fails</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	updates
+invoice to failed,</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	updates
+account's last bill date, last payment status and last payment failed
+information</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	sends
+secure message to account owner informing him of the failure </FONT>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	sends
+email to support@mdcom.com informing us of failed transaction</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal; page-break-before: always">
+<FONT FACE="Times New Roman, serif">TEST CASES:</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">ADD
+	ACCOUNT try link on </FONT>
+	</P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">one
+	group - one location:</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">super
+	manager - GOOD</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">second
+	super manager – </FONT>
+	</P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">provider
+	-   403</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">not
+	super manager - 403</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">office
+	staff not manager</FONT></P>
+</OL>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">one
+	group - two locations:</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">super
+	manager - GOOD</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">second
+	super manager - GOOD, show that exists but no details</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">provider</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">not
+	super manager</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">office
+	staff not manager -  ACL</FONT></P>
+</OL>
+<P STYLE="margin-bottom: 0in; font-weight: normal">         
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">          
+<FONT FACE="Times New Roman, serif">practice without group practice -
+ACL</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<OL START=2>
+	<LI><P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">VIEW
+	ACCOUNT LINK</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">one
+	group - one location:</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">super
+	manager  -  before account created no link, after link shown, if
+	manual GOOD</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">second
+	super manager</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">provider
+	– no link shown, if manual url 403</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">not
+	super manager – GOOD, just like super manager if entered manually,
+	since no profile    				available no link will show</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">office
+	staff not manager</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">one
+	group - two locations:</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">super
+	manager - before account created no link, after link shown, if
+	manual GOOD</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">second
+	super manager - GOOD</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">provider</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">not
+	super manager</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">office
+	staff not manager - ACL</FONT></P>
+</OL>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">          
+<FONT FACE="Times New Roman, serif">practice without group practice -
+ACL</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">3.
+ CREATE  AND CHARGE  INVOICES</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">           
+<FONT FACE="Times New Roman, serif">Current month</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	Started
+last month</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	Started
+first day of this month</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">            <FONT FACE="Times New Roman, serif">Not
+active subscription</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">            <FONT FACE="Times New Roman, serif">Rerun
+invoices</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">            <FONT FACE="Times New Roman, serif">Rerun
+payements</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">	Previous
+invoice failed last month, updated CC</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">           
+<FONT FACE="Times New Roman, serif">Previous invoice failed last
+month, NOT updated CC</FONT></P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">            
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal">         
+</P>
+<OL START=2>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"></P>
+</OL>
+<OL START=11>
+	<P STYLE="margin-bottom: 0in; font-weight: normal; page-break-before: always">
+	<FONT FACE="Times New Roman, serif">Genbilling (custom billing and
+	subscriptions module)  Tables,</FONT></P>
+	<P STYLE="margin-bottom: 0in; font-weight: normal"><FONT FACE="Times New Roman, serif">Top
+	portion indicated set up before billing can occur</FONT></P>
+</OL>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><IMG SRC="automated_billing_V0.1_html_f7d949d.gif" ALIGN=LEFT><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><IMG SRC="automated_billing_V0.1_html_75516ef9.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_75516ef9.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_75516ef9.gif" ALIGN=LEFT><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><IMG SRC="automated_billing_V0.1_html_75fe9867.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_m561958d2.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_5b49bc0a.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_m6f299485.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_18202b21.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_m174e3098.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_4ee06d5d.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_m57225c0a.gif" ALIGN=LEFT><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><BR>
+</P>
+<P STYLE="margin-bottom: 0in; font-weight: normal"><IMG SRC="automated_billing_V0.1_html_72d9bbe7.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_m7f7b1b83.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_m41ae2cc4.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_5a7f5ae6.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_688d3f7d.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_m43dd0f4.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_mface0e8.gif" ALIGN=LEFT><IMG SRC="automated_billing_V0.1_html_m22f30c2d.gif" ALIGN=LEFT><BR>
+</P>
+</BODY>
+</HTML>

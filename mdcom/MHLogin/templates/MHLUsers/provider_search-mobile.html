@@ -1,0 +1,27 @@
+{% extends "base-mobile.html" %}
+{% load i18n %}
+
+{% block customJSData %}{{all_providers_box}}{% endblock %}
+
+{% block customCSS %}
+#searchbox {width:200px;line-height:15px;}
+#searchbox2 {width:200px;line-height:15px;}
+.tableoverflow {overflow:auto; overflow-x:hidden; overflow-y:auto;} 
+{% endblock %}
+
+{% block content %}
+    <div style="margin-left:40px; margin-top:-20px;">        
+		<p class="header" style="font-size:14px;font-weight:bold;">{% trans "Welcome" %}, {{ mhl_user_displayName }}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Current location" %}: <b>{{ current_site.name }}</b> <a href="/Sites/">{% trans "Click here" %}</a> {% trans "to change" %}.</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Contact phone number" %}: <b>{{ mobile_phone }}</b>. <a href="/Profile/Edit/">{% trans "Click here" %}</a> {% trans "to change" %}.</p>
+    </div>
+	<div class="ui-corner-all" style="width:400px; height:50px; margin-left:40px; display:block; background:white; border:solid 1px lightgray;padding:30px;">
+		<div style="display:inline;">
+			<p style="font-weight:bold;">{% trans "Provider Search" %}:
+				<input type="text" id="allProviders"  style="width:250px;display:inline;" />
+			</p>
+		</div>
+	</div>
+<br/>
+{% endblock %}
+

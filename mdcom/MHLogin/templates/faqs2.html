@@ -1,0 +1,171 @@
+{# extends "base_short_new.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id='faqs' class="ui-corner-all">	
+<h1>{% trans "FAQs" %}</h1>
+<a href="#1">{% trans "What is the DoctorCom Answering Service? What are its uses?" %}</a><br />
+<a href="#2">{% trans "How do I change my password?" %}</a><br />
+<a href="#3">{% trans "How can I edit my personal information, i.e. mobile number and email?" %}</a><br />
+<a href="#4">{% trans "What is my office Answering Service number? Where do I find it?" %}</a><br />
+<a href="#5">{% trans "How do I use the Answering Service number?" %}</a><br />
+<a href="#6">{% trans "Should I give my Answering Service number to patients?" %}</a><br />
+<a href="#7">{% trans "How does call forwarding to my Answering Service number work?" %}</a><br />
+<a href="#8">{% trans "How do I activate call forwarding to my Answering Service number?" %}</a><br />
+<a href="#9">{% trans "How do I deactivate call forwarding to my Answering Service number?" %}</a><br />
+<a href="#10">{% trans "How do I get my closed office greeting to play for closed hours?" %}</a><br />
+<a href="#11">{% trans "How do I get my closed office greeting to play for lunch breaks?" %}</a><br />
+<a href="#12">{% trans "How do I forward spillover calls to my Answering Service number? " %}</a><br />
+<a href="#13">{% trans "How do I set up my voicemail greetings?" %}</a><br />
+<a href="#14">{% trans "Can I edit my voicemail greeting remotely?" %}</a><br />
+<a href="#15">{% trans "How do I access my voice messages? " %}</a><br />
+<a href="#16">{% trans "Can I check voice messages outside the office?" %}</a><br />
+<a href="#17">{% trans "What are IVR access numbers? " %}</a><br />
+<a href="#18">{% trans "How do I manage my IVR access numbers?" %}</a><br />
+<a href="#19">{% trans "How do I populate providers and staff, who are part of my practice, on the DoctorCom website?" %}</a><br />
+<a href="#20">{% trans "How do I configure the on-call schedule?" %}</a><br />
+<a href="#21">{% trans "How will on-call doctors be notified of urgent messages from patients? " %}</a><br />
+<a href="#22">{% trans "How do I indicate which on-call doctor should be notified? " %}</a><br />
+<a href="#23">{% trans "What happens when there is an urgent message and no on-call doctor in the time-slot?" %}</a><br />
+
+<p>
+<a name='1'><b>{% trans 'What is the DoctorCom Answering Service? What are its uses?' %}</b><br />
+{% trans 'The DoctorCom Answering Service is an office profile that helps keep your office connected, even outside of normal business hours. The Answering Service will record messages from your patients while you are answering another call, away from the desk, or closed for the night.  As an office manager, you will be able to use it to connect to the providers in your office, aid in provider-to-provider communication, send necessary images to providers and automatically send urgent messages from patients to the correct on-call doctor.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='2'><b>{% trans 'How do I change my password?' %}</b><br />
+{% trans 'On the User Profile page of the DoctorCom website, click on the “Change of Password” link next to your name.  Follow the prompts.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='3'><b>{% trans 'How can I edit my personal information, i.e. mobile number and email?' %}</b><br />
+{% trans 'On the User Profile page of the DoctorCom website, click on the “Edit” button. Fill in/Edit the appropriate text boxes and press “Submit.”' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='4'><b>{% trans 'What is my office Answering Service number? Where do I find it?' %}</b><br />
+{% trans 'Your office Answering Service number is a unique number provided to you through DoctorCom.  It is located on your dashboard on the DoctorCom website. Your Answering Service number is the number that calls forward to outside of normal business hours or during lunch breaks. It is also the number you would use to direct spillover calls.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='5'><b>{% trans 'How do I use the Answering Service number?' %}</b><br />
+{% trans 'The Answering Service number is mostly for internal office use. It is the number that you will enter as a call forwarding number. The Answering Service number is also the number that you would give your phone company if you would like to set up a spillover call system.  ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='6'><b>{% trans 'Should I give my Answering Service number to patients?' %}</b><br />
+{% trans 'No, this is not necessary because the Answering Service number is connected to your direct office number. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='7'><b>{% trans 'How does call forwarding to my Answering Service number work?' %}</b><br />
+{% trans 'You must set-up your Answering Service greetings, both an open office greeting, as well as a closed office greeting. On the DoctorCom website, navigate to the “Provider Profile” page under “Account.” There, you will need to populate the office hours in order to have the correct greeting play depending on whether the office is closed or open. This does not automatically set up call forwarding.  You will need to activate call forwarding to your DoctorCom Answering Service number at the end of the day and deactivate it at the beginning of the day. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='8'><b>{% trans 'How do I activate call forwarding to my Answering Service number?' %}</b><br />
+{% trans 'To activate call forwarding, using your office phone, dial *72 and enter your DoctorCom Answering Service number. *<br />*Note: the code for your service provider may be different from *72, please contact your service provider to verify.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='9'><b>{% trans 'How do I deactivate call forwarding to my Answering Service number?' %}</b><br />
+{% trans 'To deactivate call forwarding, using your office phone, dial *73 and enter your DoctorCom Answering Service number.*<br />*Note: the code for your service provider may be different from *73, please contact your service provider to verify.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='10'><b>{% trans 'How do I get my closed office greeting to play for closed hours?' %}</b><br />
+{% trans 'On the “Practice Profile” page of the DoctorCom website, under “Office Hours,” select the “Manage Hours” link. Here, you can fill in your opening and closing times. During closed hours, calls will automatically forward to your DoctorCom Answering Service number. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='11'><b>{% trans 'How do I get my closed office greeting to play for lunch breaks?' %}</b><br />
+{% trans 'On the “Practice Profile” page of the DoctorCom website, under “Office Hours,” select “Manage Hours.” Here, you will need to put a lunch start and lunch duration. If you do not have a designated lunch period, you still need to enter a start time.  For example, enter “12:00” for the start time with the duration of “0” into the respective text boxes. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='12'><b>{% trans 'How do I forward spillover calls to my Answering Service number? ' %}</b><br />
+{% trans 'To forward spillover calls to your DoctorCom Answering Service number, you will need to contact your phone company. This feature does have a small fee associated with it from the phone company.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='13'><b>{% trans 'How do I set up my voicemail greetings?' %}</b><br />
+{% trans 'Using your office phone or a phone that is listed under your IVR access numbers on the DoctorCom website, call your DoctorCom number. From there, a prompt will guide you through the steps to making your voicemail greetings. Please note that you will need to make two greetings, one for open office hours and one for closed office hours. For an example of a possible office greeting, see the Office Manager User Manual. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='14'><b>{% trans 'Can I edit my voicemail greeting remotely?' %}</b><br />
+{% trans 'Yes. You will be able to edit your voicemail greeting from any number listed under your IVR access number list on the DoctorCom website. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='15'><b>{% trans 'How do I access my voice messages? ' %}</b><br />
+{% trans 'You can access your voice messages by logging in to your DoctorCom web dashboard, where you will be able to listen to your received messages. These messages can be found on the DoctorCom dashboard page, underneath the “Recently Received Messages” bar. If you cannot see your received messages, you may need to expand the bar by right clicking on it. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='16'><b>{% trans 'Can I check voice messages outside the office?' %}</b><br />
+{% trans 'Yes.  Using any device that can browse the web, you will be able to access the DoctorCom website dashboard and access your messages from there. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='17'><b>{% trans 'What are IVR access numbers? ' %}</b><br />
+{% trans 'IVR stands for “Interactive Voice Response.” IVR access numbers are the numbers with allowances to access your Interactive Voice Response System, where you are able to remotely edit your greetings.  ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='18'><b>{% trans 'How do I manage my IVR access numbers?' %}</b><br />
+{% trans 'You can find the “Manage IVR access numbers” link on the Practice Profile page of the DoctorCom website. On the Manage IVR access numbers page, you will be able to input multiple numbers that you would like associated with you IVR System. These numbers will be able to remotely edit your greetings. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='19'><b>{% trans 'How do I populate providers and staff, who are part of my practice, on the DoctorCom website?' %}</b><br />
+{% trans 'Click on the “Staff” button on the menu bar of the DoctorCom dashboard page. There you will be able to search and add providers and staff members. If you cannot find a provider using the search option, they may not already have a DoctorCom Account. Please use the “Invite” button to send them an invitation. Once they have joined DoctorCom, you will be able to add them to your practice.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='20'><b>{% trans 'How do I configure the on-call schedule?' %}</b><br />
+{% trans 'The on-call schedule can be configured by the drag-and-drop mechanism or by clicking directly on a specific day to set a time slot. Once you have populated your practice with your providers, they will appear on the left hand side of your calendar. Simply drag the corresponding box into the appropriate timeslot. Once there, you can double click to edit specific start and end times. ' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='21'><b>{% trans 'How will on-call doctors be notified of urgent messages from patients? ' %}</b><br />
+{% trans 'A tone, indicating that a voice message has been received, will notify on-call doctors that they have received an urgent message from a patient. If they have a pager, they will also receive a page with the patient’s callback number.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='22'><b>{% trans 'How do I indicate which on-call doctor should be notified? ' %}</b><br />
+{% trans 'The DoctorCom system will recognize which doctor is on-call through your on-call schedule, which can be found by clicking “Schedule” on the DoctorCom menu bar on the dashboard page. If a patient calls with an urgent message, indicated by pressing #2, that message will be automatically forwarded to the on-call doctor for that particular timeslot.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+
+<p>
+<a name='23'><b>{% trans 'What happens when there is an urgent message and no on-call doctor in the time-slot?' %}</b><br />
+{% trans 'If an urgent message is received and there is no on-call doctor listed for that particular time, the message will automatically be sent to the last doctor who was on-call. All urgent calls are copied to the Answering Service and marked with a red exclamation mark.' %}
+</a><br /><a href="#">{% trans "Back to top" %}</a>
+</p>
+</div>
+{% endblock %}
+

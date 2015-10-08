@@ -1,0 +1,18 @@
+{% load i18n %}
+<h1>{% trans 'Congratulations! We have sent the invitation. You can:' %}</h1> 
+<br>
+<p><a id="inviteAnother" href="javascript:void(0);">{% trans 'Invite another organization' %}</a></p> 
+<br>
+<p><a id="backFromInvite" href="javascript:void(0);">{% trans 'Back to member organization list' %}</a></p> 
+<script>
+$(function(){
+	$("#backFromInvite").click(function(){
+		memberOrgView();
+	});
+	$("#inviteAnother").click(function(){
+		$("#search_org_result").hide();
+		$("#congratulation_panel").hide();
+		$("#search_org_panel").show();
+	});
+});
+</script>

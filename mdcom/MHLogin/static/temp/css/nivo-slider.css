@@ -1,0 +1,184 @@
+/*
+ * jQuery Nivo Slider v2.5.2
+ * http://nivo.dev7studios.com
+ *
+ * Copyright 2011, Gilbert Pellegrom
+ * Free to use and abuse under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * 
+ * March 2010
+ */
+ 
+ 
+/* The Nivo Slider styles */
+.nivoSlider {
+	position:relative;
+	z-index: 100;
+	width: 960px;
+	height: 410px;
+}
+.nivoSlider img {
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+/* If an image is wrapped in a link */
+.nivoSlider a.nivo-imageLink {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	border:0;
+	padding:0;
+	margin:0;
+	z-index:6;
+	display:none;
+}
+/* The slices and boxes in the Slider */
+.nivo-slice {
+	display:block;
+	position:absolute;
+	z-index:5;
+	height:100%;
+}
+.nivo-box {
+	display:block;
+	position:absolute;
+	z-index:5;
+}
+/* Caption styles */
+.nivo-caption {
+	position: absolute;
+	top: 30px;
+	left: 20px;
+	width: 556px;
+	color:#fff;
+	opacity:0.8; /* Overridden by captionOpacity setting */
+	z-index:8;
+	color: #9ed2f6;
+}
+.nivo-caption p {
+	margin:0;
+	font-size: 20px;
+	line-height: 1.5em;
+	font-weight: 100;
+}
+.nivo-caption ul {
+	margin: 0;
+	padding: 0;
+	width: 540px;
+}
+.nivo-caption li {
+	margin:0;
+	padding: 0;
+	font-size: 28px;
+	line-height: 1.6em;
+	font-weight: 100;
+	list-style-type: none;
+	padding-left: 60px;
+}
+ul.slide-2 li.liOne {
+	background: url(../img/ico-telephony.gif) 0 10px no-repeat;
+}
+ul.slide-2 li.liTwo {
+	background: url(../img/ico-privacy-controls.gif) 10px 7px no-repeat;
+}
+ul.slide-2 li.liThree {
+	background: url(../img/ico-conf.gif) 5px 10px no-repeat;
+}
+
+.nivo-caption ul.slide-3 li {
+	line-height: 1.4em;
+	margin-bottom: 20px;
+}
+ul.slide-3 li.liOne {
+	background: url(../img/ico-ans.gif) 0 10px no-repeat;
+}
+ul.slide-3 li.liTwo {
+	background: url(../img/ico-emr.gif) 5px 5px no-repeat;
+}
+
+
+.nivo-caption ul .more {
+	font-size: 20px;
+	color: #5596c3;
+	list-style-type: none;
+}
+.nivo-caption a {
+	display:inline !important;
+}
+.nivo-html-caption {
+  display:none;
+}
+
+.nivo-caption h1 {
+	font-weight: 100;
+	font-size: 15px;
+	color: #4096d5;
+	margin: 0 0 3px 0;
+	padding: 0;
+}
+.nivo-caption .ir.slide-1 {
+	background: url(../img/slide-1-title.gif) top left no-repeat;
+	width: 556px;
+	height: 35px;
+}
+.nivo-caption .ir.slide-2 {
+	background: url(../img/slide-2-title.gif) top left no-repeat;
+	width: 557px;
+	height: 35px;
+}
+.nivo-caption .ir.slide-3 {
+	background: url(../img/slide-3-title.gif) top left no-repeat;
+	width: 557px;
+	height: 35px;
+}
+
+
+/* Direction nav styles (e.g. Next & Prev) */
+.nivo-directionNav a {
+	position:absolute;
+	top:45%;
+	z-index:9;
+	cursor:pointer;
+}
+.nivo-prevNav {
+	left:0px;
+}
+.nivo-nextNav {
+	right:0px;
+}
+/* Control nav styles (e.g. 1,2,3...) */
+.nivo-controlNav {
+	position : absolute;
+	right: 10px;
+	top: 10px;
+}
+.nivo-controlNav a {
+	display: inline-block;
+	background: url(../img/slide-pos-off.png) top left no-repeat;
+	width: 14px;
+	height: 14px;
+	margin-left: 10px;
+	position:relative;
+	z-index:9;
+	cursor:pointer;
+	text-indent: -9999em;
+}
+.nivo-controlNav a.active {
+	font-weight:bold;
+	background: url(../img/slide-pos-on.png) top left no-repeat;
+}
+#slider {
+    position:relative;
+    width:960px; /* Change this to your images width */
+    height:410px; /* Change this to your images height */
+    background:url(../img/loading.gif) no-repeat 440px 60px;
+}
+#slider img {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+}

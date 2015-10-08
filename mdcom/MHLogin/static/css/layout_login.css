@@ -1,0 +1,91 @@
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+table {
+
+}
+td {
+
+}
+td#offset {
+	width: 20px;
+}
+
+div#background {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+div#content_vpositioner {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 48%;
+}
+div#content_hpositioner {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 50%;
+	height: 100%;
+}
+div#content {
+	position: absolute;
+	bottom: -119px;
+	left: 0px;
+	width: 100%;
+	height: 238px;
+}
+div#login_form {
+	position: absolute;
+	right: -325px;
+	top: 65px;
+}
+
+
+div#stroke_top_blk {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 2px;
+	width: 100%;
+}
+div#stroke_top_wht {
+	position: absolute;
+	top: 2px;
+	left: 0px;
+	height: 1px;
+	width: 100%;
+}
+div#stroke_bottom_blk {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	height: 2px;
+	width: 100%;
+}
+
+div#branding {
+	position: absolute;
+	bottom: 30px;
+	right: 40px;
+	
+	padding: 0px;
+	margin: 0px;
+}
+
+.right {
+	text-align: right;
+}
+.center {
+	text-align: center;
+}
+.left {
+	text-align: left;
+}

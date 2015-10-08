@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <style type="text/css">
+            body {width:320px;height:436px;font: normal 100% Helvetica, Arial, sans-serif;}
+            input[type='button'],input[type='submit'],button{cursor:pointer;}
+            #dicom_viewer_div {margin:0 auto;width:680px;}
+            #dicom_viewer_div > p {padding-top:15px;};
+            
+            #dicom_viewer_div .title {font-weight:bold;}
+            #page-navigation {left: 50px;position: absolute;top: 460px;width: 680px;}
+            #lw-tools {left: 50px;position: absolute;top: 510px;width: 680px;}
+            #dicom_viewer_div .pic_container {margin:50px 0 40px 3px;height:287px;}
+            #lw-tools .slider_range_container {float:left;padding-right:20px;text-align:left;}
+            #lw-tools .slider_range_container input {border: 0; background:transparent;}
+            #lw-tools .slider_range_container div.slider {width:245px;}
+
+            #dicom_viewer_div .range_buttons {float:left;padding:14px 0 0 5px;}
+
+            #page-navigation div.slider {width:490px;float:left;padding:0 20px 0 0;}
+            #page-navigation div.value {float:left;display:inline;font-size:14px;}
+            #page-navigation div.buttons {float:left;font-size:12px;padding:2px 0 0 0;}
+            #page-navigation .nav_btn_enabled {cursor:pointer;text-decoration:underline;}
+            #page-navigation .nav_btn_disabled {cursor:default;text-decoration: none;}
+            .dicom-viewer-info { font-size:11px;color: #FFFFFF;display: block;position: absolute;}
+            #info-top-left {float: left;top: 60px;width: 100px;padding:10px;}
+            #info-top-right {float: right;top: 60px;right:45px;width: 100px;padding:10px;text-align:right;}
+            #info-bottom-left {float: left;bottom: 170px;width: 100px;padding:10px;}
+            #info-bottom-right {float: right;bottom: 170px;right:45px;width: 100px;padding:10px;text-align:right;}
+            #nav_btn_previous {display:block; width:38px;height:38px;background:url('{{STATIC_URL}}img/button_g.png') -38px 0; position: relative;margin:-10px 5px 0 20px;float:left;}
+            #nav_btn_previous:hover {background:url('{{STATIC_URL}}img/button_g.png') -38px -38px;}
+            #nav_btn_previous:active {background:url('{{STATIC_URL}}img/button_g.png') -38px -76px;}
+            .play {display:block; width:38px;height:38px;background:url('{{STATIC_URL}}img/button_g.png') 0 0; position: relative;margin:-10px 5px 0;float:left;}
+            .play:hover {background:url('{{STATIC_URL}}img/button_g.png') 0 -38px;}
+            .play:active {background:url('{{STATIC_URL}}img/button_g.png') 0 -76px;}
+            .pause {display:block; width:38px;height:38px;background:url('{{STATIC_URL}}img/button_g.png') -228px 0; position: relative;margin:-10px 5px 0;float:left;}
+            .pause:hover {background:url('{{STATIC_URL}}img/button_g.png') -228px -38px ;}
+            .pause:active {background:url('{{STATIC_URL}}img/button_g.png') -228px -76px ;}
+            #nav_btn_next {display:block; width:38px;height:38px;background:url('{{STATIC_URL}}img/button_g.png') -76px 0; position: relative;margin:-10px 0 0 5px;float:left;}
+            #nav_btn_next:hover {background:url('{{STATIC_URL}}img/button_g.png') -76px -38px;}
+            #nav_btn_next:active {background:url('{{STATIC_URL}}img/button_g.png') -76px -76px;}
+            .lwinfo {display: block; float: right; font-size: 14px;padding: 2px; width:220px;}
+            #nav_btn_reset {display:block; width:38px;height:38px;background:url('{{STATIC_URL}}img/button_g.png') -190px 0; position: relative;float:left;top:12px;}
+            #nav_btn_reset:hover {background:url('{{STATIC_URL}}img/button_g.png') -190px -38px;}
+            #nav_btn_reset:active {background:url('{{STATIC_URL}}img/button_g.png') -190px -76px;}
+            
+         </style>
+        <link type="text/css" href="{{STATIC_URL}}css/start/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript">
+            var slider_range_W_default = 256;
+            var slider_range_W_min = 1;
+            var slider_range_W_max = 307;
+            var slider_range_L_default = 128;
+            var slider_range_L_min = -25;
+            var slider_range_L_max = 280;
+            var slider_range_page_max = {{jpg_count}};
+            var slider_range_W;
+            var slider_range_L;
+            var slider_range_Page;
+            var is_play = false;
+            var timer = false;
+
+            function initImageViewer() {
+                slider_range_W = $("#slider-range-W").slider({
+                    range: "min",
+                    value: slider_range_W_default,
+                    min: slider_range_W_min,
+                    max: slider_range_W_max,
+                    change: function(event, ui) {
+                        $("#valueW").val(ui.value);
+                        setWindow();
+                    }
+                });
+                $("#valueW").val(slider_range_W_default);
+                $("#slider-range-W").removeClass("ui-widget-content");
+                $("#slider-range-W").addClass("ui-slider-bg");
+                slider_range_L = $("#slider-range-L").slider({
+                    range: "min",
+                    value: slider_range_L_default ,
+                    min: slider_range_L_min,
+                    max: slider_range_L_max,
+                    change: function(event, ui) {
+                        $("#valueL").val(ui.value);
+                        setWindow();
+                    }
+                });
+                $("#valueL").val(slider_range_L_default);
+                $("#slider-range-L").removeClass("ui-widget-content");
+                $("#slider-range-L").addClass("ui-slider-bg");
+            }
+
+            function reset() {
+                slider_range_W.slider("value", slider_range_W_default);
+                slider_range_L.slider("value", slider_range_L_default);
+            }
+
+            /** page navigation actions **/
+            function initPageNavigation() {
+                if (slider_range_page_max && slider_range_page_max>1) {
+                    slider_range_Page = $("#slider-range-page").slider({
+                        range: "min",
+                        value: 1,
+                        min: 1,
+                        max: slider_range_page_max,
+                        change: function(event, ui) {
+                            $("#valueP").text(ui.value+"/"+slider_range_page_max);
+                            setNavButtonStatus();
+                            var ww = parseInt($("#valueW").val());
+                            var wl = parseInt($("#valueL").val());
+                            var jpg_url = $("#jpg_url_"+(ui.value-1)).val();
+                            loadImage(jpg_url, ww, wl);
+                        }
+                    });
+                    $("#slider-range-page").removeClass("ui-widget-content");
+                    $("#slider-range-page").addClass("ui-slider-bg");
+                    $("#valueP").text(1+"/"+slider_range_page_max);
+                    setNavButtonStatus();
+                    $("#page-navigation").show();
+                    $("#lw-tools").css('top', '510px');
+                }
+                else{
+                    $("#lw-tools").css('top', '460px');
+                }
+            }
+
+            function playOrStop() {
+                if (!$("#nav_btn_play_or_stop").attr("disabled")) {
+                    if (!is_play) {
+                        play();
+                    } else {
+                        stop();
+                    }
+                }
+            }
+
+            function play() {
+                $("#nav_btn_play_or_stop").removeClass("play");
+                $("#nav_btn_play_or_stop").addClass("pause");
+                var current_position = slider_range_Page.slider("value");
+                if (current_position == slider_range_page_max){
+                     slider_range_Page.slider("value", 1);
+                }
+                timer = window.setInterval(function(){
+                        var current_position = slider_range_Page.slider("value");
+                        if (current_position >= slider_range_page_max) {
+                            stop();
+                        }
+                        if (is_play) {
+                            next();
+                        }
+                    }, 500);
+                is_play = true;
+            }
+
+            function stop() {;
+                $("#nav_btn_play_or_stop").removeClass("pause");
+                $("#nav_btn_play_or_stop").addClass("play");
+                if (timer) {
+                    window.clearTimeout(timer);
+                }
+                is_play = false;
+            }
+
+            function next() {
+                var btn = $("#nav_btn_next");
+                if (!btn.attr("disabled")) {
+                    var current_position = slider_range_Page.slider("value");
+                    if (current_position >= slider_range_page_max) {
+                        return;
+                    } else {
+                        var new_position = current_position + 1;
+                        slider_range_Page.slider("value", new_position);
+                    }
+                    setNavButtonStatus();
+                }
+            }
+
+            function previous() {
+                var btn = $("#nav_btn_previous");
+                if (!btn.attr("disabled")) {
+                    var current_position = slider_range_Page.slider("value");
+                    if (current_position <= 1) {
+                        setNaButtonDisabled(btn);
+                        return;
+                    } else {
+                        var new_position = current_position - 1;
+                        slider_range_Page.slider("value", new_position);
+                    }
+                    setNavButtonStatus();
+                }
+            }
+
+            function setNavButtonEnabled(btn) {
+                btn.removeAttr("disabled").removeClass("nav_btn_disabled").addClass("nav_btn_enabled");
+            }
+
+            function setNavButtonDisabled(btn) {
+                btn.attr("disabled", true).addClass("nav_btn_disabled").removeClass("nav_btn_enabled");
+            }
+
+            function setNavButtonStatus() {
+                var slider_range_val = slider_range_Page.slider("value");
+                // nav_btn_previous
+                if (slider_range_val <= 1) {
+                    setNavButtonDisabled($("#nav_btn_previous"));
+                } else {
+                    setNavButtonEnabled($("#nav_btn_previous"));
+                }
+                // nav_btn_next and nav_btn_play_or_stop
+                if (slider_range_val >= slider_range_page_max) {
+                    setNavButtonDisabled($("#nav_btn_next"));
+                    //setNavButtonDisabled($("#nav_btn_play_or_stop"));
+                } else {
+                    setNavButtonEnabled($("#nav_btn_next"));
+                    setNavButtonEnabled($("#nav_btn_play_or_stop"));
+                }
+            }
+
+            $(function() {
+                initPageNavigation();
+                initImageViewer();
+                var jpg_url = $("#jpg_url_0").val();
+                loadImage(jpg_url, slider_range_W_default, slider_range_L_default);
+                $("#nav_btn_play_or_stop").addClass("play");
+                $("#study_description").attr('title', "{{ dcm.study_description }}");
+                $("#series_description").attr('title', "{{ dcm.series_description }}");
+                $("#institution_name").attr('title', "{{ dcm.institution_name }}");
+                $("#station_name").attr('title', "{{ dcm.station_name }}");
+            });
+            
+        </script>
+    </head>
+    <body style="background:url('{{STATIC_URL}}img/bg_dcm.png');">
+        <div id="dicom_viewer_div">
+            <p>
+                <span class="title">Dicom Viewer - </span>{{dcm.file_name}}
+            </p>
+            <div id="container" class="pic_container">
+                <center>
+                    <canvas id="imageviewer" width="287" height="287" mce_style="border: 1px solid;" />
+                </center>    
+            </div>
+            <div id='info-top-left' class="dicom-viewer-info">{{patient.name}} <br/> {% if patient.id %} ID: {{patient.id}} <br/> {% endif %}  
+            {% if patient.sex %} Sex:{{patient.sex}} <br/>  {% endif %} 
+            {% if patient.birthday %} Birthday: {{patient.birthday}} <br/> {% endif %}
+            {% if patient.weight and patient.weight != "0" %} Weight: {{patient.weight}} <br/>{% endif %}
+            </div>
+            <div id='info-top-right'  class="dicom-viewer-info">
+            {% if dcm.institution_name %} <span id="institution_name">{{dcm.institution_name|slice:"15" }}{% if dcm.institution_name|length > 15 %}..{% endif %} </span> <br/> 
+            {% else %} <span id="station_name">{{dcm.station_name|slice:"15" }}{% if dcm.station_name|length > 15 %}..{% endif %} </span> <br/> {% endif %} 
+            {% if dcm.study_id %} Study ID: {{ dcm.study_id }} <br/> {% endif %} 
+            {% if dcm.study_description %}<span id="study_description">{{ dcm.study_description|slice:"15" }}{% if dcm.study_description|length > 15 %}..{% endif %}</span><br/> {% endif %} 
+            {% if dcm.acquisition_date %} Acq.: {{ dcm.acquisition_date }} <br/> {% endif %} 
+            {% if dcm.acquisition_time %} Acq.: {{ dcm.acquisition_time }} <br/> {% endif %} 
+            </div>
+            <div id='info-bottom-left' class="dicom-viewer-info">
+            
+            </div>
+            <div id='info-bottom-right'  class="dicom-viewer-info">
+            {% if dcm.series_number %} Series Nb: {{ dcm.series_number }} <br/> {% endif %} 
+            {% if dcm.series_description %} <span id="series_description">{{ dcm.series_description|slice:"15" }}{% if dcm.series_description|length > 15 %}..{% endif %}</span> <br/> {% endif %} 
+            {% if dcm.slice_thickness %} Thickness: {{ dcm.slice_thickness }}  <br/> {% endif %}
+            {% if dcm.slice_location %} Location: {{ dcm.slice_location }} <br/> {% endif %} 
+            </div>        
+        </div>
+        
+        <div id="page-navigation" style="display:none">
+            <div id="valueP" class="value"></div> <br/>
+            <div id="slider-range-page" class="slider"></div> 
+            <div id="page_buttons" class="buttons">
+                <a id="nav_btn_previous" href="javascript:void(0);" onclick="previous();" class="nav_btn_disabled"></a>
+                <a id="nav_btn_play_or_stop" href="javascript:void(0);" onclick="playOrStop();" class="nav_btn_enabled"></a>
+                <a id="nav_btn_next" href="javascript:void(0);" onclick="next();" class="nav_btn_enabled"></a>
+            </div>
+            <input type="hidden" id="device_id" value="{{device_id}}"/>
+            <input type="hidden" id="secret" value="{{secret}}"/>
+            {% for jpg in jpgs %}
+                <input type="hidden" id="jpg_url_{{jpg.index}}" value="{{jpg.url}}"/>
+            {% endfor %}
+        </div>
+        
+        <div id="lw-tools-space"></div>
+        
+        <div id="lw-tools">
+            <div class="slider_range_container">
+                <img src='{{STATIC_URL}}img/icons/icon_l.png' /><div class='lwinfo'>L: <input type="text" id="valueL"/></div>
+                <div id="slider-range-L" class="slider"></div>
+            </div>
+            <div class="slider_range_container">
+                <img src='{{STATIC_URL}}img/icons/icon_w.png' /><div class='lwinfo'>W: <input type="text" id="valueW"/></div>
+                <div id="slider-range-W" class="slider"></div>
+            </div>
+            <div class="range_buttons">
+                
+                <a id="nav_btn_reset" href="javascript:void(0);" onclick="reset();" class="nav_btn_enabled"></a>
+            </div>
+        </div>
+                    
+    </body>
+    <script type="text/javascript">
+        var patternData = [];
+        var patternWidth = 287;
+        var patternHeight = 287;
+        
+        
+        function getPatternData(x,y){
+            return patternData[y*patternWidth+x];
+        }
+        
+        var icanvas = document.getElementById('imageviewer');
+        var icanvasWidth = parseInt(icanvas.getAttribute("width")); 
+        var icanvasHeight = parseInt(icanvas.getAttribute("height")); 
+        var icontext = icanvas.getContext('2d');
+        var isWindowing = 0;
+        var beginPointX = 0;
+        var beginPointY = 0;
+        var wwStep = 5;
+        var wlStep = 5;
+        
+        function loadImage(jpg_url, valueW, valueL){
+            var img = new Image();
+            var device_id = "";
+            if ($("#device_id").val()) {
+                jpg_url += "?DCOM_DEVICE_ID="+$("#device_id").val();
+                if ($("#secret").val()) {
+                    jpg_url += "&secret="+$("#secret").val();
+                }
+            }
+            img.src = jpg_url;
+            img.onload = function() {
+                iwidth = this.width;
+                iheight = this.height;
+                ratio = iwidth/iheight;
+                if(ratio > 447/287){
+                    iwidth = iwidth>447?447:iwidth;
+                    iheight = iwidth/ratio;
+                }
+                else{
+                    iheight = iheight>287?287:iheight;
+                    iwidth = iheight*ratio;
+                                        
+                }
+                top_y = (287-iheight)/2;
+                if(top_y){ $('#container').css("padding-top", top_y)};
+                icanvas.width = icanvasWidth = patternWidth = iwidth;
+                icanvas.height = icanvasHeight = patternHeight = iheight;
+                icontext.drawImage(this, 0, 0, this.width, this.height, 0, 0, iwidth, iheight);
+                var imageData = icontext.getImageData(0, 0, iwidth, iheight).data;
+                var length = this.width * this.height;
+                for (var i = 0; i < length; i++) {
+                    var j = i * 4;
+                    patternData[i] = imageData[j] + imageData[j+1] + imageData[j+2];
+                }
+                loadPattern(valueW*10,valueL*6);
+            };
+        }
+
+        function loadPattern(ww,wl){
+            function setPoint(img,x,y,pv){
+                var i = (y*img.width+x)*4;
+                img.data[i]=img.data[i+1]=img.data[i+2]=pv;
+                img.data[i+3]=255;
+            }
+            function getPresentationValue(v,w,c){
+                var minv = c-Math.round(w/2);
+                if(v<minv) return 0;
+                var maxv = c+Math.round(w/2);
+                if(v>maxv) return 255;
+                var pv = Math.round(255*(v-minv)/w);
+                if(pv<0) return 0;
+                if(pv>255) return 255;
+                return pv;
+            }
+            var imgData = icontext.getImageData(0,0,icanvasWidth,icanvasHeight);
+            for(y=0;y<patternHeight;y++){
+                for(x=0;x<patternWidth;x++){
+                    var v = getPatternData(x,y);
+                    var pv = getPresentationValue(v,ww,wl);
+                    setPoint(imgData,x,y,pv);
+                }
+            }
+            icontext.putImageData(imgData,0,0);
+        }
+
+        function setWindow(){
+            var ww = parseInt($("#valueW").val()) * 10;
+            var wl = parseInt($("#valueL").val()) * 6;
+            loadPattern(ww,wl);
+        }
+</script>
+<html>

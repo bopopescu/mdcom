@@ -1,0 +1,96 @@
+{% extends "base_new.html" %}
+{% load i18n %} 
+{% block title %}
+{% trans "Organization Management" %}{%endblock %}
+
+{% block customJS %}
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.pagination.js"></script>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/organization.css" />
+
+<script>
+var CURRENTORGID = '';
+var SHOWORGVIEW = true;
+var index = 0;
+var tmpDialog;
+RefreshRight = function(html){
+    $("#orgContentRight").html(html);
+    $("ul.org_tabs li").eq(index).addClass("current");
+}
+
+$(function(){
+    $("#createOrg").click(function(){
+        OrgAdd();
+    });
+});
+
+OrgAdd = function(){
+    var practice_name = $("#id_practice_name").val();
+    var organization_type = $("#id_organization_type").val();
+    var parent_org_ids = $("#id_parent_org_ids").val();
+    
+    if (parent_org_ids == undefined || parent_org_ids == "")
+    {
+        parent_org_ids = GetSelectOrgID(); 
+    }
+    
+    $.comAjax({
+        url: "/Organization/Add/",
+        type:'GET',
+        data: {
+            'parent_org_ids': parent_org_ids,
+            'organization_type': organization_type, 
+            'practice_name': practice_name
+        },
+        success:function(data, status){
+            RefreshRight(data);
+        }
+    });
+}
+
+
+OrgView = function(){
+    $.comAjax({
+        url: "/Organization/View/",
+        type:'POST',
+        data: {org_id:GetSelectOrgID()},
+        success:function(data, status){
+            index = 0;
+            RefreshRight(data);
+        }
+    });
+};
+
+
+function autoResize(){
+    var id = 'eidtProfileIframe';
+    var newheight;
+    var newwidth;
+    if(document.getElementById){
+        newheight=document.getElementById(id).contentWindow.document .body.scrollHeight;
+        newwidth=document.getElementById(id).contentWindow.document .body.scrollWidth;
+    }
+    document.getElementById(id).height= (newheight) + "px";
+    document.getElementById(id).width= (newwidth) + "px";
+}
+
+OrgEdit = function(){
+    $("#orgContentRight .org-tab-content").html('<iframe id="eidtProfileIframe" height="500" width="700" scrolling="no" frameborder="0" src="/Organization/Edit/" onLoad="autoResize();"><iframe>');
+};
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="content_border ui-corner-all">
+    <div class="org-content-left">
+        {% include "MHLOrganization/includes/organization_tree.html" %}
+        <div id="createOrg">
+            <div class="createOrgLeft"></div>
+            <div class="createOrgCenter">{% trans 'Create Organization'%}</div>
+            <div class="createOrgRight"></div>
+        </div>
+    </div>
+    <div id="orgContentRight" class="org-content-right" ></div>
+    <div class="clear" ></div>
+</div>
+{% endblock %}

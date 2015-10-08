@@ -1,0 +1,29 @@
+{% load i18n %}
+<div class="inviteDialog">
+	<form id='inviteProviderForm'>
+		<div class="content">
+			<div class="text text5">
+				{% trans "Input all details you know."%}
+			</div>
+			<div class="invite-item first-item">
+				<span>{% trans "Email:" %}</span>
+				<input type="text" id="inviteEmail" value="" />
+			</div>
+			<div class="invite-item">
+				<span>{% trans "Full Name:" %}</span>
+				<input type="text" id="inviteFullname" value="" />
+			</div>
+			<div class="invite-item">
+				<span>{% trans "User Name:" %}</span>
+				<input type="text" id="inviteUsername" value="" />
+			</div>
+			<div class="invite-item err-msg text6"></div>
+			
+			<div class="line"></div>
+			<div class="buttons">
+				<div class="button step1Cancel">{% trans 'Cancel' %}</div>
+				<div class="button step1Next buttonR">{% trans 'Search' %}</div>
+			</div>
+		</div>
+	</form>
+</div>

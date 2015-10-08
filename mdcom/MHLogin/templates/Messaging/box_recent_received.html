@@ -1,0 +1,24 @@
+{% extends "Boxes/box_100_table.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<table border="0">
+<tr>
+	<th>{% trans "Timestamp" %}</th>
+	<th>{% trans "Sender" %}</th>
+	<th>{% trans "Message" %}</th>
+	<th>{% trans "Confirmation" %}</th>
+</tr>
+{% for message in messages_received %}
+<tr>
+	<td>{{ message.timestamp|date:"m/d/y h:i a" }}</td>
+	<td>{{ message.message.sender.first_name }} {{ message.message.sender.last_name }}</td>
+	<td{% if not message.success %} class="error"{% endif %}>{{ message.message.body }}</td>
+	<td{% if not message.success %} class="error"{% endif %}>{{ message.confirmation }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
+

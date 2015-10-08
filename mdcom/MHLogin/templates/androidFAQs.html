@@ -1,0 +1,59 @@
+{# extends "base_short_new.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id='faqs' class="ui-corner-all">	
+	<h1>{% trans "FAQs for Android Users" %}</h1>
+	<a href="#13">{% trans "How do I invite colleagues to DoctorCom?" %}</a><br />
+	<a href="#14">{% trans "How do I edit existing invitations to join DoctorCom?" %}</a><br />
+	<a href="#15">{% trans "How do I choose whether calls go to my mobile phone, or directly to my DoctorCom voicemail?" %}</a><br />
+	<a href="#16">{% trans "How do I edit my “Site” and “Practice” Information?" %}</a><br />
+	<a href="#17">{% trans "How do I protect my privacy using the DoctorCom app?" %}</a><br />
+	<a href="#18">{% trans "How do I get a message to show up in the “Follow up Task List”?" %}</a><br />
+	<a href="#13">{% trans "How do I use my DoctorCom app to contact other DoctorCom members?" %}</a><br />
+	<a href="#20">{% trans "How do I search for other Providers on DoctorCom?" %}</a><br />
+	
+	<p>
+	<a name="13" /><b>{% trans "How do I invite colleagues to DoctorCom?" %}</b><br />
+	{% trans "The “Invite Colleagues” option is two screens to the left, or right, of your dashboard screen. Press the button in the upper left or right side of the DoctorCom app dashboard, then click on the “Invit.” button to navigate to the Invitation page. Click the button with an image of a doctor and plus sign to create a new invitation. Under recipient, enter the email of the doctor you would like to invite. We recommend entering text in the “Note” textbox denoting who you are, since the invitation will not be sent from your email address, nor will it include your name. Then, press “Send.”" %}
+	<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+	<a name="14" /><b>{% trans "How do I edit existing invitations to join DoctorCom?" %}</b><br />
+	{% trans "Navigate to the invitations page of your DoctorCom app, which is located two screens to the left, or right, of your dashboard screen (and can be navigated to by clicking the buttons in the upper right or left hand corner of the DoctorCom app). Your “Outstanding Invitations” will be listed on this screen. Click on the outstanding invitation you wish to edit. Two buttons will appear next to the name of the doctor; a circle with arrows and a trashbin. Click the circle with arrows to resend the invitation. Click the trashbin to delete the invitation. " %}
+	<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+	<a name="15" /><b>{% trans "How do I choose whether calls go to my mobile phone, or directly to my DoctorCom voicemail?" %}</b><br />
+	{% trans "From the Dashboard Screen of your DoctorCom app, press the “Pref.” button, located in the upper left hand corner of the screen. Press the menu bar located after “Call Fwd.” A dropdown menu will appear on the screen, select either “Mobile” or “Voicemail,” depending on your preferences." %}
+	<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+	<a name="16" /><b>{% trans "How do I edit my “Site” and “Practice” Information?" %}</b><br />
+	{% trans "From the Dashboard Screen of your DoctorCom app, press the “Pref.” button, located in the upper left hand corner of the screen. Click either “Site” or “Practice” respectively to switch to different site or practice location. " %}
+	<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+	<a name="17" /><b>{% trans "How do I protect my privacy using the DoctorCom app?" %}</b><br />
+	{% trans "When making secure calls from your mobile phone, make sure to use the “Call Number” function located on the dashboard screen of the DoctorCom dashboard page of your app. Enter the number you wish to dial in the text box located next to “Call Number.” The recipient will see your DoctorCom number, rather than your private number." %}
+	<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+	<a name="18" /><b>{% trans "How do I get a message to show up in the “Follow up Task List”?" %}</b><br />
+	{% trans "Once you have clicked to view the message, click the “Follow up” button above the callback number. On the “Follow up” screen, you will be able to mark the priority of the follow up, as well as add text to the note textbox. Press, “Save.” The message will then appear in your “Follow Up Task List.”" %}
+	<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+	<a name="19" /><b>{% trans "How do I use my DoctorCom app to contact other DoctorCom members?" %}</b><br />
+	{% trans "From the DoctorCom Dashboard page, click the “Users” button, located in the upper right hand corner of the screen. When you click the appropriate group box, the names of your contacts will appear. Click on the Provider you would like to contact." %}
+	<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+	<a name="20" /><b>{% trans "How do I search for other Providers on DoctorCom?" %}</b><br />
+	{% trans "From the DoctorCom Dashboard page, click the “Users” button, located in the upper right hand corner of the screen. The “Search” textbox is located on the bottom of the “User Directory” page. Enter the name of the Provider in the textbox and press the magnifying glass. A list of Providers, with their specialty, will appear. Click on the Provider to find out more information and to contact them through DoctorCom.<br />Note: If you cannot find a Provider, it is possible that they do not yet have a DoctorCom account; please use the invite function in order to securely connect with them through DoctorCom." %}
+	<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+</div>
+{% endblock %}
+

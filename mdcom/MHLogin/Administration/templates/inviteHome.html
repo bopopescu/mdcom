@@ -1,0 +1,68 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}{% trans "Invitation Home" %}{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h1>{% trans "Invitation Home" %}</h1>
+<a href="New/">{% trans "New Invitation" %}</a><br>
+<h2>{% trans "Outstanding Issued Invites" %}</h2>
+<table class='dcAdminTable' cellspacing='0' cellpadding='0'>
+    <tr>
+        <th align='left'>{% trans "Recipient" %}</th>
+        <th align='left'>{% trans "Timestamp" %}</th>
+        <th align='left'>{% trans "User Type" %}</th>
+        <th align='center'>{% trans "Verified?" %}</th>
+        <th align='left'>{% trans "Inviter" %}</th>
+        <th>{% trans "Code" %}<br />({% trans "test only" %})</th>
+        <th>{% trans "Cancel?" %}</th>
+    </tr>
+    {% for invite in outstandingInvites %}
+    <tr>
+        <td>{{invite.recipient}}</td>
+        <td>{{invite.requestTimestamp}}</td>
+        <td align='left'>{{invite.get_userType_display}}</td>
+        <td align='center'>{% if invite.typeVerified %}Yes{% else %}No{% endif %}</td>
+        <td align='left'>{{invite.first_name}} {{invite.last_name}}</td>
+        <td>{% if invite.testFlag %}{{invite.code}}{% else %}&nbsp;{% endif %}</td>
+        <td><a href='#' onclick='cancelInvitation({{invite.id}});'>{% trans "Cancel" %}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+<script>
+function cancelInvitation(id){
+    if(typeof id != 'undefined'){
+        $.ajax({
+            url:'/Invitations/Check/',
+            type:'POST',
+            data:{inviteID:id},
+            success:function(data,txtStatus){
+                var d = JSON.parse(data);
+                if(d=='ok'){
+                    location.href = 'Cancel/'+id;
+                }else{
+                    alert('This invitation has been cancelled.');
+                    location.reload();
+                }
+            },
+            error:function(){
+                
+            }
+        });
+    }else{
+        alert('There is an error occured.');
+        location.reload();
+    }
+}
+</script>
+{% endblock %}

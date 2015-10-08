@@ -1,0 +1,18 @@
+This doc is in progress
+
+Set up env
+
+make sure the development packages of libxml2, libxslt, libcurl and libgraphviz are installed
+aptitude install libxml2-dev libxslt1-dev libgraphviz-dev libcurl4-gnutls-dev
+
+pip install -r requirements.pip
+
+Copy django_local_settings-sample.py into django_local_settings.py
+cp django_local_settings-sample.py django_local_settings.py
+
+
+fab freshdb
+fab loaddata 
+Will put in data from the dump and also run the alter statments to get you up and running. 
+
+

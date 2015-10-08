@@ -1,0 +1,43 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block customCSS %}
+.errorlist {color:red;}
+{% endblock %}
+
+{% block content %}
+<br/>
+<a style="float:left" href="/Sales/Profile/Edit/">{% trans "Edit Profile" %}</a>
+<br/>
+<a style="float:left" href={% url 'MHLogin.MHLUsers.views.change_password' %}>
+    {% trans "Change Password" %}
+</a>
+
+
+{% comment %}
+<div style="width:150px; margin-top:20px;">
+	<img src="{{photo}}" alt="{% trans 'No Image Provided' %}" width="150px" 
+        style="border:solid 10px lightblue;">
+</div>
+{% endcomment %}
+
+<div style="text-align:left">
+<br/><br/>{% trans "Address:" %}<br/>
+	{% if user.address1 %}
+		{{user.address1}}<br />
+		{% if user.address2 %}{{user.address2}}<br />{% endif %}
+		{{ user.city }}, {{ user.state }} {{ user.zip }}
+		{% comment %} <br/>Latitude= {{ user.lat }}, Longitude= {{ user.longit }} {% endcomment %}
+	{% else %}
+		({% trans "Not Given" %})
+	{% endif %}<br />
+</p>
+<p>{% trans "Mobile Phone" %}: {% if user.mobile_phone %}{{user.mobile_phone}}{% else %}(Not Given){% endif %}<br/>
+<p>{% trans "Other Phone" %}: {% if user.phone %}{{user.phone}}{% else %}(Not Given){% endif %}<br/>
+<p>{% trans "Email Address" %}: {{user.email}}</p>
+<br/>
+</div>
+
+{% endblock %}
+

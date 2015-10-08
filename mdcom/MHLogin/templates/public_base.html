@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load i18n %}
+
+<html>
+{% block style %}
+<style>
+    body{ background:#EFF3F8;}
+    #public-base{ width:953px; margin:0 auto;}
+    #public-base .content{ border:1px solid #A6C9E2; border-radius:5px; padding:0 10px; background:#fff;}
+    #public-base .content p,#public-base .content li{ font-weight:normal; font-family:Arial; font-size:14px;}
+    #footer{ width:953px; margin:10px auto; font-size:11px; padding-left:30px; font-family:Verdana;}
+    #footer a{ color:#143888;}
+    .hidden{display:none;}
+    .button{float:left; cursor:pointer; text-align:center;}
+    #inviteDialog .buttons{ width:230px; height:35px; margin:0 auto; margin-top:10px;}
+    #inviteDialog .buttons.longButtons{ width:275px;}
+    #inviteDialog .buttons .button{ width:81px; height:34px; 
+        background:url({{STATIC_URL}}img/newButton.png) no-repeat; 
+            font-size:13px; line-height:30px; margin-left:25px;}
+    #inviteDialog .buttons .button.buttonR{ background:url({{STATIC_URL}}img/newButtonR.png); 
+        color:#fff; font-weight:bold;}
+    #inviteDialog .buttons .button.buttonLong{ 
+        background:url({{STATIC_URL}}img/buttonLong.png) no-repeat;
+            color:#fff; font-weight:bold; width:100px;}
+    #inviteDialog .buttons .button.buttonGray{ 
+        background:url({{STATIC_URL}}img/buttonGray.png) no-repeat;
+            color:#fff; font-weight:bold; width:100px;}
+    #inviteDialog .buttons .buttonCenter{ margin:0 auto; margin-left:85px;}
+    #inviteDialog .content .text{ font-weight:normal; font-size:14px; 
+        padding-top:8px; padding-bottom:17px;}
+    input{ width:81px; height:30px; 
+        background:url({{STATIC_URL}}img/newButton.png) no-repeat; 
+            font-size:13px; margin-left:25px; border:0; font-weight:bold; cursor:pointer;}
+    .buttonR{background:url({{STATIC_URL}}img/newButtonR.png); color:#fff; font-weight:bold;}
+    #buttonForm{ width:930px; margin:0 auto; text-align:center; padding-bottom:10px;}
+    #buttonForm input{ padding:0; margin:0 30px;}
+    .ui-widget{ font-size:13px;}
+</style>
+{% endblock %}
+
+{% block extrastyle %}
+{% endblock %}
+
+<head>
+    <title>{% block title %}{% trans "DoctorCom" %}{% endblock %} </title>
+    <link type="text/css" href="{{STATIC_URL}}css/start/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/staffHome.css" />
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-extension.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+    <script>
+        function showCancelDialog(){
+            showSimpleDialog({
+                title: "{% trans 'Reject Terms' %}",
+                content: "{% trans 'Are sure reject the terms?' %}",
+                dc_buttons: {
+                    '{% trans "OK" %}': {
+                        'click': function() {
+                            location.href='/logout';
+                        },
+                        'text': '{% trans "OK" %}',
+                        'class': 'positive-btn'
+                    },
+                    '{% trans "Cancel" %}': function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id='public-base'>
+        <img src="{{STATIC_URL}}img/logo.gif">
+        <div class='content'>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% include "includes/public_footer.html" %}
+</body>
+</html>

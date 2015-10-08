@@ -1,0 +1,209 @@
+{% load i18n %}
+
+<script>
+	$(function(){
+		$("#holidayAdd").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/HolidayAdd/0/",
+				type:'GET',
+				data: {
+					
+				},
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#holidayRemove").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/HolidayView/",
+				type:'POST',
+				data: $("#removeHolidayForm").serialize(),
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#holidaySave").click(function(){
+			var holiday_id = 0;
+			var holiday_id_tmp  = $("#holiday_id").val();
+			if (holiday_id_tmp) {
+				holiday_id = holiday_id_tmp;
+			}
+
+			$.comAjax({
+				url: "/Organization/InformationSub/HolidayAdd/"+holiday_id+"/",
+				type:'POST',
+				data: $("#holidayForm").serialize(),
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#holidayView").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/HolidayView/",
+				type:'POST',
+				data: {
+					
+				},
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#holidayBack").click(function(){
+			OrgView();
+		});
+		
+		$("#hourEdit").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/HourEdit/",
+				type:'GET',
+				data: {},
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#hourEditToSave").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/HourEdit/",
+				type:'POST',
+				data: $("#hourForm").serialize(),
+				success:function(data, status){
+					OrgView();
+					//RefreshRight(data);
+				}
+			});
+		});
+
+		$("#hourSave").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/HourEdit/",
+				type:'POST',
+				data: {},
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#hourBack").click(function(){
+			OrgView();
+		});
+
+		$("#pinSave").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/PinChange/",
+				type:'POST',
+				data:  $("#pinForm").serialize(),
+				success:function(data, status){
+					RefreshRight(data);
+					//OrgView();
+				}
+			});
+		});		
+
+		$("#pinChange").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/PinChange/",
+				type:'GET',
+				data: {} ,
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#pinBack").click(function(){
+			OrgView();
+		});
+
+		<!-- form.ser .....+"&name="+val+ -->
+		$("#ivrView").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/IVRView/",
+				type:'POST',
+				data: {org_id: GetSelectOrgID()},
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#ivrBack").click(function(){
+			OrgView();
+		});
+		
+		$("#ivrSave").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/IVRView/",
+				type:'POST',
+				data: {
+					org_id: GetSelectOrgID(),
+					newnumber: 'true',
+					number: $('#id_number').val(),
+					description: $('#id_description').val()
+				},
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+
+		$("#ivrDelete").click(function(){
+			$.comAjax({
+				url: "/Organization/InformationSub/IVRView/",
+				type:'POST',
+				data: $("#del_form").serialize()+"&org_id="+GetSelectOrgID()+"&delnumber=0",
+					
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+	});
+	function holidayEdit(holiday_id) {
+		$.comAjax({
+			url: "/Organization/InformationSub/HolidayAdd/"+holiday_id+"/",
+			type:'GET',
+			success:function(data, status){
+				RefreshRight(data);
+			}
+		});
+	}
+	function quitMemberOrg(obj, relation_id) {
+		var org_name = $(".name",$(obj).closest("tr")).text();
+		org_name = $.trim(org_name);
+		showSimpleDialog({
+			title: '{% trans "Quit Organization" %}',
+			content: '{% trans "Are you sure you wish to remove your organization from %s?" %}'.sprintf(org_name),
+			dc_buttons: {
+				'{% trans "Quit" %}': {
+					'click': function() {
+						$( this ).dialog( "close" );
+						$.comAjax({
+							url: "/Organization/MemberOrg/Remove/",
+							type:'POST',
+							data: {org_rs_id: relation_id},
+							success:function(data, status){
+								OrgView();
+							}
+						});
+					},
+					'text': '{% trans "Quit" %}',
+					'class': 'positive-btn'
+				},
+				'{% trans "Cancel" %}': function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	}
+</script>

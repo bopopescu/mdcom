@@ -1,0 +1,99 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<div class='signup'>
+	<div class='head'>{% trans "Registration" %}
+		<span>{% if step_count %}
+			{% trans "Step" %} {{ step }} {% trans "of" %} {{ step_count }}
+		{% endif %}
+		</span>
+	</div>
+	<div class='content'>
+		<form action="." method="post" id='registerStaff'>{% csrf_token %}
+			<li>
+				{{ form.practice_name.errors }}
+				<label for="id_practice_name">{% trans "Practice Name:" %}</label> 
+				{{form.practice_name}}
+			</li>
+			<li>
+				{{ form.practice_address1.errors }}
+				<label for="id_practice_address1">{% trans "Practice Address1:" %}</label> 
+				{{form.practice_address1}}
+			</li>
+			<li>
+				{{ form.practice_address2.errors }}
+				<label for="id_practice_address2">{% trans "Practice Address2:" %}</label> 
+				{{form.practice_address2}}
+			</li>
+			<li>
+				{{ form.practice_city.errors }}
+				<label for="id_practice_city">{% trans "Practice City:" %}</label> 
+				{{form.practice_city}}
+			</li>
+			<li>
+				{{ form.practice_state.errors }}
+				<label for="id_practice_state">{% trans "Practice State:" %}</label> 
+				{{form.practice_state}}
+			</li>
+			<li>
+				{{ form.practice_zip.errors }}
+				<label for="id_practice_zip">{% trans "Practice Zip:" %}</label> 
+				{{form.practice_zip}}
+			</li>
+			<li>
+				{{ form.time_zone.errors }}
+				<label for="id_time_zone">{% trans "Time Zone:" %}</label> 
+				{{form.time_zone}}
+			</li>
+			<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+				{{ previous_fields|safe }}
+			<div class="submit">
+				{% if step > 1 %}
+				<input type="button" class='back' value='{% trans "Back" %}' id='back' >
+				{% endif %}
+	
+				{% if step == step_count %}
+				<input type="submit" class='submit' value='{% trans "Submit" %}'>
+				{% else%}
+				<input type="submit" class='submit' value='{% trans "Next" %}' >
+				{% endif %}
+			</div>
+		</form>
+	</div>
+</div>
+<script type='text/javascript'>
+$(function(){
+	//add * in every input field , add validate method and add back click method by xlin in 20120620
+	$('#id_practice_name').after('<span class="redstar">*</span>');
+	$('#id_practice_zip').after('<span class="redstar">*</span>');
+	$('#id_time_zone').after('<span class="redstar">*</span>');
+	$('#id_practice_address1').after('<span class="redstar">*</span>');
+	$('#id_practice_city').after('<span class="redstar">*</span>');
+	$('#id_practice_state').after('<span class="redstar">*</span>');
+	
+	$('#registerStaff').validate({
+		rules:{
+			practice_name:{required:true},
+			practice_zip:{required:true,isZipCode:true},
+			time_zone:{required:true},
+			practice_address1:{required:true},
+			practice_city:{required:true},
+			practice_state:{required:true}
+		},
+		messages:{
+			practice_zip:{
+				isZipCode:'{% trans "This is not a valid zip code." %}'
+			}
+		},
+		submitHandler:function(form){
+			$.ui.wait.start('Waiting...');
+			setTimeout(function(){
+				form.submit();
+			},1000);
+		}
+	});
+	
+});
+</script>
+{% endblock content %}

@@ -1,0 +1,12 @@
+<form action="/Scheduler/getPrimaryOncall/" method="post">
+{% load i18n %}
+{% if form.non_field_errors %}
+<div id="form_errors" style="color:red;padding:5px 20px 5px 20px;margin-bottom:10px;border:1px solid lightgray;width:55%;" class="ui-corner-all">
+{{non_field_errors}}
+</div>
+{% endif %}
+
+{{ form.as_p }}
+
+<input type="submit" value="Submit" />
+</form>

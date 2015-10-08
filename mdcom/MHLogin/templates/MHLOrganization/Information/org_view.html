@@ -1,0 +1,185 @@
+{% load i18n %}
+{% load url from future %}
+{% include "MHLOrganization/Information/org_js.html" %}
+{% include "MHLOrganization/InformationSub/org_sub_js.html" %}
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+
+
+<div class="org-tab-content">
+	<div>
+		<input id="orgEdit"  class="org_inf_btn" type="button" value="{% trans 'Edit Profile'%}" />
+		<input id="ivrView" class="org_inf_btn" type="button" value="{% trans 'Change IVR'%}" />
+		<input id="pinChange" class="org_inf_btn" type="button" value="{% trans 'Change Pin'%}" />
+		{% if has_move_btn %}
+		<input id="orgMove" class="org_inf_btn" type="button" value="{% trans 'Move/Change Type'%}" />
+		{% endif %}
+		{% if has_remove_btn %}
+		<input id="orgRemove" class="org_inf_btn" type="button" value="{% trans 'Remove'%}" />
+		{% endif %}
+	</div>
+	
+	<div id="hrDiv"></div>
+	<div id='orgProfileView' class="ui-corner-all">
+	    <div class="profileViewContent">
+			<table width='80%' class='tableProfile' cellspacing='0' cellpadding='0'>
+				<tr>
+					<td>
+						<h3>{% trans "Name:" %}</h3>
+					</td>
+					<td>
+							{{ office_name }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{% trans "Type:" %}</h3>
+					</td>
+					<td>
+							{{ org_type }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{% trans "Parent Organization:" %}</h3>
+					</td>
+					<td>
+							{{ org_parent_org_name }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{% trans "Address:" %}</h3>
+					</td>
+					<td>
+						{% if office_address1 %}
+							{{office_address1}}
+							{% if office_address2 %}{{office_address2}}{% endif %}
+							{{ office_city }}, {{ office_state }} 
+			                {{ office_zip }}
+						{% else %}
+							{% trans "(Not Given)" %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{% trans "Office Phone:" %}</h3>
+					</td>
+					<td>
+						{% if office_phone %}{{office_phone}}{% else %}{% trans "(Not Given)" %}{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>{% trans "Backline Phone:" %}</h3>
+					</td>
+					<td>
+						{% if backline_phone %}{{backline_phone}}{% else %}{% trans "(Not Given)" %}{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><h3>{% trans "Time Zone:" %}</h3></td>
+					<td>{{office_time_zone}}</td>
+				</tr>
+				<tr>
+					<td style="vertical-align: top;"><h3>{% trans "Logo" %}:</h3></td>
+					<td>
+						<div style="margin: 5px 0; line-height: 0;">
+							<img style="border: 1px solid #E1EDF5;" src="{{office_logo}}" />
+						</div>
+					</td>
+				</tr>
+			</table>
+	    </div>
+	
+		<div class="profileViewContainer">
+			<h3>{% trans "Office Hours" %}</h3>
+	        <table width='100%' class='tableOfficeProfile' cellspacing='0' cellpadding='0'>
+			<tr>
+				<th align='left'>{% trans "Day Of The Week" %}</th>
+				<th align='left'>{% trans "Office Opens" %}</th>
+				<th align='left'>{% trans "Office Closes" %}</th>
+				<th align='left'>{% trans "Lunch Starts" %}</th>
+				<th align='left'>{% trans "Lunch Duration" %}</th>
+			</tr>
+			{% for hour in hours %}
+			<tr>
+				<td align='left'> 
+	            {% if hour.day_of_week == 1 %}{% trans "Monday" %}{% endif %}
+	            {% if hour.day_of_week == 2 %}{% trans "Tuesday" %}{% endif %}
+	            {% if hour.day_of_week == 3 %}{% trans "Wednesday" %}{% endif %}
+	            {% if hour.day_of_week == 4 %}{% trans "Thursday" %}{% endif %}
+	            {% if hour.day_of_week == 5 %}{% trans "Friday" %}{% endif %}
+	            {% if hour.day_of_week == 6 %}{% trans "Saturday" %}{% endif %}
+	            {% if hour.day_of_week == 7 %}{% trans "Sunday" %}{% endif %}
+	            </td>
+	            
+				<td align='left'>{{ hour.open }}</td>
+				<td align='left'>{{ hour.close}}</td>
+				<td align='left'>{{ hour.lunch_start}}</td>
+				<td align='left'>{{ hour.lunch_duration }} {% trans "min" %}</td>
+			</tr>
+			{% endfor %}
+			</table>
+			<p>
+				<input id="hourEdit" class="org_inf_btn" type="button" value="{% trans 'Manage Hours'%}" />
+			</p>
+
+			<h3>{% trans "Holiday Closures" %}</h3>
+			<table width='100%' class='tableHolidayProfile' cellspacing='0' cellpadding='0'>
+			<tr>
+				<th align='left'>{% trans "Holiday" %}</th>
+				<th align='left'>{% trans "Date" %}</th>
+			</tr>
+			{% for holidays in holidays.all %}
+			<tr>
+				<td align='left'>
+					{%if holidays.name%}
+						{{ holidays.name}}
+					{%else%}
+						&nbsp;
+					{%endif%}
+				</td>
+				<td align='left'>{{ holidays.designated_day|date:"SHORT_DATE_FORMAT" }}</td>
+			</tr>
+			{% endfor %}
+			</table>
+			<p>
+				<input id="holidayView" class="org_inf_btn" type="button" value="{% trans 'Manage Holiday'%}" />
+			</p>
+
+			{% if member_of %}
+			<h3>{% trans "Member of" %}</h3>
+			<table width='100%' class='memberOf' cellspacing='0' cellpadding='0'>
+			<tr>
+				<th align='left' width="150">{% trans "Name" %}</th>
+				<th align='left' width="100">{% trans "Type" %}</th>
+				<th align='left'>{% trans "Address" %}</th>
+				<th align='left' width="45">{% trans "Action" %}</th>
+			</tr>
+			{% for org in member_of %}
+			<tr>
+				<td align='left' class="name">
+					{{org.name}}&nbsp;
+				</td>
+				<td align='left'>
+					{{org.type}}&nbsp;
+				</td>
+				<td align='left'>
+					{% if org.address1 %}{{org.address1}}{% endif %}
+					{% if org.address2 %}{{org.address2}}{% endif %}
+					{% if org.city %}{{org.city}},{% endif %}
+					{% if org.state %}{{org.state}}{% endif %}
+					{% if org.zip %}{{org.zip}}{% endif %}
+				</td>
+				<td align='left'>
+					<a href="javascript:void(0);" onclick="quitMemberOrg(this, {{org.relation_id}});">{% trans "Quit" %}</a>
+				</td>
+			</tr>
+			{% endfor %}
+			</table>
+			{% endif %}
+
+		</div>
+	</div>
+</div>

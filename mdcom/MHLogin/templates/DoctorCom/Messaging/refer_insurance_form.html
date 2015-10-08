@@ -1,0 +1,59 @@
+{% load i18n %}
+<script>
+
+	$(function(){
+		$("#id_back_to_demographics").click(function(){
+			$("#referTabs").tabs("option", "selected", 1);
+		});
+	});
+
+</script>
+
+
+
+<div id="form-3">
+	<div class="clear"></div>
+	<div class="referContent">
+		<table>
+			<tr>
+				<td>
+					{% trans "Prior Authorization Number:" %}</span><br/>
+					{{ insurance_form.prior_authorization_number }}
+				</td>
+				<td class="righttd">
+					<span class="star">*</span>{% trans "Primary Insurance:" %}<br/>
+					{{ insurance_form.insurance_id }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					{% trans "Other Authorization:" %}<br/>
+					{{ insurance_form.other_authorization }}
+					
+				</td>
+				<td class="righttd">
+					<span>{% trans "Secondary Insurance:" %}<br/></span>
+					{{ insurance_form.secondary_insurance_id }}
+					
+				</td>
+			</tr>
+			<tr>
+				<td>
+					{% trans "Internal Tracking Number:" %}<br/>
+					{{ insurance_form.internal_tracking_number }}
+				</td>
+				<td class="righttd">
+					<span>{% trans "Tertiary Insurance:" %}<br/></span>
+					{{ insurance_form.tertiary_insurance_id }}
+				</td>
+			</tr>
+		</table>
+		<div class="clear"></div>
+		<div class="actionbtns">
+			<input id="id_back_to_demographics" type="button" value="{% trans "Back to Demographics" %}" class="cancel"/>
+			<input id="id_submit" type="button" value="{% trans "Submit" %}" class="next"/>
+			<input id="id_cancel2" type="button" value="{% trans "Cancel" %}" class="cancel"/>
+		</div>							
+	</div>
+</div>	
+

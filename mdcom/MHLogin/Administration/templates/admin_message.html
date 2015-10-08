@@ -1,0 +1,21 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<form id="msgNewFrm" enctype="multipart/form-data" action="{% if ACTION %}{{ACTION}}{% else %}.{% endif %}" method="POST">
+    <h3>{% trans "Recipient" %}:{{recipient.first_name}} {{recipient.last_name}}</h3>
+    {{form.recipient}}
+    <div id='adminMessage'>
+        {{form.as_ul}}
+    </div>
+    <input id="id_send" type="submit" name="Submit" value='{% trans "Send Msg" %}' />
+</form>
+</div>
+{% endblock %}

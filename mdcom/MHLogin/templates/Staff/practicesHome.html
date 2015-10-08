@@ -1,0 +1,1183 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+div.practices_list {
+	background-color:#fff;
+	border:1px solid #666;
+	padding:3px;
+	overflow:auto;
+	height:190px;
+}
+div#add_practices_results {
+	padding:0px;
+}
+div.practices_list table {
+	width:100%;
+}
+table#results_table p {
+	margin-top:0px;
+	margin-bottom:5px;
+}
+
+tr.practice_container td {
+	border-top: 1px solid gray;
+}
+
+/* big blue boxes */
+div#add_practices_container{
+border:1px solid lightblue; 
+width:450px;
+height:250px;
+background-color:#F8FFFF;
+}
+
+div#current_container{
+border:1px solid lightblue; 
+width:450px;
+height:250px;
+background-color:#F8FFFF;
+}
+div#current_container table {
+	border-collapse: collapse;
+}
+
+div#pending_container{
+border:1px solid lightblue; 
+width:450px;
+height:250px;
+background-color:#F8FFFF;
+
+}
+
+/* bars */
+div.hdr_bar{
+}
+
+div#add_practices_search{
+float:left;
+}
+
+input#search_name{
+width:120px;
+}
+
+/* tag above grey box container */
+div#add_practices_results_container{
+padding-left:200px;
+/*width:100%;*/
+cursor:pointer;
+}
+
+div#pending_results_container{
+}
+
+
+.hover_highlight {
+	background-color:#bbe0f0;
+}
+table#results_table td {
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+div.overlay_modal {
+    /* must be initially hidden */
+    display:none;
+    position: absolute;
+    /* place overlay on top of other elements */
+    z-index:10000;
+    
+    border:1px solid #666;
+	padding: 15px;
+	
+	width: 400px;
+
+    /* styling */
+    background-color:#fff;
+}
+
+span.association_actions {
+	font-size: 11px;
+}
+
+table tr{
+	background:none;
+}
+table tr:hover{
+	background:none;
+}
+{% endblock %}
+
+{% block customImports %}
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.tools-overlay_expose_tooltip_new.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/json2.js"></script>
+	
+<script language="javascript">
+
+$(document).ready(function() 
+{
+	
+	ProvidersPractice.searchCurrent();
+	Association.searchPendingPractices();
+	
+	$('#search_name').keyup(function(event) {
+		if (event.keyCode == 13) {
+			Practices_Search.searchPractices();
+		}
+	});
+
+});
+
+var ProvidersPractice={};
+ProvidersPractice.received = [];
+
+ProvidersPractice.current = function(pract_id,pract_name, make_current){
+	this.pract_id = pract_id;
+	this.pract_name = pract_name;
+	this.make_current = make_current;
+
+}
+
+var Practices_Search = {};
+Practices_Search.received = [];
+
+Practices_Search.practice = function(id,name, address, city, state, zip){
+	this.id = id;
+	this.name = name;
+	this.address = address;
+	this.city = city;
+	this.state = state;
+	this.zip = zip;
+}
+
+var Association={};
+Association.received_to = [];
+Association.received_from = [];
+
+Association.pending = function(pract_id,req_name,pract_name,assoc_id){
+	this.pract_id = pract_id;
+	this.req_name = req_name;
+	this.pract_name = pract_name;
+	this.assoc_id = assoc_id;
+
+}
+
+/* search practices for addition */
+Practices_Search.getPractices_display = function() 
+{
+    $('table#results_table tr.practice_container').remove();
+    $('table#results_table tr.practice_searcherror').remove();
+	$('table#results_table tr.practice_notfound').remove();
+	$('table#results_table tr.practice_details').remove();
+	
+	var table = $('table#results_table');
+   
+   practices = Practices_Search.received;
+	if (practices.length == 0) 
+	{
+			$('<tr class="practice_notfound"><td>'+'{% trans "No Practices found." %}'+'</td></tr>').appendTo(table);
+			 return;
+	}
+			
+	for (var i=0; i< practices.length; i++) 
+	{
+		$('<tr class="practice_container" id="' + practices[i].id +
+		'"><td "pract_id=' + practices[i].id + '">' + practices[i].name +
+		'</td></tr><tr class="practice_details practice_' + practices[i].id +
+		'_details"><td><p>'+'{% trans "Address:" %}'+'<br />' +  practices[i].address +
+		'<br />' + practices[i].city + ', ' + practices[i].state + ' ' +
+		practices[i].zip + '</p><p><a href="javascript:void(0);" onClick="javascript:' + 
+		'Association.AddAssociationHandler(' + practices[i].id +
+		', ' + i + ');">'+'{% trans "Join" %}'+'</a></p></td></tr>').appendTo(table);
+	}
+	
+	//highlight on mouse
+	$('tr.practice_container td').hover(
+	  function(event){
+	   $(this).addClass("hover_highlight");	
+	  },
+	  function(event){
+	 	   $(this).removeClass("hover_highlight");
+	  }
+  );
+	  
+	 $('table#results_table tr.practice_details').hide();
+	  //expand on click
+
+    
+    $('tr.practice_container').live('click', function(event) 
+    {
+		var pract_id = this.id;
+		
+		$('table#results_table tr.practice_'+pract_id+'_details').toggle();
+		return false;
+	});	
+	
+
+	
+}
+
+		
+Practices_Search.searchPractices = function() {
+	$.ajax({
+		url: 'AJAX/PracticesSearch/',
+		type: 'POST' ,
+		data: {
+			search_name: $('input#search_name').val()
+		}, // end data
+		
+		success: function(data, textStatus, httpRequest) 
+		{
+				Practices_Search.received = [];
+				all_practices = JSON.parse(data);
+				
+				for (var idx=0; idx < all_practices.length; idx++) 
+				{
+					Practices_Search.received[idx] = new Practices_Search.practice(
+									all_practices[idx].id,
+									all_practices[idx].practice_name,
+									all_practices[idx].practice_address,
+									all_practices[idx].practice_city,
+									all_practices[idx].practice_state,
+									all_practices[idx].practice_zip
+								);
+					
+
+			    }
+			    Practices_Search.getPractices_display();
+		    
+         },
+		error: function(httpRequest, textStatus, errorThrown) 
+		{
+		
+			return false;
+		}
+	}); //end adjax
+}
+
+
+/* Current practice associations for this provider */
+ProvidersPractice.getProvidersPractice_display = function() 
+{
+    $('table#current_practices_table tr.current_container').remove();
+	
+	var table = $('table#current_practices_table');
+   
+   current = ProvidersPractice.received;
+   
+	if (current.length == 0) 
+	{
+		return;
+	}
+			
+	for (var i=0; i< current.length; i++) 
+	{
+		if (current[i].make_current == 'yes')
+		{
+			$('<tr class="current_container"><td>' + current[i].pract_name + 
+			'</td> <td><a href="javascript:void(0);" onClick="javascript:ProvidersPractice.MakePracticeCurrent(' + 
+	        current[i].pract_id +
+			');">'+'{% trans "Make Practice Current" %}'+'</a></td><td>  </td><td><a href="javascript:void(0);" onClick="javascript:ProvidersPractice.RemovePracticeHandler('
+	           + current[i].pract_id +
+	    ', '+i+');">'+'{% trans "Leave" %}'+'</a></td></tr>').appendTo(table);
+	  }
+	  else
+	  {
+	   $('<tr class="current_container"><td>'
+			 +current[i].pract_name+
+			 '</td> <td> - '+'{% trans "Current Practice" %}'+'</td><td>  </td><td><a href="javascript:void(0);" onClick="javascript:ProvidersPractice.RemovePracticeHandler('
+	           + current[i].pract_id +
+	    ', '+i+');">'+'{% trans "Leave" %}'+'</a></td></tr>').appendTo(table);
+	  }
+	  
+	   
+	}
+	
+	$('tr.current_container').hover(
+	  function(event){
+	    $(this).addClass("hover_highlight");
+	  },
+	  function(event){
+	  	   $(this).removeClass("hover_highlight");
+	  }
+	  );
+}
+
+ProvidersPractice.searchCurrent = function() {
+	$.ajax({
+		url: 'AJAX/getCurrentPractices/',
+		type: 'POST',
+		
+		success: function(data, textStatus, httpRequest) 
+		{
+				ProvidersPractice.received = [];
+				practice = JSON.parse(data);
+				
+				for (var idx=0; idx < practice.length; idx++) 
+				{
+					ProvidersPractice.received[idx] = new ProvidersPractice.current(
+									practice[idx].pract_id,
+									practice[idx].pract_name,
+									practice[idx].make_current
+								);
+					
+
+			    }
+			    ProvidersPractice.getProvidersPractice_display();
+		    
+         },
+		error: function(httpRequest, textStatus, errorThrown) 
+		{
+
+			return false;
+		}
+	}); //end adjax
+}
+
+
+/* Pending practice associations for this provider */
+Association.searchPendingPractices = function() {
+
+		Association.searchPendingPracticesFrom();
+		Association.searchPendingPracticesTo();
+
+	
+}
+
+Association.getPendingPracticesTo_display = function(alldata) 
+{
+	$('table#pending_table tr.pending_to_container').remove();
+	var table = $('table#pending_table');
+   
+   pending_to =   Association.received_to;
+  
+	if (pending_to.length == 0) 
+	{
+		 return;
+	}
+	
+	if (pending_to.length > 0)
+	{
+	for (var i=0; i< pending_to.length; i++) 
+	{
+	 $('<tr class="pending_to_container"><td>'+'{% trans "To:" %} '
+			 +pending_to[i].pract_name+
+			 ' <span class="association_actions">(<a href="javascript:void(0);" onClick="javascript:Association.ResendAssociationHandler('
+	           + pending_to[i].assoc_id +
+	    ', '+i+');">'+'{% trans "Resend" %}'+'</a> | <a href="javascript:void(0);" onClick="javascript:Association.RemoveAssociationHandler('
+	    	+ pending_to[i].assoc_id + ', '+i+
+	    ');">'+'{% trans "Cancel" %}'+'</a>)</span></td></tr>').appendTo(table);
+	}
+	}
+	
+	$('tr.pending_to_container').hover(
+	  function(event){
+	    $(this).addClass("hover_highlight");
+	  },
+	  function(event){
+	  	   $(this).removeClass("hover_highlight");
+	  }
+	  );
+
+}
+
+Association.getPendingPracticesFrom_display = function(alldata) 
+{
+	
+	$('table#pending_table_from tr.pending_from_container').remove();
+	var table = $('table#pending_table_from');
+   
+   pending_from = Association.received_from;
+  
+	if (pending_from.length == 0) 
+	{
+		 return;
+	}
+	
+			
+	if (pending_from.length > 0)
+	{
+		for (var i=0; i< pending_from.length; i++) 
+		{
+			$('<tr class="pending_from_container"><td>'+'{% trans "From:" %} ' +
+			pending_from[i].pract_name + ' <span class="association_actions">' +
+			'(<a href="javascript:void(0);" onClick="javascript:' +
+			'ProvidersPractice.AddPracticeHandler(' + pending_from[i].pract_id +
+			', ' + pending_from[i].assoc_id + ', ' + i + ');">'+'{% trans "Accept" %}'+'</a> | ' +
+			'<a href="javascript:void(0);" onClick="javascript:Association.' + 
+			'RejectAssociationHandler(' + pending_from[i].assoc_id + 
+			', ' + i + ');">'+'{% trans "Reject" %}'+'</a>)</td></tr>').appendTo(table);
+		}
+	}
+	
+	
+	$('tr.pending_from_container').hover(
+	  function(event){
+	    $(this).addClass("hover_highlight");
+	  },
+	  function(event){
+	  	   $(this).removeClass("hover_highlight");
+	  }
+	  );
+	  
+
+}
+
+Association.searchPendingPracticesFrom = function() {
+
+	$.ajax({
+		url: 'AJAX/getPendingPracticesFrom/',
+		type: 'POST',
+		
+		success: function(data, textStatus, httpRequest) 
+		{
+				Association.received_from = [];
+				current_office_from = JSON.parse(data);
+				
+				for (var idx=0; idx < current_office_from.length; idx++) 
+				{
+					Association.received_from[idx] = new Association.pending(
+									current_office_from[idx].pract_id,
+									current_office_from[idx].req_name,
+									current_office_from[idx].pract_name,
+									current_office_from[idx].assoc_id
+								);
+					
+
+			    }
+			    
+			   
+			    Association.getPendingPracticesFrom_display();
+
+		    
+         },
+		error: function(httpRequest, textStatus, errorThrown) 
+		{
+
+			return false;
+		}
+	}); //end adjax
+}
+
+Association.searchPendingPracticesTo = function() {
+	
+	$.ajax({
+		url: 'AJAX/getPendingPracticesTo/',
+		type: 'POST',
+		
+		success: function(data, textStatus, httpRequest) 
+		{
+				Association.received_to = [];
+				current_office = JSON.parse(data);
+				
+				for (var idx=0; idx < current_office.length; idx++) 
+				{
+					Association.received_to[idx] = new Association.pending(
+									current_office[idx].pract_id,
+									current_office[idx].req_name,
+									current_office[idx].pract_name,
+									current_office[idx].assoc_id
+								);
+				
+			    
+			    }
+			    Association.getPendingPracticesTo_display();
+		    
+         },
+		error: function(httpRequest, textStatus, errorThrown) 
+		{
+
+			return false;
+		}
+	}); //end adjax
+
+
+}
+
+ProvidersPractice.MakePracticeCurrent = function(pract_id)
+{
+	
+	$.ajax({
+		url: 'AJAX/makePracticeCurrent/',
+		type: 'POST',
+		data: {
+			pract_id: pract_id
+		}, // end data
+		
+		success: function(data, textStatus, httpRequest) {
+			// Test for success
+			if (textStatus == 'success') {
+				//call to reload current
+				ProvidersPractice.searchCurrent();
+				$('#changePractice option').each(function(i, obj){
+					if (obj.value == pract_id) {
+						$(obj).attr("selected","selected");
+						$(obj).get(0).selected = true;
+					}
+				});
+				$('#changePractice option[value=pract_id]').attr("selected","selected");
+				$('#changePractice').val(pract_id);
+			}
+		}, // end success
+		error: function(httpRequest, textStatus, errorThrown) {
+			alert('{% trans "An error occurred while setting current practice." %}');
+		}
+	});
+
+	
+}
+
+/* removed provider from practice, if scheduled on call in teh next two weeks, show warning window first */
+ProvidersPractice.RemovePracticeHandler = function(pract_id, pract_idx)
+{
+	/*start with ajax call to check if warning needed */
+	$.ajax({
+		url: 'AJAX/removePracticeErrorCheck/',
+		type: 'POST',
+		data: {
+				pract_id: pract_id
+			}, // end data
+		success: function(data, textStatus, httpRequest) {
+			// Test for success
+			if (textStatus == 'success') {
+				return_value = JSON.parse(data);
+				if (return_value == 'ok')//do not need i18n
+				{
+					$('span#remove_check_name').html(
+							ProvidersPractice.received[pract_idx].pract_name);
+					//show warning window
+					/*creates an overlay window*/
+					$('div#remove_check').overlay({
+						// custom top position
+						top: 'center',
+						left: 'center',
+						mask: {
+							color: '#111',
+							// load mask a little faster
+							loadSpeed: 200,
+							opacity: 0.7
+						},
+						// disable this for modal dialog-type of overlays
+						closeOnClick: true,
+						// for some reason, if api is omitted (or false), the
+						// first overlay display call is ignored.
+						// load it immediately after the construction
+						api:true
+					}).load();
+					//save practice id in hidden field
+					$('input#rem_pract_id').attr('value', pract_id);
+				}
+				else
+				{
+					//$('span#remove_check_scheduled_name').html(ProvidersPractice.received[pract_idx].pract_name);
+					//show warning window
+					/*creates an overlay window*/
+					$('div#remove_check_scheduled').overlay({
+						// custom top position
+						top: 'center',
+						left: 'center',
+						mask: {
+							color: '#111',
+							// load mask a little faster
+							loadSpeed: 200,
+							opacity: 0.7
+						},
+						// disable this for modal dialog-type of overlays
+						closeOnClick: true,
+						// for some reason, if api is omitted (or false), the
+						// first overlay display call is ignored.
+						// load it immediately after the construction
+						api: true
+					}).load();
+					//save practice id in hidden field
+					$('input#rem_pract_id').attr('value', pract_id);
+				} //end of else - show warning window 
+			} //end - text status
+		}, // end success
+		error: function(httpRequest, textStatus, errorThrown) {
+			alert('{% trans "An error occurred while removing you from practice." %}');
+		}
+	}); // end AJAX call
+}
+
+ProvidersPractice.RemovePracticeInternal = function()
+{
+   var pract = $('input#rem_pract_id').val();
+   ProvidersPractice.RemovePractice(pract);
+   	
+	$('div#remove_check').overlay().close();
+}
+ProvidersPractice.RemovePracticeInternal_scheduled = function()
+{
+   var pract = $('input#rem_pract_id').val();
+   ProvidersPractice.RemovePractice(pract);
+   	
+	$('div#remove_check_scheduled').overlay().close();
+}
+
+ProvidersPractice.RemovePractice = function(pract_id)
+{
+	$.ajax({
+		url: 'AJAX/removePractice/',
+		type: 'POST',
+		data: {
+			pract_id: pract_id
+		}, // end data
+		
+		success: function(data, textStatus, httpRequest) {
+			// Test for success
+			if (textStatus == 'success') {
+			
+				//call to reload current				
+				ProvidersPractice.searchCurrent();
+				$('#changePractice option[value='+pract_id+']').remove();
+				var sel_prac_id = $('#changePractice option:selected').val();
+				if (sel_prac_id == pract_id) {
+					$('#changePractice option[value=0]').attr("selected","selected");
+					$('#changePractice').val(0);
+				}
+			}
+		}, // end success
+		error: function(httpRequest, textStatus, errorThrown) {
+			alert('{% trans "An error occurred while removing you from the requested practice. Please try again later." %}');
+			
+		}
+	});
+	
+}
+
+/* manage associations */
+Association.AddAssociationHandler = function(pract_id, pract_idx)
+{
+	$('span#add_association_name').html(
+								Practices_Search.received[pract_idx].name);
+    /*creates an overlay window*/
+	$('div#add_association').overlay({
+
+			// custom top position
+			top: 'center',
+			left: 'center',
+
+			// some expose tweaks suitable for facebox-looking dialogs
+			mask: {
+				// you might also consider a "transparent" color for the mask
+				color: '#111',
+				// load mask a little faster
+				loadSpeed: 200,
+				opacity: 0.7
+			},
+
+			// disable this for modal dialog-type of overlays
+			closeOnClick: true,
+			api: true // for some reason, if api is omitted (or false), the
+					  // first overlay display call is ignored.
+
+		// load it immediately after the construction
+		}).load();
+
+       //keep provider id as hidden field
+
+      	var newInputDiv = $(document.createElement('input'));
+		newInputDiv.attr('name', 'add_pract_id');
+		newInputDiv.attr('type', 'hidden');
+		newInputDiv.attr('id', 'add_pract_id');
+		newInputDiv.attr('value', pract_id);
+			
+		$('form#addassociation').append(newInputDiv);
+		
+
+}
+/* adding association row to database */
+Association.Add = function()
+{
+	
+	$.ajax({
+		url: 'AJAX/addAssociationForPractice/',
+		type: 'POST',
+		data: {
+			pract_id: $('input#add_pract_id').val()
+		}, // end data
+		
+		success: function(data, textStatus, httpRequest) {
+			// Test for success
+			if (textStatus == 'success') {
+			
+				return_value = JSON.parse(data);
+				
+				//call to reload pending				
+				Association.searchPendingPractices();
+				
+				//do not need to call to reload search results
+				Practices_Search.searchPractices();
+				
+				 if (return_value[0] == 'duplicate')
+			    {alert('{% trans "You already have been invited to join this practice. Please View pending invitations." %}');}
+			}
+		}, // end success
+		error: function(httpRequest, textStatus, errorThrown) {
+			alert('{% trans "An error occurred adding new association." %}');
+			
+		}
+	});
+	$('input#add_pract_id').remove();
+	$('div#add_association').overlay().close();
+	
+}
+
+ProvidersPractice.AddPracticeHandler = function(pract_id, assoc_id, idx)
+{
+	$('span#add_practice_name').html(
+								Association.received_from[idx].pract_name);
+    /*creates an overlay window*/
+	$('div#add_practice').overlay({
+
+			// custom top position
+			top: 'center',
+			left: 'center',
+
+			// some expose tweaks suitable for facebox-looking dialogs
+			mask: {
+				// you might also consider a "transparent" color for the mask
+				color: '#111',
+				// load mask a little faster
+				loadSpeed: 200,
+				opacity: 0.7
+			},
+
+			// disable this for modal dialog-type of overlays
+			closeOnClick: true,
+			api: true // for some reason, if api is omitted (or false), the
+					  // first overlay display call is ignored.
+
+		// load it immediately after the construction
+		}).load();
+
+       //keep provider id as hidden field
+
+      	var newInputDiv = $(document.createElement('input'));
+		newInputDiv.attr('name', 'add_pract_id');
+		newInputDiv.attr('type', 'hidden');
+		newInputDiv.attr('id', 'add_pract_id');
+		newInputDiv.attr('value', pract_id);
+		
+		var newInputDiv1 = $(document.createElement('input'));
+		newInputDiv1.attr('name', 'rem_assoc_id');
+		newInputDiv1.attr('type', 'hidden');
+		newInputDiv1.attr('id', 'rem_assoc_id');
+		newInputDiv1.attr('value', assoc_id);
+			
+		$('form#addpractice').append(newInputDiv);
+		$('form#addpractice').append(newInputDiv1);
+		
+
+}
+
+ProvidersPractice.Add = function()
+{
+	
+	$.ajax({
+		url: 'AJAX/addPracticeToProvider/',
+		type: 'POST',
+		data: {
+			pract_id: $('input#add_pract_id').val(),
+			assoc_id: $('input#rem_assoc_id').val()
+		}, // end data
+		
+		success: function(data, textStatus, httpRequest) {
+			// Test for success
+			if (textStatus == 'success') {
+				window.location = ".";
+			}
+		}, // end success
+		error: function(httpRequest, textStatus, errorThrown) {
+			alert('{% trans "You already have been added to the practice or your invitation has been canceled from other client." %}');
+			
+		}
+	});
+	$('input#add_pract_id').remove();
+	$('input#rem_assoc_id').remove();
+	$('div#add_practice').overlay().close();
+	
+}
+
+Association.RemoveAssociationHandler = function(assoc_id, pract_idx)
+{
+	$('span#remove_association_name').html(
+								Association.received_to[pract_idx].pract_name);
+    /*creates an overlay window*/
+	$('div#remove_association').overlay({
+
+			// custom top position
+			top: 'center',
+			left: 'center',
+
+			// some expose tweaks suitable for facebox-looking dialogs
+			mask: {
+				// you might also consider a "transparent" color for the mask
+				color: '#111',
+				// load mask a little faster
+				loadSpeed: 200,
+				opacity: 0.7
+			},
+
+			// disable this for modal dialog-type of overlays
+			closeOnClick: true,
+			api: true // for some reason, if api is omitted (or false), the
+					  // first overlay display call is ignored.
+
+		// load it immediately after the construction
+		}).load();
+
+       //keep provider id as hidden field
+
+      	var newInputDiv = $(document.createElement('input'));
+		newInputDiv.attr('name', 'remove_assoc_id');
+		newInputDiv.attr('type', 'hidden');
+		newInputDiv.attr('id', 'remove_assoc_id');
+		newInputDiv.attr('value', assoc_id);
+			
+		$('form#removeassociation').append(newInputDiv);
+
+}
+
+Association.Remove = function()
+{
+	
+	$.ajax({
+		url: 'AJAX/removeAssociation/',
+		type: 'POST',
+		data: {
+			assoc_id: $('input#remove_assoc_id').val()
+		}, // end data
+		
+		success: function(data, textStatus, httpRequest) {
+			// Test for success
+			if (textStatus == 'success') {
+			
+				//call to reload pending
+				Association.searchPendingPractices();
+				
+				//call to reload search results
+				//Providers_Search.searchProviders()
+			}
+		}, // end success
+		error: function(httpRequest, textStatus, errorThrown) {
+			alert('{% trans "An error occurred when you tried to cancel join practice request. This usually occurs if your request was already accpeted or rejected by the practice manager. Please RELOAD this page to see your current practices and pending requests." %}');
+
+			
+		}
+	});
+	
+	$('input#remove_assoc_id').remove();
+	$('div#remove_association').overlay().close();
+	
+}
+
+Association.RejectAssociationHandler = function(assoc_id, prac_id)
+{
+	$('span#reject_association_name').html(
+							Association.received_from[prac_id].pract_name);
+    /*creates an overlay window*/
+	$('div#reject_association').overlay({
+
+			// custom top position
+			top: 'center',
+			left: 'center',
+
+			// some expose tweaks suitable for facebox-looking dialogs
+			mask: {
+				// you might also consider a "transparent" color for the mask
+				color: '#111',
+				// load mask a little faster
+				loadSpeed: 200,
+				opacity: 0.7
+			},
+
+			// disable this for modal dialog-type of overlays
+			closeOnClick: true,
+			api: true // for some reason, if api is omitted (or false), the
+					  // first overlay display call is ignored.
+
+		// load it immediately after the construction
+		}).load();
+
+       //keep provider id as hidden field
+
+      	var newInputDiv = $(document.createElement('input'));
+		newInputDiv.attr('name', 'reject_assoc_id');
+		newInputDiv.attr('type', 'hidden');
+		newInputDiv.attr('id', 'reject_assoc_id');
+		newInputDiv.attr('value', assoc_id);
+			
+		$('form#rejectassociation').append(newInputDiv);
+
+}
+
+Association.Reject = function()
+{
+	
+	$.ajax({
+		url: 'AJAX/rejectAssociation/',
+		type: 'POST',
+		data: {
+			assoc_id: $('input#reject_assoc_id').val()
+		}, // end data
+		
+		success: function(data, textStatus, httpRequest) {
+			// Test for success
+			if (textStatus == 'success') {
+			
+				//call to reload pending
+				Association.searchPendingPractices();
+				
+				//call to reload search results
+				//Providers_Search.searchProviders()
+			}
+		}, // end success
+		error: function(httpRequest, textStatus, errorThrown) {
+		   alert('{% trans "You already have been added to the practice or your invitation has been canceled from other client." %}');
+			
+		}
+	});
+	$('input#reject_assoc_id').remove();
+	$('div#reject_association').overlay().close();
+	
+}
+Association.ResendAssociationHandler = function(assoc_id, pract_idx)
+{
+	$('span#resend_association_name').html(
+								Association.received_to[pract_idx].pract_name);
+    /*creates an overlay window*/
+	$('div#resend_association').overlay({
+
+			// custom top position
+			top: 'center',
+			left: 'center',
+
+			// some expose tweaks suitable for facebox-looking dialogs
+			mask: {
+				// you might also consider a "transparent" color for the mask
+				color: '#111',
+				// load mask a little faster
+				loadSpeed: 200,
+				opacity: 0.7
+			},
+
+			// disable this for modal dialog-type of overlays
+			closeOnClick: true,
+			api: true // for some reason, if api is omitted (or false), the
+					  // first overlay display call is ignored.
+
+		// load it immediately after the construction
+		}).load();
+
+       //keep provider id as hidden field
+
+      	var newInputDiv = $(document.createElement('input'));
+		newInputDiv.attr('name', 'resend_assoc_id');
+		newInputDiv.attr('type', 'hidden');
+		newInputDiv.attr('id', 'resend_assoc_id');
+		newInputDiv.attr('value', assoc_id);
+			
+		$('form#resendassociation').append(newInputDiv);
+
+}
+
+Association.Resend = function()
+{
+	
+	$.ajax({
+		url: 'AJAX/resendAssociation/',
+		type: 'POST',
+		data: {
+			assoc_id: $('input#resend_assoc_id').val()
+		}, // end data
+		
+		success: function(data, textStatus, httpRequest) {
+			// Test for success
+			if (textStatus == 'success') {
+			
+				//nothing to reload
+			}
+		}, // end success
+		error: function(httpRequest, textStatus, errorThrown) {
+		alert('{% trans "An error occurred when you tried to resend request to join practice. This usually occurs if you already have been added to the practice or your invitation has been canceled. Please RELOAD this page to see your current practices and pending requests." %}');
+
+			
+		}
+	});
+	$('input#resend_assoc_id').remove();
+	$('div#resend_association').overlay().close();
+	
+}
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- headers -->
+
+<!--<div class="header" style="display:block; margin-top:10px;" >
+			<span style="font-size:14px;font-weight:bold;">
+				Welcome, {{ mhl_user_displayName }} &nbsp;<a href="/logout/" style="font-size:12px;font-weight:400;">Logout</a>
+			</span>
+</div>-->
+
+<!-- table around my boxes -->
+<div style="background-color:white;margin:20px 0;border:1px solid lightgray;text-align:left;" class="ui-corner-all">
+<table id="main_table" cellpadding="10" cellspacing="10">
+<tr>
+<td>
+
+<!-- Show Practices -->
+<div id="current_container" class="ui-corner-all">
+
+ <div id="current_bar" class="hdr_bar"><p class="ui-corner-all ui-widget-header">&nbsp;{% trans "Current Practices:" %}</p>
+ </div>
+
+  
+     <div id="current_practices_container">
+     	<div id="current_practices_results" class="practices_list">
+			<table id="current_practices_table">
+			</table>
+		 </div>
+
+     </div>
+	
+ 	
+</div><!-- current_container -->
+</td> 
+
+<td>
+<!-- Show Pending Invites -->
+<div id="pending_container" class="ui-corner-all">
+
+ <div id="pending_bar" class="hdr_bar"><p class="ui-corner-all ui-widget-header">&nbsp;{% trans "Practices Pending Acceptance:" %} </p>
+ </div>
+
+   
+     <div id="pending_results_container">
+     	<div id="pending_results" class="practices_list">
+     
+			<table id="pending_table_from">
+			</table>
+			<table id="pending_table">
+			</table>
+		 </div>
+
+    </div> <!-- end pending_results_container -->
+    
+</div><!--pending_container-->
+</td></tr>
+
+<tr><td>
+<!-- Add provders Box -->
+<div id="add_practices_container" class="ui-corner-all">
+
+ <div id="add_bar" class="hdr_bar"><p class="ui-corner-all ui-widget-header">&nbsp;{% trans "Add Practice:" %} </p>
+ </div>
+
+
+     <div id="add_practices_search">
+		 {% trans "Name:" %} <input type="text" id="search_name" />
+		<br/><br/>
+      	 <input type="button" id="search_button" onclick="javascript:Practices_Search.searchPractices();" value="{% trans "Search" %}" />
+     </div>
+  
+
+  
+     <div id="add_practices_results_container">
+     	<div id="add_practices_results" class="practices_list">
+     
+			<table id="results_table">
+			</table>
+		 </div>
+
+    </div> <!-- end div#add_practices_results_container -->
+
+</div><!--add_practices_container-->
+</td></tr>
+</table> <!-- main -->
+</div>
+
+<!-- overlays divs -->
+<!-- accept invitaion by practice to join it -->
+<div id="add_practice" class="overlay_modal">
+	<form id="addpractice">
+	<p>{% trans "Are you sure you would like to accept this request to join" %} <span id="add_practice_name"></span>?</p>
+   <p><a id="add_practice_submit" href="" onclick="javascript:ProvidersPractice.Add(this.form); return false;">{% trans "Accept" %}</a> | 
+	<a class="close" href="" onclick="return false;">{% trans "Cancel" %}</a><span id="add_practice_close"></span></p>
+	</form>
+
+</div>
+
+
+<!-- ask to join practice -->
+<div id="add_association" class="overlay_modal">
+	<form id="addassociation">
+	<p>{% trans "Are you sure you wish to join" %} <span id="add_association_name"></span>?<br />
+	{% trans "This will send an association request to the practice manager." %}</p>
+   <p><a id="add_association_submit" href="" onclick="javascript:Association.Add(this.form); return false;">{% trans "Send Request" %}</a> | 
+	<a class="close" href="" onclick="return false;">{% trans "Cancel" %}</a><span id="add_association_close"></span></p>
+	</form>
+
+</div>
+
+<!-- send request to practice to join it again, to remind manager about you -->
+<div id="resend_association" class="overlay_modal">
+	<form id="resendassociation">
+	<p>{% trans "Are you sure you like to resend the request to join" %} <span id="resend_association_name"></span>?</p>
+   <p><a id="resend_association_submit" href="" onclick="javascript:Association.Resend(this.form); return false;">{% trans "Resend Invitation" %}</a> | 
+	<a class="close" href="" onclick="return false;">{% trans "Cancel" %}</a><span id="resend_association_close"></span></p>
+	</form>
+
+</div>
+
+
+<!-- cancels request by provider sent to practice with permision to join -->
+<div id="remove_association" class="overlay_modal">
+	<form id="removeassociation">
+	<p>{% trans "Are you sure you would like to withdraw your request to join" %} <span id="remove_association_name"></span>?</p>
+   <p><a id="remove_association_submit" href="" onclick="javascript:Association.Remove(this.form); return false;">{% trans "Withdraw Request" %}</a> | 
+	<a class="close" href="" onclick="return false;">{% trans "Cancel" %}</a><span id="remove_association_close"></span></p>
+	</form>
+
+</div>
+
+<!-- provider rejects request from practice to himslef to join practice -->
+<div id="reject_association" class="overlay_modal">
+	<form id="rejectassociation">
+	<p>{% trans "Are you sure you would like to reject this request to join"%} <span id="reject_association_name"></span>?</p>
+   <p><a id="reject_association_submit" href="" onclick="javascript:Association.Reject(this.form); return false;">{% trans "Reject" %}</a> | 
+	<a class="close" href="" onclick="return false;">{% trans "Keep" %}</a><span id="reject_association_close"></span></p>
+	</form>
+
+</div>
+
+<!-- provider removes himslef from practice -->
+<div id="remove_check" class="overlay_modal">
+	<form id="removecheck">
+	<p>{% trans "Are you sure you wish to leave" %} <span id="remove_check_name"></span>?</p>
+	<p><a id="remove_check_submit" href="" onclick="javascript:ProvidersPractice.RemovePracticeInternal(this.form); return false;">{% trans "Leave" %}</a> | 
+	<a class="close" href="" onclick="return false;">{% trans "Cancel" %}</a><span id="remove_check_close"></span></p>
+	</form>
+
+</div>
+<div id="remove_check_scheduled" class="overlay_modal">
+	<form id="removecheckscheduled">
+		<p>{% trans "You appear to be scheduled to be on call for" %}
+		<span id="remove_check_scheduled_name"></span> 
+		{% trans "in the near future. Removing yourself from practice will result in coverage gaps in the on-call schedule. Do you still wish to remove yourself from this practice?" %}
+	</p>
+	<p>
+		<a id="remove_check_scheduled_submit" href="" onclick="javascript:ProvidersPractice.RemovePracticeInternal_scheduled(this.form); return false;">{% trans "Leave" %}</a>
+		<a class="close" href="" onclick="return false;">{% trans "Cancel" %}</a><span id="remove_check_close"></span></p>
+	</form>
+</div>
+
+<!-- Used to keep track of which practice the user wishes to leave. -->
+<input type="hidden" name="rem_pract_id" id="rem_pract_id" value="" />
+
+{% endblock %}

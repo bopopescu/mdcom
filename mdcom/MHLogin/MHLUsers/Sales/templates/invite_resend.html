@@ -1,0 +1,11 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% load url from future %}
+{% block content %}
+<div id='sales' class="ui-corner-all">
+	<h1>{% trans "Resend Invitation" %}</h1>
+	<div class='errorlist'>{{err}}</div>
+	<p>{% trans "Are you sure you want to re-send this invitation to" %}{{invite.recipient}}?</p>
+	<p><a href="?action=confirm">{% trans "Yes" %}</a>&nbsp;|&nbsp;<a href="{% url 'MHLUsers.Sales.views.dashboard' %}">{% trans "No" %}</a></p>
+</div>
+{% endblock %}

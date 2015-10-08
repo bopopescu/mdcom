@@ -1,0 +1,518 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block customCSS %}
+{% block dashboard_customCSS %}{% endblock %}{% endblock %}
+{% block customImports %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/flowplayer-3.2.4.min.js"></script>
+{% block dashboard_customImports %}{% endblock %}{% endblock %}
+{% block customJS %}
+<script type="text/javascript">
+window.currentOffset = 0;
+
+var DATE_FORMAT={
+        'de':'yy-mm-dd',
+        'en-us':'mm/dd/yy'
+    };
+
+function change_text(obj) {
+    var id = obj.attr('id');
+    var data = { provider:id };
+    var obj = $(obj).parent();
+    var index = $(obj).index('#site_providers tbody tr');
+    var args = { type:"GET", url:"/Provider_Info/", data:data, complete:function(data,status){
+        done(data,status,obj,index);
+    }};
+    $.ajax(args);
+    return false;
+};
+
+function done(res, status,obj,index) {
+    var left = 0;
+    var top = 0;
+    if(index < 8){
+        left = 145;
+    }else{
+        left = 595;
+    }
+    top = 356 + (index % 8)*27;
+  if (status == "success") {
+    var txt = res.responseText;
+    $("#provider_info").html(txt);
+    $("#provider_info").dialog({
+        "title":'{% trans "User Information" %}',
+        "closeOnEscape":"false",
+        'resizable':'false',
+        'width': 434,
+        'height': 220,
+        "open":function(){
+            $(this).parent().css({
+                'left': left + 'px',
+                'top': top + 'px'
+            });
+        }
+    });
+  }
+  else {
+    // display an explanation of failure
+    $("#provider_info").html(res.responseText);
+  }
+};
+
+function mdcom_fwd_changed(event, ui) {
+    fwd_changed(event, ui, '{% url "MHLogin.MHLUsers.views.mdcom_forwarding" %}', '#mdcom_fwd_status')
+}
+function anssvc_fwd_changed(event, ui) {
+    fwd_changed(event, ui, '{% url "MHLogin.MHLUsers.views.anssvc_forwarding" %}', '#anssvc_fwd_status')
+}
+function anssvc_caller_changed(event, ui) {
+    fwd_changed(event, ui, '{% url "MHLogin.MHLPractices.views.anssvc_caller" %}', '#anssvc_caller_status')
+}
+function fwd_changed(event, ui, url, results_container_selector) {
+    var selection = event.currentTarget.value;
+    $.ajax({
+        url: url,
+        type: 'POST',
+        cache: false,
+        data: {
+                forward: selection
+            },
+        error: function(jqXHR,textStatus, errorThrown) {
+            alert('{% trans "An error occurred setting your call forward preference. Please try again...." %}');
+        },
+        success: function(data, textStatus, jqXHR) {
+            var new_setting = data['fwd_setting'];
+            $(results_container_selector).html(new_setting);
+            if (results_container_selector == '#anssvc_caller_status'){
+                window.location = '/';
+            }
+        }
+    });
+}
+
+/**
+ * cilck done checkbox to change status
+ * @param {} f_id int the msg id
+ * @returns {} change done status
+ */
+function followupdone_changed(f_id, count) {
+    var confirm_done = confirm('{% trans "Are you sure you wish to change the done status?" %}'+'\n\n'+'{% trans "(Note, to remove the task, use delete button.)" %}');
+    if (confirm_done){
+        $.ajax({
+            url:"/FollowUps/Done/" + f_id + '/' + currentOffset + '/' + count,
+            type:'GET',
+            success:function(response){
+                $('#followup_table').html(response);
+                if(response.indexOf('nofollowup') == -1){
+                    $('#followup_pagation').removeClass('hidden');
+                    bindFollowupMehod();
+                    showPagination(currentOffset);
+                }
+            },
+            error: function(jqXHR,textStatus, errorThrown) {
+                alert('{% trans "An error occurred. Please try again...." %}');
+            }
+        });    
+    }
+    else{
+        $.ajax({
+            url:"/FollowUps/Reload/"+ currentOffset + '/' + count,
+            success:function(response){
+                $('#followup_table').html(response);
+                if(response.indexOf('nofollowup') == -1){
+                    $('#followup_pagation').removeClass('hidden');
+                    bindFollowupMehod();
+                    showPagination(currentOffset);
+                }
+            },
+            error: function(jqXHR,textStatus, errorThrown) {
+                alert('{% trans "An error occurred. Please try again...." %}');
+            }
+        });
+    }
+};
+/**
+ * cilck del button to delete current followup
+ * @param {} f_id int followup id
+ * @returns {} delete current followup
+ */
+function followupdel(f_id, count) {
+    var confirm_del = confirm('{% trans "Are you sure you wish to delete this task?" %}');
+    if (confirm_del){
+        $.ajax({
+            url:"/FollowUps/Del/"+ f_id + '/' + count,
+            type:'GET',
+            success:function(response){
+                $('#followup_pagation').addClass('hidden');
+                $('#followup_table').html(response);
+                if(response.indexOf('nofollowup') == -1){
+                    $('#followup_pagation').removeClass('hidden');
+                    bindFollowupMehod();
+                    showPagination(0);
+                }
+            },
+            error: function(jqXHR,textStatus, errorThrown) {
+                alert('{% trans "An error occurred. Please try again...." %}');
+            }
+        });
+    }
+    else{
+        $.ajax({
+            url:"/FollowUps/Reload/"+ currentOffset + '/' + count,
+            success:function(response){
+                $('#followup_table').html(response);
+                if(response.indexOf('nofollowup') == -1){
+                    $('#followup_pagation').removeClass('hidden');
+                    bindFollowupMehod();
+                    showPagination(currentOffset);
+                }
+            },
+            error: function(jqXHR,textStatus, errorThrown) {
+                alert('{% trans "An error occurred. Please try again...." %}');
+            }
+        });
+    }
+};
+
+/**
+ * add a new followup
+ * @param {
+ *         event:object
+ * }
+ */
+function followupadd(event) {
+    event.preventDefault();
+
+    var task = $.trim($("input[name='taskname']").val());
+    var due = $("input[name='duedate']").val();
+    var priority = $("#id_priority option:selected").val();
+    if (task.length < 1) {
+        alert('{% trans "Please fill in the task field." %}');
+        return true;
+    }
+    if (!due||!DateUtils.isValidUnixDate(due)) {
+        alert('{% trans "Please specify a (valid) date. Format is mm/dd/yyyy and the value is not before 01/01/1970." %}');
+        return true;
+    }
+    
+    var count = $('#followup_pagation select').val();
+    $.ajax({
+        type: "POST",
+        url: "/FollowUps/Add/",
+        data: {
+            task:task, 
+            due_date:due, 
+            priority:priority,
+            offset:0,
+            count:count
+        },
+        success: function(response) {
+            $('#followup_table').html(response);
+            if(response.indexOf('nofollowup') == -1){
+                $('#followup_pagation').removeClass('hidden');
+                $("input[name='taskname']").val('');
+                $("input[name='duedate']").val('');
+                showPagination(0);
+                bindFollowupMehod();
+                alert(task+' {% trans "successfully added to your Follow-up task list." %}');
+                return false;
+            }
+        },
+        error: function(XMLHttpRequest, errDescr) {
+            if (XMLHttpRequest.status >= 500) {
+                alert("{% trans "A server error has occurred. The administrators have been automatically notified. Please try again if you haven't." %}");
+            }
+            else if (XMLHttpRequest.status == 404) {
+                alert('{% trans "A server error (FNF/404) has occurred. If the error occurs again, please contact us (from the support menu) to report the issue." %}');
+            }
+            else if (XMLHttpRequest.status == 400) {
+                // This is how we know that the request was invalid -- notably, for form validation errors.
+                data = $.parseJSON(XMLHttpRequest.responseText)
+                if (data.error_type='form_validation') {
+                    // Iterate over the fields of the form and display error messages, as appropriate.
+                    for (var key in data.field_errors) { // field_errors should be an associative array
+                        if (key == "due_date") {
+                            if('{{LANGUAGE_CODE}}'=='de'){
+                                alert('{% trans "Please specify a (valid) date. Format is yyyy-mm-dd and the value is not before 1970-01-01." %}');
+                            }else{
+                                alert('{% trans "Please specify a (valid) date. Format is mm/dd/yyyy and the value is not before 01/01/1970." %}');
+                            }
+                            return true;
+                        }
+                        else if(key == 'task'){
+                            alert('{% trans "This task field is required." %}');
+                        }
+                        else {
+                            alert('{% trans "A data validation error occurred. Please check your follow-up data and try again." %}');
+                        }
+                    }
+                    for (var err in data.non_field_errors) { // non-field errors should be a regular array
+                        alert(err);
+                    }
+                }
+                else {
+                    // Handle other errors here.
+                alert('{% trans "A server error has occurred. If the error occurs again, please contact us (from the support menu) to report the issue." %}');
+                }
+            }
+            else if (errDescr == 'timeout') {
+                alert('{% trans "The request has timed out. Please try again later." %}');
+            }
+        }
+    });
+};
+
+/**
+ * bind followup method
+ */
+function bindFollowupMehod(){
+    var count = parseInt($('#followup_pagation select').val());
+    $('#followup_table .description').click(function(){
+        singleClick($(this).parent(),$(this).parent().find(':hidden').val());
+    });
+    $('#followup_table .description').dblclick(function(){
+        clickThisTr($(this).parent().find(':hidden').val());
+    });
+    $("#followup_table tr input[type=checkbox]").unbind('click').click(function(){
+        followupdone_changed($(this).val(), count);
+    });
+    
+    $('#followup_table tr .buttonedit').unbind('click').click(function(event){
+        var id = $(this).parent().parent().parent().find('input[type=checkbox]').val();
+        location.href='/FollowUps/'+ id +'/Edit/';
+        return false;
+    });
+    
+    $('#followup_table tr .buttondel').unbind('click').click(function(event){
+        var id = $(this).parent().parent().parent().find('input[type=checkbox]').val();
+        followupdel(id, count);
+        return false;
+    });
+}
+
+/**
+ * refresh page and load followup msgs
+ * @param {} offset int current page index 
+ * @param {} count int pages per page show
+ * @returns {} 
+ */
+function showFollowupMsgs(count){
+    //var height = $('#followup_list_container').height() - $('#followup_list_container form').height();
+    var height = $('#donefollowup').height();
+    //$('#followup_pagation').addClass('hidden');
+    var loading = '<tr class="loading"><td align="middle" valign="center"><img src="{{STATIC_URL}}img/icons/wait-left.gif" />'+'{% trans "Loading" %}'+'<img src="{{STATIC_URL}}img/icons/wait-right.gif" /></td></tr>';
+    $('#followup_table').html(loading);
+    $('#followup_table .loading').height(height);
+    $.ajax({
+        type: "GET",
+        url: "/FollowUps/Add/"+ currentOffset + "/" + count+"/",
+        success:function(response){
+            $('#followup_table').html(response);
+            if(response.indexOf('nofollowup') == -1){
+                $('#followup_pagation').removeClass('hidden');
+                var count = parseInt($("#followup_pagation select").val());
+                showPagination(currentOffset);
+                bindFollowupMehod();
+            }
+        },
+        error: function(jqXHR,textStatus, errorThrown) {
+            alert('{% trans "An error occurred. Please try again...." %}');
+        }
+    });
+}
+
+function closeTabs(thisobj,n){
+    //$(this) = thisobj;
+    $(thisobj).parent().hide();
+    $('#tab-'+n).hide();
+    return false;
+}
+
+
+/**
+ * click one followup and show followup body
+ */
+function singleClick(obj,id){
+    if($("#context"+id).hasClass("hidden")){
+        $(obj).find('.bgTag').removeClass('bgDown').addClass('bgUp');
+        $("#context"+id).removeClass("hidden");
+    }else{
+        $(obj).find('.bgTag').removeClass('bgUp').addClass('bgDown');
+        $("#context"+id).addClass("hidden");
+    }
+}
+/**
+ * click one followup and open edit page
+ */
+function clickThisTr(id){
+    if(typeof id !='undefined'){
+        window.location='/FollowUps/'+id+'/Edit/';
+    }
+};
+/**
+ * change the old style to new for pagniation followup module
+ */
+function changeStyle(selectedVal){
+    $("#followup_pagation .pagination .prev").html('');
+    $("#followup_pagation .pagniation .prev").addClass('prevIcon');
+    $("#followup_pagation .pagniation .next").html('');
+    $("#followup_pagation .pagniation .next").addClass('nextIcon');
+    $('#followup_pagation .pagination a').attr({ //add this line to fix the a link jump bug, but there will be a syntax error
+        'href':'javascript:void(0)'
+    });
+    if(typeof selectedVal=='undefined'){
+        selectedVal = 10;
+    }
+    $('#followup_pagation select').val(selectedVal);
+}
+
+/**
+ * show pageniation
+ */
+function showPagination(currentPage){
+    if(typeof currentPage == 'undefined'){
+        currentPage = 0;
+    }
+    //$('#followup_pagation').removeClass('hidden');
+    var count = parseInt($("#followup_pagation select").val());
+    var msgsCount = parseInt($('#followup_count').text());
+    $('#followup_pagation .pagniation').pagination(msgsCount ,{
+            callback: followupCallback,
+            current_page: currentPage,
+            items_per_page: count,
+            num_edge_entries:1,
+            num_edge_entries: 3,
+            num_display_entries: 3,
+        }
+    );
+    changeStyle();
+}
+
+/**
+ * followup pagination page callback
+ */
+function followupCallback(index,jq){
+    currentOffset = index;
+    var count = $('#followup_pagation select').val();
+    showFollowupMsgs(count);
+    changeStyle();
+}
+
+/**
+ * followup select click
+ */
+function followupSelectChange(){
+    var count = parseInt($('#followup_pagation select').val());
+    currentOffset = 0;
+    showFollowupMsgs(count);
+}
+
+/**
+ * init follow up 
+ */
+function initFollowup(){
+    var count = 10;
+    if(typeof $.cookie("count") != "undefined" && $.cookie("count") != null && $.cookie('ss') == $.cookie('userId')){
+        count = $.cookie("count");
+    }
+    
+    $('#followup_pagation select').val(count);
+    var url = "/FollowUps/Add/"+ currentOffset +"/"+ count+"/";
+    $.ajax({
+        type:'GET',
+        url:url,
+        success:function(response){
+            $('#followup_table').html(response);
+            if(response.indexOf('nofollowup') == -1){
+                $('#followup_pagation').removeClass('hidden');
+                bindFollowupMehod();
+                showPagination();
+            }
+        },
+        error: function(jqXHR,textStatus, errorThrown) {
+            alert('{% trans "An error occurred. Please try again...." %}');
+        }
+    });
+}
+
+function showMsgText(val){
+    switch(val){
+        case 'MO':
+            return 'Mobile';
+        case 'OF':
+            return 'Office';
+        case 'OT':
+            return 'Other';
+        case 'VM':
+            return 'Voicemail';
+    }
+}
+function initForwardingAnsweringText(){
+    var forwarding = '';
+    var answering = '';
+    forwarding = showMsgText($('#mdcom_fwd_chooser').val());
+    answering = showMsgText($('#ans_fwd_chooser').val());
+    $('#mdcom_fwd_status').html(forwarding);
+      $('#anssvc_fwd_status').html(answering);
+}
+
+$(function(){
+    $("#followup_table tr:first").removeClass("odd");
+    $("#followup_table tr").removeClass("odd");
+    $("#followup_table tr:odd").addClass("odd");
+    $("#followup_table tr:first").removeClass("odd");
+    
+    $("#followup_add_button").unbind('click').click(function(event){
+        followupadd(event);
+    });
+    
+    initFollowup();
+    
+    $('#followup_pagation select').change(function(){
+        $.cookie("count",$(this).val());
+        $.cookie('userId',$.cookie('ss'));
+        followupSelectChange();
+    });
+    
+    $("#datepicker").attr("maxlength",10).css("ime-mode","disabled").datepicker({
+            showOn: 'both',
+            buttonImage: '{{STATIC_URL}}img/calendar.gif',
+            buttonImageOnly: true,
+            minDate: new Date(1970, 1-1, 1),
+            dateFormat: DATE_FORMAT[Constant.TIME_ZONE]
+        });
+        
+    $("a.buttonadd").button({
+        icons: {primary : 'ui-icon-comment'},
+        text: false
+        });
+    $("a.buttondownload").button({
+        icons: {primary : 'ui-icon-arrowthickstop-1-s'},
+        text: false
+        });
+    var currentDate = new Date();
+    var prettyDate = '';
+    if(Constant.TIME_ZONE=='de'){
+        prettyDate += currentDate.getFullYear()+'-';
+        if(currentDate.getMonth()<10){
+            prettyDate += '0'+(currentDate.getMonth() + 1)+'-';
+        }else{
+            prettyDate += (currentDate.getMonth() + 1)+'-';
+        }
+        prettyDate += currentDate.getDate();
+    }else{
+        var prettyDate = (currentDate.getMonth() + 1) + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
+    }
+    
+    $("#datepicker").val(prettyDate);
+    $('#mdcom_fwd_chooser').change(mdcom_fwd_changed);
+    $('#ans_fwd_chooser').change(anssvc_fwd_changed);
+    $('#anssvc_caller_chooser').change(anssvc_caller_changed);
+    
+    //show correct msg
+    initForwardingAnsweringText();
+});
+</script>
+{% block dashboard_customJS %}{% endblock %}
+{% endblock %}

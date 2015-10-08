@@ -1,0 +1,18 @@
+{# extends "base_short_new.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<!--<div style="margin-left:40px; margin-top:-60px;">        
+	<p class="header" style="font-size:14px;font-weight:bold;">Welcome, {{ mhl_user_displayName }}</p>
+	<p class="header" style="margin-left:0px;margin-top:-13px;">Current location: <b>{{ current_site.name }}</b> <a href="/Sites/">Click here</a> to change.</p>
+</div>-->
+<div id="contact" style="background-color:white;margin:20px 0;border:1px solid lightgray;padding:30px; text-align:left;" class="ui-corner-all">
+	<h3>{% trans "DoctorCom Support" %}</h3>
+	<p>{% trans "Thank you for submitting your support issue. We will review this issue and contact you if we need any further information." %}</p?
+	<p>{% trans "In the meantime, please visit the" %} <a href="/Support/FAQs/">{% trans "FAQs" %}</a> {% trans "section, to see if there may be a solution." %}</p>
+	<br/>
+	<a href="/">{% trans "Go back to Home Page" %}</a>
+</div>
+{% endblock %}
+

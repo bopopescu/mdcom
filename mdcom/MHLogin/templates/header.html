@@ -1,0 +1,133 @@
+{% load i18n %}
+{% load tech_tags %}
+{% load org_tags %}
+{% load url from future %}
+
+<script type="text/javascript">
+    $(function(){
+        $('#changePractice').change(function(){
+            var id = $(this).val();
+            $.comAjax({
+                url:'/Profile/Practices/AJAX/makePracticeCurrent/',
+                type:'POST',
+                data:{pract_id:id},
+                success:function(data,txtStatus){
+                    location.reload();
+                },
+                error:function(data,txtStatus){}
+            });
+        });
+
+    });
+</script>
+
+<div id="header">
+    <div class="header_top clearfix">
+        <div id="header_logo">
+            {% if prefer_logo %}
+                <img src="{{prefer_logo}}" class="logo" onload="adjustLogoPosition(this)"/>
+            {% else %}
+                <a href="/" class="fleft logo">
+                    <img src="{{STATIC_URL}}img/logo.gif" />
+                </a>
+            {% endif %}
+        </div>
+
+        <div id="user_info_panel" class="fright">
+            <span>
+                <strong>{% trans "Welcome," %}&nbsp;&nbsp;{{ mhl_user_displayName }}</strong>
+                <a href="/logout/">{% trans "Logout" %}</a>
+            </span>
+            {% comment %} For salesersons only, but ok if they belong to more than 
+            one type.  We should have this type of logic for other types rather 
+            than have a bunch of menu_template_xyz.html. {% endcomment %}
+            {% if 'Salesperson' not in sender_types or sender_types|length > 2 %}
+            <span>
+                {% trans "Current Hospital:" %} 
+                {{ site_form.current }}
+            </span>
+            <span>
+                {% trans "Current Practice:" %} 
+                <select id='changePractice'>
+                    <option value="0">---(None)---</option>
+                    {% for p in practice.all %}
+                        {% if p == current_practice %}
+                            <option selected='selected' value='{{p.pk}}'>{{p.practice_name}}</option>
+                        {% else %}
+                            <option value='{{p.pk}}'>{{p.practice_name}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </span>
+            {% endif %}
+        </div>
+
+    </div>
+    <!--nav start-->
+    <div class="nav_list">
+        <div class="nav_body clearfix">
+            <ul class="fleft">
+              <li><a href="/">{% trans "Home" %}</a></li>
+              <li>
+                   <a href="/Profile/">{% trans "Account" %}</a>
+
+                    <div class="sub_nav hide">
+                        <div class="sub_nav_bto sub_nav_bto3"></div>
+                        <ul>
+                            <li><a href="/Profile">{% trans "Profile" %}</a></li>
+                            <li class='hidden'><a>{% trans "Billing" %}</a></li>
+                        </ul>
+                    </div>
+              </li>
+              {% comment %} For salesersons only, but ok if they belong to more than
+              one type.  We should have this type of logic for other types rather 
+              than have a bunch of menu_template_xyz.html. {% endcomment %}
+              {% if 'Salesperson' not in sender_types or sender_types|length > 2 %}
+              <li>
+                  <a href="/Support/FAQs/">{% trans "Support" %}</a>
+                <div class="sub_nav hide">
+                    <ul>
+                        <li><a href="/Support/FAQs/">{% trans "FAQs" %}</a></li>
+                        <li><a href="/Support/androidFAQs/">{% trans "Android Tips" %}</a></li>
+                        <li><a href="/Support/iphoneFAQs/">{% trans "iPhone Tips" %}</a></li>
+                        <li><a href="/Support/Contact/">{% trans "Contact" %}</a></li>
+                    </ul>
+                    <div class="sub_nav_bto sub_nav_bto2"></div>
+                </div>
+              </li>
+              <li class="hidden"><a href="#">{% trans "MobileView" %}</a></li>
+                  <li><a href="/Invitations/New/">{% trans "Invite Colleagues" %}</a></li>
+              {% endif %}
+              {% comment %} We should have this type of logic for other types rather 
+                  than have a bunch of menu_template_xyz.html. {% endcomment %}
+              {% if 'Salesperson' in sender_types or 'Administrator' in sender_types %}
+              <li>
+                  <a href="/Sales/">{% trans "Sales" %}</a>
+                  <div class="sub_nav hide">
+                      <ul>
+                          <li><a href="/Sales/salesleads">{% trans "Sales leads" %}</a></li>
+                          <li><a href="/Sales/Invites/">{% trans "Issue invites" %}</a></li>
+                      </ul>
+                      <div class="sub_nav_bto sub_nav_bto5"></div>
+                  </div>
+              </li>
+              {% endif %}
+              {% get_org_menu_var as show_org_menu %}
+              {% if show_org_menu == "true" %}
+                  <li><a href='/Organization/List/'>{% trans "Organization" %}</a></li>
+              {% endif %}
+              {% get_tech_menu_var as show_tech_menu %}
+              {% if show_tech_menu == "true" %}
+                  <li><a href='/dcAdmin/'>{% trans "Admin" %}</a></li>
+              {% endif %}
+            </ul>
+            <span class="fright">
+                <input type="text" id="allProviders" title='{% trans "Type to Search for User" %}'/>
+                <button type="submit" id="btnSearch" value='{% trans "submit" %}'></button>
+            </span>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!--nav end-->
+</div>

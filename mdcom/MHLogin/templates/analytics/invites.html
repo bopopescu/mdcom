@@ -1,0 +1,93 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Invites" %} - {{period}}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlx.css">
+<script src="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlx.js"></script>
+
+<script type="text/javascript">
+
+function doOnLoad() 
+{
+    var formData = [{
+            type: "settings",
+            position: "label-left",
+            labelWidth: 130, inputWidth: 80,
+        }, 
+        {
+            type: "fieldset",
+            label: "Select end date or empty for today",
+            inputWidth: "auto",
+            list: [{
+                    type: "calendar", dateFormat: "%m-%d-%Y", name: "end_date", 
+                    label: "End Date", skin: "dhx_skyblue", readonly: true,
+                    calendarPosition: "right"
+                },
+                {
+                    type: "button", value: "Submit", name: "submit"
+                },
+            ]
+        }];
+    submitform = new dhtmlXForm("submitform", formData);
+    
+    end = submitform.getCalendar("end_date");
+    end.setWeekStartDay(7);
+    
+    submitform.attachEvent("onButtonClick", function(name) 
+    {
+        if (name == "submit" && submitform.validate())
+            document.forms[0].submit();
+    });    
+}
+</script>
+
+<p align='right'><a href="/analytics/">{% trans "Analytics Home" %}</a></p>
+
+<STYLE TYPE="text/css">
+BODY
+{
+    font-family:sans-serif;
+    text-align:left;
+    margin:5px;
+    padding:5px;
+}
+</STYLE>
+
+<h1 style="margin:5px;padding:5px; text-align:left;">{% trans "7 Day Invite Stats" %}: {{period}} </h1>
+
+<form action="." method="post" target="_self">
+<div id="submitform"></div>
+</form>
+
+<div id="dateform" style="height:100px;"></div>
+<body onload="doOnLoad();">
+</body>
+
+
+<h2 style="margin:5px;padding:5px; text-align:left;">{% trans "Invite Stats Since inception" %}: </h2>
+<p><b>{% trans "Total Outstanding Invites" %}: {{invites_total}}</b></p>
+<p><b>{% trans "Total Invites Accepted Count" %}: {{invitelogs_accepted}}</b></p>
+<p><b>{% trans "Total Invites Cancelled Count" %}: {{invitelogs_canceled}}</b></p>
+<p><b>{% trans "Total Invites Overall" %}: {{invites_overall}}</b></p>
+
+<h2 style="margin:5px;padding:5px; text-align:left;">{% trans "Invite Stats by day:" %}</h2>
+
+<table border="1">
+<tr>
+    <th>{% trans "Date" %}</th>
+    <th>{% trans "Total" %}</th>
+    <th>{% trans "Cancelled" %}</th>
+</tr>
+{% for invite in invites_summary_detail %}
+    <tr>
+        <td>{{invite.0}}</td>
+        <td>{{invite.1}}</td>
+        <td>{{invite.2}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
+

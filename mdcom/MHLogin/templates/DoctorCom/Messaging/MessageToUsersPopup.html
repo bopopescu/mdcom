@@ -1,0 +1,51 @@
+{% load i18n %}
+
+<div id='RicipientDialog' class='hidden' >
+	<div class='content' >
+		<table id="userPopConTab" width="100%">
+			<tr>
+				<td>
+					<input id="userTypeAll" type="radio" name="userTypeGroup" value="all" checked="checked" onchange="RefreshUser(false);" style="cursor: pointer;" />
+					<label for="userTypeAll" style="cursor: pointer;">{% trans "All" %}</label>
+					<input id="userTypeProviders" type="radio" name="userTypeGroup" value="providers" style="margin-left:20px;cursor: pointer;"  onchange="RefreshUser(false);" />
+					<label for="userTypeProviders" style="cursor: pointer;">{% trans "Providers" %}</label>
+					<input id="userTypeStaff" type="radio" name="userTypeGroup" value="staffs" style="margin-left:20px;cursor: pointer;" onchange="RefreshUser(false);"  />
+					<label for="userTypeStaff" style="cursor: pointer;">{% trans "Staff" %}</label>
+					<input id="userNameFilter" type="text" onkeypress="if(event.keyCode==13){RefreshUser(false);}" />
+					<input id="userNameFilterbtn" style="padding: 0 5px; height:22px;" type="button" value="{% trans "Apply" %}"  onclick="RefreshUser(false);"/>
+				</td>
+			</tr>
+			
+		</table>
+		<table id="userTableHead" cellspacing="0" cellpadding="0" width="755px"  >
+			<thead>
+				<tr>
+					<th width="120px">{% trans "Name" %}</th>
+					<th width="100px">{% trans "User Type" %}</th>
+					<th>{% trans "Office Address" %}</th>
+					<th width="160px">{% trans "Specialty" %}</th>
+				</tr>
+			</thead>
+		</table>
+		<div style="overflow-y: auto; height: 300px; width: 100%" >
+			<table id="userTable" cellspacing="0" cellpadding="0" width="755px">
+				<tbody>
+				</tbody>
+			</table>
+		</div>			
+	</div>
+	<div id='toUser' style="margin-top: 10px; text-align: left;">
+		<div id="addSelectedUserBtn" style="padding: 0 5px; float: left;"></div>
+		<div id='recPopUsrDiv' style="text-align:left; float: right; width: 700px; min-height: 20px; max-height: 60px; overflow-y: auto; border: 1px solid #CCCCCC;">
+		</div>
+	</div>
+</div>
+
+<div id='confirmDialog' class='hidden'>
+	<div class='content'>You select some people, but you don't add them to recipients. Are you sure leave the page?</div>
+	<div class='line'></div>
+	<div class='buttons'>
+		<div class='button'></div>
+		<div class='button'></div>
+	</div>
+</div>

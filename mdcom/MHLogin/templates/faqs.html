@@ -1,0 +1,83 @@
+{# extends "base_short_new.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id='faqs' class="ui-corner-all">	
+	<h1>{% trans "FAQs" %}</h1>
+	<a href="#1">{% trans "What is my DoctorCom number and why is it important?" %}</a><br />
+	<a href="#2">{% trans "How do I configure my DoctorCom voicemail?" %}</a><br />
+	<a href="#3">{% trans "How do I retrieve my DoctorCom voice messages?" %}</a><br />
+	<a href="#4">{% trans "If I receive a DoctorCom message as a text message, can I respond directly to it?" %}</a><br />
+	<a href="#5">{% trans "How do I send a message with DoctorCom?" %}</a><br />
+	<a href="#6">{% trans "How do I call someone with DoctorCom?" %}</a><br />
+	<a href="#7">{% trans "How do I page someone with DoctorCom?" %}</a><br />
+	<a href="#8">{% trans "How does my office use DoctorCom?" %}</a><br />
+	<a href="#9">{% trans "How do I access DoctorCom on my mobile device?" %}</a><br />
+	<a href="#10">{% trans "How do I protect my privacy when using DoctorCom?" %}</a><br />
+	<a href="#11">{% trans "How do I invite colleagues to DoctorCom?" %}</a><br />
+	<a href="#12">{% trans "Can my patients use DoctorCom?" %}</a><br /><br />
+
+	<p>
+		<a name="1" /><b>{% trans "What is my DoctorCom number and why is it important?" %}</b><br />
+		{% trans "After completing your DoctorCom registration, you will receive a unique DoctorCom phone number, specific to your area code. This number acts as a professional number for your phone and provides an alternative to giving out your personal information. As doctors, the line between personal and professional lives are often blurred; the DoctorCom number creates a unique space, separate from personal messages and voicemail, where you will be able to receive work related calls and messages. You can select whether incoming calls to your DoctorCom number come to your phone or your DoctorCom voicemail, depending on your preferences. " %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="2" /><b>{% trans "How do I configure my DoctorCom voicemail?" %}</b><br />
+		{% trans "You can configure your DoctorCom voicemail by calling your DoctorCom number using your mobile phone. A prompt will help you to set up your DoctorCom voicemail. Once you have set your voicemail you can access your messages using the DoctorCom app as well. " %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="3" /><b>{% trans "How do I retrieve my DoctorCom voice messages?" %}</b><br />
+		{% trans "When you receive a new voice message, you will be notified with a text message to your phone or, if using the DoctorCom app, you will be notified with a chime on your phone and the DoctorCom icon will appear on your phone. To retrieve the message, you can either dial your DoctorCom number from your mobile phone, or listen to the message from within the DoctorCom app." %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="4" /><b>{% trans "If I receive a DoctorCom message as a text message, can I respond directly to it?" %}</b><br />
+		{% trans "Yes. If you are not using the DoctorCom app, you can directly respond to a message using your phone. Your DoctorCom number will show up as the sender on the recipient’s phone, protecting the privacy of your personal number.  Using the DoctorCom app, you can respond to any received message and your name will appear as the sender." %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="5" /><b>{% trans "How do I send a message with DoctorCom?" %}</b><br />
+		{% trans "Adjacent the name of a provider, you can find buttons for message, page and call. When you click the message button (“msg”) a field will appear where you can type your message. Press “Send.”  Using the DoctorCom, click the name of provider you wish to message and click the “msg” icon.  A text field will appear where you can type your message. Press “Send.”" %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="6" /><b>{% trans "How do I call someone with DoctorCom?" %}</b><br />
+		{% trans "Next to a provider’s name click the “call” button (the green phone icon), which will connect you to the number of that provider." %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="7" /><b>{% trans "How do I page someone with DoctorCom?" %}</b><br />
+		{% trans "If the “page” button is blue, then you can page the provider by pressing on the blue pager icon. If the pager button is gray, then the provider does not have the pager option enabled." %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="8" /><b>{% trans "How does my office use DoctorCom?" %}</b><br />
+		{% trans "Offices can use DoctorCom for an office Answering Service. You and your staff are welcome to call 1-855-244-2737 for more information." %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="9" /><b>{% trans "How do I access DoctorCom on my mobile device?" %}</b><br />
+		{% trans "Our DoctorCom app is available at the Apple iTunes and on Google Play for free download." %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="10" /><b>{% trans "How do I protect my privacy when using DoctorCom?" %}</b><br />
+		{% trans 'When using either the DoctorCom website or mobile application to respond to pages or calls, always use the “Call Non-DoctorCom Member” text box located on the upper-right hand side of your DoctorCom dashboard. The DoctorCom mobile application automatically uses your DoctorCom number to make calls and respond to messages, in order to protect your privacy.' %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="11" /><b>{% trans "How do I invite colleagues to DoctorCom?" %}</b><br />
+		{% trans "Please use the “Invite Colleague Function” located in the upper right-hand corner of your dashboard page to reach the “Invite Colleagues” page. Only credentialed and practicing Doctors, Dentists, Podiatrists, Psychologists, Doctor Assistants, nurse practitioners or medical/dental students are eligible to register with DoctorCom. " %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+	<p>
+		<a name="12" /><b>{% trans "Can my patients use DoctorCom?" %}</b><br />
+		{% trans "Not yet, but we are developing a portal for patients." %}
+		<br /><a href="#">{% trans "Back to top" %}</a>
+	</p>
+</div>
+{% endblock %}
+

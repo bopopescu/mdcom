@@ -1,0 +1,25 @@
+{% load i18n %}
+<div class="inviteDialog">
+	<div class="content">
+		<div class="text2">
+			{% trans "Sorry, send invitation failed." %}
+		</div>
+		<ul>
+			<li>
+				<a onclick="javascript:void(0);" id="inviteBackToStep1">
+					{% trans "Invite another member" %}
+				</a>
+			</li>
+			<li>
+				<a onclick="javascript:void(0);" id="inviteBackToMember">
+					{% trans "Back to member page" %}
+				</a>
+			</li>
+		</ul>
+		<div class="line"></div>
+			<div class="buttons" style="width:115px;">
+				<div class="button step1Next buttonR">{% trans "Close" %}</div>
+			</div>
+		</div>
+	</div>
+</div>

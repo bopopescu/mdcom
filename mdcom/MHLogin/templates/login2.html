@@ -1,0 +1,80 @@
+{% extends "corp/base_home_page.html" %}
+{% load i18n %}
+
+
+{% block content %}
+<div style="width:938px;height:560px;background-color:#F5F5F5;border:1px solid darkgray;margin-top:5px;margin-left:25px;">
+    <div style="width:575px;height:490px;background-color:#FFF;color:#5F5D5D;border:1px solid lightblue;margin-top:15px;margin-left:20px;display:inline;padding:15px;float:left;font-size:.95em;">
+        <h2>{{page_data.heading|safe}}</h2>
+        <p>
+            <img src="{{STATIC_URL}}img/ME.jpg" style="padding:0px 15px 5px 0px;width:135px;display:inline;float:left;"/>
+        </p>
+        {{page_data.content|safe}}
+    </div>
+
+    <div style="display:inline;float:right;margin-right:20px;background-color:#FFF;margin-top:15px;padding:15px;border:1px solid lightblue;height:120px;width:246px;font-size:.85em;overflow:auto;">
+        <form method="POST" action="/login/">
+            {% if error_msg %}<ul><li class="error_msg">{{ error_msg|safe }}</li></ul>{% endif %}
+            <div>
+                <p style="width:70px;float:left;margin-top:5px;margin-bottom:5px;">{% trans "User ID:" %}</p>
+                <input id="id_username" type="text" maxlength="30px" name="username" style="width:130px;"/>
+            </div>
+            {{ form.password.errors }}
+            <div style="clear:both;">
+                <p style="width:70px;float:left;margin-top:5px;margin-bottom:5px;">{% trans "Password:" %}</p>
+                <input id="id_password" type="password" maxlength="30px" name="password" style="width:130px;display:block;"/>
+                <p style="font-size:10.5px; margin-top:2px;"><a href="/ForgotPassword/">{% trans "Forgot Password?" %}</a></p>
+                {{form.next}}
+                <input type="submit" value='      {% trans "Login" %}      ' style="vertical-align:middle;" />
+            </div>
+
+        </form>
+    </div>
+
+    <div style="width:273px;height:190px;background-color:#FFF;border:1px solid lightblue;margin-top:15px;margin-right:20px;display:inline;padding:2px;float:right;font-size:.8em;">
+
+        <div class="video_wrapper">
+            <script src="{{STATIC_URL}}js/flowplayer-3.1.0.min.js"></script>
+            <div id="video_player" class="video_player" style="clear: both;background-image: url({{MEDIA_URL}}{{video.screenshot}}_356x250.png);">
+                <img src="{{STATIC_URL}}img/video_play_283x200.png" alt='{% trans "play video" %}' style="width:271px;"/>
+            </div>
+            <div class="clear"></div>
+
+            <script>
+                flowplayer("video_player", "{{STATIC_URL}}swf/flowplayer.commercial-3.1.0.swf",  {
+                    key: '#$134794a3ab471d6b2c3',
+                    logo: { url: '{{STATIC_URL}}img/video_logo_90x43.png',
+                            fullscreenOnly: false,
+                            zIndex: 1,
+                            bottom: '25px',
+                            right: '10px',
+                            width: '90px'},
+                    playlist: [ {url: '{{MEDIA_URL}}video/{{ video.id }}.flv', scaling: 'fit'}
+                    ],
+                    // show playlist buttons in controlbar
+                    plugins:  {
+                        controls: {
+                            playlist: true,
+                            // use tube skin with a different background color
+                            backgroundColor: '#aedaff'
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </div>
+
+    <div style="display:inline;float:right;margin-right:20px;width:246px;height:128px;background-color:#FFF;margin-top:15px;padding:0px 15px 15px 15px;border:1px solid lightblue;font-size:.8em;color:#5F5D5D;">
+        <h4>{% trans "Recent Press Releases" %}</h4>
+        <ul style="margin-left:-20px;">
+            {% if press %}
+                {% for pr in press %}
+                <li style="margin-bottom:5px;text-decoration:none;"><a href="{{STATIC_URL}}{{pr.press_file}}" target='_blank' title="{{pr.title}}">{{pr.title|slice:":35"}}</a></li>
+                {% endfor %}
+            {% else %}
+                <p>{% trans "Check back soon..." %}</p>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

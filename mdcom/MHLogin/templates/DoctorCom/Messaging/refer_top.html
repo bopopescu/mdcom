@@ -1,0 +1,89 @@
+{% load i18n %}
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/popupUserList.js"></script>
+
+<div id="recipient_info" class="recipient_info">
+	{% if practice_photo %}
+		<div class="parctice_photo_div">
+			<img id="practice_photo" src="{{practice_photo}}" alt='{% trans "No Image" %}' class="logo_img">
+		</div>
+	{% else %}
+		<div style="height:20px;"></div>	
+	{% endif %}
+	<div class="info_contaion">
+		<div class="left">
+			<div class="left_user_photo">
+			<img src="{{user_photo}}" alt='{% trans "No Image" %}' class="info_img">
+			</div>
+			<div class="left_btn">
+				<a href="/Messages/New/?user_recipients={{ provider.user.id }}">
+					<img title='{% trans "Click to send text message." %}' src="{{STATIC_URL}}img/msg_icon.png" />
+				</a>
+				{% if pager_available %}
+				<a href="/Page/{{ provider.user.id }}/">
+					<img src="{{STATIC_URL}}img/pager_icon.png" title='{% trans "Click to page." %}'/>
+				</a>
+				{% else %}
+					<a class="disablecImg" href="javascript:void(0);">
+						<img class="disablecImg" src="{{STATIC_URL}}img/pager_disable_icon.png"/>
+					</a>
+				{% endif %}
+				{% if call_available %}
+				<a href="/Call/{{ provider.user.id }}/">
+					<img src="{{STATIC_URL}}img/call_icon.png" title='{% trans "Click to phone." %}'/>
+				</a>
+				{% else %}
+				<a class="disablecImg" href="javascript:void(0);">
+					<img class="disablecImg" src="{{STATIC_URL}}img/call_disable_icon.png" />
+				</a>
+				{% endif %}
+			</div>
+		</div>
+			<div class="title">
+				{{fullname}} {% if specialty %} <span style="font-size:16px;">({{specialty}})</span> {% endif %}
+			</div>
+		<div class="center">
+
+			<div class="address">
+				{% if provider.user.address1 %}
+				<p>{{provider.user.address1}}</p>
+				{% if provider.user.address2 %}<p>{{provider.user.address2}}</p>{% endif %}
+				<div class="city_state_zip">{{ provider.user.city }}, {{ provider.user.state }} {{ provider.user.zip }}</div>
+				{% endif %}
+			</div>
+
+			<div class='ccs'>
+				<div class="message_cell_left" style="width: auto; padding-top: 4px;margin-right:5px;float:left;">
+				</div>
+				<div class="message_cell_right" style="width: auto;float:left;">
+					<div id='recipToDiv' style="cursor:pointer; float: left; width: 160px; min-height: 20px; max-height: 60px; overflow-y: auto; border: 1px solid #CCCCCC; font-weight: normal;">
+					</div>
+					<input id='recipToBtn' type="button" value='{% trans "Cc" %}' style="padding: 0 5px; margin:-1px 0 0 10px;"/>
+				</div>
+			</div>
+
+			<div class='location'>
+				{% if practices %}
+				<select id="id_rec_practices">
+				{% for p in practices %}
+					<option value="{{ p.id }}"
+					{% if p.id == selected_practice_id %}selected="selected"{% endif %}
+					>{{p.practice_name}}</option>
+				{% endfor %}
+				</select>
+				{% endif %}
+			</div>
+		</div>
+		
+		<div class="right">
+			<div class="BoardCertifications">{% trans "Board Certifications" %}:</div>
+			<div class="BoardCertificationsD">{{provider.certification|default_if_none:""|linebreaks}}</div>
+			<div class="SpecialSkills">{% trans "Special Skills" %}:</div>
+			<div class="SpecialSkillsD">{{provider.user.skill|default_if_none:""|linebreaks}}</div>
+			<div id="practice_member_area" class="divmargin">
+				{{practice_members}}
+			</div>		
+		</div>
+	</div>
+</div>
+
+

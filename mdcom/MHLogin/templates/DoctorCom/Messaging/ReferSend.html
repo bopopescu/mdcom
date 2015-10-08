@@ -1,0 +1,628 @@
+{# extends "base_short_new.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+
+{% endblock %}
+
+{% block customJS %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.uploaderProgress.css" />
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/messaging/refer_form.css" />
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.uploadProgress.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/popupUserList.js"></script>
+    {%include 'includes/jquery.validate.html'%}
+<script type="text/javascript">
+
+var ioerror = "{{ioerror}}";
+var autoSendMsg = false;
+var dialogWait = null;
+var selected_practice = null;
+$(document).ready(function(){
+    {% if show_subscribe %}
+        nonSubscribersDialog();
+    {% endif %}
+    
+    var DATE_FORMAT={
+        'de':'yy-mm-dd',
+        'en-us':'mm/dd/yy'
+    };
+    
+    $("#id_date_of_birth").attr("maxlength",10).css("ime-mode","disabled").datepicker({
+        showOn: 'both',
+        buttonImage: '{{STATIC_URL}}img/calendar.gif',
+        buttonImageOnly: true,
+        minDate: new Date(1900, 1-1, 1),
+        maxDate:'+0',
+        yearRange: "-200",
+        changeYear: true,
+        changeMonth: true,
+        dateFormat: DATE_FORMAT[Constant.TIME_ZONE]
+    });
+    
+    if (ioerror) {
+        alert('{% trans "Sorry, there was an error saving the file. Please upload file again." %}');
+    }
+    
+    setInsuranceStatus();
+    
+    $("input").keyup(function(){
+        setInsuranceStatus();
+    });
+    
+    $("input").blur(function(){
+        setInsuranceStatus();
+    });
+
+    $("tr:odd").removeClass("odd");
+
+    $("#id_upload_area").multiUploadProgress({
+            "after_upload":"sendMsgAfterUpload",
+            "before_abort_upload":"setManualSendMsgAndCloseWin",
+            "max_upload_size":{{MAX_UPLOAD_SIZE}}
+    });
+
+    var sendRefFrmValidator = $("#sendRefFrm").validate({
+        rules: {
+            first_name: "required",
+            last_name: "required",
+            phone_number:{
+                required:true,
+                isPhone:true
+            },
+            alternative_phone_number: {
+                isPhone:true
+            },            
+            reason_of_refer: "required",
+            date_of_birth: {
+                isDate: true,
+                isAfterToday:true,
+                required:true
+            }
+        },
+        messages: {
+            first_name: '{% trans "first name is required." %}',
+            last_name: '{% trans "last name is required." %}',
+            phone_number: {
+                isPhone:'{% trans "Please enter a valid phone number." %}'
+            },
+            alternative_phone_number: {
+                isPhone:'{% trans "Please enter a valid phone number." %}'
+            },
+            date_of_birth: {
+                isDate: '{% trans "Please specify a (valid) date." %}',
+                isAfterToday :'{% trans "Please input date before today." %}'
+            }
+        },
+        showErrors: showErrorsBelow,
+        meta: "validate",    
+        onfocusout: false,    
+        onkeyup: false,    
+        onsubmit: false,
+        invalidHandler:function(form, validator) {
+            return;
+        }
+    });
+
+    $("#sendRefFrm").bind('submit', function() {
+        var file_clone = $("#id_file").clone(true);
+        file_clone.val("");
+        $("#id_file").replaceWith(file_clone);    
+    });
+
+    var recipientValidator = function(){
+        getUsrReferSpanVal();
+        // var rec = $('#id_user_to_recipients').val();
+        // var rec_cc = $('#id_user_cc_recipients').val();
+        // if(rec == '' && rec_cc != ''){
+            // $('#recipToDivErr').css({'display':'block'});
+            // return false;
+        // } else {
+            // $('#recipToDivErr').css({'display':'none'});
+        // }
+            return true;
+    }
+
+    $("#sendRefFrm_container #id_send").click(function(){
+        var valid = sendRefFrmValidator.form();
+        valid = valid && recipientValidator();
+        if (valid) {
+            var canSend = sendMsgCheck();
+            if (!canSend) {
+                autoSendMsg=true;
+                dialogWait = jWait({
+                        title: '{% trans "Waiting for file uploading..." %}',
+                        message: '{% trans "We will send this refer after all files have been uploaded." %}',
+                        cancelFunc:setManualSendMsg
+                    });
+            } else {
+                submitsendRefFrm();
+            }                    
+        }
+    });
+    
+    $("#sendRefFrm_container #id_preview").click(function(){
+    
+        var top = 60;
+        var previewDialog = $("#previewDialog");
+        previewDialog.dialog({
+            modal:true,
+            width:600,
+            resizable:false,
+            title: "{% trans 'Preview' %}",
+            position:['center',top],
+            draggable:false,
+            close:function(){
+                $('.content', previewDialog).html("");    
+            }
+        });
+        $('div.ui-widget-overlay').css('height',0);
+        $('div.ui-widget-overlay').css('height',$(document).height());    
+        $('#previewDialog #loadingPic').show();
+        
+        
+        insurance_name = $("#id_insurance_name").val()
+        insurance_id = $("#id_insurance_id").val()
+        secondary_insurance_name = ''
+        secondary_insurance_id = ''
+        tertiary_insurance_id = ''
+        tertiary_insurance_name = ''
+        if(insurance_name != '' && insurance_id != ''){
+            secondary_insurance_name = $("#id_secondary_insurance_name").val()
+            secondary_insurance_id = $("#id_secondary_insurance_id").val()
+            if (secondary_insurance_id != '' && secondary_insurance_name != ''){
+                tertiary_insurance_id = $("#id_tertiary_insurance_id").val()
+                tertiary_insurance_name = $("#id_tertiary_insurance_name").val()
+            }
+        }
+        
+        $.ajax({
+            type:'GET',
+            url: '/Messages/PreviewDialog',
+            data:{
+                user_recipients:$("#id_user_recipients").val(),
+                first_name:$("#id_first_name").val(),
+                last_name:$("#id_last_name").val(),
+                middle_name:$("#id_middle_name").val(),
+                date_of_birth:$("#id_date_of_birth").val(),
+                phone_number:$("#id_phone_number").val(),
+                alternative_phone_number:$("#id_alternative_phone_number").val(),
+                insurance_name:insurance_name,
+                insurance_id:insurance_id,
+                secondary_insurance_name:secondary_insurance_name,
+                secondary_insurance_id:secondary_insurance_id,
+                tertiary_insurance_id:tertiary_insurance_id,
+                tertiary_insurance_name:tertiary_insurance_name,
+                reason_of_refer:$("#id_reason_of_refer").val(),
+                today:$("#id_today").val()
+            },
+            success:function(data, status){
+                if(status=='success'){
+                    $('#previewDialog #loadingPic').addClass('hidden');
+                    showReferInfo(data);
+                    $('div.ui-widget-overlay').css('height',$(document).height());
+                }
+            },
+            error:function(data, status){
+                $('#previewDialog').dialog('close');
+                alert(data);
+            }
+        });
+    });
+    
+    $('#recipToBtn').live('click',function(){
+        $('#recipToDiv').AddRecipientUser();
+        $('#addSelectedUserBtn').html(MESSAGE.POPUP_USER_LIST_CC);
+    });
+    
+    $('#recipToDiv').live('click',function(){
+        $('#recipToDiv').AddRecipientUser();
+        $('#addSelectedUserBtn').html(MESSAGE.POPUP_USER_LIST_CC);
+    });
+    
+    $('#recipCcBtn').live('click',function(){
+        $('#recipCcDiv').AddRecipientUser();
+        $('#addSelectedUserBtn').html(MESSAGE.POPUP_USER_LIST_CC);
+    });
+
+    $('#recipCcDiv').live('click',function(){
+        $('#recipCcDiv').AddRecipientUser();
+        $('#addSelectedUserBtn').html(MESSAGE.POPUP_USER_LIST_CC);
+    });
+    modifyPracticePhoto();
+    $('#id_rec_practice').change(function(){
+        var photo = $(this).find("option:selected").attr('prac_photo');
+        selected_practice = $(this).find("option:selected").val();
+        modifyPracticePhoto(photo);
+    });
+});
+
+function modifyPracticePhoto(photo){
+    if(photo == undefined){
+        photo = $("#id_rec_practice [selected='selected']").attr("prac_photo");
+        selected_practice = $("#id_rec_practice [selected='selected']").val();
+    }
+    $("#id_rec_practice_photo").attr("src", photo);
+}
+
+function nonSubscribersDialog() {
+    showSimpleDialog({
+        title: '{% trans "Subscribe" %}',
+        content: html,
+        height: 150,
+        dc_buttons: {
+            "Yes": {
+                'click': function() {
+                    $.ajax({
+                        url: '/Support/AJAX/Contact/',
+                        type: 'POST',
+                        async: false,
+                        success: function(jsonData, textStatus, httpRequest) {
+                            window.location.href="/";
+                        }, // end success
+                        error: function(httpRequest, textStatus, errorThrown) {
+                            alert("Send mail Failed.");
+                        }
+                    });
+
+                },
+                'text': '{% trans "Subscribe Now" %}',
+                'class': 'positive-btn'
+            },
+            "No": {
+                'click': function() {
+                    window.location.href="/";
+                },
+                'text': '{% trans "No Thanks" %}'
+            }
+        }
+    });
+}
+
+function setInsuranceStatus(){
+    var insurance_name = $.trim($("#id_insurance_name").val())
+    var insurance_id = $.trim($("#id_insurance_id").val())
+    var secondary_insurance_name = $.trim($("#id_secondary_insurance_name").val())
+    var secondary_insurance_id = $.trim($("#id_secondary_insurance_id").val())
+    if(insurance_name != '' && insurance_id != ''){
+        $("#id_secondary_insurance_name").removeAttr("disabled");
+        $("#id_secondary_insurance_id").removeAttr("disabled");
+        if (secondary_insurance_id != '' && secondary_insurance_name != ''){
+            $("#id_tertiary_insurance_id").removeAttr("disabled");
+            $("#id_tertiary_insurance_name").removeAttr("disabled");
+        } else {
+            $("#id_tertiary_insurance_id").attr("disabled", 'disabled');
+            $("#id_tertiary_insurance_name").attr("disabled", 'disabled');
+        }
+    } else{
+        $("#id_secondary_insurance_name").attr("disabled", 'disabled');
+        $("#id_secondary_insurance_id").attr("disabled", 'disabled');
+        $("#id_tertiary_insurance_id").attr("disabled", 'disabled');
+        $("#id_tertiary_insurance_name").attr("disabled", 'disabled');
+    }
+}
+
+function showReferInfo(data){
+    var previewDialog = $("#previewDialog");
+    var referContent = $('.content', previewDialog);
+    referContent.html(data);
+    $('#previewDialog #loadingPic').hide();
+    referContent.show();
+}
+
+function sendMsgAfterUpload() {
+    if (sendMsgCheck()&&autoSendMsg) {
+        if (dialogWait) {
+            dialogWait.dialog("close");
+        }
+        submitsendRefFrm();
+    }
+}
+
+function submitsendRefFrm() {
+    $('#id_selected_practice').val(selected_practice);
+    dialogWait = jWait({height:100,title:'{% trans "Sending refer" %}',message:'{% trans "Sending refer..." %}',cancelEnable:false});
+    setTimeout(function(){
+        $("#sendRefFrm").submit();
+    },2000);        
+}
+
+function setManualSendMsg() {
+    autoSendMsg = false;
+}        
+
+function setManualSendMsgAndCloseWin() {
+    if (dialogWait) {
+        dialogWait.dialog("close");
+    }          
+    setManualSendMsg();
+}          
+
+function sendMsgCheck() {
+    var canSend = true;
+    $('iframe').each(function(){
+        var formObj = $(this).contents().find("form");
+        if (formObj&&formObj.length>0&&formObj.attr("upload")) {
+            canSend = false;
+            return false;
+        }
+    }); 
+    return canSend;
+}
+</script>
+<style>
+    #userPopConTab, #userPopConTab tr, #userTableHead, #userTableHead tr, #userTable, #userTable tr{
+        background: #FCFDFD;
+        line-height: 30px;
+    }
+    #userTableHead{
+        border-top: 1px solid #D1CEFD;
+        border-bottom: 1px solid #D1CEFD;
+    }
+    #userTable{
+        cursor: pointer;
+    }
+    
+    
+    #userTable td{
+        border-bottom: 1px solid #D1CEFD;
+    }
+
+    #userTable .selected,#userTable tr.selected:hover{
+        background:#D1CEFD;
+    }
+    
+    #userTable tr:hover{
+        background:#F0F2FF;
+    }
+    
+    #userPopConTab input[type="radio"] {margin-bottom: 2px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="previewDialog" class="overlay_modal hidden">
+    <div class='container'>
+        <div id='loadingPic'></div>
+        <div class='content hidden'></div>
+    </div>
+</div>
+
+<div id="sendRefFrm_container" class="ui-corner-all">
+    <form id="sendRefFrm" enctype="multipart/form-data" action="{% if ACTION %}{{ACTION}}{% else %}.{% endif %}" method="POST" style="width:880px;text-align:left;">
+        <div class="message_row title" >
+            {% trans "Recipient Information" %}
+        </div>
+        <div class="line" ></div>
+        <div class="message_row" >
+            <div class="message_cell_left" style="width: 600px; padding-top: 4px;">
+    <!--             <div class="message_row" >
+                    <div class="message_cell_left" style="width: 40px; padding-top: 4px;">
+                        {% trans "Cc:" %}
+                    </div>
+                    <div class="message_cell_right" style="width: 855px;">
+                        <div id='recipCcDiv' style="cursor:pointer; float: left; width: 620px; min-height: 20px; max-height: 60px; overflow-y: auto; border: 1px solid #CCCCCC;">
+                        </div>
+                        <input id='recipCcBtn' type="button" value='{% trans "Cc..." %}' style="padding: 0 5px; margin:-1px 0 0 10px;"/>
+                        {{form.user_cc_recipients}}
+                    </div>
+                </div> -->
+                <div class="message_row" >
+                        <div class="message_cell_left width1">
+                        {% trans "Name" %}:
+                    </div>
+                    <div class="message_cell_right width2">
+                        {{user_recipient_name}}{{form.user_recipients}}{{form.today}}&nbsp;
+                        {{ form.selected_practice }}
+                    </div>
+                    <div class="message_cell_left width1">
+                        {% trans "Practice" %}:
+                    </div>
+                    <div class="message_cell_right width2">
+                        {% if rec_practices %}
+                        <select id="id_rec_practice">
+                        {% for p in rec_practices %}
+                        <option value="{{ p.id }}" 
+                            {% if p.is_current_practice %}selected="selected"{% endif %}
+                            prac_photo="{{ p.photo }}"
+                            >{{p.name}}</option>
+                        {% endfor %}
+                        {% endif %}
+                        </select>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="message_row" >
+                    {% if user_type == "practice" %}
+                        <div class="message_cell_left width1">
+                            {% trans "Address" %}:
+                        </div>
+                        <div class="message_cell_right width2">
+                            {{practice_address|safe}}&nbsp;
+                        </div>
+                    {% else %}
+                        <div class="message_cell_left width1">
+                            {% trans "Specialty" %}:
+                        </div>
+                        <div class="message_cell_right width2">
+                            {% if specialty %}
+                                {{specialty}}&nbsp;
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="message_cell_left width1">
+                        &nbsp;
+                    </div>
+                    <div class="message_cell_right width2">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="clear"></div>
+                
+                <div class="message_row" >
+                    <div class="message_cell_left" style="width: auto; padding-top: 4px;margin-right:5px;">
+                        {% trans "Cc: " %}
+                    </div>
+                    <div class="message_cell_right" style="width: auto;">
+                        <div id='recipToDiv' style="cursor:pointer; float: left; width: 425px; min-height: 20px; max-height: 60px; overflow-y: auto; border: 1px solid #CCCCCC; font-weight: normal;">
+                        </div>
+                        <input id='recipToBtn' type="button" value='{% trans "Cc..." %}' style="padding: 0 5px; margin:-1px 0 0 10px;"/>
+                        <div id='recipToDivErr' style="width: 270px; display: none; color:red;font-style: italic;">{% trans "Recipient is required." %}</div>
+                        {{form.user_to_recipients}}
+                    </div>
+                </div>
+            </div>
+            <div class="message_cell_right" style="width: 100px;">
+                {% if rec_practices %}
+                <img id="id_rec_practice_photo" style="float:right; max-height: 30px; max-width: 100px;">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="message_row title" >
+            {% trans "Patient Information" %}
+        </div>
+        <div class="line" ></div>
+        <div class="message_row" >
+            <div class="message_cell_left">
+                {% trans "Patient Name" %}:
+            </div>
+            <div class="message_cell_right">
+                {{form.first_name}}<span class="redstar">*</span> - {{form.middle_name}} - {{form.last_name}}<span class="redstar">*</span>
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Gender" %}:
+            </div>
+            <div class="message_cell_right">
+                {{form.gender}}
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Date of Birth" %}:
+            </div>
+            <div class="message_cell_right">
+                {{form.date_of_birth}}&nbsp;<span class="redstar">*</span>
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Phone Number" %}:
+            </div>
+            <div class="message_cell_right">
+                {{form.phone_number}}&nbsp;{{form.alternative_phone_number.help_text}}<span class="redstar">*</span>
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Alternative Phone Number" %} :
+            </div>
+            <div class="message_cell_right">
+                {{form.alternative_phone_number}}&nbsp;{{form.alternative_phone_number.help_text}}
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Primary Insurance Name" %}:
+            </div>
+            <div class="message_cell_right insurance">
+                {{form.insurance_name}}
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Primary  Insurance ID" %}:
+            </div>
+            <div class="message_cell_right insurance">
+                {{form.insurance_id}}
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Secondary Insurance Name" %}:
+            </div>
+            <div class="message_cell_right insurance">
+                {{form.secondary_insurance_name}}
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Secondary Insurance ID" %}:
+            </div>
+            <div class="message_cell_right insurance">
+                {{form.secondary_insurance_id}}
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Tertiary Insurance Name" %}:
+            </div>
+            <div class="message_cell_right insurance">
+                {{form.tertiary_insurance_name}}
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Tertiary Insurance ID" %}:
+            </div>
+            <div class="message_cell_right insurance">
+                {{form.tertiary_insurance_id}}
+            </div>
+        </div>
+        <div class="clear" ></div>
+        <div class="line" ></div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Reason for Referral" %}:
+            </div>
+            <div style="clear:both">
+                {{form.reason_of_refer}}
+                <span class="redstar">*</span>
+            </div>
+        </div>
+        <div class="message_row">
+            <div class="message_cell_left">
+                {% trans "Attachment(s)" %}:
+            </div>
+            <div class="message_cell_right">
+                <div id="id_upload_area">
+                    <div id="id_file_list_area">
+                        {% for file in file_list %}
+                            <div class="upload_panel">
+                                <div>
+                                {{file.file_display_name}} {% trans "uploaded successfully" %}.&nbsp;&nbsp;&nbsp;
+                                <input type="hidden" name="file_saved_name" value="{{file.file_saved_name}}"/>
+                                <input type="hidden" name="file_display_name" value="{{file.file_display_name}}"/>
+                                <input type="hidden" name="file_charset" value="{{file.file_charset}}"/>    
+                                <input type="hidden" name="file_size" value="{{file.file_size}}"/>
+                                <a class="delete_attachment" href="javascript:void(null);" onclick="deleteAttachment(this);">{% trans "Delete" %}</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="message_row">
+            <div class="message_cell_left">
+                Send a Fax Copy?
+            </div>
+            <div class="message_cell_right">
+                {{form.send_a_fax_copy}}
+            </div>
+        </div>         -->
+        <div class="sendRefBtnsContainer" style="padding-top:20px;">
+            <input id="id_preview" type="button" name="Submit" value="{% trans "Preview" %}" class="enable_btn"/>
+            <input id="id_send" type="button" name="Submit" value="{% trans "Send" %}" class="enable_btn"/>
+        </div>        
+    </form>
+</div>
+
+
+{% include "DoctorCom/Messaging/MessageToUsersPopup.html" %}
+
+{% endblock %}

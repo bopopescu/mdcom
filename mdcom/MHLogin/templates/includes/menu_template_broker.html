@@ -1,0 +1,60 @@
+{% load i18n %}
+{% load tech_tags %}
+
+<div id="header">
+    <div class="header_top clearfix">
+        <a href="/" class="fleft logo"><img src="{{STATIC_URL}}img/logo.gif" /></a>
+        <div class="fright">
+            <span>{% trans "Welcome," %} <strong>{{ mhl_user_displayName }}</strong> 
+            <a href="/logout/">{% trans "Logout" %}</a> </span>
+        </div>
+        
+    </div>
+    <!--nav start-->
+    <div class="nav_list" id="user-new">
+        <div class="nav_body clearfix">
+            <ul class="fleft">
+                <li>
+                    <a href="/">{% trans "Home" %}</a>
+                </li>
+                <li>
+                    <a href="/Profile/">{% trans "Account" %}</a>
+                    <div class="sub_nav hide">
+                        <div class="sub_nav_bto sub_nav_bto3"></div>
+                        <ul>
+                            <li>
+                                <a href="/Profile/">{% trans "User Profile" %}</a>
+                            </li>
+                            <li class='hidden'>
+                                <a href="/Profile/Billing/">{% trans "Billing" %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+              {% comment %} We should have this type of logic for other types rather 
+              than have a bunch of menu_template_xyz.html. {% endcomment %}
+              {% if 'Salesperson' in sender_types or 'Administrator' in sender_types %}
+              <li>
+                  <a href="/Sales/">{% trans "Sales" %}</a>
+                  <div class="sub_nav hide">
+                      <ul>
+                          <li><a href="/Sales/salesleads">{% trans "Sales leads" %}</a></li>
+                          <li><a href="/Sales/Invites/">{% trans "Issue invites" %}</a></li>
+                      </ul>
+                      <div class="sub_nav_bto sub_nav_bto4"></div>
+                  </div>
+              </li>
+              {% endif %}
+              {% get_tech_menu_var as show_tech_menu %}
+              {% if show_tech_menu == "true" %}
+                  <li><a href='/dcAdmin/'>{% trans "Admin" %}</a></li>
+              {% endif %}
+            </ul>
+            <span class="fright">
+                <input type="text" id="allProviders" title='{% trans "Type to Search for Provider" %}'/>
+                <button type="submit" id="btnSearch" value='{% trans "Submit" %}'></button> </span>
+        </div>
+    </div>
+</div>
+</div> <!--nav end-->
+</div>

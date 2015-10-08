@@ -1,0 +1,25 @@
+{% load i18n %}
+{% blocktrans with email and code%}
+Dear {{email}},
+
+Congratulations! You've been invited to join DoctorCom! Just point your browser to:
+
+https://www.mdcom.com/register/
+
+And enter the following information to get started (don't worry -- you can change your email address as you work through the registration pages):
+
+Invitation Code: {{code}}
+Email Address: {{email}}
+
+Best,
+DoctorCom Staff
+{% endblocktrans %}
+
+{% if msg %}
+______________________________________________________________________________
+Additional Note from {{sender}}:
+
+{{msg}}
+
+______________________________________________________________________________
+{% endif %}

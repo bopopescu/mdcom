@@ -1,0 +1,82 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Pages" %} - {{period}}{% endblock %}
+
+{% block content %}
+<p align='right'><a href="/analytics/">{% trans "Analytics Home" %}</a></p>
+
+<STYLE TYPE="text/css">
+BODY
+{
+    font-family:sans-serif;
+    text-align:left;
+    margin:5px;
+    padding:5px;
+}
+</STYLE>
+
+<h1 style="margin:5px;padding:5px; text-align:left;">{% trans "Pages" %}: {{period}}</h1>
+
+<ul style="margin:5px;padding:5px; text-align:left;">
+{{date_form}}
+</ul>
+
+<p style="margin:5px;padding:5px; text-align:left;"><b>{% trans "Total Page Count" %}: {{page_total}}</b></p>
+
+<table border="0">
+<tr><td>
+    <h2 style="margin:5px;padding:5px; text-align:left;">{% trans "Top 10 Pagers" %}</h2>
+    <table border="1">
+    <tr>
+    	<th>{% trans "Name" %}</th>
+    	<th>{% trans "Count" %}</th>
+    </tr>
+    {% for pager in top10_pagers %}
+        <tr>
+        	<td>{{pager.0.first_name}} {{pager.0.last_name}}</td>
+        	<td>{{pager.1}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    
+    </td><td width="25px">&nbsp;</td><td>
+    
+    <h2 style="margin:5px;padding:5px; text-align:left;">{% trans "Top 10 Paged (page recipients)" %}</h2>
+    <table border="1">
+    <tr>
+    	<th>{% trans "Name" %}</th>
+    	<th>{% trans "Count" %}</th>
+    </tr>
+    {% for paged in top10_paged %}
+        <tr>
+        	<td>{{paged.0.first_name}} {{paged.0.last_name}}</td>
+        	<td>{{paged.1}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    
+</td></tr>
+</table>
+
+<h2 style="margin:5px;padding:5px; text-align:left;">{% trans "Page Data" %}</h2>
+
+<table border="1">
+<tr>
+    <th>{% trans "Pager" %}</th>
+    <th>{% trans "Paged" %}</th>
+    <th>{% trans "Date" %}</th>
+    <th>{% trans "Time" %}</th>
+</tr>
+{% for page in pages_detail %}
+    <tr>
+        <td>{{page.0}}</td>
+        <td>{{page.1}}</td>
+        <td>{{page.2}}</td>
+        <td>{{page.3}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
+

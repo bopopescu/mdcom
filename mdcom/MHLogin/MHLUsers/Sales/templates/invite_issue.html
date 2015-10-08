@@ -1,0 +1,28 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id='sales' class="ui-corner-all">
+	<h1>
+		{% trans "Issue Invitations" %} &nbsp;
+	</h1>
+	{% if form.non_field_errors  %}
+	<div class="ui-corner-all">
+		{{ form.non_field_errors }}
+	</div>
+	{% endif %}
+
+	<form action="." method="POST">
+		<p>{{form.userType.label}}: {{form.userType}} {{form.userType.errors|safe}}</p>
+		<p>{{form.emailAddresses.label}}</p>
+		<div>{{form.emailAddresses}} {{form.emailAddresses.errors|safe}}</div>
+		<p>{{form.msg.label}}</p>
+		{{form.msg}} {{form.msg.errors|safe}}
+		{% if debug %}
+			<p>{{form.test.label}}{{form.test}} {{form.test.errors|safe}}</p>
+		{% endif %}
+		<p><input type="submit" name="mysubmit" value="Send Invitations"></p>
+	</form>
+</div>
+{% endblock %}
+

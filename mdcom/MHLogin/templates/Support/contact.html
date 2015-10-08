@@ -1,0 +1,70 @@
+{# extends "base_short_new.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customJS %}
+{%include 'includes/jquery.validate.html'%}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("table tr:odd").removeClass("odd");
+	var pf = $('#contact_form').validate({
+		rules:{
+			call_back_number: {isPhone:true,required:true},
+			message: {required:true}
+		},
+		messages:{
+			call_back_number: {
+				isPhone: MESSAGE.CONTACT_CALL_BACK_NUMBER_NOT_VALID,
+				required: '{% trans "Call back number is required." %}'
+			},
+			message: MESSAGE.CONTACT_MESSAGE_REQUIRED
+		},
+		showErrors: showErrorsBelow
+	});
+});
+</script>
+{% endblock %}
+
+{% block content %}
+    <!--<div style="margin-left:40px; margin-top:-60px;">        
+		<p class="header" style="font-size:14px;font-weight:bold;">Welcome, {{ mhl_user_displayName }}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">Current location: <b>{{ current_site.name }}</b> <a href="/Sites/">Click here</a> to change.</p>
+    </div>-->
+<div id="contact" style="background-color:white;margin:20px 0;border:1px solid lightgray;padding:30px; text-align:left;" class="ui-corner-all">
+	<h1>{% trans "DoctorCom Support" %}</h1>
+	<p class="info">{% trans "If you are unable to find the answers you need through the" %} <a href="/Support/FAQs/">{% trans "FAQs" %}</a>{% trans ", please tell us about your issue in box below:" %}</p>
+	<form id="contact_form" method="post" action=".">
+	<table width="100%">
+	<tr>
+		<td>
+			<label class="bold_title">{% trans "Call Back Number:" %}</label>
+			<input id="call_back_number" name="call_back_number" value="{{call_back_number}}"/><span class="redstar">*</span>
+			<label class="bold_title">{% trans "(A call number will speed up the support process.)" %}</label>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="areaContact">
+				<textarea id="message" name="message" class="contact_message" /></textarea>
+				<span class="redstar">*</span>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span class="contactText">{% trans "Please provide as much detail as possible including how you arrived at the issue." %}</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="btnContact">
+				<input type="submit" name="submit" value='{% trans "Send to support@mdcom.com" %}' />
+			</div>
+		</td>
+	</tr>
+	</table>
+	</form>
+
+</div>
+
+{% endblock %}

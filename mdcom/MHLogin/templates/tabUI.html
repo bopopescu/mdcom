@@ -1,0 +1,115 @@
+{% load i18n %}
+<ul id="tabUl" class="fleft tabsUIHeader">
+	{% for u in org %}
+	<li>
+		<a href='#fragment-{{u.id}}' logo="{{u.logo}}">
+			<span>{{u.name}}</span>
+		</a>
+	</li>
+	{% endfor %}
+	
+	{% if userType == 0 %}
+	<li>
+		<a href="#fragment-01">
+			<span>{% trans "Site Providers" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-04">
+			<span>{% trans "Site Staff" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-02">
+			<span>{% trans "Community Prvdrs" %}</span>
+		</a>
+	</li>
+	<!--
+	<li>
+		<a href="#fragment-03">
+			<span>{% trans "Med Students" %}</span>
+		</a>
+	</li>-->
+	<li>
+		<a href="#fragment-05">
+			<span>{{current_organization_type}} {% trans "Staff" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-06">
+			<span>{% trans "Local Practices" %}</span>
+		</a>
+	</li>
+	<li class="lastLI">
+		<a href="#fragment-07">
+			<span>{% trans "My Favorites" %}</span>
+		</a>
+	</li>
+	{% endif %}
+	
+	{% if userType == 1 %}
+	<li>
+		<a href="#fragment-01">
+			<span>{{current_organization_type}} {% trans "Staff" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-02">
+			<span>{{ current_site }} {% trans "Providers" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-06">
+			<span>{{ current_site }} {% trans "Staff" %}</span>
+		</a>
+ 	</li>
+	<li>
+		<a href="#fragment-03">
+			<span>{% trans "Community Professionals" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-04">
+			<span>{% trans "Local Practices" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-05">
+			<span>{% trans "My Favorites" %}</span>
+		</a>
+	</li>
+	{% endif %}
+	
+	{% if userType == 2 %}
+	<li>
+		<a href="#fragment-01">
+			<span>{{current_organization_type}} {% trans "Staff" %}</span>
+		</a>
+	</li>	
+	<li>
+		<a href="#fragment-02">
+			<span>{{ current_site }} {% trans "Providers" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-06">
+			<span>{{ current_site }} {% trans "Staff" %}</span>
+		</a>
+ 	</li>
+	<li>
+		<a href="#fragment-03">
+			<span>{% trans "Community Professionals" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-04">
+			<span>{% trans "Local Practices" %}</span>
+		</a>
+	</li>
+	<li>
+		<a href="#fragment-05">
+			<span>{% trans "My Favorites" %}</span>
+		</a>
+	</li>
+	{% endif %}
+</ul><!-- tabUI -->

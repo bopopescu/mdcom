@@ -1,0 +1,35 @@
+{% load i18n %}
+<div class="inviteDialog">
+	<div class="content">
+		<form id='inviteProviderForm'>
+			<div class="text1">
+				{% trans "We can not find any people matching the conditions. Please input email to invite people." %}
+			</div>
+
+			{% if err_tip %}
+			<div class="text1">{{err_tip}}</div>
+			{% endif %}
+
+			<table class="inviteNewStaffTable">
+				<tr>
+					<td align="left">{% trans "Recipient:" %}</td>
+					<td colspan="2"><input type="text" id="inviteNewEmail" value='{{ email }}' /></td>
+				</tr>
+				<tr>
+					<td align="left">{% trans "User Type:" %}</td>
+					<td>{{ user_type_form.provider_types }}</td>
+				</tr>
+				<tr>
+					<td align="left">{% trans "Note:" %}</td>
+					<td><textarea id="mail-body"></textarea></td>
+				</tr>
+			</table>
+			<div class="line"></div>
+				<div class="buttons">
+					<div class="button step1Cancel">{% trans "Back" %}</div>
+					<div class="button step1Next buttonR">{% trans "Send" %}</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

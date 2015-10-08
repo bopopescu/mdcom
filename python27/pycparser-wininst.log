@@ -1,0 +1,55 @@
+*** Installation started 2013/05/29 19:49 ***
+Source: C:\Users\mwang.KADA\Downloads\pycparser-2.09.1.win32-py2.7.exe
+999 Root Key: HKEY_LOCAL_MACHINE
+020 Reg DB Key: [Software\Microsoft\Windows\CurrentVersion\Uninstall]pycparser-py2.7
+040 Reg DB Value: [Software\Microsoft\Windows\CurrentVersion\Uninstall\pycparser-py2.7]DisplayName=Python 2.7 pycparser-2.09.1
+040 Reg DB Value: [Software\Microsoft\Windows\CurrentVersion\Uninstall\pycparser-py2.7]UninstallString="C:\Python27\Removepycparser.exe" -u "C:\Python27\pycparser-wininst.log"
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ast_transforms.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_ast.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_generator.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_lexer.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_parser.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\lextab.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\plyparser.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\yacctab.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\_ast_gen.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\_build_tables.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\_c_ast.cfg
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\__init__.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\cpp.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\ctokens.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\lex.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\yacc.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\__init__.py
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\__init__.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\yacc.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\lex.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\ctokens.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\cpp.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\__init__.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\_build_tables.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\_ast_gen.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\yacctab.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\plyparser.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\lextab.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_parser.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_lexer.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_generator.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_ast.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ast_transforms.pyc
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\__init__.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\yacc.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\lex.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\ctokens.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ply\cpp.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\__init__.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\_build_tables.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\_ast_gen.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\yacctab.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\plyparser.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\lextab.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_parser.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_lexer.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_generator.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\c_ast.pyo
+200 File Copy: C:\Python27\Lib\site-packages\pycparser\ast_transforms.pyo

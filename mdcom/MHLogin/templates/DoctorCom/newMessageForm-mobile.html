@@ -1,0 +1,54 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+th {text-align:left;}
+#id_body {display:inline; margin-left:7px;width:330px;}
+#id_user_recipients {display:inline; width:330px; margin-left:30px;}
+#id_send {margin-left:10px;vertical-align:65px; width:100px;font-weight:bold;font-size:14px;color:#003399;}
+{% endblock %}
+
+{% block customJS %}
+    <script type="text/javascript">  
+        $(document).ready(function(){            
+            $("tr:odd").removeClass("odd");
+
+        });
+    </script>
+
+
+{% endblock %}
+
+{% block content %}
+    <div style="margin-left:40px; margin-top:-60px;">        
+		<p class="header" style="font-size:14px;font-weight:bold;">{% trans "Welcome" %}, {{ mhl_user_displayName }}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Current location" %}: <b>{{ current_site.name }}</b> <a href="/Sites/">{% trans "Click here" %}</a> {% trans "to change" %}.</p>
+    </div>
+<div style="width:800px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">
+
+<h1>{{headline}}</h1>
+
+<form action="{% if ACTION %}{{ACTION}}{% else %}.{% endif %}" method="POST">
+<div>
+<p style="display:inline;font-weight:bold;vertical-align:65px;">{% trans "Message Text" %}:&nbsp;</p>
+{{form.body}}<br />
+{% trans "Do not use identifying information such as names or room numbers." %}
+<input type="hidden" name="action" value="send" />
+<input id="id_send" type="submit" name="Submit" value='{% trans "Send Text" %}' />
+</div>
+<div style="margin-top:20px;margin-bottom:20px;">
+<p style="display:inline;font-weight:bold;">{% trans "Recipients" %}:&nbsp;</p>
+{{form.user_recipients}}
+</div>
+
+{% comment %}
+<table>
+{{ form.as_table }}
+</table>
+{% endcomment %}
+
+</form>
+</div>
+{% endblock %}
+
+

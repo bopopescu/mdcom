@@ -1,0 +1,5 @@
+<script type="text/javascript"> 
+    {% for user in users %}
+    data.push({text:"{{ user.first_name }} {{ user.last_name }}", url:"/Provider_View/?provider={{ user.id }}"});
+    {% endfor %}
+</script> 

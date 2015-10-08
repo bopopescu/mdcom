@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<script>
+	$(function(){
+		$("#memberOrgBack").click(function(){
+			OrgView();
+		});
+
+		$("#inviteStep1").click(function(){
+			$.comAjax({
+				url: "/Organization/MemberOrg/InviteStep1/",
+				type:'GET',
+				data: {},
+				success:function(data, status){
+					RefreshRight(data);
+				}
+			});
+		});
+	});
+
+	function inviteView(){
+		$.comAjax({
+			url: "/Organization/MemberOrg/ShowInvitation/",
+			type:'POST',
+			data: {},
+			success:function(data, status){
+				RefreshRight(data);
+			}
+		});
+	}
+
+	function memberOrgView(){
+		$.comAjax({
+			url: "/Organization/MemberOrg/View/",
+			type:'POST',
+			data: {},
+			success:function(data, status){
+				RefreshRight(data);
+			}
+		});
+	}
+
+</script>

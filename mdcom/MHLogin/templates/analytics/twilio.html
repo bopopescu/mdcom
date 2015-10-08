@@ -1,0 +1,142 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Summary" %} - {{period}}{% endblock %}
+{% block content %}
+<h1>{% trans "Summary Stats for" %} {{start_date}} {% trans "to" %} {{end_date}} </h1>
+{% if show_change_timeslice %}
+{{change_timeslice_form}}
+{% endif %}
+
+<h2>{% trans "Flot View" %}</h2>
+
+<div id="totalcounts" style="width:600px;height:300px;"></div>
+{% trans "total" %}: {{total}}; {% trans "average" %}: {{mean}}; {% trans "stdev" %}: {{stdev}}
+
+{% for user in users %}
+    <h2>{{user.1.name}}</h2>
+    <div id="u{{ user.1.id }}" style="width:600px;height:300px;"></div>
+    {% trans "total" %}: {{user.1.total}}
+{% endfor %}
+
+<script id="source" language="javascript" type="text/javascript">
+
+    $.plot($("#totalcounts"), [
+        {   data: 
+            [
+                {% for day in click2calltotal %}
+                [{{day.0}},{{day.1}}],
+                {% endfor %}
+            ], 
+            label: '{% trans "click2call" %}', 
+            lines: { show: true },
+            points: { show: true }
+        },
+        {   data: 
+            [
+                {% for day in outsidecalltotal %}
+                [{{day.0}},{{day.1}}],
+                {% endfor %}
+            ],
+            label: '{% trans "outside calls" %}',
+            lines: { show: true },
+            points: { show: true },
+        },
+        {   data: 
+            [
+                {% for day in answeringservicetotal %}
+                [{{day.0}},{{day.1}}],
+                {% endfor %}
+            ],
+            label: '{% trans "answering service" %}',
+            lines: { show: true },
+            points: { show: true },
+        },
+        {   data:
+            [
+                {% for day in voicemailtotal %}
+                [{{day.0}},{{day.1}}],
+                {% endfor %}
+            ],
+            label: '{% trans "Checking Voicemail" %}',
+            lines: { show: true },
+            points: { show: true },
+        },
+        {   data: 
+            [
+                {% for day in answeringservicetotal %}
+                [{{day.0}},{{day.1}}],
+                {% endfor %}
+            ],
+            label: '{% trans "callbacks" %}',
+            lines: { show: true },
+            points: { show: true },
+        },
+    ],
+    { xaxis: { mode: "time", timeformat: "%y-%m-%d" },
+      yaxis: { tickDecimals: 0 }
+    });
+    
+    {% for user in users %}
+    $.plot($("#u{{user.1.id}}"), [
+        {   data: 
+            [
+                {% for day in user.1.click2call %}
+                [{{ day.0 }}, {{ day.1 }}],
+                {% endfor %}
+            ],
+            label: "click2call", 
+            lines: { show: true },
+            points: { show: true }
+        },
+        {   data: 
+            [
+                {% for day in user.1.outsidecall %}
+                [{{ day.0 }}, {{ day.1 }}],
+                {% endfor %}
+            ],
+            label: "outsidecall", 
+            lines: { show: true },
+            points: { show: true }
+        },
+        {   data: 
+            [
+                {% for day in user.1.answeringservice %}
+                [{{ day.0 }}, {{ day.1 }}],
+                {% endfor %}
+            ],
+            label: "answering service", 
+            lines: { show: true },
+            points: { show: true }
+        },
+        {   data: 
+            [
+                {% for day in user.1.voicemail %}
+                [{{ day.0 }}, {{ day.1 }}],
+                {% endfor %}
+            ],
+            label: "Checking Voicemail", 
+            lines: { show: true },
+            points: { show: true }
+        },
+        {   data: 
+            [
+                {% for day in user.1.callback %}
+                [{{ day.0 }}, {{ day.1 }}],
+                {% endfor %}
+            ],
+            label: "Callbacks", 
+            lines: { show: true },
+            points: { show: true }
+        },
+    ],
+
+    { xaxis: { mode: "time", timeformat: "%y-%m-%d" },
+      yaxis: { tickDecimals: 0 }
+    });
+    {% endfor %}
+
+</script>
+
+{% endblock %}
+

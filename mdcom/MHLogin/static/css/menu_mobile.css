@@ -1,0 +1,10 @@
+/* menu */
+#menu{ margin:0px; padding:0px; list-style:none; color:#fff; line-height:35px; display:inline-block; float:left; font-size:14px;}
+#menu a { color:#fff; text-decoration:none; }
+#menu > li {background:#172322 none repeat scroll 0 0; cursor:pointer; float:left; position:relative;padding:0px 15px;}
+#menu > li a:hover {color:#B0D730;}
+.menu-left-img { background: transparent url('../img/menu_left1.png') no-repeat center center; width:18px; height:35px;float:left; display:inline-block;}
+.menu-right-img { background: transparent url('../img/menu_right.png') no-repeat center center; width:18px; height:35px;float:left;display:inline-block;}
+
+#toggle_mobile a {color:darkgreen;margin-left:10px;position:relative;top:-25px;left:350px;}
+#toggle_mobile a:visited {color:darkgreen;}

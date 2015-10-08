@@ -1,0 +1,29 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}{% trans "Key Generation Complete" %}{% endblock %}
+
+{% block content %}
+<div id="dc_nav">
+<a href="/dcAdmin/">DCAdmin</a>
+>
+<a href="/dcAdmin/QATools/ReGenerateKey/">Re-Generate Key</a>
+</div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h1>{% trans "Generate key successfully." %}</h1>
+
+{% if handled_users %}
+	<h3>We have re-generated keys for the following {{count}} user(s):</h3>
+	{% for user in handled_users %}
+		<p style="padding:5px 30px;">{{user.first_name}} {{user.last_name}}, his registered name is {{user.username}}.</p>
+	{% endfor %}
+{% endif %}
+
+</div>
+
+{% endblock %}

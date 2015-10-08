@@ -1,0 +1,195 @@
+{% load i18n %}
+
+{% include "MHLOrganization/MemberOrg/member_org_js.html" %}
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+
+<script>
+	function memberOrgDel(org_rs_id){
+		showSimpleDialog({
+			title: '{% trans "Remove Organization" %}',
+			content: '{% trans "Are you sure you wish to remove this organization?" %}',
+			dc_buttons: {
+				'{% trans "Remove" %}': {
+					'click': function() {
+						$( this ).dialog( "close" );
+						$.comAjax({
+							url: "/Organization/MemberOrg/Remove/",
+							type:'POST',
+							data: {org_rs_id: org_rs_id},
+							success:function(data, status){
+								getAndShowMemberOrg();
+							}
+						});
+					},
+					'text': '{% trans "Remove" %}',
+					'class': 'positive-btn'
+				},
+				'{% trans "Cancel" %}': function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	};
+
+	$(function(){
+		getAndShowMemberOrg();
+		$('#search_input').keypress(function(event){
+			if(event.which==13){
+				getAndShowMemberOrg();
+			}
+		}).Watermark('{% trans "Organization name here" %}');
+		$("#search_button").click(function(){
+			getAndShowMemberOrg();
+		});
+		getAndShowMemberOrgInvite();
+	});
+
+	function getAndShowMemberOrg(index, count) {
+		if (!index) {
+			index = 0;
+		}
+		if (!count) {
+			count = 8;
+		}
+		var search_input = $.trim($("#search_input").val())
+		if(search_input == '{% trans "Organization name here" %}'){
+			search_input = '';
+		}
+
+		$.comAjax({
+			url: "/Organization/MemberOrg/ShowMemberOrg/",
+			type:'POST',
+			data: {search_input: search_input, index:index, count: count},
+			success:function(data, status){
+				$("#member_org_list_area").html(data);
+			}
+		});
+	}
+
+	function getAndShowMemberOrgInvite(index, count) {
+		if (!index) {
+			index = 0;
+		}
+		if (!count) {
+			count = 8;
+		}
+		$.comAjax({
+			url: "/Organization/MemberOrg/ShowInvitation/",
+			type:'POST',
+			data: {index:index, count: count},
+			success:function(data, status){
+				$("#member_org_invitation_area").html(data);
+			}
+		});
+	}
+
+	function resendOrgInvite(pending_id, org_name){
+		showSimpleDialog({
+			title: '{% trans "Resend" %}',
+			content: '{% trans "Are you sure you would like to resend the invitation to" %} '+org_name+' ?',
+			dc_buttons: {
+				'{% trans "Yes" %}': {
+					'click': function() {
+						$( this ).dialog( "close" );
+						doResendOrgInvite(pending_id);
+					},
+					'text': '{% trans "Yes" %}',
+					'class': 'positive-btn'
+				},
+				'{% trans "No" %}': function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	}
+
+	function doResendOrgInvite(pending_id){
+		$.comAjax({
+			url: "/Organization/MemberOrg/ResendInvitation/"+pending_id+"/",
+			type:'GET',
+			success:function(data, status){
+			}
+		});
+	}
+
+	function cancelOrgInvite(pending_id, org_name){
+		showSimpleDialog({
+			title: '{% trans "Cancel" %}',
+			content: '{% trans "Are you sure you would like to withdraw the invitation to" %} '+org_name+' ?',
+			dc_buttons: {
+				'{% trans "Withdraw" %}': {
+					'click': function() {
+						$( this ).dialog( "close" );
+						doCancelOrgInvite(pending_id);
+					},
+					'text': '{% trans "Withdraw" %}',
+					'class': 'positive-btn'
+				},
+				'{% trans "Cancel" %}': function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	}
+
+	function doCancelOrgInvite(pending_id){
+		$.comAjax({
+			url: "/Organization/MemberOrg/CancelInvitation/"+pending_id+"/",
+			type:'GET',
+			success:function(data, status){
+				$("#member_org_invitation_area").html(data);
+			}
+		});
+	}
+</script>
+
+<div class="org-tab-content">
+	<div id="member_org_view">
+		<div class="content_top">
+
+			<div class="content_top_sub">
+				<div class="title">
+					<div class="text">{% trans "Member Organizations" %}</div>
+				</div>
+				<div id="hrDiv"></div>
+				<div class="content">
+					<table class="search-options">
+						<tbody>
+							<tr>
+								<td width="25%"><input type="text" id="search_input" class="search_input"></td>
+								<td width="57%"><div class="search-button" id="search_button"></div></td>
+								<td>
+									&nbsp;
+								</td>
+								<td>
+									<div id="inviteStep1" class="invite_btn">
+										<input type="button" value='{% trans "Invite" %}' class="org_inf_btn">
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div id="member_org_list_area">
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-bottom">
+			<div class="content_bottom_sub">
+				<div class="title">
+					<div class="text">{% trans "Organization Invitations" %}</div>
+				</div>
+				<div id="hrDiv"></div>
+				<div class="content">
+					<div id="member_org_invitation_area">
+	
+					</div>
+ 				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+</div>
+

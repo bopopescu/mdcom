@@ -1,0 +1,80 @@
+{% load i18n %}
+
+<div class="search-result">
+	<table class="org_table" width="100%" cellspacing="0" cellpadding="0">
+	{% if member_orgs %}
+		<tr class="title">
+			<th>{% trans "Name"%}</th>
+			<th>{% trans "Logo"%}</th>
+			<th>{% trans "Provider Count"%}</th>
+			<th></th>
+		</tr>
+		{% for mo in member_orgs %}
+		<tr 
+		{% if forloop.counter|divisibleby:2 %}class="even"{% endif %}
+		>
+			<td>{{ mo.to_name }}</td>
+			<td><img src="{{mo.to_logo}}" alt="" style="max-width:100px; max-height:30px; margin-top: 4px;"></td>
+			<td>{{ mo.provider_count }}</td>
+			<td><div class="delete" onclick="memberOrgDel('{{ mo.id }}');">&nbsp;</div></td>
+		</tr>
+		{% endfor %}
+	{% else %}
+	<tr>
+		<td><h3>{% trans "Currently, no member organizations." %}</h3></td>
+	</tr>
+	{% endif %}
+	</table>
+</div>
+{% if member_orgs %}
+<div id="memberOrgListPagation" class="pagation_panel pagation_panel2">
+	<table>
+		<tr>
+			<td><div class="pagniation"></div></td>
+			<!--
+			<td>
+				<div class="selectPagePer">
+					<select>
+						<option value="10" selected="selected">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="25">25</option>
+						<option value="30">30</option>
+						<option value="50">50</option>
+					</select>
+					<span>{% trans "per page" %}</span>
+				</div>
+			</td>-->
+		</tr>
+	</table>
+</div>
+{% endif %}
+
+<script>
+	var memberOrgPagationCallback = function(index){
+		getAndShowMemberOrg(index);
+	};
+
+	function showMemberOrgPagination(){
+		var index = {{index}};
+		var count = {{count}};
+		var msgsCount = {{member_org_count}};
+		$('#memberOrgListPagation .pagniation').pagination(msgsCount ,{
+				callback:memberOrgPagationCallback,
+				current_page: index,
+				items_per_page: count,
+				num_edge_entries:1,
+				num_edge_entries: 3,
+				num_display_entries: 3,
+				prev_text:"",
+				next_text:"",
+				href_none:true
+			}
+		);
+	}
+
+	$(function(){
+		showMemberOrgPagination();
+	});
+
+</script>

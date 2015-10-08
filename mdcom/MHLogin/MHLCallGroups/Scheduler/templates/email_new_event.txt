@@ -1,0 +1,7 @@
+{% load i18n %}
+{% blocktrans %}
+Server Address: {{server_addr}}
+
+New event {{event.id}} from callgroup {{event.callGroup.id}} ({{event.callGroup.decscription}}).
+{% endblocktrans %}
+{% include "MHLCallGroups/Scheduler/email_event_debug_dump.txt" %}

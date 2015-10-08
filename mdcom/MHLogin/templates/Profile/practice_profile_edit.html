@@ -1,0 +1,49 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="practiceEdit" class="ui-corner-all">
+    <form action="." method="POST" class='profileEditForm' enctype="multipart/form-data">{% csrf_token %}
+        {{form.non_field_errors|linebreaksbr}}
+        {% if form.non_field_warnings %}
+            <ul class="errorlist"><li>
+                {{form.non_field_warnings|linebreaksbr}}
+            </li></ul>
+        {% endif %}        
+        <table class='tableProfile' cellspacing='0' cellpadding='0' width='70%'>
+            {% for field in form %}
+            {% if field.label != "Use zip" %}
+            <tr>
+                <th align='left'>
+                    {{field.label}}:
+                </th>
+                <td align='left'>
+                    {{field}}
+                    {% if field.name in "['practice_name', 'time_zone', 'practice_zip', 'practice_address1', 'practice_city', 'practice_state']" %}
+                        <span class="redstar">*</span>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <span>{{field.help_text}}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if field.errors %}
+                        {{field.errors}}
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% if form.show_use_zip %}
+            <tr>
+                <th align='left'>{{form.use_zip.label}}</th>
+                <td>{{form.use_zip}}</td>
+            </tr>
+        {% endif %}
+        </table>
+        <input class="profileFormSubmit" type="submit" value='{% trans "Submit" %}' />
+    </form>
+</div>
+{% endblock %}

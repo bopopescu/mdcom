@@ -1,0 +1,23 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "DoctorCom Learn More" %}{% endblock %}
+
+{% block customCSS %}
+.icon_text {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+{% endblock %}
+
+{% block content %}
+
+<p class="icon_text"> {% trans "DoctorCom" %}&trade {% trans "allows you to communicate with colleagues and other healthcare professionals" %}</p><br/>
+<ul> 
+<li class="icon_text">{% trans "Use SMS, paging or "click to call" to call one or more colleagues" %}</li>
+<li class="icon_text">{% trans "Be available while protecting your personal contact information" %}</li> 
+<li class="icon_text">{% trans "Patients can use DoctorCom to contact you" %}</li>
+</ul> 
+<br/><p class="icon_text"> <a href="/contact/">{% trans "Create an account" %}</a> {% trans "and begin taking advantage of the many features today!" %}</p>
+
+{% endblock %}

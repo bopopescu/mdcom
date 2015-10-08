@@ -1,0 +1,62 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<div class='signup'>
+	<div class='head'>
+		{% trans "Activate Account" %}<span>
+		{% if getNumber %}
+		{% trans 'Step 1 of 2' %}
+		{% else %}
+		{% trans 'Step 1 of 1' %}
+		{% endif %}</span>
+	</div>
+	<div class='content'>
+		<form action="." method="post" id='activeCodeForm'>{% csrf_token %}
+			<li>
+				{% if err%}
+				{{err}}
+				{% endif %}
+			</li>
+			<li>
+				<label>{% trans "Email" %}:</label> 
+				{{active_form.fields.email.initial}}
+			</li>
+			<li>
+				<label>{% trans "Activation Code" %}:</label> 
+				{{active_form.fields.activeCode.initial}}
+			</li>
+			{{ active_form.as_ul }}
+			<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+				{{ previous_fields|safe }}
+				{% include 'termsText.html' %}
+			<div class="submit">
+				{% if getNumber %}
+				<input type="submit" class='submit' value='{% trans "Next" %}' >
+				{% else %}
+				<input type="submit" class='submit' value='{% trans "Submit" %}' >
+				{% endif %}
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type='text/javascript'>
+$(function(){
+	$('#id_password1,#id_password2').after('<span class="redstar">*</span>');
+	$('#activeCodeForm').validate({
+		rules:{
+			password1:{ required:true},
+			password2:{ equalTo:'#id_password1'}
+		},
+		submitHandler:function(form){
+			if($('#acceptPolicy').attr('checked')){
+				form.submit();
+			}else{
+				alert('{% trans "You must agree to accept DoctorCom Terms of Service and Privacy Policy." %}');
+			}
+		}
+	});
+});
+</script>
+{% endblock content %}

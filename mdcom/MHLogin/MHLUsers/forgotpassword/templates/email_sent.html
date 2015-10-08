@@ -1,0 +1,20 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Password recovery sent" %}{% endblock %}
+
+{% block content %}
+<p>
+<div class="resultmsg">    
+    {% blocktrans %} 
+        An email was sent to the address we have on record for this account.  Please
+        click the link in the email in a timely manner to set your new password.
+        <br/><br/>
+        Sincerely,
+        <br/>
+        DoctorCom Staff
+        <br/><br/>
+    {% endblocktrans %}
+</div>
+</p>
+{% endblock %}

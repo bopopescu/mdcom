@@ -1,0 +1,80 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block content %}
+
+
+<table border='0' width="800">
+<tr><th>Practice: </th><td>{{customer}}</td></tr>
+<tr><th>Internal Account Number: </th><td>{{account.id}}</td></tr>
+<tr><th>Account Number: </th><td>{{account.account_no}}</td></tr>
+<tr><th>Responsible Person: </th><td>{{owner}}</td></tr>
+<tr><th>Account Status: </th><td>{{account.get_status_display}}</td></tr>
+</table>
+
+<table border='0' width="800">
+<tr><td><h2>Subscriptions</h2></td></tr>
+</table>
+
+<table border='1' width="800">
+
+<tr>
+ <th>Product: </th>
+ <th>Price: </th>
+ <th>Active: </th>
+ <th>Start Date: </th>
+ <th>Practice Location: </th>
+</tr>
+
+  {% for subscription in subscriptions %}
+  <tr>
+       <td>{{subscription.product }}</td>
+       <td>${{subscription.price }}</td>
+       <td>{{subscription.is_active }}</td>
+       <td>{{subscription.start_date }}</td>
+       <td>{{subscription.practice_location }}</td>
+      </tr>
+
+{% endfor %}
+</table>
+
+<table border='0' width="800">
+<tr><td><h2>Transaction List</h2></td>
+</tr>
+
+</table>
+
+<table border='1' width="800">
+
+<tr>
+ <th>Internal Tx #: </th>
+ <th>Type: </th>
+ <th>Memo: </th>
+ <th>Amount: </th>
+ <th>Period: </th>
+ <th>Created On : </th>
+</tr>
+
+    {% for transaction in transactions %}
+    {% if transaction.tx_type == '0' %} 
+      <tr style="background-color:grey">
+     {% else %}
+     <tr>
+     {% endif %}
+       <td>{{transaction.id }}</td>
+       <td>{{transaction.get_tx_type_display }}</td>
+       <td>{{transaction.memo }}</td>
+       <td>${{transaction.amount }}</td>
+       <td>{{transaction.period_start }} - {{transaction.period_end }}</td>
+       <td>{{ transaction.created_on }}</td>
+      </tr>
+
+{% endfor %}
+</table>
+
+<table border='0' width="800">
+<tr><td><a href="/billing/billing_menu/">Back to Customer Account Management Menu<a></td></tr>
+</table>
+
+
+{% endblock %}
+

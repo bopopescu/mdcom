@@ -1,0 +1,172 @@
+{% load i18n %}
+<html>
+<head>
+<title>
+    {% trans "DoctorCom Administration" %}: {% block title %}{% endblock %}
+</title>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.jstree.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.watermark.js"></script>
+<script type="text/javascript">
+var $JQ191 = $.noConflict(true);
+var ROOT_NODE = "";
+var SHOW_PARENT = "";
+var IS_DBLCLICK = false;
+var DEFAULT_SEARCH_DATA = '{% trans "Input Organization Name" %}';
+var SEARCH_DATA = '';
+$JQ191(function () {
+    $JQ191("#treeSearchText").Watermark(DEFAULT_SEARCH_DATA);
+    $JQ191("#org_tree").jstree({
+        "themes":{"theme":"default", "dots" : false, "icons" : false },
+        "json_data":{
+            "ajax": {
+                "async": true,
+                "data":function (n) {
+                    return { search_data: SEARCH_DATA,
+                            root_node: ROOT_NODE,
+                            show_parent: SHOW_PARENT};
+                },
+                "url": "/Organization/TreeData/",
+                "type": "POST",
+                timeout:30000,
+                beforeSend : function() {
+                    waitId = $.ui.wait.start(MESSAGE.JQUERY_UI_COMAJAX_MSG_LOAD);
+                },
+                complete : function() {
+                    $.ui.wait.stop(waitId);
+                },
+                success: function(data){
+                    if (data[0] == undefined){
+                        alert('Sorry, no organization you can manage, it will go to home page.');
+                        window.location = '/';
+                    }
+                },
+                error: function(data, error, errorThrown){
+                    if(error==="timeout") {
+                        alert(MESSAGE.JQUERY_UI_COMAJAX_TIMEOUT);
+                        return;
+                    }
+                    alert('Server error, please refresh the page.');
+                }
+                
+            }
+        },
+        "ui" : {
+            "select_limit" : 1,
+            "selected_parent_close" : "select_parent"
+        },
+        "search" : {
+            "show_only_matches" : true
+        },
+        "plugins" : [ "themes", "json_data", "ui", "sort", "types", "search", "crrm", "dnd"]
+    })
+    .bind("loaded.jstree", function (event, data) {
+        if (CURRENTORGID == undefined || !CURRENTORGID){
+            CURRENTORGID = data.inst.select_node('ul > li:first');
+        }
+        OrgTreeResetStatus();
+    })
+    .bind("refresh.jstree", function (event, data) {
+        if (CURRENTORGID == undefined || !CURRENTORGID){
+            CURRENTORGID = data.inst.select_node('ul > li:first');
+        }
+        OrgTreeResetStatus();
+
+    })
+    .bind("select_node.jstree", function (event, data) {
+        if (!IS_DBLCLICK){
+            setTimeout(show_org, 500);
+        }
+        data_rlbk = data.rlbk;
+
+        SEARCH_DATA = $JQ191.trim($JQ191('#treeSearchText').val());
+        if(SEARCH_DATA != DEFAULT_SEARCH_DATA && SEARCH_DATA != ''){
+            $JQ191("#org_tree").jstree("search", SEARCH_DATA);
+        }
+    })
+    .bind("dblclick.jstree", function (event, data) {
+        IS_DBLCLICK = true;
+        SHOWORGVIEW = false;
+        CURRENTORGID = ROOT_NODE = $JQ191('#org_tree').jstree('get_selected').attr('id');
+        $JQ191("#org_tree").jstree("refresh");
+    })
+    .bind("move_node.jstree", function (event, data) {
+        var drag_id = data.rslt.o.attr("id");
+        var drop_id = data.rslt.np.attr("id");
+        var op_id = data.rslt.op.attr("id");
+        if (drag_id != op_id){
+            $.comAjax({
+                url: "/Organization/DragMove/",
+                type: "POST",
+                data: {'org_id':drag_id, 'org_parent_id':drop_id},
+                success:function(data, status){
+                    CURRENTORGID = drag_id;
+                    $JQ191("#org_tree").jstree("refresh");
+                    if (data.status=='err'){
+                        alert(data.err_msg);
+                    }
+                }
+            });
+        }
+        $JQ191("#org_tree").jstree("deselect_all");
+    })
+
+    $JQ191('#treeSearchText').keyup(function(){
+        var searchText =  $JQ191.trim($JQ191('#treeSearchText').val());
+        if (searchText.length > 2 || searchText.length==0){
+            $JQ191("#org_tree").jstree("search",searchText);
+        }
+    });
+
+    $JQ191('#org_tree_back').click(function(){
+        CURRENTORGID = $JQ191('#org_tree').jstree('get_selected').attr('id');
+        ROOT_NODE = '';
+        SHOW_PARENT = true;
+        $JQ191('#treeSearchText').val(DEFAULT_SEARCH_DATA);
+        $JQ191("#org_tree").jstree("refresh");
+    });
+});
+
+var show_org= function()
+{
+    if (SHOWORGVIEW){
+        OrgView();
+    }
+    SHOWORGVIEW = true;
+};
+
+var RefreshTree = function(){
+    $JQ191("#org_tree").jstree("deselect_all");
+    $JQ191("#org_tree").jstree("refresh");
+};
+
+var GetSelectOrgID = function(){
+    return $JQ191("#org_tree").jstree('get_selected').attr('id');
+};
+
+var OrgTreeResetStatus = function(){
+    $JQ191("#org_tree").jstree("select_node", $("#"+CURRENTORGID));
+    $JQ191("#org_tree").jstree('open_all');
+    ROOT_NODE = "";
+    SHOW_PARENT = "";
+    IS_DBLCLICK = false;
+}
+</script>
+</head>
+<body>
+
+    <div id="treeSearchDiv">
+        <div id="treeSearchIcon"></div>
+        <input id="treeSearchText" type="text" value=''/>
+    </div>
+    <div id="org_tree_title" class="org_tree_title">
+        <div id="org_tree_titile_left" class="org_tree_titile_left">
+            {% trans "Organization List" %}
+            <div id = "org_tree_back" title="{% trans "Back to top"%}" ></div>
+        </div>
+        <div id="org_tree_titile_right" class="org_tree_titile_right"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="org_tree" class="org_tree_content"></div>
+</body>
+</html>

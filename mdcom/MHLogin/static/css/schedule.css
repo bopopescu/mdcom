@@ -1,0 +1,306 @@
+h3{ padding-left:5px;}
+.highLightBorder{ border:solid 1px #000;}
+.schedule_event{ position: absolute;font-size: 11px;text-align: center;}
+.schedule_event.schedule_event_medical {width:88px;}
+.schedule_event.schedule_event_administrative{ border-color: #005500;}
+.slot_border{ border:1px solid #000;}
+#calendar_leftnav {vertical-align: top;font-size: 13px;}
+#calendar_display{position: relative;width:752px; height:645px;overflow:auto;}
+#calendar_display .odd{ background:#F0F2FF; border:#CFD2F5;}
+#calendar_clickableDiv {position: absolute;top: 0px;left: 0px;width:605px;height:1439px;border: none;}
+.calendar_display_header{ width:752px;height:32px; background:url(../img/calendar_header.png) no-repeat; position:relative;}
+.calendar_display_header div{ font-weight:bold; line-height:30px;}
+.calendar_display_header_text {	position: absolute;top: 0px;height: 42px; border-left: 1px #ffffff solid;color: #ffffff; text-align:center;}
+#calendar_display .calendar_time{ width:99px; height:37px; height:39px\9; width:100px\9; position:absolute;left:0px; border:solid 1px #CFD2F5; color:#6A6B97; font-weight:bold; z-indxe:2;}
+#calendar_display .calendar_time .text{ text-align:center; padding-top:8px;}
+#calendar_display .no_bottom_border {border-bottom: none;}
+#calendar_display .calendar_slot {position: absolute;width:90px; width:91px\9; height:19px; height:16px\9; border-style:solid; border-color:#D1D0FC; border-width:0 1px 1px 0;}
+#calendar_display .no_bottom_border {border-bottom: none;}
+#calendar_save_warning{ width:780px; height:43px;}
+#calendar_save_warning .left{ width:29px; height:43px; background:url(../img/info-left.png) no-repeat; float:left;}
+#calendar_save_warning .mid{ width:707px; width:727px\9; height:43px; background:url(../img/info-mid.png) repeat-x; float:left; padding:0 10px;}
+#calendar_save_warning .right{ width:24px; height:43px; background:url(../img/info-right.png) no-repeat; float:left; cursor:pointer;}
+/* Overlays */
+.calendarOverlay .close {background-image:url(../img/overlay/close.png);position:absolute;right:-15px;top:-15px;cursor:pointer;height:35px;width:35px;}
+.scheduleEvent_undoDiv{ width:47px; height:22px; background:url(../img/undoButton.png) no-repeat; position:absolute; bottom: 0px; display:none;}
+.overlay_modal {display:none;position: absolute; z-index:10000; border:1px solid #666; background-color:#fff; width:500px;}
+img.close {position: absolute;top: -18px;right: -18px; cursor:pointer;}
+.overlay_modal table {font-size: 13px;margin:10px 50px;}
+.overlay_modal tr.odd {background-color: white;}
+.overlay_modal td.label {text-align: right;font-weight: bold;}
+table.calendar_small {font-size: 10px;}
+table.calendar_small td {text-align: center;}
+table.calendar_small tr.monthname {font-size: 12px;background-color: #5486a7;color: white;}
+.odd {background-color: #dbedfa;}
+.schedule_event{cursor:pointer;}
+.schedule_event .content{ width:100%; height:100%; overflow:hidden;}
+
+#dragged_new_event_config .help_icon2,#dragged_new_event_config .help_icon{ width:17px; height:17px; background:url(../img/help_icon.png) no-repeat;}
+#dragged_new_event_config .title{ width:181px; width:183px\9; height:28px; background:#E4E4E4; padding:0; border-radius:0; border-style:solid; border-color:#ACCCE3; border-width:0 1px 0 1px; margin:0;}
+#calendar_user_list_container input,#calendar_user_list_container span{ font-family:Arial;}
+#calendar_user_list_container .help td{ font-size: 10px; background:#FFF8C7; color:#6B6871; text-decoration:none;}
+#dragged_new_event_config{ height:106px;}
+#dragged_new_event_config .title .ui-icon{ background:none;}
+#scheduleOverlay_deleteEvent h1,#scheduleOverlay_editEvent h1,#downloadPDFDialog h1{ text-align:left; padding-top:18px; padding-left:30px;}
+#scheduleOverlay_deleteEvent h3{ text-align:center; padding:0; margin:0;}
+#scheduleOverlay_deleteEvent .bottom{ background:none; border:0; width:220px; padding:0; margin:0 auto;}
+#scheduleOverlay_deleteEvent .bottom .cancel{cursor:pointer; width:81px; height:34px; background:url(../img/newButton.png) no-repeat; float:right;}
+#scheduleOverlay_deleteEvent .bottom .gradual{ background:url(../img/newButtonR.png) no-repeat;}
+#scheduleOverlay_deleteEvent .bottom .cancel a{ font-size:12px; color:#1c2726; text-decoration:none; line-height:30px;}
+#scheduleOverlay_deleteEvent .bottom .gradual a{ color:#fff; font-weight:bold;}
+#scheduleOverlay_deleteEvent .bottom2{ width:170px; margin-top:10px;}
+#calendar .top{ height:28px; width:184px; background:url(../img/calendarTop.png) no-repeat; border:0; padding:0;}
+#calendar .top .item{ float:left;}
+#calendar .top .prev{ width:27px; height:27px; background:url(../img/calendar_prev.png) no-repeat; cursor:pointer; margin-left:5px;}
+#calendar .top .year{ font-size:14px; color:#fff; padding:0 40px; font-weight:bold; padding-top:4px;}
+#calendar .top .next{ width:27px; height:27px; background:url(../img/calendar_next.png) no-repeat; cursor:pointer;}
+#calendar .bottom{ margin:0; padding:0; border:1px solid #A6C9E2; width:181px;}
+#calendar .bottom .content{ margin:0; padding:0; width:100%; height:130px; text-align:center;}
+#calendar .bottom .content td,#calendar .bottom .content tr{ background:none; color:#237AC1;}
+#calendar .bottom .content td:hover{ background:#FFC529; color:#143888; cursor:pointer;}
+#calendar .bottom .content .currentMonth{ background:#FFC529;}
+#content_div{ width:950px; min-height:740px;background-color:white;margin:10px 0;border:1px solid #d3d3d3;text-align:left;}
+#content_div .ui-datepicker{ margin:0; padding:0;}
+#content_div .ui-widget-header{ background:#6FB9D6; width:181px; width:185px\9;}
+#content_div .content-left{ width:150px; float:left; padding-top:10px; margin-left:5px; padding-bottom:10px;}
+#content_div .content-left .twoButtons{ width:146px; text-align:center; background:#f5f5f5; border:1px solid #bbb; border-radius:5px;}
+#content_div .content-left .twoButtons .refresh{ width:17px; height:17px; background:url(../img/refresh.png) no-repeat;}
+#content_div .content-left .twoButtons .pdf{ width:17px; height:17px; background:url(../img/pdf.png) no-repeat;}
+#content_div .content-left .twoButtons .text{ color:#14398A; text-decoration:underline; font-size:12px; cursor:pointer; word-spacing:3px;}
+#content_div .content-left .newOnCall{ width:145px; text-align:left; border:1px solid #bfbfbf; border-radius:2px; margin-top:10px; color:#000;}
+#content_div .content-left .newOnCall .oncallTitle{ height:25px; background:url(../img/new-call-on.png) 0 -8px; color:#fff; font-weight:bold; position:relative;}
+#content_div .content-left .newOnCall .oncallTitle h3{ float:left; padding:0; margin:0; margin-left:5px; line-height:25px;}
+#content_div .content-left .newOnCall .oncallTitle .help_icon{ width:16px; height:16px; background:url(../img/help_icon2.png) no-repeat; float:right; margin-top:5px; margin-right:5px; cursor:pointer;}
+#note_help{ width:320px; position:absolute; left:145px; top:-42px; color:#000; z-index:10000;}
+#note_help .left{ float:left; background:url(../img/note_left.png) no-repeat; width:31px; height:118px;}
+#note_help .middle{ float:left; background:url(../img/note_middle.png) repeat-x; width:270px; height:118px;}
+#note_help .middle .title1{ line-height:18px; margin-top:9px;}
+#note_help .middle .title2{ line-height:18px; margin-top:8px;}
+#note_help .middle p{ font-weight:normal; font-size:13px; line-height:15px;}
+#note_help .right{ float:left; background:url(../img/note_right.png) no-repeat; width:14px; height:118px;}
+#content_div .content-left .newOnCall h3.title{ height:26px; background:url(../img/title.png) repeat-x; margin:0; padding:0; color:#172322; padding-left:5px; line-height:26px;}
+#content_div .content-left .newOnCall h3 .ui-icon{ left:0px;}
+#content_div .content-left .newOnCall h3 .ui-icon-triangle-1-s{ background:url(../img/arrayBottom.png) no-repeat; background-position:4px 4px;}
+#content_div .content-left .newOnCall h3 .ui-icon-triangle-1-e{ background:url(../img/arrayTop.png) no-repeat; background-position:4px 4px;}
+#content_div .content-left .newOnCall .ui-corner-all,
+#content_div .content-left .newOnCall .ui-state-active{ border:0; border-radius:0;}
+#content_div .content-left .newOnCall .step{ font-family:Arial; padding-left:5px; font-size:12px; color:#515151;}
+#content_div .content-left .newOnCall .step-content{ font-family:Arial; padding-left:5px; font-size:11px; color:#515151;}
+#content_div .content-left .newOnCall .manage{ width:60px; height:22px; background:#eee; color:#bfbfbf; border:#d9d9d9; margin:12px 5px; font-size:14px; text-align:center; border-radius:3px;}
+#content_div .content-right{ width:780px; float:right; padding-top:10px; padding-top:8px\9; padding-right:10px; margin-bottom:10px;}
+
+#calendar_user_list_container .ui-corner-top a{ color:#000;}
+#calendar_user_list_container .callOn{ width:183px; height:33px; background:url(../img/new-call-on.png) no-repeat; line-height:28px; color:#fff; font-weight:bold; padding-left:12px;}
+#calendar_user_list_container h3{ color:#fff; background:#49A3C8; padding:5px 10px; width:180px\9;}
+#calendar_user_list_container h3 table{ font-family:arial; position:absolute; left:-10px; width:190px; font-size:12px;}
+#calendar_user_list_container h3 a{ color:#000; text-decoration:none; padding-left:15px; font-weight:normal;}
+#calendar_user_list_container .help{ border-style:solid; border-color:#AFCFE8; border-width:0 1px 0 1px; width:183px\9;}
+#calendar_user_list_container .step{ background:#FFF8C7; color:#737079; font-weight:bold; padding-left:11px;}
+#calendar_user_list_container .content{ border-radius:0; width:183px\9; border-style:solid; border-color:#ACCCE3; border-width:0 1px 0 1px; padding:0; margin:0; top:0;}
+#calendar_user_list_container .content .durationContent{ height:50px;}
+#calendar_user_list_container .content .line{ line-height:25px; text-align:center;}
+#calendar_user_list_container .content .line span{ width:35px; display:inline-block;}
+#calendar_user_list_container .content td{ font-size:12px; font-family:arial;}
+#calendar_user_list_container .content input{ text-align:center; padding:0 2px; width:25px\9;}
+#calendar_user_list_container .content select{font-family:arial;}
+#calendar_user_list_container .available{ border-style:solid; border-color:#AFCFE8; border-width:0 1px 1px 1px;}
+#calendar_user_list_container .available .content{ width:181px; border:0;}
+#calendar_user_list_container .available .title{ width:181px\9; height:28px; background:#E4E4E4; line-height:28px; padding-left:9px;}
+#dragged_new_event_timesconfig_form{ margin:0px; padding:0px;}
+#dragged_new_event_timesconfig_form table{ margin:0 auto;}
+#dragged_new_event_end_hours,#dragged_new_event_end_minutes,#dragged_new_event_start_hours,#dragged_new_event_start_minutes{ width: 18px;}
+#dragged_new_event_durationconfig_form{ margin:0px; padding:0px;}
+#dragged_new_event_durationconfig_form table{ margin:0px auto;}
+#dragged_new_event_durationconfig_form input{ width:25px;}
+#help1_content{ position:absolute; width:300px; z-index:99; left:305px; left:300px\9; top:415px; top:430px\9;}
+#help1_content .left{ width:20px; height:86px; background:url(../img/help_content_left.png) no-repeat; float:left;}
+#help1_content .mid{ height:86px; background:url(../img/help_content_mid.png) repeat-x; float:left; width:200px;}
+#help1_content .mid span{ color:#706F6B;}
+#help1_content .right{ width:25px; height:86px; background:url(../img/help_content_right.png) no-repeat; float:left;}
+#help2_content{ position:absolute; width:300px; z-index:999; left:305px; left:300px\9; top:445px; top:460px\9;}
+#help2_content .left{ width:20px; height:86px; background:url(../img/help_content_left.png) no-repeat; float:left;}
+#help2_content .mid{ height:86px; background:url(../img/help_content_mid.png) repeat-x; float:left; width:220px;}
+#help2_content .mid span{ color:#736F6E;}
+#help2_content .right{ width:25px; height:86px; background:url(../img/help_content_right.png) no-repeat; float:left;}
+#help1_content .right .closeIcon{ width:16px; height:16px; background:url(../img/icon_close.png); margin-top:5px; cursor:pointer;}
+#help2_content .right .closeIcon:hover,#help1_content .right .closeIcon:hover{ background:url(../img/icon_close_hover2.png);}
+#help2_content .right .closeIcon{ width:16px; height:16px; background:url(../img/icon_close.png); margin-top:5px; cursor:pointer;}
+#calendar_header_weekday0{ left:100px; width:88px;}
+#calendar_header_weekday1{ left:190px; width:88px;}
+#calendar_header_weekday2{ left:280px; width:88px;}
+#calendar_header_weekday3{ left:370px; width:88px;}
+#calendar_header_weekday4{ left:460px; width:88px;}
+#calendar_header_weekday5{ left:550px; width:88px;}
+#calendar_header_weekday6{ left:640px; width:100px;}
+#editEvent .bottom{ border:none; background:none; padding:5px 0; height:35px; text-align:center; width:auto;}
+#editEvent .bottom table{ padding:0; margin:0 auto;}
+#editEvent .bottom .button{ width:auto; height:34px;}
+#editEvent .bottom .button .left{ width:12px; height:34px; background:url(../img/newButtonLeft.png) no-repeat; float:left;}
+#editEvent .bottom .button .mid{ height:34px; background:url(../img/newButtonMid.png) repeat-x; float:left;}
+#editEvent .bottom .button .right{ width:10px; height:34px; background:url(../img/newButtonRight.png) no-repeat; float:left;}
+#editEvent .bottom .button a{ color:#1c2726; line-height:30px; font-size:12px; text-decoration:none;}
+#editEvent .bottom .button .graduated_left{ background:url(../img/newButtonLeftR.png) no-repeat;}
+#editEvent .bottom .button .graduated_mid{ background:url(../img/newButtonMidR.png) repeat-x;}
+#editEvent .bottom .button .graduated_mid a{ color:#fff; font-weight:bold;}
+#editEvent .bottom .button .graduated_right{ background:url(../img/newButtonRightR.png) no-repeat;}
+
+/* calendar style */
+#calendar_nav{ width:183px; height:141px; margin:0 auto;}
+#calendar_nav td span{ cursor:pointer;}
+#calendar_nav td a{ padding-right:5px;}
+#calendar_nav th a{ padding-right:0;}
+#calendar_nav .datepicker{ width:100%;}
+#calendar_nav .datepickerContainer .close{ padding-right:7px; font-size:14px; font-weight:bold; cursor:pointer; color:#1E7ABB; text-decoration:underline;}
+#calendar_nav .datepickerContainer{ padding:0; width:100%; height:141px; background:none;}
+#calendar_nav .datepickerContainer table{ width:183px; margin:0 auto;}
+#calendar_nav .datepickerContainer table th{ background:none; text-align:center;}
+#calendar_nav .datepickerContainer table tr{ width:182px; height:32px; background:url(../img/titleBg.png) no-repeat;}
+#calendar_nav .datepickerContainer table .datepickerGoPrev a{ width:16px; height:16px; background:url(../img/titleBgRight.png) no-repeat; margin-left:5px; cursor:pointer;}
+#calendar_nav .datepickerContainer table .datepickerMonth span{ color:#fff; font-weight:bold; cursor:pointer;}
+#calendar_nav .datepickerContainer table .datepickerGoNext a{ width:16px; height:16px; background:url(../img/titleBgLeft.png) no-repeat; margin-right:5px; cursor:pointer;}
+#calendar_nav .datepickerContainer table .datepickerGoPrev,
+#calendar_nav .datepickerContainer table .datepickerGoNext,
+#calendar_nav .datepickerContainer table .datepickerMonth{ background:none;}
+#calendar_nav .datepickerContainer table .datepickerDoW{ background:none; height:16px; border-style:solid; border-color:#ACCCE3; border-width:0 1px 0 1px;}
+#calendar_nav .datepickerContainer table .datepickerDoW th span{ color:#1E7ABB;}
+#calendar_nav .datepickerContainer table .datepickerDoW th:first-child{ }
+#calendar_nav .datepickerContainer .datepickerDays{ border-style:solid; border-color:#ACCCE3; border-width:0 1px 1px 1px;}
+#calendar_nav .datepickerContainer .datepickerDays .datepickerWeek{ text-align:center;}
+#calendar_nav .datepickerContainer .datepickerDays tr{background:none;}
+#calendar_nav .datepickerContainer .datepickerDays td a:hover{ cursor:pointer;}
+#calendar_nav .datepickerContainer .datepickerDays .datepickerSelected{ background:#F7C62C;}
+#calendar_nav .datepickerContainer .datepickerDays .datepickerSelected span{ color:#000;}
+#calendar_nav .datepickerContainer .datepickerDays .datepickerNotInMonth span{ color:#ccc; }
+#calendar_nav .datepickerContainer .datepickerDays td span{ color:#1E7ABB;}
+#calendar_nav .datepickerContainer .datepickerViewYears,
+#calendar_nav .datepickerContainer .datepickerViewMonths, 
+#calendar_nav .datepickerContainer .datepickerViewDays{  border:1px solid #ACCCE3\9; width:182px; margin-left:1px}
+#calendar_nav .datepickerContainer .datepickerViewDays .datepickerDays tr{ height:16px;} 
+#calendar_nav .datepickerContainer .highLight{ background:#ccc;}
+#calendar_nav .datepickerContainer .highLight.datepickerNotInMonth span{ color:#fff;}
+#calendar_nav .datepickerContainer .datepickerSelected.datepickerNotInMonth span{ color:#1E7ABB;}
+#calendar_nav .datepickerContainer .datepickerViewMonths .datepickerMonths{ border-style:solid; border-color:#ACCCE3; border-width:0 1px 1px 1px;}
+#calendar_nav .datepickerContainer .datepickerViewMonths .datepickerMonths tr{ background:none;}
+#calendar_nav .datepickerContainer .datepickerViewMonths .datepickerMonths tr{ height:29px;}
+#calendar_nav .datepickerContainer .datepickerViewMonths .datepickerMonths tr a{ height:20px;}
+#calendar_nav .datepickerContainer .currentMonth span{ font-weight:bold;}
+#calendar_nav .datepickerContainer .datepickerViewMonths td span{ color:#1E7ABB;}
+#calendar_nav .datepickerContainer .datepickerViewMonths td span:hover{ color:red;}
+#calendar_nav .datepickerContainer .datepickerViewYears .datepickerYears{ border-style:solid; border-color:#ACCCE3; border-width:0 1px 1px 1px;}
+#calendar_nav .datepickerContainer .datepickerViewYears .datepickerYears tr{ background:none;}
+#calendar_nav .datepickerContainer .datepickerViewYears .datepickerYears tr{ height:29px;}
+#calendar_nav .datepickerContainer .datepickerViewYears .datepickerYears tr a{ height:20px;}
+#calendar_nav .datepickerContainer .datepickerViewYears .datepickerYears tr span{ color:#1E7ABB;}
+#calendar_nav .datepickerContainer .datepickerViewYears .datepickerYears tr span:hover{ color:red;}
+
+/* schedule tip */
+.eventTip{position:absolute; z-index:10000; left:0; top:0; width:150px;}
+.eventTip .left{ width:18px; height:52px; background:url(../img/scheduleTipLeft.png) no-repeat; float:left;}
+.eventTip .mid{ height:52px; background:url(../img/scheduleTipMid.png) repeat-x; float:left; text-align:left; padding:0 10px;}
+.eventTip .mid .mid-item{ line-height:15px;}
+.eventTip .right{ width:11px; height:52px; background:url(../img/scheduleTipRight.png) no-repeat; float:left;}
+
+.eventTip2{ position:absolute; z-index:10000; left:-120px; top:0; width:120px;}
+.eventTip2 .right{ width:11px; height:50px; background:url(../img/scheduleTipRight2.png) no-repeat; float:right;}
+.eventTip2 .mid{ height:50px; background:url(../img/scheduleTipMid2.png) repeat-x 0 1px; float:right; text-align:left;padding:0 10px;}
+.eventTip2 .mid .mid-item{ line-height:15px;}
+.eventTip2 .left{ width:17px; height:50px; background:url(../img/scheduleTipLeft2.png) no-repeat; float:right;}
+
+
+/* dowanloading */
+#downloadPDFDialog{ width:500px; height:220px;}
+#downloadPDFDialog h3{ text-align:left; font-size:18px; margin:0;}
+#downloadPDFDialog .container{ width:500px; height:200px; margin:0 auto; margin-top:20px;}
+#downloadPDFDialog .container .container-left{ width:230px; float:left; line-height:30px; margin-left:20px;}
+#downloadPDFDialog .container .container-left p{ text-align:justify; font-size:15px; font-weight:bold;}
+#downloadPDFDialog .container .container-right{ width:200px; float:right; margin-right:30px;}
+#downloadPDFDialog .bottom{ background:none; border:0;}
+#downloadPDFDialog .bottom .download{ font-size:16px; padding:0 20px;}
+#downloadPDFDialog .bottom .downloading{ font-size:16px; padding:0 20px; color:#ccc; cursor:default;}
+
+#calendar2{ width:200px; height:160px; border:1px solid #ccc;}
+#calendar2 .top{ padding:5px 0; height:18px; width:99%;}
+#calendar2 .top .item{ float:left;}
+#calendar2 .top .prev{ width:18px; height:18px; background:url(../img/icon_prev.gif) no-repeat; cursor:pointer;}
+#calendar2 .top .year{ width:160px; font-size:14px;}
+#calendar2 .top .next{ width:18px; height:18px; background:url(../img/icon_next.gif) no-repeat; cursor:pointer;}
+#calendar2 .bottom{ margin:0; padding:0;}
+#calendar2 .bottom .content{ margin:0; padding:0; width:100%; height:130px; text-align:center;}
+#calendar2 .bottom .content span{ text-decoration:underline;}
+#calendar2 .bottom .content td,#calendar2 .bottom .content tr{ background:none;}
+#calendar2 .bottom .content td:hover{ background:#ccc; color:#143888; cursor:pointer;}
+#calendar2 .bottom .content .currentMonth{ background:#ccc;}
+
+/* new schedule  */
+#calendar_available_users{ width:130px; border:0;}
+#calendar_available_users .item{ width:128px; height:21px;}
+#calendar_available_users .item2{ width:115px; height:21px;}
+#calendar_available_users .color{ width:135px; height:20px; float:left; margin:0 2px;}
+#calendar_available_users .color2{ width:125px; height:20px; float:left; margin:0 2px;}
+#calendar_available_users .icon_move{ width:13px; height:13px; background:url(../img/icon_move.png) no-repeat; float:right; margin-top:5px; margin-right:3px;}
+#calendar_available_users .icon_forbidden{ width:13px; height:13px; background:url(../img/icon_forbidden.png) no-repeat; float:right; margin-top:5px; margin-right:3px;}
+#calendar_available_users.usersNotOverflow{ width:140px; max-height:405px;}
+#calendar_available_users.usersOverflow{ width:145px; height:435px; overflow-x:hidden; overflow-y:scroll;}
+
+#calendar_available_users,#calendar_available_users.ui-state-hover{ background:none;}
+#calendar_available_users .calendar_user{line-height: 21px;padding: 3px 2px;z-index:99;color:#000; text-decoration:none; cursor:text;}
+#calendar_available_users .calendar_user span{ margin-left:5px;}
+table td:hover,#wrap table tr:hover{ background:none;}
+.fc-header tr:first-child:hover{ background:#F6F7FF;}
+
+#calendar{width: 780px;}
+#calendar tr{ background:none;}
+#calendar .fc-agenda-slots tr:hover{ background:none;}
+.twoButtons{ padding:5px 0;}
+.twoButtons td,#wrap .twoButtons tr{ background:none;}
+.twoButtons .pdf{ width:17px; height:17px; background:url(../img/pdf.png) no-repeat;}
+.twoButtons .text{ color:#14398A; text-decoration:underline; font-size:12px; cursor:pointer;}
+#calendar .fc-event-time,#calendar .fc-event-title{text-align:center;}
+#calendar .fc-event-time,#calendar .fc-event-title b:first-child{font-size:11px;}
+#calendar .fc-event-time,#calendar .fc-event-title b.line-through{ text-decoration:line-through}
+#calendar .fc-content{ min-height:640px;}
+#calendar .fc-event-select{border-width:1px;border-color:black!important;}
+#calendar .fc-view-month .fc-event-inner{line-height:13px;padding:0 0 0 2px;}
+
+.undo{background:url(../img/undo.png) no-repeat;background-position:center; }
+.redo{background:url(../img/redo.png) no-repeat;background-position:center; }
+.undo_gray{background:url(../img/undo_gray.png) no-repeat;background-position:center; }
+.redo_gray{background:url(../img/redo_gray.png) no-repeat;background-position:center; }
+
+#durationTime,#selectTime{ padding:4px 0 0 0; margin:0; border:0; font-family:Arial;}
+#durationTime table{ width:145px;}
+#durationTime table td,#selectTime table td{ font-size:12px; text-align:center;}
+#durationTime{ border-bottom:1px solid #c4c4c4; border-radius:0;}
+#selectTime input{ width:20px; text-align:center;}
+#selectTime input.hour24{ width:35px;}
+#selectTime select{ margin-left:3px; width:50px; text-align:center;}
+#selectTime p{ color:#3e3e3e; font-size:11px; line-height:15px; width:130px; margin:10px auto;}
+#selectTime td.title{ padding-left:5px;}
+#durationTime input{ width:20px; text-align:center;}
+#durationTime td{ text-align:center;}
+#accordionTime{ border-bottom:1px solid #bbb;}
+
+#scheduleOverlay_editEvent table{ margin:0 auto; padding-bottom:8px; font-size:13px;}
+#scheduleOverlay_editEvent table .label{ font-weight:bold;}
+#scheduleOverlay_editEvent table tr{ line-height:28px;}
+#scheduleOverlay_deleteEvent table{ margin:0 auto; padding-bottom:8px; font-size:13px;}
+#scheduleOverlay_deleteEvent table .label{ font-weight:bold;}
+#scheduleOverlay_deleteEvent table tr{ line-height:28px;}
+
+/*multi call group*/
+#addGroupMember.addmember{width:120px; height:34px; background:url(../img/buttonLong.png) no-repeat; margin:0 auto; line-height:29px; color:#fff; text-align:center; margin:8px auto; cursor:pointer;}
+#addGroupMember.addmember a{ font-size:12px; font-weight:bold; font-family:Verdana,​Arial,​sans-serif;}
+#addGroupMember.addmember a:hover{ color:#fff;}
+#findProvidersPage{ float:right; padding:10px 10px 0 0;}
+/* need delete pagination css in dashboard.css and add in reset.css */
+#findProvidersPage .pagination span{ margin:0 2px;}
+.pagination a{height:18px;min-width:16px;display:block;float:left;background: none repeat scroll 0 0 #EFF3F8;border: 1px solid #82AAC7;color: #036CB4;text-decoration: none;text-align:center; line-height:16px;margin:0 2px;}
+.pagination span{height:18px;min-width:16px;line-height:16px;display:block;float:left;margin:0 3px;text-align:center;}
+.pagination a,.pagniation a{ background:none;}
+.pagination .current{background: none repeat scroll 0 0 #EFF3F8;border: 1px solid #ccc;color: #ccc;text-decoration: none;text-align:center; height:18px;}
+.pagination .prevIcon{width:16px;height:18px; background:url(../img/bg_preAll.gif) no-repeat 4px 6px;}
+.pagination .nextIcon{width:16px;height:18px; background:url(../img/bg_nextAll.gif) no-repeat 4px 6px;}
+.pagination .nextIcon.current{ background:url(../img/bg_nextAll_d_disable.gif) no-repeat 4px 6px;}
+.pagination .prevIcon.current{ background:url(../img/bg_preAll_d_disable.gif) no-repeat 4px 6px;}
+#callgroup_selector {padding-top:10px; text-align:left;}
+#callgroup_select {width:630px;}

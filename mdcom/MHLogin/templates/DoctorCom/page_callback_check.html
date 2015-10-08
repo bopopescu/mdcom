@@ -1,0 +1,19 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<!--<div style="width:800px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">-->
+<div style="background-color:white;margin:20px 0;border:1px solid lightgray;padding:30px; text-align:left;" class="ui-corner-all pagecss">
+
+<h2>{% trans "You are about to page" %} {{paged.user.first_name}} {{paged.user.last_name}}.</h2>
+
+<p>{% trans "But first, please verify your callback number" %} (make changes as necessary):</p>
+<form action="{{form_action}}" method="POST">
+<p>{{callback_form.callbackNumber}} {{ callback_form.callbackNumber.errors }}</p>
+<p><input type="submit" value='{% trans "Page" %}' /></p>
+</form>
+</p>
+
+</div>
+{% endblock %}
+

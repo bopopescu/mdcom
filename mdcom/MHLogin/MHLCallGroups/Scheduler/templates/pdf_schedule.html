@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="{{STATIC_URL}}/css/pdf_schedule.css" rel="stylesheet" type="text/css" media="screen" />
+
+<title>{% trans "DoctorCom Calendar" %}</title>
+</head>
+
+<body>
+<table>
+    <tr class="title">
+        <td colspan="7" align="center" valign="top">
+            <p id="table_title_callgroup">{{site}}</p>
+            <p id="table_title_month">{{month}}</p>
+            {% if STATIC_ROOT %}
+                {% comment %} For PDF rendering pass abs path of image {% endcomment %}
+                <img src="file:///{{STATIC_ROOT}}/img/dc_logo_gray.png" class="logo"/>
+            {% else %}
+                <img src="{{STATIC_URL}}img/dc_logo_gray.png" class="logo"/>
+            {% endif %}
+        </td>
+    </tr>
+    <tr class="days">
+        {% for day in days %}
+            <td><p>{{day}}</p></td>
+        {% endfor %}
+    </tr>
+    {% for week in weeks %}
+        <tr class="week">
+        {% for day in week %}
+            <td valign="top">
+            <p class="day light">{{day.date}}</p>
+            {% for event in day.events %}
+                <p class="event {{event.color}}" style="width:{{event.width}}%; 
+    				    left:{{event.left}}%; top:{{event.top}}px">
+                    <span class="name text{{event.status}}">{{event.name}}</span>
+                    <span class="time">{{event.starttime}}-{{event.endtime}}</span>
+				</p>
+            {% endfor %}
+            </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

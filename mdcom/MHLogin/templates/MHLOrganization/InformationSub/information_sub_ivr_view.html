@@ -1,0 +1,44 @@
+{% load i18n %}
+{% include "MHLOrganization/InformationSub/org_sub_js.html" %}
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+
+<script>
+	$(function(){
+		if({{isClearData}}){
+			$('#id_number').val('');
+			$('#id_description').val('');
+		}
+		
+	});
+</script>
+<div class="org-tab-content">
+<div id="managerHours" class="ui-corner-all">
+  <div id="backButton">
+	<input id="ivrBack" type="button" value="Back">
+  </div>
+  <div>
+    <h3 id="title">{% trans "IVR access numbers" %}</h3>
+    <form id="del_form">
+      <table class='tableProfile' cellspacing='0' cellpadding='0' width="60%">
+		<tr>
+			<th align='left'>{% trans "delete" %}</th>
+			<th align='left'>{% trans "number" %}</th>
+			<th align='left'>{% trans "description" %}</th>
+			
+		</tr>
+			{% for number in access_numbers %}
+				<td align='left'><input type="checkbox" name="remove" value="{{ number.id }}"></td>
+				<td>{{number.number}}</td>
+				<td>{{number.description}}</td>
+			</tr>
+			{% endfor %}
+      </table>
+      <input id="ivrDelete" type="button" name="delnumber" value="{% trans "Delete Selected Numbers" %}">
+      <div class='ivrNumber'>
+      		{{addform.as_p}}
+      		<input id="ivrSave" type="button" name="newnumber" value="{% trans "Add New Number" %}">
+      </div>
+    </form>
+  </div>
+</div>
+</div>

@@ -1,0 +1,406 @@
+{# extends "base_short_new.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+
+{% endblock %}
+
+{% block customJS %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.uploaderProgress.css" />
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.uploadProgress.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/popupUserList.js"></script>
+{%include 'includes/jquery.validate.html'%}
+<script type="text/javascript">
+var ioerror = "{{ioerror}}";
+var autoSendMsg = false;
+var dialogWait = null;
+$(document).ready(function(){
+    {% if show_subscribe %}
+        nonSubscribersDialog();
+    {% endif %}
+
+    if (ioerror) {
+        alert('{% trans "Sorry, there was an error saving the file. Please upload file again." %}');
+    }
+    $("tr:odd").removeClass("odd");
+
+    $("#id_upload_area").multiUploadProgress({
+            "after_upload":"sendMsgAfterUpload",
+            "before_abort_upload":"setManualSendMsgAndCloseWin",
+            "max_upload_size":{{MAX_UPLOAD_SIZE}}
+        });
+
+    var msgNewFrmValidator = $("#msgNewFrm").validate({
+        rules: {
+            body: {
+                required:true,
+                maxlength: 10240
+            },
+            subject: {maxlength: 1024}
+        },
+        messages: {
+            body: {
+                required: '{% trans "Message text is required." %}',
+                maxlength: '{% trans "Message text maxlength is 10k." %}'
+            },
+            subject: '{% trans "Message text maxlength is 1k." %}'
+        },
+        meta: "validate",
+        onfocusout: false,
+        onkeyup: false,
+        onsubmit: false,
+        //submitHandler:function(form){
+        //    dialogWait = jWait({height:150,title:"Sending message",message:"Sending message..."});
+        //    setTimeout(function(){
+        //        form.submit();
+        //    },1000);
+        //},
+        invalidHandler:function(form, validator) {
+            return;
+        }
+    });
+
+    $("#msgNewFrm").bind('submit', function() {
+        var file_clone = $("#id_file").clone(true);
+        file_clone.val("");
+        $("#id_file").replaceWith(file_clone);
+    });
+
+    $("#id_subject").bind('keydown', function(event) {
+            if(event.keyCode==13||event.which==13){return false;}
+    });
+
+    var recipientValidator = function(){
+        var pac = $('#id_practice_recipients').val();
+        if(pac != ''){
+            return true;
+        }
+        
+        getUsrSpanVal();
+        var rec = $('#id_user_recipients').val();
+        if(rec != ''){
+            $('#recipToDivErr').css({'display':'none'});
+            return true;
+        } else {
+            $('#recipToDivErr').css({'display':'block'});
+            return false;
+        }
+    }
+
+    $("#id_send").click(function(){
+        var valid = msgNewFrmValidator.form();
+        valid = valid && recipientValidator();
+        if(valid){
+            var pac = $('#id_practice_recipients').val();
+            getUsrSpanVal();
+            var len_att = $("#id_upload_area .upload_container").children(".upload_panel").length+$("#id_upload_area #id_file_list_area").children(".upload_panel").length;
+            if(len_att>1){
+                $.ajax({
+                    url: '/Messages/AJAX/Edit/Check/',
+                    type: 'POST',
+                    async: false,
+                    data: {'recipients':$('#id_user_recipients').val(),'ccs':$('#id_user_cc_recipients').val(),'len_attachments':len_att-1,'practice':pac},
+                    success: function(data) {
+                        var result = JSON.parse(data);
+                        if (!result.valid){
+                            valid = false;
+                            nonSubscribersDialog();
+                        }
+                    }
+                });
+            }
+        }
+
+        if (valid) {
+            var canSend = sendMsgCheck();
+            if (!canSend) {
+                autoSendMsg=true;
+                dialogWait = jWait({
+                        title: '{% trans "Waiting for file uploading..." %}',
+                        message: '{% trans "We will send this message after all files have been uploaded." %}',
+                        cancelFunc:setManualSendMsg
+                    });
+            } else {
+                submitMsgNewFrm();
+            }
+        }
+    });
+
+    var content = '';
+    {% for u in user_recipients %}
+    content += getUsrSpan({{u.id}},'{{u.fullname}}');
+    {% endfor %}
+
+    $('#recipToDiv').append(content);
+    
+    var content = '';
+    {% for u in user_cc_recipients %}
+    content += getUsrSpan({{u.id}},'{{u.fullname}}');
+    {% endfor %}
+    $('#recipCcDiv').append(content);
+    
+    $('#recipToBtn').live('click',function(){
+        $('#recipToDiv').AddRecipientUser();
+        $('#addSelectedUserBtn').html('To->');
+    });
+    
+    $('#recipToDiv').live('click', function(){
+        $('#recipToDiv').AddRecipientUser();
+        $('#addSelectedUserBtn').html('To->');
+    });
+    
+    $('#recipCcBtn').live('click',function(){
+        $('#recipCcDiv').AddRecipientUser();
+        $('#addSelectedUserBtn').html(MESSAGE.POPUP_USER_LIST_CC);
+    });
+    
+    $('#recipCcDiv').live('click',function(){
+        $('#recipCcDiv').AddRecipientUser();
+        $('#addSelectedUserBtn').html(MESSAGE.POPUP_USER_LIST_CC);
+    });
+});
+
+function nonSubscribersDialog() {
+    var html = '{% trans "Thank you for your interest in sharing files with DoctorCom’s secure system. This share is compliments of DoctorCom and your file has been sent to the intended party. However, to have full access you’ll need a subscription for only $25/month." %}';
+    showSimpleDialog({
+        title: '{% trans "Subscribe" %}',
+        content: html,
+        height: 150,
+        dc_buttons: {
+            "Yes": {
+                'click': function() {
+                    $.ajax({
+                        url: '/Support/AJAX/Contact/',
+                        type: 'POST',
+                        async: false,
+                        success: function(jsonData, textStatus, httpRequest) {
+                            window.location.href="/Support/ContactConfirm/";
+                        }, // end success
+                        error: function(httpRequest, textStatus, errorThrown) {
+                            alert("Send mail Failed.");
+                        }
+                    });
+                    $(this).dialog("close");
+                },
+                'text': '{% trans "Subscribe Now" %}',
+                'class': 'positive-btn'
+            },
+            "No": {
+                'click': function() {
+                    $(this).dialog("close");
+                },
+                'text': '{% trans "No Thanks" %}'
+            }
+        }
+    });
+}
+
+function sendMsgAfterUpload() {
+    if (sendMsgCheck()&&autoSendMsg) {
+        if (dialogWait) {
+            dialogWait.dialog("close");
+        }
+        submitMsgNewFrm();
+    }
+}
+
+function submitMsgNewFrm() {
+    dialogWait = jWait({height:100,title:'{% trans "Sending message" %}',message:'{% trans "Sending message..." %}',cancelEnable:false});
+    setTimeout(function(){
+        var pac = $('#id_practice_recipients').val();
+        if(pac == ''){
+            getUsrSpanVal();
+        }
+        $("#msgNewFrm").submit();
+    },1000);        
+}
+
+function setManualSendMsg() {
+    autoSendMsg = false;
+}
+
+function setManualSendMsgAndCloseWin() {
+    if (dialogWait) {
+        dialogWait.dialog("close");
+    }
+    setManualSendMsg();
+}
+
+function sendMsgCheck() {
+    var canSend = true;
+    $('iframe').each(function(){
+        var formObj = $(this).contents().find("form");
+        if (formObj&&formObj.length>0&&formObj.attr("upload")) {
+            canSend = false;
+            return false;
+        }
+    }); 
+    return canSend;
+}
+</script>
+    
+    <style>
+        #userPopConTab, #userPopConTab tr, #userTableHead, #userTableHead tr, #userTable, #userTable tr{
+            background: #FCFDFD;
+            line-height: 30px;
+        }
+
+        #userTableHead{
+            border-top: 1px solid #D1CEFD;
+            border-bottom: 1px solid #D1CEFD;
+        }
+        #userTableHead th{
+            padding-right: 5px;
+        }
+
+        #userTable{
+            cursor: pointer;
+        }
+
+        #userTable td{
+            border-bottom: 1px solid #D1CEFD;
+            padding-right: 5px;
+        }
+
+        #userTable .selected,#userTable tr.selected:hover{
+            background:#D1CEFD;
+        }
+
+        #userTable tr:hover{
+            background:#F0F2FF;
+        }
+
+        #userPopConTab input[type="radio"] {margin-bottom: 2px; }
+        
+        #id_subject{width:660px; height:20px; border:1px solid #CCCCCC;}
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!--<div style="margin-left:40px; margin-top:-60px;">        
+        <p class="header" style="font-size:14px;font-weight:bold;">Welcome, {{ mhl_user_displayName }}</p>
+        <p class="header" style="margin-left:0px;margin-top:-13px;">Current location: <b>{{ current_site.name }}</b> <a href="/Sites/">Click here</a> to change.</p>
+    </div>-->
+<!--<div style="width:600px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">-->
+<div id="msgNewFrm_container" class="ui-corner-all">    
+<form id="msgNewFrm" enctype="multipart/form-data" action="{% if ACTION %}{{ACTION}}{% else %}.{% endif %}"  method="POST" style="width:880px;text-align:left;">
+<!--{{form.errors}}-->
+
+{% if not practice_recipient %}
+<div class="message_row" >
+    <div class="message_cell_left">
+        {% trans "To:" %}
+    </div> 
+    <div id='toUser' class="message_cell_right" >
+        <div id='recipToDiv' style="cursor:pointer; float: left; width: 660px; min-height: 20px; max-height: 60px; overflow-y: auto; border: 1px solid #CCCCCC;"></div>
+        <input id='recipToBtn' type="button" value='{% trans "To..." %}' style="padding: 0 5px; margin:-1px 0 0 10px;"/>
+        <div id='recipToDivErr' style="width: 660px; display: none; color:red;font-style: italic;">{% trans "Recipient is required." %}</div>
+    </div>
+</div>
+<div class="message_row">
+    <div class="message_cell_left">
+        {% trans "Cc:" %}
+    </div> 
+    <div class="message_cell_right" >
+        <div id='recipCcDiv' style="cursor:pointer; float: left; width: 660px; min-height: 20px; max-height: 60px; overflow-y: auto; border: 1px solid #CCCCCC;"></div>
+        <input id='recipCcBtn'  type="button" value='{% trans "Cc..." %}' style="padding: 0 5px; margin:-1px 0 0 10px;"/>
+    </div>
+</div>
+{% endif %}
+
+{% if practice_recipient %}
+<div class="message_row">
+    <div class="message_cell_left">
+        {% trans "Recipient:" %}
+    </div> 
+    <div class="message_cell_right">
+         {{practice_recipient.practice_name}}{{form.practice_recipient}}
+         {{form.non_field_errors}}
+    </div>
+</div>
+{% endif %}
+
+<div class="message_row">
+    <div class="message_cell_left">
+        {% trans "Subject:" %}
+    </div>
+    <div class="message_cell_right">
+        <div style="width:120px;">
+            {{form.subject}}{{form.subject.errors}}
+        </div>
+    </div>
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left">
+        {% trans "Share a file:" %}
+    </div>
+    <div class="message_cell_right">
+        <div id="id_upload_area">
+            <div id="id_file_list_area">
+                {% for file in file_list %}
+                    <div class="upload_panel">
+                        <div>
+                        {{file.file_display_name}} {% trans "uploaded successfully" %}.&nbsp;&nbsp;&nbsp;
+                        <input type="hidden" name="file_saved_name" value="{{file.file_saved_name}}"/>
+                        <input type="hidden" name="file_display_name" value="{{file.file_display_name}}"/>
+                        <input type="hidden" name="file_charset" value="{{file.file_charset}}"/>    
+                        <input type="hidden" name="file_size" value="{{file.file_size}}"/>
+                        <a class="delete_attachment" href="javascript:void(null);" onclick="deleteAttachment(this);">{% trans "Delete" %}</a>
+                        </div>
+                    </div>
+                {% endfor %}    
+            </div>         
+        </div>
+    </div>
+</div>
+
+<div>
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left1">
+        {% trans "Message text:" %}
+    </div>
+    <div class="message_cell_right1">
+        &nbsp;
+    </div>     
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left1">
+        &nbsp;
+    </div>
+    <div class="message_cell_right1">
+        {{form.body}}
+        {{form.body.errors}}    
+    </div>     
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left1">
+        &nbsp;
+    </div>
+    <div class="message_cell_right1">
+        <input id="id_send" type="button" name="Submit" value='{% trans "Send Msg" %}' class="enable_btn"/>
+    </div>     
+</div>
+
+{{recipientsform.as_p}}
+</form>
+
+</div>
+{% include "DoctorCom/Messaging/MessageToUsersPopup.html" %}
+
+<div id='confirmDialog' class='hidden'>
+    <div class='content'>You select some people, but you don't add them to recipients. Are you sure leave the page?</div>
+    <div class='line'></div>
+    <div class='buttons'>
+        <div class='button'></div>
+        <div class='button'></div>
+    </div>
+</div>
+
+
+{% endblock %}

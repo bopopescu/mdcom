@@ -1,0 +1,217 @@
+
+#dc_nav {width:950px; height:20px; text-align:left; margin-left:10px; float:left;}
+#dcAdmin_home{ width:950px; background-color:white;border:1px solid lightblue;
+    margin:0 auto; text-align:left; padding-bottom:10px; margin-top:30px;}
+#dcAdmin_home select{margin-right:10px; font-size:12px; font-family:Arial;}
+
+#dcAdmin_home input[type=text]{ width:150px; margin-right:10px; border-weight:1px;}
+#dcAdmin_home p{ padding:10px 20px 0 0;}
+#dcAdmin_home p a{ padding:0;}
+#dcAdmin_home a,#dcAdmin_home h3{ padding:0px 15px; margin:0;}
+#dcAdmin_home .resetComplete{ padding-left:18px; padding-top:10px;}
+#dcAdmin_home .privateKey{ padding:8px 0 0 16px;}
+#dcAdmin_home .privateKeyForm{ padding:8px 0 0 14px;}
+#dcAdmin_home .errorlist{ margin:5px 0 0 15px;}
+#dcAdmin_home h1,#dcAdmin_home h2{ padding:10px;}
+.dcAdminTable{ width:90%; border:1px solid #ccc; margin:15px;}
+.dcAdminTable tr{ background:#F6F7FF; line-height:35px;}
+.dcAdminTable th{ background:#E4EFF2; line-height:20px; padding-left:5px;}
+.dcAdminTable td{ padding-left:5px;}
+#dcAdmin_home .dcAdminTable td a{ padding:0;}
+#newInvitation{ padding:15px;}
+#newInvitation .errorlist{ position:relative;}
+#newInvitation .errorlist li{ position:absolute; left:160px;}
+#newInvitation li{ list-style:none; line-height:30px;}
+#newInvitation li label{ display:inline-block; min-width:150px; font-weight:bold;}
+#msgNewFrm{ padding:15px;}
+#msgNewFrm textarea{ padding:0; margin:0;}
+#msgNewFrm input[type='subit']{ margin:0;}
+#msgNewFrm li label{ display:inline-block; min-width:100px; font-weight:bold;}
+#msgNewFrm li .errorlist li{ padding:0; padding-left:107px;}
+.cancelConfirm{ padding:15px 0;}
+table.searchForm {width: 275px;border: 2px black solid;margin: 10px;border-spacing: 0px;}
+table.searchForm th {background-color: #7FCDFE;	padding: 5px;}
+table.searchForm td {padding: 5px;}
+table.record {margin: 5px 0px;border-spacing: 0px;border-right: 1px black solid;border-bottom: 1px black solid;}
+table.record td {border-left: 1px black solid;border-top: 1px black solid;padding: 3px 5px;}
+table.record th {border-left: 1px black solid;border-top: 1px black solid;text-align: right;padding: 1px 5px;background-color: #7FCDFE;}
+#adminMessage{background-color:white;margin:20px 0;border:1px solid #ccc;padding:30px; text-align:left;}
+.passwordResetSubmit{ margin:0 0 15px 15px;}
+#dcAdmin_home .userkey{ padding-left:20px;}
+
+.errorlist li{ padding-left:208px;}
+
+.brokerCreate{ width:90%; margin:15px; text-align: right; clear:both;}
+
+#dcAdmin_home .brokerTable a{ text-decoration: underline; cursor: pointer; color:#143888; padding:0; margin-right: 5px;}
+#dcAdmin_home .brokerTable a:hover{color:#FF9700; text-decoration: none;}
+#dcAdmin_home .brokerTable td {font-size:12px;}
+#dcAdmin_home .dataTables_info{float:left;line-height:22px; margin-left:15px;}
+#dcAdmin_home .dataTables_length{ float:right;width:auto;line-height:22px; margin-right:75px;}
+#dcAdmin_home .dataTables_paginate{float:right;width:auto;}
+#dcAdmin_home .dataTables_paginate .paginate_active{background-color:#FFFFFF;}
+
+.brokerSearchTable{ width:90%; margin:15px; background: #FFFFFF;}
+.brokerSearchTable tr{ line-height:35px;}
+.brokerSearchTable td.width1{ width: 120px}
+.brokerSearchTable th.width1{ width: 120px}
+.brokerSearchTable a{ text-decoration: underline; cursor: pointer;}
+.brokerTitle{font-size: 18px; font-weight: bold; margin:15px 0 0 15px;}
+
+#brokerQuery ul li{line-height:25px; padding: 0; display: inline;}
+#brokerQuery select{width: 180px;}
+
+
+
+.pagation_nav{
+	float: right;
+	margin-right:75px;
+}
+
+.pagation_nav2{
+	float: right;
+	margin: 5px 10px 0 0;
+}
+
+.pagation_nav_left{
+	margin-left: 15px;
+	float: left;
+}
+
+#providerItemTable_pagation table tr:hover{
+	background:#ffffff;
+}
+
+#dcAdmin_home .pagniation a,
+#providerItemTable_pagation .pagniation a{
+	padding: 0;
+	height:18px;
+	min-width:16px;
+	display:block;
+	float:left;
+	background: none repeat scroll 0 0 #DDDDDD;
+    border: 1px solid #AAAAAA;
+    color: #000000;
+    text-decoration: none;
+    text-align:center;
+    line-height:16px;
+    margin:0 2px;
+}
+#dcAdmin_home .pagniation span,
+#providerItemTable_pagation .pagniation span{
+	height:18px;
+	min-width:16px;
+	line-height:16px;
+	display:block;
+	float:left;
+	margin:0 3px;
+	text-align:center;
+}
+
+#dcAdmin_home .pagniation .current,
+#providerItemTable_pagation .pagniation .current{
+	min-width:16px;
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #ccc;
+    color: #000000;
+    text-decoration: none;
+    text-align:center;
+    height:18px;
+}
+
+#providerItemTable_pagation .pagniation a{
+	border: 1px solid #82AAC7;
+	color: #036CB4;
+	background: none repeat scroll 0 0 transparent;
+}
+
+#providerItemTable_pagation .pagniation .current{
+	border: 1px solid #CCCCCC;
+	color: #CCCCCC;
+	background: none repeat scroll 0 0 #EFF3F8;
+}
+
+.pagniation .prevIcon{
+	width:16px;
+	height:18px;
+	background:url(../../img/bg_preAll.gif) no-repeat 4px 6px;
+}
+.pagniation .nextIcon{
+	width:16px;
+	height:18px;
+	background:url(../../img/bg_nextAll.gif) no-repeat 4px 6px;
+}
+.pagniation .nextIcon.current{ background:url(../../img/bg_nextAll_d_disable.gif) no-repeat 4px 6px;}
+.pagniation .prevIcon.current{ background:url(../../img/bg_preAll_d_disable.gif) no-repeat 4px 6px;}
+
+#id_broker_to{
+	width:180px;
+	height:18px;
+}
+
+
+#dcAdmin_nav{ width:950px; margin:15px auto 0; text-align:left; padding-bottom:10px;}
+
+#dcAdmin_nav a{text-decoration:underline; cursor:pointer;}
+
+#id_assignPractice,#id_userType{ width:190px; margin-right:10px;}
+#id_recipient{ width:185px; margin-right:10px;}
+
+#dcAdmin_home .selectPagePer select{margin:0px; width:40px;} 
+#dcAdmin_home .dataTables_length select{margin:0px;} 
+
+#dcAdmin_home #brokerQuery input[type=text]{ width:180px;} 
+
+#viewOrg{ width:90%; margin:15px auto;}
+#viewOrg .title{ font-size:18px; text-align:left; margin:10px 0;}
+#viewOrg .title2{ font-size:16px; font-weight:bold; height:23px; line-height:23px; text-align:left;}
+#viewOrg .title3{ font-size:14px;}
+#viewOrg .edit a{ text-decoration:underline; color:blue;}
+#viewOrg .edit a:hover{ cursor:pointer; color:#ff9700;}
+#viewOrg input[type='button']{ float:right; width:80px;}
+#viewOrg li{ list-style:none; width:100%; text-align:left;}
+#viewOrg .orgInfo li .head{ float:left; width:150px; font-size:12px; font-weight:bold;}
+#viewOrg .orgInfo li .text{ float:left;}
+#viewOrg .orgInfo li .edit{ float:right;}
+#viewOrg .invitList li{ list-style:none; text-align:left;}
+#viewOrg .brokerTable{ margin:15px 0; width:100%;}
+#viewOrg .orgInfo{ margin-bottom:20px;}
+#viewOrg .orgInfo li{ margin:10px 0;}
+#viewOrg .memberInfo{ margin-bottom:20px;}
+#viewOrg .invitList .table{ margin-bottom:15px;}
+#viewOrg th{ font-size:13px;}
+#viewOrg .invitList .head{ height:30px; line-height:30px;}
+
+
+.orgTable{ width:100%; border-style:solid; border-width:1px 0 1px 1px; border-color:#ccc; margin:10px 0 40px 0;}
+.orgTable th,.orgTable td{ border-style:solid; border-width:0 1px 0 0; border-color:#ccc; padding-left:8px;}
+.orgTable thead{ background:#F0F2FF;}
+.orgTable td a{ text-decoration:underline; color:blue;}
+
+#inviteDialog .pracitceSelect{ width:85%; margin:10px auto;}
+
+.ui-corner-all{ border:1px solid #A6C9E2;}
+.ui-dialog-dc-buttonpane .ui-corner-all{ border:0px;}
+
+.ui-dialog-titlebar{ margin:0;}
+.orgTable a{ cursor:pointer;}
+#memberList .disableLink{ text-decoration:none; color:black; cursor:default;}
+#virtualSitesList{ }
+#virtualSitesList .head{ width:905px; margin:10px auto;}
+#virtualSitesList .head span{ font-size:16px; font-weight:bold;}
+#virtualSitesList .head .left{ float:left; height:40px;}
+#virtualSitesList .head .right{ float:right;}
+#virtualSitesList .head .warning{ width:40px;}
+#virtualSitesList .head .text{ width:800px;}
+#virtualSitesList .head h2{ padding:0;}
+#virtualSitesList .content{ width:95%; margin:0 auto;}
+#virtualSitesList .content .siteListTable td a{ padding-left:0; color:blue; text-decoration:underline; cursor:pointer;}
+#virtualSitesList .content td a{ padding:0; cursor:pointer;}
+#virtualSitesList .content table{ margin:0; width:100%; margin-bottom:15px;}
+
+.showDialogPopup .content{ text-align:left; padding:10px 0;}
+.showDialogPopup .buttons{ width:230px; height:35px; margin:0 auto; margin-top:10px;}
+.showDialogPopup .buttons .button{ width:81px; height:34px; background:url(../../media/img/newButton.png) no-repeat; font-size:13px; line-height:30px; margin-left:25px;}
+.showDialogPopup .buttons .button.buttonR{ background:url(../../media/img/newButtonR.png); color:#fff; font-weight:bold;}
+.showDialogPopup .buttons .buttonCenter{ margin:0 auto; margin-left:85px;}
+.showDialogPopup .content .text{ font-weight:normal; font-size:14px; padding-top:8px; padding-bottom:17px;}

@@ -1,0 +1,40 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+{% endblock %}
+
+{% block customJS %}
+	{%include 'includes/jquery.validate.html'%}
+	<script type="text/javascript">
+		var mobile_required = BoolUtils.str2bool("{{mobile_required}}");
+	</script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/profile/validates.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/profile/validationPage.js"></script>
+{% endblock %}
+{% block content %}
+<div id="profileEdit" class="ui-corner-all">
+	<h1>{% trans "Validate your Personal Information" %}</h1>
+	<p class="info">{% trans 'We found your contact way below are not validated, please click "Start to Validate" button to validate them.' %}</p> 
+
+	<form action="/Validations/ValidationPage/" method="POST" id="profile_form">
+		{% if form %}
+			{% if form.fields.mobile_phone.initial and request.CALL_ENABLE %}
+				<li>{{form.mobile_phone.label_tag}}{{form.mobile_phone}}</li>
+			{% endif %}
+			{% if form.fields.pager.initial and request.CALL_ENABLE %}
+				<li>{{form.pager.label_tag}}{{form.pager}}</li>
+			{% endif %}
+			{% if form.fields.email.initial %}
+				<li>{{form.email.label_tag}}{{form.email}}</li>
+			{% endif %}
+		{% endif %}
+
+		{% for hidden in form.hidden_fields %}
+			{{ hidden }}
+		{% endfor %}
+		<input type="submit" name="start_validate" id="start_validate" value='{% trans "Start to Validate" %}'>
+	</form>
+	<div id='validationDialog'></div>
+</div>
+{% endblock %}

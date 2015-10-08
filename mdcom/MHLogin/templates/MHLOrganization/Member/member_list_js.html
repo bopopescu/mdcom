@@ -1,0 +1,220 @@
+{% load i18n %}
+
+<script>
+	var selected_organization_type = '{{ selected_organization_type }}'.toLowerCase();
+	$(function(){
+		getAndShowMemberProviders();
+		//provider input enter press method
+		$("#provider-input").keypress(function(event){
+								if(event.which==13){
+									getAndShowMemberProviders();
+								}
+							}).Watermark('{% trans "Email or name here" %}');
+
+		//providers search button click method
+		$('#provider_search_button').click(function(){
+			getAndShowMemberProviders();
+		});
+	
+		getAndShowMemberStaff();
+		//staff input enter press method
+		$("#staffer-input").keypress(function(event){
+								if(event.which==13){
+									getAndShowMemberStaff();
+								}
+							}).Watermark('{% trans "Email or name here" %}');
+		//staff search button click method
+		$('#staff_search_button').click(function(){
+			getAndShowMemberStaff();
+		});
+
+	});
+
+	function getAndShowMemberProviders(index, count) {
+		if (!index) {
+			index = 0;
+		}
+		if (!count) {
+			count = 8;
+		}
+
+		var val = $.trim($("#provider-input").val());
+		var per = window.getPersonalName(val);
+		$.comAjax({
+			url:'/Organization/Member/AJAX/ProviderList/',
+			type:'POST',
+			data: {firstName: per['firstName'], lastName: per['lastName'], index:index, count: count},
+			success:function(data, textStatus){
+				$("#member_provider_area").html(data);
+			},
+			error:function(data, txtStatus){
+				if(data.status!=200){
+					alert("{% trans 'There is an error occured when getting providers infomation. Please refresh page again.' %}");
+				}
+			}
+		});
+	}
+
+	function getAndShowMemberStaff(index, count) {
+		if (!index) {
+			index = 0;
+		}
+		if (!count) {
+			count = 8;
+		}
+		var val = $.trim($("#staffer-input").val());
+		var per = window.getPersonalName(val);
+		$.comAjax({
+			url:'/Organization/Member/AJAX/StaffList/',
+			type:'POST',
+			data: {firstName: per['firstName'], lastName: per['lastName'], index:index, count: count},
+			success:function(data, textStatus){
+				$("#member_staff_area").html(data);
+			},
+			error:function(data, txtStatus){
+				if(data.status!=200){
+					alert("{% trans 'There is an error occured when removing the staff. Please refresh page again.' %}");
+				}
+			}
+		});
+	}
+
+	// provider list action
+	function checkProviderSchedule(prov_id) {
+		var ret_val = {
+			no_schedule: true,
+			error: false
+		};
+		if (prov_id) {
+			$.comAjax({
+				url:'/Organization/Member/AJAX/CheckProviderSchedule/',
+				type:'POST',
+				async: false,
+				data:{
+					prov_id: prov_id
+				},// end data
+				success: function(data, textStatus, httpRequest) {
+					// Test for success
+					if(textStatus == 'success') {
+						var json_data = JSON.parse(data);
+						var text = "";
+						if(json_data[0] == 'ok'){
+							ret_val.no_schedule = true;
+						}else{
+							ret_val.no_schedule = false;
+						}//end of else - show warning window
+					}//end - text status
+				},// end success
+				error: function(httpRequest, textStatus, errorThrown) {
+					ret_val.error = true;
+					alert('{% trans "An error occurred while removing provider from %s." %}'.sprintf(selected_organization_type));
+				}
+			});
+		}
+		return ret_val;
+	}
+
+	function removeMemberProvider(prov_id, name) {
+		if (prov_id) {
+			var ch_data = checkProviderSchedule(prov_id);
+			if (ch_data.error) {
+				return;
+			}
+			var text = '{% trans "Are you sure you wish to remove %s from your %s?" %}'.sprintf(name, selected_organization_type);
+			if (!ch_data.no_schedule) {
+				text = '{% trans "%s is a member of the call group for this %s and is scheduled to be on call in the future. Removing this provider from %s will result in gaps in the call schedule." %}'.sprintf(name, selected_organization_type, selected_organization_type);
+			}
+			showSimpleDialog({
+				title: '{% trans "Remove Provider" %}',
+				content: text,
+				dc_buttons: {
+					'{% trans "Remove" %}': {
+						'click': function() {
+							$( this ).dialog( "close" );
+							$.comAjax({
+								url:'/Organization/Member/AJAX/RemoveProvider/',
+								type:'POST',
+								data:{
+									prov_id:prov_id
+								},
+								success:function(data, textStatus){
+									if(textStatus == 'success'){
+										if(data['err']){
+											alert('{% trans "An error occurred while removing provider from %s." %}'.sprintf(selected_organization_type));
+										}else{
+											getAndShowMemberProviders();
+										}
+									}
+								},
+								error:function(data, textStatus){
+									if(data.status==500){
+										alert('{% trans "An error occurred while removing provider from %s." %}'.sprintf(selected_organization_type));
+									}
+								}
+							});
+						},
+						'text': '{% trans "Remove" %}',
+						'class': 'positive-btn'
+					},
+					'{% trans "Cancel" %}': function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+		}
+	}
+
+	function changeStaffSmartphone(obj, pk) {
+		var jObj = $(obj);
+		var newSmart = jObj.val();
+		$.comAjax({
+			url:'/Organization/Member/AJAX/ChangeSmartphonePermission/',
+			type:'POST',
+			data:{
+				pk:pk,
+				newSmart:newSmart
+			},
+			success:function(data, txtStatus){
+			},
+			error:function(data, txtStatus){
+				if(data.status!=200){
+					alert('{% trans "There was a problem changing smartphone access permission, please contact support." %}');
+				}
+			} 
+		});
+	};
+
+	function removeMemberStaff(pk, name) {
+		showSimpleDialog({
+			title: '{% trans "Remove Staff" %}',
+			content: '{% trans "Are you sure you wish to remove %s from your staff?" %}'.sprintf(name),
+			dc_buttons: {
+				'{% trans "Remove" %}': {
+					'click': function() {
+						$( this ).dialog( "close" );
+						$.comAjax({
+							url:'/Organization/Member/AJAX/RemoveStaff/',
+							data:{
+								staff_id: pk
+							},
+							type:'POST',
+							success:function(data, txtStatus){
+								getAndShowMemberStaff();
+							},
+							error:function(data, txtStatus){
+								if(data.status!=200){
+									alert('{% trans "There is an error occured when removing the staff. Please refresh page again." %}');
+								}
+							}
+						});
+					},
+					'text': '{% trans "Remove" %}',
+					'class': 'positive-btn'
+				},
+				'{% trans "Cancel" %}': function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	}
+</script>

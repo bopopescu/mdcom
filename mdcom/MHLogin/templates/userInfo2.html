@@ -1,0 +1,47 @@
+{% load i18n %}
+<div class="provider-container">
+	<table id="providers" class="rowhover dataTables" cellspacing='0' cellpadding='0'>
+		<thead>
+			<tr style="display:none;"><th></th><th></th><th></th><th></th><th style="display:none;"></th><th style="display:none;"></th><th></th></tr>
+		</thead>
+	{% if providers %}
+	{% for provider in providers %}
+		<tr class='hidden'>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td class="officename name" id="{{provider.id}}" title='{% trans "Click on name to view more info." %}' locaoOffic='1' onclick="getAndShowDetialInfo(this, '/Provider_Info/Practice/', '{% trans "Office Information" %}', 625, true)" >
+				<span class="warpName">
+					{{provider.practice_name}}
+					<span class="text">
+						
+					</span>
+				</span>
+			</td>
+			<td style="display:none;">
+				{{provider.practice_name}}
+			</td>	
+			<td style="display:none;">
+				&nbsp;
+			</td>
+			<td class='links'>
+				{% if provider.has_manager %}
+				<a href="/Messages/New/?practice_recipients={{ provider.id }}">
+					<div class="msg_btn button btnShow buttonMsgAble" available="true" title='{% trans "Click to send text message." %}'>{% trans "msg" %}</div>
+				</a>
+				{% else %}
+					<div class="msg_btn button btnShow buttonPhoneDisable" title='{% trans "Click to send text message." %}'>{% trans "msg" %}</div>
+				{% endif %}
+				{% if provider.call_available %}
+			 	<a href="/Call/Practice/?called_practice={{ provider.id }}">
+			 		<div class="call_btn button btnShow buttonPhoneAble" available="true" title='{% trans "Click to phone." %}'>{% trans "call" %}</div>
+			 	</a>
+				{% else %}
+					<div class="call_btn button btnShow buttonPhoneDisable textDisable">{% trans "call" %}</div>
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+	{% endif %}
+	</table>
+</div>

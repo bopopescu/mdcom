@@ -1,0 +1,34 @@
+DoctorCom Production Push Instructions
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Objective:
+-----
+The objective of this file is to better document the process required to push
+changes from trunk into production with minimum downtime. 
+
+Instructions:
+-----
+Simply update the below instructions as necessary (e.g., including SQL if it
+won't work in alters.sql) so that the person pushing the code out to production
+knows what needs to be done to smoothly apply changes.
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+2013-07-28: KurtV, these steps must be done for integration.  For production do this
+    now and incrementally, for qa/devl can be done now or when rm #2074 merged:
+
+    1. Activate your virtual enviroment if not already in:
+       $ source /the/path/to/your/virtualenv/bin/activate
+    2. backup database:
+        $ mysqldump your_db_name > some_output_file.sql
+    3. $ python manage.py syncdb
+    4. $ python manage.py create_resetkeys <admin password>
+    5. $ python manage.py create_userkeys
+    6. $ python manage.py migrate_objectkeys <admin password>
+    7. $ python manage.py test
+    
+    For production run all steps then periodically run steps 5, 6 before 
+    final deployment of rm #2074, currently set for staging_1.69.00 release. 
+
+2013-08-11: KurtV, run alters.sql.  Removes FK partner in MHLUsers and partner tables.
+2013-08-12: xlin, add field title in MHLUsers_mhluser,please run alters.sql 

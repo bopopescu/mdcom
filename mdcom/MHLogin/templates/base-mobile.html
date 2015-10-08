@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{% block title %}{% trans "DoctorCom" %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/menu_mobile.css" />
+
+    <style type="text/css">
+        body { font-family:Verdana, Helvetica, Sans-Serif; font-size:13px; margin:0px 20px;}
+
+        p.header {display:block}
+
+        #my_favorites tr:hover {background-color:lightgreen;}
+        #my_group tr:hover {background-color:lightgreen;}
+        .rowhover tr:hover {background-color:lightgreen;}
+
+        #received_messages tr:hover {background-color:lightgreen;}
+        #sent_messages tr:hover {background-color:lightgreen;}
+
+        a img { border:none; vertical-align:middle; }
+        a img.buttons {border:0px;}
+
+        .odd td {border-bottom: 1px solid #cef; border-top: 1px solid #cef;}
+
+        .button3 { background: transparent url('{{STATIC_URL}}images/button3_b2.png') no-repeat center center;text-align:center;color:white;width:62px;height:20px;}
+        .button3:hover {background: transparent url('{{STATIC_URL}}images/button3_y.png') no-repeat center center;text-align:center;color:black;width:62px;height:20px;}
+        tr:hover td div.button3 {background: transparent url('{{STATIC_URL}}images/button3b_4.png') no-repeat center center;text-align:center;color:black;width:62px;height:20px;}
+        .button2 {background: transparent url('{{STATIC_URL}}images/button2.png') no-repeat center center;text-align:center;color:black;width:62px;height:20px;}
+
+        .odd {background-color: #E2E4FF; }
+        #sent_msgs .collapse,#received_msgs .collapse{ width:16px;}
+    </style>
+    <link type="text/css" href="{{STATIC_URL}}css/start/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{STATIC_URL}}css/start/jquery.autocomplete.css" type="text/css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}css/datatable_jui.css" type="text/css" />
+    <link rel="stylesheet" href="{{STATIC_URL}}css/datatable.css" type="text/css" />
+    <link type="text/css" href="{{STATIC_URL}}css/messaging/dashboard.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}jPlayer/skin/blue.monday/jplayer.blue.monday.css" />
+
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-1.8.2.custom.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.filterable.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.bgiframe.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.autocomplete.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.watermark.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.dataTables_mod2.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/multiselect.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-cookie.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/json2.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.pagination.js"></script>
+
+    <script type="text/javascript" src="{{STATIC_URL}}js/flowplayer-3.2.6.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/flowplayer.ipad-3.2.8.js"></script>
+
+<script type="text/javascript">
+var data = [];
+</script>
+{% block customJSData %}{% endblock %}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#accordion").accordion({
+                autoHeight: false
+            });
+            $('#site_providers').filterable({
+                      affects: 'tbody tr',
+                      queryLabel: '',
+                      inputId: "#searchbox"
+                    });
+            $('#my_community_physicians').filterable({
+                      affects: 'tbody tr',
+                      queryLabel: '',
+                      inputId: "#searchbox2"
+                    });
+            $('#accordion_messages .header_messages').click(function() {
+                $(this).next().toggle('slow');
+                return false;
+            }).next().show();
+            $("tr:odd").addClass("odd");
+            $("#community_providers tr.odd").removeClass("odd");
+            $("#provider_info tr.odd").removeClass("odd");
+            $('.messages .odd').removeClass('odd');
+
+            /*if (data.length>0)
+            {
+                $("#allProviders").autocomplete(data, {delay:10, matchContains:true, width:300, max:15, formatItem: function(item) { return item.text; } }).result(function(event, item) { location.href = item.url;});
+            }*/
+            $("#allProviders").autocomplete("../../../Search/User/AJAX/", {
+                dataType: "json",
+                delay:333, 
+                matchContains:true, 
+                width:145, 
+                max:15, 
+                formatItem: function(row) { 
+                    return row;
+                },
+                parse: function(data) {
+                    var parsed = [];
+                    if(data.length==2) {
+                        if(data[0]=="ok") {
+                            var rows = data[1];
+                            for (var i = 0; i < rows.length; i++) {
+                                var row = rows[i];
+                                if (row) {
+                                    /*
+                                    if(row[2]=='provider'){
+                                        parsed[parsed.length] = { data: row[1], value: "/Provider_View/?provider="+row[0] };    
+                                    }else{
+                                        parsed[parsed.length] = { data: row[1], value: "/Provider_View/?officestaff="+row[0] };
+                                    }*/
+                                    parsed[parsed.length] = { data: row[1], value: "/Provider_View/?provider="+row[0] };
+                                }
+                            }
+                            if(parsed.length==0) {
+                                parsed[0] = { data: "No records found.", value: location.href };
+                            }
+                        } else if(data[0]=='error') {
+                            parsed[0] = { data: data[1], value: location.href };
+                        }
+                    }
+                    return parsed;
+                }
+            }).result(function(event, data, result) { 
+                if(location.href != result) {
+                    location.href = result;
+                }
+            });
+        });
+    </script>
+
+<style type="text/css">{% block customCSS %}{% endblock %}</style>
+{% block customJS %}{% endblock %}
+</head>
+
+<body style="background-color:#dbedfa;">
+{% include "includes/menu_template_mobile.html" %}
+<!-- content is up first -->
+{% block content %}{% endblock %}
+
+{% include "includes/footer.html" %}
+
+{% include "includes/google_analytics.html" %}
+
+</body>
+</html>

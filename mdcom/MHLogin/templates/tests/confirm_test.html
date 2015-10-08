@@ -1,0 +1,27 @@
+{% extends "tests/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Test in progress" %}{% endblock %}
+
+{% block content %}
+
+<h2>{% trans "The test is in progress" %}</h2>
+<p>{% trans "Did the test complete successfully?" %}</p>
+
+<table border="0"><tr><td>
+<form action="{{form_action}}" method="POST">
+	<input type="hidden" name="test_type" value="{{test_type}}" />
+	<input type="hidden" name="test_id" value="{{test_id}}" />
+	<input type="hidden" name="test_result" value="1" />
+	<input type="submit" value='{% trans "Yes" %}'>
+</form>
+</td><td width="10">&nbsp;</td><td>
+<form action="{{form_action}}" method="POST">
+	<input type="hidden" name="test_type" value="{{test_type}}" />
+	<input type="hidden" name="test_id" value="{{test_id}}" />
+	<input type="hidden" name="test_result" value="0" />
+	<input type="submit" value='{% trans "No" %}'>
+</form>
+</td></tr></table>
+
+{% endblock %}

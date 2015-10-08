@@ -1,0 +1,57 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}{% trans "Send Email To Users" %}{% endblock %}
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+
+<style type="text/css"> 
+    .fieldWrapper textarea
+    {
+        margin: 0px 0px 0px 10px;
+    }
+    .fieldWrapper input
+    {
+        margin: 0px 0px 0px 15px;
+    }
+    .fieldWrapper select
+    {
+        margin: 0px 0px 0px 25px;
+    }
+</style> 
+
+<h1>{% trans "Send Email To Users" %}</h1>
+
+<form action="." method="POST" id='emailToAllForm'>
+    <br/>
+    
+    <div class="fieldWrapper">
+    {{ form.subject.errors }}
+    <th><label for="id_subject" style="margin:15px;">{% trans "Subject:" %}</label></th>
+    {{ form.subject }}
+    </div>
+    
+    <div class="fieldWrapper">
+    {{ form.body.errors }}
+    <th><label for="id_body" style="float:left; margin:15px">{% trans "Message:" %}</label></th>
+    <br/> {{ form.body }}
+    </div>
+
+    <div class="fieldWrapper">
+    {{ form.emailfilter.errors }}
+    <th><label for="id_emailfilter" style="float:left; margin:20px;">{% trans "Filter:" %}</label></th>
+    <br/>{{ form.emailfilter }}
+    </div>
+
+    <br/>
+    <input id="id_send" type="submit" style="margin:0px 0px 0px 95px;" 
+        name="Submit" value='{% trans "Send Email" %}' />
+</form>
+</div>
+{% endblock %}

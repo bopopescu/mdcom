@@ -1,0 +1,31 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id='changePin' class="ui-corner-all">
+
+{% if click2call_xfer %}
+    <h2>{% trans "Your caller has been transferred to: " %} {{called}}.</h2>
+{% else %}
+    <h2>{% trans "You are now calling: " %} {{called}}.</h2>
+{% endif %}
+
+<br/>
+
+<p>
+{% if click2call_xfer %}
+    {% trans "Transfering your caller to provider: " %} {{called_person}}
+{% else %}
+    {% trans "In order to connect your call, we require you to press the 1 key on your phone during or after the voice prompt. This is necessary to distinguish yourself from a machine (e.g., voicemail)." %}
+{% endif %}
+</p>
+
+<br/>
+{% if err_msg %}
+    <p><i><b>{% trans "Unable to call, the server provided the following information:" %}</b></i><br/><br/>
+    {{err_msg}}
+    </p>
+{% endif %}
+</div>
+{% endblock %}
+

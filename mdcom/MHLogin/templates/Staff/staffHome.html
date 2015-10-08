@@ -1,0 +1,147 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block customCSS %}
+{% endblock %}
+
+{% block customImports %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.pagination.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/organization.css" />
+{% endblock %}
+{% block content %}
+    {% include "MHLOrganization/Member/member_invite_provider_js.html" %}
+    {% include "MHLOrganization/Member/member_invite_staff_js.html" %}
+    {% include "MHLOrganization/Member/member_list_js.html" %}
+    {% include "MHLOrganization/Invite/invite_js.html" %}
+    <script>
+        $(function(){
+            $('#create-new-provider').CreateUser(0, false, null);
+            $('#create-new-staffer').CreateUser(1, false, null);
+        });
+    </script>
+    <div id='stafferHome'>
+        <div class='staffer-top'>
+            <div class='staffer-providers'>
+                <div class='title'>
+                    <div class='text'>{% trans 'Providers' %}</div>
+                </div>
+                <div class='content'>
+                    <table class='search-options'>
+                        <tr>
+                            <td width='30%'><input type='text' id='provider-input' /></td>
+                            <td class='td_search_botton'><div id="provider_search_button" class='search-button'></div></td>
+                            <td>
+                                {% if can_have_any_provider %}
+                                <div class='create-new-provider' id="create-new-provider">
+                                {% else %}
+                                <div class='create-new-provider' onclick='alert("Sorry, you cannot create a new provider in this organization.");'>
+                                {% endif %}
+                                    <div class='left item'></div>
+                                    <div class='mid item'>{% trans 'Create' %}</div>
+                                    <div class='right item'></div>
+                                </div>
+                            </td>
+                            <td>
+                                {% if can_have_any_provider %}
+                                <div class='add-new-provider' id="add-new-provider" refresh_function="InvitationRefresh">
+                                {% else %}
+                                <div class='add-new-provider' onclick='alert("Sorry, you cannot invite a new provider in this organization.");'>
+                                {% endif %}
+                                    <div class='left item'></div>
+                                    <div class='mid item'>{% trans 'Invite' %}</div>
+                                    <div class='right item'></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="member_provider_area">
+                        <div class='search-result'>
+                            <div class='provider-table'></div>
+                        </div>
+                    </div>
+                    <div id='provider-pagation'></div>
+                </div><!-- end of providers content -->
+            </div><!-- end of staffer providers -->
+            <div class='request-coming'>
+                <div class='title'>
+                    <div class='text'>{{ org_type_name_request }}</div>
+                </div>
+                <div class='requests-content'>
+                    <div class='requests'></div>
+                    <div class='switch'>
+                        <div class='prev hide disable'></div>
+                        <div class='next hide'></div>
+                    </div>
+                </div>
+            </div><!-- end of request coming -->
+        </div><!-- end of staffer top -->
+        <div class='staffer-bottom'>
+            <div class='staffer-staff'>
+                <div class='title'>
+                    <div class='text'>{% trans 'Staff' %}</div>
+                </div>
+                <div class='content'>
+                    <table class='search-options'>
+                        <tr>
+                            <td width='30%'><input type='text' id='staffer-input' /></td>
+                            <td class='td_search_botton'><div  id="staff_search_button"  class='search-button'></div></td>
+                            <td>
+                                {% if can_have_any_staff %}
+                                <div class='create-new-staffer' id="create-new-staffer">
+                                {% else %}
+                                <div class='create-new-staffer' onclick='alert("Sorry, you cannot create a new staff in this organization.");'>
+                                {% endif %}
+                                    <div class='left item'></div>
+                                    <div class='mid item'>{% trans 'Create' %}</div>
+                                    <div class='right item'></div>
+                                </div>
+                            </td>
+                            <td>
+                                {% if can_have_any_staff %}
+                                <div class='add-new-staffer' id="add-new-staffer" refresh_function="InvitationRefresh">
+                                {% else %}
+                                <div class='add-new-staffer' onclick='alert("Sorry, you cannot invite a new staff in this organization.");'>
+                                {% endif %}
+                                    <div class='left item'></div>
+                                    <div class='mid item'>{% trans 'Invite' %}</div>
+                                    <div class='right item'></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div class='search-result'>
+                        <div id="member_staff_area">
+                        </div>
+                        <div class='provider-table'></div>
+                        <div id='staffer-pagation'></div>
+                    </div>
+                </div>
+            </div><!-- end of staffer staff -->
+            <div class='doctorInvitation'>
+                <div class='title'>
+                    <div class='text'>{% trans 'DoctorCOM invitation' %}</div>
+                </div>
+                <div class='requests-content'>
+                    <div class='requests'></div>
+                    <div class='switch'>
+                        <div class='prev hide disable'></div>
+                        <div class='next hide'></div>
+                    </div>
+                </div>
+            </div><!-- end of request go out -->
+        </div><!-- end of staffer bottom -->
+        <div class='clear'></div>
+    </div><!-- end of staff home -->
+    <div id='staffHomeDialog' class='hidden'><div class='content'></div></div>
+
+{% comment %} 
+These below code need to be refactored, when we using template rendering html.
+{% endcomment %}
+<div id='invite_provider_selecter' class='hidden'>
+    {{ user_type_form.provider_types }}
+</div>
+<div id='invite_staff_selecter' class='hidden'>
+    {{ user_type_form.staff_types }}
+</div>
+
+{% endblock %}

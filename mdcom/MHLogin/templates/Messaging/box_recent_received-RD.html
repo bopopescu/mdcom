@@ -1,0 +1,245 @@
+{% load i18n %}
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/main.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/ajax.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/json2.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/dashboard.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    Messaging.refreshReceivedMessages();
+});
+
+collapse_button_icons = ['ui-icon-plus', 'ui-icon-minus']
+
+$(document).ready(function() {
+    $("tr.msg_body").hide();
+    $("table.message_item a.collapse").button({
+        icons: {primary : collapse_button_icons[0]},
+        text: false
+        });
+    $("table.message_item span.download").button({
+        icons: {primary : 'ui-icon-arrowthick-1-s'},
+        text: false
+        });
+    $("table.message_item span.play").button({
+        icons: {primary : 'ui-icon-play'},
+        text: false
+        });
+    $("table.message_item tr.message_item").click(toggleBody);
+});
+
+</script>
+
+<style type="text/css">
+div.messages .filter {
+    float:left;
+    width: 120px;
+    margin: 0px 10px 0px 0px;
+    padding: 5px;
+    padding-right: 10px;
+    border-right: solid 1px #999999;
+    font-size: 11px;
+}
+div.messages .filter h1 {
+    font-size: 14px;
+    border-bottom: solid 1px #999999;
+    margin: 10px 0px 0px 0px;
+}
+div.messages .filter h1.refresh {
+    border: 0px;
+    margin-top: 6px;
+}
+div.messages .filter h2 {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: italic;
+    margin: 6px 0px 3px 0px;
+}
+div.messages .filter select {
+    font-size: 9px;
+}
+div.messages div.filter a {
+    color: #3366c6;
+}
+div.messages div.nav {
+    text-align: right;
+    font-size: 10px;
+    color: black;
+    margin: 5px 15px 6px 0px;
+}
+div.messages div.nav span.pager {
+    color: #aaaaaa;
+}
+div.messages div.nav a {
+    color: #333333;
+    /*text-decoration: none;
+*/
+}
+
+
+table.message_list {
+    margin: 5px 0px;
+    padding: 0px;
+    text-align: left;
+    border-spacing: 0px;
+    padding:0px;
+    margin:0px;
+}
+table.message_list td.header {
+    border-bottom: 1px solid #000;
+}
+table.message_list td.bottom-border {
+    border-bottom: 1px solid #999;
+}
+table.message_list td.loading {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 15px;
+    height: 50px;
+}
+table.message_list td.loading img {
+    vertical-align: text-top;
+    padding: 0px 6px;
+}
+
+
+table.message_item {
+    width: 744px;
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+table.message_item td a {
+    color: black;
+}
+table.message_item th,
+table.message_item td {
+    vertical-align: top;
+    padding: 0px 5px;
+}
+table.message_item td.collapse,
+table.message_item th.collapse {
+    width: 19px;
+}
+table.message_item .from {
+    width: 125px;
+}
+table.message_item .subject {
+    /*width: 392px;*/
+}
+table.message_item .attachments {
+    width: 33px;
+}
+table.message_item .timestamp {
+    width: 120px;
+}
+table.message_item .resolution {
+    width: 70px;
+    text-align:center;
+}
+table.message_item h1 {
+    font-size: 12px;
+    margin: 4px 0px;
+    text-decoration: underline;
+    width: 150px;
+}
+table.message_item h1+p{
+    margin-top:0px;
+}
+table.message_item tr.message_item:hover {
+    background-color:#CDF;
+}
+
+
+
+div.nav {
+    margin-top:4px;
+}
+div.attachment_container {
+    text-align: right;
+    width: 555px;
+}
+div.audio {
+    float: right;
+    width: 450px;
+    height: 17px;
+    
+    cursor: pointer;
+    text-decoration: underline;
+    text-align: left;
+}
+div.clear {
+    clear:both;
+}
+
+/* Old styles:
+#sent_messages a.ui-button {line-height:1.0em}
+#sent_messages tr td {border-bottom: 1px solid #cef;}
+#received_messages tr td {border-bottom: 1px solid #cef;}
+#received_messages tr:hover {background-color:lightgreen;}
+#sent_messages tr:hover {background-color:lightgreen;}
+*/
+
+</style>
+
+
+
+<div id="received_messages" class="messages">
+
+<div class="filter">
+    <h1 class="refresh"><a href="#" onClick="javascript: Messaging.refreshReceivedMessages();return false;">{% trans "Refresh" %}</a></h1>
+
+    <h1>{% trans "Options" %}</h1>
+    
+    <h2>{% trans "Message Count" %}</h2>
+    <span class="count_selector">
+    <select onChange="javascript:Messaging.receivedMsgs_setCount();">
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="25">25</option>
+    <option value="50">50</option>
+    </select> {% trans "per page" %}
+    </span>
+    
+    <h1>{% trans "Show Only" %}</h1>
+    
+    <h2>{% trans "Resolution" %}</h2>
+    <input type="checkbox" id="resolved_status_true" onClick="javascript:Messaging.refreshReceivedMessages(false, true);" />{% trans "Resolved" %}<br />
+    <input type="checkbox" id="resolved_status_false" onClick="javascript:Messaging.refreshReceivedMessages(false, true);" />{% trans "Unresolved" %}
+</div>
+
+<!-- There's an issue with IE and the message list. If the body table contains a div of >533px in width (or text of similar width, presumably), the column widths seem to go to pot. -->
+<table id="received_msgs" class="message_list">
+<tbody><tr class="header"><td class="header">
+    <table class="message_item"><tbody><tr>
+    <th class="collapse"></th>
+    <th class="from">{% trans "From" %}</th>
+    <th class="subject">{% trans "Subject" %}</th>
+    <th class="attachments">{% trans "Att" %}.</th>
+    <th class="timestamp">{% trans "Timestamp" %}</th>
+    <th class="resolution">{% trans "Resolved" %}</th>
+    </tr></tbody></table>
+</td></tr><!--
+<tr class="msg_container"><td class="bottom-border">
+    <table class="message_item" id="msg_fa431658941045cb943c00323089c989"><tbody><tr class="message_item" id="fa431658941045cb943c00323089c989">
+    <td class="collapse"><a title="" aria-disabled="false" role="button" href="#" class="collapse ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" id="msg_fa431658941045cb943c00323089c989_collapse" button_pos="1" body_fetched="0"><span class="ui-button-icon-primary ui-icon ui-icon-minus"></span><span class="ui-button-text"></span></a></td>
+    <td class="from">Morris Kelley</td>
+    <td class="subject">test</td>
+    <td class="attachments"></td>
+    <td class="timestamp">01/02/11 10:49</td>
+    <td class="resolution"><input type="checkbox"></td>
+    </tr><tr style="display: table-row;" class="msg_body"><td colspan="6"><h1>Body</h1>
+<p>test</p>
+</td></tr>--></tbody></table>
+</td></tr></tbody></table>
+
+<div class="nav">
+
+<span class="pager"><a href="#" onClick="Messaging.receivedMsg_changePage(-99999);return false;">&lt;{% trans "newest" %}</a> | <a href="#" onClick="Messaging.receivedMsg_changePage(-10);return false;">&lt;10</a> | <a href="#" onClick="Messaging.receivedMsg_changePage(-5);return false;">&lt;5</a> | <a href="#" onClick="Messaging.receivedMsg_changePage(-1);return false;">&lt;1</a> |</span> {% trans "Page" %} <span class="pager_current"></span> {% trans "of" %} <span class="pager_max"></span> <span class="pager">| <a href="#" onClick="Messaging.receivedMsg_changePage(1);return false;">1&gt;</a> | <a href="#" onClick="Messaging.receivedMsg_changePage(5);return false;">5&gt;</a> | <a href="#" onClick="Messaging.receivedMsg_changePage(10);return false;">10&gt;</a> | <a href="#" onClick="Messaging.receivedMsg_changePage(99999);return false;">{% trans "oldest" %}&gt;</a></span>
+</div>
+
+<div class="clear"></div>
+
+</div>

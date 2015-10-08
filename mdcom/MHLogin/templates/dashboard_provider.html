@@ -1,0 +1,356 @@
+{% extends "dashboard_base.html" %}
+{% load i18n %}
+
+{% block dashboard_customCSS %}
+
+{% endblock %}
+
+{% block dashboard_customJS %}
+<script type="text/javascript">
+var org_invitations = null;
+var need_reload_org = false;
+
+var call_group_invitations = null;
+var need_reload_cg = false;
+$(function(){
+    window.autoRefreshTime = {{auto_refresh_time}};
+    var tid2=null;
+    var tid3=null;
+    $("#tabs").tabs({disabled:[]});
+
+    // todo, use one request to get all invitation list, include org/call group invitation
+    $.ajax({
+        url:'/Practice/getPenddings/',
+        type:'POST',
+        success:function(datas, txtStatus){
+            if (datas && typeof(datas)=="object" && datas.length>0) {
+                org_invitations = datas;
+                showOrgInvitationDialog();
+            }
+        },
+        error:function(data,txtStatus){}
+    });
+    $.ajax({
+        url:'/CallGroup/AJAX/getPenddings/',
+        type:'POST',
+        success:function(datas,txtStatus){
+            call_group_invitations = JSON.parse(datas);
+            showCallGroupInviateDialog();
+        },
+        error:function(data,txtStatus){}
+    });
+    
+});
+
+function showOrgInvitationDialog(){
+    if (org_invitations) {
+        if (need_reload_org && org_invitations.length<=0) {
+            location.reload();
+        } else if (org_invitations.length > 0) {
+            var d = org_invitations.shift();
+            var html = '<div id="inviteDialog"><div class="content">';
+            //todo use template render html string
+            html += '<div class="dialog-left">';
+            if(d.practice_photo){
+                html += '<img width="'+d.logo_width+'" height="'+d.logo_height+'" src="'+d.practice_photo+'" class="logo">';
+            }
+            html += '    <div class="org-name">'+d.practice_name+'</div>';
+            html += '</div>';
+            html += '<div class="dialog-right">';
+            html += '    <div class="text1">'+d.user+' invites you to join <span class="org-name">'+d.practice_name+'</span> as a '+d.type+'.</div>';
+            html += '    <div class="text1">'+MESSAGE.DASHBOARD_PROVIDER_SHOW_SEND_INVITATION_DIALOG.sprintf(d.org_type)+'</div>';
+            html += '    <div class="text1"><span class="org-name">'+MESSAGE.DASHBOARD_PROVIDER_NAME+'</span>'+d.practice_name+'</div>';
+        
+            html+='<div class="text1"><span class="org-name">'+MESSAGE.DASHBOARD_PROVIDER_ADDRESS+'</span>'+d.addr+'</div>';
+            html+='<div class="text1"><span class="org-name">'+MESSAGE.DASHBOARD_PROVIDER_ZIP_CODE+'</span>'+d.practice_zip+'</div>';
+            html+='<div class="text1">'+MESSAGE.DASHBOARD_PROVIDER_WANT_TO_JOIN_IT+'</div>';
+            html += '</div>';
+            html += '<div class="clear"></div>';
+            html += '</div></div>';
+        
+            showSimpleDialog({
+                title: '{% trans "You have one invitation" %}',
+                content: html,
+                height: 280,
+                dc_buttons: {
+                    'Yes': {
+                        'click': function() {
+                            acceptOrgInvite(this, d.pract_id,d.assoc_id);
+                        },
+                        'text': '{% trans "Yes, I want to" %}',
+                        'class': 'positive-btn'
+                    },
+                    'No': {
+                        'click': function() {
+                            rejectOrgInvite(this, d.assoc_id);
+                        },
+                        'text': '{% trans "No, thanks" %}'
+                    }
+                },
+                close: function() {
+                    setTimeout(function(){
+                        showOrgInvitationDialog();
+                    },500);
+                }
+            });
+        }
+    }
+};
+
+function showCallGroupInviateDialog(){
+    if (call_group_invitations) {
+        if (need_reload_cg && call_group_invitations.length<=0) {
+            location.reload();
+        } else if (call_group_invitations.length > 0) {
+            var d = call_group_invitations.shift();
+            var html = '{% trans "%s invites you to join his call group of %s" %}'.sprintf(d.from_user, d.call_group_team);
+            html += '<br/>{% trans "Do you want to join it?" %}';
+            showSimpleDialog({
+                title:'{% trans "You have one call group invitation" %}',
+                content: html,
+                width:500,
+                height: 125,
+                dc_buttons: {
+                    "Accept": {
+                        'click': function() {
+                            joinCallGroupAjax(this, d.id, 'Accept');
+                        },
+                        'text': '{% trans "Yes, I want to" %}',
+                        'class': 'positive-btn'
+                    },
+                    "Reject": {
+                        'click': function() {
+                            joinCallGroupAjax(this, d.id, 'Reject');
+                        },
+                        'text': '{% trans "No, thanks" %}'
+                    }
+                },
+                close: function() {
+                    setTimeout(function(){
+                        showCallGroupInviateDialog();
+                    },500);
+                }
+            });
+        }
+    }
+};
+
+function joinCallGroupAjax(obj, id, type){
+    var url = '';
+    var error_msg = '';
+    if(type == 'Accept'){
+        need_reload_cg = true;
+        url = '/CallGroup/AJAX/joinCallGroup/Accept/';
+        error_msg = '{% trans "An error occurred when you tried to accept call group invitation." %}';
+    }else if (type = 'Reject'){
+        url = '/CallGroup/AJAX/joinCallGroup/Reject/';
+        error_msg = '{% trans "An error occurred when you tried to reject call group invitation." %}';
+    }else{
+        return;
+    }
+
+    $.comAjax({
+        url: url,
+        type: 'POST',
+        data: {id: id},
+        success: function(data, textStatus, httpRequest) {
+            if (textStatus == 'success' && data) {
+                if (!data["success"] && data["message"]) {
+                    need_reload_cg = true;
+                    $(obj).dialog( "close" );
+                    alert(data["message"]);
+                    return;
+                }
+            }
+            $(obj).dialog( "close" );
+        },
+        error_500: error_msg
+    });
+}
+
+function acceptOrgInvite(obj, pract_id,assoc_id){
+    $.comAjax({
+        url: '/Profile/Practices/AJAX/addPracticeToProvider/',
+        type: 'POST',
+        data: {
+            pract_id: pract_id,
+            assoc_id: assoc_id
+        },
+        success: function(data, textStatus, httpRequest) {
+            need_reload_org = true;
+            if (textStatus == 'success' && data) {
+                if (!data["success"] && data["message"]) {
+                    $(obj).dialog( "close" );
+                    alert(data["message"]);
+                    return;
+                }
+            }
+            $(obj).dialog( "close" );
+        }
+    });
+};
+
+function rejectOrgInvite(obj, assoc_id){
+    $.comAjax({
+        url: '/Profile/Practices/AJAX/rejectAssociation/',
+        type: 'POST',
+        data: {
+            assoc_id: assoc_id
+        },
+        success: function(data, textStatus, httpRequest) {
+            if (textStatus == 'success' && data) {
+                if (!data["success"] && data["message"]) {
+                    need_reload_org = true;
+                    $(obj).dialog( "close" );
+                    alert(data["message"]);
+                    return;
+                }
+            }
+            $(obj).dialog( "close" );
+        }
+    });
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="mainpage">
+    <!--
+    {% ifnotequal accept_invites_count 0 %}
+    <div id="invitesCount" class="clearfix hidden" style="margin:5px 0;">
+        <div class="item prompt-left"></div>
+        <div class="item prompt_info mtop">
+            <table class="content">
+                <tr>
+                    <td>
+                    <a href="Profile/Practices/">{% trans "You have" %} {{ accept_invites_count }} {% trans "practice invitation" %} 
+                        {% ifnotequal accept_invites_count 1 %}{% trans "requests." %}{%else%}{% trans "request." %}{%endifnotequal%}</a>
+                    </td>
+                    <td>
+                        <a class="acceptCloseX" onclick="$('#invitesCount').hide();"><img src="{{STATIC_URL}}img/colse_btu.gif" /></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="item prompt-right"></div>
+    </div>
+    {% endifnotequal %}
+    -->
+    
+    {% ifnotequal unread_msg_count 0 %}
+    <div id="msgCount" class="clearfix" style="margin:5px 0; ">
+        <div class="item prompt-left"></div>
+        <div class="item prompt_info mtop">
+            <table class="content">
+                <tr>
+                    <td>
+                        {% trans "You have" %} {{unread_msg_count}} {% trans "new voicemail" %} 
+                        {% ifnotequal unread_msg_count 1 %} {% trans "messages." %}{%else%}{% trans "message." %}
+                        {%endifnotequal%}
+                    </td>
+                    <td>
+                        <a class="acceptCloseX" onclick="$('#msgCount').hide();"><img src="{{STATIC_URL}}img/colse_btu.gif" /></a>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        <div class="item prompt-right"></div>
+        </div><!-- end of clearfix -->
+    {% endifnotequal %}
+    
+    {% if request.CALL_ENABLE %}
+    <div class="forwarding clearfix mtop">
+        <div id="forwarding" class="ui-corner-all">
+            <div class="col_head">
+                <h3 class="fleft">{% trans "Forwarding/Answering Settings" %}</h3>
+            </div><!-- end col_head -->
+            <form id="fwd_form" class="col_main">
+                <table class="forwarding_info">
+                    <tr><td>
+                        {% trans "DoctorCom Number" %} {{ mdcom_phone|safe }} {% trans "Forwards To" %} <span id="mdcom_fwd_status">{{mdcom_fwd}}</span>. 
+                    </td><td class="textRight">
+                            <span>{% trans "Change:" %}</span>
+                            <select id="mdcom_fwd_chooser">
+                            {% ifnotequal mobile_phone '(none)' %}
+                            <option value="MO"{% ifequal mdcom_fwd 'Mobile' %} selected{% endifequal %}>{% trans "Mobile:" %} {{mobile_phone}}</option>
+                            {% endifnotequal %}
+                            {% ifnotequal office_phone '(none)' %}
+                            <option value="OF"{% ifequal mdcom_fwd 'Office' %} selected{% endifequal %}>{% trans "Office:" %} {{office_phone}}</option>
+                            {% endifnotequal %}
+                            {% ifnotequal other_phone '(none)' %}
+                            <option value="OT"{% ifequal mdcom_fwd 'Other' %} selected{% endifequal %}>{% trans "Other:" %} {{other_phone}}</option>
+                            {% endifnotequal %}
+                            <option value="VM"{% ifequal mdcom_fwd 'Voicemail' %} selected{% endifequal %}>{% trans "Voicemail" %}</option>
+                        </select>
+                    </td></tr>
+                    <tr><td>
+                        {% trans "Answering Service Calls Forwards To" %} <span id="anssvc_fwd_status">{{anssvc_fwd}}</span>.
+                    </td><td class="textRight">
+                        <span>{% trans "Change:" %}</span>
+                        <select id="ans_fwd_chooser">
+                            {% ifnotequal mobile_phone '(none)' %}
+                            <option value="MO"{% ifequal anssvc_fwd 'Mobile' %} selected{% endifequal %}>{% trans "Mobile:" %} {{mobile_phone}}</option>
+                            {% endifnotequal %}
+                            {% ifnotequal office_phone '(none)' %}
+                            <option value="OF"{% ifequal anssvc_fwd 'Office' %} selected{% endifequal %}>{% trans "Office:" %} {{office_phone}}</option>
+                            {% endifnotequal %}
+                            {% ifnotequal other_phone '(none)' %}
+                            <option value="OT"{% ifequal anssvc_fwd 'Other' %} selected{% endifequal %}>{% trans "Other:" %} {{other_phone}}</option>
+                            {% endifnotequal %}
+                            <option value="VM"{% ifequal anssvc_fwd 'Voicemail' %} selected{% endifequal %}>{% trans "Voicemail" %}</option>
+                        </select>
+                    </td></tr>
+                </table>
+            </form><!-- end of fwd form -->
+        </div><!-- end of forwarding -->
+
+        {# NOTE: If provider's mobile_phone is optional, then this "call" area should be hidden when mobile_phone is empty. #}
+        <div class="call_member">
+            <form action="/Call/Number/" method="GET">
+                <span>
+                    <input id="callMembers" type="text" value=' {% trans "Call  Non-Member" %}' name="called_number" {% if not request.CALL_ENABLE %} disabled="disabled" {% endif %}/>
+                    {% if request.CALL_ENABLE %} 
+                    <button type="submit" value='{% trans "submit" %}'></button>
+                    {% else %}
+                    <div class="gray"></div>
+                    {% endif %}
+                </span>
+                <span class="enter_eg">{% trans "Enter only digits without spaces, e.g. 8005551212" %}</span>
+            </form>
+        </div><!-- end call_member -->
+    </div><!-- end of forwarding clearfix mtop -->
+    {% endif %}
+
+    <div id="provider_info"></div>
+    
+    <div id='dashboard' class="ui-corner-all pm-ui-container">
+        <div id="tabs">
+            <input type="hidden" id="zip" value="{{zip}}"/>
+            <div class='content'>
+                <div class='tabPrev hidden' onclick='clkTabPrev();'></div>
+                {{tabUI}}
+                <div class='tabNext hidden' onclick='clkTabNext();'></div>
+            </div>
+            {% for u in orgOroviders %}
+                <div id="fragment-{{u.id}}" org_id='{{u.id}}' tab_type="site_org" class="tabdivs orgProvider">{{u.context}}</div>
+            {% endfor %}
+            
+            <div id="fragment-01" tab_type="site_provider" class="tabdivs">{{providers}}</div>
+            <div id="fragment-04" tab_type="site_staff"  class="tabdivs">{{site_staff}}</div>
+            <div id="fragment-02" tab_type="community_provider" class="tabdivs">{{community_physicians}}</div>
+            <!--
+            <div id="fragment-03" tab_type="clerk" class="tabdivs">{{site_clinical_clerks}}</div>
+            -->
+
+            <div id="fragment-05" tab_type="office_staff" class="tabdivs">{{practice_members}}</div>
+            <div id="fragment-06" tab_type="practice" class="tabdivs">{{local_practices}}</div>
+            <div id="fragment-07" tab_type="my_favorite" class="tabdivs">{{my_favorite}}</div>
+            <div id='loadingPic2'></div>
+        </div><!-- end of tabs -->
+
+        {%include 'Messaging/accordion_messages.html'%}
+
+    </div><!-- end of ui-corner-all -->
+</div><!-- end of forwarding clearfix mtop -->
+</div><!-- end of mainpage -->
+{% endblock %}

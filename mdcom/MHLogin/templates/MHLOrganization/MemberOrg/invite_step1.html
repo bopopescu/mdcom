@@ -1,0 +1,71 @@
+{% load i18n %}
+
+<script>
+	$(function(){
+		
+	});
+</script>
+
+{% include "MHLOrganization/MemberOrg/member_org_js.html" %}
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+{%include 'includes/jquery.validate.html'%}
+
+<div class="org-tab-content">
+	<div id="search_org_panel">
+		<h1>{% trans "Search Organization" %}</h1>
+		<form id="searchForm" action=".">
+			<table class="search_condition">
+				<tr>
+					<td class="left">
+						<label for="id_org_name">{% trans " Name:" %}</label> 
+					</td>
+					<td>
+						<input type="text" maxlength="30" name="org_name" id="id_org_name"><span class="redstar">*</span>
+					</td>
+				</tr>
+			</table>
+			<div class="buttons">
+				<input type="submit" id="inviteStep2" class="org_inf_btn" value="{% trans 'Next' %}">
+				<input type="button" id="cancelSearch" class="org_inf_btn" value="{% trans 'Cancel' %}">
+			</div>
+		</form>
+	</div>
+
+	<div id="search_org_result" style="display:none;">
+	</div>
+
+	<div id="congratulation_panel">
+	</div>
+</div>
+
+<script>
+$(function(){
+	$("#cancelSearch").click(function(){
+		memberOrgView();
+	});
+	$('#searchForm').validate({
+		rules:{
+			org_name: {required:true}
+		},
+		messages:{
+			org_name:{
+				required:'{% trans "Practice name field is required." %}'
+			}
+		},
+		showErrors: showErrorsBelow,
+		submitHandler:function(form){
+			$.comAjax({
+				url: "/Organization/MemberOrg/InviteStep2/",
+				type:'POST',
+				data: $('#searchForm').serialize(),
+				success:function(data, status){
+					$("#search_org_panel").hide();
+					$("#search_org_result").html(data);
+					$("#search_org_result").show();
+				}
+			});
+		}
+	});
+});
+
+</script>

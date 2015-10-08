@@ -1,0 +1,104 @@
+{% load i18n %}
+<script>
+	var DATE_FORMAT={
+		'de':'yy-mm-dd',
+		'en-us':'mm/dd/yy'
+	};
+
+	$(function(){
+		$("#id_date_of_birth").attr("maxlength",10).css("ime-mode","disabled").datepicker({
+			showOn: 'both',
+			buttonImage: '{{STATIC_URL}}img/calendar.gif',
+			buttonImageOnly: true,
+			minDate: new Date(1900, 1-1, 1),
+			maxDate:'+0',
+			yearRange: "-200",
+			changeYear: true,
+			changeMonth: true,
+			dateFormat: DATE_FORMAT[Constant.TIME_ZONE]
+		});
+
+		$("#id_back_to_clinical").click(function(){
+			$("#referTabs").tabs("option", "selected", 0);
+		});
+	});
+
+</script>
+
+<div id="form-2">
+	<div class="clear"></div>
+		<div class="referContent">
+			<table>
+				<tr>
+					<td class="lefttd">
+						<span class="star">*</span>{{ demographics_form.first_name.label_tag }}:<br/>
+						{{ demographics_form.first_name }}
+					</td>
+					<td class="righttd">
+						<span class="star">*</span>{{ demographics_form.last_name.label_tag }}:<br/>
+						{{ demographics_form.last_name }}
+					</td>
+				</tr>
+				<tr>
+					<td class="lefttd">
+						{{ demographics_form.previous_name.label_tag }}<br/>
+						{{ demographics_form.previous_name }}
+					</td>
+					<td class="righttd"><span class="star">*</span>{% trans "DOB:" %}</span><br/>
+						{{ demographics_form.date_of_birth }}
+					</td>
+				</tr>
+				<tr>
+					<td class="lefttd">
+						{% trans "Gender:" %}<br/>
+						{{ demographics_form.gender }}
+					</td>
+					<td class="righttd">
+						<span>{% trans "Address:" %}</span><br/>
+						{{ demographics_form.address }}
+					</td>
+				</tr>
+				<tr>
+					<td class="lefttd">
+						<span class="star">*</span>{% trans "MRN:" %}<br/>
+						{{ demographics_form.mrn }}
+					</td>
+					<td class="righttd">
+						<span>{% trans "SSN:" %}</span><br/>
+						{{ demographics_form.ssn }}
+					</td>
+				</tr>
+				<tr>
+					<td class="lefttd">
+						{% trans "Mobile Phone:" %}<br/>
+						{{ demographics_form.phone_number }}
+					</td>
+					<td class="righttd">
+						<span>{% trans "Home Phone:" %}</span><br/>
+						{{ demographics_form.home_phone_number }}
+					</td>
+				</tr>
+				<tr>
+					<td class="lefttd">
+						{% trans "Email:" %}<br/>
+						{{ demographics_form.email }}
+					</td>
+					<td class="righttd">
+						&nbsp;
+					</td>
+				</tr>
+			</table>
+				
+				<div class="dem_textarea">
+					{% trans "Notes:" %}<br/>
+					{{ demographics_form.notes }}
+				</div>
+				
+			<div class="clear"></div>
+			<div class="actionbtns">
+				<input id="id_back_to_clinical" type="button" name="Submit" value="{% trans "Back to Clinical" %}" class="cancel"/>
+				<input id="id_proceed_to_insurance" type="button" value="{% trans "Proceed to Insurance" %}" class="next"/>
+				<input id="id_cancel1" type="button" value="{% trans "Cancel" %}" class="cancel"/>
+			</div>							
+		</div>
+</div>		

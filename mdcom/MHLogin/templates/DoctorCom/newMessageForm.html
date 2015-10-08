@@ -1,0 +1,42 @@
+{% extends "base_short_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+#id_body {margin-left:10px;width:330px;height:70px;}
+#id_send {margin-left:10px;width:100px;font-weight:bold;font-size:14px;color:#003399;}
+{% endblock %}
+
+{% block customJS %}
+    <script type="text/javascript">  
+        $(document).ready(function(){            
+            $("tr:odd").removeClass("odd");
+
+        });
+    </script>
+
+
+{% endblock %}
+
+{% block content %}
+    <div style="margin-left:40px; margin-top:-60px;">        
+		<p class="header" style="font-size:14px;font-weight:bold;">{% trans "Welcome" %}, {{ mhl_user_displayName }}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Current location" %}: <b>{{ current_site.name }}</b> <a href="/Sites/">{% trans "Click here" %}</a> {% trans "to change" %}.</p>
+    </div>
+<div style="width:600px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">
+
+<h1>{{headline}}</h1>
+
+<form action="{% if ACTION %}{{ACTION}}{% else %}.{% endif %}" method="POST">
+<p style="margin-left:10px;margin-bottom:2px;font-weight:bold;font-size:.9em;">{% trans "Message Text DoctorCom" %}:</p>
+{{form.body}}
+<br />
+{% trans "Do not use identifying information such as names or room numbers." %}
+<input type="hidden" name="action" value="send" />
+<p style="margin-left:10px;font-weight:bold;font-size:.9em;">{% trans "Recipient" %}: {{form.user_recipient}}</p>
+<input id="id_send" type="submit" name="Submit" value='{% trans "Send Text" %}' />
+
+</form>
+</div>
+{% endblock %}
+
+

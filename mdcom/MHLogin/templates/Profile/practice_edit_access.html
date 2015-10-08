@@ -1,0 +1,41 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<script>
+	$(function(){
+		if({{isClearData}}){
+			$('#id_number').val('');
+			$('#id_description').val('');
+		}
+		
+	});
+</script>
+<div id="managerHours" class="ui-corner-all">
+  <div>
+    <h3>{% trans "IVR access numbers" %}</h3>
+    <form action='.' method="post">
+      <table class='tableProfile' cellspacing='0' cellpadding='0' width="60%">
+		<tr>
+			<th align='left'>{% trans "number" %}</th>
+			<th align='left'>{% trans "description" %}</th>
+			<th align='center'>{% trans "delete" %}</th>
+		</tr>
+			{% for number in access_numbers %}
+			<tr>
+				<td>{{number.number}}</td>
+				<td>{{number.description}}</td>
+				<td align='center'><input type="checkbox" name="remove" value="{{ number.id }}"></td>
+			</tr>
+			{% endfor %}
+      </table>
+      <input type="submit" name="delnumber" value="{% trans "Delete Selected Numbers" %}">
+      <div class='ivrNumber'>
+      		{{addform.as_p}}
+      		<input type="submit" name="newnumber" value="{% trans "Add New Number" %}">
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

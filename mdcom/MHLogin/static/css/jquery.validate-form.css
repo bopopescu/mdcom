@@ -1,0 +1,56 @@
+/**********************************
+
+Name: validate-form Styles
+
+***********************************/
+
+form label.error, label.error {
+	/* remove the next line when you have trouble in IE6 with labels in list */
+	color: red;
+	font-style: italic!important;
+	font-weight:normal!important;
+}
+
+label.tip {
+	font-size:8pt;
+	color:#0a427c;
+}
+
+div.error {
+	color: red;
+	font-style: italic!important;
+	font-weight:normal!important;
+}
+
+span.verified {
+	margin-left:5px;
+	color: green;
+}
+
+input.checkbox { border: none }
+
+td.error { border: 1px dotted red; }
+
+select.error { border: 1px dotted red; }
+
+input.error { border: 1px dotted red; }
+
+textarea.error { border: 1px dotted red!important;}
+
+div.validate-message-area {
+	clear:left;
+	background-color: #eee;
+	border: 1px solid red;
+	margin: 5px;
+	padding: 5px;
+}
+div.validate-message-area ol li {
+	list-style-type: disc;
+	margin-left: 20px;
+}
+div.validate-message-area { display: none }
+div.validate-message-area label.error {
+	display: inline;
+}
+
+.redstar{ color:red; margin-left:5px;}

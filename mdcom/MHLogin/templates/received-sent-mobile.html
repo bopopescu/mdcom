@@ -1,0 +1,49 @@
+{% extends "base-mobile.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+/* .ui-filterable-query {font-size:14px;line-height:30px;padding:5px;margin-bottom:5px;text-align:center;border:1px solid lightgray; overflow:visible;}
+.ui-filterable-query input[type=text] {width:150px;background-color:#def;} */
+#searchbox {width:200px;line-height:15px;}
+#searchbox2 {width:200px;line-height:15px;}
+.hidden{ display:none;}
+.tableoverflow {overflow:auto; overflow-x:hidden; overflow-y:auto;}
+#accordion_messages{ margin:10px;}
+#accordion_messages .ui-widget-header{ display:block; font-weight:bold; padding:5px; width: 936px; height:20px;}
+#accordion_messages .ui-widget-content{ width:946px; margin-bottom:10px;}
+#mobile-head p{ text-align:left;}
+{% endblock %}
+
+{% block customJS %}
+    <script type="text/javascript">
+    window.autoRefreshTime = {{auto_refresh_time}}
+    </script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/messaging/main.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/messaging/ajax.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jPlayer/js/jquery.jplayer.js"></script>    
+    <script type="text/javascript" src="{{STATIC_URL}}js/messaging/dashboard_mobile.js"></script>
+{% endblock %}
+
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/reset.css" />
+{% block content %}
+    <div id='mobile-head'>
+        <p class="header">{% trans "Welcome," %} {{ mhl_user_displayName }}</p>
+        <p class="header">{% trans "Current location:" %} <b>{{ current_site.name }}</b> <a href="/Profile/Sites/">{% trans "Click here" %}</a> {% trans "to change." %}</p>
+        <p class="header">{% trans "Contact phone number:" %} <b>{{ mobile_phone }}</b>. <a href="/Profile/Edit/">{% trans "Click here" %}</a> {% trans "to change." %}</p>
+    </div>
+    <div id="accordion_messages" class="ui-widget">
+        <div class="header_messages ui-widget-header ui-corner-all" style="">
+            <a href="#" style="text-decoration:none;">{% trans "Recently Received Messages" %}</a>
+            <span id='newMsg'></span>
+        </div>
+        <div class="ui-widget-content">
+            {%include 'Messaging/dashboard_received_mobile.html'%}
+        </div>
+        <div class="header_messages ui-widget-header ui-corner-all">
+            <a href="#" style="text-decoration:none;">{% trans "Recently Sent Messages" %}</a>
+        </div>
+        <div class="ui-widget-content">
+            {%include 'Messaging/dashboard_sent.html'%} 
+        </div>
+    </div>
+{% endblock %}

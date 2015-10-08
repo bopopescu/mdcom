@@ -1,0 +1,8 @@
+{% load i18n %}
+<p>{% trans "Congratulations! Your new DoctorCom phone number and PIN are" %}:</p>
+<p class='pincode'>{% trans "DoctorCom Number" %}: {{new_number}}</p>
+<p class='pincode'>{% trans "PIN Code" %}: {{pin}}</p>
+<p>{% trans "Please make a note of your pin as you will need it to access your voice mailbox. You'll want to log into your voicemail box at your earliest convenience to set it up." %}</p>
+<p>{% trans "To log into your voicemail box, just call your DoctorCom number from your mobile phone, as listed in your account profile." %}</p>
+
+<a href="/">{% trans "Go back to Home Page" %}</a>

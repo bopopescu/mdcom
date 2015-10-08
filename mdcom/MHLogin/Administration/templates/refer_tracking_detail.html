@@ -1,0 +1,138 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}Brokers{% endblock %}
+
+{% block customJS %}
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.pagination.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        InitReferData(0);
+        $("#referTable_pagation .selectPagePer select").change(function(){
+            InitReferData(0);
+        });
+
+        $('#referTrackingBack').bind('click',function() {
+            var form_url = '/dcAdmin/ReferTracking/';
+            $('#referTrackingForm').attr("action", form_url)
+            $('#referTrackingForm').submit();
+        });
+    });
+    
+    function pageselectRefersCallback(page_id, jq) { 
+        InitReferData(page_id); 
+    }
+
+    function InitReferData(pageIndex) {
+        var referCount = 0;
+        var items_per_page = $("#referTable_pagation .selectPagePer option:selected").val();
+        var id_period_type = $('#id_period_type').val();
+        var id_period_radio = $('#id_period_radio').val();
+        var id_period_from = $('#id_period_from').val();
+        var id_period_to = $('#id_period_to').val();
+
+        var tbody = "";
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: '/dcAdmin/ReferTrackingDetail/Ajax/'+$('#userID').val(),
+            data: {
+                    'page_index':(pageIndex + 1),
+                    'items_per_page':items_per_page,
+                    'period_type':id_period_type,
+                    'period_radio':id_period_radio,
+                    'period_from':id_period_from,
+                    'period_to':id_period_to
+                  },
+            success: function(data) { 
+                    referCount = data.referCount;
+                    $.each(data.refers, function(i,refer){
+                        if(i%2==1){
+                            tbody += '<tr>'
+                        } else {
+                            tbody += '<tr class="odd">'
+                        }
+                        tbody += '<td style="width:200px;">'+refer.time+'</td>'
+                        tbody += '<td style="width:200px;">'+refer.recipients+'</td>'
+                        tbody += '<td style="width:200px;">'+refer.sender+'</td>'
+                        tbody += '<td >'+refer.practice+'</td>'
+                        tbody += '</tr>'
+                    });
+                    $('#referTable tbody').html(tbody);
+                    $('#refer_count').html(referCount);
+                    $("#referTable_pagation .pagniation").pagination(referCount, {
+                        callback: pageselectRefersCallback, 
+                        prev_text: '<',
+                        next_text: '>',
+                        items_per_page: items_per_page,
+                        num_display_entries: 5,
+                        current_page: pageIndex,
+                        num_edge_entries: 0
+                    });
+                    $('.pagination a').attr({'href':'javascript:void(0)'});
+                }
+            });
+        }
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="dc_nav">
+<a href="/dcAdmin/">DCAdmin</a> > 
+<a href="/dcAdmin/ReferTracking/">{% trans "Refer Tracking" %}</a>
+</div>
+<div id='dcAdmin_home' class="ui-corner-all">
+
+<h2>{% trans "Refers Detail" %}</h2>
+<table id='referTable' class='brokerTable' cellspacing='0' cellpadding='0' width="60%">
+    <thead>
+        <tr>
+            <th align="left" style="width:200px;">{% trans "Datetime" %}</th>
+            <th align="left" style="width:200px;">{% trans "Recipient" %}</th>
+            <th align="left" style="width:200px;">{% trans "Sender" %}</th>
+            <th align="left">{% trans "Practice of Sender" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div id="referTable_pagation_count"  class="pagation_nav_left">
+    {% trans "Total:" %} <span id="refer_count"></span>&nbsp;{% trans "refer(s)" %}
+</div>
+<div id="referTable_pagation"  class="pagation_nav">
+    <table>
+        <tr>
+            <td><div class="pagniation"></div></td>
+            <td>
+                <div class="selectPagePer">
+                    <select>
+                        <option value="10" selected="selected">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>{% trans "per page" %}</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="clear:both;"></div>
+
+<div class="brokerCreate"><a id='referTrackingBack' href="javascript:void(0);">{% trans "Back" %}</a></div>
+<div style="display: none">
+    <form id="referTrackingForm" enctype="multipart/form-data" action="." method="POST">
+        {{form}}
+    </form>
+</div>
+<input type="hidden" id='userID' value="{{userID}}" />
+</div>
+{% endblock %} 

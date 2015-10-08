@@ -1,0 +1,82 @@
+{% load i18n %}
+
+<div class="search-result">
+	<table id="member_org_invite_table" class="org_table" width="100%" cellspacing="0" cellpadding="0">
+		<!--<tr class="title">
+			<th>{% trans "Name"%}</th>
+			<th>{% trans "Logo"%}</th>
+			<th>{% trans "Provider Count"%}</th>
+			<th></th>
+		</tr>-->
+		{% if member_org_invitations %}
+		
+		{% for mo in member_org_invitations %}
+		<tr>
+			<td>
+				<div>
+					<div class="request-in-icon"></div>
+					{{ mo.to_name }}
+				</div>
+			</td>
+			<td><img src="{{mo.to_logo}}" alt="" style="max-width:100px; max-height:30px; margin-top: 4px;"></td>
+			<td>
+				<div rid="3" type="1" class="user-action">
+					<div class="resend" onclick="resendOrgInvite('{{ mo.pending_id }}', '{{ mo.to_name }}');">
+						<div class="item left"></div>
+						<div class="item right">Resend</div>
+					</div>
+					<div class="cancel" onclick="cancelOrgInvite({{ mo.pending_id }}, '{{ mo.to_name }}');">
+						<div class="item left"></div>
+						<div class="item right">Cancel</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<tr>
+			<td><h3>{% trans "Currently, no member organization invitations." %}</h3></td>
+		</tr>	
+		{% endif %}
+	</table>
+</div>
+
+{% if member_org_invitations %}
+<div id="member_org_invitationsListPagation" class="pagation_panel pagation_panel2">
+	<table>
+		<tr>
+			<td><div class="pagniation"></div></td>
+		</tr>
+	</table>
+</div>
+{% endif %}
+
+
+<script>
+	var member_org_invitationsPagationCallback = function(index){
+		getAndShowMemberOrgInvite(index);
+	};
+
+	function showmember_org_invitationsPagination(){
+		var index = {{index}};
+		var count = {{count}};
+		var msgsCount = {{total_count}};
+		$('#member_org_invitationsListPagation .pagniation').pagination(msgsCount ,{
+				callback:member_org_invitationsPagationCallback,
+				current_page: index,
+				items_per_page: count,
+				num_edge_entries:1,
+				num_edge_entries: 3,
+				num_display_entries: 3,
+				prev_text:"",
+				next_text:"",
+				href_none:true
+			}
+		);
+	}
+
+	$(function(){
+		showmember_org_invitationsPagination();
+	});
+
+</script>

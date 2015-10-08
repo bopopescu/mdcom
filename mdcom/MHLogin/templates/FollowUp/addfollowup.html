@@ -1,0 +1,21 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customJS %}
+
+{%include 'FollowUp/editfollowup_script.html'%}
+
+{% endblock %}
+{% block content %}
+<div id="addFollowUp" class="ui-corner-all">
+<h2>{% trans "Add A New Follow-Up Task Item" %}</h2>
+
+<form id="followupForm" enctype="multipart/form-data" action="/FollowUps/Add/{{msg_obj_str}}/{{messageID}}/" method="POST">
+<table class='followupTable'>
+{{ addfollowup_form.as_table }}
+</table>
+<input type="submit" value='{% trans "Add" %}' title='{% trans "Save" %}' />
+<input type='button' value='{% trans "Cancel" %}' onclick="window.location='/'" />
+</form>
+</div>
+{% endblock %}

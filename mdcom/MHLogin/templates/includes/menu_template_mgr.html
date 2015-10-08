@@ -1,0 +1,158 @@
+{% load i18n %}
+{% load url from future %}
+{% load tech_tags %}
+{% load org_tags %}
+
+<script type="text/javascript">
+    $(function(){
+        $('#changeCurrentPractice').change(function(){
+            var id = $(this).val();
+            $.comAjax({
+                url:'/changeCurrentPractice/',
+                type:'POST',
+                data:{id:id},
+                success:function(data,txtStatus){
+                    var d = JSON.parse(data);
+                    if(d.status=='ok'){
+                        if(location.pathname.indexOf('Schedule')>0){
+                            if(d.uses_original_answering_serice) {location.href='/CallGroup/'+d.callgroup_id+'/Schedule/';}
+                            else {location.href='/Practice/'+id+'/CallGroup/0/Schedule/';}
+                            
+                        }else{
+                            location.reload();
+                        }
+                    }
+                },
+                error:function(data,txtStatus){}
+            });
+        });
+    });
+</script>
+<div id="header">
+    <div class="header_top clearfix">
+        <div id="header_logo">
+            {% if prefer_logo %}
+                <img src="{{prefer_logo}}" class="logo" onload="adjustLogoPosition(this)"/>
+            {% else %}
+                <a href="/" class="fleft logo">
+                    <img src="{{STATIC_URL}}img/logo.gif" />
+                </a>
+            {% endif %}
+        </div>
+        <div id="user_info_panel" class="fright">
+            <span>
+                {% trans "Welcome" %}, <strong>{{ mhl_user_displayName }}</strong>
+                    <a href="/logout/">{% trans "Logout" %}</a>
+                </span>
+            <span>
+                {% trans "Current Hospital:" %}
+                {{ site_form.current }}
+            </span>
+            <span>
+                {% trans "Current Practice/Organization" %}:
+                <select id='changeCurrentPractice'>
+                    {% for p in managed_practices %}
+                        {% if p == current_practice %}
+                            <option selected='selected' value='{{p.pk}}'>{{p.practice_name}}</option>
+                        {% else %}
+                            <option value='{{p.pk}}'>{{p.practice_name}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </span>
+        </div>
+
+    </div>
+    <!--nav start-->
+    <div class="nav_list" id="user-new">
+        <div class="nav_body clearfix">
+            <ul class="fleft">
+                <li><a href="/">{% trans "Home" %}</a></li>
+              <li>
+                   <a href="/Profile/">{% trans "Account" %}</a>
+                    <div class="sub_nav hide">
+                        <ul>
+                            <li><a href="/Profile/">{% trans "User Profile" %}</a></li>
+                            <li><a href="/Practice/Profile/">{% trans "Org. Profile" %}</a></li>
+                        </ul>
+                        <div class="sub_nav_bto sub_nav_bto1"></div>
+                    </div>
+              </li>
+              <li><a href="/Practice/Staff/">{% trans "Staff" %}</a></li>
+              {% if current_practice.uses_original_answering_serice %}
+              <li>
+                  <a href="/CallGroup/{{current_practice.call_group.id}}/Schedule/">{% trans "Schedule" %}</a>
+                  <div class="sub_nav hide">
+                        <div class="sub_nav_bto sub_nav_bto3"></div>
+                        <ul>
+                            <li>
+                                <a href="/CallGroup/{{current_practice.call_group.id}}/Schedule/" style="font-size:13px;">{% trans "On Call Providers" %}</a>
+                            </li>
+                        </ul>
+                    </div>
+              </li>
+              {% else %}
+              <li>
+                  <a href="/Practice/{{current_practice.id}}/CallGroup/{% if request.session.current_callgroup_id %}{{request.session.current_callgroup_id}}{% else %}0{% endif %}/Schedule/">{% trans "Schedule" %}</a>
+                  <div class="sub_nav hide">
+                        <div class="sub_nav_bto sub_nav_bto3"></div>
+                        <ul>
+                            <li>
+                                <a href="/Practice/{{current_practice.id}}/CallGroup/{% if request.session.current_callgroup_id %}{{request.session.current_callgroup_id}}{% else %}0{% endif %}/Schedule/" style="font-size:13px;">{% trans "On Call Providers" %}</a>
+                            </li>
+                        </ul>
+                    </div>
+              </li>              
+              {% endif %}
+              <li>
+                  <a href="/Support/FAQs/">{% trans "Support" %}</a>
+                <div class="sub_nav hide">
+                    <ul>
+                        <!--<li><a href="/Support/videoTutorial/">{% trans "Video Tutorial" %}</a></li>
+                        <li><a href="/Support/FAQs/">{% trans "FAQs" %}</a></li>
+                        <li><a href="/Support/Contact/">{% trans "Contact Support" %}</a></li>-->
+                        
+                        <li><a href="/Support/FAQs/">{% trans "FAQs" %}</a></li>
+                        <li><a href="/Support/androidFAQs/">{% trans "Android Tips" %}</a></li>
+                        <li><a href="/Support/iphoneFAQs/">{% trans "iPhone Tips" %}</a></li>
+                        <li><a href="/Support/Contact/">{% trans "Contact" %}</a></li>
+                    </ul>
+                    <div class="sub_nav_bto sub_nav_bto1"></div>
+                </div>
+              </li>
+              <li>
+                  <a onclick='showSendInvitationDialog();'>{% trans "Invite Provider" %}</a>
+              </li>
+              {% comment %} We should have this type of logic for other types rather 
+              than have a bunch of menu_template_xyz.html. {% endcomment %}
+              {% if 'Salesperson' in sender_types or 'Administrator' in sender_types %}
+              <li>
+                  <a href="/Sales/">{% trans "Sales" %}</a>
+                  <div class="sub_nav hide">
+                      <ul>
+                          <li><a href="/Sales/salesleads">{% trans "Sales leads" %}</a></li>
+                          <li><a href="/Sales/Invites/">{% trans "Issue invites" %}</a></li>
+                      </ul>
+                      <div class="sub_nav_bto sub_nav_bto5"></div>
+                  </div>
+              </li>
+              {% endif %}
+              {% get_org_menu_var as show_org_menu %}
+              {% if show_org_menu == "true" %}
+                  <li><a href='/Organization/List/'>{% trans "Organization" %}</a></li>
+              {% endif %}
+              {% get_tech_menu_var as show_tech_menu %}
+              {% if show_tech_menu == "true" %}
+                  <li><a href='/dcAdmin/'>{% trans "Admin" %}</a></li>
+              {% endif %}
+          </ul>
+            <span class="fright">
+                <input type="text" id="allProviders" title='{% trans "Type to Search for Provider" %}'/>
+                <button type="submit" id="btnSearch"></button>
+            </span>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!--nav end-->
+</div>

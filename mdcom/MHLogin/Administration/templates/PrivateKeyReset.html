@@ -1,0 +1,36 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}{% trans "Administration: User Password Reset" %}{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h1>{% trans "Private Key Reset" %}
+</h1>
+    {% if reset_users %}
+        <div class='privateKey'>{% trans "You're about to reset the private keys for all users who need this done" %}:</div>
+        <ul class=''>
+            {% for reset_user in reset_users %}
+                <li>{{reset_user.first_name}} {{reset_user.last_name}} ({{reset_user.email}})</li>
+            {% endfor %}
+        </ul>
+        <form class='privateKeyForm' action="." method="POST">
+            <table border="0">
+                <tr>
+                    <th>{% trans "Administrator Password" %}: </th>
+                    <td>{{form.password}}</td>
+                    <td>{{form.password.errors}}</td>
+                </tr>
+            </table>
+            <input type="submit" value='{% trans "Submit" %}' />
+        </form>
+{% else %}
+<h3>{% trans "There are no outstanding private key reset requests." %}</h3>
+{% endif %}
+</div>
+{% endblock %}

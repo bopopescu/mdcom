@@ -1,0 +1,84 @@
+{% load i18n %}
+{% if not not_show_header %}
+<div id="dataTables_filter_custom" class="dataTables_filter_custom hidden" >
+	<form id="userInfoBrokerForm" action="/Messages/NewMulti/" method="GET">
+		{% trans "Search by Name:" %}
+		<input type="text" class="name" name='name'/>
+		{% trans "Specialty:" %}
+		<input type="text" class="specialty" name='specialty'/>
+		<span style="margin-left:5px; padding-left:0px;">{% trans "Proximity:" %}</span>
+		<select class="proximity" name="proximity">
+			<option value="10">10{% trans "mi" %}</option>
+			<option value="25">25{% trans "mi" %}</option>
+			<option value="50" selected="selected">50{% trans "mi" %}</option>
+			<option value="100">100{% trans "mi" %}</option>
+			<option value="200">200{% trans "mi" %}</option>
+		</select>
+		<input type="text" maxlength="10" class="zip" style="ime-mode: disabled;" name="zip"/>
+		{% trans "Licensure:" %}
+		<select class="licensure" name="licensure" >
+			{% for licensure in licensure_list %}
+			<option value="{{ licensure.0 }}">{{ licensure.0 }}</option>
+			{% endfor %}
+		</select>
+		<input type="button" class="apply" value='{% trans "Apply" %}'/>
+	</form>
+</div>
+{% endif %}
+<div class="provider-container">
+	<table id="providers" class="rowhover dataTables" cellpadding='0' cellspacing='0'>
+		<thead>
+			<tr style="display:none;"><th></th><th></th><th></th><th></th><th style="display:none;"></th><th style="display:none;"></th><th></th></tr>
+		</thead>
+	{% if providers %}
+	{% for provider in providers %}
+		<tr class='hidden'>
+			<td><input type="hidden" value="{{provider.user.id}}" /></td>
+			<td></td>
+			<td></td>
+			<td class="name" id="{{provider.user.id}}" title="Click on name to view more info." onclick="getAndShowDetialInfo(this, '/Provider_Info/Provider/')" >
+				<span class="warpName">					
+					{{ provider.fullname }}
+					<span class="text">
+						{% if provider.template_specialty%}
+						({{provider.template_specialty}})
+						{% else %}
+						&nbsp;
+						{% endif %}
+					</span>
+				</span>
+			</td>
+			<td style="display:none;">
+				{{ provider.user.last_name }} {{ provider.user.first_name }}
+			</td>
+			<td style="display:none;">
+				{% if provider.template_specialty%}
+				{{provider.template_specialty}}
+				{% else %}
+				&nbsp;
+				{% endif %}
+			</td>
+			<td class='links'>
+				<a href="/Messages/New/?user_recipients={{ provider.user.id }}">
+					<div class="msg_btn button btnShow buttonMsgAble" available="true" title="Click to send text message.">{% trans "msg" %}</div>
+				</a>
+				{% if provider.pager_available %}
+				<a href="/Page/{{ provider.user.id }}/">
+					<div class="page_btn button btnShow buttonPageAble" available="true" title="Click to page.">{% trans "page" %}</div>
+				</a>
+				{% else %}
+					<div class="page_btn button btnShow buttonPageDisable textDisable">{% trans "page" %}</div>
+				{% endif %}
+				{% if provider.call_available %}
+				<a href="/Call/{{ provider.user.id }}/">
+					<div class="call_btn button btnShow buttonPhoneAble" available="true" title="Click to phone.">{% trans "call" %}</div>
+				</a>
+				{% else %}
+					<div class="call_btn button btnShow buttonPhoneDisable textDisable">{% trans "call" %}</div>
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+	{% endif %}
+	</table>
+</div>

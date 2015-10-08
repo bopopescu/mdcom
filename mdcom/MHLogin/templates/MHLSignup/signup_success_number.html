@@ -1,0 +1,26 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<div class='signup'>
+	<div class='head'>
+		<div class='text'>{% trans "Registration" %}</div>
+		<div class='success-img'></div>
+		<div class='clear'></div>
+	</div>
+	<div class='content success'>
+		<!--<div class='success-img'></div>-->
+		<div class='success-text'>
+			<p class='item'>{% trans 'Congratulations! Your registration was successful and your new DoctorCom phone number and PIN number are:' %}</p>
+			<p class='item black'>{% trans 'DoctorCom Number:' %}{{ area_code }}</p>
+			<p class='item black'>{% trans 'PIN code: ' %}{{pin}}</p>
+			<p class='item'>{% trans 'Please make a note of your pin as you will need it to access your voice mailbox. You will want to log into your voicemail box at your earliest convenience to set it up.' %}</p>
+			<p class='item'>{% trans 'To log into your voicemail box, just call your DoctorCom number from your mobile phone, as listed in your account profile.' %}</p>
+		</div>
+		<div class='clear'></div>
+		<div class='buttons'>
+			<input type="button" class='submit signin' value='{% trans "Sign in" %}' id="loginClick" >
+		</div>
+	</div>
+</div>
+{% endblock content %}

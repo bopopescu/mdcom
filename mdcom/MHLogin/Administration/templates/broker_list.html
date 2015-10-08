@@ -1,0 +1,142 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}Brokers{% endblock %}
+
+{% block customJS %}
+<script type="text/javascript">
+    $(function(){
+        var oTable1 = $('#brokersTable').dataTable({
+            "aoColumns": [
+                {"bSearchable": false},
+                {"bSearchable": false},
+                {"bSearchable": false,"sWidth": "75px"},
+                {"bSearchable": false,"sWidth": "130px"},
+                {"bSearchable": false,"sWidth": "35px"},
+                {"bSearchable": false,"sWidth": "250px"}
+            ],
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sLengthMenu": MESSAGE.JQUERY_DATATABLES_SLENGTHMENU_PER_PAGE,
+                "sInfo": MESSAGE.JQUERY_DATATABLES_SINFO_BROKER,
+                "sInfoEmpty": MESSAGE.JQUERY_DATATABLES_SINFOEMPTY_BROKER
+            },
+            "aaSorting": [[ 0, "asc" ]],
+            "sDom": 'rtilp<"clear">'
+        });
+        
+        var oTable2 = $('#invitebrokerTable').dataTable({
+            "aoColumns": [
+                {"bSearchable": false},
+                {"bSearchable": false},
+                {"bSearchable": false,"sWidth": "180px"},
+                {"bSearchable": false,"sWidth": "180px"}
+            ],
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sLengthMenu": MESSAGE.JQUERY_DATATABLES_SLENGTHMENU_PER_PAGE,
+                "sInfo": MESSAGE.JQUERY_DATATABLES_SINFO_INVITATION,
+                "sInfoEmpty": MESSAGE.JQUERY_DATATABLES_SINFOEMPTY_INVITATION
+            },
+            "aaSorting": [[ 0, "desc" ]],
+            "sDom": 'rtilp<"clear">'
+        });
+
+        $(".brokerTable tr:odd").addClass("odd");
+    });
+    
+    function updateAccountStatus(id,userId){
+        $.ajax({
+            type:'POST',
+            url: '/dcAdmin/BrokerStatus/',
+            data: {userId:userId},
+            success:function(data, status){
+                if(data.statusAccount){
+                    $('#update_account_'+id).html('Stop this account');
+                    $('#span_active_'+id).html('Yes');
+                } else {
+                    $('#update_account_'+id).html('Active this account');
+                    $('#span_active_'+id).html('No');
+                }
+            },
+            error:function(data, status){
+            }
+        });
+    }
+
+
+</script>
+{% endblock %}
+
+{% block content %} 
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h2>{% trans "Broker/Contractors" %}</h2>
+
+<table id='brokersTable' class='brokerTable' cellspacing='0' cellpadding='0'>
+    <thead>
+        <tr>
+            <th align="left">{% trans "Name" %}</th>
+            <th align="left">{% trans "Email" %}</th>
+            <th align="left">{% trans "Total # of A.D." %}</th>
+            <th align="left">{% trans "# of A.D. in last 30 days" %}</th>
+            <th align="left">{% trans "Active" %}</th>
+            <th align="left">{% trans "Actions" %}</th>
+        </tr>
+    </thead>
+    {% for broker in broker_list %}
+    <tr>
+        <td>{{broker.user.first_name}} {{broker.user.last_name}}</td>
+        <td>{{broker.user.email}}</td>
+        <td>{{broker.count_all}}</td>
+        <td>{{broker.count_latest}}</td>
+        <td>
+            {% if broker.user.is_active %}
+            <span id="span_active_{{broker.id}}">{% trans "Yes" %}</span>
+            {% else %}
+            <span id="span_active_{{broker.id}}">{% trans "No" %}</span>
+            {% endif %}
+        </td>
+        <td>
+            <a id="update_account_{{broker.id}}" herf='javascript:void(0);' onclick="updateAccountStatus({{broker.id}},{{broker.user.id}})">
+                {% if broker.user.is_active %}
+                {% trans "Stop this account" %}
+                {% else %}
+                {% trans "Active this account" %}
+                {% endif %}
+            </a>
+            <a href="/dcAdmin/BrokerTracking/?user_id={{broker.user.id}}">{% trans "View tracking information" %}</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>{% trans "Pending Invitations" %}</h2>
+<table id='invitebrokerTable' class='brokerTable' cellspacing='0' cellpadding='0'>
+    <thead>
+        <tr>
+            <th align='left'>{% trans "Sending Date Time" %}</th>
+            <th align='left'>{% trans "Email" %}</th>
+            <th align='left'">{% trans "Invitation" %} Code</th>
+            <th align='left'">{% trans "Actions" %}</th>
+        </tr>
+    </thead>
+    {% for invitation in invitation_list %}
+    <tr>
+        <td>{{invitation.requestTimestamp}}</td>
+        <td>{{invitation.recipient}}</td>
+        <td>{{invitation.code}}</td>
+        <td>
+            <a href="/dcAdmin/Broker/Invitations/Resend/{{invitation.id}}/">{% trans "Resend" %}</a>
+            <a href="/dcAdmin/Broker/Invitations/Cancel/{{invitation.id}}/">{% trans "Cancel" %}</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<div class="brokerCreate"><a href="/dcAdmin/Invitations/New/?userType=300">{% trans "Create a new invitation" %}</a></div>
+</div>
+{% endblock %}

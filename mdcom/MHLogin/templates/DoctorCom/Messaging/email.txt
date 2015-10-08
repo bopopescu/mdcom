@@ -1,0 +1,17 @@
+You've received a DoctorCom message from {{caller}} on {%now "l, F jS"%} at {%now "g:i a"%}
+
+To read this message, either <a href="{{SERVER_PROTOCOL}}://{{SERVER_ADDRESS}}/{%url%}">click this link</a> or paste the following web address into your web browser if the link isn't click-able.
+
+{{SERVER_PROTOCOL}}://{{SERVER_ADDRESS}}/{%url%}
+
+You received this email because you don't have a mobile phone number set in your account. To set up your mobile phone number, you can either:
+
+1. <a href="{{SERVER_PROTOCOL}}://{{SERVER_ADDRESS}}/{%url%}">Click this link</a>
+
+2. Paste the below web address into your web browser, logging in if prompted.
+
+{{SERVER_PROTOCOL}}://{{SERVER_ADDRESS}}/{%url%}
+
+Or,
+
+3. Log into your DoctorCom account. In the 'Account' pull-down menu, choose 'Profile', then click the edit link.

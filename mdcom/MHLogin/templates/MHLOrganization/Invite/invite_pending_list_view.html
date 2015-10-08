@@ -1,0 +1,32 @@
+{% load i18n %}
+
+
+{% if pend_invite %}
+	{% for p in pend_invite %}
+		<div class="join-request-item {% cycle 'even' 'odd' %}">
+		{% if p.flag %}
+		<div class="request-icon2"></div>
+		{% else %}
+		<div class="request-icon"></div>
+		{% endif %}
+		<div class="name">
+			<span class="text">{{ p.req_name }}</span><span class="time">
+			{{ p.delta_time }}
+			</span>
+		</div>
+		<div class="action" assoc_id="{{ p.assoc_id }}" pract_id="{{ p.pract_id }}">
+			{% if p.flag %}
+			<div class="accept"><div class="item left"></div><div class="item right">{% trans "Accept" %}</div></div>
+			<div class="reject"><div class="item left"></div><div class="item right">{% trans "Reject" %}</div></div>
+			{% else %}
+			<div class="resend"><div class="item left"></div><div class="item right">{% trans "Resend" %}</div></div>
+			<div class="cancel"><div class="item left"></div><div class="item right">{% trans "Cancel" %}</div></div>
+			{% endif %}
+		</div>
+	</div>
+	{% endfor %}
+	<div class="line"></div>
+{% else %}
+	<h3>{{ no_requets }}</h3>
+{% endif %}
+

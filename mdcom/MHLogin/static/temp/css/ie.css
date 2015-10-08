@@ -1,0 +1,18 @@
+header nav a.btn-signIn {
+	width: 88px;
+	height: 31px;
+	text-indent: -999em;
+	background: url(../img/btn-signin.png) top left no-repeat;
+	display: inline-block;
+}
+
+.box-gold {
+	//background: url(../img/bg-form-gold-ie.png) top left repeat-x;
+	border: none;
+	margin-right: -10px;
+}
+
+
+input.submit:hover {
+	background-position: 0 0;
+}

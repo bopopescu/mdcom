@@ -1,0 +1,71 @@
+{% load i18n %}
+<style>
+	#invitation_content{
+		width:95%;
+		margin-top:15px;
+		margin-left:8px;
+		font-family:Arial;
+		font-size:14px;
+		line-height: 25px;
+	}
+	img{
+		max-width:153px;
+		max-height:64px;
+	}
+	.org_name{
+		width:247px;
+	}
+	.weight-font{
+		font-weight:bold;
+		font-size:14px;
+	}
+	.left-td{
+		width:25%;
+	}
+	td{
+		text-align:left;
+	}
+</style>
+
+
+<table cellspadding='0' cellspacing='0' id='invitation_content'>
+	<tr>
+		<td colspan='2'>
+			<table cellspadding='0' cellspacing='0' class='top_table'>
+				<tr>
+				{% if org_logo %}
+					<td><img src='{{org_logo}}'>&nbsp;</td>
+				{% endif %}
+					<td class='org_name weight-font'>{{org_name}}&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+		
+	</tr>
+	<tr>
+		<td colspan='2' >&nbsp;
+			{{invitation_sender}} {%trans "invites you to join " %}{{org_name}}{%trans "as a "%}{{role}}
+		</td>
+	</tr>
+	<tr>
+		<td colspan='2'>&nbsp;
+			{%trans "Following are the detail information of this "%}{{org_type}}.
+		</td>
+	</tr>
+	<tr>
+		<td class='weight-font left-td'>&nbsp;{%trans "Name"%}:</td>
+		<td>
+			{{ org_name|slice:"20" }}{% if org_name|length > 20 %}...{% endif %}&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td class='weight-font left-td'>&nbsp;{%trans "Address"%}:</td>
+		<td>
+			{{ org_addr1|slice:"20" }}{% if org_addr1|length > 20 %}...{% endif %}&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td class='weight-font left-td'>&nbsp;{%trans "Zip"%}:</td>
+		<td>{{org_zip}}&nbsp;</td>
+	</tr>
+</table>

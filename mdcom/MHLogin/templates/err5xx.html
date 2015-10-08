@@ -1,0 +1,17 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "HTTP Error 5xx - Server Error" %}{% endblock %}
+
+{% block content %}
+    <div style="height:500px;">
+    <h3>{% trans "HTTP Error " %} {{err_code}} {{err_title}} {% trans "- Server Response" %}</h3> 
+    <p>{% trans "We apologize for any inconvenience, however the server is unable to grant you access to the requested page." %}</p>
+    {% if err_msg %}
+        <p><i><b>{% trans "The server provided the following information:" %}</b></i><br/><br/>
+        {{err_msg}}
+        </p>
+    {% endif %}
+    </div>
+    <a href="/logout/">Logout</a>
+{% endblock %}

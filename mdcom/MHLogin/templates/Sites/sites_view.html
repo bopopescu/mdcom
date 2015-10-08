@@ -1,0 +1,60 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Sites Admin Home" %}{% endblock %}
+
+{% block customCSS %}
+.under {border-bottom:1px solid black;}
+{% endblock %}
+
+
+{% block content %}
+<div style="margin-left:30px;margin-bottom:20px;">
+	<span><b>{% trans "Current Sites" %}</b> <a href="/SitesAdmin/Add/">{% trans "Add a New Site/Hospital" %}</a></span>
+</div>
+{% comment %}
+<div style="margin-left:30px;margin-bottom:20px;">
+	<p>{% trans "Current Location: Lat:" %}{{lat}}, {% trans "Long:" %}{{longit}}</p>
+	<p>{% trans "Range:" %} {{miles}} {% trans "miles" %}</p>
+	<p>{% trans "Range (lat/long):" %} {{delta_lat}}, {{delta_longit}} {% trans "degrees" %}</p>
+</div>
+{% endcomment %}
+<div style="margin-left:30px;margin-bottom:20px;">
+<form action="." method="POST">
+<input id="id_searchRadio_0" type="radio" name="searchRadio" value="AL"/>{% trans "Display All" %}<br/>
+<input id="id_searchRadio_1" type="radio" name="searchRadio" value="NA"/>{% trans "Search by Name:" %} {{searchby.name}} <br/>
+<input id="id_searchRadio_1" type="radio" name="searchRadio" value="CI"/>{% trans "Search by City:" %} {{searchby.city}} <br/>
+<input id="id_searchRadio_2" type="radio" name="searchRadio" value="ST"/>{% trans "Search by State:" %} {{searchby.state}}<br/>
+<input id="id_searchRadio_2" type="radio" name="searchRadio" value="ZI"/>{% trans "Search by Zip:" %} {{searchby.zip}}<br/>
+<input id="id_searchRadio_3" type="radio" name="searchRadio" value="PR"/>{% trans "Search by Proximity:" %} {{searchby.proximity}} {% trans "Miles" %} <br/>
+<input type="submit" name="submit" value="{% trans "Submit" %}" />
+</form>
+</div>
+<table cellspacing="10" style="background:#FFF;border:1px solid lightblue;margin-left:30px;padding:10px;" class="ui-corner-all">
+<tr class="under">
+	<th class="under">{% trans "Id" %}</th>
+	<th class="under">{% trans "Name" %}</th>
+	<th class="under">{% trans "Address 1" %}</th>
+	<th class="under">{% trans "Address 2" %}</th>
+	<th class="under">{% trans "City" %}</th>
+	<th class="under">{% trans "State" %}</th>
+	<th class="under">{% trans "Zip" %}</th>
+	<th class="under">{% trans "Latitude" %}</th>
+	<th class="under">{% trans "Longitude" %}</th>
+	<th class="under">{% trans "Edit?" %}</th>
+</tr>
+{% for site in sites%}
+<tr>
+	<td>{{site.id}}</td>
+	<td>{{site.name}}</td>
+	<td>{{site.address1}}</td>
+	<td>{{site.address2}}</td>
+	<td>{{site.city}}</td>
+	<td>{{site.state}}</td>
+	<td>{{site.zip}}</td>
+	<td>{{site.lat}}</td>
+	<td>{{site.longit}}</td>
+	<td><a href="/SitesAdmin/Edit/{{site.id}}/">{% trans "Edit" %}</a></td>
+</tr>{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% load i18n %}
+<div class="left">
+	<img src="{{photo}}" alt="No Image">
+</div>
+<script type="text/javascript">
+	$(function(){
+		var fullname=$('.fullname').html().trim();
+		if (fullname.length > 28){
+			fullname=fullname.slice(0,25)+"...";
+			$('.fullname').html(fullname);
+		}
+	})
+</script>
+<div class="right practice-right">
+	<div class='practiceName'> 
+		<span class="fullname" title={{location.practice_name}}>{{location.practice_name}}</span>
+		<div class="favorite-btn {%if is_favorite %}is_favorite{% endif %}"
+			 title="{%if is_favorite %}{% trans "Remove from My Favorites" %}{% else %}{% trans "Add to My Favorites" %}{% endif %}"
+			 onclick="toggleFavorite(this, 2, {{location.id}},true);">
+		</div>
+	</div>
+	{% if location.practice_address1 %}
+	<p class='practiceAddress'>
+		{{location.practice_address1}}
+	</p>
+	{% endif %}
+	
+	{% if location.practice_address2 %}
+	<p>
+		{{location.practice_address2}}
+	</p>
+	{% endif %}
+	<p class='city'>
+		{% if location.practice_city %}{{location.practice_city}},{% endif %}
+		{% if location.practice_state %} {{location.practice_state}}{% endif %}
+		{% if location.practice_zip %}{{location.practice_zip}}{% endif %}
+	</p>
+
+	{{practice_members}}
+	
+</div>

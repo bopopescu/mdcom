@@ -1,0 +1,201 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customJS %}
+{%include 'includes/jquery.validate.html'%}
+<script type="text/javascript">
+$(function(){
+	setRequiredFields();
+	if({{showDialog}}){//show dialog
+		$('#createDoctor').before('<div class="success">{% trans "Provider" %} {{username}} {% trans "has been successfully created." %} </div><div class="clear"></div>');
+		$('.success').fadeOut(8000);
+		//form reset
+		document.forms[0].reset();
+	}
+	var f = $('#newDoctorForm').validate({
+		rules:{
+			username:{required:true, isUserName:true},
+			first_name:{required:true},
+			last_name:{required:true},
+			email:{required:true,email:true},
+			gender:{required:true},
+			user_type:{required:true},
+			mobile_phone:{required:true,isPhone:true},
+			office_phone:{ required:false,isPhone:true},
+			phone:{required:false,isPhone:true},
+			pager:{required:false,isPhone:true},
+			current_practice:{required:true},
+			address1:{required:true},
+			city:{required:true},
+			state:{required:true},
+			zip:{required:true,isZipCode:true}
+		},
+		messages:{
+			username:{
+				required:'{% trans "User name field is required." %}',
+				isUserName:'{% trans "User name may contain only letters, numbers and @/./+/-/_ characters." %}'
+			},
+			first_name:'{% trans "First name field is required." %}',
+			last_name:'{% trans "Last name field is required." %}',
+			email:{
+				required:'{% trans "Email field is required." %}',
+				email:'{% trans "Email field is not a valid email address." %}'
+			},
+			gender:'{% trans "Gender field is required." %}',
+			mobile_phone:{
+				required:'{% trans "Mobile phone field is required." %}',
+				isPhone:'{% trans "Mobile phone is not a valid phone number." %}'
+			},
+			office_phone:{
+				required:'{% trans "Mobile phone field is required." %}',
+				isPhone:'{% trans "Mobile phone is not a valid phone number." %}'
+			},
+			phone:{
+				required:'{% trans "Mobile phone field is required." %}',
+				isPhone:'{% trans "Mobile phone is not a valid phone number." %}'
+			},
+			current_practice:'{% trans "Current practice field is required." %}',
+			pager:{
+				isPhone:'{% trans "Pager is not a valid pager number." %}'
+			},
+			address1:'{% trans "Office address1 field is required." %}',
+			city:'{% trans "Office city field is required." %}',
+			state:'{% trans "Office state field is required." %}',
+			zip:{
+				required:'{% trans "Office zip field is required." %}',
+				isZipCode:'{% trans "This is not a valid zip code." %}'
+			}
+		},
+		submitHandler:function(form){
+			ajaxCreateNew(form);
+		}
+	});
+});
+
+
+function setRequiredFields() {
+	//adjust ui
+	$('#id_username').after('<span class="redstar">*</span>');
+	$('#id_first_name').after('<span class="redstar">*</span>');
+	$('#id_last_name').after('<span class="redstar">*</span>');
+	$('#id_gender').after('<span class="redstar">*</span>');
+	$('#id_email').after('<span class="redstar">*</span>');
+	$('#id_mobile_phone').after('<span class="redstar">*</span>');
+	$('#id_address1').after('<span class="redstar">*</span>');
+	$('#id_city').after('<span class="redstar">*</span>');
+	$('#id_state').after('<span class="redstar">*</span>');
+	$('#id_zip').after('<span class="redstar">*</span>');
+}
+
+function ajaxCreateNew(form){
+	var username = $('#id_username').val();
+	var email = $('#id_email').val();
+	var mobile = $('#id_mobile_phone').val();
+	var type = $('#id_user_type').val();
+	$.comAjax({
+		url:'/ValidateEmailAndPhone/',
+		type:'POST',
+		data:{
+			username:username,
+			email:email,
+			phone:mobile
+		},
+		success:function(data, txtStatus){
+			var d = JSON.parse(data);
+			if(!isEmptyObject(d)){
+				if(d['err1']){
+					$('#id_username').addClass('error');
+					$('#id_username').after('<label for="id_username" generated="true" class="error">{% trans "This user name has been registered. Please choose another user name or invite him to your practice." %}</label>');	
+				}
+				if(d['err2']){
+					$('#id_email').addClass('error');
+					$('#id_email').after('<label for="id_email" generated="true" class="error">{% trans "This email has been registered. Please choose another email or invite him to your practice." %}</label>');
+				}
+				if(d['err3']){
+					$('#id_mobile_phone').addClass('error');
+					$('#id_mobile_phone').after('<label for="id_mobile_phone" generated="true" class="error">{% trans "This mobile phone has been registered. Please choose another mobile phone or invite him to your practice." %}</label>');
+				}
+			}else{
+				//check the invitation
+				$.comAjax({
+					url:'/Organization/Member/AJAX/valideInvitation/',
+					type:'POST',
+					data:{
+						email:email,
+						type:type
+					},
+					success:function(data, txtStatus){
+						if(txtStatus=='success'){
+							var id = JSON.parse(data);
+							if(id!='err'){
+								showSimpleDialog({
+									title: '{% trans "Create New Provider" %}',
+									content: '{% trans "This email is already existed in Invitations. If you create account with this email, invitation to" %} '+email+' {% trans "will be rescinded. Are you sure you want to continue?" %}',
+									height: 130,
+									dc_buttons: {
+										'{% trans "Cancel" %}': function() {
+											$( this ).dialog( "close" );
+										},
+										'{% trans "OK" %}': {
+											'click': function() {
+												$( this ).dialog( "close" );
+												$.comAjax({
+													url:'../AJAX/cancelExistInvitation/',
+													type:'POST',
+													data:{
+														email:email,
+														type:type
+													},
+													success:function(data,txtStatus){
+														var d = JSON.parse(data);
+														if(d=='ok'){
+															$('#inviteDialog').dialog('close');
+															$.ui.wait.start();
+															form.submit();
+														}
+													}
+												});
+											},
+											'text': '{% trans "OK" %}',
+											'class': 'positive-btn'
+										}
+									}
+								});
+							}else{
+								//alert('Provider '+username+' has been successfully created. After he activated his account ,you can see him in your provider list.');
+								$.ui.wait.start();
+								form.submit();
+							}
+						}else{
+							alert('{% trans "Create provider" %} '+username+' {% trans "failed" %}.');
+						}
+					},
+					error:function(data, txtStatus){
+						alert('{% trans "Create provider" %} '+username+' {% trans "failed" %}.');
+					}
+				});
+			}
+		}
+	});
+}
+</script>
+
+{% endblock %}
+
+{% block content %}
+<div id="createDoctor" class="ui-corner-all">
+	<h1>{% trans "Create Provider Account" %}</h1>
+	<form id="newDoctorForm" enctype='multipart/form-data' action="." method="POST">
+		{{ user_form.as_ul }}
+		<!--
+		<li><label for="id_current_practice">{% trans "Practice" %}:</label> 
+			<div id="id_current_practice" name="current_practice">{{current_practice}}</div>
+		</label></li>
+		-->
+
+		<h4>{% trans "This account will received one email after you create it." %}</h4>
+		<div class='buttons'><input type="submit" value='{% trans "Create" %}' />
+		<input type='button' value='{% trans "Cancel" %}' onclick='location.href="/Practice/Staff/"' /></div>
+	</form>
+</div>
+{% endblock %}

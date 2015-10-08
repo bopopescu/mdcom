@@ -1,0 +1,93 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% comment %}
+TODO:
+This template needs to handle provider type (physician, nurse, etc.) forms, as passed 
+from the view function. The changes should only need to be made here, handling forms as 
+passed in the list structure provider_forms. Note that this indicates support for multiple
+roles for a single provider."
+{% endcomment %}
+{% block customCSS %}
+.errorlist {color:red;}
+{% endblock %}
+
+{% block customJS %}
+    {%include 'includes/jquery.validate.html'%}
+    <script type="text/javascript">
+        var mobile_required = BoolUtils.str2bool("{{mobile_required}}");
+    </script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/profile/validates.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/profile/profile_edit.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="profileEdit" class="ui-corner-all">
+    <h1>{% trans "Edit Profile" %}</h1>
+    <form id="profile_form" enctype="multipart/form-data" action="." method="POST">
+        {% if user_form.non_field_warnings %}
+            <ul class="errorlist"><li>
+                {{user_form.non_field_warnings|linebreaksbr}}
+            </li></ul>
+        {% endif %}        
+
+        <table class='profileEditTable'>
+            {{ user_form.as_ul }}
+
+            {% if staff_form %}
+                {{ staff_form.as_ul }} 
+            {% endif %}
+
+            {% if licenses_form %}
+                {{ licenses_form.as_table }}
+            {% endif %}
+
+            {% if physician %}
+                {% if physician_form %}
+                    {{physician_form.as_ul}}
+                {% endif %}
+            {% endif %}
+            
+            {% if broker_form %}
+                {{ broker_form.as_ul }} 
+            {% endif %}
+        </table>
+
+		<div id="settingTime" class="ui-corner-all">
+			<h1>{% trans 'Preference Setting' %}</h1>
+			<li class="time_setting">
+				{{preference_form.time_setting.label_tag}}
+				{{preference_form.time_setting}}{{preference_form.time_setting.errors}}
+			</li>
+			<li>
+				{{preference_form.time_zone.label_tag}}
+				{{preference_form.time_zone}}{{preference_form.time_zone.errors}}
+			</li>
+			{% if preference_form.refer_forward %}
+			<li>
+				{{preference_form.refer_forward.label_tag}}
+				{{preference_form.refer_forward}}{{preference_form.refer_forward.errors}}
+			</li>
+			<br/>
+			{% endif %}
+			<li>
+				<label>{% trans "Language:" %}</label>
+				<ul>
+					<li>{{Language}}</li>
+				</ul>
+			</li>
+		</div>
+
+		{% if isStaff%}
+			<p>{% trans "Check if you want an email notification when you receive a message:" %} {{settings_form.notification_email}}</p>
+		{% endif %}
+		{% if isProvider %}
+			<p>{% trans "Check if you want an email notification when you receive a message:" %} {{settings_form.notification_email}}</p>
+			<p>{% trans "Check if you want sms notifications when you receive a message:" %} {{settings_form.notification_sms}}</p>
+			<p>{% trans "Check if you want a pager notification when you receive an urgent message:" %} {{settings_form.notification_page}}</p>
+		{% endif %}
+        <input type="submit" id="saveProfile" name="saveProfile" value="{% trans "Submit" %}"/>
+    </form>
+    <div id='validationDialog'></div>
+</div>
+{% endblock %}

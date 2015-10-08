@@ -1,0 +1,12 @@
+{% load i18n %}
+<h2 class="nav_bar">{% trans "Current Location" %}</h2>
+<p class="nav_bar">
+{% if current_site %}
+	{{ current_site.name }}
+{% else %}
+	(None)
+{% endif %}
+</p>
+<p class="nav_bar">
+<a href="/Sites/">{% trans "Change?" %}</a>
+</p>

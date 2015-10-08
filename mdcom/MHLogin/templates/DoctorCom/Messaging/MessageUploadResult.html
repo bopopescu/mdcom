@@ -1,0 +1,48 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title></title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.uploaderProgress.css" />
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/localization/l10n_{{LANGUAGE_CODE}}.js"></script>
+<script type="text/javascript">  
+var message = {% if message %} "{{message}}"; {% else %} null; {% endif %}
+
+$(document).ready(function(){  
+    if (message) {
+        var before_abort_upload = "{{before_abort_upload}}";
+        if (before_abort_upload) {
+            window.parent[before_abort_upload]();
+        }    
+        alert(message);            
+        removeUploadArea();    
+    } else {
+        var after_upload = "{{after_upload}}";
+        if (after_upload) {
+            window.parent[after_upload]();
+        }                
+        var frameWindow = document.parentWindow || document.defaultView;
+        $(frameWindow.frameElement.parentNode).append(interceptString("<div>{{file_display_name}}",30)+' {% trans 'uploaded successfully' %}.&nbsp;&nbsp;&nbsp;'
+            +'<input type="hidden" name="file_saved_name" value="{{file_saved_name}}"/>'    
+            +'<input type="hidden" name="file_display_name" value="{{file_display_name}}"/>'
+            +'<input type="hidden" name="file_charset" value="{{file_charset}}"/>'    
+            +'<input type="hidden" name="file_size" value="{{file_size}}"/>'
+            +'<a class="delete_attachment" href="javascript:void(null);" onclick="deleteAttachment(this);">'
+            +MESSAGE.MESSAGE_UPLOAD_RESULT_DELETE
+            +'</a></div>');     
+        $(frameWindow.frameElement).remove();
+    }
+    
+    function removeUploadArea() {
+        var frameWindow = document.parentWindow || document.defaultView;
+        $(frameWindow.frameElement.parentNode).remove();             
+    }            
+});
+</script>
+</head>
+<body>
+</body>
+</html>

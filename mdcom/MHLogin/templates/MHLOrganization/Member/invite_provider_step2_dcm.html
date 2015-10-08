@@ -1,0 +1,36 @@
+{% load i18n %}
+<div class="inviteDialog">
+	<div class="content findProviderContent">
+		<div class="text8 text9">
+			{{ title_people }}
+		</div>
+		<div class="text8 text4 text10">
+			{% trans "Please choose one person and then click send button." %}
+		</div>
+		{% for p in providers %}
+			<div class="invite-provider {{currentItem}}" prov_id="{{ p.id }}">
+				<div class="left">
+					<img src="{{ p.photo }}" style="max-width:60px; max-height:70px;">
+				</div>
+				<div class="right">
+					<div class="provider-name">
+						<div class="text" style="float:left; width:auto;">{{ p.name }}</div>
+						<div class="send-mail" style="float:left; margin: 5px; position:relative;"> </div>
+						<div class="clear"></div>
+					</div>
+					<div class="provider-address">{% trans "Office Address: " %}{{ p.address1 }}{{ p.address2 }}</div>
+					<div class="provider-special">{% trans "Specialty:" %}{{ p.specialty }}</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		{% endfor %}
+		<div class="line"></div>
+		<div id="findProvidersPage"></div>
+		
+	</div>
+	<div class="line"></div>
+	<div class="buttons">
+		<div class="button step1Cancel">{% trans "Back" %}</div>
+		<div class="button step1Next buttonR">{% trans "Send" %}</div>
+	</div>
+</div>

@@ -1,0 +1,506 @@
+{% load i18n %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        {% for audio in audio_list %}
+        PlayMsgAttachments('{{audio.id}}','{{audio.suffix}}','{{audio.msgId}}');
+        {% endfor %}
+        $('a.isIpad').attr('target','_blank')
+
+        $('#msg_content .msg_detail_title:first').addClass('hide');
+        $('#msg_content .msg_detail:first').removeClass('hide');
+        
+        {% for msg in msgs %}
+        {% if msg == msgs|first and not msg.read %}
+        UpdateReadStatus('{{msg.id}}', false, '{{msg.is_sender}}', '');
+        {% endif %}
+        {% endfor %}
+    });
+    var goToURL = function(url,event){
+        window.location = url;
+        event.stopPropagation();
+    }
+    
+</script>
+<div id="msg_content" onclick="HideMsgOperationList();">
+{% for msg in msgs %}
+{% if msg == msgs|first %}
+<div class="msg_detail_title hide">
+{% else %}
+<div class="msg_detail_title" style="cursor: pointer;">
+{% endif %}    
+<table class="messageContent">
+    {% if msg.read or msg == msgs|first %}
+    <tr class="background1" onClick="UpdateMsgBodyStatus(this, true, '{{msg.id}}', true, '{{msg.is_sender}}');"  >
+    {% else %}
+    <tr class="background1 unread" onClick="UpdateMsgBodyStatus(this, true, '{{msg.id}}', '{{msg.read}}', '{{msg.is_sender}}');" style="cursor: pointer" >
+    {% endif %}
+        <td class="collapse {{msg.unread}}">
+            {% if msg.is_sender %}
+            <img src="{{STATIC_URL}}img/msg_body_user1.gif" style="margin: 7px 5px 0 28px;" />
+            {% else %}
+            <img src="{{STATIC_URL}}img/msg_body_user2.gif" style="margin: 7px 5px 0 28px;" />
+            {% endif %}
+        </th>
+        <td class="urgent">&nbsp;</th>
+        <td class="attachments">&nbsp;</th>
+        <td class="from" align='left' style="padding:0 5px;">{{msg.sender}}</th>
+        <td class="subject" align='left'  style="padding:0 5px;">{{ msg.subject }}</th>
+        <td class="timestamp" align='left'  style="padding:0 5px;">{{msg.timestamp}}</th>
+    </tr>    
+</table>
+</div>
+{% if msg == msgs|first %}
+        <div class="msg_detail">
+{% else %}
+        <div class="msg_detail hide">
+{% endif %}
+    <table class="messageContent">
+        <tr class="background1">
+{% if msg == msgs|first %}
+        <td style="width: 52px; text-align: right;">
+{% else %}
+        <td style="width: 52px; text-align: right;" onClick="UpdateMsgBodyStatus(this, false, '{{msg.id}}', true, '{{msg.is_sender}}');" style="cursor: pointer;">
+{% endif %}
+            {% if msg.is_sender %}
+            <img src="{{STATIC_URL}}img/msg_body_user1.gif" style="margin: 7px 7px 0 0;" />
+            {% else %}
+            <img src="{{STATIC_URL}}img/msg_body_user2.gif" style="margin: 7px 7px 0 0;" />
+            {% endif %}
+        </td>
+{% if msg == msgs|first %}
+        <td class="action">
+{% else %}
+        <td class="action" onClick="UpdateMsgBodyStatus(this, false, '{{msg.id}}', true, '{{msg.is_sender}}');" style="cursor: pointer;">
+{% endif %}
+            {{msg.sender}}
+            {{msg.timestamp}}
+        </td>
+        <td style="width: 160px; vertical-align: middle;" rowspan="2">
+            <div>
+                <div class="dashboardMsgBtn dashboardMsgBtnRight" title="More" onclick="ShowMsgOperationList(this,event);">
+                    <img src="{{STATIC_URL}}img/bg_msg_show.gif" style="margin: 2px 0;" />
+                    <div class="msg_popup hide">
+                        <ul>
+                            {% if msg.sender_id and not msg.refer %}
+                            <li style="cursor: pointer;" onclick="javascript:window.location='/Messages/New/?user_recipients={{msg.sender_id}}&msg_id={{msg.id}}&thread_uuid={{msg.thread_uuid}}&msg_prefix=RE'">
+                                <div style="width: 30px; float: left;"><img src="{{STATIC_URL}}img/bg_msg_reply.gif" /></div>
+                                {% trans "Reply" %}    
+                            </li>
+                            <li style="cursor: pointer;" onclick="goToURL('/Messages/New/?user_recipients={{msg.to_recipient_ids}}&user_cc_recipients={{msg.cc_recipient_ids}}&msg_id={{msg.id}}&thread_uuid={{msg.thread_uuid}}&msg_prefix=RE',event)">
+                                <div style="width: 30px; float: left;"><img src="{{STATIC_URL}}img/bg_msg_reply_all.gif" /></div>
+                                {% trans "Reply All" %}
+                            </li>
+                            {% endif %}
+                            {% if msg.sender_id or msg.answering_service %}
+                            <li style="cursor: pointer;" onclick="goToURL('/Messages/New/?msg_id={{msg.id}}&msg_prefix=FW',event)">
+                                    <div style="width: 30px; float: left;"><img src="{{STATIC_URL}}img/bg_for.gif" /></div>
+                                    {% trans "Forward" %}
+                            </li>
+                            {% endif %}
+                            <li style="cursor: pointer;" onclick="javascript:window.location='/FollowUps/Add/Message/{{msg.id}}/'">
+                                    <div style="width: 30px; float: left;"><img style="margin-left: 3px;" src="{{STATIC_URL}}img/bg_cre1.gif" /></div>
+                                    {% trans "Create a follow-up item" %}
+                            </li>
+                            {% if msg.refer and msg.refer.refer_pdf %}
+                            <li style="cursor: pointer;" onclick="javascript:window.location='/Messages/Refer/PDF/{{msg.refer.uuid}}/'">
+                                    <div style="width: 30px; float: left;"><img style="margin-top: 4px;" src="{{STATIC_URL}}img/pdf.png" /></div>
+                                    {% trans "Download as PDF" %}
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                {% if msg.sender_id and not msg.refer %}
+                <div class="dashboardMsgBtn dashboardMsgBtnLeft" title="Reply" onclick="goToURL('/Messages/New/?user_recipients={{msg.sender_id}}&msg_id={{msg.id}}&thread_uuid={{msg.thread_uuid}}&msg_prefix=RE',event)">
+                {% else %}
+                <div class="dashboardMsgBtn dashboardMsgBtnLeft" title="Reply" onclick="alert('Sorry, you couldn\'t reply this message.');event.stopPropagation();" style="cursor: default;">
+                {% endif %}
+                    <img src="{{STATIC_URL}}img/bg_msg_reply.gif" />
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="background1">
+        <td style="width: 52px; text-align: right;">
+        </td>
+        <td class="action" style="-moz-user-select:-moz-none;">
+            <div style="float:left;">
+                {% trans "To:" %}
+                {{msg.recipients|truncatewords:4}}
+            </div>
+            <div class="msgShowUserInfo" title="Show details" onclick="ShowMsgOperationList(this,event);" >
+                <div class="msg_popup msg_popup_info hide">
+                    <table id="msgPopupInfoTable"  >
+                        <tr>
+                            <td style="text-align: right;">{% trans "From:" %}</td>
+                            <td>{{msg.sender}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">{% trans "To:" %}</td>
+                            <td>{{msg.recipients}}</td>
+                        </tr>
+                        {% if msg.ccs %}
+                        <tr>
+                            <td style="text-align: right;">{% trans "Cc:" %}</td>
+                            <td>{{msg.ccs}}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td style="text-align: right;">{% trans "Date:" %}</td>
+                            <td>{{msg.timestamp}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">{% trans "Subject:" %}</td>
+                            <td>{{msg.subject}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+        </td>
+        
+    </tr>
+
+</table>
+{% if msg.refer %}
+<table class="messageContent noBorder marginBottom" style="margin-top: 10px;">
+	<tr class="no_background">
+		<td class="blank">&nbsp;</td>
+		<td >
+			<img src="{{msg.refer.practice_logo}}" style="border:6px solid #E1EDF5;" />
+		</td>
+		<td >
+			<table style="margin-left:15px; width:270px">
+				<tr>
+					<td width="145" class="bold">{% trans "Organization Name:" %}</td>
+					<td width="125">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan=2>{{msg.refer.practice_name}}</td>
+				</tr>
+				<tr>
+					<td width="145" class="bold">{% trans "Office Phone:" %}</td>
+					<td width="125">{{msg.refer.practice_phone_number|safe}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "City:" %}</td>
+					<td>{{msg.refer.practice_city}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "State:" %}</td>
+					<td>{{msg.refer.practice_state}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Address:" %}</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan=2>{{msg.refer.practice_address}}</td>
+				</tr>
+				<tr>
+					<td  class="bold">{% trans "Referring Doctor:" %}</td>
+					<td >{{msg.refer.referring_physician}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Doctor Phone:" %}</td>
+					<td >{{msg.refer.physician_phone_number|safe}}</td>
+				</tr>
+			</table>
+		</td>
+		<td >
+			<table style="margin:0 15px; width:320px;">
+				<tr>
+					<td width="195" class="bold">{% trans "Patient Name:" %}</td>
+					<td  width="125">{{msg.refer.patient_name}}</td>
+				</tr>
+				<tr>
+					<td width="195" class="bold">{% trans "Previous name:" %}</td>
+					<td  width="125">{{msg.refer.previous_name}}</td>
+				</tr>
+				
+				<tr>
+					<td  class="bold">{% trans "Gender:" %}</td>
+					<td >{{msg.refer.gender}}</td>
+				</tr>
+				<tr>
+					<td  class="bold">{% trans "Date of Birth:" %}</td>
+					<td >{{msg.refer.date_of_birth}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Phone:" %}</td>
+					<td >{{msg.refer.phone_number|safe}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Home Phone:" %}</td>
+					<td >{{msg.refer.home_phone_number|safe}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "MRN:" %}</td>
+					<td >{{msg.refer.refer_mrn}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "SSN:" %}</td>
+					<td >{{msg.refer.refer_ssn}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Address:" %}</td>
+					<td >{{msg.refer.refer_address}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Email:" %}</td>
+					<td >{{msg.refer.refer_email}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Prior Authorization Number:" %}</td>
+					<td >{{msg.refer.prior_authorization_number}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Other Authorization Number:" %}</td>
+					<td >{{msg.refer.other_authorization}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Internal Tracking Number:" %}</td>
+					<td >{{msg.refer.internal_tracking_number}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Primary Insurance:" %}</td>
+					<td >{{msg.refer.insurance_id}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Secondary Insurance:" %}</td>
+					<td >{{msg.refer.secondary_insurance_id}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Tertiary Insurance:" %}</td>
+					<td >{{msg.refer.tertiary_insurance_id}}</td>
+				</tr>
+				{% comment %}
+				<tr>
+					<td class="bold">{% trans "ICD:" %}</td>
+					<td >{{msg.refer.icd_code}}</td>
+				</tr>
+				{% if LANGUAGE_CODE and LANGUAGE_CODE == 'de' %}
+				<tr>
+					<td class="bold">{% trans "OPS:" %}</td>
+					<td >{{msg.refer.ops_code}}</td>
+				</tr>
+				<tr>
+					<td class="bold">{% trans "Medication list:" %}</td>
+					<td >{{msg.refer.medication_list}}</td>
+				</tr>
+				{% endif %}
+				{% endcomment %}
+			</table>
+		</td>
+	</tr>
+</table>
+{% endif %}
+
+{% if msg.body %}
+
+{% if msg.refer and msg.refer.notes %}
+<div class="dotLine"></div>
+<table class="messageContent noBorder" style="margin-top: 10px;">
+	<tr class="no_background">
+		<td class="blank">&nbsp;</td>
+		<td class="bold">{% trans "Refer Notes:" %}</td>
+	</tr>
+	<tr class="no_background">
+		<td class="blank">&nbsp;</td>
+		<td >{{msg.refer.notes|linebreaks}} </td>
+	</tr>
+</table>
+{% endif %}
+
+{% if msg.refer %}
+<div class="dotLine"></div>
+{% endif %}
+
+<table class="messageContent noBorder" style="margin-top: 10px;">
+    <tr class="no_background">
+        <td class="blank">&nbsp;</td>
+        <td>{{msg.body|safe|linebreaks}}</td>
+    </tr>
+</table>
+
+
+
+{% endif %}
+
+{% if msg.attachments %}
+<div class="dotLine"></div>
+
+<table class="messageContent noBorder">
+    <tr class="no_background">
+        <td class="blank">&nbsp;</td>
+        <td class="attachmentHead">{% trans "Attachments:" %}</td>
+    </tr>
+</table>
+
+<table class="messageContent noBorder marginBottom">
+    <tr class="no_background">
+        <td class="blank">&nbsp;</td>
+        <td>
+    {% for attach in msg.attachments %}
+    <div>
+        <img height="3px" width="3px" style="margin:3px;" src="{{STATIC_URL}}img/bg_message_attachment.gif" />
+
+{% if attach.suffix == 'dcm' %}
+        <a href="javascript:void(0);" onclick="Messaging.checkAndShow_DicomWindow('{{msg.id}}','{{attach.id}}', '{{attach.filename}}');">{{attach.filename}}</a> &nbsp;({{attach.size|filesizeformat}})
+{% else %}
+        <a class="isIpad" href="/Messages/{{msg.id}}/View/Attachment/{{attach.id}}/">{{attach.filename}}</a> &nbsp;({{attach.size|filesizeformat}})
+{% endif %}
+
+
+{% if attach.suffix == 'mp3' or attach.suffix == 'wav' %}
+    <div class="jp_container_outer" style="margin-left:12px;" >
+        <div id="jquery_jplayer_{{attach.id}}" class="jp-jplayer"></div>
+        <div id="jp_container_{{attach.id}}" class="jp-audio">
+            <div class="jp-type-single">
+            <div class="jp-gui jp-interface">
+                <ul class="jp-controls">
+                        <li><a href="javascript:;" class="jp-play" tabindex="1">{% trans "play" %}</a></li>
+                        <li><a href="javascript:;" class="jp-pause" tabindex="1">{% trans "pause" %}</a></li>
+                        <li><a href="javascript:;" class="jp-stop" tabindex="1">{% trans "stop" %}</a></li>
+                        <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">{% trans "mute" %}</a></li>
+                        <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">{% trans "unmute" %}</a></li>
+                        <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">{% trans "max volume" %}</a></li>
+                </ul>
+                <div class="jp-progress">
+                    <div class="jp-seek-bar">
+                        <div class="jp-play-bar"></div>
+                    </div>
+                </div>
+                <div class="jp-volume-bar">
+                    <div class="jp-volume-bar-value"></div>
+                </div>
+                <div class="jp-time-holder">
+                    <div class="jp-current-time"></div>
+                    <div class="jp-duration"></div>
+                    <ul class="jp-toggles">
+                        <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">{% trans "repeat" %}</a></li>
+                        <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">{% trans "repeat off" %}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="jp-no-solution"><span>{% trans "To play the media you will need to either update your browser to a recent version or update your" %}</span>
+                {% trans "To play the media you will need to either update your browser to a recent version or update your" %}
+                <a href="http://get.adobe.com/flashplayer/" target="_blank" onclick='window.open("http://get.adobe.com/flashplayer/");'>{% trans "Flash plugin" %}</a>.
+            </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+    </div>
+    {% endfor %}
+        </td>
+    </tr>
+</table>
+{% endif %}
+
+{% if not msg.refer %}
+{% if msg.answering_service or msg.callback_number %}
+<div class="dotLine"></div>
+<table class="messageContent noBorder marginBottom">
+    <tr class="no_background">
+        {% if msg.answering_service %}
+        <td class='blank'>&nbsp;</td>
+        <td class='ansHead'>{% trans "Answering Service:" %}</td>
+        <td class="ans">
+            {% trans "Yes" %}
+        </td>
+        {% endif %}
+    {% if msg.callback_number %}
+        <td class='blank'>&nbsp;</td>
+        <td class='callbackNumberHead'>{% trans "Callback Number:" %}</td>
+        <td class="callbackNumber">{{msg.callback_number|safe}}</td>
+    {% endif %}
+        <td>&nbsp;</td>     
+    </tr>
+</table>
+{% endif %}
+{% endif %}
+
+{% if msg.callbacks %}
+<div class="dotLine"></div>
+<table class="messageContent noBorder marginBottom">
+    <tr class="callback_log_title no_background" style="cursor:pointer">
+        <td class="blank">&nbsp;</td>
+        <td class="callbackLogHead">{% trans "Callback Log:" %}</td>
+        <td class="callbackLog"><a class="showOrHideCallback hide" href="javascript:void(0)"></a></td>
+    </tr>    
+</table>
+<table class="messageContent  noBorder marginBottom" style="display:none;">
+    <tr>
+        <td>
+            <table>
+                <tr class="no_background">
+                    <th width="64">&nbsp;</th>
+                    <th width="170">{% trans "Timestamp" %}</th>
+                    <th>Caller</th>
+                </tr>
+            {% for cb in msg.callbacks %}
+                <tr class="no_background">
+                    <td>&nbsp;</td>
+                    <td>{{cb.timestamp}}</td>
+                    <td>{{cb.caller_name}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>
+{% endif %}
+
+{% if msg.refer %}
+<div id="refer_status' + msg.refer["uuid"] + '"class="actionItem" style="margin-top: 30px;">
+    {% if msg.refer.status == "NO" and type == "received" %}
+    <a href="javascript:void(0)" style="text-decoration: none;" onclick="UpdateReferStatusAccept('{{msg.refer.uuid}}');">
+        <div class="btnAccept actionItem">{% trans "Accept" %}</div>
+    </a>
+    <a href="javascript:void(0)" style="text-decoration: none;" onclick="UpdateReferStatusRefuse('{{msg.refer.uuid}}');">
+        <div class="btnAccept btnRefuse actionItem">{% trans "Decline" %}</div>
+    </a>
+</div>
+{% endif %}
+
+<div id="refer_status' + msg.refer["uuid"] + '"class="actionItem">
+    {% if msg.refer.refer_jpg %}
+    <a href="{{msg.refer.refer_jpg}}"><div class="jpg"></div></a>
+    {% endif %}
+</div>
+<table class="messageContent noBorder">
+    <tr class="no_background">
+        <td class='blank'>&nbsp;</td>
+    </tr>
+</table>
+
+{% endif %}
+
+{% if msg.action_history %}
+<div class="dotLine"></div>
+<table class="messageContent noBorder">
+    <tr class="no_background">
+        <td class="blank">&nbsp;</td>
+        <td class="ahHead">{% trans "Action History:" %}</td>
+    </tr>    
+</table>
+<table class="messageContent noBorder marginBottom">
+    <tr>
+        <td>
+            <table>
+            {% for ah in msg.action_history %}
+                <tr class="no_background">
+                    <td class="blank">&nbsp;</td>
+                    <td>{{ah.content}} {{ah.timestamp}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>
+{% endif %}
+
+</div>
+{% endfor %}
+</div>

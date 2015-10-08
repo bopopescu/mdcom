@@ -1,0 +1,41 @@
+{% load i18n %}
+<form action="FollowUps/Add/" method="POST">
+    <table>
+    {{ addfollowup_form.as_table }}
+    </table>
+
+    <input type="submit" name="submit" value='{% trans "Add" %}'  />
+    <input type='button' value='{% trans "Cancel" %}' onclick="window.location='/'" />
+</form>
+
+<script type="text/javascript">
+    $("#id_due_date").attr("maxlength",10).css("ime-mode","disabled").datepicker({
+            showOn: 'both',
+            buttonImage: '{{STATIC_URL}}img/calendar.gif',
+            buttonImageOnly: true,
+            minDate: new Date(1970, 1-1, 1) 
+        });
+    $("table tr:odd").removeClass("odd");
+
+function followupadd2() {
+    alert("followup2 fired.");
+    var task = $("#followup_title input[name='taskname']").val();
+    var due = $("#followup_title input[name='duedate']").val();
+    var priority = $("#id_priority option:selected").val();
+
+    $('#followup_table').load("/FollowUps/Add/", {taskname:task, duedate:due, priority:priority }, function(response,status, xhr){
+                if (status == "error") {
+                alert('{% trans "Error:" %}'+xhr.status+" "+xhr.statusText);
+                return false;
+            }
+            else {
+                return true;
+            }
+        });
+
+
+    $("#addfollowup").dialog( {
+        modal: true,
+        });
+    }
+</script>

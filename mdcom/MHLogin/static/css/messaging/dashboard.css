@@ -1,0 +1,667 @@
+.bold{
+    font-weight: bold;
+}
+.dotLine{
+    height:1px; 
+    background:url(../../img/dot_line.gif); 
+    margin:10px 5px;
+}
+.filter{
+	height: auto;
+	margin-bottom: 10px;
+	width: 136px;
+}
+.filter h1,.filter div{ margin-left:10px;}
+.filter .line{ height:1px; background:#A6C9E2; margin:0;}
+#received_messages .collapse.bgUp{
+	background:url(../../img/bg_up.gif) no-repeat;
+}
+#sent_msgs{ width:100%;}
+#sent_msgs .collapse.bgUp{
+	background:url(../../img/bg_up.gif) no-repeat;
+}
+#received_messages .collapse a{
+	width:16px;
+	height:16px;
+	display:block;
+	background:url(../../img/bg_down.gif) no-repeat;
+	margin-top:6px;
+}
+
+#received_messages table tr .odd,
+#sent_messages table tr .odd{
+    background:#F6F7FF;
+}
+
+#received_messages table tr .even,
+#sent_messages table tr .even{
+    background:#F0F2FF;
+}
+
+#received_messages table tr:hover{
+	background:none;
+}
+
+#received_messages table tr .none,
+#sent_messages table tr .none,
+#received_messages table tr:hover .none,
+#sent_messages table tr:hover .none{
+    background: url("../../img/bg_message_tr_head.gif") repeat-x scroll 0 0 transparent;
+}
+
+#received_messages table tr:odd,
+#sent_messages table tr:odd{
+    background:#F6F7FF;
+}
+
+#received_messages table tr:even,
+#sent_messages table tr:even{
+    background:#F0F2FF;;
+}
+
+#sent_messages table tr:hover{
+	background:none;
+}
+
+#sent_messages>table {
+	width:100%;
+}
+#received_messages table{width:100%;}
+#sent_messages table.refreshTable tr,#sent_messages table.refreshTable tr:hover,
+#received_messages table.refreshTable tr,#received_messages table.refreshTable tr:hover{ background:none; height:28px;}
+#sent_messages .collapse a{
+	width:16px;
+	height:16px;
+	display:block;
+	background:url(../../img/bg_down.gif) no-repeat;
+	margin-top:6px;
+}
+#receivedNav{padding:10px 20px 10px 0; float:right;}
+#receivedNav table tr,#receivedNav table tr:hover{ background:none;}
+#receivedNav .pagniation{
+	float:left;
+}
+.pagniation a{
+	height:18px;
+	min-width:16px;
+	display:block;
+	float:left;
+	background: none repeat scroll 0 0 #EFF3F8;
+    border: 1px solid #82AAC7;
+    color: #036CB4;
+    text-decoration: none;
+    text-align:center;
+    line-height:16px;
+    margin:0 2px;
+}
+.pagniation span{
+	height:18px;
+	min-width:16px;
+	line-height:16px;
+	display:block;
+	float:left;
+	margin:0 3px;
+	text-align:center;
+}
+.pagniation a,.pagniation a{ background:none;}
+.pagniation .current{
+	min-width:16px;
+	background: none repeat scroll 0 0 #EFF3F8;
+    border: 1px solid #ccc;
+    color: #ccc;
+    text-decoration: none;
+    text-align:center;
+    height:18px;
+}
+.pagniation .prevIcon{
+	width:16px;
+	height:18px;
+	background:url(../../img/bg_preAll.gif) no-repeat 4px 6px;
+}
+.pagniation .nextIcon{
+	width:16px;
+	height:18px;
+	background:url(../../img/bg_nextAll.gif) no-repeat 4px 6px;
+}
+.pagniation .nextIcon.current{ background:url(../../img/bg_nextAll_d_disable.gif) no-repeat 4px 6px;}
+.pagniation .prevIcon.current{ background:url(../../img/bg_preAll_d_disable.gif) no-repeat 4px 6px;}
+#receivedNav .selectPagePer{
+	float:left;
+}
+#receivedNav .selectPagePer select{
+	
+}
+#sentNav{
+	padding:10px 20px 10px 0;
+}
+#sentNav table tr,#sentNav table tr:hover{ background:none;}
+#sentNav .pagniation{
+	float:left;
+}
+#sentNav .selectPagePer{
+	float:left;
+}
+div.messages .filter .header-show{
+	font-size: 14px;
+	font-weight:bold;
+/*	height:25px;*/
+	line-height:27px;
+}
+div.messages .filter h1.refresh {
+	border: 0px;
+	margin-top:10px;
+	*margin-top:0;
+}
+div.messages .filter h1.refresh a{
+	font-size:14px;
+}
+div.messages .filter h1 img{
+	
+}
+div.messages .filter .header-re{
+	font-size: 13px;
+	font-weight: normal;
+	font-style: italic;
+	height:25px;
+}
+div.messages .filter .header-chk{ height:20px; line-height:20px;}
+div.messages .filter .header-chk input{ height:20px; line-height:20px;}
+div.messages .filter .header-chk span{ height:25px; line-height:25px; display:inline-block;}
+div.messages .filter select{font-size: 9px;}
+div.messages div.filter a {
+	color: #3366c6;
+}
+div.messages div.nav {
+	float:right;
+	position:relative;
+}
+div.messages div.nav span.pager {
+	color: #aaaaaa;
+}
+table.message_list {
+	margin: 5px 0px;
+	padding: 0px;
+	text-align: left;
+	border-spacing: 0px;
+	padding:0px;
+	margin:0px;
+}
+table.message_list td.header {
+	border-bottom: 1px solid #CED1F9;
+}
+table.message_list td.bottom-border {
+	border-bottom: 1px solid #CED1F9;
+}
+table.message_list td.loading {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 15px;
+	height: 50px;
+}
+table.message_list td.loading img {
+	vertical-align: text-top;
+	padding: 0px 6px;
+}
+
+.message_item {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+table.message_item .messageBody{
+	text-align:right;
+	height:30px;
+}
+table.message_item .messageBody .item{
+	font-size:11px;
+	-webkit-text-size-adjust:none; 
+	float:left;
+	line-height:30px;
+	padding:0 2px;
+}
+table.message_item .messageBody .item1{ width:15px; margin-left:530px;}
+table.message_item .messageBody .item2{ width:45px;}
+table.message_item .messageBody .item3{ width:15px;}
+table.message_item .messageBody .item4{ width:135px;}
+table.message_item .messageBody .item a{
+	display:inline-block;
+}
+table.message_item .head{
+	padding-left:25px;
+	font-weight:bold;
+	color:#143888;
+	font-size:12px;
+	text-decoration:underline;
+	height:20px;
+}
+table.message_item .bodycontent{
+	padding:3px 0 50px 50px;
+}
+table.message_item .messageBody .mailIcon{
+	display:block;
+	width:15px;
+	height:12px;
+	background:url(../../img/bg_re.gif) no-repeat;
+	margin-top:9px;
+}
+table.message_item .messageBody .greenIcon{
+	display:block;
+	width:15px;
+	height:12px;
+	background:url(../../img/bg_cre.gif) no-repeat;
+	margin-top:9px;
+}
+table.message_item tr.unread {
+	font-weight: bold;
+}
+table.message_item td a {
+	color: #163B82;
+}
+table.message_item th,
+table.message_item td {
+	vertical-align: top;
+	padding: 0px 5px;
+}
+table.message_item td.collapse,
+table.message_item th.collapse {
+	width: 2px;
+}
+table.message_item .from {
+	-webkit-text-size-adjust:none;
+	width: 150px;
+	line-height:25px;
+}
+table.message_item .subject {
+	line-height:25px;
+	width: 295px;
+	-webkit-text-size-adjust:none;
+}
+
+table.message_item .placeholder {
+	width: 28px;
+	-webkit-text-size-adjust:none;
+}
+
+table.message_item .urgent {
+	width: 16px;
+	padding: 0px;
+}
+
+table.message_item .urgent img{
+	height: 16px;margin-top: 6px;width: 16px;
+}
+
+table.message_item .attachments {
+	width: 16px;
+	padding: 0px;
+}
+
+table.message_item .attachments img{
+	height: 16px;margin-top: 6px;width: 16px;
+}
+
+table.message_item .timestamp {
+	line-height:25px;
+	width: 150px;
+	-webkit-text-size-adjust:none;
+}
+
+table.message_item .resolution {
+	width: 75px;
+	line-height:25px;
+	text-align:center;
+}
+table.message_item h1 {
+	font-size: 12px;
+	margin: 4px 0px;
+	text-decoration: underline;
+	width: 150px;
+}
+table.message_item h1+p{
+	margin-top:0px;
+}
+table.message_item tr.message_item:hover {
+	background-color:#CDF;
+}
+
+div.nav {
+	margin-top:4px;
+}
+div.attachment_container {
+	text-align: right;
+	width: 555px;
+}
+div.audio {
+	float: right;
+	width: 450px;
+	height: 17px;
+	
+	cursor: pointer;
+	text-decoration: underline;
+	text-align: left;
+}
+div.clear {
+	clear:both;
+	width:0;
+	height:0;
+}
+/* Old styles:
+#sent_messages a.ui-button {line-height:1.0em}
+#sent_messages tr td {border-bottom: 1px solid #cef;}
+#received_messages tr td {border-bottom: 1px solid #cef;}
+#received_messages tr:hover {background-color:lightgreen;}
+#sent_messages tr:hover {background-color:lightgreen;}
+*/
+
+/** Message view sent/received  **/
+table.message_item table.messageContent {
+/*	border-top: 0px solid #E8E8FF;*/
+	border-top: 1px solid #3D96BA;
+	width:100%;
+	border-spacing: 0px;
+	border-collapse: collapse;	
+}
+
+table.message_item table.noBorder{
+    border-top: 0px solid #E8E8FF;
+}
+
+table.message_item table.marginBottom{
+    margin-bottom:12px;
+}
+
+table.message_item table.messageContent tr {
+	background:#FFFFFF; 
+}
+
+table.message_item table.messageContent tr.no_background {
+	background:#FFFFFF; 
+}
+
+table.message_item table.messageContent tr.background1,
+table.message_item table.messageContent tr.background1,
+#received_messages table tr:hover .background1,
+#sent_messages table tr:hover .background1{
+    background:#F3F4F8;
+/*    border-bottom: 1px solid #3D96BA;*/
+}
+
+table.message_item table.messageContent .actionItem{
+	font-size:11px;
+	-webkit-text-size-adjust:none; 
+	float:right;
+	line-height:25px;
+	padding:0 8px 0 0;
+}
+table.message_item table.messageContent .mailIcon{
+	display:block;
+	width:15px;
+	height:12px;
+	background:url(../../img/bg_re.gif) no-repeat;
+	margin-top:9px;
+}
+table.message_item table.messageContent .greenIcon{
+	display:block;
+	width:15px;
+	height:12px;
+	background:url(../../img/bg_cre.gif) no-repeat;
+	margin-top:9px;
+}	
+	
+table.message_item table.messageContent td,table.message_item table.messageContent th{
+	color:#000000;
+	font-size:12px;
+	text-align: left;	
+	text-decoration:none;	
+	padding:0;
+	line-height:25px;
+	-webkit-text-size-adjust: none;
+}
+	
+table.message_item table.messageContent td.blank {
+	width:52px;
+}	
+
+table.message_item table.messageContent td.attachmentHead,
+table.message_item table.messageContent td.ahHead {
+	font-weight:bold;
+}
+
+table.message_item table.messageContent td.ccsHead {
+	font-weight:bold;
+	width:30px;
+}	
+
+table.message_item table.messageContent td.ccs {
+	padding-left:8px;
+	width:670px;
+}	
+
+table.message_item table.messageContent td.ansHead {
+	font-weight:bold;
+	width:140px;
+}	
+
+table.message_item table.messageContent td.referHead {
+	font-weight:bold;
+	width:175px;
+	text-align:left;
+}	
+
+table.message_item table.messageContent td.textRight {
+    text-align:right;
+}
+
+table.message_item table.messageContent td.ans {
+	width:30px;
+}	
+
+table.message_item table.messageContent td.callbackNumberHead {
+	font-weight:bold;
+	width:120px;
+}	
+
+table.message_item table.messageContent td.callbackNumber {
+	padding-left:8px;
+}	
+
+table.message_item table.messageContent td.callbackLogHead {
+	font-weight:bold;
+	width:90px;
+}	
+
+table.message_item table.messageContent td.callbackLog {
+	padding-left:8px;
+}	
+
+table.message_item table.messageContent div.messageContentItem {
+	padding-left:64px;
+}
+
+table.message_item table.messageContent div.messageContentItem div.jp_container_outer {
+	padding-left:16px;
+	padding-bottom:5px;
+}
+
+table.message_item table.messageContent div.bodycontent {
+	padding:3px 0 50px 28px;
+	width:690px;
+	overflow:hidden;
+}
+
+table.message_item table.messageContent div.bodycontentPadding {
+	padding:3px 0 0px 28px;
+}
+
+table.message_item table.messageContent a.hide{
+	width:16px;
+	height:16px;
+	display:block;
+	background:url(../../img/triangle_down.png) no-repeat;
+	margin-top:6px;	
+}
+
+table.message_item table.messageContent a.show{
+	width:16px;
+	height:16px;
+	display:block;
+	background:url(../../img/triangle_up.png) no-repeat;
+	margin-top:6px;	
+}
+
+table.message_item table.messageContent table {
+	float:left;
+	font-size:12px;
+	width:100%;
+	border-spacing: 0px;
+	border-collapse: collapse;		
+}	
+
+table.message_item table.messageContent table th {
+	text-align: left;	
+}	
+
+table.message_item td a.dashboardMsgLinkBtn{
+	text-decoration: none;
+	color: black
+}
+
+.dashboardMsgBtn {	
+    background: url("../../img/message_btn.gif") repeat-x scroll 0 0 transparent;
+    border: 1px solid #9194BF;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 4px;
+    margin-right: 10px;
+    text-decoration: none;
+    float: right;
+    cursor: pointer;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius:3px;
+}
+
+.dashboardMsgBtnLeft{
+	margin-right:-1px;
+	padding: 0 8px;
+	-moz-border-radius: 3px 0 0 3px;
+    -webkit-border-radius: 3px 0 0 3px;
+    border-radius:3px 0 0 3px;
+}
+.dashboardMsgBtnRight{
+	-moz-border-radius: 0 3px 3px 0;
+    -webkit-border-radius: 0 3px 3px 0;
+    border-radius:0 3px 3px 0;
+}
+
+
+/*.dashboardMsgBtn .imgBtnPdf{
+	width: 16px;
+	height: 16px;
+	float: left;
+	margin: 2px;
+	background: url("../../img/pdf.png") no-repeat scroll 0 0 transparent;
+}*/
+
+.dashboardMsgBtn .imgBtnReply{
+	width: 15px;
+	height: 12px;
+	float: left;
+	margin: 4px 2px;
+	background: url("../../img/bg_re.gif") no-repeat scroll 0 0 transparent;
+}
+
+.dashboardMsgBtn .imgBtnFollowUps{
+	width: 12px;
+	height: 12px;
+	float: left;
+	margin: 4px 2px;
+	background: url("../../img/bg_cre.gif") no-repeat scroll 0 0 transparent;
+}
+
+.dashboardMsgBtn:hover {
+	border-color: #F8B257;
+    background: url("../../img/message_btn_hover.gif") repeat-x scroll 0 0 transparent;
+}
+
+.btnAccept {
+    background: url("../../img/newButtonR.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    height: 35px;
+    line-height: 30px;
+    text-align: center;
+    width: 80px;
+    cursor: pointer;
+    float: left;
+    margin-left:310px;
+}
+
+.btnRefuse {
+    background: url("../../img/newButton.png") no-repeat;
+    color: #222222;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.liMessageAttachment {
+    background: url("../../img/bg_message_attachment.gif") no-repeat;
+}
+
+
+#referStatusDialog .bold {font-weight: bold;}
+#referStatusDialog .refuse_reason {font-size: 14px; height: 144px; width: 420px;}
+#referStatusDialog .text {margin: 0 auto; padding: 6px 0; text-align: left; width: 420px;}
+
+/**
+/** Message view sent/received  **/
+	
+
+
+.msgShowUserInfo{
+	background: url("../../img/bg_msg_show.gif") no-repeat scroll 0 0 transparent;
+	float: left;
+	height: 5px;
+	line-height: 5px;
+	margin: 10px 0 0 5px;
+	width: 9px;
+	cursor: pointer;
+} 
+
+.msg_popup{
+    z-index: 999;
+    margin:3px 0 0 -188px;
+    position: absolute;
+    width: 200px;
+    border:1px solid #BEBEBE;
+    background: #FFFFFF;
+    cursor:default;
+}
+
+.msg_popup_info{
+	margin:10px 0 0 0;
+	width:240px;
+}
+
+.msg_popup_action_info{margin:0 0 0 -178px;width:280px;}
+.msg_popup_action_info .msgPopupInfoTable{color:#222222; font-weight: normal; text-align: left; background: none repeat scroll 0% 0% rgb(255, 255, 255);}
+.msg_popup_action_info .msgPopupInfoTable .title{padding: 0 0 0 10px; width:92px;}
+.msg_popup_action_info .msgPopupInfoTable .content{padding:0;}
+
+.msg_popup li{
+	padding: 0 5px;
+	line-height: 25px;
+}
+
+.msg_popup li:hover{
+	background: #FFEAB9;
+}
+
+#msgPopupInfoTable tr td{
+	padding: 0 10px;
+}

@@ -1,0 +1,38 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="managerHoliday" class="ui-corner-all">
+	<h3>{% trans "Office Closed For The Following Holidays" %}</h3>
+	<form action="." method="post">
+	    <table class='tableProfile' cellspacing='0' cellpadding='0' width='70%'>
+			<tr>
+				<th align='left' width='50px'>{% trans "Remove" %}</th>
+				<th align='left'>{% trans "Holiday" %}</th>
+				<th align='left'>{% trans "Date" %}</th>
+				<th align='left'>{% trans "Edit" %}</th>
+			</tr>
+			{% for holidays in holidays.all %}
+			<tr>
+				<td align='center'>
+					<input type="checkbox" name="remove" value="{{ holidays.id }}">
+				</td>
+		        <td>
+		        	{% if holidays.name %}
+		        		{{ holidays.name}}
+		        		{%else%}
+		        		&nbsp;
+		        	{% endif %}
+		        </td>
+				<td>{{ holidays.designated_day|date:"SHORT_DATE_FORMAT" }}</td>
+				<td><div class='followupBtn buttonedit' onclick='location.href="/Practice/Holidays/Edit/{{ holidays.id }}"'></div></td>
+			</tr>
+			{% endfor %}
+		</table>
+	<input type="submit" value="{% trans 'Remove Selected' %}">
+	<input type="button" value="{% trans 'Add Holiday' %}" onclick='location.href="/Practice/Holidays/Edit/0"' />
+	</form>
+	<a href='/Practice/Profile/'>{% trans "Back to Practice Profile" %}</a>
+</div>
+{% endblock %}
+

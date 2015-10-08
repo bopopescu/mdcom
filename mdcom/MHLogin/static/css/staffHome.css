@@ -1,0 +1,169 @@
+.redstar{ color:red; margin-left:5px;}
+.line{ width:100%; height:1px; background:#D1D0F8;}
+.success{ float:left; height:20px; width:923px; text-align:left; border:1px solid #ddd; background: #FFC url(../admin_media/img/admin/icon_success.gif) 5px 6px no-repeat; padding: 4px 5px 4px 25px; color:#000; font-weight:bold;}
+#stafferHome .mid.item{ font-size:14px; color:#003044; font-weight:bold; line-height:48px;}
+#stafferHome{ width:953px; margin:10px 0; font-family:Verdana,Arial,sans-serifl; position:relative;}
+#stafferHome .text{ font-size:14px; font-weight:bold; color:#fff; text-align:left; margin-left:15px; padding-top:5px;}
+#stafferHome .staffer-top{ height:400px;}
+#stafferHome .staffer-top .staffer-providers{ width:600px; height:380px; float:left;}
+#stafferHome .staffer-top .staffer-providers .title{ height:30px; width:100%; background:url(../img/staffer-title.png) no-repeat;}
+#stafferHome .content{ height:360px; border:1px solid #ABCBE0; -webkit-border-radius:0 0 5px 5px;-moz-border-radius:0 0 5px 5px; border-radius:0 0 5px 5px; background-color:#fff;}
+#stafferHome .search-options{ height:50px; width:100%;}
+#stafferHome .search-options tr,#stafferHome .search-options tr:hover{ background:none;}
+#stafferHome .content .search-options .search-input{ width:190px; float:left; padding-top:15px;}
+#stafferHome .content .search-options .add-new-provider{ cursor:pointer; margin-right:15px;padding-bottom: 48px;}
+#stafferHome .content .search-options .add-new-provider .item{ float:left; height:40px;}
+#stafferHome .content .search-options .add-new-provider .left{ width:44px; background:url(../img/invite-new-provider-left.png) no-repeat;}
+#stafferHome .content .search-options .add-new-provider .mid{ background:url(../img/invite-new-provider-mid.png) repeat-x;}
+#stafferHome .content .search-options .add-new-provider .right{ width:7px; background:url(../img/invite-new-provider-right.png) no-repeat;}
+#stafferHome .content .search-options .add-new-staffer{ margin-right:15px; cursor:pointer;padding-bottom: 48px;}
+#stafferHome .content .search-options .add-new-staffer .item{ float:left; height:40px;}
+#stafferHome .content .search-options .add-new-staffer .left{ width:41px; background:url(../img/invite-new-staff-left.png) no-repeat;}
+#stafferHome .content .search-options .add-new-staffer .mid{ background:url(../img/invite-new-staff-mid.png) repeat-x;}
+#stafferHome .content .search-options .add-new-staffer .right{ width:7px; background:url(../img/invite-new-staff-right.png) no-repeat;}
+#stafferHome .search-options .search-button{ width:25px; height:25px; background:url(../img/search_button.png) no-repeat; cursor:pointer;}
+#stafferHome #staffer-input,
+#stafferHome #provider-input{ height:25px; border:1px solid #7CA0C0; color:#a7a7a7; font-family:Verdana,Arial,sans-serifl; margin-left:12px; font-size:14px;}
+#stafferHome .search-options .create-new-provider{ height:40px; cursor:pointer;padding-bottom: 8px;}
+#stafferHome .search-options .create-new-provider .item{ float:left; height:40px;}
+#stafferHome .search-options .create-new-provider .left{ width:44px; background:url(../img/create-new-provider-left.png) no-repeat;}
+#stafferHome .search-options .create-new-provider .mid{ background:url(../img/create-new-provider-mid.png) repeat-x;}
+#stafferHome .search-options .create-new-provider .right{ width:8px; background:url(../img/create-new-provider-right.png) no-repeat;}
+#stafferHome .search-options .create-new-staffer{ cursor:pointer;padding-bottom: 48px;}
+#stafferHome .search-options .create-new-staffer .item{ float:left; height:40px;}
+#stafferHome .search-options .create-new-staffer .left{ width:38px; background:url(../img/create-new-staff-left.png) no-repeat;}
+#stafferHome .search-options .create-new-staffer .mid{ background:url(../img/create-new-staff-mid.png) repeat-x;}
+#stafferHome .search-options .create-new-staffer .right{ width:8px; background:url(../img/create-new-staff-right.png) no-repeat;}
+#stafferHome .staffer-top .staffer-providers .content .search-result{ width:598px; height:262px;}
+#stafferHome .content .search-result .provider-table{ width:100%; height:262px;}
+#stafferHome .content .search-result .provider-table .provider-item{ height:28px; border-style:solid; border-color:#D1D0F8; border-width:1px 0 0 0;}
+#stafferHome .content .search-result .provider-table .provider-item .name{ width:200px; margin-left:15px; font-weight:bold; float:left; text-align:left; line-height:28px;}
+#stafferHome .content .search-result .provider-table .provider-item .status{ width:150px; margin-left:15px; font-weight:bold; float:left; text-align:left; line-height:28px;}
+#stafferHome .content .search-result .provider-table .provider-item .last-time{ float:left; font-weight:bold; #D1D0F8; line-height:28px;}
+#stafferHome .content .search-result .provider-table .provider-item .title-name{ width:185px; float:left; height:28px; line-height:28px; overflow:hidden; text-align:left; margin:0 15px;}
+#stafferHome .content .search-result .provider-table .provider-item .title-status{ width:150px; float:left; line-height:28px; text-align:left; margin-left:15px;}
+#stafferHome .content .search-result .provider-table .provider-item .title-last-time{ width:150px; float:left; line-height:28px; text-align:left;}
+#stafferHome .content .search-result .provider-table .action{ width:16px; height:16px; background:url(../img/icon08.gif) no-repeat; cursor:pointer; float:left; margin-top:6px;}
+#stafferHome .content .search-result .provider-table .action:hover{ background:url(../img/icon08_hover.gif);}
+
+#stafferHome .content .search-result .provider-table .staffer-item{ width:100%; height:28px; border-style:solid; border-color:#D1D0F8; border-width:1px 0 0 0; line-height:28px; text-align:left;}
+#stafferHome .content .search-result .provider-table .staffer-item .name{ float:left; width:180px; font-weight:bold; margin-left:15px;}
+#stafferHome .content .search-result .provider-table .staffer-item .role{ float:left; width:130px; font-weight:bold;}
+#stafferHome .content .search-result .provider-table .staffer-item .status{ float:left; width:60px; font-weight:bold;}
+#stafferHome .content .search-result .provider-table .staffer-item .smart-phone { width:120px; float:left; font-weight:bold; #D1D0F8; line-height:28px;}
+#stafferHome .content .search-result .provider-table .staffer-item .last-login{ float:left; width:90px; font-weight:bold;}
+#stafferHome .content .search-result .provider-table .staffer-item .staffer-name{ float:left; width:180px; margin-left:5px; height:28px; line-height:28px; overflow:hidden; padding-right:10px;}
+#stafferHome .content .search-result .provider-table .staffer-item .staffer-gray{ color:gray; font-size:11px; margin-left:5px;}
+#stafferHome .content .search-result .provider-table .staffer-item .staffer-role{ float:left; width:110px; line-height:28px;}
+#stafferHome .content .search-result .provider-table .staffer-item .staffer-role select{ width:110px;}
+#stafferHome .content .search-result .provider-table .staffer-item .staffer-status{ float:left; width:20px; height:28px;}
+#stafferHome .content .search-result .provider-table .staffer-item .title-status{ float:left; width:60px; line-height:28px;}
+#stafferHome .content .search-result .provider-table .staffer-item .smartphone-change{ float:left; width:80px; line-height:28px; margin:5px 20px 0px 0px;}
+#stafferHome .content .search-result .provider-table .staffer-item .smartphone-change select{ width:80px;}
+#stafferHome .content .search-result .provider-table .staffer-item .staffer-last-login{ float:left; width:90px; line-height:28px;}
+#stafferHome .content .search-result .provider-table .staffer-item .loading{width:24px; height:24px; background:url({{MEDIA_URL}}/img/loadinfo_d3.gif) no-repeat; margin-top:2px;}
+#stafferHome .content .search-result .provider-table .staffer-item .change-role{width:12px; height:12px; background:url(../img/icon_s.png) no-repeat; margin-top:9px;}
+
+#stafferHome .staffer-top .request-coming{ width:347px; height:380px; float:right;}
+#stafferHome .staffer-top .request-coming .title{ width:347px; height:30px; background:url(../img/staffer-title2.png) no-repeat;}
+
+#stafferHome .staffer-top .request-coming .requests-content{ width:345px; height:360px; border-style:solid; border-color:#ABCBE0; border-width:0 1px 1px 1px; -webkit-border-radius:0 0 5px 5px;-moz-border-radius:0 0 5px 5px; border-radius:0 0 5px 5px; background-color:#fff;}
+#stafferHome .staffer-top .request-coming .requests-content .requests{ height:295px; padding-top:22px;}
+#stafferHome .staffer-top .request-coming .requests-content .requests .join-request-item{ height:28px; border-style:solid; border-color:#D1D0F8; border-width:1px 0 0 0;}
+#stafferHome .staffer-top .requests .join-request-item .request-icon{ width:16px; height:16px; background:url(../img/staffer-request-in.png) no-repeat; margin-top:6px; float:left; margin-left:15px; }
+#stafferHome .staffer-top .requests .join-request-item .request-icon2{ width:16px; height:16px; background:url(../img/staffer-request-out.png) no-repeat; margin-top:6px; float:left; margin-left:15px; }
+#stafferHome .staffer-top .requests .join-request-item .name{ text-align:left; width:200px; height:28px; overflow:hidden;}
+#stafferHome .staffer-top .requests .join-request-item .text{ font-size:12px; color:#251D1A; font-weight:normal; line-height:28px; margin-left:3px;}
+#stafferHome .staffer-top .requests .join-request-item .name{ float:left; width:138px;}
+#stafferHome .staffer-top .requests .join-request-item .name .time{ font-size:9px; color:#656565;}
+#stafferHome .staffer-top .requests .join-request-item .action{ float:left; margin-top:6px;}
+
+#stafferHome h3{ line-height:300px; margin:0;}
+
+#stafferHome .staffer-bottom{ }
+#stafferHome .staffer-bottom .staffer-staff{ width:600px; height:380px; float:left;}
+#stafferHome .staffer-bottom .staffer-staff .title{ height:30px; widht:100%; background:url(../img/staffer-title.png) no-repeat;}
+#stafferHome .staffer-bottom .doctorInvitation{ width:347px; height:390px; float:right; border-style:solid; border-color:#A9CBE4; border-width:0 1px 1px 1px; -webkit-border-radius:5px;-moz-border-radius:5px; border-radius:5px; background:#fff;}
+#stafferHome .staffer-bottom .doctorInvitation .title{ width:347px; height:30px; background:url(../img/staffer-title2.png) no-repeat;}
+#stafferHome .staffer-bottom .doctorInvitation .requests{ margin-top:22px; height:291px;}
+#stafferHome .staffer-bottom .doctorInvitation .requests .line{ margin:0;}
+
+#stafferHome .request-in-item{ height:28px; width:100%; border-style:solid; border-color:#D6D5DD; border-width:0 0 1px 0;}
+#stafferHome .request-in-item .request-in-icon{ float:left; width:16px; height:16px; background:url(../img/staffer-request-in.png) no-repeat; margin-left:15px; margin-top:5px;}
+#stafferHome .request-in-item .user-info{ float:left; width:135px; height:28px; line-height:28px; text-align:left; padding-left:5px; overflow:hidden;}
+#stafferHome .request-in-item .user-info .user-name{ width:100px; overflow:hidden; float:left;}
+#stafferHome .request-in-item .user-info .request-time{ font-size:9px; color:#606060; float:left; padding:0 5px;}
+#stafferHome .request-in-item .user-action{ float:left; margin-top:6px;}
+
+#stafferHome .resend{ height:16px;border:1px solid #9194BF; cursor:pointer; float:left; border-radius:3px;}
+#stafferHome .item{ height:16px; float:left; font-size:9px; line-height:14px;}
+#stafferHome .resend .left{ width:14px; background:url(../img/button-resend-left.png) no-repeat;}
+#stafferHome .cancel{ height:16px;border:1px solid #9194BF; cursor:pointer; float:left; border-radius:3px; margin-left:3px;}
+#stafferHome .cancel .item{ height:16px; float:left; font-size:9px; line-height:14px;}
+#stafferHome .cancel .left{ width:14px; background:url(../img/button-cancel-left.png) no-repeat;}
+#stafferHome .user-action .right,#stafferHome .action .right{ min-width:35px; text-align:left; -webkit-text-size-adjust: none;font-size:9px; padding-right: 5px;}
+
+#stafferHome .accept{ height:16px;border:1px solid #9194BF; cursor:pointer; float:left;border-radius:3px;}
+#stafferHome .accept .item{ height:16px; float:left; font-size:9px; line-height:14px;}
+#stafferHome .accept .left{ width:14px; background:url(../img/button-accept-left.png) no-repeat;}
+#stafferHome .reject{ height:16px;border:1px solid #9194BF; cursor:pointer; float:left;border-radius:3px;margin-left:3px;}
+#stafferHome .reject .left{ width:14px; background:url(../img/button-cancel-left.png) no-repeat;}
+
+#stafferHome .requests-content{ width:100%; height:291px;}
+#stafferHome .requests-content .switch{ width:55px; height:22px; float:right; margin-top:12px; margin-right:10px;}
+#stafferHome .requests-content .switch .prev{ width:22px; height:22px; background:url(../img/request-prev.png) no-repeat; float:left; cursor:pointer;}
+#stafferHome .requests-content .switch .prev.disable{ cursor:default; background:url(../img/request-prev-disable.png) no-repeat;}
+#stafferHome .requests-content .switch .next{ width:22px; height:22px; background:url(../img/request-next.png) no-repeat; float:right; cursor:pointer;} 
+#stafferHome .requests-content .switch .next.disable{ cursor:default; background:url(../img/request-next-disable.png) no-repeat;}
+
+#findProvidersPage,
+#staffer-pagation,
+#provider-pagation{ float:right; padding:10px 10px 0 0;}
+/* need delete pagination css in dashboard.css and add in reset.css */
+#findProvidersPage .pagination span,
+#staffer-pagation .pagination span,
+#provider-pagation .pagination span{ margin:0 2px;}
+.pagination a{height:18px;min-width:16px;display:block;float:left;background: none repeat scroll 0 0 #EFF3F8;border: 1px solid #82AAC7;color: #036CB4;text-decoration: none;text-align:center; line-height:16px;margin:0 2px;}
+.pagination span{height:18px;min-width:16px;line-height:16px;display:block;float:left;margin:0 3px;text-align:center;}
+.pagination a,.pagniation a{ background:none;}
+.pagination .current{background: none repeat scroll 0 0 #EFF3F8;border: 1px solid #ccc;color: #ccc;text-decoration: none;text-align:center; height:18px;}
+.pagination .prevIcon{width:16px;height:18px; background:url(../img/bg_preAll.gif) no-repeat 4px 6px;}
+.pagination .nextIcon{width:16px;height:18px; background:url(../img/bg_nextAll.gif) no-repeat 4px 6px;}
+.pagination .nextIcon.current{ background:url(../img/bg_nextAll_d_disable.gif) no-repeat 4px 6px;}
+.pagination .prevIcon.current{ background:url(../img/bg_preAll_d_disable.gif) no-repeat 4px 6px;}
+
+#staffHomeDialog .content{ font-size:14px;}
+/*need delete and dialog css*/
+#staffHomeDialog .ui-dialog-buttonpane{ width:280px; margin:0 auto; border-top-color:#cfcfcf; padding-top:10px; padding-bottom:11px;}
+#staffHomeDialog .ui-dialog-buttonpane .ui-dialog-buttonset{ width:180px; margin:0 auto; padding-top:5px;}
+#staffHomeDialog .ui-dialog-buttonpane .ui-dialog-buttonset button{ width:81px; height:34px; background:url(../img/newButton.png) no-repeat; border:0; color:#1c2726; line-height:30px; font-weight:bold; font-size:14px; font-weight:normal;}
+#staffHomeDialog .ui-dialog-buttonpane .ui-dialog-buttonset .ui-button .ui-button-text{ height:22px; padding:0; margin:0; font-size:12px;}
+#staffHomeDialog .ui-dialog-buttonpane .ui-dialog-buttonset .gradually{ background:url(../img/newButtonR.png) no-repeat;}
+#staffHomeDialog .ui-dialog-buttonpane .ui-dialog-buttonset .gradually span{ color:#fff; font-weight:bold;}
+
+#inviteDialog #inviteNewEmail{ height:24px; font-size:14px; width:250px;}
+#inviteDialog #inviteMsg{ margin-left:38px; width:380px; height:100px; margin-bottom:8px; color:#000;}
+#inviteDialog #inviteMsg.msg-color{ color:#aaa;}
+#inviteDialog .loading-search{ margin:10px auto; width:68px; font-size:14px;}
+#inviteDialog #mail-body{ font-size:14px; width:325px; height:144px; margin-top:10px;}
+#inviteDialog #id_msg{ font-size:14px; width:425px; height:144px;}
+#inviteDialog #sendMailToStaff{ margin:10px 0; height:24px; font-size:14px; width:220px;}
+#inviteDialog #sendMaiToStafflBody{ width:325px; font-size:14px; height:144px; margin-top:10px;}
+#inviteDialog .inviteNewStaffTable tr,
+#inviteDialog .inviteNewStaffTable tr:hover{ background:none; line-height:40px;}
+.odd{background-color: #F6F7FF;}
+
+#createDoctor,#createStaff{ width:953px; border:1px solid #ABCBE0; border-radius:5px; margin:10px auto; text-align:left; background:#fff;}
+#createDoctor h1,#createStaff h1{ padding:20px;}
+#createDoctor h4,#createStaff h4{ padding:0 20px 10px 20px;}
+#createDoctor .buttons,#createStaff .buttons{ width:900px; text-align:center;}
+#createDoctor form li,#createStaff form li{ list-style:none; min-height:30px;padding-left:20px; font-size:12px; margin:10px 0; width:900px; position:relative; line-height:30px;}
+#createDoctor form li label,#createStaff form li label{ display:inline-block; width:150px; font-weight:bold;}
+#createDoctor form li label.error,#createStaff form li label.error{ color:#f00; position:absolute; left:180px; top:20px; font-weight:normal;}
+#createDoctor form li input,#createStaff form li input{ width:200px;}
+#createDoctor form li input.error,#createStaff form li input.error{ border:1px red dotted;}
+#createDoctor input[type=submit],#createStaff input[type=submit]{ margin:20px; margin-top:-20px;}
+
+#id_current_practice{ font-weight:normal; display:inline-block;}
+
+.td_search_botton{width:25%}

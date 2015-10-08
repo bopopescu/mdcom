@@ -1,0 +1,39 @@
+{% load i18n %}
+<script>
+	$(function(){
+		$('ul.org_tabs li').click(function(){
+			var c = $("ul.org_tabs li");
+			index = c.index(this);
+			c.eq(index).addClass("current").siblings().removeClass("current");
+			
+			$(this).css({"text-decoration":"none"});
+			
+			var url = $(this).attr("href_url");
+			var data = {'org_id': GetSelectOrgID()};
+			var type = $(this).attr("href_type");
+			$.comAjax({
+				url: url,
+				type: type,
+				data: data,
+				success:function(data, txtStatus){
+					RefreshRight(data);
+				}
+			});
+		});
+	});
+</script>
+
+<div class="tagMenu">
+	<ul class="org_tabs">
+		<li href_url="/Organization/View/" href_type="POST" >{% trans "Information" %}</li>
+		<li href_url="/Organization/Member/View/" href_type="POST" >{% trans "Member" %}</li>
+		<li href_url="/Organization/Invite/View/" href_type="POST" >{% trans "Invitation" %}</li>
+		{% if can_have_member_organization %}
+		<li href_url="/Organization/MemberOrg/View/" href_type="POST" >{% trans "Member Organization" %}</li>
+		{% endif %}
+		{% if can_manage_setting %}
+		<li href_url="/Organization/OrgSetting/" href_type="GET" >{% trans "Settings" %}</li>
+		{% endif %}
+	</ul>
+</div>
+	

@@ -1,0 +1,158 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% comment %}
+"TODO:
+1. This template will allow user to change their security questions if they forget their password"
+{% endcomment %}
+
+{% block customCSS %}
+.errorlist {color:red;}
+#security table tr{ background:none;}
+{% endblock %}
+
+{% block content %}
+<script>
+	var option = new Array(MESSAGE.SECURITY_QUESTION1_TEXT,MESSAGE.SECURITY_QUESTION2_TEXT,MESSAGE.SECURITY_QUESTION3_TEXT,MESSAGE.SECURITY_QUESTION4_TEXT);
+	
+	//initial select html
+	function initalQuestions(){
+		if($.cookie('q1')==null){
+			$.cookie('q1', option[0]);
+		}
+		
+		if($.cookie('q2')==null){
+			$.cookie('q2', option[1]);
+		}
+		
+		if($.cookie('q3')==null){
+			$.cookie('q3', option[2]);
+		}
+		
+		$('#profile_security tr').each(function(i){
+			if($(this).find('input').val()=='' && $(this).find('label').text().indexOf('Custom')==0)
+				$(this).addClass('hidden addNewTr');
+			else
+				$(this).addClass('addNewTr');
+		});
+	}
+	
+	//when changed option, show
+	function showQuestion(id,val){
+		var html = '';
+		html +='<option value="'+val+'">'+val+'</option>';
+		for(var i=0;i<option.length;i++){
+			var v = option[i];
+			if(v!=$.cookie("q1")&&v!=$.cookie("q2")&&v!=$.cookie("q3")){
+				html+='<option value="'+ v +'">'+v+'</option>';
+			}
+		}
+		if(val!='Custom Question'){
+			if($('#id_custom_question'+id).val()==''){
+				html+='<option value="Custom Question">'+'{% trans "Custom Question" %}'+'</option>';
+			}	
+		}
+		$('#id_security_question'+id).html(html);
+	} 
+	
+	function checkCustomEmpty(){
+		if($('#id_security_question1').val()=='Custom Question' && $.trim($('#id_custom_question1').val()) == ''){
+			return true;
+		}
+		
+		if($('#id_security_question2').val()=='Custom Question' && $.trim($('#id_custom_question2').val()) == ''){
+			return true;
+		}
+		
+		if($('#id_security_question3').val()=='Custom Question' && $.trim($('#id_custom_question3').val()) == ''){
+			return true;
+		}
+		return false;
+	}
+	
+	$(function(){
+		initalQuestions();
+		
+		if({{cookie_is_valid}}){ //if form is not valid, user cookie
+			showQuestion(1,$.cookie("q1"));
+			showQuestion(2,$.cookie("q2"));
+			showQuestion(3,$.cookie("q3"));	
+		}else{
+			$.cookie('q1', option[0]);
+			$.cookie('q2', option[1]);
+			$.cookie('q3', option[2]);
+			showQuestion(1,option[0]);
+			showQuestion(2,option[1]);
+			showQuestion(3,option[2]);
+		}
+		
+		$('#id_security_question1').change(function(){
+			var val = $(this).val();
+			$.cookie("q1",val);
+			var newTr = $(this).parent().parent();
+			if(val =="Custom Question"){
+				$(newTr).next().removeClass('hidden');
+			}else{
+				$('#id_custom_question1').val('');
+				$(newTr).next().addClass('hidden');
+			}
+			showQuestion(2,$.cookie("q2"));
+			showQuestion(3,$.cookie("q3"));
+		});
+		
+		$('#id_security_question2').change(function(){
+			var val = $(this).val();
+			$.cookie("q2",val);
+			var newTr = $(this).parent().parent();
+			if(val =="Custom Question"){
+				$(newTr).next().removeClass('hidden');
+			}else{
+				$('#id_custom_question2').val('');
+				$(newTr).next().addClass('hidden');
+			}
+			showQuestion(1,$.cookie("q1"));
+			showQuestion(3,$.cookie("q3"));
+		});
+		
+		$('#id_security_question3').change(function(){
+			var val = $(this).val();
+			$.cookie("q3",val);
+			var newTr = $(this).parent().parent();
+			if(val =="Custom Question"){
+				$(newTr).next().removeClass('hidden');
+			}else{
+				$('#id_custom_question3').val('');
+				$(newTr).next().addClass('hidden');
+			}
+			showQuestion(2,$.cookie("q2"));
+			showQuestion(1,$.cookie("q1"));
+		});
+		
+		//this branch check the custom question is empty. so don't comment it
+		$('#profile_security').submit(function(){
+			if(checkCustomEmpty()){
+				$('.errorInfo').eq(0).html('{% trans "Custom question is empty." %}');
+				return false;
+			}else{
+				document.getElementById("profile_security").submit();
+			}
+		});
+	})
+</script>
+<div id="security" style="" class="ui-corner-all">
+	{%if timeout%}
+	<h2>{% trans "Timeout" %}</h2>
+	<p><a href="/Profile/UpdateSecurityQuestions/">{% trans "Go back." %}</a></p>
+	{%else%}
+	<h2>{% trans "Update security questions" %}</h2>
+	<form id="profile_security" enctype="multipart/form-data" action="/Profile/SecurityQuestions/" method="POST">
+		<p>{% trans "In the interest of security, you have 15 minutes to finish this form. If you encounter a timeout error, please refresh the page." %}</p>
+		<p class="errorInfo">{{ error }}</p>
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="{% trans "Submit" %}" />
+	</form>
+{%endif%}
+</div>
+{% endblock %}

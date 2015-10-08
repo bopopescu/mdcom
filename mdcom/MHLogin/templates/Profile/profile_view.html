@@ -1,0 +1,221 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block content %}
+<div id='profileView' class="ui-corner-all">
+    <div class="clearfix doc_info" id="profile-content-header">
+        <div class="fleft logo">
+            <img src="{{photo}}" alt='{% trans "No Image Provided" %}' style="border:solid 7px lightblue; max-height: 130px; max-width: 100px;">
+        </div>
+        <div class="fright">
+            <div class="doc_tit">
+                <h3>
+                    {{fullname}}
+                </h3>
+                <span>
+                    <a href="Edit/" class="edit"> {% trans "Edit" %}</a>
+                    <label>|</label>
+                    <a href="ChangePassword/" class="cp">{% trans "Change Password" %}</a>
+                    <label>|</label>
+                    <a href="UpdateSecurityQuestions/" class="cp2">{% trans "Update Security Questions" %}</a>
+                    {% if request.CALL_ENABLE %}
+                    <label>|</label>
+                    <a href="{% url 'MHLogin.MHLUsers.views.changepin' %}" class="cpp">{% trans "Change Pin" %}</a>
+                    {% endif %}
+                </span>
+            </div>
+            <table class="doc_main">
+                <tr>
+                    <td width="180"><b>{% trans "Office Address:" %} </b></td>
+                    <td>{% if profile.user.address1 %}
+                            {{profile.user.address1}}
+                            {% if profile.user.address2 %}{{profile.user.address2}}{% endif %}
+                            {{ profile.user.city }}, {{ profile.user.state }} {{ profile.user.zip }}
+
+                            {% else %}
+                                {% trans "(Not Given)" %}
+                            {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Mobile Phone:" %} </b></td>
+                    <td>{% if profile.mobile_phone %}{{profile.mobile_phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Office Phone:" %} </b></td>
+                    <td>{% if profile.office_phone %}{{profile.office_phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Other Phone:" %} </b></td>
+                    <td>{% if profile.phone %}{{profile.phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Pager:" %} </b></td>
+                    <td>{% if profile.pager %}{{profile.pager}}{% if profile.pager_extension %} {% trans "Ext." %} {{profile.pager_extension}}{% endif %}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Email Address:" %} </b></td>
+                    <td>{{profile.email}}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "State(s) of Licensure:" %} </b>
+                    </td><td>{{states_of_licensure}}</td>
+                </tr>
+                <tr>
+                    <td valign="top"><b>{% trans "Special Skill:" %} </b>
+                    </td><td>{{skill}}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Gender:" %} </b></td>
+                    <td>{{profile.gender}}</td>
+                </tr>
+                {% if physician %}
+                    <tr>
+                        <td><b>{% trans "Accepting new patients:" %} </b></td>
+                        <td>{{accepting_new_patients}}</td>
+                    </tr><tr>
+                        <td><b>{% trans "Specialty:" %}</b></td><td> {{specialty}}</td>
+                    </tr><tr>
+                        <td><b>{% trans "Staff Type:" %}</b></td><td> {{staff_type}}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td valign="top"><b>{% trans "Public Notes:" %} </b></td>
+                    {% if profile.public_notes %}
+                        <td>{{profile.public_notes|linebreaks}}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td valign="top"><b>{% trans "Certification:" %} </b></td>
+                    {% if profile.certification %}
+                        <td>{{profile.certification}}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td valign="top"><b>{% trans "Time Setting:" %} </b></td>
+                    {% if time_setting %}
+                        <td>{{time_setting}}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td valign="top"><b>{% trans "Time Zone:" %} </b></td>
+                    {% if time_zone %}
+                        <td>{{time_zone}}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td valign="top"><b>{% trans "Language:" %} </b></td>
+                    {% if language %}
+                        <td>{{language}}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td valign="top"><b>{% trans "Refer Forward:" %} </b></td>
+                    {% if refer_forward %}
+                        <td>{{refer_forward}}</td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+    </div>
+   
+    <div class="col_table" id="profile-content-table">
+        <div class="col_table_tit clearfix">
+            <h3>{% trans "Sites" %}</h3>
+            <a href="{% url 'MHLogin.MHLSites.views.manage_sites' %}">{% trans "Manage Hospitals" %}</a>
+        </div>
+        <div class="table_style col_table_body">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <th width="80" class="firstTD">{% trans "Current?" %}</th>
+                <th width="230">{% trans "Name" %}</th>
+                <th width="220">{% trans "Address" %}</th>
+                <th width="170">{% trans "City" %}</th>
+                <th>{% trans "State" %}</th>
+            </tr>
+            {% for site in sites.all %}
+            <tr>
+                <td class="firstTD">
+                    {% ifequal site current_site %}
+                        {% trans "Yes" %}
+                    {% else %}
+                        &nbsp; 
+                    {% endifequal %}
+                </td>
+                <td>{{ site.name }}</td>
+                <td>{{ site.address1 }}{% if site.address2 %}, {{site.address2}}{% endif %}</td>
+                <td>{{ site.city }}</td>
+                <td>{{ site.state }}</td>
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+    
+    <div class="col_table mtop" id="profile-content-mtop">
+        <div class="col_table_tit clearfix">
+            <h3>{% trans "Practices" %}</h3>
+            <a href="{% url 'MHLogin.MHLUsers.views_practices.practicesHome' %}">{% trans "Manage Practices" %}</a>
+        </div>
+            <div class="table_style col_table_body">
+            <table cellspacing="0" cellpadding="0">
+            <tr>
+                <th width="80" class="firstTD">{% trans "Current?" %}</th>
+                <th width="230">{% trans "Name" %}</th>
+                <th width="220">{% trans "Address" %}</th>
+                <th width="170">{% trans "City" %}</th>
+                <th>{% trans "State" %}</th>
+            </tr>
+            
+            {% for practice in practices.all %}
+            <tr>
+                <td class="firstTD">
+                    {% ifequal practice current_practice %}
+                        {% trans "Yes" %}
+                    {% else %}
+                        &nbsp;
+                    {% endifequal %}
+                </td>
+                <td>{{ practice.practice_name }}</td>
+                <td>{{ practice.practice_address1 }}{% if practice.practice_address2 %}, {{practice.practice_address2}}{% endif %}</td>
+                <td>{{ practice.practice_city }}</td>
+                <td>{{ practice.practice_state }}</td>
+            </tr>
+            {% endfor %}
+            </table>
+            </div>
+        </div>
+        
+    <div class="col_table mtop mbottom" id="profile-content-mbottom">
+        <div class="col_table_tit clearfix">
+            <h3>{% trans "Other Organizations" %}</h3>
+        </div>
+            <div class="table_style col_table_body">
+            <table cellspacing="0" cellpadding="0">
+            <tr>
+                <th width="80" class="firstTD">{% trans "Current?" %}</th>
+                <th width="230">{% trans "Name" %}</th>
+                <th width="220">{% trans "Address" %}</th>
+                <th width="170">{% trans "City" %}</th>
+                <th>{% trans "State" %}</th>
+            </tr>
+            
+            {% for org in other_orgs %}
+            <tr>
+                <td class="firstTD">
+                </td>
+                <td>{{ org.name }}</td>
+                <td>{{ org.address1 }}{% if org.address2 %}, {{org.address2}}{% endif %}</td>
+                <td>{{ org.city }}</td>
+                <td>{{ org.state }}</td>
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+<div class="colmian_bottom"></div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "HTTP Error 4xx - Client Error" %}{% endblock %}
+
+{% block content %}
+    <div style="height:500px;">
+    <h3>{% trans "HTTP Error " %} {{err_code}} {{err_title}} {% trans "- Client Request" %}</h3> 
+    <p>{% trans "We apologize for any inconvenience, there is a problem with the client request." %}</p>
+    {% if err_msg %}
+        <p><i><b>{% trans "The server provided the following information:" %}</b></i><br/><br/>
+        {{err_msg}}
+        </p>
+    {% endif %}
+    </div>
+    <a href="/logout/">Logout</a>
+{% endblock %}

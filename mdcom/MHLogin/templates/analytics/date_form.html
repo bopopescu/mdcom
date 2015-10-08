@@ -1,0 +1,72 @@
+{% load i18n %}
+
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlx.css">
+<script src="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlx.js"></script>
+
+<script type="text/javascript">
+
+function doOnLoad() 
+{
+    var formData = [{
+            type: "settings",
+            position: "label-left",
+            labelWidth: 130, inputWidth: 80,
+        }, 
+        {
+            type: "fieldset",
+            label: "Select date range or all",
+            inputWidth: "auto",
+            list: [{
+                type: "radio",
+                name: "date_filter",
+                label: "Date Range",
+                labelWidth: "auto",
+                position: "label-right",
+                checked: true,
+                list: [{
+                        type: "calendar", dateFormat: "%m-%d-%Y", name: "start_date", 
+                        label: "Start Date", skin: "dhx_skyblue", readonly: false,
+                        calendarPosition: "right"
+                    },
+                    {
+                        type: "calendar", dateFormat: "%m-%d-%Y", name: "end_date", 
+                        label: "End Date", skin: "dhx_skyblue", readonly: false,
+                        calendarPosition: "right"
+                    }]}, 
+                {
+                    type: "radio", name: "date_filter", label: "All",
+                    labelWidth: "auto", position: "label-right",
+                }, 
+                {
+                    type: "button", value: "Submit", name: "submit"
+                },
+            ]
+        }];
+    submitform = new dhtmlXForm("submitform", formData);
+    
+    start = submitform.getCalendar("start_date");
+    end = submitform.getCalendar("end_date");
+    start.setWeekStartDay(7);
+    end.setWeekStartDay(7);
+
+//    var now = new Date();
+//    submitform.setItemValue("end_date", now);
+//    now.setDate(now.getDate()-30);
+//    submitform.setItemValue("start_date", now);
+    
+    submitform.attachEvent("onButtonClick", function(name) 
+    {
+        if (name == "submit" && submitform.validate())
+            document.forms[0].submit();
+    });    
+}
+</script>
+
+<form action="." method="post" target="_self">
+<div id="submitform"></div>
+</form>
+
+<div id="daterangeform" style="height:200px;"></div>
+<body onload="doOnLoad();">
+</body>
+

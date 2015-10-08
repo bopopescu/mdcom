@@ -1,0 +1,15 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "DoctorCom 403 Error - Forbidden" %}{% endblock %}
+
+{% block content %}
+<div style="height:500px;">
+<h3>{% trans "HTTP Error 403 - Forbidden" %}</h3> 
+<p>{% trans "We apologize for any inconvenience, however, the server is unable to grant you access to the requested page." %}</p>
+{% if err_msg %}
+<p><i><b>{% trans "The server provided the following information:" %}</b></i><br />
+{{err_msg}}</p>
+{% endif %}
+</div>
+{% endblock %}

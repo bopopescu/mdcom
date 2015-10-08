@@ -1,0 +1,19 @@
+{% extends "Boxes/box_100-RD.html"%}
+{% load i18n %}
+
+{% block content %}
+{% for user in users %}
+	<tr style="line-height:24px;">
+		<td style="padding-left:10px;"> {{ user.first_name }} {{ user.last_name }}  </td>
+		<td width="75px" style="width:75px;">  
+		      {% if user.mobile_phone %}<a style="text-decoration:none;" href="/Messages/New/?user_recipients={{ user.id }}">
+		      <div class="button3">{% trans "text" %}</div></a>{% else %}<div class="button2">{% trans "text" %}</div>{% endif %} 
+		      </td>
+		<td width="75px" style="width:75px;">{% if user.pager %} <a style="text-decoration:none;" href="/Page/{{ user.id }}/">
+		<div class="button3">{% trans "page" %}</div></a>{% else %}<div class="button2">{% trans "page" %}</div>{% endif %}</td>
+		<td width="75px" style="width:75px;"> {% if user.mobile_phone %}<a style="text-decoration:none;" href="/Call/{{ user.id }}/">
+		<div class="button3">{% trans "call" %}</div></a>{% else %}<div class="button2">{% trans "call" %}</div>{% endif %}</td>
+		<td width="5px"></td>
+	</tr>
+{% endfor %}
+{% endblock %} 

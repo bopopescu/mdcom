@@ -1,0 +1,50 @@
+{% load i18n %}
+{%include 'includes/jquery.validate.html'%}
+<script type="text/javascript">
+    $(document).ready(function(){
+        var DATE_FORMAT={
+                'de':'yy-mm-dd',
+                'en-us':'mm/dd/yy'
+            };
+        $("#id_due_date").attr("maxlength",10).css("ime-mode","disabled").datepicker({
+                showOn: 'both',
+                buttonImage: '{{STATIC_URL}}img/calendar.gif',
+                buttonImageOnly: true,
+                minDate: new Date(1970, 1-1, 1),
+                dateFormat: DATE_FORMAT[Constant.TIME_ZONE]
+            });
+
+        $("table tr:odd").removeClass("odd");
+
+        var followupValidater = $("#followupForm").validate({
+            rules: {
+                task: "required",
+                priority: "required",
+                due_date: {
+                    isValidUnixDate: true,
+                    maxlength:10
+                }
+            },
+            messages: {
+                task: '{% trans "Task is required." %}',
+                priority: '{% trans "Priority is required." %}',
+                due_date: {
+                    isValidUnixDate: '{% trans "Please specify a (valid) date. Format is mm/dd/yyyy and the value is not before 01/01/1970." %}',
+                    maxlength:'{% trans "Please specify a (valid) date. Format is mm/dd/yyyy and the value is not before 01/01/1970." %}'
+                }
+            },
+            showErrors: showErrorsBelow,
+            meta: "validate",
+            onfocusout: false,
+            onkeyup: false,
+            onclick: false,
+            onsubmit: true,
+            submitHandler:function(form){
+                form.submit();
+            },
+            invalidHandler:function(form, validator) {
+                return;
+            }
+        });
+    });
+</script>

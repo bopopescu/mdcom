@@ -1,0 +1,27 @@
+{% load i18n %}
+{% blocktrans with call_stack|safe as call_stack %}
+Event Details
+---------------------------------------
+id: {{event.id}}
+callGroup: {{event.callGroup}}
+title: {{event.title}}
+startDate: {{event.startDate}}
+endDate: {{event.endDate}}
+eventType: {{event.eventType}}
+oncallPerson: {{event.oncallPerson}}
+oncallLevel: {{event.oncallLevel}}
+oncallStatus: {{event.oncallStatus}}
+creator: {{event.creator}}
+creationdate: {{event.creationdate}}
+lastupdate: {{event.lastupdate}}
+eventStatus: {{event.eventStatus}}
+notifyState: {{event.notifyState}}
+whoCanModify: {{event.whoCanModify}}
+checkString: {{event.checkString}}
+
+
+
+Call Stack
+---------------------------------------
+{{call_stack}}
+{% endblocktrans %}

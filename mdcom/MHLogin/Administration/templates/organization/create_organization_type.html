@@ -1,0 +1,184 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block title %}{% trans "Organization Type Management" %}{% endblock %}
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/organization.css"/>
+{% endblock %}
+
+{% block content %}
+<div id="dc_nav">
+    <a href="/dcAdmin/">DCAdmin</a> >
+    <a href="/dcAdmin/OrganizationTypeList/">{% trans "Organization Type Management" %}</a>
+</div>
+<div id='dcAdmin_home' class="ui-corner-all">
+
+<div class="org_content">
+    <div class="org_content_title">{{ page_name }}</div>
+    <div class="float-right"></div>
+</div>
+
+<div class="clear" ></div>
+<div style="width: 90%; margin: 15px;">
+    <form action="." method="POST">
+        <input type="hidden" id="org_type_id" value="{{type_form.initial.id}}"/>
+        <table class="org_create_table">
+            {% for field in type_form %}
+            {% if field.name in "['name', 'is_public', 'description']" %}
+                <tr>
+                    <td class="org_create_td_field">{{ field.label_tag }}</td>
+                    <td class="org_create_td">{{ field }}
+                    {% if field.name != 'name' %}
+                        <label for="{{field.auto_id}}">{{ field.help_text }}</label>
+                    {% endif %}
+                    </td>
+                </tr>
+                {% if field.errors %}
+                <tr>
+                    <td class="org_create_td_field">&nbsp;</td>
+                    <td>{{ field.errors }}</td>
+                </tr>
+                {% endif %}
+            {% endif %}
+            {% endfor %}
+
+            {% for field in setting_form %}
+                {% if field.name in "['can_have_answering_service', 'can_be_billed', 'display_in_contact_list_tab', 'can_have_luxury_logo', 'can_have_member_organization']" %}
+                    <tr>
+                        <td class="org_create_td_field">{{ field.label_tag }}</td>
+                        <td class="org_create_td">{{ field }}<label for="{{field.auto_id}}">{{ field.help_text }}</label></td>
+                    </tr>
+                    {% if field.errors %}
+                    <tr>
+                        <td class="org_create_td_field">&nbsp;</td>
+                        <td>{{ field.errors }}</td>
+                    </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </table>
+        <table>
+            <tr>
+                <td class="org_create_td_field">{% trans "User types" %}</td>
+                <td class="org_create_td">
+                    <table>
+                        <tr>
+                            <td>{% trans "Staff" %}</td>
+                            <td style="padding: 0 10px;">{% trans "Provider" %}</td>
+                            <td style="padding: 0 10px;">{% trans "Tech Admin" %}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0 20px;">{{setting_form.can_have_manager}}<label for="{{setting_form.can_have_manager.auto_id}}">{% trans "Manager" %}</label></td>
+                            <td style="padding: 0 30px;">{{setting_form.can_have_physician}}<label for="{{setting_form.can_have_physician.auto_id}}">{% trans "Doctor" %}</label></td>
+                            <td style="padding: 0 30px;">{{setting_form.can_have_tech_admin}}<label for="{{setting_form.can_have_tech_admin.auto_id}}">{% trans "Tech Admin" %}</label></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0 20px;">{{setting_form.can_have_staff}}<label for="{{setting_form.can_have_staff.auto_id}}">{% trans "Staff" %}</label></td>
+                            <td style="padding: 0 30px;">{{setting_form.can_have_nppa}}<label for="{{setting_form.can_have_nppa.auto_id}}">{% trans "NP/PA/Midwife" %}</label></td>
+                            <td style="padding: 0 10px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0 20px;">{{setting_form.can_have_nurse}}<label for="{{setting_form.can_have_nurse.auto_id}}">{% trans "Nurse" %}</label></td>
+                            <td style="padding: 0 30px;">{{setting_form.can_have_medical_student}}<label for="{{setting_form.can_have_medical_student.auto_id}}">{% trans "Medical/Dential Student" %}</label></td>
+                            <td style="padding: 0 10px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0 20px;">{{setting_form.can_have_dietician}}<label for="{{setting_form.can_have_dietician.auto_id}}">{% trans "Dietician" %}</label></td>
+                            <td style="padding: 0 30px;">&nbsp;</td>
+                            <td style="padding: 0 10px;">&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div id="org_sub_type">
+            <fieldset> 
+                <legend class="title">
+                    {% trans "Sub types" %}
+                    <a id="org_sub_type_selectall">{% trans "Select all" %}</a>
+                    <a id="org_sub_type_unselectall">{% trans "Unselect all" %}</a>
+                </legend>
+                {{type_form.subs}}
+                {{type_form.subs.errors}}
+            </fieldset>
+            <div>{% trans 'This type only can create these sub types.' %}</div>
+        </div>
+        <div id="org_type_btn" style="text-align: center; padding:10px 0;">
+            <input type="submit" name="mysubmit" value="{% trans 'Save'%}">
+            <input type="button" name="cancel"  onclick="location.href='/dcAdmin/OrganizationTypeList/';" value="{% trans 'Back'%}">
+        </div>
+    </form>
+</div>
+</div>
+
+<script type='text/javascript'>
+    {% if has_saved %}
+        alert("{% trans 'Save successfully'%}");
+    {% endif %}
+
+    $(function(){
+        $('#org_sub_type_selectall').click(function(){
+            $("input[name='subs']").attr("checked", "checked");
+        });
+        $('#org_sub_type_unselectall').click(function(){
+            var type_ids = "";
+            $("input[name='subs']").each(function(i){
+                if (i > 0) {
+                    type_ids += ",";
+                }
+                type_ids += $(this).val();
+            });
+            if (checkRemoveSubType(type_ids)) {
+                $("input[name='subs']").removeAttr("checked");
+            }
+        });
+        $("input[name='subs']").click(function(){
+            var jobj = $(this);
+            var type_ids = jobj.val();
+            if (!jobj.attr("checked")){
+                return checkRemoveSubType(type_ids)
+            }
+            return true;
+        });
+
+        function checkRemoveSubType(type_ids) {
+            var org_type_id = $("#org_type_id").val();
+            if (!org_type_id) {
+                return true;
+            }
+            var can_remove = false;
+            $.comAjax({
+                url: "/dcAdmin/OrganizationType/CheckRemoveSubType/",
+                type:'POST',
+                data: {"type_ids": type_ids, "parent_type_id":$("#org_type_id").val()},
+                async: false,
+                success:function(data, status){
+                    var result = data;
+                    var cannt_remove_orgs = result["cannt_remove_orgs"];
+                    if (cannt_remove_orgs && cannt_remove_orgs.length>0) {
+                        can_remove = false;
+                        var can_remove_name = "";
+                        var can_remove_num = cannt_remove_orgs.length;
+                        for (var i = 0; i < can_remove_num; i++) {
+                            if (i>0) {
+                                can_remove_name += ", ";
+                            }
+                            var org_name = $.trim($("input[name='subs'][value='"+cannt_remove_orgs[i]+"']").parent().text());
+                            can_remove_name += org_name;
+                        }
+                        if (can_remove_num>1) {
+                            alert("{% trans "You can't remove the sub types %s, because they have been used." %}".sprintf(can_remove_name));
+                        } else {
+                            alert("{% trans "You can't remove the sub type %s, because it has been used." %}".sprintf(can_remove_name));
+                        }
+                    } else {
+                        can_remove = true;
+                    }
+                }
+            });
+            return can_remove;
+        }
+    });
+</script>
+{% endblock %}

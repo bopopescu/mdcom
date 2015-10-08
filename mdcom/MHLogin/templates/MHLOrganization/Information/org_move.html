@@ -1,0 +1,34 @@
+{% load i18n %}
+{% include "MHLOrganization/Information/org_js.html" %}
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+{%include 'includes/jquery.validate.html'%}
+
+<div class="org-tab-content">
+	<div id="" class="ui-corner-all">
+		<form id="orgMoveForm" action="." method="POST" >{% csrf_token %}
+			<table  cellspacing='0' cellpadding='0' class="org_move_table">
+			{% for field in pareorg_form %}
+				<tr>
+					<th align='left' class="td-left">
+						{{field.label}}:
+					</th>
+					<td align='left'>
+						{{field}} 
+						{% if showChange and show_form_errors %}
+						<span>
+							{{field.help_text}}
+						</span>
+						{% endif %}
+					</td>
+					<td>
+						{% if show_form_errors %}
+						{% if field.errors %} {{field.errors}} {% else %} &nbsp; {% endif %}
+						{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+			</table>
+			<input id="orgMoveFormSubmit" type="button" value='{% trans "Save" %}' class="org_inf_btn"/>
+		</form>
+	</div>
+</div>

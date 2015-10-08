@@ -1,0 +1,47 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<div id='billingView' class="ui-corner-all">
+
+<div id="payments_billing">
+
+{%if current_cc_info %} 
+<h2>Update your billing information and click Save</h2> 
+<h2>OR click <a href="/Practice/Profile/"> Cancel </a> to keep existing information and exit</h2>
+{% else %}
+<h2>Your billing information</h2>
+{% endif %}
+
+{% if errors %}
+<div id="errors">
+<h2>{{errors}}</h2>
+{% else %}
+<form class action="{{ cc_form_post_url }}" method="POST"  autocomplete="off"  id="id_update_cc_form">{% csrf_token %}
+<label for='braintree_cardholder_name'>Cardholder Name</label>
+<input type="text" name="customer[credit_card][cardholder_name]" id="braintree_cardholder_name" {%if current_cc_info %} value = '{{name}}'{% endif %}/> <br>
+
+<label for='braintree_credit_card_number'>Credit Card Number</label>
+<input type="text" name="customer[credit_card][number]" id="braintree_credit_card_number" {%if current_cc_info %} value = '{{cc_number}}'{% endif %}/> <br>
+
+<label for='braintree_credit_card_exp'>Credit Card Expiration (mm/yyyy)</label>
+<input type='text' name='customer[credit_card][expiration_date]' id='braintree_credit_card_exp'{%if current_cc_info %} value = '{{expiration_date}}'{% endif %}/><br>
+
+<label for='braintree_customer_postal_code'>Zip Code</label>
+<input type='text' name='customer[credit_card][billing_address][postal_code]' id='braintree_customer_postal_code'{%if current_cc_info %} value = '{{zip_code}}'{% endif %}/><br>
+
+<label for='braintree_credit_card_cvv'>CVV</label>
+<input type='text' name='customer[credit_card][cvv]' id='braintree_credit_card_cvv'/>
+
+</div>
+
+<input type="hidden" name="tr_data" value='{{ tr_data }}' />
+    <input type="submit" value="Save" />
+
+</form>
+</div>
+{% endif %}
+
+       
+{% endblock %}

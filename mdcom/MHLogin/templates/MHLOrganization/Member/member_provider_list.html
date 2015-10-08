@@ -1,0 +1,75 @@
+{% load i18n %}
+
+<div class="org-search-result">
+	<table class="org_table" width="100%" cellspacing="0" cellpadding="0">
+	{% if datas %}
+		<tr class="title">
+			<th>{% trans "Name"%}</th>
+			<th>{% trans "Status"%}</th>
+			<th>{% trans "Last Login"%}</th>
+			<th></th>
+		</tr>
+		{% for data in datas %}
+		<tr class="{% if forloop.last %}last{% else %}not-last{% endif %}">
+			<td class="provider-name">
+				<div class="inner-name">
+					{{ data.name }}&nbsp;
+				</div>
+			</td>
+			<td>
+				{% if data.status %}
+					{% trans 'Active' %}
+				{% else %}
+					{% trans 'Pending' %}
+				{% endif %}
+			</td>
+
+			<td>{{ data.last_login }}&nbsp;</td>
+			<td><div class="delete" onclick="removeMemberProvider({{ data.id }}, '{{ data.name }}');">&nbsp;</div></td>
+		</tr>
+		{% endfor %}
+	{% else %}
+	<tr>
+		<td><h3>{% trans "Currently, no providers are registered." %}</h3></td>
+	</tr>
+	{% endif %}
+	</table>
+</div>
+{% if datas %}
+<div id="memberProviderListPagation" class="pagation_panel pagation_panel2">
+	<table>
+		<tr class="no-data">
+			<td><div class="pagniation"></div></td>
+		</tr>
+	</table>
+</div>
+{% endif %}
+
+<script>
+	function memberProviderPagationCallback(index){
+		getAndShowMemberProviders(index);
+	};
+
+	function showMemberProviderPagination(){
+		var index = {{index}};
+		var count = {{count}};
+		var total_count = {{total_count}};
+		$('#memberProviderListPagation .pagniation').pagination(total_count ,{
+				callback:memberProviderPagationCallback,
+				current_page: index,
+				items_per_page: count,
+				num_edge_entries:1,
+				num_edge_entries: 3,
+				num_display_entries: 3,
+				prev_text:"",
+				next_text:"",
+				href_none:true
+			}
+		);
+	}
+
+	$(function(){
+		showMemberProviderPagination();
+	});
+
+</script>

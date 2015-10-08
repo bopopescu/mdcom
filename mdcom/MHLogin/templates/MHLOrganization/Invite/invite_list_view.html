@@ -1,0 +1,27 @@
+{% load i18n %}
+{% if invites %}
+	{% for p in invites %}
+	<div class="request-in-item {% cycle 'even' 'odd' %}">
+		<div class="request-in-icon"></div>
+		<div class="user-info">
+			<div class="user-name" title="{{ p.recipient }}">{{p.recipient}}</div>
+			<div class="request-time">{{ p.delta_time }}</div>
+		</div>
+		<div class="user-action" type="{{ p.type }}" rid="{{ p.id }}">
+			<div class="resend">
+				<div class="item left"></div>
+				<div class="item right">{% trans "Resend" %}</div>
+			</div>
+			<div class="cancel">
+				<div class="item left"></div>
+				<div class="item right">{% trans "Cancel" %}</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	<div class="line"></div>
+{% else %}
+	<h3>{{ no_requets }}</h3>
+{% endif %}
+
+

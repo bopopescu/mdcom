@@ -1,0 +1,584 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block title %}Sales Leads{% endblock %}
+{% block content %}
+
+<div id="title" style="margin-top:10px;height:30px;width:350px;
+		text-align:left;font-size:25px;font-weight:bold;">
+{% trans "Sales Leads" %}
+</div>
+
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlx.css">
+<style type="text/css">
+    html { height: 100% }
+    body { height: 100%; margin-left: 10; padding: 0 }
+    
+    .dhx_header_cmenu
+    {
+        background-color:#ffffff;
+        border:2px outset silver;
+        z-index:2;
+        text-align:left;
+    }
+    .dhx_header_cmenu_item
+    {
+        white-space:nowrap;
+    }
+
+    .dhx_textarea
+    {
+        padding:2px 2px 2px 2px;
+        left:0px;
+        top:0px;    
+        font-family:Tahoma;    
+        font-size:13px;
+        height:200px;
+    }
+    
+</style>
+
+
+{% comment - For debugging %}
+<script src="{{STATIC_URL}}js/dhtmlx35/dhtmlxGrid/sources/dhtmlxcommon.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx35/dhtmlxGrid/sources/dhtmlxgrid.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx35/dhtmlxGrid/sources/ext/dhtmlxgrid_splt.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx35/dhtmlxGrid/sources/ext/dhtmlxgrid_ssc.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx35/dhtmlxGrid/sources/dhtmlxgridcell.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx35/dhtmlxDataProcessor/sources/dhtmlxdataprocessor.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx35/dhtmlxMenu/sources/dhtmlxmenu.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx35/dhtmlxCombo/sources/dhtmlxcombo.js"></script>
+{% endcomment %}
+<script src="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlx.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlxgrid_hextra.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlxgrid_export.js"></script>
+
+<script type="text/javascript">
+    isAdmin = "{{fullLeadAccess}}" == "True" ? true : false;
+    /* custom case insensitive sorting */
+    function str_nocase(a, b, order)
+    {    // the name of the function must be > than 5 chars
+        if (order=="asc")
+            return (a.toLowerCase()>b.toLowerCase()?1:-1);
+        else
+            return (a.toLowerCase()>b.toLowerCase()?-1:1);
+    }
+
+    /* custom stage combo sorter sorts by labels rather than value */
+    function stage_combo(a, b, ord, a_id, b_id)
+    {
+        var grid = document.getElementById("gridbox").grid;
+        a=grid.cells(a_id,grid.getColIndexById("stage")).getText().toLowerCase();
+        b=grid.cells(b_id,grid.getColIndexById("stage")).getText().toLowerCase();
+        vala = parseInt(a.split("-")[0]);
+        valb = parseInt(b.split("-")[0]);
+        return ord == "asc" ? (vala > valb ? 1 : -1) : (vala > valb ? -1 : 1);
+    }
+
+    /* custom rep combo sorter sorts by labels rather than value */
+    function rep_combo(a, b, ord, a_id, b_id)
+    {
+        var grid = document.getElementById("gridbox").grid;
+        a=grid.cells(a_id,grid.getColIndexById("rep")).getText().toLowerCase();
+        b=grid.cells(b_id,grid.getColIndexById("rep")).getText().toLowerCase();
+        return ord=="asc"?(a>b?1:-1):(a>b?-1:1);
+    }
+
+    /* custom products sorter sorts price only */
+    function products(a, b, ord, a_id, b_id)
+    {
+        var grid = document.getElementById("gridbox").grid;
+        var v1=parseFloat(grid.cells(a_id,grid.getColIndexById("pricequote")).getValue());
+        var v2=parseFloat(grid.cells(b_id,grid.getColIndexById("pricequote")).getValue());
+        return ord=="asc"?(v1>v2?1:-1):(v1>v2?-1:1);
+    }
+    
+    /* monkey patch add formatMoney to numbers */
+    Number.prototype.formatMoney = function(c, d, t)
+    {
+        var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "" : d, 
+                t = t == undefined ? "" : t, s = n < 0 ? "-" : "", 
+                        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+                            j = (j = i.length) > 3 ? j % 3 : 0;
+        return s + (j ? i.substr(0, j) + t : "") + 
+            i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + 
+                (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    }
+
+    /* Initialize controls */
+    function initialize() 
+    {
+        var newId = 1;
+        var grid = new dhtmlXGridObject('gridbox');
+        var dp = new dataProcessor('/Sales/sales_updatedata/');
+        var sales_rep = "{{sales_display_rep_name}}";
+        var sales_repid = "{{sales_display_rep_id}}";
+        var platform = navigator.platform.toLowerCase(); 
+        var menu = new dhtmlXMenuObject();
+
+        menu.setIconsPath("{{STATIC_URL}}js/dhtmlx_pro_full/imgs/");
+        menu.renderAsContextMenu();
+        menu.attachEvent("onClick", onButtonClick);
+        menu.loadXMLString("<menu id=\"0\">" +
+            "<item text=\"Add\" id=\"add_row\"></item>"+ 
+            "<item text=\"Copy\" id=\"copy_row\"></item>"+ 
+            "<item text=\"Delete...\" id=\"del_row\"></item>"+ 
+            "</menu>");
+
+        grid.setImagePath("{{STATIC_URL}}js/dhtmlx_pro_full/imgs/");
+        gridstyle = "font-family: arial; font-size: 13px;";
+        grid.setStyle(gridstyle, gridstyle, gridstyle, gridstyle); 
+
+        grid.setHeader("Practice,Region,Type,Products/$," +
+                "#cspan,Contact,{#collapse}5:Phone,Email,Website,First contact," +
+                "First appt.,Sales Stage,Lead Source,Notes,Address,Sales Rep.");
+        grid.attachHeader("&nbsp;,#select_filter,#cspan,&nbsp;,#cspan,#cspan,#cspan," +
+                "&nbsp;,#cspan,#cspan,#cspan,#select_filter,&nbsp;,#cspan,#cspan,#cspan");
+        grid.setColumnIds("practice,region,type,prods," +
+                "pricequote,contact,phone,email,website,firstcontact," +
+                "firstappt,stage,source,notes,address,rep");
+        grid.setColSorting("str_nocase,str_nocase,str_nocase," +
+        		"products,products,str_nocase,str,str_nocase,str_nocase," +
+        		"date,date,stage_combo,str,str,str,rep_combo");  // set sorting
+        grid.setColTypes("ed,coro,ed,sub_row_grid,price,ed," +
+        		"ed,ed,ed,dhxCalendarA,dhxCalendarA,coro,co,txt,txt,coro");
+
+        grid.setColumnMinWidth("130,75,55,25,70,100,90,100,50,80,80,130,95,50,50,110");
+        grid.setInitWidths("130,75,55,25,70,100,90,100,100,80,80,130,95,150,150,125");
+
+        grid.enableTooltips("false");
+        grid.enableMultiselect(true);
+        grid.preventIECaching(true);    // for at least Chrome as well
+
+        var stages = eval("(" + "{{stages|escapejs|safe}}" + ")");
+        var stagecombo = grid.getCombo(grid.getColIndexById("stage"));
+        for (var key in stages) 
+        {
+            var val = stages[key];
+            stagecombo.put(key, val[1]);
+        }
+        var sources = eval("(" + "{{sources|escapejs|safe}}" + ")");
+        var sourcecombo = grid.getCombo(grid.getColIndexById("source"));
+        for (var ii = 0; ii < sources.length; ii++)
+        {
+            sourcecombo.put(sources[ii], sources[ii]);
+        }
+        var region = grid.getColIndexById("region");
+        if (isAdmin == true)
+        {   // admin/execs can modify contents of region combo 
+            grid.setColumnExcellType(region, "co");
+        }
+        putRegionsInCombo(grid.getCombo(region));
+        putUsersInCombo(grid.getCombo(grid.getColIndexById("rep")));
+
+        grid.enableContextMenu(menu);
+        grid.setSizes();
+        grid.setSkin("dhx_skyblue");      // set grid skin
+        grid.init();                      // initialize grid
+        grid.collapseColumns(grid.getColIndexById("phone")); //only after init (!)
+        // vvv The following are only available in PRO addition:
+        //grid.enableHeaderMenu();
+        //grid.enableColumnMove(true);
+        grid.setDateFormat("%m/%d/%Y");
+        // ^^^
+        // add devices as needed, mobiles don't work well with default edit settings
+        if (platform == "ipad" ||  platform == "iphone" || platform == "ipod")
+            grid.enableEditEvents(true, true, false);
+
+        dp.init(grid);
+        dp.defineAction("error_of_datastore", handle_error);
+        setGridVerification(grid, dp);
+
+        //grid.loadOrderFromCookie();
+        //grid.loadSortingFromCookie();
+        grid.loadSizeFromCookie();
+        //grid.loadHiddenColumnsFromCookie();
+
+        grid.enableAutoSizeSaving();
+        grid.enableSortingSaving();
+        //grid.enableOrderSaving();
+        //grid.enableAutoHiddenColumnsSaving();
+
+        grid.loadXML("/Sales/sales_getdata/", function()
+        {
+            grid.loadSortingFromCookie();
+            document.getElementById("title").innerHTML = generateTitle();
+        });
+
+        grid.attachEvent("onEditCell", doOnEditCell);
+        grid.attachEvent("onBeforeContextMenu", onBeforeContextMenu);
+
+        grid.attachEvent("onGridReconstructed", function(grid_obj)
+        {
+            document.getElementById("title").innerHTML = generateTitle();
+        }); 
+
+        /* change default behavior of filtering to exact match */
+        grid._filterA=function(column, value)
+        {
+            if (value=="") 
+                return;
+            var d = true;
+            if (typeof(value)=="function") 
+                d = false;
+            else 
+                value=(value||"").toString().toLowerCase();
+
+            if (!this.rowsBuffer.length) 
+                return;
+            // this is taken from dhtmlXGridObject.prototype._filterA except for 
+            // comparision when value is not a callback function, we do exact match.            
+            for (var i=this.rowsBuffer.length-1; i>=0; i--)
+            {
+                if (d ? 
+                    (this._get_cell_value(this.rowsBuffer[i],column).toString().toLowerCase()!=value) :
+                    (!value.call(this, this._get_cell_value(this.rowsBuffer[i],column),
+                            this.rowsBuffer[i].idd)))
+                    this.rowsBuffer.splice(i,1);    // filter out row
+            }
+        };
+
+        /* process context menu click */
+        function onButtonClick(menuitemId, type) 
+        {
+            //var data = grid.contextID.split("_");
+            if (menuitemId == "add_row")
+            {
+                addNewSalesLead();
+            }
+            else if (menuitemId == "del_row")
+            {
+                deleteSalesLead(grid.getSelectedRowId().split(","));
+            }
+            else if (menuitemId == "copy_row")
+            {
+                var sel = grid.getSelectedRowId().split(",");
+                if (sel.length == 1)
+                {
+                    copySalesLead(sel[0]);
+                }
+                else
+                    alert("Please select one Sales Lead to copy.");
+            }
+        }
+
+        /* function callback to setup context menu based on row selection */
+        function onBeforeContextMenu(rowId, cellIdx, grid)
+        {
+            var sel = grid.getSelectedRowId();
+            menu.forEachItem(function(item) { menu.setItemEnabled(item); });
+            if (sel != null)
+            {   // check if row is locked
+                if (grid.getRowAttribute(rowId, "locked") == "true")
+                {   // disable certain items when locked 
+                    menu.setItemDisabled("del_row");            
+                    menu.setItemDisabled("copy_row");            
+                }
+                if (sel.split(",").length > 1)
+                {   // set copy disabled if selecting more than one lead
+                    menu.setItemDisabled("copy_row");            
+                }
+            }
+            else    
+            {   // no row(s) selected disable copy/delete but not add
+                menu.setItemDisabled("copy_row");
+                menu.setItemDisabled("del_row");
+            }
+            return true;
+        }
+        
+        /* helper to update grid verification, called on init and when we move columns */
+        function setGridVerification(grid, dp)
+        {
+            function noValidation(value) { return true; }
+            function isValidEmail(value) 
+            {
+                var isValid = true;
+                if (value != "")
+                {
+                    var regemail = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+                    isValid = (value.toString().match(regemail) != null) ? true : false;
+                }
+                return isValid;
+            }
+            function isValidPercent(value)
+            {
+                valid = (value.toString().match(/(^-?\d+$)/) != null) ? true : false;
+                if (valid == true && (value > 100 || value < 0))
+                    valid = false;
+                 return valid;
+            }
+            var defvals = { "region" : noValidation, "practice" : noValidation,
+                    "type" : noValidation, "rep" : noValidation,
+                    "contact" : noValidation, "phone" : noValidation, 
+                    "email" : isValidEmail, "website" : noValidation, 
+                    "firstcontact" : noValidation, "firstappt" : noValidation, 
+                    "prods" : noValidation, "pricequote" : noValidation, 
+                    "stage" : noValidation, "notes" : noValidation, "address" : noValidation};
+            for (var key in defvals)
+            {
+                dp.setVerificator(grid.getColIndexById(key), defvals[key]);
+            }
+        }
+
+        /* create sub grid for product data entry */
+        grid.attachEvent("onSubGridCreated",function(subgrid, rId, cell, data)
+        {
+            var subdp = new dataProcessor('/Sales/sales_updateproductdata/');
+
+            data = "/Sales/sales_getproductdata/?id=" + rId;
+
+            subgrid.setHeader("Product,#cspan,Standard Price,Price Quoted");
+            subgrid.setColumnIds("select,product,price,quote");
+            subgrid.setColTypes("ch,ro,ro,price");
+            subgrid.setInitWidths("20,170,100,100");
+            subgrid.setColumnMinWidth("20,150,100,100");
+            subgrid.init();
+            subdp.setVerificator(subgrid.getColIndexById("quote"),
+                    dhtmlxValidation.isValidCurrency);
+            // add devices as needed, mobiles don't work well with default edit settings
+            if (platform == "ipad" ||  platform == "iphone" || platform == "ipod")
+                subgrid.enableEditEvents(true, true, false);
+
+            subdp.init(subgrid);
+            subdp.defineAction("error_of_datastore", handle_error);
+
+            subgrid.loadXML(data);
+
+            /* helper to calculate price of sales products */
+            function calcPrice()
+            {
+                var price = 0;
+                subgrid.forEachRow(function(rowId)
+                { 
+                    var select = subgrid.cellById(rowId, subgrid.getColIndexById("select"));                    
+                    if (select.getValue() == 1)
+                    {
+                        var c = subgrid.cellById(rowId, subgrid.getColIndexById("quote"));
+                        price += parseFloat(c.getValue());
+                    }
+                });
+                // round to two decimal places
+                return (Math.round(price * Math.pow(10,2)) / Math.pow(10,2)).formatMoney(2, '.');
+            }
+
+            /* for custom cell editors */
+            subgrid.attachEvent("onCellChanged", function(row, col, value)
+            {
+                var cell_price = grid.cellById(rId, grid.getColIndexById("pricequote"));
+                cell_price.setValue(calcPrice());
+                return true;
+            });
+
+            /* for custom cell editors */
+            subgrid.attachEvent("onCheck", function(row, col, state)
+            {
+                cell_price = grid.cellById(rId, grid.getColIndexById("pricequote"));
+                cell_price.setValue(calcPrice());
+                return true;
+            });
+
+            return false;   // prevent default behavior
+        });
+
+        /* copy an existing sales lead */
+        function copySalesLead(rId)
+        {
+            var ary = new Array();
+            var uid = new Date().valueOf();
+            var colids = ["region", "practice", "type", "rep", "contact",
+                          "phone", "email", "website", "firstcontact", "firstappt",
+                          "pricequote", "stage", "source", "notes", "address"];
+
+            // build row array - indexes may not match column because we allow column moves
+            for (ii = 0; ii < colids.length; ii++)
+            {
+                ary[grid.getColIndexById(colids[ii])] = 
+                    grid.cellById(rId, grid.getColIndexById(colids[ii])).getValue();
+            }
+            // products are handled differently copy later
+            ary[grid.getColIndexById("prods")] = "/Sales/sales_getproductdata/?id=-1";
+            // Copy product data too
+            evtId = dp.attachEvent("onAfterUpdate", function(sid, action, tid, tag)
+            {   // send message to server telling to copy product data of source to dest
+                var xmlHttp = new XMLHttpRequest(); 
+                xmlHttp.open("GET", "/Sales/sales_copyproductdata/?srcId=" + 
+                        rId + "&dstId=" + tid, true);
+                xmlHttp.send(null);
+                dp.detachEvent(evtId);
+            });
+            // add row to top
+            grid.addRow(uid, ary, 0);
+        }
+
+        /* helper to add a new sales lead with default values */
+        function addNewSalesLead()
+        {
+            var date = new Date();
+            var ary = new Array();
+            var uid = date.valueOf();
+            var defvals = { "region" : "", "practice" : "new practice " + (grid.getRowsNum()+1),
+                    "type" : "", "rep" : parseInt(sales_repid),
+                    "contact" : "", "phone" : "", "email" : "", "website" : "",
+                    "firstcontact" : date, "firstappt" : date, 
+                    "prods" : "/Sales/sales_getproductdata/?id=-1",
+                    "pricequote" : "0.00", "stage" : "discovery", "notes" : "", "address" : ""};
+            for (var key in defvals)
+            {
+                if (defvals.hasOwnProperty(key))
+                    ary[grid.getColIndexById(key)] = defvals[key];
+            }
+            // add row to top
+            grid.addRow(uid, ary, 0);
+            return uid;
+        }
+
+        /* helper to delete sales lead or leads */
+        function deleteSalesLead(sel)
+        {
+            var isLocked = false;
+
+            for (ii = 0; ii < sel.length; ii++)
+            {
+                isLocked = (grid.getRowAttribute(sel[ii], "locked") == "true") ? true : false;
+                if (isLocked == true)
+                    break;
+            }
+            
+            if (isLocked == false)
+            {
+                msg = "Are you sure you want to delete this entry?"
+                msg = (sel.length > 1) ? msg.replace("this entry", "these entries") : msg;
+                if (confirm (msg) == true)
+                    grid.deleteSelectedRows();
+            }
+            else
+            {   // one or more rows locked
+                alert ("One or more selected rows are locked and cannot be deleted.");
+            }
+        }
+
+        /* process row add event */
+        document.getElementById("buttonadd").addEventListener("click", function()
+        {
+            uid = addNewSalesLead();
+            grid.selectRowById(uid);
+        });
+
+        /* process row delete event */
+        document.getElementById("buttondelete").addEventListener("click", function()
+        {
+            deleteSalesLead(grid.getSelectedRowId().split(","));
+        });
+
+        /* process reset and clear cookies command */
+        document.getElementById("buttonreset").addEventListener("click", function()
+        {
+            grid.clearConfigCookie();
+            window.location.reload();   // TODO grid has cookies cached somewhere
+        });
+        
+        /* for custom cell editors */
+        function doOnEditCell(stage, row, col) 
+        {
+            var rc = true;
+
+            if (col == grid.getColIndexById("rep"))
+            {   // prevent editing rep if not admin
+                if (stage == 0 && isAdmin == false)
+                {
+                    rc = false;
+                }
+            }
+            else if (col == grid.getColIndexById("pricequote"))
+            {   // keep price quote read-only but still type 'price' so shows green and $
+                rc = false;
+            }
+            else if (col == grid.getColIndexById("region"))
+            {
+                if (stage == 2)
+                {   // when in last stage of editing update region combo
+                    putRegionsInCombo(grid.getCombo(col));
+                }
+            }
+
+            return rc;
+        }
+
+        /* Display error for dataprocessor */
+        function handle_error(obj)
+        {
+            alert('Error: ' + obj.firstChild.data);
+            return false;
+        }
+
+        /* helpe to generate salesleads title */
+        function generateTitle()
+        {
+            return "{% trans "Sales Leads" %} (" + grid.getRowsNum() + ")";
+        }
+    }
+
+    /* Helper to send user list request to server and build userlist combo box */
+    function putUsersInCombo(repcombo)
+    {
+        var xmlHttp = new XMLHttpRequest(); 
+        xmlHttp.onreadystatechange = function()
+        {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) 
+            {
+                var resp = eval('(' + xmlHttp.responseText + ')');
+                // populate sales rep combo list
+                for (ii = 0; resp && ii < resp.length; ii++)
+                {
+                    var index = resp[ii][0];
+                    var label = resp[ii][1] + " " + resp[ii][2]
+                    repcombo.put(index, label);
+                }
+            }
+        }
+        xmlHttp.open("GET", "/Sales/sales_getuser_list/", false);
+        xmlHttp.send(null);
+    }
+
+    /* Helper to get region list */
+    function putRegionsInCombo(regioncombo)
+    {
+        var xmlHttp = new XMLHttpRequest(); 
+        xmlHttp.onreadystatechange = function()
+        {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) 
+            {
+                var resp = eval('(' + xmlHttp.responseText + ')');
+                // populate sales rep combo list
+                regioncombo.clear();
+                for (ii = 0; resp && ii < resp.length; ii++)
+                {
+                    regioncombo.put(resp[ii], resp[ii]);
+                }
+            }
+        }
+        xmlHttp.open("GET", "/Sales/sales_region_list/", false);
+        xmlHttp.send(null);
+    }
+
+    function export_excel(grid)
+    {
+        grid.toExcel('/Sales/sales_generate_excel/');
+    }
+
+</script>
+
+<body onload="initialize()">
+    <div id="gridbox" style="margin-bottom:5px;height:75%;background-color:white;overflow:hidden"></div>
+    <div id="button_panel" style="text-align:center;width:950px;">
+        <input type="button" value="Add" id="buttonadd"></input>
+        <input type="button" value="Delete" id="buttondelete"></input>
+        <input type="button" value="Reset layout" id="buttonreset"></input>
+        {% if export_support %}
+            <input type="button" value="Export To Excel" onclick="export_excel(gridbox.grid);"/>
+        {% endif %}
+    </div>
+</body>
+
+{% endblock %}
+

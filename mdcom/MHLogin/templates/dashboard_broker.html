@@ -1,0 +1,144 @@
+{% extends "dashboard_base.html" %}
+{% load i18n %}
+{% block dashboard_customCSS %}
+
+{% endblock %}
+
+{% block dashboard_customJS %}
+<script type="text/javascript">
+$(function(){
+    window.autoRefreshTime = {{auto_refresh_time}}
+    $("#tabs").tabs();
+})
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="mainpage">
+    {% ifnotequal accept_invites_count 0 %}
+    <div id="invitesCount" class="clearfix" style="margin:5px 0;">
+        <div class="item prompt-left"></div>
+        <div class="item prompt_info mtop">
+            <table class="content">
+                <tr>
+                    <td>
+                    <a href="Profile/Practices/">{% blocktrans %}You have {{ accept_invites_count }} practice invitation{% endblocktrans %}
+                        {% ifnotequal accept_invites_count 1 %}{% trans "requests." %}{%else%}{% trans "request." %}{%endifnotequal%}</a>
+                    </td>
+                    <td>
+                        <a class="acceptCloseX" onclick="$('#invitesCount').hide();"><img src="{{STATIC_URL}}img/colse_btu.gif" /></a>
+                    </td>
+                </tr>
+            </table>
+        </div><!-- end of prompt_info -->
+        <div class="item prompt-right"></div>
+    </div><!-- end of clearfix -->
+    {% endifnotequal %}
+    
+    {% ifnotequal unread_msg_count 0 %}
+    <div id="msgCount" class="clearfix" style="margin:5px 0; ">
+        <div class="item prompt-left"></div>
+        <div class="item prompt_info mtop">
+            <table class="content">
+                <tr>
+                    <td>
+                        {% blocktrans %}You have {{unread_msg_count}} new voicemail{% endblocktrans %}
+                        {% ifnotequal unread_msg_count 1 %}{% trans "messages." %}{%else%}{% trans "message." %}
+                        {%endifnotequal%}
+                    </td>
+                    <td>
+                        <a class="acceptCloseX" onclick="$('#msgCount').hide();"><img src="{{STATIC_URL}}img/colse_btu.gif" /></a>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        <div class="item prompt-right"></div>
+        </div><!-- end of clearfix -->
+    {% endifnotequal %}
+
+    {% if request.CALL_ENABLE %}
+    <div class="forwarding clearfix mtop">
+        <div id="forwarding" class="ui-corner-all borker">
+            <div class="col_head">
+                <h3 class="fleft">{% trans "Forwarding/Answering Settings" %}</h3>
+            </div><!-- end col_head -->
+            <form id="fwd_form" class="col_main">
+                <table class="forwarding_info">
+                    <tr><td>
+                        {% trans "DoctorCom Number " %}{{ mdcom_phone|safe }}&nbsp;{% trans "Forwards To " %}
+                        <span id="mdcom_fwd_status">
+                            {% if mobile_phone != '(none)' or office_phone != '(none)' or other_phone != '(none)' %}
+                            {{mdcom_fwd}}
+                            {% else %}
+                            {% trans "Voicemail" %}
+                            {% endif %}
+                        </span>. 
+                    </td><td class="textRight">
+                            <span>{% trans "Change:" %}</span>
+                            <select id="mdcom_fwd_chooser">
+                            {% ifnotequal mobile_phone '(none)' %}
+                            <option value="MO"{% ifequal mdcom_fwd 'Mobile' %} selected{% endifequal %}>{% trans "Mobile:" %} {{mobile_phone}}</option>
+                            {% endifnotequal %}
+                            {% ifnotequal office_phone '(none)' %}
+                            <option value="OF"{% ifequal mdcom_fwd 'Office' %} selected{% endifequal %}>{% trans "Office:" %} {{office_phone}}</option>
+                            {% endifnotequal %}
+                            {% ifnotequal other_phone '(none)' %}
+                            <option value="OT"{% ifequal mdcom_fwd 'Other' %} selected{% endifequal %}>{% trans "Other:" %} {{other_phone}}</option>
+                            {% endifnotequal %}
+                            <option value="VM"{% ifequal mdcom_fwd 'Voicemail' %} selected{% endifequal %}>{% trans "Voicemail" %}</option>
+                        </select>
+                    </td></tr>
+                </table>
+            </form><!-- end of fwd form -->
+        </div><!-- end of forwarding -->
+
+        {# NOTE: If broker's mobile_phone is optional, then this "call" area should be hidden when mobile_phone is empty. #}
+        <div class="call_member">
+            <form action="/Call/Number/" method="GET">
+                <span>
+                    <input id="callMembers" type="text" value='{% trans "Call  Non-Member" %}' name="called_number" />
+                    <button type="submit" value="{% trans "Submit" %}"></button>
+                </span>
+                <span class="enter_eg">{% trans "Enter only digits without spaces, e.g. 8005551212" %}</span>
+            </form>
+        </div><!-- end call_member -->
+    </div><!-- end of forwarding clearfix mtop -->
+    {% endif %}
+
+    <div id="provider_info"></div>
+    
+    <div id='dashboard' class="ui-corner-all">
+        <div id="tabs">
+            <input type="hidden" id="zip" value="{{zip}}"/>
+            <div class='content'>
+                <div class='tabPrev hidden' onclick='clkTabPrev();'></div>
+                    <ul id="tabUl" class="fleft tabsUIHeader">
+                        <li>
+                            <a href="#fragment-01">
+                                <span>{% trans "Community Prvdrs" %}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#fragment-02">
+                                <span>{% trans "My Favorites" %}</span>
+                            </a>
+                        </li>
+                    </ul>
+                <div class='tabNext hidden' onclick='clkTabNext();'></div>
+            </div>
+            
+            <div id="fragment-01" tab_type="community_broker" class="community_brokerc tabdivs">
+                {% include 'user_info_broker.html'%}
+            </div>
+            <div id="fragment-02" tab_type="my_favorite" class="tabdivs">
+                {% include 'my_favorite.html'%}
+            </div>
+            <div id='loadingPic2'></div>
+        </div><!-- end of tabs -->
+
+        {%include 'Messaging/accordion_messages.html'%}
+
+    </div><!-- end of ui-corner-all -->
+</div><!-- end of forwarding clearfix mtop -->
+</div><!-- end of mainpage -->
+{% endblock %}

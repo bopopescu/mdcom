@@ -1,0 +1,143 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block content %}
+    <div id='profileView' class="ui-corner-all">
+        <div class="clearfix doc_info" id="profile-content-header">
+            <div class="fleft logo">
+                <img src="{{photo}}" alt='{% trans "No Image Provided" %} ' style="border:solid 7px lightblue; max-height: 130px; max-width: 100px;">
+            </div>
+            <div class="fright">
+                <div class="doc_tit">
+                    <h3>
+                        {{fullname}}
+                    </h3>
+                    <span>
+
+                        <a href="Edit/" class="edit"> {% trans "Edit" %}</a>
+                        <label>|</label>
+                        <a href="ChangePassword/" class="cp">{% trans "Change Password" %}</a>
+                        <label>|</label>
+                        <a href="UpdateSecurityQuestions/" class="cp2">{% trans "Update Security Questions" %}</a>
+                        <!--<label>|</label>
+                        <a href="{% url 'MHLogin.MHLUsers.views.changepin' %}" class="cpp">Change Pin</a>-->
+                    </span>
+
+                </div>
+                <table class="doc_main">
+                    <tr>
+                        <td><b>{% trans "Mobile Phone:" %} </b></td>
+                        <td>{% if profile.user.mobile_phone %}{{profile.user.mobile_phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td><b>{% trans "Office Phone:" %} </b></td>
+                        <td>{% if profile.office_phone %}{{profile.office_phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td><b>{% trans "Other Phone:" %} </b></td>
+                        <td>{% if profile.user.phone %}{{profile.user.phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td><b>{% trans "Pager:" %}</b></td>
+                        <td>{% if profile.pager %}{{profile.pager}}{% if profile.pager_extension %} {% trans "Ext." %} {{profile.pager_extension}}{% endif %}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td><b>{% trans "Email Address:" %}</b></td>
+                        <td>{{profile.user.email}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>{% trans "Special Skill:" %}</b></td>
+                        <td>
+                            {% if profile.user.skill %}
+                                {{profile.user.skill}}
+                            {% else %}
+                                (Not Given)
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><b>{% trans "Public Notes:" %} </b></td>
+                        {% if profile.user.public_notes %}
+                            <td>{{profile.user.public_notes|linebreaks}}</td>
+                        {% endif %}
+                    </tr>
+	                <tr>
+	                    <td valign="top"><b>{% trans "Time Setting:" %} </b></td>
+	                    {% if time_setting %}
+	                        <td>{{time_setting}}</td>
+	                    {% endif %}
+	                </tr>
+	                <tr>
+	                    <td valign="top"><b>{% trans "Time Zone:" %} </b></td>
+	                    {% if time_zone %}
+	                        <td>{{time_zone}}</td>
+	                    {% endif %}
+	                </tr>
+	                <tr>
+	                    <td valign="top"><b>{% trans "Language:" %} </b></td>
+	                    {% if language %}
+	                        <td>{{language}}</td>
+	                    {% endif %}
+	                </tr>
+                    
+                </table>
+            </div>
+        </div>
+        <!--<div class="profileViewContent">
+            <p><span style="font-weight:bold; font-size:1.5em;">
+            {{profile.user.first_name}} {{profile.user.last_name}}
+             - User Profile</span><a style="margin-left:10px;" href="Edit/">Edit</a></p>
+            <a href="ChangePassword/">Change Password</a>
+            <a href="UpdateSecurityQuestions/">Update Security Questions</a>
+        </div>
+
+        <div class="profileUserImg">
+            <img src="{{STATIC_URL}}{{photo}}" alt="No Image Provided" width="150px" style="border:solid 10px lightblue">
+        </div>
+
+        <div class="profileViewContainer">
+            <p>Mobile Phone: {% if profile.user.mobile_phone %}{{profile.user.mobile_phone}}{% else %}(Not Given){% endif %}<br/>
+               Office Phone: {% if practice.practice_phone %}{{practice.practice_phone}}{% else %}(Not Given){% endif %}<br/>
+               Other Phone: {% if profile.user.phone %}{{profile.user.phone}}{% else %}(Not Given){% endif %}<br/>
+               Pager: {% if profile.pager %}{{profile.pager}}{% if profile.pager_extension %} Ext. {{profile.pager_extension}}{% endif %}{% else %}(Not Given){% endif %}</p>
+            <p>Email Address: {{profile.user.email}}</p>
+        </div>
+        <div style="clear:both;"></div>-->
+
+        <div class="col_table" id="profile-content-table">
+            <div class="col_table_tit clearfix">
+                <h3>{% trans "Sites" %}</h3>
+                <a href="{% url 'MHLogin.MHLSites.views.manage_sites' %}">{% trans "Manage Hospitals" %}</a>
+            </div>
+            <div class="table_style col_table_body">
+            <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <th width="80" class="firstTD">{% trans "Current?" %}</th>
+                    <th width="230">{% trans "Name" %}</th>
+                    <th width="220">{% trans "Address" %}</th>
+                    <th width="170">{% trans "City" %}</th>
+                    <th>{% trans "State" %}</th>
+                </tr>
+                {% for site in sites.all %}
+                <tr>
+                    <td class="firstTD">
+                        {% ifequal site current_site %}
+                            {% trans "Yes" %}
+                        {% else %}
+                            &nbsp; 
+                        {% endifequal %}
+                    </td>
+                    <td>{{ site.name }}</td>
+                    <td>{{ site.address1 }}{% if site.address2 %}, {{site.address2}}{% endif %}</td>
+                    <td>{{ site.city }}</td>
+                    <td>{{ site.state }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+        <br>
+    </div>
+
+{% endblock %}

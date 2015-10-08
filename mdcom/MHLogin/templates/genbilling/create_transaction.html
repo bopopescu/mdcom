@@ -1,0 +1,34 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% if errors %}
+
+<div id="errors">
+<table border='0' width="800">
+<tr><td><h2>{{errors}}</h2></td></tr>
+</table>
+
+{% else %}
+
+
+<form action="/billing/create_transaction/" method="POST">
+<div id='billingView' class="ui-corner-all">
+<h2>
+Create Manual Transaction Billing Period {{begin_period}} - {{end_period}}
+</h2>
+{{ practice_group_name.as_ul }} 
+<br>
+<input type="submit" value="Submit">
+</form>
+</div>
+{% endif %} 
+
+<table border='0' width="800">
+<tr><td><a href="/billing/billing_menu/">Back to Customer Account Management Menu<a></td></tr>
+</table>
+
+  
+{% endblock %}
+

@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- 
+    This is new style for schedule page.
+    create by xlin 2011-11-25
+ -->
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/fullcalendar.css" />    
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/schedule.css" />
+    <script type="text/javascript" src="{{STATIC_URL}}js/json2.js"></script>    
+    <script type="text/javascript" src="{{STATIC_URL}}js/fullcalendar/fullcalendar.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.tools-overlay_expose_tooltip_new.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/fullcalendar/ajax.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+{% endblock %}
+{% block content %}
+
+<div id="content_div" class="ui-corner-all">
+    <div class='content-left'>
+        <table class="twoButtons">        
+            <!--            
+            <tr>
+                <td width='20' align='right'>
+                    <div class='refresh'></div>
+                </td>
+                <td align='left' valign='middle'>
+                    <span class='text' onclick='javascript:MHSchedule.revertSchedule();'>Refresh Schedule</span>
+                </td>
+            </tr>-->
+            <tr>
+                <td width='20' align='right'>
+                    <div class='pdf'></div>
+                </td>
+                <td align='left' valign='middle'>
+                    <span class='text' onclick='MHSchedule.pdf.downloadPDFDialog();'>{% trans "Download as PDF" %}</span>
+                </td>
+            </tr>
+        </table><!-- end of two buttons -->
+        <div class='newOnCall'>
+            <div class='oncallTitle'>
+                <h3>{% trans "New On-Call" %}</h3>
+                <div class='help_icon'></div>
+                <div id='note_help' class='hidden'>
+                    <div class='left'></div>
+                    <div class='middle'>
+                        <div class='title1'>{% trans "Step 1" %}</div>
+                        <p>{% trans "Choose and set on-call hours" %}.</p>
+                        <div class='title2'>{% trans "Step 2" %}</div>
+                        <p>{% trans "Drag the user you wish to place on call, onto their on-call day in the calendar at night" %}.</p>
+                    </div>
+                    <div class='right'></div>
+                </div>
+            </div>
+            <h3 class='title'>{% trans "Start & End Time" %}</h3>
+            <div id='selectTime'>
+                <table width='100%' cellspacing='0' cellpadding='0'>
+                {% if schedule_time_setting %}<!-- 24h -->
+                    <tr class='startTime'>
+                        <td class='title'>{% trans "Start" %}:</td>
+                        <td>
+                            <input type='text' class='hour24' id='startHour' name='startHour' value='8' maxlength="2" size="2" style="ime-mode:disabled"></td>
+                        <td>:</td>
+                        <td><input type='text' class='hour24' id='startMin' name='startMinute' value='00' maxlength="2" size="2" style="ime-mode:disabled"/></td>
+                    </tr>
+                    <tr class='endTime'>
+                        <td class='title'>{% trans "End" %}:</td>
+                        <td><input type='text' class='hour24' id='endHour' name='endHour' value='8' maxlength="2" size="2" style="ime-mode:disabled"></td>
+                        <td>:</td>
+                        <td><input type='text' class='hour24' id='endMin' name='endMinute' value='00' maxlength="2" size="2" style="ime-mode:disabled"/></td>
+                    </tr>
+                    {% else %}<!-- 12h -->
+                    <tr class='startTime'>
+                        <td class='title'>{% trans "Start" %}:</td>
+                        <td>
+                            <input type='text' id='startHour' name='startHour' value='8' maxlength="2" size="2" style="ime-mode:disabled"></td>
+                        <td>:</td>
+                        <td><input type='text' id='startMin' name='startMinute' value='00' maxlength="2" size="2" style="ime-mode:disabled"/></td>
+                        <td><select id='startMoring'>
+                        <option value='0' selected='selected'>{% trans 'am' %}</option>
+                        <option value='1'>{% trans 'pm' %}</option>
+                        </select></td>
+                    </tr>
+                    <tr class='endTime'>
+                        <td class='title'>{% trans "End" %}:</td>
+                        <td><input type='text' id='endHour' name='endHour' value='8' maxlength="2" size="2" style="ime-mode:disabled"></td>
+                        <td>:</td>
+                        <td><input type='text' id='endMin' name='endMinute' value='00' maxlength="2" size="2" style="ime-mode:disabled"/></td>
+                        <td><select id='endMoring'>
+                        <option value='0' selected='selected'>{% trans 'am' %}</option>
+                        <option value='1'>{% trans 'pm' %}</option>
+                        </select></td>
+                    </tr>
+                    {% endif %}
+                </table>
+                <p>{% trans "Note: End times before start times are assumed to be on the following day." %}</p>
+            </div><!-- end of select time -->
+            <h3 class='title'>{% trans "Available Users" %}</h3>
+            <div class='content'>
+                <div id="calendar_available_users"></div>
+            </div>
+            <div class='manage hidden'>{% trans "Manage" %}</div>
+        </div><!-- end of new on call -->
+    </div><!-- end of left content -->
+    <div class='content-right'>
+        <div id='calendar'></div>
+    </div>
+    <div class='clear'></div>
+</div>
+
+<div id="downloadPDFDialog" class="hidden">
+    <!--<img class="close" src="{{STATIC_URL}}img/closeIcon.png" />-->
+    <div class="container">
+        <div class="container-left">
+            <p>
+                {% trans "To download a PDF copy of your schedule,&nbsp;just click on the link for the month you want." %}
+            </p>
+        </div>
+        <div class="container-right">
+            <div id='calendar2'>
+                <div class='top'>
+                    <div class='item prev'></div>
+                    <div class='item year'></div>
+                    <div class='item next'></div>
+                    <div class='clear'></div>
+                </div>
+                <div class='bottom'>
+                    <table class="content">
+                        <tr>
+                            <td><span class='jan'>{% trans "Jan" %}</span></td>
+                            <td><span class='feb'>{% trans "Feb" %}</span></td>
+                            <td><span class='mar'>{% trans "Mar" %}</span></td>
+                            <td><span class='apr'>{% trans "Apr" %}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class='may'>{% trans "May" %}</span></td>
+                            <td><span class='jun'>{% trans "Jun" %}</span></td>
+                            <td><span class='jul'>{% trans "Jul" %}</span></td>
+                            <td><span class='aug'>{% trans "Aug" %}</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class='sep'>{% trans "Sep" %}</span></td>
+                            <td><span class='oct'>{% trans "Oct" %}</span></td>
+                            <td><span class='nov'>{% trans "Nov" %}</span></td>
+                            <td><span class='dec'>{% trans "Dec" %}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="scheduleOverlay_editEvent" class="hidden">
+    <!--<img class="close" src="{{STATIC_URL}}img/closeIcon.png" />-->
+    <!--<h1 style="margin-top: 0px;"><span id="scheduleOverlay_editEvent_action"></span> On-Call</h1>-->
+    <form id="editEvent">
+    <input type="hidden" name="type" value="0"  />
+    <table border="0">
+    <tr>
+        <td class="label" align='right'>{% trans "Start" %}:&nbsp;</td>
+        <td>
+            <input type="text" name="start_month" maxlength="2" size="2" style="ime-mode:disabled" />/<input type="text" name="start_day" maxlength="2" size="2" style="ime-mode:disabled" />/<input type="text" name="start_year" maxlength="4" size="4" style="ime-mode:disabled" />
+            at <input type="text" name="start_hour" maxlength="2" size="2" style="ime-mode:disabled" />:<input type="text" name="start_minute" maxlength="2" size="2" style="ime-mode:disabled" />
+        </td>
+        <td class='time_setting'>
+            <select name="start_ampm">
+                <option value="0">{% trans "am" %}</option>
+                <option value="1">{% trans "pm" %}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="label" align='right'>{% trans "End" %}:&nbsp;</td>
+        <td>
+            <input type='hidden' name='eventID' value='' />
+            <input type="text" name="end_month" maxlength="2" size="2" style="ime-mode:disabled" />/<input type="text" name="end_day" maxlength="2" size="2" style="ime-mode:disabled" />/<input type="text" name="end_year" maxlength="4" size="4" style="ime-mode:disabled" />
+            at <input type="text" name="end_hour" maxlength="2" size="2" style="ime-mode:disabled" />:<input type="text" name="end_minute" maxlength="2" size="2" style="ime-mode:disabled" />
+        </td>
+        <td class='time_setting'>
+            <select name="end_ampm">
+                <option value="0">{% trans "am" %}</option>
+                <option value="1">{% trans "pm" %}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="label" align='right'>{% trans "On-Call" %}:&nbsp;</td>
+        <td><select name="scheduleOverlay_userList"></select></td>
+    </tr>
+    </table>
+    <div class='line'></div>
+    <div class='bottom'>
+        <table>
+            <tr>
+                <td>
+                    <div class='button'>
+                        <div class='left graduated_left'></div>
+                        <div class='mid graduated_mid'><a id="scheduleOverlay_editEvent_submit" href="javascript:void(null);"></a></div>
+                        <div class='right graduated_right'></div>
+                    </div>
+                </td>
+                <td>
+                    <div class='button'>
+                        <div class='left'></div>
+                        <div class='mid'><a id="scheduleOverlay_editEvent_close" class="close" href="javascript:void(null);" onclick="return false;">{% trans "Cancel" %}</a></div>
+                        <div class='right'></div>
+                    </div>
+                </td>
+                <td>
+                    <div class='button'>
+                        <div class='left'></div>
+                        <div class='mid'><a id="scheduleOverlay_editEvent_delete" class="scheduleOverlay_editEvent_delete" href="javascript:void(null);">{% trans "Delete" %}</a></div>
+                        <div class='right'></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</div>
+
+<div id="scheduleOverlay_deleteEvent" class="hidden">
+    <!--<img class="close" src="{{STATIC_URL}}img/closeIcon.png" />-->
+    <!--<h1>Delete Confirmation</h1>-->
+    <h3>{% trans "Are you sure you wish to delete the below event?" %}</h3>
+    <table>
+        <tr>
+            <td class="label" align='right'>{% trans "Start" %}:&nbsp;</td>
+            <td><span id="deleteConfirmOverlay_start"></span></td>
+        </tr>
+        <tr>
+            <td class="label" align='right'>{% trans "End" %}:&nbsp;</td>
+            <td><span id="deleteConfirmOverlay_end"></span></td>
+        </tr>
+        <tr>
+            <td class="label" align='right'>{% trans "On-Call" %}:&nbsp;</td>
+            <td><span id="deleteConfirmOverlay_onCall"></span></td>
+        </tr>
+    </table>
+    <div class='line'></div>
+    <div class='bottom bottom2'>
+        <div class='cancel'>
+            <a id="scheduleOverlay_editEvent_cancelDelete" href="javascript:void(null);" onclick="return false;" class="close">{% trans "No" %}</a>
+        </div>
+        <div class='cancel gradual'>
+            <a id="scheduleOverlay_editEvent_confirmDelete" href="javascript:void(null);">{% trans "Yes" %}</a>
+        </div>
+    </div>
+</div>
+
+<div id='confirmDialog'>
+    <h3></h3>
+</div>
+{% endblock %}

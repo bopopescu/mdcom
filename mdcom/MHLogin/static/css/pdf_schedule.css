@@ -1,0 +1,135 @@
+@media print{@page {size: landscape}}
+
+/***** Embedd css and image into html for pdf generation *****/
+body {
+    font-family: helvetica, arial, sans-serif;
+    font-size: .7em;
+}
+
+table {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    margin: 0;
+    z-index: 10;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    margin: 0;
+    width: 130px;
+}
+
+td {
+    height: 72px;
+    position: relative;
+    z-index: 4;
+}
+
+tr.title td {
+    height: 48px;
+    padding-left: 2px;
+    padding-top: 2px;
+}
+
+tr.title #table_title_callgroup {
+    position: absolute;
+    color: #5E85BC;
+    float: left;
+    font-size: 10pt;
+    font-weight:bold;    
+    padding-top: 16px;
+    padding-left: 6px;
+}
+
+tr.title #table_title_month {
+    position: absolute;
+    right: 400px;
+    font-size: 16pt;
+    padding-top: 12px;
+    padding-right: 20px;
+}
+
+tr.title .logo {
+    position: absolute;
+    top: 12px;
+    right: 0px;
+    display: block;
+    height: 30px;
+    width: 73px;     
+    padding-right: 20px;
+}
+
+.light {
+    color: #999;
+}
+
+tr.days {
+    background: #f2f2f2;
+    color: #555;
+    font-size: 6pt;
+}
+
+tr.days td {
+    height: 10px;
+    padding-left: 2px;
+    padding-top: 2px;
+}
+
+/* Events */
+p {
+    padding: 1px 0;
+    margin: 0;
+    z-index: 20;
+}
+
+p.day {
+    padding: 1px 4px;
+}
+
+p.event {
+    font-size: 5pt;
+    margin-bottom: 1px;
+    position: relative;
+    z-index: 100;
+    letter-spacing: .04em;
+    line-height: 1.2em;
+    /* pdf rendering tool Weasyprint v0.19 supports CSS2.1, border-radius CSS3 property */
+    border-radius: 4px; 
+}
+
+p span.text0 { text-decoration:line-through;}
+
+.name { padding: 0 0 0 2px; font-weight: bold; display: block;}
+.time { color: #333; padding-left: 2px; display: block;}
+
+/* Colors */
+.clr-1 { background: #8accd9;}
+.clr-2 { background: #9a81ee; }
+.clr-3 { background: #e187be; }
+.clr-4 { background: #dcd069;}
+.clr-5 { background: #88e859;}
+.clr-6 { background: #f2a948;}
+.clr-7 { background: #d1d1d1;}
+.clr-8 { background: #6f97f3;}
+.clr-9 { background: #ff6b6b;}
+.clr-10 { background: #c5e084;}
+.clr-11 { background: #ba9976;}
+.clr-12 { background: #33ca3a;}
+.clr-13 { background: #eec19c;}
+.clr-14 { background: #8d30ce;}
+.clr-15 { background: #d40000;}
+.clr-16 { background: #c7f0c7;}
+.clr-17 { background: #d1f0c7;}
+.clr-18 { background: #dbf0c7;}
+.clr-19 { background: #e6f0c7;}
+.clr-20 { background: #f0f0c7;}
+.clr-21 { background: #f0e6c7;}
+.clr-22 { background: #f0dbc7;}
+.clr-23 { background: #f0d1c7;}
+.clr-24 { background: #f0c7c7;}
+
+/* Vertical Position */
+.pull-one { top: -19px;}
+.pull-two { top: -38px;}
+.pull-three { top: -57px;}
+

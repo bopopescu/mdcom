@@ -1,0 +1,98 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/organization.css"/>
+{% endblock %}
+
+{% block title %}{% trans "Organization Type Management" %}{% endblock %}
+{% block customJS %}
+<script type="text/javascript">
+	$(function(){
+		var oTable1 = $('#orgTypeListTable').dataTable({
+			"sPaginationType": "full_numbers",
+			"oLanguage": {
+				"sLengthMenu": MESSAGE.JQUERY_DATATABLES_SLENGTHMENU_PER_PAGE,
+				"sInfo": MESSAGE.JQUERY_DATATABLES_SINFO.replace(
+						'_TYPENAME_',
+						MESSAGE.JQUERY_DATATABLES_SINFO_ORGANIZATION_TYPE),
+				"sInfoEmpty": MESSAGE.JQUERY_DATATABLES_SINFOEMPTY.replace(
+						'_TYPENAME_',
+						MESSAGE.JQUERY_DATATABLES_SINFO_ORGANIZATION_TYPE)
+			},
+			"aaSorting": [[ 3, "asc" ]],
+			"sDom": 'rtilp<"clear">'
+		});
+
+		$(".brokerTable tr:odd").addClass("odd");
+	});
+
+	function deleteOrgType(orgTypeId){
+		showSimpleDialog({
+			title: '{% trans "Delete organization type" %}',
+			content: '{% trans "Are you sure to delete this organization type?" %}',
+			dc_buttons: {
+				'Yes': {
+					'click': function() {
+						$( this ).dialog( "close" );
+						$.comAjax({
+							type:'POST',
+							url: '/dcAdmin/OrganizationType/Del/'+orgTypeId+'/',
+							success:function(data, status){
+								location.href='.';
+							}
+						});
+					},
+					'text': '{% trans "Yes" %}',
+					'class': 'positive-btn'
+				},
+				'No': {
+					'click': function() {
+						$(this).dialog( "close" );
+					},
+					'text': '{% trans "No" %}'
+				}
+			}
+		});
+	}
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+
+<div class="org_content">
+    <div class="org_content_title">{% trans "Organization Type List" %}</div>
+    <div class="float-right">
+        <a href="/dcAdmin/OrganizationType/Create/">{% trans "Create an organization type" %}</a>
+    </div>
+</div>
+
+<div class="clear" ></div>
+<table id='orgTypeListTable' class='brokerTable' cellspacing='0' cellpadding='0'>
+    <thead>
+        <tr>
+            <th align="left">{% trans "Name" %}</th>
+            <th align="left">{% trans "Description" %}</th>
+            <th align="left" style="width: 75px;">{% trans "Public" %}</th>
+            <th align="left" style="width: 250px;">{% trans "Actions" %}</th>
+        </tr>
+    </thead>
+    {% for org_type in org_type_list %}
+    <tr>
+        <td>{{org_type.name}}</td>
+        <td>{{org_type.description}}</td>
+        <td>{{org_type.public}}</td>
+        <td>
+            <a href="/dcAdmin/OrganizationType/Edit/{{org_type.id}}/">{% trans "Edit" %}</a>
+            {% if org_type.can_delete %}
+            <a href="javascript:void(0);" onclick="deleteOrgType('{{org_type.id}}')">{% trans "Delete" %}</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

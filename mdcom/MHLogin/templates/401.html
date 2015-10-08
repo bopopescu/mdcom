@@ -1,0 +1,11 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "DoctorCom 401 Error - Authorized Required" %}{% endblock %}
+
+{% block content %}
+<div style="height:500px;">
+<h3>{% trans "HTTP Error 401 - Authorized Required" %}</h3> 
+<p>{% trans "We apologize for any inconvenience, however, the you are not authorized to access the requested page or file." %}</p>
+</div>
+{% endblock %}

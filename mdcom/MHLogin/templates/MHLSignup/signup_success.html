@@ -1,0 +1,19 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<div class='signup'>
+	<div class='head'>
+		<div class='text'>{% trans "Registration" %}</div>
+		<div class='success-img'></div>
+		<div class='clear'></div>
+	</div>
+	<div class='content success'>
+		<div class='success-text'>{% trans 'Congratulations! Your registration was successful. '%}</div>
+		<div class='clear'></div>
+		<div class='buttons'>
+			<input type="button" class='submit signin' value='{% trans "Sign in" %}' id="loginClick" >
+		</div>
+	</div>
+</div>
+{% endblock content %}

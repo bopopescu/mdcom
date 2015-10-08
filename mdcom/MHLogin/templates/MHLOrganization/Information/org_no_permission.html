@@ -1,0 +1,23 @@
+{% load i18n %}
+{% include "MHLOrganization/Information/org_js.html" %}
+
+
+<div id="divOrgAdd" class="org-no-tab-content">
+	<div id="orgAddTitle">{% trans "Create an Organization" %}</div>
+	<div id="orgAddContent">
+		
+		{% if has_move_per %}
+			{% blocktrans %}
+			You do not have permission to move or change type of this organization.
+			Please <a href="/Support/Contact/">contact</a> administrator for help.
+			{% endblocktrans %}
+		{% else %}
+			{% trans "You do not have permission to create an organization." %}
+		{% endif %}
+		
+		
+		<div>
+			<input id="orgBack" class="org_inf_btn" type="button" value="Back" />
+		</div>
+	</div>
+</div>

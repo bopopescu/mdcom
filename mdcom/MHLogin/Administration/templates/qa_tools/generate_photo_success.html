@@ -1,0 +1,20 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}{% trans "Generate photo/logo Complete" %}{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h1>{% trans "Generate photo/logo successfully." %}</h1>
+
+<p class='userkey'>{% trans "Done!" %}</p>
+
+</div>
+
+{% endblock %}

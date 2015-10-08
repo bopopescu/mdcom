@@ -1,0 +1,70 @@
+{% load i18n %}
+<div id="sent_messages" class="messages">
+    <table cellspacing="0" cellpadding="0">
+        <tr>
+            <td class='sent_td' width='144' valign="top" style="border-right:1px solid #A6C9E2; background: #FFFFFF;">
+                <div class="filter">
+                    <table class='refreshTable'>
+                        <tr>
+                            <td align='right'><img src="{{STATIC_URL}}img/bg_ref.gif" /></td>
+                            <td><div class='refresh' onClick="clickSentRefresh();">{% trans "Refresh" %}</div></td>
+                        </tr>
+                    </table>
+                    <div class="header-show">{% trans "Show Only" %}</div>
+                    <div class="header-re">{% trans "Resolution" %}</div>
+                    <div class="header-chk">
+                        <input type="checkbox" id='snd_resolved_status_true' class="resolved_status_true" />
+                        <span>{% trans "Resolved" %}</span>
+                    </div>
+                    <div class="header-chk">
+                        <input type="checkbox" id='snd_resolved_status_false' class="resolved_status_false" />
+                        <span>{% trans "Unresolved" %}</span>
+                    </div>
+                </div>            
+            </td>
+            <td class='sent_td' width='790' valign="top" style="background: #FFFFFF;">
+                <table id="sent_msgs" class="message_list">
+                    <tbody>
+                        <tr class="header">
+                            <td class="header">
+                                <table class="message_item">
+                                    <tbody>
+                                        <tr class="none">
+                                            <th class="collapse"></th>
+                                            <th class="placeholder">&nbsp;</th>
+                                            <th class="urgent"><img src="{{STATIC_URL}}img/urgent.gif"/></th>
+                                            <th class="attachments"><img src="{{STATIC_URL}}img/attachment.png"/></th>
+                                            <th class="from" align='left'>{% trans "To" %}</th>
+                                            <th class="subject" align='left'>{% trans "Subject" %}</th>
+                                            <th class="timestamp" align='left'>{% trans "Timestamp" %}</th>
+                                            <th class="resolution">{% trans "Resolved" %}</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="nav" id="sentNav">
+                    <table>
+                    <tr>
+                        <td><div class="pagniation"></div></td>
+                        <td><div class="selectPagePer">
+                        <select>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    {% trans "per page" %}
+                </div></td>
+                    </tr>
+                </table>
+                </div>
+                <div class="clear"></div>
+            </td>
+        </tr>
+    </table>
+</div>

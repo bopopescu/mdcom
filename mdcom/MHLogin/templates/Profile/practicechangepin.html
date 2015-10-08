@@ -1,0 +1,33 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="changePin" class="ui-corner-all">
+	<h1>{% trans "Change PIN" %}</h1>
+	
+	{% if form.non_field_errors %}
+	<div id="form_errors" class="ui-corner-all changepin">
+		{{non_field_errors}}
+	</div>
+	{% endif %}
+
+	<form action="." method="POST">
+		<table class="contentTable">
+			{% for field in form %}
+				{% if field %}
+						<tr>
+							<td>{{field.label_tag}}</td>
+							<td>{{ field }}</td>
+							
+							{% if field.errors %}
+								<td>{{field.errors}}</td>
+							{% endif %}
+							
+						</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+		<input type="submit" name="submit" value="{% trans "Submit" %}" />
+	</form>
+</div>
+{% endblock %}

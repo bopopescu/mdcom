@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load i18n %}
+<html>
+	<head>
+		<title>{% block title %}{% trans "DoctorCom" %}{% endblock %}</title>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-1.7.2.custom.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/color.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/layout.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/type.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/start/jquery-ui-1.7.2.custom.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/start/jquery.autocomplete.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/color_login.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/layout_login.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/type_login.css" />
+		{% block customJS %}{%endblock %}
+		<style type="text/css">{% block customCSS %}{% endblock %}</style>
+	</head>
+	<body>
+		<div style="float:left; display:inline; margin-left:40px;margin-top:10px;">
+			<img src="{{STATIC_URL}}img/dclogo4.png" style="width:200px;">
+		</div>
+		<div style="float:left; display:inline; margin-left:30px;margin-top:23px;">
+			<h2/>{% trans "Registration" %}</h2>
+		</div>
+		<div class="ui-corner-all" style="width:850px;margin-left:70px;border:1px solid lightgray;background:white;padding:30px;clear:both;display:block;">
+			<div id="error_signup"></div>
+			{% block content %}{% endblock %}
+		</div>
+		{% include "includes/footer.html" %}
+	</body>
+</html>

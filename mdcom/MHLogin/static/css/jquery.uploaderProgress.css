@@ -1,0 +1,88 @@
+body {
+	margin:0px;
+}
+a:link {
+    color: #143888;
+    text-decoration: underline;
+    font-family: Arial;
+    font-size: 12px;
+    line-height: 20px;    
+}
+
+div.upload_panel {
+	height: 25px;
+}
+
+div.upload_panel div{
+	padding:5px 0 0 8px;
+}
+
+#progress_container {
+	font-size: 12px;
+	width: 100%;
+	height: 25px;
+	position: relative;
+	margin: 0;
+	padding:5px 0 0 8px;
+}
+
+#progress_container>div {
+	float:left;
+}
+
+#progress_filename {
+	float:left;
+	font-size: 12px;
+	margin: 0.25em 0.25em 0.25em 0;
+}
+
+#progress_bar {
+	float:left;
+	width: 100px;
+	border: 1px solid #999;
+	margin: 0.45em 0.25em 0.25em 0;
+}
+
+#progress_indicator {
+	background: #8a9;
+	width: 0;
+	height: 10px;
+}
+
+#id_max_size_msg{
+	font-size: 12px;
+}
+
+.upload_btn{
+	background: none repeat scroll 0 0 #08ABAE;
+	border: 0 none;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 1px 2px 3px 2px #A2A2A2;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-family: Lobster;
+	font-size: 17.6px;
+	font-weight: 500;
+	height: 25px;
+	margin: 0 8px;
+	padding: 0 10px;
+	text-align: center;
+	font-style: normal;
+	font-size-adjust:none;
+	line-height:21px;
+	vertical-align: baseline;
+}
+
+.upload_hidden_input {
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 118px;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+	left:-1580px;
+	width:1743px;
+}

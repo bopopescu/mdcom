@@ -1,0 +1,21 @@
+{% load i18n %}
+{% blocktrans %}
+Support Request from: {{first_name}} {{last_name}}
+
+Call Back Number: {{call_back_number}}
+
+Reply Email Address: {{email}}
+
+Explanation of Issue:
+
+{{message}}
+
+
+Other Supporting Information:
+__________________________________________________________________
+sessionid = {{sessionid}}
+{% endblocktrans %}
+{% for key,value in meta.items %}
+{{key}}: {{ value }}
+{% endfor %}
+

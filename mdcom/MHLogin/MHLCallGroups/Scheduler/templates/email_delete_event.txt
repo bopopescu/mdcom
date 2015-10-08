@@ -1,0 +1,8 @@
+{% load i18n %}
+{% blocktrans %}
+Server Address: {{server_addr}}
+
+It appears that the delete method for event {{event.id}} from callgroup {{event.callGroup.id}} ({{event.callGroup.decscription}}) was called.
+
+{% endblocktrans %}
+{% include "MHLCallGroups/Scheduler/email_event_debug_dump.txt" %}

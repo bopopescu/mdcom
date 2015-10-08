@@ -1,0 +1,92 @@
+{% load i18n %}
+
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+{% include "MHLOrganization/Member/member_list_js.html" %}
+{% include "MHLOrganization/Member/member_invite_provider_js.html" %}
+{% include "MHLOrganization/Member/member_invite_staff_js.html" %}
+
+<script>
+	var showMemberView = function(){
+		$.ajax({
+			url: '/Organization/Member/View/',
+			type:'POST',
+			data: data,
+			success:function(data, txtStatus){
+				RefreshRight(data);
+			}
+		});
+	};
+
+	$(function(){
+		
+		$('#add-new-provider').click(function(){
+			inviteProviderStep(InvProvConf.step1);
+		});
+		$('#create-new-provider').CreateUser(0, true, RefreshRight);
+		$('#create-new-staffer').CreateUser(1, true, RefreshRight);
+	})
+</script>
+
+<div class="org-tab-content">
+<div id='member_view' class="main-content">
+{% if can_have_provider_users %}
+	<div class='content-top'>
+		<div class='title'>
+			<div class='text'>{% trans 'Providers' %}</div>
+		</div>
+		<div id="hrDiv"></div>
+		<div class='content'>
+			<table class='search-options'>
+				<tr>
+					<td width='25%'><input type='text' id='provider-input' class="search-input"/></td>
+					<td width='57%'><div id="provider_search_button" class='search-button'></div></td>
+					<td>
+						<div class='create-new-provider' id="create-new-provider">
+							<input class="org_inf_btn" type="button" value="{% trans 'Create' %}" />
+						</div>
+					</td>
+					<td>
+						<div class='add-new-provider' id="add-new-provider">
+							<input class="org_inf_btn" type="button" value="{% trans 'Invite' %}" />
+						</div>
+					</td>
+				</tr>
+			</table>
+			<div id="member_provider_area">
+			</div>
+		</div>
+	</div>
+{% endif %}
+{% if can_have_staff_users %}
+	<div class='content-bottom'>
+		<div class='title'>
+			<div class='text'>{% trans 'Staff' %}</div>
+		</div>
+		<div id="hrDiv"></div>
+		<div class='content'>
+			<table class='search-options'>
+				<tr>
+					<td width='25%'><input type='text' id='staffer-input' class="search-input"/></td>
+					<td width='57%'><div id="staff_search_button" class='search-button'></div></td>
+					<td>
+						<div class='create-new-staffer' id="create-new-staffer">
+							<input class="org_inf_btn" type="button" value="{% trans 'Create' %}" />
+						</div>
+					</td>
+					<td>
+						<div class='add-new-staffer' id="add-new-staffer">
+							<input class="org_inf_btn" type="button" value="{% trans 'Invite' %}" />
+						</div>
+					</td>
+				</tr>
+			</table>
+			<div id="member_staff_area">
+			</div>
+		</div>
+	</div>
+	<div class='clear'></div>
+</div>
+{% endif %}
+
+<div id="tinviteDialog1">
+</div>

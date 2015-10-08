@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div id="footer">
+	<p>
+		<a href="/Support/Contact/">{% trans "Support" %}</a> |
+		<a href="/privacy/">{% trans "Privacy Policy" %}</a> |
+		<a href="/terms/">{% trans "Terms of Service" %}</a> | 
+		{% trans "Copyright" %} &#169; {{request.SERVER_TIME_YEAR}} 
+		{% trans "DoctorCom" %}&reg; {% trans "Inc. All rights reserved." %}
+		<a class='fright'>{{SERVERVERSION}}</a>
+	</p>
+</div>

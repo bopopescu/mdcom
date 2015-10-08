@@ -1,0 +1,25 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}{% trans "Migaration Complete" %}{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h1>{% trans "Done!" %}</h1>
+
+<p class='userkey'>{% trans "Migaration is complete." %}</p>
+
+{% for err in error_list %}
+    <div class='userkey' style="color:red;">{{err}}</div>
+{% endfor %}
+
+<p class='userkey'><a href="/dcAdmin/">{% trans "Return to admin home" %}</a></p>
+
+</div>
+{% endblock %}

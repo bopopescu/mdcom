@@ -1,0 +1,17 @@
+{% load i18n %}
+{% load url from future %}
+
+{% blocktrans %}
+Dear {{ username }},
+
+Please click or copy/paste this link to set your new DoctorCom password:
+{% endblocktrans %}
+http{% if secure %}s{% endif %}://{{ sitedomain }}{% url "password_change" token tempcode %}
+{% blocktrans %}
+You will be asked to enter your new password twice to confirm.  If you do not wish 
+to reset your password or feel this was sent erroneously simply ignore this email 
+and it will stay unchanged.
+
+Sincerely,
+DoctorCom Staff
+{% endblocktrans %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+{% load i18n %}
+<html lang="en">
+<head>
+    <title>{% trans "DoctorCom 500 Error - Server Error" %}</title>
+</head>
+<body style="background:lightblue; font-family:Verdana;">
+	<h1>&nbsp;&nbsp;{% trans "DoctorCom" %}&trade;</h1>
+	<div style="width:850px; height:500px; margin-left:30px; margin-top:5px; background:white; border:1px solid grey; padding:30px; padding-top:10px;">
+		<h3>{% trans "HTTP Error 500 - Server Error" %}</h3>
+	
+		<p style="font-size:14px;">{% trans "We apologize for any inconvenience, however, the requested page is unavailable due to a server error." %}<br/><br/>
+	
+		{% trans "Support has been notified and we expect to resolve this issue shortly. Please try back later." %}</p>
+		
+		{% if err_msg %}
+		<div style="background:lightyellow; width:650px; margin-left:0px; margin-top:30px; padding:20px; padding-top:0px;border:1px solid grey;">
+		<p style="text-decoration:underline; font-size:14px;">{% trans "Additional Information Provided by Server:" %}</p>
+		<p style="font-size:14px;">{{ err_msg }}</p>
+		</div>
+		{% endif %}
+    </div>
+    
+    <p style="margin-left:32px;margin-top:5px;font-size:12px;">{% trans "Copyright" %} &#169; {{request.SERVER_TIME_YEAR}} {% trans "My Health Inc. All rights reserved." %}</p>
+</body>
+</html>

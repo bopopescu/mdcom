@@ -1,0 +1,84 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<div class='signup'>
+	<div class='head'>{% trans "Registration" %}
+		<span>{% if step_count %}
+			{% trans "Step" %} {{ step }} {% trans "of" %} {{ step_count }}
+		{% endif %}
+		</span>
+	</div>
+	<div class='content'>
+		<form action="." method="post" id='registerStaff'>{% csrf_token %}
+			<li>
+				{{ form.address1.errors }}
+				<label for="id_address1">{% trans "Office Address1:" %}</label> 
+				{{form.address1}}
+			</li>
+			<li>
+				{{ form.address2.errors }}
+				<label for="id_address2">{% trans "Office Address2:" %}</label> 
+				{{form.address2}}
+			</li>
+			<li>
+				{{ form.city.errors }}
+				<label for="id_city">{% trans "City:" %}</label> 
+				{{form.city}}
+			</li>
+			<li>
+				{{ form.state.errors }}
+				<label for="id_state">{% trans "State:" %}</label> 
+				{{form.state}}
+			</li>
+			<li>
+				{{ form.zip.errors }}
+				<label for="id_zip">{% trans "Zip:" %}</label> 
+				{{form.zip}}
+			</li>
+			<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+				{{ previous_fields|safe }}
+			<div class="submit">
+				{% if step > 1 %}
+				<input type="button" class='back' value='{% trans "Back" %}' id='back' >
+				{% endif %}
+	
+				{% if step == step_count %}
+				<input type="submit" class='submit' value='{% trans "Submit" %}'>
+				{% else%}
+				<input type="submit" class='submit' value='{% trans "Next" %}' >
+				{% endif %}
+			</div>
+		</form>
+	</div>
+</div>
+<script type='text/javascript'>
+$(function(){
+	//add * in every input field , add validate method and add back click method by xlin in 20120620
+	$('#id_address1').after('<span class="redstar">*</span>').attr('tabIndex','1');
+	$('#id_address2').attr('tabIndex','2');
+	$('#id_city').after('<span class="redstar">*</span>').attr('tabIndex','3');
+	$('#id_state').after('<span class="redstar">*</span>').attr('tabIndex','4');
+	$('#id_zip').after('<span class="redstar">*</span>').attr('tabIndex','5');
+	$('input.submit').attr('tabIndex','6');
+	
+	$('#registerStaff').validate({
+		rules:{
+			zip:{required:true,isZipCode:true},
+			address1:{required:true},
+			city:{required:true},
+			state:{required:true}
+		},
+		messages:{
+			zip:{
+				isZipCode:'{% trans "This is not a valid zip code." %}'
+			}
+		},
+		submitHandler:function(form){
+			form.submit();
+		}
+	});
+	
+});
+</script>
+{% endblock content %}

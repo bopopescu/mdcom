@@ -1,0 +1,16 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}{% trans "Administration: User Password Reset" %}{% endblock %}
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+
+<h1>{% trans "Private Key Reset Complete" %}</h1>
+<h3>{% trans "You're done." %}</h3>
+</div>
+{% endblock %}

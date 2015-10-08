@@ -1,0 +1,101 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block content %}
+<div id='profileView' class="ui-corner-all">
+	<div class="clearfix doc_info" id="profile-content-header">
+		<div class="fleft logo">
+			<img src="{{photo}}" alt='{% trans "No Image Provided" %}' style="border:solid 7px lightblue; max-height: 130px; max-width: 100px;">
+		</div>
+		<div class="fright">
+			<div class="doc_tit">
+				<h3>
+					{{fullname}}
+				</h3>
+				<span>
+                    <a href="Edit/" class="edit"> {% trans "Edit" %}</a>
+                    <label>|</label>
+                    <a href="ChangePassword/" class="cp">{% trans "Change Password" %}</a>
+                    <label>|</label>
+                    <a href="UpdateSecurityQuestions/" class="cp2">{% trans "Update Security Questions" %}</a>
+                    {% if request.CALL_ENABLE %}
+                    <label>|</label>
+                    <a href="{% url 'MHLogin.MHLUsers.views.changepin' %}" class="cpp">{% trans "Change Pin" %}</a>
+                    {% endif %}
+                </span>
+			</div>
+			<table class="doc_main">
+				<tr>
+                    <td width="180"><b>{% trans "Office Address:" %}</b></td>
+                    <td>{% if profile.user.address1 %}
+								{{profile.user.address1}}
+								{% if profile.user.address2 %}{{profile.user.address2}}{% endif %}
+								{{ profile.user.city }}, {{ profile.user.state }} {{ profile.user.zip }}
+							{% else %}
+								{% trans "(Not Given)" %}
+							{% endif %}
+					</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Mobile Phone:" %} </b></td>
+                    <td>{% if profile.user.mobile_phone %}{{profile.user.mobile_phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                </tr>
+                <tr>
+                	<td><b>{% trans "Office Phone:" %} </b></td>
+                	<td>{% if profile.office_phone %}{{profile.office_phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+            	</tr>
+            	<tr>
+                    <td><b>{% trans "Other Phone:" %} </b></td>
+                    <td>{% if profile.user.phone %}{{profile.user.phone}}{% else %}{% trans "(Not Given)" %}{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Pager:" %}</b></td>
+                    <td>{% if profile.pager %}{{profile.pager}}{% if profile.pager_extension %}{% trans "Ext." %} {{profile.pager_extension}}{% endif %}{% else %}(Not Given){% endif %}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Email Address:" %}</b></td>
+                    <td>{{profile.user.email}}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "State(s) of Licensure:" %}</b>
+                    </td><td>{{states_of_licensure}}</td>
+                </tr>
+                <tr>
+                    <td><b>{% trans "Gender:" %}</b></td>
+                    <td>{{profile.user.gender}}</td>
+                </tr>
+	                <tr>
+	                    <td valign="top"><b>{% trans "Time Setting:" %} </b></td>
+	                    {% if time_setting %}
+	                        <td>{{time_setting}}</td>
+	                    {% endif %}
+	                </tr>
+	                <tr>
+	                    <td valign="top"><b>{% trans "Time Zone:" %} </b></td>
+	                    {% if time_zone %}
+	                        <td>{{time_zone}}</td>
+	                    {% endif %}
+	                </tr>
+	                <tr>
+	                    <td valign="top"><b>{% trans "Language:" %} </b></td>
+	                    {% if language %}
+	                        <td>{{language}}</td>
+	                    {% endif %}
+	                </tr>
+                {% if physician %}
+					<tr>
+						<td><b>{% trans "Accepting new patients:" %}</b></td>
+						<td>{{accepting_new_patients}}</td>
+					</tr><tr>
+						<td><b>{% trans "Specialty:" %}</b></td><td> {{specialty}}</td>
+					</tr><tr>
+						<td><b>{% trans "Staff Type:" %}</b></td><td> {{staff_type}}</td>
+					</tr>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

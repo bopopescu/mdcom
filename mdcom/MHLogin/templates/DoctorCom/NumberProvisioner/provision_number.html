@@ -1,0 +1,29 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+.errorlist li {color:red;margin-top:0px;}
+#id_area_code {width:45px}
+#id_pin {width:75px}
+#ajaxContent p{ padding:3px 0;}
+#ajaxContent .pincode{ font-size:14px; font-weight:bold;}
+{% endblock %}
+
+{% block customJS %}
+<script type="text/javascript">
+	function submitForm() {
+    	$.post('{{ ajaxPageURL }}', $('#form').serialize(), function(data) {
+    		$('div#ajaxContent').html(data)
+    	});
+    }
+	$(function(){
+		$('div#ajaxContent').load('{{ ajaxPageURL }}')
+	});
+</script>
+{% endblock %}
+{% block content %}
+<div id="provider_number" class="ui-corner-all">
+	<h1>{% trans "Get your DoctorCom Number" %}</h1>	
+	<div id="ajaxContent" style="position:relative;"></div>
+</div>
+{% endblock %}

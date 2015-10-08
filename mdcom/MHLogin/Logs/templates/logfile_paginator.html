@@ -1,0 +1,25 @@
+<p class="paginator">
+        {% if paginator.has_previous %}
+            <span><a href="?page={{ paginator.previous_page_number }}">Prev</a></span>
+        {%  endif %}
+        {% if paginator.paginator.num_pages < 10 %}
+            {% for page_num in paginator.paginator.page_range %}
+                <span{% if page_num == page %} class="this-page"{% endif %}>
+                    <a href="?page={{ page_num }}">{{ page_num }}</a></span>
+            {% endfor %}
+        {% else %}
+            {% load pag_tags %}
+            {% pages_sequence paginator %}
+            {% if rebuild_paginated %}
+                {% for page_num in rebuild_paginated %}
+                    <span{% if page_num == page %} class="this-page"{% endif %}>
+                        <a href="{% if page_num != '...' %}?page={{ page_num }}{% else %}#{% endif %}">{{ page_num }}</a>
+                    </span>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        {% if paginator.has_next %}
+            <span><a href="?page={{ paginator.next_page_number }}">Next</a></span>
+        {% endif %}
+<span> {{ paginator }}</span>
+</p>

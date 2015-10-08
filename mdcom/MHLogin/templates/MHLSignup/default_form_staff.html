@@ -1,0 +1,161 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<div class='signup'>
+	<div class='head'>{% trans "Registration" %}
+		<span>{% if step_count %}
+			{% trans "Step" %} {{ step }} {% trans "of" %} {{ step_count }}
+		{% endif %}
+		</span>
+	</div>
+	<div class='content'>
+		<form action="." method="post" id='registerStaff' class='registerStaffForm'>{% csrf_token %}
+			<li>
+				{{ form.username.errors }}
+				<label for="id_username">{% trans "Username:" %}</label> 
+				{{form.username}}
+			</li>
+			<li>
+			{{ form.password1.errors }}
+				<label for="id_password1">{% trans "Password:" %}</label> 
+				{{form.password1}}
+			</li>
+			<li>
+			{{ form.password2.errors }}
+				<label for="id_password2">{% trans "Password Verify:" %}</label> 
+				{{form.password2}}
+			</li>
+			<li>
+			{{ form.first_name.errors }}
+			<label for="id_first_name">Name:</label> 
+			<span class='defaultFont'>{{form.first_name}}</span>
+			
+			{{ form.last_name.errors }}
+			<span class='defaultFont'>{{form.last_name}}</span>
+			</li>
+			<li>
+			{{ form.email.errors }}
+				<label for="id_email">{% trans "Email Address:" %}</label> 
+				{{form.email}}
+			</li>
+			<li>
+			{{ form.mobile_phone.errors }}
+				<label for="id_mobile_phone">{% trans "Mobile Phone:" %}</label> 
+				{{form.mobile_phone}}
+			</li>
+			<li class='gender'>
+			{{ form.gender.errors }}
+				<label for="id_gender">{% trans "Gender:" %}</label> 
+				{{form.gender}}
+			</li>
+			<li>
+			{{ form.userType.errors }}
+				<label>{% trans "User Type:" %}</label>
+				{{form.userType}}
+			</li>
+			<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+				{{ previous_fields|safe }}
+				{% include 'termsText.html' %}
+			<div class="submit">
+				<input type="submit" class='submit' value='{% trans "Submit" %}' >
+			</div>
+		</form>
+	</div>
+</div>
+<script type='text/javascript'>
+$(function(){
+	//add * for every field by xlin 20120621
+	$('#registerStaff li input').eq(0).after('<span class="redstar">*</span>').attr('tabIndex','1');
+	$('#id_password1').after('<span class="redstar">*</span>').attr('tabIndex','2');
+	$('#id_password2').after('<span class="redstar">*</span>').attr('tabIndex','3');
+	$('#id_first_name').attr('tabIndex','4').attr('value',"{% trans 'First Name' %}");;
+	$('#id_last_name').after('<span class="redstar">*</span>').attr('tabIndex','5').attr('value',"{% trans 'Last Name' %}");;
+	$('#id_email').after('<span class="redstar">*</span>').attr('tabIndex','6');
+	$('#id_mobile_phone').attr('tabIndex','7');
+	//$('#id_gender').after('<span class="redstar">*</span>').attr('tabIndex','8');
+	$('.gender ul').after('<span class="redstar">*</span>').attr('tabIndex','8');
+	$('#id_user_type').attr('tabIndex','9');
+	$('#acceptPolicy').attr('tabIndex','10');
+	$('input.submit').attr('tabIndex','11');
+
+	$('#registerStaff').validate({
+		rules:{
+			username:{required:true,isUserName:true},
+			password1:{required:true},
+			password2:{required:true,equalTo:'#id_password1'},
+			first_name:{required:true},
+			last_name:{required:true},
+			email:{required:true,email:true},
+			mobile_phone:{isPhone:true},
+			gender:{required:true}
+		},
+		messages:{
+			username:{
+				isUserName:'{% trans "User name may contain only letters, numbers and @/./+/-/_ characters." %}'
+			},
+			mobile_phone:{
+				isPhone:'{% trans "Mobile phone is not a valid phone number." %}'
+			}
+		},
+		submitHandler:function(form){
+			if($('#acceptPolicy').attr('checked')){
+				var username= $.trim($('form li input').eq(0).val());
+				var email = $.trim($('#id_email').val());
+				var phone = $.trim($('#id_mobile_phone').val());
+				$.ajax({
+					url:'/ValidateEmailAndPhone/',
+					type:'POST',
+					data:{
+						username:username,
+						email:email,
+						phone:phone
+					},
+					success:function(data, txtStatus){
+						if(txtStatus=='success'){
+							var d = JSON.parse(data);
+							if(!isEmptyObject(d)){
+								if(d['err1']){
+									$('form li input').eq(0).addClass('error');
+									$('form li input').eq(0).after('<label for="id_user_name" generated="true" class="error">{% trans "This user name has been registered. Please choose another user name." %}</label>');
+								}
+								if(d['err2']){
+									$('#id_email').addClass('error');
+									$('#id_email').after('<label for="id_email" generated="true" class="error">{% trans "This email has been registered. Please choose another email." %}</label>');
+								}
+								if(d['err3']){
+									$('#id_mobile_phone').addClass('error');
+									$('#id_mobile_phone').after('<label for="id_mobile_phone" generated="true" class="error">{% trans "This mobile phone has been registered. Please choose another mobile phone." %}</label>');
+								}
+							}else{
+								$.ui.wait.start('Waiting...');
+								setTimeout(function(){
+									form.submit();
+								},1000);
+							}
+						}
+					}
+				});
+			}else{
+				alert('{% trans "You must agree to accept DoctorCom Terms of Service and Privacy Policy." %}');
+			}
+		}
+	});
+	$('label[for="id_gender_0"]').html('<div class="button"><input checked="checked" id="id_gender_0" value="M" name="gender" type="radio"></div><div class="text">{% trans "Male"%}</div>');
+	$('label[for="id_gender_1"]').html('<div class="button"><input id="id_gender_1" value="F" name="gender" type="radio"></div><div class="text">{% trans "Female"%}</div>');
+	
+	$('#id_first_name').focus(function(){
+		if($(this).val()=="{% trans 'First Name' %}"){
+			$(this).val('');
+		}
+		$(this).parent().removeClass('defaultFont').addClass('inputFont');
+	});
+	$('#id_last_name').focus(function(){
+		if($(this).val()=="{% trans 'Last Name' %}"){
+			$(this).val('');
+		}
+		$(this).parent().removeClass('defaultFont').addClass('inputFont');
+	});
+});
+</script>
+{% endblock content %}

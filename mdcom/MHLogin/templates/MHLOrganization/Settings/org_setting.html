@@ -1,0 +1,118 @@
+{% load i18n %}
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+
+<script language="JavaScript">
+	$(function(){
+		$('#save_org_setting').click(function() {
+			var save_btn = $("#save_org_setting");
+			if (!save_btn.attr("disabled")) {
+				save_btn.attr("disabled", "disabled").addClass("org_inf_btn_disabled").removeClass("org_inf_btn");
+				var org_id = GetSelectOrgID();
+				$.ajax({
+					data: $("#orgSettingForm").serialize(),
+					type: "POST",
+					url: "/Organization/OrgSetting/",
+					async: false,
+					success: function(data) {
+						$('#info_panel').empty().prepend('<div class="success" style="width:90%;">{% trans "Save successfully." %} </div><div class="clear"></div>');
+						$('.success').fadeOut(4000, function(){
+							$("#save_org_setting").removeAttr("disabled").addClass("org_inf_btn").removeClass("org_inf_btn_disabled");
+						});
+					}
+				});
+			}
+		});
+		
+		{% if inherit_org_type %}
+		$('#id_inherit_org_type').attr("checked", "checked");
+		$("tr.org_setting_tr input[type='checkbox']").attr("disabled", "disabled");
+		{% endif %}
+		
+		$('#id_inherit_org_type').click(function(){
+			if($("input[name='inherit_org_type']").attr("checked")){
+				$("tr.org_setting_tr input[type='checkbox']").attr("disabled", "disabled");
+			} else {
+				$("tr.org_setting_tr input[type='checkbox']").removeAttr("disabled");
+			}
+		});
+	});
+
+</script>
+
+
+<div class="org-tab-content">
+	<div id="info_panel" class="info_panel">
+	</div>
+	<form id="orgSettingForm" action="." method="POST">
+		<table>
+			<tr>
+				<td class="org_create_td_field" colspan="2" id="inherit_org_type_td">
+					<input type="checkbox" id="id_inherit_org_type" name="inherit_org_type" />
+					<label for="id_inherit_org_type">{% trans "Inherit from organization type" %}</label>
+				</td>
+			</tr>
+			
+			{% for field in form %}
+				{% if field.name in "['can_have_answering_service', 'can_be_billed', 'display_in_contact_list_tab', 'can_have_luxury_logo', 'can_have_member_organization']" %}
+					<tr class="org_setting_tr">
+						<td class="org_create_td_field">{{ field.label_tag }}</td>
+						<td class="org_create_td">{{ field }}<label for="{{field.auto_id}}">{{ field.help_text }}</label></td>
+					</tr>
+					{% if field.errors %}
+					<tr>
+						<td class="org_create_td_field">&nbsp;</td>
+						<td>{{ field.errors }}</td>
+					</tr>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</table>
+		<table>
+			<tr>
+				<td class="org_create_td_field">{% trans "User types" %}</td>
+				<td class="org_create_td">
+					<table>
+						<tr class="org_setting_tr">
+							<td class="left">{% trans "Staff" %}</td>
+							<td class="middle">{% trans "Provider" %}</td>
+							<td class="right">{% trans "Tech Admin" %}</td>
+						</tr>
+						<tr class="org_setting_tr">
+							<td class="detail">{{form.can_have_manager}}{% trans "Manager" %}</td>
+							<td class="detail">{{form.can_have_physician}}{% trans "Doctor" %}</td>
+							<td class="detail">{{form.can_have_tech_admin}}{% trans "Tech Admin" %}</td>
+						</tr>
+						<tr class="org_setting_tr">
+							<td class="detail">{{form.can_have_staff}}{% trans "Staff" %}</td>
+							<td class="detail">{{form.can_have_nppa}}{% trans "NP/PA/Midwife" %}</td>
+							<td class="detail"></td>
+						</tr>
+						<tr class="org_setting_tr">
+							<td class="detail">{{form.can_have_nurse}}{% trans "Nurse" %}</td>
+							<td class="detail">{{form.can_have_medical_student}}{% trans "Medical/Dental Student" %}</td>
+							<td class="detail"></td>
+						</tr>
+						<tr class="org_setting_tr">
+							<td class="detail">{{form.can_have_dietician}}{% trans "Dietician" %}</td>
+							<td class="detail">&nbsp;</td>
+							<td class="detail">&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<div style="text-align: left; padding:10px 0;">
+			<input type="button" id="save_org_setting" name="mysubmit" value="{% trans 'Save'%}" class="org_inf_btn">
+		</div>
+	</form>
+</div>
+
+
+
+
+
+
+
+
+
+

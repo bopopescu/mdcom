@@ -1,0 +1,55 @@
+{% load i18n %}
+
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.validate-form.css" />
+<script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.metadata.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.validate.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    jQuery.validator.addMethod("isValidUnixDate" , function(value, element){
+        return DateUtils.isValidUnixDate(value);
+    },"");
+    jQuery.validator.addMethod("isDate" , function(value, element){
+        return DateUtils.isDate(value);
+    },"");
+    jQuery.validator.addMethod("isPhone" , function(value, element){
+        return this.optional(element) || StrUtils.isPhone(value);
+    },  "");
+    jQuery.validator.addMethod("isZipCode" , function(value, element){
+        return this.optional(element) || StrUtils.isZipCode(value);
+    },  "");
+    jQuery.validator.addMethod("isUserName" , function(value, element){
+        return this.optional(element) || StrUtils.isUserName(value);
+    },  "");
+    jQuery.validator.addMethod("isPinCode" , function(value, element){
+        return this.optional(element) || StrUtils.isPinCode(value);
+    },  "");
+    jQuery.validator.addMethod("isAreaCode" , function(value, element){
+        return this.optional(element) || StrUtils.isAreaCode(value);
+    },  "");
+    jQuery.validator.addMethod("isFirstNameText" , function(value, element){
+        return this.optional(element) || StrUtils.isFirstNameText(value);
+    },  "");
+    jQuery.validator.addMethod("isLastNameText" , function(value, element){
+        return this.optional(element) || StrUtils.isLastNameText(value);
+    },  "");
+    jQuery.validator.addMethod("isAfterToday" , function(value, element){
+        return this.optional(element) || StrUtils.isAfterToday(value);
+    },  "");
+    jQuery.validator.addMethod("customRule" , function(){},  "");
+    jQuery.validator.messages['required'] = '{% trans "This field is required." %}';
+    jQuery.validator.messages['email'] = '{% trans "Please enter a valid email address." %}';
+});
+
+function showErrorsBelow(errorMap, errorList) {
+    $.each(errorList, function() {
+        var elementId = this.element.id;
+        var jpObj = $("#"+elementId).parent();
+        $('p.errorPanel', jpObj).remove();
+        jpObj.append('<p class="errorPanel"><label for="'+elementId+'" generated="true" class="error">'+this.message+'</label></p>');
+    });
+    this.defaultShowErrors();
+}
+
+</script>

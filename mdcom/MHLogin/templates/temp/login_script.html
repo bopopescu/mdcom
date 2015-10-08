@@ -1,0 +1,12 @@
+<script type="text/javascript">
+	$(document).ready(function(){{% if error_msg %}
+		$('#boxSignIn').show();{% else %}
+		$('#boxSignIn').hide();{% endif %}
+		$('a.btn-signIn').click(function(){
+			$('#boxSignIn').fadeIn('fast');
+		});
+		$('a.cancel').click(function(){
+			$('#boxSignIn').fadeOut('fast');
+		})
+	});
+</script>

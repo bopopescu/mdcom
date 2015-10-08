@@ -1,0 +1,127 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title></title>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.uploaderProgress.css" />
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.uploadProgress.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var jcurentFrame = getCurentIFrame();
+    jcurentFrame.closest(".upload_outer_container").find(".file_readonly_area").hide();
+    jcurentFrame.parent().show();
+    $('#uploadForm').uploadProgress({
+        jqueryPath: "{{STATIC_URL}}js/jquery-1.4.2.min.js",
+        uploadProgressPath: "{{STATIC_URL}}js/jquery.uploadProgress.js",
+        progressBar: '#progress_indicator',
+        progressUrl: '/Messages/Upload/UploadProgress/',
+        start: function() {
+            var filename = $("#id_file").val().split(/[\/\\]/).pop();
+            this.filename=filename;
+            $("#progress_filename").html('{% trans "Uploading" %} '+ interceptString(this.filename,30));
+        },
+        uploading: function(upload) {
+            if (upload) {
+                var max_upload_size = parseInt({{MAX_UPLOAD_SIZE}});
+                if (!this.checked && max_upload_size && max_upload_size>0 && upload.size > max_upload_size*1024*1024) {
+                    this.checked = true;
+                    window.clearTimeout(this.timer);
+                    beforeAbortUpload();
+                    alert('{% trans "The file " %} "'+this.filename+'"{% trans " is larger than" %} '+max_upload_size+'M, '+'{% trans "please select a smaller file to upload." %}');
+                    removeUploadArea();
+                }
+                if (upload.percents == 100) {
+                    window.clearTimeout(this.timer);
+                    $("#progress_filename").html('{% trans "Processing"%} ' + interceptString(this.filename,30));
+                } else {
+                    $("#progress_filename").html('{% trans "Uploading"%} ' + interceptString(this.filename,30) + ': ' + upload.percents + '%');
+                }
+            }
+        },
+        netAbort: function() {
+            setTimeout(function(){
+                var uploadForm = $('#uploadForm');
+                if (!uploadForm.attr("aborted")) {
+                    uploadForm.attr("aborted",true);
+                    var parentContainer = getCurentIFrame().parent();
+                    if (parentContainer && parentContainer.length>0) {
+                        beforeAbortUpload();
+                        alert('{% trans "Can not connect to server, please check your network environment or contact the server administrator." %}');
+                        $("#progress_container").hide();
+                    }
+                }
+            },100);
+        },
+        interval: 1000
+    });
+
+    $("#id_file").bind('change', function() {
+        if ($(this).val()) {
+            var uploadForm = $("#uploadForm");
+            uploadForm.attr("upload",true);
+            var jcurentFrame = getCurentIFrame();
+            var uploadOuterContainer = jcurentFrame.closest(".upload_outer_container");
+            $("#upload_area").hide();
+            $("#progress_container").show();
+            uploadOuterContainer.find(".file_readonly_area").show();
+            window.parent.addUploadArea(uploadOuterContainer.attr("id"));
+            $("#uploadForm").submit();
+            //setTimeout(function(){
+            //    jcurentFrame.parent().appendTo(uploadOuterContainer.find(".upload_panel_container"));
+            //},10000);
+        }
+    });
+
+    $('#id_cancel').click(function(){
+        if (confirm('{% trans "Are you sure you want to cancel the upload?" %}')) {
+            removeUploadArea();
+        }
+    });
+
+    function removeUploadArea() {
+        getCurentIFrame().parent().remove();
+    }
+
+    function beforeAbortUpload() {
+        var before_abort_upload = "{{before_abort_upload}}";
+        if (before_abort_upload) {
+            window.parent[before_abort_upload]();
+        }
+    }
+
+    function getCurentIFrame() {
+        var frameWindow = document.parentWindow || document.defaultView;
+        return $(frameWindow.frameElement);
+    }
+});
+</script>
+</head>
+
+<body>
+<form id="uploadForm" enctype="multipart/form-data" action=".?after_upload={{after_upload}}&before_abort_upload={{before_abort_upload}}" method="POST">
+<div id="upload_area">
+	{% if custom_button %}
+		<span id="upload_btn" class="upload_btn"><img src="{{STATIC_URL}}img/upload_icon.png"/>{% trans "Click to Upload" %}</span>
+		<input type="file" size="1" name="file" id="id_file" style="cursor:pointer;" class="upload_hidden_input">
+	{% else %}
+		<input type="file" size="25" name="file" id="id_file" style="cursor:pointer;">
+	{% endif %}
+	<span id="id_max_size_msg">({% trans "Maximum size of the uploaded file is" %}&nbsp;{{MAX_UPLOAD_SIZE}}M.)</span>
+	<a id="id_add_file" href="javascript:void(null);" style="display:none;">{% trans "Add a file" %}</a>
+</div>
+<div id="progress_container" style="display:none;">
+    <div id="progress_filename"></div>
+    <div id="progress_bar">
+        <div id="progress_indicator"></div>
+    </div>
+    <div>
+        <a id="id_cancel" href="javascript:void(null);">{% trans "Cancel" %}</a>
+    </div>
+</div>
+</form>
+
+</body>
+</html>

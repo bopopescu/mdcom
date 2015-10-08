@@ -1,0 +1,6 @@
+{% load i18n %}
+<form action="/Scheduler/updateEvent/{{eventId}}/" method="post">
+{% trans "Event Id" %}: {{ eventId }}
+{{ form.as_p }}
+<input type="submit" value='{% trans "Submit" %}'/>
+</form>

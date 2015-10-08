@@ -1,0 +1,53 @@
+{% load i18n %}
+{% load tech_tags %}
+
+<div style="margin-left:25px;">
+    <div class="menu-left-img"></div>
+    <ul id="menu">
+        <li><a href="/">{% trans "Home" %}</a></li>
+        <li><a href="/Profile/">{% trans "Account" %}</a>
+            <ul id="account">
+                <li><img class="corner_inset_left" alt="" src="{{STATIC_URL}}img/corner_inset_left.png"/>
+                    <a href="/Profile">{% trans "Profile" %}</a>
+                    <img class="corner_inset_right" alt="" src="{{STATIC_URL}}img/corner_inset_right.png"/> 
+                </li>
+                <!--<li><a href="/Profile/Billing/">{% trans "Billing" %}</a></li>-->
+                <li class='hidden'><a>{% trans "Billing" %}</a></li>
+                <li class="last">
+                    <img class="corner_left" alt="" src="{{STATIC_URL}}img/corner_left.png"/>
+                    <img class="middle" alt="" src="{{STATIC_URL}}img/dot.gif"/>
+                    <img class="corner_right" alt="" src="{{STATIC_URL}}img/corner_right.png"/>
+                </li> 
+            </ul>
+        </li>
+        <li><a href="/Support/FAQs/">{% trans "Support" %}</a>
+            <ul id="support">
+                <li><img class="corner_inset_left" alt="" src="{{STATIC_URL}}img/corner_inset_left.png"/>
+                    <a href="/Support/FAQs/">{% trans "FAQs" %}</a>
+                    <img class="corner_inset_right" alt="" src="{{STATIC_URL}}img/corner_inset_right.png"/> 
+                </li>
+                <li><a href="/Support/Contact/">{% trans "Contact" %}</a></li>
+                <li class="last">
+                    <img class="corner_left" alt="" src="{{STATIC_URL}}img/corner_left.png"/>
+                    <img class="middle" alt="" src="{{STATIC_URL}}img/dot.gif"/>
+                    <img class="corner_right" alt="" src="{{STATIC_URL}}img/corner_right.png"/>
+                </li> 
+            </ul>            
+        </li>
+        {% get_tech_menu_var as show_tech_menu %}
+        {% if show_tech_menu == "true" %}
+            <li><a href='/dcAdmin/'>Admin</a></li>
+        {% endif %}
+        <!-- 
+        <li><a href="">EMR</a></li>
+         -->
+        <li><a href="/logout/">{% trans "Logout" %}</a></li>
+        <li class="searchContainer"><div>
+            <input type="text" id="allProviders" style="width:150px;" title='{% trans "Type to Search for Provider" %}'/>
+            <img src="{{STATIC_URL}}img/magnifier.png" alt="{% trans 'Search' %}" onclick=""/></div></li>   
+    </ul>
+    <div class="menu-right-img"></div>
+</div>
+<div id="toggle_mobile" style="font-size:10px;"><a style="" href="/toggle_mobile/">{% trans "Display Mobile Pages" %}</a></div>
+<div style="position:relative;left:80px;top:-10px;z-index:-1;padding-bottom:5px;"><img  alt="" src='{{STATIC_URL}}img/dclogo4a.png' width="260px"/></div>
+<div style="float:none; clear:both;"></div>

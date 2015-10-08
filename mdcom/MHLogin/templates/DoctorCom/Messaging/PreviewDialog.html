@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load i18n %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		{% if pdf %}
+		<style type="text/css" title="text/css">
+			table:hover, tr:hover, td:hover {
+				background: none;
+			}
+			table {
+				border-collapse: collapse;
+				border-spacing: 0;
+				border-left: 1px solid #000000;
+				border-top: 1px solid #000000;
+				background: #FFFFFF;
+				width: 100%;
+			}
+			th, td {
+				border-right: 1px solid #000000;
+				border-bottom: 1px solid #000000;
+				background: #FFFFFF;
+				padding: 3px;
+			}
+			th, .FontBolder {
+				font-weight: bold;
+			}
+			th span {
+				font-weight: normal;
+			}
+			.Center {
+				text-align: center;
+			}
+			.Title {
+				color: #006FC0;
+				font-size: 24px;
+			}
+			.Margin20 {
+				margin-top: 25px;
+			}
+			.TextRight {
+				text-align: right;
+			}
+			.TextLeft {
+				text-align: left;
+			}
+			.dialogDiv {
+				margin: 25px;
+			}
+			.Top {
+				vertical-align: top;
+			}
+			.MinHeight100 {
+				min-height: 100px;
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				line-height:32px;
+				font-size: 16px;
+			}
+		</style>
+		{% endif %}
+		
+		<title>{% trans "Preview Dialog" %}</title>
+	</head>
+	<body>
+		<div class="dialogDiv">
+			<table>
+				<tr>
+					<th class="Center" width="40%"> 
+						{% if current_practice and current_practice_photo %} 
+							{% if pdf and practice_photo_path %}
+								<img src="file:///{{practice_photo_path}}" /> 
+							{% else %}
+								<img style="margin-bottom: -5px;" 
+									src="{{current_practice_photo}}" /> 
+							{% endif %}
+						{% endif %}
+					</th>
+					<th class="Center Title"> {% if current_practice and current_practice.practice_name %}
+					{{current_practice.practice_name}}
+					{% else %}
+					&nbsp;
+					{% endif %} 
+					</th>
+				</tr>
+			</table>
+			<div class="Margin20 Center">
+				<h1>{% trans "REFERRAL FORM" %}</h1>
+			</div>
+			<table class="Margin20">
+				<tr>
+					<th class="TextLeft">{% trans "Send referral to" %}:</th>
+				</tr>
+				<tr>
+					<th style="text-align:center">{{user_recipient_name}}</th>
+				</tr>
+			</table>
+			<table class="Margin20">
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Today's Date" %}:</th>
+					<td>{{refer_form.today}}</td>
+				</tr>
+			</table>
+			<table class="Margin20">
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Patient Name" %}:</th>
+					<td>{{refer_form.first_name}} {{refer_form.last_name}}</td>
+				</tr>
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Gender" %}:</th>
+					<td>{% if refer_form.gender %} {% if refer_form.gender == "M" %} {% trans "Male" %} {% else %} {% trans "Female" %} {% endif %}{% endif %}</td>
+				</tr>
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Previous Name" %}:</th>
+					<td>{{refer_form.previous_name}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "Date of Birth" %}:</th>
+					<td>{{refer_form.date_of_birth}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "MRN" %}:</th>
+					<td>{{refer_form.mrn}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "SSN" %}:</th>
+					<td>{{refer_form.ssn}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "Phone" %}:</th>
+					<td>{{refer_form.phone_number}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "Home Phone" %}:</th>
+					<td>{{refer_form.home_phone_number}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "Address" %}:</th>
+					<td>{{refer_form.address}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "Email" %}:</th>
+					<td>{{refer_form.email}}</td>
+				</tr>
+				{% comment %}
+				<tr>
+					<th class="TextRight">{% trans "ICD-10 2013 code:" %}</th>
+					<td >{{refer_form.icd_code}}</td>
+				</tr>
+				{% if LANGUAGE_CODE and LANGUAGE_CODE == 'de' %}
+				<tr>
+					<th class="TextRight">{% trans "OPS 2013 code:" %}</th>
+					<td >{{refer_form.ops_code}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "Medication list:" %}</th>
+					<td >{{refer_form.medication_list}}</td>
+				</tr>
+				{% endif %}
+				{% endcomment %}
+			</table>
+			<div class="Margin20 FontBolder TextLeft">
+				{% trans "Patient's Insurance" %}:
+			</div>
+			<table>
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Prior Authorization Number" %}:</th>
+					<td >{{refer_form.prior_authorization_number}}</td>
+				</tr>
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Other Authorization Number" %}:</th>
+					<td >{{refer_form.other_authorization}}</td>
+				</tr>
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Internal Tracking Number" %}:</th>
+					<td >{{refer_form.internal_tracking_number}}</td>
+				</tr>
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Primary Insurance" %}:</th>
+					<td >{{refer_form.insurance_id}}</td>
+				</tr>
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Secondary Insurance" %}:</th>
+					<td >{{refer_form.secondary_insurance_id}}</td>
+				</tr>
+				<tr>
+					<th width="40%" class="TextRight">{% trans "Tertiary Insurance" %}:</th>
+					<td >{{refer_form.tertiary_insurance_id}}</td>
+				</tr>
+			</table>
+			<table class="Margin20">
+				<tr>
+					<th width="40%" class="TextRight Top">
+					<div class="Top MinHeight100">
+						{% trans "Reason for referral" %}:
+					</div></th>
+					{% if pdf %}
+					<td class="Top"><div style="margin-top: -10px; line-height: 25px;">{{refer_form.reason_of_refer|escape|linebreaks}}</div> </td>
+					{% else %}
+					<td class="Top">{{refer_form.reason_of_refer|escape|linebreaks}}</td>
+					{% endif %}
+				</tr>
+				<tr>
+					<th width="40%" class="TextRight Top">
+					<div class="Top MinHeight100">
+						{% trans "Notes" %}:
+					</div></th>
+					<td class="Top"><div style="margin-top: -10px; line-height: 25px;">{{refer_form.notes|escape|linebreaks}}</div> </td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "Referring Doctor" %}: </th>
+					<td>{{referring_physician_name}}</td>
+				</tr>
+				<tr>
+					<th class="TextRight">{% trans "Doctor Phone Number" %}:</th>
+					<td>{{physician_phone_number}}</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

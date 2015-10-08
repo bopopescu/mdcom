@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
+
+{% block extrahead %}
+<a href="/" class="logo"><img style="margin:5px 0px 5px 0px" src="{{STATIC_URL}}img/logo.gif"></img></a>
+{% endblock %}
+
+{% block extrastyle %}
+<style type="text/css">
+body 
+{ 
+    background-color:#f0f4ff; 
+    margin:5px 5px 0px 20px;
+    font-family:sans-serif;
+    text-align:left;
+}
+</style>
+{% endblock %}
+
+{% block branding %}
+    <input id="tech_admin" type="hidden" name="tech_admin" value="false"/>
+    
+    <h1 id="site-name"></h1>
+    <script type="text/javascript">
+        // set title name based on if we are managing admin or subset tech_admin
+        var site_name = document.getElementById("site-name");
+        var pathsplit = window.location.pathname.split('/');
+        
+        site_name.innerText = "DoctorCom Administration";
+        
+        if ((pathsplit.length > 1 && pathsplit[1] == "tech_admin") ||
+                (pathsplit.length == 1 && pathsplit[0] == "tech_admin"))
+        {
+            site_name.innerText = "DoctorCom Tech Admin";
+            ta = document.getElementById("tech_admin");
+            ta.value = "true";
+        }
+    </script>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+

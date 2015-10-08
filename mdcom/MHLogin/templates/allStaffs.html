@@ -1,0 +1,58 @@
+{% load i18n %}
+{% if scroll %}
+<div id='listOfficeStaff' class='scroll'>
+{% else %}
+<div id='listOfficeStaff'>
+{% endif %}
+{% for provider in providers %}
+	<li>
+		{% if scroll %}
+		<span id="{{provider.user.id}}" class='scorll'>
+		{% else %}
+		<span id="{{provider.user.id}}">
+		{% endif %}
+			<div class='name'>
+				<a class='name' title='{{provider.user.last_name}} {{provider.user.first_name}}'>
+				<span class='spanContent'>{{ provider.fullname}}</span>
+				</a>
+				<a class='name nameWidth1' title='{{provider.user.last_name}} {{provider.user.first_name}}'>
+				{% if provider.usertypetext == 0 %}
+					<span class='normal'>{% trans "(Manager)" %}</span>
+				{% endif %}
+				{% if provider.usertypetext == 1 %}
+					<span class='normal'>{% trans "(Nurse)" %}</span>
+				{% endif %}
+				{% if provider.usertypetext == 2 %}
+					<span class='normal'>{% trans "(Staff)" %}</span>
+				{% endif %}
+				</a>
+			</div>
+			<!-- <a class="text">
+				{% if provider.template_specialty and not provider.user.clinical_clerk %}
+				({{provider.template_specialty}}) 
+				{% else %}
+				&nbsp;
+				{% endif %}
+			</a>-->
+			
+			<a href="/Messages/New/?user_recipients={{ provider.user.id }}">
+				<div class="button btnShow buttonMsgAble" title='{% trans "Click to send text message." %}'>{% trans "msg" %}</div>
+			</a>
+			{% if provider.pager_available %}
+			<a href="/Page/{{ provider.user.id }}/">
+				<div class="button btnShow buttonPageAble" title='{% trans "Click to page." %}'>{% trans "page" %}</div>
+			</a>
+			{% else %}
+				<div class="button btnShow buttonPageDisable textDisable">{% trans "page" %}</div>
+			{% endif %}
+			{% if provider.call_available %}
+			<a href="/Call/{{ provider.user.id }}/">
+				<div class="button btnShow buttonPhoneAble" title='{% trans "Click to phone." %}'>{% trans "call" %}</div>
+			</a>
+			{% else %}
+				<div class="button btnShow buttonPhoneDisable textDisable">{% trans "call" %}</div>
+			{% endif %}
+		</span>
+	</li>
+{% endfor %}
+</div>

@@ -1,0 +1,126 @@
+{% load i18n %}
+<script>
+	var autoSendMsg = false;
+	var dialogWait = null;
+	$(function(){
+		//$("#id_icd_code").Watermark('{% trans "Add ICD-10 2013 code" %}');
+		//$("#id_ops_code").Watermark('{% trans "Add OPS 2013 code" %}');
+		//$("#id_medication_list").Watermark('{% trans "Add from Medication list 2013" %}');
+
+		$("#id_upload_area").multiUploadProgress({
+			"after_upload": "sendMsgAfterUpload",
+			"before_abort_upload": "setManualSendMsgAndCloseWin",
+			"max_upload_size": {{MAX_UPLOAD_SIZE}},
+			"custom_button": true
+		});
+
+		$("#referFrm").bind('submit', function() {
+			var file_clone = $("#id_file").clone(true);
+			file_clone.val("");
+			$("#id_file").replaceWith(file_clone);
+			var canSend = sendMsgCheck();
+			if (!canSend) {
+				autoSendMsg=true;
+				dialogWait = jWait({
+					height: 200,
+					title: '{% trans "Waiting for file uploading..." %}',
+					message: '{% trans "We will send this refer after all files have been uploaded." %}',
+					cancelFunc:setManualSendMsg
+				});
+			}
+		});
+	});
+
+	function sendMsgAfterUpload() {
+		if (sendMsgCheck()&&autoSendMsg) {
+			if (dialogWait) {
+				dialogWait.dialog("close");
+			}
+			submitclinicalFrm();
+		}
+	}
+
+	function submitclinicalFrm() {
+		dialogWait = jWait({height:200, title:'{% trans "Sending refer" %}',message:'{% trans "Sending refer..." %}',cancelEnable:false});
+		setTimeout(function(){
+			$("#referFrm").submit();
+		},2000);		
+	}
+
+	function setManualSendMsg() {
+		autoSendMsg = false;
+	}
+
+	function setManualSendMsgAndCloseWin() {
+		if (dialogWait) {
+			dialogWait.dialog("close");
+		}
+		setManualSendMsg();
+	}
+
+	function sendMsgCheck() {
+		var canSend = true;
+		$('iframe').each(function(){
+			var formObj = $(this).contents().find("form");
+			if (formObj&&formObj.length>0&&formObj.attr("upload")) {
+				canSend = false;
+				return false;
+			}
+		}); 
+		return canSend;
+	}
+</script>
+
+<div id="form-1">
+	<div class="clear"></div>
+		{{ clinical_form.selected_practice }}
+		{{ clinical_form.user_recipients }}
+		<div class="referContent">
+			<div>
+				<div class="fieldTitle">
+					<span class="star">*</span>
+					{% trans "Reason for Referral" %}:
+				</div>
+				<div>
+					{{ clinical_form.reason_of_refer }}
+				</div>
+			</div>
+			{% comment %}
+			<div class="text">
+				<input style="width:240px;" name="icd_code" id="id_icd_code" maxlength=255 type="text"></input>
+				{% if LANGUAGE_CODE and LANGUAGE_CODE == 'de' %}
+				<input style="width:240px;" name="ops_code" id="id_ops_code" maxlength=255 type="text"></input>
+				<input style="width:240px;" name="medication_list" id="id_medication_list" type="text"></input>
+				{% endif %}
+			</div>
+			{% endcomment %}
+			<div class="upload">
+				<div class="fieldTitle">
+					<span>{% trans "Attachment(s)" %}:</span>
+				</div>
+				<div id="id_upload_area" class="upload_area">
+					<div id="id_file_list_area">
+						{% for file in file_list %}
+							<div class="upload_panel">
+								<div>
+								{{file.file_display_name}} {% trans "uploaded successfully" %}.&nbsp;&nbsp;&nbsp;
+								<input type="hidden" name="file_saved_name" value="{{file.file_saved_name}}"/>
+								<input type="hidden" name="file_display_name" value="{{file.file_display_name}}"/>
+								<input type="hidden" name="file_charset" value="{{file.file_charset}}"/>	
+								<input type="hidden" name="file_size" value="{{file.file_size}}"/>
+								<a class="delete_attachment" href="javascript:void(null);" onclick="deleteAttachment(this);">{% trans "Delete" %}</a>
+								</div>
+							</div>
+						{% endfor %}	
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="actionbtns">
+			<input id="id_go_to_demographics" type="button" value="{% trans "Proceed to Demographics" %}" class="next"/>
+			<input id="id_cancel" type="button" value="{% trans "Cancel" %}" class="cancel"/>
+		</div>
+</div>
+

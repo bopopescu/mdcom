@@ -1,0 +1,23 @@
+{% load i18n %}
+<div id="inviteDialog" pending_id="{{pending_id}}"
+	class="pending_content ">
+	<div class="content">
+
+		<div class="dialog-left" style="width: 150px">
+			<div id="from_org_logo">
+				<img id="from_org_logo_img" src="{{from_practicelocation_logo}}" style="max-width: 130px; max-height: 80px;"></img>
+			</div>
+			<div id="from_org_name1">{{from_practicelocation_name}}
+			</div>
+
+		</div>
+		<div class="dialog-right">
+			<div class="text1">{{sender_name}} {%trans "invites your " %}
+				{{to_practicelocatin_type}} {{to_practicelocation_name}} {% trans "to join " %} {{from_practicelocatin_type}}
+				{{from_practicelocation_name}} {% trans "as a Member." %}</div>
+			<div class="text1">{% trans "Do you want to join?" %}</div>
+		</div>
+
+		<div class="clear"></div>
+	</div>
+</div>

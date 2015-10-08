@@ -1,0 +1,133 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+.under {border-bottom:1px solid black;}
+.dataTables_length {width:auto;float:none;}
+.dataTables_wrapper {clear:both; margin-top:auto;min-height:50px;}
+.dataTables {font-size:0.85em;}
+{% endblock %}
+
+{% block content %}
+
+<link type="text/css" href="{{STATIC_URL}}css/start/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{STATIC_URL}}css/start/jquery.autocomplete.css" type="text/css" />
+<link rel="stylesheet" href="{{STATIC_URL}}css/datatable_jui.css" type="text/css" />
+<link rel="stylesheet" href="{{STATIC_URL}}css/datatable.css" type="text/css" />
+<script type="text/javascript" src="{{STATIC_URL}}js/localization/l10n_{{LANGUAGE_CODE}}.js"></script>
+<!--<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.3.2.min.js"></script>-->
+<!--<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-1.7.2.custom.min.js"></script>-->
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.dataTables_mod2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.dataTables').dataTable({
+                "bFilter":false,
+                "bJQueryUI": false,
+                "bLengthChange": false,
+                "iDisplayLength" : 25,
+                });
+    });
+
+    function post_to_url(url, p) 
+    {
+        var dynform = document.createElement("form");
+        dynform.method = "post";
+        dynform.action = url;
+        for (var k in p) 
+        {
+            var input = document.createElement("input");
+            input.setAttribute("name", k) ;
+            input.setAttribute("value", p[k]);
+            dynform.appendChild(input);
+        }
+        document.body.appendChild(dynform);
+        dynform.submit();
+        document.body.removeChild(dynform);
+    }
+    
+</script>
+
+<div id='sales' class="ui-corner-all">
+    <h3><a href="salesleads/">{% trans "Sales Leads" %}</a></h3>
+    {% if 'Administrator' in sender_types %}
+        <h3><a href="/analytics/">{% trans "Analytics" %}</a></h3>
+    {% endif %}
+    <h3>{% trans "Outstanding Invitations" %}</h3>
+    {% if unanswered_invites %}
+    <table class="salesTables" cellspacing='0' cellpadding='0'>
+        <thead>
+            <tr class="under">
+                <th class="under">{% trans "Recipient" %}</th>
+                <th class="under">{% trans "Original Invite Date" %}</th>
+                <th class="under">{% trans "Invitation Code" %}</th>
+                <th class="under">{% trans "Resend" %}?</th>
+                <th class="under">{% trans "Cancel" %}?</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invite in unanswered_invites %}
+            <tr>
+                <td>{{invite.recipient}}</td>
+                <td>{{invite.requestTimestamp}}</td>
+                <td>{{invite.code}}</td>
+                <td><a href="Invites/{{invite.pk}}/Resend/">{% trans "Resend" %}</a></td>
+                <td><a href="Invites/{{invite.pk}}/Cancel/">{% trans "Cancel" %}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>{% trans "There are currently no outstanding invitations" %}. 
+        <a href="Invites/">{% trans "Issue New Invitations" %}</a></p>
+    {% endif %}
+    <h3>{% trans "Recently Accepted Invitations" %}</h3>
+    <table class="salesTables" cellspacing='0' cellpadding='0'>
+        <thead>
+            <tr>
+                <th class="under">{% trans "Recipient" %}</th>
+                <th class="under">{% trans "Username" %}</th>
+                <th class="under">{% trans "Email" %}</th>
+                <th class="under">{% trans "Original Invite Date" %}</th>
+                <th class="under">{% trans "Accepted Date" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invite in answered_invites %}
+        <tr>
+            {% if 'Administrator' in sender_types %}
+                <td>
+                    <a href="javascript:post_to_url('/analytics/map/', {locate:'{{invite.username}}' })"">
+                    {{invite.first_name}} {{invite.last_name}}</a>
+                </td>
+            {% else %}
+            <td>{{invite.first_name}} {{invite.last_name}}</td>
+            {% endif %}
+            <td>{{invite.username}}</td>
+            <td>{{invite.email}}</td>
+            <td>{{invite.requestTimestamp}}</td>
+            <td>{{invite.responseTimestamp}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h3>{% trans "Recently Cancelled Invitations" %}</h3>
+    <table class="salesTables" cellspacing='0' cellpadding='0'>
+        <thead>
+            <tr>
+                <th class="under">{% trans "Recipient" %}</th>
+                <th class="under">{% trans "Original Invite Date" %}</th>
+                <th class="under">{% trans "Cancelled Date" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invite in cancelled_invites %}
+        <tr>
+            <td>{{invite.recipient}}</td>
+            <td>{{invite.requestTimestamp}}</td>
+            <td>{{invite.responseTimestamp}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

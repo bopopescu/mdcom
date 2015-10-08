@@ -1,0 +1,13 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans "Access Denied" %}</h2>
+<p>{% trans "It looks like you're trying to access a part of the site that you don't have permission to use. If you believe you are getting this notice in error, please try again." %}</p>
+
+{% if issue_code %}
+<p>{% trans "If you get this message again, rest assured that the administrators have been automatically notified. However, you're welcome to" %} <a href="/Support/Contact/">{% trans "contact us" %}</a>, {% trans "if you please. Please reference issue" %} {{ issue_code }}.</p>
+{% else %}
+<p>{% trans "If you get this message again, rest assured that the administrators have been automatically notified. However, you're welcome to" %} <a href="mailto:support@mdcom.com">{% trans "contact us at support@mdcom.com" %}</a>, {% trans "if you please. Please reference issue" %} {{ issue_code }}.</p>
+{% endif %}
+{% endblock %}

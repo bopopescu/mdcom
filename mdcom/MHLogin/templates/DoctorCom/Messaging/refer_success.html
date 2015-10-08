@@ -1,0 +1,41 @@
+{% extends "DoctorCom/Messaging/refer_base.html" %}
+{% load i18n %}
+
+{% block customJS %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/messaging/refer_form.css" />
+<script>
+	$(function(){
+		$("#id_another_refer").click(function(){
+			waitId = $.ui.wait.start(MESSAGE.JQUERY_UI_COMAJAX_MSG_LOAD);
+			window.location = "/Messages/Refer/?user_recipients={{user_recipients}}";
+		});
+
+		$("#id_back").click(function(){
+			waitId = $.ui.wait.start(MESSAGE.JQUERY_UI_COMAJAX_MSG_LOAD);
+			window.location = "/";
+		});
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="refer_success">
+	<div id="sendRefFrm_container" class="main">
+		<div class="success_info">
+			<div class="refer_success_head">{% trans "Send Referral" %} {% if not err_message %}<img src="{{STATIC_URL}}img/sign-success.png"/>{% endif %}</div>
+			{% if err_message %}
+				<div class='err_message_text'>{{err_message}}</div>
+			{% else %}
+				<div class='success-text'>{% trans 'Congratulations! Your referral was sent successfully. '%}</div>
+			{% endif %}
+		</div>
+		<div class="clear"></div>
+		<div class="actionbtns">
+		{% if not err_message %}
+			<input id="id_another_refer" type="button" value="{% trans "Send another referral" %}" class="next"/>
+		{% endif %}
+			<input id="id_back" type="button" value="{% trans "Back to home page" %}" class="cancel"/>
+		</div>
+	</div>
+</div>
+{% endblock %}

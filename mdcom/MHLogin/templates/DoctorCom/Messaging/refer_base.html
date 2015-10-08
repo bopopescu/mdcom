@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load i18n %}
+{% load admin_static %}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}{% trans "DoctorCom" %}{% endblock %}</title>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-1.8.16.custom.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.watermark.js"></script>	
+		<script type="text/javascript" src="{{STATIC_URL}}js/localization/l10n_{{LANGUAGE_CODE}}.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui-extension.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
+		{% if LANGUAGE_CODE and LANGUAGE_CODE != 'en-us' %}
+			<script type="text/javascript" src="{{STATIC_URL}}js/localization/jquery-ui/jquery.ui.datepicker-{{LANGUAGE_CODE}}.js"></script>
+		{% endif%}
+		
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.autocomplete-custom.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.autocomplete.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.uploadProgress.js"></script>
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/start/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.uploaderProgress.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/start/jquery.autocomplete.css" type="text/css" />
+		{%include 'includes/jquery.validate.html'%}
+
+		{% block customJS %}
+		{% endblock %}
+<script type="text/javascript">
+var data = [];
+var Constant = {}; 
+//Constant.URL_SCHEME = "{{request.META.wsgi.url_scheme}}";
+Constant.HTTP_HOST = "{{request.META.HTTP_HOST}}";
+if (location.href.indexOf("https")>=0) {
+	Constant.URL_SCHEME = "https";
+} else {
+	Constant.URL_SCHEME = "http";
+}
+Constant.SERVER_TIME_YEAR = {{request.SERVER_TIME_YEAR}};
+Constant.LANGUAGE_CODE = "{{LANGUAGE_CODE}}";
+if (!Constant.LANGUAGE_CODE) {
+	Constant.LANGUAGE_CODE = 'en-us';
+}
+Constant.CALL_ENABLE = "{{request.CALL_ENABLE}}";
+Constant.CALL_ENABLE = BoolUtils.str2bool(Constant.CALL_ENABLE);
+Constant.SITE_URL = Constant.URL_SCHEME + "://" + Constant.HTTP_HOST
+Constant.OpenHandCursor = "url("+Constant.SITE_URL+"/static/img/cursor/openhand.cur),pointer";
+Constant.ClosedHandCursor = "url("+Constant.SITE_URL+"/static/img/cursor/closedhand.cur),pointer";
+Constant.TIME_ZONE = Constant.LANGUAGE_CODE;
+Constant.SEND_CODE_WAITING_TIME = {{request.SEND_CODE_WAITING_TIME}};
+Constant.VALIDATE_LOCK_TIME = {{request.VALIDATE_LOCK_TIME}};
+Constant.TIME_SETTING = {{schedule_time_setting}};
+Constant.CURRENT_ORGANIZATION_TYPE = "{{current_organization_type}}";
+
+function adjustLogoPosition(obj) {
+	var header_logo = $('#header_logo');
+	var header_logo_h = header_logo.height();
+	var header_logo_img_h = obj.height;
+	var header_logo_img_margin = 0;
+	if (header_logo_h > header_logo_img_h) {
+		header_logo_img_margin = (header_logo_h-header_logo_img_h)/2;
+	}
+	$(obj).css({"margin-top": header_logo_img_margin});
+}
+
+$(function(){
+	$("#allProviders").autocomplete("/Search/User/AJAX/", {
+		dataType: "json",
+		delay:333, 
+		matchContains:true, 
+		width:145, 
+		max:15,
+		minChars: 3,
+		formatItem: function(row) { 
+			return row;
+		},
+		parse: function(data) {
+			var parsed = [];
+			if(data.length==2) {
+				if(data[0]=="ok") {
+					var rows = data[1];
+					for (var i = 0; i < rows.length; i++) {
+						var row = rows[i];
+						if (row) {
+							parsed[parsed.length] = { data: row[1], value: "/User_View/?user_id="+row[0] };
+						}
+					}
+					if(parsed.length==0) {
+						parsed[0] = { data: '{% trans "No records found." %}', value: location.href };
+					}
+				} else if(data[0]=='err') {
+					parsed[0] = { data: data[1], value: location.href };
+				}
+			}
+			return parsed;
+		}
+	}).result(function(event, data, result) { 
+		if(location.href != result) {
+			location.href = result;
+		}
+	});
+	$("#allProviders").Watermark(' {% trans "Search for User" %}');
+
+	$('#id_current').change(function(){
+		var id = $(this).val();
+		$.comAjax({
+			url:'/Profile/ChangeCurrentSite/',
+			type:'POST',
+			data:{current:id},
+			success:function(data,txtStatus){
+				location.reload();
+			}
+		});
+	});
+});
+
+</script>
+	</head>
+	<body>
+		<header>
+			{% if "Office_Manager" in sender_types %}
+				{% include "includes/menu_template_mgr.html" %}
+			{% else %}
+				{% if "Broker" in sender_types %}
+					{% include "includes/menu_template_broker.html" %}
+				{% else %}
+					{% if "OfficeStaff" in sender_types %}
+						{% include "includes/menu_template_staff.html" %}
+					{% else %}
+						{% comment %}The user is a Provider of some sort.{% endcomment %}
+						{# include "includes/menu_template.html" #}
+						{% include "header.html" %}
+					{% endif %}
+				{% endif %}
+			{% endif %}
+		</header>
+		<div class="clear"></div>
+		<div class="main-content-new">
+			{% block content %}
+			{% endblock %}
+		</div>
+		<footer class="clearfix tk-adelle">
+			<div class="container_16">
+				<div class="footerimgd">
+					<img src="{{STATIC_URL}}temp/img/logo-doctorcom-footer.png" alt='{% trans "DoctorCom" %}' />
+				</div>
+				<p class="menu">
+					{% if debug %}
+					<a href="/user_agent/">{% trans "UA" %}</a> | 
+					{% endif %}
+					<a href="/Support/Contact/">{% trans "Support" %}</a> |
+					<a href="/privacy/">{% trans "Privacy Policy" %}</a> |
+					<a href="/terms/">{% trans "Terms of Service" %}</a> | 
+					<span class="copyright">
+						{% trans "Copyright" %} &#169; {{request.SERVER_TIME_YEAR}} 
+						{% trans "DoctorCom" %}&reg; {% trans "Inc. All rights reserved." %}
+					</span>
+				</p>
+			</div>
+			<div class="container_16">
+				<p class="copyright"><div class="copyright_c">© {{request.SERVER_TIME_YEAR}} {% trans "DoctorCom, Inc." %}<span><a class='fright'>{{SERVERVERSION}}</a></span></div></p>
+			</div>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+{% load i18n %}
+
+{% for user in users %}
+	<div id="staff_{{user.user.id}}" {% if forloop.counter0 >= 3%}class="hidden can_hide" {%endif%}>
+		<span class="name" title='{{user.user.last_name}} {{user.user.first_name}} {% if user.usertypetext == 0 %}{% trans "(Manager)" %}{% endif %}{% if user.usertypetext == 1 %}{% trans "(Staff)" %}{% endif %}{% if user.usertypetext == 2 %}{% trans "(Staff)" %}{% endif %}'>
+			<span>{{user.fullname}}</span>
+			{% if user.usertypetext == 0 %}
+				<span >{% trans "(Manager)" %}</span>
+			{% endif %}
+			{% if user.usertypetext == 1 %}
+				<span >{% trans "(Staff)" %}</span>
+			{% endif %}
+			{% if user.usertypetext == 2 %}
+				<span >{% trans "(Staff)" %}</span>
+			{% endif %}
+		</span>
+		<a href="/Messages/New/?user_recipients={{ user.user.id }}" >
+			<img title='{% trans "Click to send text message." %}' src="/static/img/msg_icon.png" />
+		</a>
+		{% if user.call_available %}
+		<a href="/Call/{{ user.user.id }}/">
+			<img src="/static/img/call_icon.png" title='{% trans "Click to phone." %}'/>
+		</a>
+		{% else %}
+		<a class="disablecImg" href="javascript:void(0);">
+			<img  class="disablecImg" src="/static/img/call_disable_icon.png"/>
+		</a>
+		{% endif %}
+
+		{% if forloop.counter0 == 2 and not forloop.last %}
+		<span id="show_more_staff_btn" class="show_more" onclick="showMoreStaff();">
+			<a href="javascript:void(0);">
+				{% trans "More" %}
+			</a>
+		</span>
+		{% endif %}
+		{% if forloop.last and forloop.counter0 > 2%}
+		<span id="hide_more_staff_btn"class="hide_more" onclick="hideMoreStaff();">
+			<a href="javascript:void(0);">
+				{% trans "Hide" %}
+			</a>
+		</span>
+		{% endif %}
+	</div>
+{% endfor %}
+</div>

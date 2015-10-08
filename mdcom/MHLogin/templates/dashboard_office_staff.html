@@ -1,0 +1,51 @@
+{% extends "dashboard_base.html" %}
+{% load i18n %}
+
+{% block dashboard_customCSS %}
+{% endblock %}
+
+{% block dashboard_customJS %}
+<script type="text/javascript">
+$(document).ready(function(){
+	window.autoRefreshTime = {{auto_refresh_time}};
+	$("#tabs").tabs({disabled:[]});
+});
+//-->
+</script>
+{% endblock %}
+
+{% block content %}
+	{% if request.CALL_ENABLE %}
+	<div id="forwarding2" class="ui-corner-all">
+		<div class="col_head">
+			{% if can_have_answering_service %}
+			<h3 class="fleft">{% trans "DoctorCom Answering Service Number:" %} {{ mdcom_phone|safe }}</h3>
+			{% else %}
+			<h3 class="fleft">{% trans "Answering service disabled" %}</h3>
+			{% endif %}
+		</div>
+	</div>
+	{% endif %}
+	<div id='dashboard' class="ui-corner-all pm-ui-container">
+		<div id="tabs">
+			<input type="hidden" id="zip" value="{{zip}}"/>
+			<div class='content'>
+				<div class='tabPrev hidden' onclick='clkTabPrev();'></div>
+				{{tabUI}}
+				<div class='tabNext hidden' onclick='clkTabNext();'></div>
+			</div>
+			{% for u in orgOroviders %}
+				<div id="fragment-{{u.id}}" tab_type="site_org" class="tabdivs orgProvider">{{u.context}}</div>
+			{% endfor %}
+			<div id="fragment-01" tab_type="practice_member" class="tabdivs">{{practice_members}}</div>
+			<div id="fragment-02" tab_type="hospital_provider" class="tabdivs">{{site_provider}}</div>
+			<div id="fragment-06" tab_type="site_staff" class="tabdivs">{{site_staff}}</div>
+			<div id="fragment-03" tab_type="community_provider" class="tabdivs">{{comm_professionals}}</div>
+			<div id="fragment-04" tab_type="practice" class="tabdivs">{{local_practices}}</div>
+			<div id="fragment-05" tab_type="my_favorite" class="tabdivs">{{my_favorite}}</div>
+			<div id='loadingPic2'></div>
+		</div>
+
+		{%include 'Messaging/accordion_messages.html'%}
+	</div>
+{% endblock %}

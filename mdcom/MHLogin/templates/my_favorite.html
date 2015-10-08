@@ -1,0 +1,86 @@
+{% load i18n %}
+<div id="my_favorite_list" class="provider-container">
+	<table id="providers" class="rowhover dataTables" cellpadding='0' cellspacing='0'>
+		<thead>
+			<tr style="display:none;"><th></th><th></th><th></th><th></th><th style="display:none;"></th><th style="display:none;"></th><th></th></tr>
+		</thead>
+	{% if favorites %}
+	{% for fav in favorites %}
+		<tr class='hidden'>
+			<td></td>
+			<td></td>
+			<td></td>
+			{%if 2 == fav.object_type_flag%}
+			<td class="name" id="{{fav.object_id}}" title='{% trans "Click on name to view more info." %}' onclick="getAndShowDetialInfo(this, '/Provider_Info/Practice/', '{% trans "Office Information" %}', 625, true)" >
+			{%else%}
+			<td class="name" id="{{fav.object_id}}" title='{% trans "Click on name to view more info." %}' onclick="getAndShowDetialInfo(this)" >
+			{%endif%}
+
+				<span class="warpName">
+					{{ fav.object_name_web_display }}
+					<span class="text">
+					{% if fav.object_type_display %}
+						({{fav.object_type_display}})
+					{% else %}
+						&nbsp;
+					{% endif %}
+					</span>
+				</span>
+			</td>
+			<td style="display:none;">
+				{{ fav.object_name }}
+			</td>
+			<td style="display:none;">
+				{% if fav.object_type_display %}
+				{{fav.object_type_display}}
+				{% else %}
+				&nbsp;
+				{% endif %}
+			</td>
+			<td class='links'>
+				{% if fav.msg_available %}
+					{%if fav.object_type_flag = 1%}
+						<a href="/Messages/New/?user_recipients={{ fav.object_id }}">
+					{%else%}
+						<a href="/Messages/New/?practice_recipients={{ fav.object_id }}">
+					{%endif%}
+							<div class="msg_btn button btnShow buttonMsgAble" available="true" title='{% trans "Click to send text message." %}'>{% trans "msg" %}</div>
+						</a>
+				{% else %}
+					<div class="msg_btn button btnShow buttonPhoneDisable" title='{% trans "Click to send text message." %}'>{% trans "msg" %}</div>
+				{% endif %}
+				{%if fav.object_type_flag = 1%}
+					{% if fav.pager_available %}
+					<a href="/Page/{{ fav.object_id }}/">
+						<div class="page_btn button btnShow buttonPageAble" available="true" title='{% trans "Click to page." %}'>{% trans "page" %}</div>
+					</a>
+					{% else %}
+						<div class="page_btn button btnShow buttonPageDisable textDisable">{% trans "page" %}</div>
+					{% endif %}
+				{% endif %}
+				{% if fav.call_available %}
+					{%if fav.object_type_flag = 1%}
+						<a href="/Call/{{ fav.object_id }}/">
+					{%else%}
+						<a href="/Call/Practice/?called_practice={{ fav.object_id }}">
+					{%endif%}
+							<div class="call_btn button btnShow buttonPhoneAble" available="true" title='{% trans "Click to phone." %}'>{% trans "call" %}</div>
+						</a>
+				{% else %}
+					<div class="call_btn button btnShow buttonPhoneDisable textDisable">{% trans "call" %}</div>
+				{% endif %}
+				{%if fav.refer_displayable%}
+					{% if fav.refer_available %}
+					<a href="/Messages/Refer/?user_recipients={{ fav.object_id }}">
+						<div class="refer_btn button btnShow buttonMsgAble btnRefer btnReferHome" available="true" title="Send refer.">{% trans "Refer" %}</div>
+					</a>
+					{% else %}
+						<div class="refer_btn button btnShow buttonPageDisable textDisable btnReferHome">{% trans "Refer" %}</div>
+					{% endif %}
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+	{% endif %}
+	</table>
+</div>

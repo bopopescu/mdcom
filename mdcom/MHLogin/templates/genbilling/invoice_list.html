@@ -1,0 +1,42 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block content %}
+
+{% if no_invoices %} 
+	<div id='billingView' class="ui-corner-all">
+    	<h2>No Invoices Found</h2>
+    </div>
+{% else %}
+
+<table border='0' width="800">
+<tr><th>Invoices</th></tr>
+<tr><td>{{begin_period}}</td></tr>
+</table>
+
+
+<table border='1' width="800">
+<tr>
+ <th> Customer:  </th>
+ <th> Internal Invoice #:</th>
+ <th> Customer Invoice # : </th>
+ <th> Amount: </th>
+ <th> Created On : </th>
+</tr>
+
+    {% for transaction in transactions %}
+      <tr>
+       <td>{{transaction.customer }} </td>
+       <td>{{transaction.id}} </td>
+       <td> <a href="/billing/invoice_details/?id={{transaction.id}}">{{transaction.reference_no }}<a></td>
+       <td>${{transaction.amount }}</td>
+       <td>{{ transaction.created_on }}</td>
+      </tr>
+
+{% endfor %}
+</table>
+{% endif %}
+<table border='0' width="800">
+<tr><td><a href="/billing/billing_menu/">Back to Customer Account Management Menu<a></td></tr>
+</table>
+{% endblock %}
+

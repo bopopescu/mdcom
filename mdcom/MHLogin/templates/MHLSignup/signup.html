@@ -1,0 +1,66 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<div class='signup'>
+	<div class='head'>{% trans "Registration" %}
+	<!--<span>{% if step_count %}
+		{% trans "Step" %} {{ step }} {% trans "of" %} {{ step_count }}
+	{% endif %}
+	</span>-->
+	</div>
+	<div class='content'>
+		<div class='content-left'>
+			<div class='img'></div>
+			<!--<div class='text'>{% trans 'View Pricing Table' %}</div>-->
+		</div>
+		<div class='content-right'>
+			<p>{% trans 'Please input your Invitation Code and Email.' %}</p>
+			<form action="." method="post" id='registerFrom'>{% csrf_token %}
+			{{ form.non_field_errors }}
+				{{ form.code.errors }}
+				<li>
+					<label>{% trans "Invitation Code:" %}</label> 
+					{{form.code}}
+				</li>
+				{{ form.signEmail.errors }}
+				<li>
+					<label>{% trans "Your Email Address:" %}</label> 
+					{{form.signEmail}}
+				</li>
+			
+				<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+				    {% if previous_fields %}
+					   {{ previous_fields|safe }}
+					{% endif %}
+				<div class="submit">
+					<input type="submit" class='submit' value='{% trans "Next" %}' />
+				</div>
+			</form>
+		</div>
+		<div class='clear'></div>
+	</div>
+</div>
+<script type='text/javascript'>
+	$(function(){
+		$('#id_code').after('<span class="redstar">*</span>');
+		$('#id_signEmail').after('<span class="redstar">*</span>');
+		
+		$('#registerFrom').validate({
+			rules:{
+				code:{required:true},
+				signEmail:{required:true,email:true}
+			},
+			messages:{
+				code:{
+					required:'Code field is required.'
+			},
+				signEmail:{
+					required:'Email field is required.',
+					email:'Email is not valid email address.'
+			}
+		}
+		});
+	});
+</script>
+{% endblock content %}

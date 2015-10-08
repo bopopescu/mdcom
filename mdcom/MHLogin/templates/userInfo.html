@@ -1,0 +1,67 @@
+{% load i18n %}
+<div class="provider-container">
+	<table id="providers" class="rowhover dataTables" cellpadding='0' cellspacing='0'>
+		<thead>
+			<tr style="display:none;"><th></th><th></th><th></th><th></th><th style="display:none;"></th><th style="display:none;"></th><th></th></tr>
+		</thead>
+	{% if providers %}
+	{% for provider in providers %}
+		<tr class='hidden'>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td class="name" id="{{provider.user.id}}" title='{% trans "Click on name to view more info." %}' onclick="getAndShowDetialInfo(this, '/Provider_Info/Provider/')" >
+				<span class="warpName">
+					{{ provider.fullname }}
+					<span class="text">
+						{% if provider.template_specialty and not provider.user.clinical_clerk %}
+						({{provider.template_specialty}}) 
+						{% else %}
+						&nbsp;
+						{% endif %}
+					</span>
+				</span>
+			</td>
+			<td style="display:none;">
+				{{ provider.user.last_name }} {{ provider.user.first_name }}
+			</td>
+			<td style="display:none;">
+				{% if provider.template_specialty%}
+				{{provider.template_specialty}}
+				{% else %}
+				&nbsp;
+				{% endif %}
+			</td>
+			<td class='links'>
+				<a href="/Messages/New/?user_recipients={{ provider.user.id }}">
+					<div class="msg_btn button btnShow buttonMsgAble" available="true" title='{% trans "Click to send text message." %}'>{% trans "msg" %}</div>
+				</a>
+				{% if provider.pager_available %}
+				<a href="/Page/{{ provider.user.id }}/">
+					<div class="page_btn button btnShow buttonPageAble" available="true" title='{% trans "Click to page." %}'>{% trans "page" %}</div>
+				</a>
+				{% else %}
+					<div class="page_btn button btnShow buttonPageDisable textDisable">{% trans "page" %}</div>
+				{% endif %}
+
+				{% if provider.call_available %}
+				<a href="/Call/{{ provider.user.id }}/">
+					<div class="call_btn button btnShow buttonPhoneAble" available="true" title='{% trans "Click to phone." %}'>{% trans "call" %}</div>
+				</a>
+				{% else %}
+					<div class="call_btn button btnShow buttonPhoneDisable textDisable">{% trans "call" %}</div>
+				{% endif %}
+
+				{% if provider.refer_available%}
+				<a href="/Messages/Refer/?user_recipients={{ provider.user.id }}">
+					<div class="refer_btn button btnShow buttonMsgAble btnRefer btnReferHome" available="true" title="Send refer.">{% trans "Refer" %}</div>
+				</a>
+				{% else %}
+					<div class="refer_btn button btnShow buttonPageDisable textDisable btnReferHome">{% trans "Refer" %}</div>
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+	{% endif %}
+	</table>
+</div>

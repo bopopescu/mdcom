@@ -1,0 +1,27 @@
+{% extends "Boxes/box_100_table-RD.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% for msg in messages %}
+<tr>
+	<td width="150">{{ msg.timestamp }}</td>
+	<td width="125">{{ msg.recipients|safe }}</td>
+	<td width="400">{{ msg.body }}</td>
+	<td width="130">
+		{% for attachment in msg.attachments %}
+			{% ifequal attachment.suffix|lower 'mp4' %}
+				<div class="audio" style="display:inline-block;width:90px;height:17px;float:left" href='{% url DoctorCom.Messaging.views.download_attachment msg.uuid attachment.uuid %}'></div>
+				<a style="display:inline;float:left;margin-left:5px;" href='{% url DoctorCom.Messaging.views.download_attachment msg.uuid attachment.uuid %}' class="buttondownload">{% trans "Download the attachment to your computer." %}</a>
+			{% else %}
+				<a style="display:inline;float:left;margin-left:95px;" href='{% url DoctorCom.Messaging.views.download_attachment msg.uuid attachment.uuid %}' class="buttondownload">{% trans "Download the attachment to your computer." %}</a>
+			{% endifequal %}
+		{% endfor %}
+	</td>
+	<td width="70">
+		<a href="/FollowUps/Add/{{msg.class_name}}/{{ msg.id }}/?msg_object={{msg.class_name}}" class="buttonadd" style="margin-left:10px;">{% trans "Click to create a Follow-Up task from this message." %}</a>
+	</td>
+</tr>
+{% endfor %}
+
+{% endblock %}

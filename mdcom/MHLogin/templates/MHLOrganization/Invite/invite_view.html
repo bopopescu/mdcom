@@ -1,0 +1,59 @@
+{% load i18n %}
+
+
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+{% include "MHLOrganization/Invite/invite_js.html" %}
+
+<div class="org-tab-content">
+	<div id='invite_view'>
+		<div class='staffer-top'>
+			<div class='request-coming'>
+				<div class='title'>
+					<div class='text'>{{ selected_organization_type }}{% trans ' Requests' %}
+					{% if can_have_provider_users %}
+						{% include "MHLOrganization/Member/member_invite_provider_js.html" %}
+						<div id="add-new-provider" class="add-new-provider" refresh_function="InvitationRefresh">
+							<input class="org_inf_btn" type="button" value="{% trans 'Invite' %}">
+						</div>
+					{% endif %}
+					</div>
+					<div id="hrDiv"></div>
+				</div>
+				<div class='requests-content'>
+				<div class='requests'></div>
+				<div class='switch'>
+					<div class='prev'></div>
+					<div class='next'></div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class='staffer-bottom'>
+			<div class='doctorInvitation'>
+				<div class='title'>
+					<div class='text'>{% trans 'DoctorCOM Invitations' %}</div>
+				</div>
+				<div id="hrDiv"></div>
+				<div class='requests-content'>
+					<div class='requests'>
+					</div>
+				<div class='switch'>
+					<div class='prev'></div>
+					<div class='next'></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class='clear'></div>
+	</div>
+	<div id='staffHomeDialog' class='hidden'>
+		<div class='content'></div>
+	</div>
+</div>
+
+{% comment %} 
+These below code need to be refactored, when we using template rendering html.
+{% endcomment %}
+<div id='invite_provider_selecter' class='hidden'>
+	{{ user_type_form.provider_types }}
+</div>

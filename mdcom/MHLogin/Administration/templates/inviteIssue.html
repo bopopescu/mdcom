@@ -1,0 +1,138 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block title %}{% trans "New Invitation" %}{% endblock %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+<h1>{% trans "New Invitation" %}</h1>
+<h3 class='errorlist'>{{err}}</h3>
+{% block content %}
+
+{%include 'includes/jquery.validate.html'%}
+<div id="dc_nav">
+<a href="/dcAdmin/">DCAdmin</a> > 
+<a href="/dcAdmin/Invitations/">{% trans "Invitations" %}</a>
+</div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h1>{% trans "New Invitation" %}</h1>
+<form action="." method="POST" id='newInvitation'>
+    <li class="errorlist">{{err}}</li>
+    {{inviteForm.as_ul}}
+    <input type='submit' value='{% trans "Submit" %}' >
+</form>
+</div>
+
+<script type="text/javascript">
+$(function(){
+    if(location.search.split('=')[1]=='300'){
+        $('#id_typeVerified').attr('disabled','disabled');
+        $('#id_createGroupPractice').attr('disabled','disabled');
+        $('#id_createPractice').attr('disabled','disabled');
+        $('#id_assignPractice').attr('disabled','disabled');
+    }
+    var type = $('#id_userType').val();
+    initStatus(type);
+    $('#id_createPractice').click(function(){
+        if($('#id_userType').val()=='100'){
+            if($(this).attr('checked')){
+                $('#id_assignPractice').attr('disabled','disabled');
+            }else{
+                $('#id_assignPractice').removeAttr('disabled');
+            }
+        }
+    });
+    //bind method for id_assignPractice
+    $('#id_assignPractice').change(function(){
+        var v = $('#id_userType').val();
+        if(v=='100'){
+            if($(this).val()==''){
+                $('#id_createPractice').removeAttr('disabled');
+            }else{
+                $('#id_createPractice').attr('disabled','disabled');
+            }
+        }else{
+            $('#id_createPractice').attr('disabled','disabled');
+        }
+    });
+    
+    $('#id_userType').change(function(){
+        var type = $(this).val();
+        $.comAjax({
+            url: "/dcAdmin/Invitations/GetAssignPractice/",
+            type:'GET',
+            data: {"userType": type},
+            async: false,
+            success:function(response, status){
+                $("#id_assignPractice").html($(response).html())
+            }
+        });
+        initStatus(type);
+    });
+    $('#newInvitation').validate({
+        rules:{
+            recipient:{required:true,email:true},
+            userType:{required:true}
+        },
+        messages:{
+            recipient:{
+                required:'{% trans "Email Address field is required." %}',
+                email:'{% trans "Email field is not a valid email address." %}'
+            }
+        },
+        submitHandler:function(form){
+            var type = $('#id_userType').val();
+            var prac = $('#id_assignPractice').val();
+            var chk = $('#id_createPractice').attr('checked');
+            
+            if(type=='100'){ //manager
+                if(!chk && prac==''){
+                    alert('{% trans "You must choose AssignPractice or checke CreatePractice." %}');
+                    return false;
+                }
+            }
+            if(type=='101'){ //staff
+                if(prac==''){
+                    alert('{% trans "You must choose AssignPractice." %}');
+                    return false;
+                }
+            }
+            form.submit();
+        }
+    });
+});
+function initStatus(type){
+    if(type!=''){
+        $('#id_typeVerified').attr('disabled','disabled');
+        $('#id_createGroupPractice').attr('disabled','disabled');
+        $('#id_createPractice').attr('disabled','disabled');
+        $('#id_createPractice').attr('checked',false);
+        $('#id_assignPractice').val(0);
+    }else{
+        $('#id_typeVerified').removeAttr('disabled');
+        $('#id_createGroupPractice').removeAttr('disabled');
+        $('#id_createPractice').removeAttr('disabled');
+        $('#id_assignPractice').removeAttr('disabled');
+        $('#id_testFlag').removeAttr('disabled');
+    }
+    if(type=='100'){
+        $('#id_createPractice').removeAttr('disabled');
+        $('#id_testFlag').removeAttr('disabled');
+        $('#id_createPractice').attr('checked',true);
+        $('#id_assignPractice').attr('disabled','disabled');
+    }
+    if(type=='101'){
+        $('#id_assignPractice').removeAttr('disabled');
+        $('#id_testFlag').removeAttr('disabled');
+        $('#id_assignPractice').val(1);
+    }
+    if(type=='300'){ // add option border and disable all input by xlin in 20120625
+        $('#id_assignPractice').attr('disabled','disabled');
+        //$('#id_testFlag').attr('disabled','disabled');
+    }
+}
+</script>
+
+{% endblock %}

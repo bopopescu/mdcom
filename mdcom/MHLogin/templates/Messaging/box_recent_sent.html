@@ -1,0 +1,45 @@
+{% extends "Boxes/box_table.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<table border="0">
+<tr>
+    <th>{% trans "Timestamp" %}</th>
+    <th>{% trans "Message" %}</th>
+    <th>{% trans "Recipient" %}</th>
+    <th>{% trans "Confirmation" %}</th>
+</tr>
+{% for message in messages_sent %}
+{% if message.1 %}
+<tr>
+    <td rowspan="{{ message.1 }}">{{ message.0.timestamp|date:"d/m/y h:i a" }}</td>
+    <td rowspan="{{ message.1 }}">{{ message.0.body }}</td>
+    <td{% if not message.2.success %} class="error"{% endif %}>
+        {{ message.2.message_recipient.first_name }} {{ message.2.message_recipient.last_name }}
+    </td>
+    <td{% if not message.2.success %} class="error"{% endif %}>
+        {{ message.2.confirmation }}
+    </td>
+</tr>
+    {% for log_entry in message.3 %}
+<tr>
+    <td{% if not message.2.success %} class="error"{% endif %}>
+        {{ log_entry.message_recipient.first_name }} {{ log_entry.message_recipient.last_name }}
+    </td>
+    <td{% if not message.2.success %} class="error"{% endif %}>
+        {{ log_entry.confirmation }}
+    </td>
+</tr>
+    {% endfor %}
+{% else %}
+<tr>
+    <td colspan="2">
+        <a href="/Messages/Detail/{{message.0.id}}/" target="_blank">{% trans "See message details" %}</a>
+    </td>
+</tr>
+{% endif %}
+{% endfor %}
+</table>
+
+{% endblock %}

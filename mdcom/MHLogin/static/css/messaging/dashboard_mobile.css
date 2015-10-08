@@ -1,0 +1,162 @@
+
+div.messages {
+	border:0px;
+	padding:0px;
+	margin:0px;
+}
+div.ui-widget-content {
+	border:0px;
+	padding:0px;
+}
+
+div.messages .filter {
+	float:left;
+	width: 120px;
+	margin: 0px 10px 0px 0px;
+	padding: 5px;
+	padding-right: 10px;
+	border-right: solid 1px #999999;
+	font-size: 11px;
+}
+div.messages .filter h1 {
+	font-size: 14px;
+	border-bottom: solid 1px #999999;
+	margin: 10px 0px 0px 0px;
+}
+div.messages .filter h1.refresh {
+	border: 0px;
+	margin-top: 6px;
+}
+div.messages .filter h2 {
+	font-size: 13px;
+	font-weight: normal;
+	font-style: italic;
+	margin: 6px 0px 3px 0px;
+}
+div.messages .filter select {
+	font-size: 9px;
+}
+div.messages div.filter a {
+	color: #3366c6;
+}
+div.messages div.nav {
+	text-align: right;
+	font-size: 10px;
+	color: black;
+	margin: 5px 15px 6px 0px;
+}
+div.messages div.nav span.pager {
+	color: #aaaaaa;
+}
+div.messages div.nav a {
+	color: #333333;
+	/*text-decoration: none;
+*/
+}
+
+
+table.message_list {
+	margin: 5px 0px;
+	padding: 0px;
+	text-align: left;
+	border-spacing: 0px;
+	padding:0px;
+	margin:0px;
+}
+table.message_list td.header {
+	border-bottom: 1px solid #000;
+}
+table.message_list td.bottom-border {
+	border-bottom: 1px solid #999;
+}
+table.message_list td.loading {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 15px;
+	height: 50px;
+}
+table.message_list td.loading img {
+	vertical-align: text-top;
+	padding: 0px 6px;
+}
+
+
+table.message_item {
+	width: 602px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+table.message_item tr.unread {
+	font-weight: bold;
+}
+table.message_item td a {
+	color: black;
+}
+table.message_item th,
+table.message_item td {
+	vertical-align: top;
+	padding: 0px 5px;
+}
+table.message_item td.collapse,
+table.message_item th.collapse {
+	width: 32px;
+}
+table.message_item .from {
+	width: 125px;
+}
+table.message_item .subject {
+	/*width: 392px;*/
+}
+table.message_item th.attachments,
+table.message_item td.attachments {
+	width: 10px;
+}
+table.message_item .timestamp {
+	width: 120px;
+}
+table.message_item .resolution {
+	width: 70px;
+	text-align:center;
+}
+table.message_item h1 {
+	font-size: 12px;
+	margin: 4px 0px;
+	text-decoration: underline;
+	width: 150px;
+}
+table.message_item h1+p{
+	margin-top:0px;
+}
+table.message_item tr.message_item:hover {
+	background-color:#CDF;
+}
+
+
+
+div.nav {
+	margin-top:4px;
+}
+div.attachment_container {
+	text-align: right;
+	width: 555px;
+}
+div.audio {
+	float: right;
+	width: 450px;
+	height: 17px;
+	
+	cursor: pointer;
+	text-decoration: underline;
+	text-align: left;
+}
+div.clear {
+	clear:both;
+}
+
+
+.ui-icon {
+	width: 12px;
+}

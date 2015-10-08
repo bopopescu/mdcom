@@ -1,0 +1,23 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+    <div style="margin-left:40px; margin-top:-60px;">
+		<p class="header" style="font-size:14px;font-weight:bold;">{% trans "Welcome," %} {{ mhl_user_displayName }}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Current location:" %} <b>{{ office_name }}</b> </p>
+    </div>
+<div style="width:800px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">
+
+	<div style="clear:both;display:block;">
+		<h3>{% trans "Office Open Hours" %}</h3>
+		<form method="post">
+        <table border="1">
+			{{ form.as_table }}
+		</table>
+		<p><input type="submit" value="{% trans "Submit" %}"></p>
+		</form>
+
+	</div>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+
+<style type="text/css">
+table tr:hover {background: none repeat scroll 0 0 #F6F7FF;}
+table tr td {width: 440px;}
+</style>
+
+<script type="text/javascript">
+	$(function(){
+		$("#generate").click(function(){
+			$.ui.wait.start();
+			$("#generate_user_form").submit();
+		});
+	})
+</script>
+
+{% endblock %}
+
+{% block title %}{% trans "Generate Users" %}{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h1>{% trans "Generate Users" %}</h1>
+
+	<form id="generate_user_form" action="." method="POST">
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="button" id="generate" name="generate" value="{% trans "Generate" %}"/>
+	</form>
+</div>
+
+{% endblock %}

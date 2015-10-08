@@ -1,0 +1,111 @@
+{% extends "DoctorCom/Messaging/refer_base.html" %}
+{% load i18n %}
+
+{% block customJS %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/messaging/refer_form.css" />
+<script>
+$(function(){
+	$('#id_submit').click(function(){
+		var request_data = {
+			sel_practice: "{{sel_practice}}",
+			user_recipients: "{{user_recipients}}"
+		}
+		$.comAjax({
+			type:'POST',
+			url: '/Messages/Refer/CheckSendRefer/',
+			data: request_data,
+			async: false,
+			success:function(data, status){
+				var goto_next_direct = data["goto_next_direct"];
+				if (goto_next_direct){
+					doSendRefer();
+				} else {
+					if (data["message"]) {
+						$.ui.wait.stop();
+						showSimpleDialog({
+							title: '{% trans "Send Refer Confirm" %}',
+							content: data["message"],
+							height: 'auto',
+							dc_buttons: {
+								'Yes': {
+									'click': function() {
+										$(this).dialog("close");
+										doSendRefer();
+									},
+									'text': '{% trans "Yes, proceed any way" %}',
+									'class': 'positive-btn'
+								},
+								'No': {
+									'click': function() {
+										$(this).dialog("close");
+										cancelSendRefer();
+									},
+									'text': '{% trans "Cancel" %}'
+								}
+							}
+						});
+					} else {
+						doSendRefer();
+					}
+				}
+			}
+		});
+	});
+
+	$("#id_cancel").click(function(){
+		cancelSendRefer();
+	});
+});
+
+function cancelSendRefer() {
+	waitId = $.ui.wait.start(MESSAGE.JQUERY_UI_COMAJAX_MSG_LOAD);
+	window.location = "/";
+}
+
+function doSendRefer() {
+	waitId = $.ui.wait.start(MESSAGE.JQUERY_UI_COMAJAX_MSG_LOAD)
+	$("#ProceedSaveForm").submit();
+}
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+<div id="sendRefFrm_container" class="ui-corner-all">
+	<div class="me">
+		<div class="myphoto">
+			<img src="{{user_photo}}" alt='{% trans "No Image" %}'/>
+		</div>
+		<div class="">
+			<div class="mycont">
+				{% trans "You have consulted" %} <b style="font-weight:600;">{{recipient}}</b> {% trans "who is not part of your network. There"  %} {% if providers|length == 1 %}{% trans "is one provider" %}{% else %} {% trans "are"  %} {{ providers|length }} {% trans "providers" %}{% endif %} {% trans "in your network" %}
+				{% trans "who have the same skills. They are conveniently listed below. Do you wish to proceed?" %}
+			</div>
+			<div class="btn_area">
+				<input id="id_submit" type="button" value="{% trans "Yes, proceed any way" %}" class="enable_btn"/>
+				<input id="id_cancel" type="button" value="{% trans "Cancel" %}" class="calcel_btn"/>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	{% for p in providers %}
+	<div class="others">
+		<div class="otherphoto">
+			<img src="{{p.photo}}" alt="{% trans "No Image" %}"/>
+		</div>
+		<div class="othercont">
+			<div class="othername">{{ p.name }} </div> <div class="otherdistance">{% trans "is" %} {{p.specialty}} {% if p.base_flag == 0 %}{% else %} {% trans "within" %} {{ p.distance }} {% trans "miles of" %} {% if p.base_flag == 1 %} {% trans "your office" %}{% endif%}{% if p.base_flag == 2 %} {% trans "you" %}{% endif%}{% endif%}.</div><br/>
+			<div class="learnmore"><a href="/Provider_View/?provider={{p.id}}">{% trans "Learn More" %}</a></div>
+		</div>
+	</div>
+	{% endfor%}
+</div>
+
+
+<div style="display:none;">
+	<form id="ProceedSaveForm" enctype="multipart/form-data" action="/Messages/Refer/ProceedSave/" method="POST">
+		<input type="hidden" name="user_recipients" value="{{user_recipients}}"/>
+	</form>
+</div>
+{% endblock %}

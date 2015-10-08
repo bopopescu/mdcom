@@ -1,0 +1,9 @@
+This file shall keep track of all necessary attributions and conditions for distribution for images/media copyrighted by another party.
+
+
+icons/paperclip.png
+------------------------------------
+Author: Yusuke Kamiyamane
+Taken from: http://www.softicons.com/free-icons/toolbar-icons/diagone-icons-by-yusuke-kamiyamane/paper-clip-icon
+License: CC Attribution 3.0 Unported (http://creativecommons.org/licenses/by/3.0/)
+

@@ -1,0 +1,41 @@
+{% load i18n %}
+<style>
+	#invitation_content{
+		width:95%;
+		margin-top:15px;
+		margin-left:8px;
+		font-family:Arial;
+		font-size:14px;
+		line-height: 25px;
+	}
+	img{
+		max-width:153px;
+		max-height:64px;
+	}
+</style>
+<table id='invitation_content'>
+	<tr>
+		<td>
+			<table>
+				<tr>
+				{% if from_practicelocation_logo%}
+					<td><img src="{{from_practicelocation_logo}}"></img></td>
+				{% endif %}
+					<td>{{from_practicelocation_name}}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			{{sender_name}} {%trans "invites your " %}
+			{{to_practicelocatin_type}} {{to_practicelocation_name}} {% trans "to join " %} {{from_practicelocatin_type}}
+			{{from_practicelocation_name}} {% trans "as a Member." %}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			{% trans "Do you want to join?" %}
+		</td>
+	</tr>
+</table>

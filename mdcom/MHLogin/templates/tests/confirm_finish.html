@@ -1,0 +1,28 @@
+{% extends "tests/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Test complete:" %} {{result}}{% endblock %}
+
+{% block content %}
+
+{% if success %}
+<h2>{% trans "Test success!" %}</h2>
+<p>{% trans "This test has been recorded as being successful. Thanks for testing!" %}</p>
+{% else %}
+<h2>{% trans "The test was completed unsuccessfully." %}</h2>
+<p>{% trans "If this is the first time you've run this test during this session, please
+go back and try it again." %}</p>
+
+<p>{% trans "The administrators have already been notified appropriately, but they may
+need more information. Please either call Brian or please send an email
+detailing what you did, and what the system is (or isn't) doing." %}</p>
+
+<h3>{% trans "Administrators" %}</h3>
+<ul>
+{% for admin in admins %}
+	<li><a href="mailto:{{admin.1}}">{{admin.0}} &lt;{{admin.1}}&gt;</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

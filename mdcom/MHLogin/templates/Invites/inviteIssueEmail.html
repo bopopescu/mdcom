@@ -1,0 +1,30 @@
+{% load i18n %}
+{% blocktrans with inviteurl|safe as inviteurl%}
+Dear {{email}},
+
+Congratulations! {{sender}} has invited you to join {{practice_name}}! Just click on the following link to signup:
+
+https://{{inviteurl}}
+
+If you have any issues with linking to the above page, please start your browser and manually type in the following URL:
+
+https://{{server_address}}/{{registerurl}}
+
+Then, enter the following information to get started (don't worry -- you can change your email address as you work through the registration pages):
+
+Invitation Code: {{code}}
+Email Address: {{email}}
+
+If you have any issues, please contact us at support@mdcom.com
+
+Best,
+DoctorCom Staff
+{% endblocktrans %}
+{% if msg %}
+______________________________________________________________________________
+Additional Note from {{sender}}:
+
+{{msg}}
+
+______________________________________________________________________________
+{% endif %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Oncall Result - {{curDate}} {% endblock %}
+
+{% block content %}
+<h1>{% trans "Oncall Result" %}:</h1>
+
+<table border="0">
+<tr><td>
+
+<h2>{% trans "Oncall Primary" %}</h2>
+{{oncallPrimary}}
+
+</td><td width="25px">&nbsp;</td><td>
+
+    <div style="margin-left:40px; margin-top:-60px;">        
+		<p class="header" style="font-size:14px;font-weight:bold;">{% trans "Welcome" %}, {{ mhl_user_displayName }}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Current location" %}: <b>{{ current_site.name }}</b> <a href="/Sites/">{% trans "Click here" %}</a> {% trans "to change" %}.</p>
+    </div>
+<div style="width:800px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">
+
+<form action="/Scheduler/getPrimaryOncall/" method="post">
+
+{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }}: {{ field }}
+    </div>
+{% endfor %}
+<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

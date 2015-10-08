@@ -1,0 +1,5 @@
+An urgent call with caller ID {{callerid}} to practice {{practice}} was received on {{timestamp|date:'l, F d, Y'}} at {{timestamp|date:'h:i A'}}, at which time nobody was defined as being on-call.
+
+callsid: {{callsid}}
+timestamp: {{timestamp}}
+

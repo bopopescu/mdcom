@@ -1,0 +1,97 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<STYLE TYPE="text/css">
+
+BODY
+{
+    font-family:sans-serif;
+    text-align:left;
+    margin:5px;
+    padding:5px;
+}
+</STYLE>
+
+<div style="padding:0px 0px 15px 0px;margin-top:10px;border:1px solid lightgray;" 
+        class="ui-corner-all">
+
+{% if 'Administrator' in sender_types %}
+<h2 style="margin:5px;padding:5px">{% trans "User Administration" %}</h2>
+<ul style="margin-left:25px">
+    <li><a href="/dcAdmin/Invitations/">{% trans "Invitations" %}</a></li>
+    <li><a href="/dcAdmin/Invitations/New/">
+            {% trans "Send an Invitation to Join DoctorCom" %}</a></li>
+    <li><a href="{% url 'MHLogin.Administration.views.get_user_for_reset' %}">
+            {% trans "Reset a user's password" %}</a></li>
+    <li><a href="/dcAdmin/AdminMessage/2/">{% trans "Send a system message" %}</a></li>
+    <li><a href="/dcAdmin/EmailToAll/">{% trans "Send email to users" %}</a></li>
+    <li><a href="/dcAdmin/Brokers/">{% trans "Broker/Contractor" %}</a></li>
+</ul>
+{% endif %}
+
+{% if 'Administrator' in sender_types %}
+<h2 style="margin-left:5px;padding:5px">{% trans "Key Management System" %}</h2>
+<ul style="margin-left:25px">
+    <li><a href="{% url 'MHLogin.Administration.views.generate_user_keys' %}">
+            {% trans "Generate keys for new users" %}</a></li>
+    <li><a href="{% url 'MHLogin.Administration.views.reset_private_keys' %}">
+            {% trans "Reset keys for forgotten password requests" %}</a></li>
+</ul>
+{% endif %}
+
+<h2 style="margin-left:5px;padding:5px">{% trans "System Administration" %}</h2>
+<ul style="margin-left:25px">
+    <li><a href="/dcAdmin/tech_admin/">{% trans "System Administration" %}</a></li>
+    {% if 'Administrator' in sender_types %}
+        <li><a href="/dcAdmin/OrganizationTypeList/">{% trans "Organization Type Management" %}</a></li>
+        <li><a href="/analytics/">{% trans "Analytics" %}</a></li>
+        <li><a href="/Sales/">{% trans "Sales" %}</a></li>
+    {% endif %}
+</ul>
+
+{% if 'Administrator' in sender_types %}
+<h2 style="margin-left:5px;padding:5px">{% trans "IVR" %}</h2>
+<ul style="margin-left:25px">
+    <li><a href="ResolveAnsSvcDLFailures/">{% trans "Resolve answering service download failures" %}</a></li>
+</ul>
+{% endif %}
+
+{% if 'Administrator' in sender_types %}
+<h2 style="margin-left:5px;padding:5px">{% trans "Report" %}</h2>
+<ul style="margin-left:25px">
+    <li><a href="/dcAdmin/ReferTracking/">{% trans "Refer Tracking" %}</a></li>
+</ul>
+{% endif %}
+
+{% if 'Administrator' in sender_types %}
+<h2 style="margin-left:5px;padding:5px">{% trans "Billing" %}</h2>
+<ul style="margin-left:25px">
+    <li><a href="/billing/billing_menu/">{% trans "Billing Menu" %}</a></li>
+</ul>
+{% endif %}
+
+{% if debug %}
+<h2 style="margin-left:5px;padding:5px">{% trans "QA Tools" %}</h2>
+<ul style="margin-left:25px">
+    <li><a href="/dcAdmin/QATools/">
+        {% trans "Reset customer email, mobile number & mobile access ability to QA needs." %}
+    </a></li>
+    <li><a href="/dcAdmin/QATools/GenerateUsers/">
+        {% trans "Genarate users" %}
+    </a></li>
+    <li><a href="/dcAdmin/QATools/GeneratePhotos/">
+        {% trans "Genarate photo/logo for all users/organizations." %}
+    </a></li>
+    <li><a href="/dcAdmin/QATools/ReGenerateKey/">
+        {% trans "Re-Genarate user key." %}
+    </a></li>
+</ul>
+{% endif %}
+
+</div>
+
+{% endblock %}

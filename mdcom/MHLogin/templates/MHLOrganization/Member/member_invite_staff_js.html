@@ -1,0 +1,110 @@
+{% load i18n %}
+<script>
+$(function(){
+	$('#add-new-staffer').unbind('click').click(function(){
+		inviteStaffStep(InvStaffConf.step1);
+	});
+	
+	if(location.search.split('invitationType=')[1]=='2'){
+		inviteStaffStep(InvStaffConf.step1);
+	}
+})
+
+var InvStaffConf = {
+	step1:{
+		odialog: null,
+		url: '/Organization/Member/InviteStaff/',
+		type: 'POST',
+		data: {step: 1},
+		title: MESSAGE.STAFFHOME_INVITE_STAFF_STEP1_TEXT.sprintf('{{ selected_organization_type }}'),
+		openfunc: function(data, options){
+			var tag = options.odialog;
+			tag.find('.step1Cancel').unbind('click').click(function(){
+				tag.dialog('close');
+			});
+
+			tag.unbind('keypress').bind('keypress', function(event){
+				if(event.which == 13){
+					return false;
+				}
+			})
+
+			if(data.step_type == "email"){
+				tag.find('.step1Next').unbind('click').click(function(){
+					var email = $.trim(tag.find('#inviteNewEmail').val());
+					var msg = tag.find('#mail-body').val();
+					var type =tag.find('#id_staff_types').val();
+					emailFormat = /^[A-Za-z0-9+]+[A-Za-z0-9\.\_\-+]*@([A-Za-z0-9\-]+\.)+[A-Za-z0-9]+$/;
+	
+					tag.find('span.err-msg').remove();
+					if(email.match(emailFormat)){
+						var step_options = InvStaffConf.step2;
+						step_options.odialog = options.odialog; 
+						step_options.data.email = email;
+						step_options.data.msg  = msg;
+						step_options.data.type = type;
+						inviteStaffStep(step_options);
+					}else{
+						$('#inviteNewEmail').after('<span class="err-msg">'+MESSAGE.STAFFHOME_INVALID_EMAIL_MSG+'</span>');
+					}
+				});
+			} else {
+				options.count = data.count
+				add_paginate(options);
+			}	
+		}
+	},
+	step2:{
+		odialog: null,
+		url: '/Organization/Member/InviteStaff/',
+		type: 'POST',
+		data: {step:2},
+		title: MESSAGE.STAFFHOME_INVITE_STAFF_STEP2_TEXT.sprintf('{{ selected_organization_type }}'),
+		openfunc: function(data, options){
+			var refFunc = $('#add-new-staffer').attr('refresh_function');
+			if(refFunc != undefined){
+				window[refFunc]();
+			}
+		
+			var tag = options.odialog;
+			tag.find('#inviteBackToStep1').unbind('click').click(function(){
+				var step_options = InvStaffConf.step1;
+				step_options.odialog = options.odialog; 
+				inviteStaffStep(step_options);
+			});
+			tag.find('#inviteBackToMember').unbind('click').click(function(){
+				tag.dialog("close");
+			});
+			tag.find('.step1Next').unbind('click').click(function(){
+				tag.dialog("close");
+			});
+		}
+	},
+}
+
+function inviteStaffStep(options){
+	$.comAjax({
+		url: options.url,
+		type: options.type,
+		data: options.data,
+		success:function(data, txtStatus){
+			var tag = $("<div></div>");
+			if (options.odialog != null){
+				options.odialog.dialog('close');
+			}
+			options.odialog = tag;
+			tag.html(data.html).dialog({
+				draggable:false,
+				resizable:false,
+				modal: true,
+				width:550, 
+				title: options.title,
+				open: options.openfunc(data, options),
+				close:function(){
+					tag.dialog("destroy").remove();
+				}
+			}).dialog('open');
+		}
+	});
+}
+</script>

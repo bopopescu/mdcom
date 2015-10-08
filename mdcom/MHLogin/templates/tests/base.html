@@ -1,0 +1,11 @@
+{% load i18n %}
+<html>
+	<head>
+		<title>{% trans "DoctorCom Testing:" %} {% block title %}{% endblock%}</title>
+		<body>
+			<p>
+				<a href="/tests/">{% trans "Testing Home" %}</a> | <a href="/">{% trans "DoctorCom Home" %}</a>
+			</p>
+			{% block content %}{% endblock%}
+		</body>
+</html>

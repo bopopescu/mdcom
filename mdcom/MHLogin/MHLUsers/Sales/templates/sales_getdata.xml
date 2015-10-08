@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows total_count="{{ total }}" pos="{{ pos }}">
+{% for i in data %}
+    <row id="{{ i.id }}" locked="{{ i.isLocked }}" style="{{i.style}}">
+        <cell>{{ i.practice }}</cell>
+        <cell>{{ i.region }}</cell>
+        <cell>{{ i.salestype }}</cell>
+        <cell type="sub_row_grid">/Sales/sales_getproductdata/?id={{ i.id }}</cell>
+        <cell>{{ i.price }}</cell>
+        <cell>{{ i.contact }}</cell>
+        <cell>{{ i.phone }}</cell>
+        <cell>{{ i.email }}</cell>
+        <cell>{{ i.website }}</cell>
+        <cell>{{ i.date_contact }}</cell>
+        <cell>{{ i.date_appt }}</cell>
+        <cell>{{ i.stage }}</cell>
+        <cell>{{ i.source }}</cell>
+        <cell>{{ i.notes }}</cell>
+        <cell>{{ i.address }}</cell>
+        <cell>{{ i.rep.id }}</cell>
+    </row>
+{% endfor %}
+</rows>
+

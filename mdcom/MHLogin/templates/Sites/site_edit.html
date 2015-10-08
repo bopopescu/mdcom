@@ -1,0 +1,27 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+.errorlist {color:red;}
+{% endblock %}
+
+{% block content %}
+<div style="width:800px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">
+<h2>{% trans "Edit Sites" %}</h2>
+{% comment %}
+{% if site.non_field_errors %}
+<div class="ui-corner-all" style="width:650px; margin-top:15px;margin-bottom:30px;padding:5px;padding-left:0px;border:1px solid lightgray;">
+{{ site.non_field_errors }}
+</div>
+{% endif %}
+{% endcomment %}
+<form action="." method="POST">
+<table border="0">
+{{site.as_table}}
+</table>
+<br />
+<input type="submit" name="submit" value="{% trans "Submit" %}" />
+
+</form>
+</div>
+{% endblock %}

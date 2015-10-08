@@ -1,0 +1,20 @@
+{% load i18n %}
+<div id="boxSignIn" class="signIn box-gold" style="display: none;">
+	<h2 class="tk-lobster">{% trans "Sign In" %} <a class="cancel">{% trans "Cancel" %}</a></h2>
+	<form class="hform" action="/login/" method="POST">{% if error_msg %}
+		<p style="font-size: 12px; color:#990000;">{{error_msg}}</p>{% endif %}
+		<p>
+			<label>{% trans "Username" %}</label>
+			<input type="username" name="username" id="id_username" maxlength="30">
+		</p>
+		<p>
+			<label>{% trans "Password" %}</label>
+			<input type="password" name="password" id="id_password" maxlength="30">
+		</p>
+		<div class="submit">
+			<a href="/ForgotPassword/" class="forgot">{% trans "Forgot Password?" %}</a>
+			<input type="hidden" id="id_next" name="next" value="/" />
+			<input class="submit" type="submit" value='{% trans "Submit" %}' />
+		</div>
+	</form>
+</div> <!-- eo #boxSignIn -->

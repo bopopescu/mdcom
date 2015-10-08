@@ -1,0 +1,11 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "DoctorCom 404 Error - Page Not Found" %}{% endblock %}
+
+{% block content %}
+<div style="height:500px;">
+<h3>{% trans "HTTP Error 404 - Page Not Found" %}</h3> 
+<p>{% trans "We apologize for any inconvenience, however, we are unable to find the page or file that you are trying to access." %} <br/>{% trans "Please try again at a later time." %}<br/>{% trans "If this message continues to appear, contact our system administrator for assistance." %}</p>
+</div>
+{% endblock %}

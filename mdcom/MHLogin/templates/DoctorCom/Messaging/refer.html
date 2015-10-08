@@ -1,0 +1,270 @@
+{% extends "DoctorCom/Messaging/refer_base.html" %}
+{% load i18n %}
+
+{% block customJS %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/messaging/refer_form.css" />
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/popupUserList.js"></script>
+<script>
+$(function(){
+	var referValidator = $('#referFrm').validate({
+		ignore: '',
+		showErrors: showErrorsBelow,
+		meta: "validate",
+		onfocusout: false,
+		onkeyup: false,
+		onsubmit: false,
+		invalidHandler:function(form, validator) {
+			return;
+		}
+	});
+
+	$("#referTabs").tabs({
+		show: function(event, ui) {
+			if (ui.index==1 && isUpload()){
+				$("#referTabs").tabs("option", "selected", 0);
+				alert('{% trans "Please wait for uploading files." %}');
+			}
+			if (ui.index==2 && isUpload()){
+				$("#referTabs").tabs("option", "selected", 0);
+			}
+			if (ui.index==1 && !validate_step(0)){
+				$("#referTabs").tabs("option", "selected", 0);
+				validate_step(0);
+			}
+			if (ui.index==2 && !validate_step(1)){
+				$("#referTabs").tabs("option", "selected", 1);
+				validate_step(1);
+			}
+		}
+	});
+
+	$("#id_go_to_demographics").click(function(){
+		if (isUpload()){
+			alert('{% trans "Please wait for uploading files." %}');
+		}else{
+			if (validate_step(0)) {
+				$("#referTabs").tabs("option", "selected", 1);
+			}
+		}
+	});
+
+	$("#id_proceed_to_insurance").click(function(){
+		if (validate_step(1)) {
+			$("#referTabs").tabs("option", "selected", 2);
+		}
+	});
+
+	$("#id_submit").click(function(){
+		//if ($("#id_icd_code").val() =='{% trans "Add ICD-10 2013 code" %}'){
+		//	$("#id_icd_code").val("");
+		//}
+		//if ($("#id_ops_code").val() =='{% trans "Add OPS 2013 code" %}'){
+		//	$("#id_ops_code").val("");
+		//}
+		//if ($("#id_medication_list").val() ==' {% trans "Add from Medication list 2013" %}'){
+		//	$("#id_medication_list").val("");
+		//}
+		if (validate_step(0) && validate_step(1) && validate_step(2)) {
+			getUsrReferSpanVal();
+			var selected_prac_id = $("#id_rec_practices").find("option:selected").val();
+			var user_recipients = $('#id_user_recipients').val();
+			var request_data = {
+				sel_practice: selected_prac_id,
+				user_recipients: user_recipients,
+				check_get_more: true
+			}
+			$.comAjax({
+				type:'POST',
+				url: '/Messages/Refer/CheckSendRefer/',
+				data: request_data,
+				async: false,
+				success:function(data, status){
+					var goto_next_direct = data["goto_next_direct"];
+					if (goto_next_direct){
+						doSendRefer();
+					} else {
+						if (data["message"]) {
+							showSimpleDialog({
+								title: '{% trans "Send Refer Confirm" %}',
+								content: data["message"],
+								height: 'auto',
+								dc_buttons: {
+									'Yes': {
+										'click': function() {
+											$(this).dialog("close");
+											doSendRefer();
+										},
+										'text': '{% trans "Yes, proceed any way" %}',
+										'class': 'positive-btn'
+									},
+									'No': {
+										'click': function() {
+											$(this).dialog("close");
+											cancelSendRefer();
+										},
+										'text': '{% trans "Cancel" %}'
+									}
+								}
+							});
+						} else {
+							doSendRefer();
+						}
+					}
+				}
+			});
+		}
+	});
+
+	$("#id_cancel").click(function(){
+		cancelSendRefer();
+	});
+
+	$("#id_cancel1").click(function(){
+		cancelSendRefer();
+	});
+
+	$("#id_cancel2").click(function(){
+		cancelSendRefer();
+	});
+
+	$('#id_selected_practice').val($('#id_rec_practices').find("option:selected").val())
+	$('#id_rec_practices').live("change", function(){
+		getAndRefreshRecipientInfo();
+	});
+	getAndRefreshRecipientInfo();
+
+	$('#recipToBtn').live('click',function(){
+		$('#recipToDiv').AddRecipientUser();
+		$('#addSelectedUserBtn').html(MESSAGE.POPUP_USER_LIST_CC);
+	});
+	
+	$('#recipToDiv').live('click',function(){
+		$('#recipToDiv').AddRecipientUser();
+		$('#addSelectedUserBtn').html(MESSAGE.POPUP_USER_LIST_CC);
+	});
+});
+
+function cancelSendRefer() {
+	waitId = $.ui.wait.start(MESSAGE.JQUERY_UI_COMAJAX_MSG_LOAD);
+	window.location = "/";
+}
+
+function doSendRefer() {
+	waitId = $.ui.wait.start(MESSAGE.JQUERY_UI_COMAJAX_MSG_LOAD)
+	$('#referFrm').submit();
+}
+
+function getAndRefreshRecipientInfo() {
+	var selected_prac_id = $("#id_rec_practices option:selected").val();
+	$.comAjax({
+		type:'POST',
+		url: '/Messages/Refer/Ajax/RefreshPracticeInfo/',
+		data: {
+			practice_id: selected_prac_id,
+			user_recipients:$('#id_user_recipients').val()
+		},
+		success:function(data, status){
+			$('#id_selected_practice').val(selected_prac_id);
+			$("#practice_member_area").html(data["practice_members"]);
+		}
+	});
+}
+
+validate_step = function(step){
+	var referValidator = $('#referFrm').validate();
+	if(step==0){
+		referValidator.settings.rules =  {
+			reason_of_refer: "required"
+		}
+	} else if (step == 1){
+		referValidator.settings.rules =  {
+			reason_of_refer: "required",
+			first_name: "required",	
+			last_name: "required",
+			/*ssn: "required",*/
+			mrn: "required",
+			email:{email:true},
+			/*phone_number:{required:true,isPhone:true},*/
+			phone_number:{isPhone:true},
+			home_phone_number: {isPhone:true},
+			date_of_birth: {
+				isDate: true,
+				isAfterToday:true,
+				required:true
+			}
+		};
+		referValidator.settings.messages = {
+			phone_number: {
+				isPhone:'{% trans "Please enter a valid phone number." %}'
+			},
+			home_phone_number: {
+				isPhone:'{% trans "Please enter a valid phone number." %}'
+			},
+			date_of_birth: {
+				isDate: '{% trans "Please specify a (valid) date." %}',
+				isAfterToday :'{% trans "Please input date before today." %}'
+			}
+		};
+	} else if (step = 2) {
+		referValidator.settings.rules =  {
+			/*prior_authorization_number: "required",*/
+			/*other_authorization: "required",*/
+			/*internal_tracking_number: "required",*/
+			insurance_id: "required"
+		};
+	}
+	return referValidator.form();
+};
+
+isUpload = function(){
+	var progress_name_len=$(".upload_panel iframe").contents().find("#progress_filename").size();
+	var formObj = $(".upload_panel iframe").contents().find("form");
+	if (formObj&&formObj.length>0&&formObj.attr("upload")||progress_name_len>1) {
+		return true;
+	}
+	return false;
+}
+
+function showMoreStaff() {
+	$("#show_more_staff_btn").hide();
+	$("#hide_more_staff_btn").show();
+	$(".can_hide").show();
+}
+
+function hideMoreStaff() {
+	$("#show_more_staff_btn").show();
+	$("#hide_more_staff_btn").hide();
+	$(".can_hide").hide();
+}
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="refer-main-content">
+	<div id="sendRefFrm_container" class="main">
+	<div>
+		{% include 'DoctorCom/Messaging/refer_top.html' %}
+		<div class="line"></div>
+		<div id="referTabs" class="referform">
+			<form id="referFrm" enctype="multipart/form-data" action="." method="POST">
+			{{clinical_form.user_to_recipients}}
+			<div>
+				<ul>
+					<li><a href="#form-1">{% trans "CLINICAL" %}</a></li>
+					<li><a href="#form-2">{% trans "DEMOGRAPHICS" %}</a></li>
+					<li><a href="#form-3">{% trans "INSURANCE" %}</a></li>
+				</ul>
+			</div>
+			
+			{% include 'DoctorCom/Messaging/refer_clinical_form.html' %}
+			{% include 'DoctorCom/Messaging/refer_demographics_form.html' %}
+			{% include 'DoctorCom/Messaging/refer_insurance_form.html' %}
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+{% include "DoctorCom/Messaging/MessageToUsersPopup.html" %}
+{% endblock %}

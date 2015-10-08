@@ -1,0 +1,7 @@
+{% load i18n %}
+{% blocktrans %}
+A new practice named {{practice_name}} with practice id {{practice_id}} was created at {{timestamp}}.
+
+for now, the practice needs a doctorcom number assigned manually.
+
+{% endblocktrans %}

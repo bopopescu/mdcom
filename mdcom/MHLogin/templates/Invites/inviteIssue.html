@@ -1,0 +1,41 @@
+{# extends "Invites/base.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block title %}{% trans 'New Invitation' %}{% endblock %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<div id="inviteIssue" class="ui-corner-all">	
+{% if user_is_office_manager %}
+<h3>{% trans "Invite Professionals to Join DoctorCom!" %}</h3>
+<p>{% trans "Use this page to send an invitation to doctors to join DoctorCom." %}</p>
+{% else %}
+<h3>DoctorCom -> {% trans "Invite Your Colleagues to Join DoctorCom!" %}</h3>
+<p>{% trans "Use this page to send an invitation to doctors and medical students to join DoctorCom." %}</p>
+{% endif %}
+
+<form action="." method="POST" id='invitationNewSubmit'>
+<div class='errorlist'>{{err}}</div>
+<table>
+{{ inviteForm.as_table }}
+<tr>
+	<td>
+		<input type='submit' value="{% trans 'Send Invitation' %}" />
+	</td>
+	<td>
+		<input type='button' value="{% trans 'View Pending Invitations' %}" onclick="window.location='/Invitations/'"/>
+	</td>
+</tr>
+</table>
+</form>
+</div>
+<script>
+$(function(){
+	//$('#id_recipient').after('<span class="redstar">*</span>');
+	$('#invitationNewSubmit').validate({
+		rules:{
+			recipient:{required:true,email:true}
+		}
+	});
+});
+</script>
+{% endblock %}

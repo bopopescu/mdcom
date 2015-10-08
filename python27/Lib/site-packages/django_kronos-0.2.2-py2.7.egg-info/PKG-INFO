@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: django-kronos
+Version: 0.2.2
+Summary: Kronos is a Django application that makes it easy to define and schedule tasks with cron.
+Home-page: http://github.com/jgorset/kronos
+Author: Johannes Gorset
+Author-email: jgorset@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

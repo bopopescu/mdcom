@@ -1,0 +1,82 @@
+{% load i18n %}
+<link type="text/css" href="{{STATIC_URL}}css/messaging/dashboard.css" rel="stylesheet" /> 
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/main.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/ajax.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/json2.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.pagination.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/messaging/dashboard.js"></script>
+
+<div id="received_messages" class="messages">
+
+<table cellspacing="0" cellpadding="0">
+    <tr>
+        <td valign="top" width="140" class="receive_td" style="border-right:1px solid #A6C9E2; background: #FFFFFF;">
+            <div class="filter">
+                <table class='refreshTable'>
+                    <tr>
+                        <td align='right'><img src="{{STATIC_URL}}img/bg_ref.gif" /></td>
+                        <td><div class='refresh' onClick="clickReceivedRefresh();">{% trans "Refresh" %}</div></td>
+                    </tr>
+                </table>
+                <div class="header-show">{% trans "Show Only" %}</div>
+                <!--<div class="line"></div>-->
+                <div class="header-re">{% trans "Resolution" %}</div>
+                <div class="header-chk">
+                    <!--<input type="checkbox" id="resolved_status_true"/>Resolved-->
+                    <input type="checkbox" id="received_resolved_status_true" class="resolved_status_true"/>
+                    <span>{% trans "Resolved" %}</span>
+                </div>
+                <div class="header-chk">
+                    <!--<input type="checkbox" id="resolved_status_false" />Unresolved-->
+                    <input type="checkbox" id="sent_resolved_status_false" class="resolved_status_false" />
+                    <span>{% trans "Unresolved" %}</span>
+                </div>
+            </div>
+        </td>
+        <td valign="top" width="770" class="receive_td" style="background: #FFFFFF">
+            <div class="received_table_style">
+                <table id="received_msgs" class="message_list">
+                    <tbody>
+                        <tr class="header">
+                            <td class="header">
+                                <table class="message_item">
+                                    <tbody>
+                                    <tr class="none">
+                                        <th class="collapse"></th>
+                                        <th class="placeholder">&nbsp;</th>
+                                        <th class="urgent"><img src="{{STATIC_URL}}img/urgent.gif"/></th>
+                                        <th class="attachments"><img src="{{STATIC_URL}}img/attachment.png"/></th>
+                                        <th class="from" align='left'>{% trans "From" %}</th>
+                                        <th class="subject" align='left'>{% trans "Subject" %}</th>
+                                        <th class="timestamp" align='left'>{% trans "Timestamp" %}</th>
+                                        <th class="resolution">{% trans "Resolved" %}</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="nav" id="receivedNav">
+                <table>
+                    <tr>
+                        <td><div class="pagniation"></div></td>
+                        <td><div class="selectPagePer">
+                    <select>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    {% trans "per page" %}
+                </div></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clear"></div>
+        </td>
+    </tr>
+</table>
+</div>

@@ -1,0 +1,26 @@
+header nav {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+header nav a {
+	vertical-align: bottom;
+}
+
+.box-gold.signIn {
+	
+}
+
+.box-gold.signIn h2 a {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+
+input.submit {
+	font-size: 0;
+	display:block;
+	line-height: 0;
+	
+}

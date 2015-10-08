@@ -1,0 +1,35 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% comment %}
+
+"TODO:
+1. This template needs to handle provider type (physician, nurse, etc.) forms, as passed from the view function. The changes should only need to be made here, handling forms as passed in the list structure provider_forms. Note that this indicates support for multiple roles for a single provider."
+
+{% endcomment %}
+
+{% block customCSS %}
+.errorlist {color:red;}
+{% endblock %}
+
+{% block content %}
+    <div style="margin-left:40px; margin-top:-60px;">
+		<p class="header" style="font-size:14px;font-weight:bold;">{% trans "Welcome," %} {{ mhl_user_displayName }}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Current location:" %} <b>{{ current_site.name }}</b> <a href="/Sites/">{% trans "Click here" %}</a> {% trans "to change." %}</p>
+    </div>
+<div style="width:800px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">
+<h1>{% trans "Add Address" %}</h1>
+
+{% comment %}
+"This template is not currently used and is incomplete."
+{% endcomment %}
+
+<form enctype="multipart/form-data" action="." method="POST">
+<table style="border:1px solid lightgray; width:700px;text-align:left;valign:top;">
+{{ user_form.as_table }}
+</table>
+
+<input type="submit" name="submit" value="{% trans "Submit" %}" />
+</form>
+</div>
+{% endblock %}

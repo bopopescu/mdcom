@@ -1,0 +1,117 @@
+{% load i18n %}
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.2.min.js"></script>
+
+<style>
+	table tr td.td-right
+	table tr th.td-right{
+		padding: 5px 0;
+		text-align: left;
+		vertical-align: top;
+		width: 474px;
+	}
+
+	table tr td.td-left,
+	table tr th.td-left{
+		width:200px;
+		font-size:12px;
+	}
+	
+	.redstar{
+		color: #FF0000;
+	}
+	.profileFormSubmit{
+		background:url(../../../static/img/organizations/org_btn_bg.gif);
+		border:1px solid #B9B9B9;
+		border-radius:7px;
+		height:29px;
+		color: #2D8CB5;
+		font-size: 12px;
+		font-weight: bold;
+		font-family: Arial;
+		padding:0 8px 3px ;
+		cursor: pointer;
+	}
+	
+	.helpText, table td, table th{
+		font-size:12px;
+		line-height:35px;
+		font-family: Arial;
+		color: #251D1A;
+	}
+	
+	table tr ul{
+		font-size:12px;
+		list-style:none;
+		padding:0;
+		color: #FF0000;
+		margin-bottom:0px;
+	}
+	#id_practice_name,#id_practice_address1,#id_practice_address2{width:250px;}
+</style>
+
+
+<script>
+
+$(function(){
+	{% if save_success %}
+		parent.OrgView();
+		parent.CURRENTORGID = parent.GetSelectOrgID();
+		parent.RefreshTree();
+	{% endif %}
+});
+</script>
+
+<div class="org-tab-content">
+	<div id="practiceEdit" class="ui-corner-all">
+		<form id="orgProfileForm" action="." method="POST" class='profileEditForm' enctype="multipart/form-data">{% csrf_token %}
+			{{form.non_field_errors|linebreaksbr}}
+			<table class='tableProfile' cellspacing='0' cellpadding='0' width='660px'>
+				<tr>
+					<th align='left' class="td-left">
+						{% trans "Type:" %}
+					</th>
+					<td align='left' class="td-right">
+						{{ type_form.organization_type }}
+					</td>
+				</tr>
+				{% for field in form %}
+				{% if field.label != "Use zip" %}
+				<tr>
+					<th align='left' class="td-left">
+						{% if field.name in "['practice_name']" %}
+						{% trans "Name" %}:
+						{% else %}
+						{{field.label}}:
+						{% endif %}
+					</th>
+					<td align='left' class="td-right">
+						{{field}}
+						{% if field.name in "['practice_name', 'time_zone', 'practice_zip', 'practice_address1', 'practice_city', 'practice_state']" %}
+							<span class="redstar">*</span>
+						{% endif %}
+						{% if field.help_text %}
+							<span class="helpText">{{field.help_text}}</span>
+						{% endif %}
+					</td>
+				</tr>
+				{% if field.errors %}
+				<tr>
+					<td></td>
+					<td>
+							{{field.errors}}
+					</td>
+				</tr>
+				{% endif %}
+				{% endif %}
+			{% endfor %}
+			{% if form.show_use_zip %}
+				<tr>
+					<th align='left'>{{form.use_zip.label}}</th>
+					<td>{{form.use_zip}}</td>
+				</tr>
+			{% endif %}
+			</table>
+			<input id="profileFormSubmit" class="profileFormSubmit" type="submit" value='{% trans "Save" %}' />
+		</form>
+	</div>
+</div>

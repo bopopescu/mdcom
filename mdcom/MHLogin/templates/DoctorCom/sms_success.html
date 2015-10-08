@@ -1,0 +1,15 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div style="width:800px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">
+
+<h2>{% trans "The message is being sent." %}</h2>
+
+<p><b>{% trans "Helpful Hint" %}:</b><br />
+{% trans "Some messages come from general-use DoctorCom numbers. Make sure that you have the correct DoctorCom number for somebody before you add it to your address book." %}
+</p>
+
+</div>
+{% endblock %}
+

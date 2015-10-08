@@ -1,0 +1,18 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+	<h2>{% trans "Registration" %}</h2>
+	{% if step_count %}
+		<p>{% trans "Step" %}{{ step }}{% trans "of" %}{{ step_count }}</p>
+	{% endif %}
+	<form action="." method="post">{% csrf_token %}
+		<table class='registerFormTable'>
+			{{form}}
+		</table>
+		<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+			{{ previous_fields|safe }}
+		<div class="submit">
+			<input type="submit" class='submit' value='{% trans "Submit" %}'>
+		</div>
+	</form>
+{% endblock content %}

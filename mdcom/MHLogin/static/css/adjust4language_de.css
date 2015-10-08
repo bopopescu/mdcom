@@ -1,0 +1,38 @@
+#inviteDialog .content .invite-item{ width:480px;}
+#inviteDialog .content .invite-item span{ width:140px;}
+
+.sub_nav {
+    background: url("../img/bg_subnav01_de.gif") no-repeat scroll 0 0 transparent;
+    left: -10px;
+    position: absolute;
+    top: 33px;
+    width: 214px;
+    z-index: 999;
+}
+
+.sub_nav ul {
+    background: none repeat scroll 0 0 #172322;
+    margin-left: 12px;
+    overflow: hidden;
+    width: 190px;
+}
+
+.sub_nav ul li {
+    background: url("../img/bg_dotted.gif") repeat-x scroll 0 bottom transparent;
+    clear: both;
+    float: left;
+    margin: 0 20px;
+    padding: 0;
+    text-align: left;
+    width: 150px;
+}
+
+.sub_nav_bto {
+    background: url("../img/bg_subnav02_de.png") no-repeat scroll center 0 transparent;
+    height: 18px;
+    left: 0;
+    position: absolute;
+    width: 214px;
+    z-index: 999;
+}
+.td_search_botton{width:5%}

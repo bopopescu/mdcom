@@ -1,0 +1,73 @@
+{% load i18n %}
+<script>
+	$(function(){
+		$("#orgBack").click(function(){
+			OrgView();
+		});
+
+
+		$("#orgEdit").click(function(){
+			OrgEdit();
+		});
+		
+		OrgMove = function(refresh){
+			var org_id = GetSelectOrgID();
+			var type = "GET";
+			if(refresh){
+				type = "POST";
+			}
+			$.comAjax({
+				url: "/Organization/Move/",
+				type: type,
+				data: $("#orgMoveForm").serialize(),
+				success:function(data, status){
+					if (refresh && data.status && data.status=='ok'){
+						CURRENTORGID = org_id;
+						RefreshTree();
+					} else {
+						RefreshRight(data);
+					}
+				}
+			});
+		}
+		
+
+		$("#orgMoveForm #id_parent_org_ids").change(function(){
+			OrgMove(false);
+		});
+
+		$("#orgMoveFormSubmit").click(function(){
+			OrgMove(true);
+		})
+
+		$("#orgMove").click(function(){
+			OrgMove(false);
+		});
+
+		$("#orgRemove").click(function(){
+			var can_remove_org = "{{ can_remove_org }}";
+			can_remove_org = BoolUtils.str2bool(can_remove_org);
+			if(!can_remove_org){
+				alert("{% trans "You can't remove this organization because your organization contains sub organization or you are not an administrator."%}");
+			}else{
+				var is_remove = confirm('{% trans "Are you sure to delete this organization?" %}');
+
+				if(is_remove){
+					$.comAjax({
+						url: "/Organization/Remove/",
+						type:'POST',
+						data: {},
+						success:function(data, status){
+							alert("Delete organization successfully.");
+							CURRENTORGID = '';
+							RefreshTree();
+						},
+						error:function(data, status){
+							alert("Sorry, delete organization failed.");
+						}
+					});
+				}
+			}
+		});
+	});
+</script>

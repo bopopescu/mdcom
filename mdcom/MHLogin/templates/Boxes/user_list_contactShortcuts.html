@@ -1,0 +1,11 @@
+{% extends "Boxes/box_100.html"%}
+{% load i18n %}
+
+{% block content %}
+{% for user in users %}
+	{{ user.first_name }} {{ user.last_name }}&nbsp;&nbsp;
+			<a href="/Messages/New/?user_recipients={{ user.id }}">{% trans "text" %}</a> |
+			{% comment %}<a href="/Messages/New/?user_recipients={{ user.id }}">{% trans "page" %}</a> |{% endcomment %}
+			<a href="/Call/{{ user.id }}/">{% trans "call" %}</a><br />
+{% endfor %}
+{% endblock %}

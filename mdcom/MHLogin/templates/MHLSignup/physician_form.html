@@ -1,0 +1,592 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<img src='{{STATIC_URL}}img/delItem.png' class='hidden' />
+<div class='signup'>
+	<div class='head'>{% trans "Registration" %}
+		<span>{% if step_count %}
+			{% trans "Step" %} {{ step }} {% trans "of" %} {{ step_count }}
+		{% endif %}
+		</span>
+	</div>
+	<div class='content'>
+		<form action="." method="post" class='physician' onkeypress="if(event.keyCode==13||event.which==13){return false;}">{% csrf_token %}
+			<div class='sites'>
+				<div class='title'>{% trans "What sites or hospitals are you affiliated with? (Optional)" %}</div>
+			</div>
+			<div class='sites-content'>
+				<div class='sites-form'>
+					<!-- {{ form.sites }}{{ form.sites.errors }} -->
+					<input type='hidden' name='sites' value='' />
+					<input type='text' id='inputSites' class='inputText' value='{% trans "Input hospital name here"%}' />
+					<div class='loading hidden'></div>
+					<div id='addSites' class='addIcon hidden'></div>
+				</div>
+				<p class='sites-text'>{% trans "Use this field to select the various hospitals or sites you work at or otherwise do business at. You will be able to change this at any time in the future." %}</p>
+				<div class='clear'></div>
+			</div>
+			{{form.sites.help_text}}
+			
+			<div class='current-sites'>
+				<div class='title'>{% trans "What is the site or hospital you are currently at? If you can't find your site, you can search for it after signup.(Optional)" %}</div>
+			</div>
+			
+			<div class='current-sites-content'>
+				<div class='current-sites-form'>
+					<!-- {{form.current_site }}{{ form.current_site.errors }} -->
+					<input type='hidden' name='current_site' value='' />
+					<select id="id_current_site">
+						<option value="">---------</option>
+					</select>
+				</div>
+				<p class='current-sites-text'>{% trans "Of the list of hospitals and sites you are affiliated with, please select the site that you are currently working at. You will be able to change this at any time in the future." %}</p>
+				<div class='clear'></div>
+			</div>
+			
+			{% if form.licensed_states %}
+			<div class='license-site'>
+				<div class='title'>{% trans "In which States are you Licensed? (Optional)" %}</div>
+			</div>
+			<div class='license-site-content'>
+				<div class='license-sites'>
+					<!-- {{ form.licensed_states }} {{ form.licensed_states.errors }} -->
+					<input type='hidden' name='licensed_states' value='' />
+					<input type='text' id='inputLicensed' class='inputText' value='{% trans "Input state name here"%}' />
+					<div class='loading hidden'></div>
+					<div id='addLicensed' class='addIcon hidden'></div>
+				</div>
+				<div class='current-sites-text'></div>
+				<div class='clear'></div>
+			</div>
+			{% endif %}
+			
+			{% if form.specialty %}
+			<div class='title'>{% trans "What is your area of Specialty? (Optional)" %}</div>
+			<div class='specialty'>
+				<div class='specia-content'>{{form.specialty }} {{ form.specialty.errors }}</div>
+				<div class='current-sites-text'></div>
+				<div class='clear'></div>
+			</div>
+			{% endif %}
+			
+			{% if form.staff_type %}
+			<div class='title'>{% trans "What is your Staff Type? (Optional)" %}</div>
+				<div class='staff-type'>
+					<div class='type-form'>{{form.staff_type }} {{ form.staff_type.errors }}</div>
+					<div class='current-sites-text'></div>
+					<div class='clear'></div>
+				</div>
+			{% endif %}
+			
+			{% if form.accepting_new_patients %}
+				<div class='accept-patient'>
+					{{ form.accepting_new_patients }}
+					<div class='title'>{% trans "Check if you are accepting new patients " %}</div>
+				</div>
+			{% endif %}
+			<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+				{{ previous_fields|safe }}
+				<div class="submit">
+					{% if step > 1 %}
+					<input type="button" class='back' value='{% trans "Back" %}' id='back' >
+					{% endif %}
+	
+					{% if step == step_count %}
+					<input type="button" class='submit' value='{% trans "Submit" %}' onclick='signupSubmit();'>
+					{% else%}
+					<input type="submit" class='submit' value='{% trans "Next" %}' onclick='submitForm();' >
+					{% endif %}
+				</div>
+		</form>
+	</div>
+</div>
+<script type='text/javascript'>
+	var stateAjax = null;
+	var siteAjax = null;
+	var mouseDownOnSite = false;
+	var mouseDownOnState = false;
+	var sites = new Array();
+	var currentSites = new Array();
+	var states = new Array();
+	var siteOption = 0;
+	var stateOption = 0;
+	
+	$(function(){
+		$('#id_sites').attr('tabIndex','1');
+		$('#id_current_site').attr('tabIndex','1');
+		$('#id_licensed_states').attr('tabIndex','1');
+		$('#id_specialty').attr('tabIndex','1');
+		$('#id_staff_type').attr('tabIndex','1');
+		$('#id_accepting_new_patients').attr('tabIndex','1');
+		$('input.submit').attr('tabIndex','7');
+		
+		$('#main .signup .content .physician .accept-patient .title').click(function(){
+			$('#id_accepting_new_patients').attr('checked','checked');
+		});
+		
+		$('#inputSites').keyup(function(){
+			var searchLength = 2;
+			var val = $.trim($(this).val());
+			$(this).removeAttr('sid');
+			if(val.length>searchLength && val!= siteOption){
+				siteOption = val;
+				searchSitesByInput(val);
+			}
+			if(val!=siteOption)
+			{
+				siteOption = val;
+			}
+			if(val.length<=searchLength)
+			{
+				$('.sitesList').remove();
+			}
+		}).blur(function(){
+			//var val = $.trim($(this).val());
+			//if(val==''){
+			$(this).val('{% trans "Input hospital name here"%}').removeClass('red black');
+			//}
+			if(!mouseDownOnSite){
+				$('.sitesList').remove();
+			}
+		});
+		
+		
+		$('#inputSites').focus(function(){
+			$(this).val('');
+			$(this).removeClass('orange').addClass('black');
+		});
+		
+		$('#inputLicensed').focus(function(){
+			$(this).val('');
+			$(this).removeClass('orange').addClass('black');
+		});
+		
+		$('#inputLicensed').keyup(function(){
+			var val = $.trim($(this).val());
+			var searchLength = 0;
+			$(this).removeAttr('sid');
+			if(val.length>0 && val!=stateOption){
+				stateOption = val;
+				searchStatesByInput(val);
+			}
+			if(val!=stateOption)
+			{
+				stateOption = val;
+			}
+			if(val.length<=searchLength)
+			{
+				$('.statesList').remove();
+			}
+		}).blur(function(){
+			//var val = $.trim($(this).val());
+			//if(val==''){
+			$(this).val('{% trans "Input state name here"%}').removeClass('red black');
+			//}
+			if(!mouseDownOnState){
+				$('.statesList').remove();
+			}
+		});
+		
+		/*
+		$('#addSites').click(function(){
+			var val = $('#inputSites').val();
+			if(val=='{% trans "Input hospital name here"%}'){
+				$('#inputSites').addClass('orange');
+			}
+			var id = $('#inputSites').attr('sid');
+			var name = $('#inputSites').val();
+			if(typeof id != 'undefined'){
+				var o = {};
+				o['id'] = id;
+				o['name'] = name;
+				saveSite(o);
+				showSitesList();
+				if(ifIDInSites(id)){
+					saveCurrentSite(o);
+					showCurrentSites();
+				}
+			}
+			siteOption=0;
+		});*/
+		
+		
+		$('#addLicensed').click(function(){
+			var val = $('#inputLicensed').val();
+			if(val=='{% trans "Input state name here"%}'){
+				$('#inputLicensed').addClass('orange');
+			}
+			var id = $('#inputLicensed').attr('sid');
+			var name = $('#inputLicensed').val();
+			if(typeof id != 'undefined'){
+				var o = {};
+				o['id'] = id;
+				o['name'] = name;
+				saveState(o)
+				showStatesList();
+			}
+		});
+	});
+	function searchSitesByInput(val){
+		if(siteAjax){
+			siteAjax.abort();
+		}
+		$('.sites-content .loading').removeClass('hidden');
+		siteAjax = $.ajax({
+			url:'/searchSites/',
+			type:'GET',
+			data:{'term':val},
+			success:function(data,txtStatus){
+				$('.sites-content .loading').addClass('hidden');
+				var d1 = JSON.parse(data);
+				var dlen = d1.length;
+				var d = new Array();
+				
+				for(var i=0;i<dlen; i++){
+					if(isDInSites(d1[i])){
+						d.push(d1[i]);
+					}
+				}
+				
+				$('.sitesList').remove();
+				var html = '<div class="sitesList">';
+				html += '<ul>';
+				var len = d.length;
+				if(len==0){
+					html += '<li>No hospital matches condition.</li>';
+				}else{
+					for(var i=0;i<len;i++){
+						html += '<li sid="'+d[i]['id']+'">'+d[i]['name']+'</li>';
+					}
+				}
+				html += '<li class="bottonLi"></li>';
+				html += '</ul>';
+				html += '</div>';
+				$('#inputSites').after(html);
+				
+				$('.sites-form .sitesList ul').mousedown(function(){
+					mouseDownOnSite = true;
+				}).mouseup(function(){
+					mouseDownOnSite = false;
+				});
+				
+				$('.sites-form .sitesList li').click(function(){
+					siteOption = 0;
+					var name = $(this).html();
+					var id = $(this).attr('sid');
+					if(typeof id != 'undefined'){
+						$('#inputSites').val('{% trans "Input hospital name here"%}').removeClass('red black');
+						//$('#inputSites').attr('sid',id);
+						var o = {};
+						o['id'] = id;
+						o['name'] = name;
+						saveSite(o);
+						showSitesList();
+						
+						saveCurrentSite(o);
+						showCurrentSites();
+						
+						$('.sitesList').remove();
+					}	
+				});
+			},
+			error:function(data,txtStatus){}
+		});
+	}
+	
+	function searchStatesByInput(val){
+		if(stateAjax){
+			stateAjax.abort();
+		}
+		$('.license-site-content .loading').removeClass('hidden');
+		stateAjax = $.ajax({
+			url:'/searchStates/',
+			type:'GET',
+			data:{'term':val},
+			success:function(data,txtStatus){
+				$('.license-site-content .loading').addClass('hidden');
+				var d1 = JSON.parse(data);
+				var dlen = d1.length;
+				var d = new Array();
+				
+				for(var i=0;i<dlen; i++){
+					if(isDInStates(d1[i])){
+						d.push(d1[i]);
+					}
+				}
+				//TODO
+				
+				$('.statesList').remove();
+				var html = '<div class="statesList">';
+				var len = d.length;
+				html += '<ul>';
+				if(len==0){
+					html += '<li>No state matches condition.</li>';
+				}else{
+					for(var i=0;i<len;i++){
+						html += '<li sid="'+d[i]['id']+'">'+d[i]['name']+'</li>';
+					}
+				}
+				html += '<li class="bottonLi"></li>';
+				html += '</ul>';
+				html += '</div>';
+				$('#inputLicensed').after(html);
+				
+				$('.statesList ul').mousedown(function(){
+					mouseDownOnState = true;
+				}).mouseup(function(){
+					mouseDownOnState = false;
+				});
+				
+				$('.statesList ul li').click(function(){
+					stateOption = 0;
+					
+					var name = $(this).html();
+					var id = $(this).attr('sid');
+					if(typeof id != 'undefined'){
+						$('#inputLicensed').val('{% trans "Input state name here"%}').removeClass('red black');
+						//$('#inputLicensed').attr('sid',id);
+						var o = {};
+						o['id'] = id;
+						o['name'] = name;
+						saveStates(o);
+						
+						//TODO
+						saveState(o)
+						showStatesList();
+						
+						$('.statesList').remove();
+						
+						
+					}
+				});
+			},
+			error:function(data,txtStatus){}
+		});
+	}
+	
+	function checkExistSite(id){
+		var exist = false;
+		if(typeof id!='undefined' &&id!='0'){
+			$('#id_current_site option').each(function(i){
+				if($(this).val()!=''&&$(this).val()==id){
+					return false;
+				}
+			});
+			exist = true;
+		}
+		return exist;
+	}
+	
+	//check whether site repeat in sites list
+	function saveSite(o){
+		if(jQuery.isEmptyObject(sites)){
+			sites.push(o);
+		}else{
+			for(var d in sites){
+				if(o['id']==sites[d]['id']){
+					return;
+				}else{
+					continue;
+				}
+			}
+			sites.push(o);
+		}
+	}
+	
+	function saveState(o){
+		if(jQuery.isEmptyObject(states)){
+			states.push(o);
+		}else{
+			for(var d in states){
+				if(o['id']==states[d]['id']){
+					return;
+				}else{
+					continue;
+				}
+			}
+			states.push(o);
+		}
+	}
+	
+	//show all sites
+	function showSitesList(){
+		$('.allSitesUl').remove();
+		var html = '<ul class="allSitesUl listUI">';
+		var len = sites.length;
+		for(var i=0;i<len;i++){
+			html += '<li sid="'+sites[i]['id']+'"><div class="name">'+sites[i]['name']+'</div><div class="del"></div></li>';
+		}
+		html += '</ul>';
+		$('.sites-content').after(html);
+		
+		//bind click function for del icon
+		$('.allSitesUl li .del').click(function(){
+			var id = $(this).parent().attr('sid');
+			for(var d in sites){
+				if(id==sites[d]['id']){
+					//delete sites[d];
+					sites.remove(d);
+					break;
+				}
+			}
+			for(var d in currentSites){
+				if(id==currentSites[d]['id']){
+					//delete currentSites[d];
+					currentSites.remove(d);
+					break;
+				}
+			}
+			$(this).parent().remove();
+			
+			$('#id_current_site option').each(function(){
+				if($(this).val()==id){
+					$(this).remove();
+				}
+			});
+			showCurrentSites();
+		});
+	}
+	
+	//save current site list
+	function saveCurrentSite(o){
+		if(jQuery.isEmptyObject(currentSites)){
+			currentSites.push(o);
+		}else{
+			for(var d in currentSites){
+				if(o['id']==currentSites[d]['id']){
+					return;
+				}else{
+					continue;
+				}
+			}
+			currentSites.push(o);
+		}
+	}
+	
+	//show current sites list
+	function showCurrentSites(){
+		var options = '';
+		var len = currentSites.length;
+		if(len==0){
+			options = '<option value="">---------</option>';
+		}else{
+			for(var d=0;d<len;d++){
+				options += '<option value="'+currentSites[d]['id']+'" >'+currentSites[d]['name']+'</optiion>';
+			}
+		}
+		$('#id_current_site').html(options);
+	}
+	
+	//save state
+	function saveStates(o){
+		if(jQuery.isEmptyObject(states)){
+			states.push(o);
+		}else{
+			for(var d in states){
+				if(o['id']==states[d]['id']){
+					return;
+				}else{
+					continue;
+				}
+			}
+			states.push(o);
+		}
+	}
+	
+	//
+	function showStatesList(){
+		$('.allStatesUl').remove();
+		var html = '<ul class="allStatesUl listUI listUI2">';
+		var len = states.length;
+		for(var s=0;s<len;s++){
+			html += '<li sid="'+states[s]['id']+'"><div class="name">'+states[s]['name']+'</div><div class="del"></div></li>';
+		}
+		html += '</ul>';
+		$('.license-site-content').after(html);
+		
+		//bind click function for del icon
+		$('.allStatesUl li .del').click(function(){
+			var id = $(this).parent().attr('sid');
+			for(var d in states){
+				if(id==states[d]['id']){
+					//delete sites[d];
+					states.remove(d);
+					break;
+				}
+			}
+			$(this).parent().remove();
+			
+		});
+	}
+	
+	function submitForm(){
+		var form = document.forms[1];
+		var ls = [];
+		var ss = [];
+		var cs = [];
+		
+		if(sites){
+			for(var s in sites){
+				ls.push(sites[s]['id']);
+			}
+		}
+		if(states){
+			for(var s in states){
+				ss.push(states[s]['id']);
+			}
+		}
+		cs = $('#id_current_site').val();
+		$('input[name="licensed_states"]').val(ss);
+		$('input[name="sites"]').val(ls);
+		$('input[name="current_site"]').val(cs);
+		form.submit();
+	}
+	
+	function ifIDInSites(id){
+		var b = false;
+		var len = sites.length;
+		if(len>0){
+			for(var s in sites){
+				if(sites[s]['id']==id){
+					b = true;
+					break;
+				}
+			}
+		}
+		return b;
+	}
+	
+	function isDInSites(d){
+		var len = currentSites.length;
+		var b = true;
+		if(len==0){
+			b = true;
+		}else{
+			for(var i=0;i<len;i++){
+				if(d['id']==currentSites[i]['id']){
+					b = false;
+					return false;
+				}
+			}
+		}
+		return b;
+	}
+	
+	function isDInStates(d){
+		var len = states.length;
+		var b = true;
+		if(len==0){
+			b = true;
+		}else{
+			for(var i=0;i<len;i++){
+				if(d['id']==states[i]['id']){
+					b = false;
+					return false;
+				}
+			}
+		}
+		return b;
+	}
+</script>
+{% endblock content %}

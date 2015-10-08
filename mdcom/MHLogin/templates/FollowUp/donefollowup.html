@@ -1,0 +1,49 @@
+{% load i18n %}
+<thead>
+	<tr>
+		<th style="width:40px;" align='center'>{% trans "Done" %}</th>
+		<th style="width:70px;" align='center'>{% trans "Priority" %}</th>
+		<th style="width:115px;" align='left'>{% trans "Due Date" %}</th>
+		<th style="width:20px">&nbsp;</th>
+		<th style="width:520px;" align='left'>{% trans "Description" %}</th>
+		<th style="">&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+	{% if followups|length == 0 %}
+		<tr  class='nofollowup'><td colspan='7' align='center'>
+			<span>{% trans "Sorry, no follow-up tasks were found." %}</span>
+		</td></tr>
+	{% else %}
+		{% for followup in followups %}
+		<tr>
+			<td align="center" width='40'>
+				<input type="hidden" name="followupID" value="{{followup.id}}" />
+				<input type="checkbox" value="{{followup.id}}" name="taskdone_chkbox" {% if followup.done %}checked{% endif %}/>
+			</td>
+			<td width='70' style="{% if followup.done %}text-decoration:line-through;{% endif %}" align="center" class="priority_{{followup.priority}}">
+				{{followup.get_priority_display}}
+			</td>
+			<td width='115' style="{% if followup.done %}text-decoration:line-through;{% endif %}" align="left">
+				{{followup.due_date|date:"m/d/Y"}}
+			</td>
+			<td width='20' valign='top' class='description'>
+				<div class='bgTag bgDown'></div>
+			</td>
+			<td align='left' width='620' class='description' style="{% if followup.done %}text-decoration:line-through;{% endif %};">
+				{{followup.task}}
+				<div id='context{{followup.id}}' class='followupBody hidden'>
+					{{ followup.note|default:'(none)'|linebreaks }}
+				</div>
+			</td>
+			<td>
+				<div class="editBtns">
+					<div class="followupBtn buttonedit"></div>
+					<div class="followupBtn buttondel"></div>
+				</div>
+			</td>
+		</tr>
+		<tr class='hidden'><td><div id='followup_count'>{{followup_count}}</div></td></tr>
+		{% endfor %}
+	{% endif%}
+</tbody>

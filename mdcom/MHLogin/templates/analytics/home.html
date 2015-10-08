@@ -1,0 +1,32 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+
+<STYLE TYPE="text/css">
+
+BODY
+{
+    font-family:sans-serif;
+    text-align:left;
+    margin:5px;
+    padding:5px;
+}
+</STYLE>
+
+<div id="contact" style="margin:5px;padding:5px; text-align:left;">
+<p> 
+    <span style="font-size: 25px; font-weight: bold; vertical-align: text-bottom;">
+    {% trans "Analytics Home" %}
+</p>
+</div>
+
+<h2 style="margin:5px;padding:5px"><a href="map/">{% trans "Mapping" %}</a></h2>
+<h2 style="margin:5px;padding:5px"><a href="click2call/">{% trans "Click-to-Call" %}</a></h2>
+<h2 style="margin:5px;padding:5px;"><a href="invites/">{% trans "Invites" %}</a></h2>
+<h2 style="margin:5px;padding:5px"><a href="pages/">{% trans "Pages" %}</a></h2>
+<h2 style="margin:5px;padding:5px"><a href="summary/">{% trans "Summary" %}</a></h2>
+
+{% endblock %}

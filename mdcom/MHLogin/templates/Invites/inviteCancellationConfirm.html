@@ -1,0 +1,17 @@
+{# extends "Invites/base.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "New Invitation" %}{% endblock %}
+
+{% block content %}
+<div style="background-color:white;margin:20px 0;border:1px solid lightgray;padding:30px; text-align:left;" class="ui-corner-all">
+<h1>{% trans "Cancel Invitation" %}</h1>
+
+<p style="margin: 10px 0">{{ cancel_invitation_tip }}</p>
+
+<form action="." method="POST">
+<p><a href="../..">{% trans "No" %}</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<input type="submit" value="{% trans 'Yes' %}" /></p>
+</form>
+</div>
+{% endblock %}

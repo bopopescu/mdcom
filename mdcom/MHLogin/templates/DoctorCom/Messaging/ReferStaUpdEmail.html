@@ -1,0 +1,8 @@
+{% load i18n %}
+{% blocktrans with recipient_name|safe as recipient_name and sender_name|safe as sender_name and patient_name as patient_name and status as status and operator_name as operator_name and refuse_reason|safe as refuse_reason %}
+Dear {{recipient_name}},
+
+Your Referral to {{sender_name}} for patient {{patient_name}} was {{status}}.{{refuse_reason}}
+
+{% endblocktrans %}
+

@@ -1,0 +1,64 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+{% block content %}
+{%include 'includes/jquery.validate.html'%}
+<style type="text/css">
+#main ul.errorlist{margin-bottom:0px;margin-left:0px;}
+#main .errorlist li{ list-style:none; width:100%; margin-bottom:10px; position:relative;}
+</style>
+<div class='signup'>
+	<div class='head'>{% trans "Activate Account" %}
+		<span>
+			{% trans "Step 2 of 2" %}
+		</span>
+	</div>
+	<div class='content'>
+		<h3>{% trans 'Get Your DoctorCom Number' %}</h3>
+		<p class="info">{% trans "In order to provision your unique DoctorCom virtual phone number, please enter in your desired 3-digit area code and a PIN number for voicemail access. The PIN must be numeric and between 4 to 8 digits. Once you click on the submit button, a number will be allocated to you." %}</p>
+		<form action="." method="post" id='getDoctorNumber' class='getDoctorNumberForm'>{% csrf_token %}
+			{{form.area_code.errors}}
+			<li>
+				<label for="id_area_code">{% trans 'Your desired Area Code:' %}</label>
+				{{form.area_code}}
+			</li>
+			{{form.pin.errors}}
+			<li>
+				<label for="id_pin">{% trans 'PIN number for Voicemail:' %}</label>
+				{{form.pin}}
+			</li>
+			<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+			{{ previous_fields|safe }}
+			<div class="submit">
+			<input type="submit" class='submit' value='{% trans "Finish" %}'>
+		</div>
+		</form>
+	</div>
+</div>
+<script type='text/javascript'>
+$(function(){
+	$('#id_area_code').after('<span class="redstar">*</span>').attr('tabIndex','1');
+	$('#id_pin').after('<span class="redstar">*</span>').attr('tabIndex','2');
+	$('#getDoctorNumber .submit .submit').attr('tabIndex','3');
+	$('#getDoctorNumber').validate({
+		rules:{
+			area_code:{required:true,isAreaCode:true},
+			pin:{required:true,isPinCode:true}
+		},
+		messages:{
+			area_code:{
+				isAreaCode:'{% trans "Invalid area code. The first digit may only be 2-9, the second digit may only be 0-8, and the third digit may only be 0-9." %}'
+			},
+			pin:{
+				isPinCode:'{% trans "Incorrect length: Please enter four to eight digits." %}'
+			}
+		},
+		submitHandler:function(form){
+			$.ui.wait.start('Waiting...');
+			setTimeout(function(){
+				form.submit();
+			},1000);
+		}
+	});
+});
+</script>
+{% endblock content %}

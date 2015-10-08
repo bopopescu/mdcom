@@ -1,0 +1,13 @@
+Dear Manager,
+
+An urgent call with caller ID {{callerid}} was received on {{timestamp|date:'l, F d, Y'}} at {{timestamp|date:'h:i A'}}, at which time nobody was defined as being on-call.
+
+Ordinarily, we would have used your last on-call user, but it appears that nobody has ever been on call (or that all old on-calls have been deleted). As a result, the call could not be handled.
+
+We apologize for any inconvenience this may cause, and encourage you to contact us at support@mdcom.com with the following data
+    {{callsid}}
+    {{timestamp}}
+and we will be happy to assist you in any way we can.
+
+Best,
+DoctorCom Staff

@@ -1,0 +1,17 @@
+{% extends "tests/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Test in progress" %}{% endblock %}
+
+{% block content %}
+
+<h2>{% trans "The test is in progress" %}</h2>
+<p>{% trans "You will be prompted to please press the 1, 2, and 3 keys followed by the pound key. Please do
+so. Note that you will need to manually hang up at the end. This is because of what looks to be a
+Twilio bug." %}</p>
+
+<p>{% trans "The administrators have been automatically notified that this recording has
+taken place. If you'd like to email the administrators any information regarding
+this recording, please add a reference at the top to CallSID" %} {{sid}}.</p>
+
+{% endblock %}

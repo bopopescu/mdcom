@@ -1,0 +1,21 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customCSS %}
+.errorlist {color:red;}
+{% endblock %}
+
+{% block content %}
+<br/>
+<h2 style="text-align:left;">{% trans "Edit Profile" %}</h2>
+
+<form style="margin-top:5px" enctype="multipart/form-data" action="." method="POST">
+<table style="border:1px solid lightgray; width:700px;text-align:left;valign:top;">
+{{ user_form.as_table }}
+</table>
+<br/>
+<input type="submit" name="submit" value="{% trans 'Submit' %}" />
+</form>
+</div>
+{% endblock %}
+

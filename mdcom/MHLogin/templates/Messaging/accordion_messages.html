@@ -1,0 +1,60 @@
+		{% load i18n %}
+		<div id="accordion_messages" class="ui-widget">
+			<div class="header_messages ui-widget-header ui-corner-all followup_title">
+				<a href="#" style="text-decoration:none;">{% trans "Follow-Up Task List" %}</a>
+			</div>
+			<div id="followup_list_container" class="ui-widget-content">
+				<form>
+					{% trans "Add a New Follow-Up Task" %}: <input type="text" name="taskname"/>&nbsp;
+					{% trans "Due" %}: <input type="text" id="datepicker" name="duedate"/>&nbsp;
+					{% trans "Priority" %}: <select id="id_priority" name="priority">
+									<option value="1">{% trans "High" %}</option>
+									<option value="5" selected="selected">{% trans "Med" %}</option>
+									<option value="10">{% trans "Low" %}</option>
+								</select>&nbsp;
+					<input type="button" id="followup_add_button" value="{% trans 'Add' %}"/>
+				</form>
+				<div id="donefollowup">
+					<table id="followup_table" border="0" cellspacing="0" cellpadding="0">
+						
+					</table>
+					<div id="followup_pagation"  class="nav hidden">
+						<table>
+							<tr>
+								<td><div class="pagniation"></div></td>
+								<td>
+									<div class="selectPagePer">
+										<select>
+											<option value="10" selected="selected">10</option>
+											<option value="15">15</option>
+											<option value="20">20</option>
+											<option value="25">25</option>
+											<option value="30">30</option>
+											<option value="50">50</option>
+										</select>
+										<span>{% trans "per page" %}</span>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="header_messages ui-widget-header ui-corner-all">
+				<a href="#" style="text-decoration:none;">{% trans "Recently Received Messages" %}
+					<span id="newMsg" class="newMsg"></span>
+				</a>
+			</div>
+			<div class="ui-widget-content" style="margin-top:-3px;">
+			
+			{%include 'Messaging/dashboard_received.html'%}
+
+			</div>
+			<div class="header_messages ui-widget-header ui-corner-all">
+			<a href="#" style="text-decoration:none;">{% trans "Recently Sent Messages" %}</a></div>
+			<div class="ui-widget-content" style="clear:both;">
+			
+			{%include 'Messaging/dashboard_sent.html'%}
+
+			</div>
+		</div>

@@ -1,0 +1,84 @@
+{% load i18n %}
+{% include "MHLOrganization/Information/org_js.html" %}
+
+<script>
+	$(function(){
+		var saveOrg = function(){
+			var practice_name = $("#id_practice_name").val();
+			var organization_type = $("#id_organization_type").val();
+			var parent_org_ids = $("#id_parent_org_ids").val();
+	
+			$.comAjax({
+				url: "/Organization/Save/",
+				type:'POST',
+				data: {
+					'organization_type': organization_type, 
+					'practice_name': practice_name,
+					'parent_org_ids': parent_org_ids
+				},
+				success:function(data, status){
+					if(data.org_id){
+						CURRENTORGID = data.org_id;
+						RefreshTree();
+					} else {
+						RefreshRight(data);
+					}
+				}
+			});
+		};
+		
+		$("#orgSave").click(function(){
+			saveOrg();
+		});
+
+		$("#id_parent_org_ids").change(function(){
+			OrgAdd();
+		});
+		
+		$('#id_practice_name').keypress(function(event){
+			if(event.which == 13){ //enter
+				saveOrg();
+			}
+		});
+	});
+</script>
+
+<div id="divOrgAdd" class="org-no-tab-content">
+<div id="orgAddTitle">{% trans "Create an Organization" %}</div>
+	<div id="orgAddContent">
+		<table>
+			<tr>
+				<td>
+					{% trans "Parent" %}
+				</td>
+				<td>
+					{{ form.parent_org_ids|safe }}
+					{{ form.parent_org_ids.errors }}
+					
+				</td>
+			</tr>
+			<tr>
+				<td>
+					{% trans "Type" %}
+				</td>
+				<td>
+					{{ form.organization_type }}
+					{{ form.organization_type.errors }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					{% trans "Name" %}
+				</td>
+				<td>
+					{{ form.practice_name }}
+					{{ form.practice_name.errors }}
+				</td>
+			</tr>
+		</table>
+	
+		<div>
+			<input id="orgSave" type="button" value="Save" />
+		</div>
+	</div>
+</div>

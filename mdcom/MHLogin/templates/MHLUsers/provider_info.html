@@ -1,0 +1,204 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<script type="text/javascript">
+	$(function(){
+		var fullname=$('.fullname').html().trim();
+		if (fullname.length > 45){
+			fullname=fullname.slice(0,42)+"...";
+			$('.fullname').html(fullname);
+		}
+	})
+</script>
+<div id="providerInfo" style="background-color:white;margin:20px 0;border:1px solid lightgray; text-align:left;" class="ui-corner-all">
+	<div class = 'userInfo'>{% trans "User Information" %}</div>
+	<div class="clearfix doc_info" id="profile-content-header">
+		<div class="fleft logo">
+			<img src="{{photo}}" alt='{% trans "No Image Provided" %}' style="border:solid 7px lightblue; max-height: 130px; max-width: 100px;">
+		</div>
+		<div class="fright">
+			<div class="doc_tit">
+				<div class="user_info_left">
+					<div class="user_info_left_up">
+						<span class="fullname" title="{{fullname}}" >{{fullname}}</span>
+						<div class="favorite-btn {%if is_favorite %}is_favorite{% endif %}"
+							 title="{%if is_favorite %}{% trans "Remove from My Favorites" %}{% else %}{% trans "Add to My Favorites" %}{% endif %}"
+							 onclick="toggleFavorite(this, 1, {{mhluser_id}});">
+						</div>
+					</div>
+				</div>
+				<div>
+					<span id="userInfoDialog"> 
+					<span class="buttons" style="width: auto;">
+						{% if can_send_refer %}
+							{% if refer_available %}
+							<a href="/Messages/Refer/?user_recipients={{ provider.user.id }}">
+								<div class="button btnShow buttonMsgAble btnRefer" title="Send refer.">
+									{% trans "Refer" %}
+								</div> 
+							</a> 
+							{%else%}
+								<div class="button btnShow btnRefer buttonReferDisable">
+									{% trans "Refer" %}
+								</div> 
+							{%endif%}
+						{% endif %}
+						<a href="/Messages/New/?user_recipients={{ provider.user.id }}">
+							<div class="button btnShow buttonMsgAble" title='{% trans "Click to send text message." %}'>
+								{% trans "msg" %}
+							</div> 
+						</a> 
+						{% if pager_available %} 
+						<a href="/Page/{{ provider.user.id }}/">
+							<div class="button btnShow buttonPageAble" title='{% trans "Click to page." %}'>
+								{% trans "page" %}
+							</div> 
+						</a> 
+						{% else %}
+							<div class="button btnShow buttonPageDisable textDisable">
+								{% trans "page" %}
+							</div> 
+						{% endif %}
+						{% if call_available %} 
+						<a href="/Call/{{ provider.user.id }}/">
+							<div class="button btnShow buttonPhoneAble" title='{% trans "Click to phone." %}'>
+								{% trans "call" %}
+							</div> 
+						</a> 
+						{% else %}
+							<div class="button btnShow buttonPhoneDisable textDisable">
+								{% trans "call" %}
+							</div> 
+						{% endif %} 
+					</span> 
+					</span>
+				</div>
+			</div>
+			<table class="doc_main">
+				<tr>
+					<td width="140"><b>{% trans "Office Address:" %} </b></td>
+					<td>{% if provider.user.address1 %}
+					{{provider.user.address1}}
+					{% if provider.user.address2 %}{{provider.user.address2}}{% endif %}
+					{{ provider.user.city }}, {{ provider.user.state }} {{ provider.user.zip }}
+					{% else %}
+					{% trans "(Not Given)" %}
+					{% endif %} </td>
+				</tr>
+				{% if not provider.user.clinical_clerk %}
+				<tr>
+					<td><b>{% trans "Specialty:" %} </b></td>
+					<td>{% if specialty %}{{specialty}}{% endif %}</td>
+				</tr>
+				{% endif %}
+				<tr>
+					<td><b>{% trans "State(s) of Licensure:" %} </b></td><td>{{states_of_licensure}}</td>
+				</tr>
+				<tr>
+					<td><b>{% trans "Gender:" %} </b></td>
+					<td>{{provider.user.gender}}</td>
+				</tr>
+				{% if physician %}
+				<tr>
+					<td><b>{% trans "Accepting new patients:" %} </b></td>
+					<td>{{accepting_new_patients}}</td>
+				</tr>
+				<tr>
+					<td><b>{% trans "Specialty:" %}</b></td><td> {{specialty}}</td>
+				</tr>
+				<tr>
+					<td><b>{% trans "Staff Type:" %}</b></td><td> {{staff_type}}</td>
+				</tr>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+	<div class="col_table" id="profile-content-table">
+		<div class="col_table_tit clearfix">
+			<h3>{% trans "Sites" %}</h3>
+		</div>
+		<div class="table_style col_table_body">
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<th width="80" class="firstTD">{% trans "Current?" %}</th>
+					<th width="230">{% trans "Name" %}</th>
+					<th width="220">{% trans "Address" %}</th>
+					<th width="170">{% trans "City" %}</th>
+					<th>{% trans "State" %}</th>
+				</tr>
+				{% for site in provider.user.sites.all %}
+				<tr style="background:#F6F7FF">
+					<td class="firstTD"> {% ifequal site user_current_site %}
+					{% trans "Yes" %}
+					{% else %}
+					&nbsp;
+					{% endifequal %} </td>
+					<td>{{ site.name }}</td>
+					<td>{{ site.address1 }}{% if site.address2 %}, {{site.address2}}{% endif %}</td>
+					<td>{{ site.city }}</td>
+					<td>{{ site.state }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<div class="col_table mtop" id="profile-content-mtop">
+		<div class="col_table_tit clearfix">
+			<h3>{% trans "Practices" %}</h3>
+		</div>
+		<div class="table_style col_table_body">
+			<table cellspacing="0" cellpadding="0">
+				<tr>
+					<th width="80" class="firstTD">{% trans "Current?" %}</th>
+					<th width="230">{% trans "Name" %}</th>
+					<th width="220">{% trans "Address" %}</th>
+					<th width="170">{% trans "City" %}</th>
+					<th>{% trans "State" %}</th>
+				</tr>
+				{% for practice in provider.user.practices.all %}
+				<tr style="background:#F6F7FF">
+					<td class="firstTD"> {% ifequal practice user_current_practice %}
+					{% trans "Yes" %}
+					{% else %}
+					&nbsp;
+					{% endifequal %} </td>
+					<td>{{ practice.practice_name }}</td>
+					<td>{{ practice.practice_address1 }}{% if practice.practice_address2 %}, {{practice.practice_address2}}{% endif %}</td>
+					<td>{{ practice.practice_city }}</td>
+					<td>{{ practice.practice_state }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	
+	<div class="col_table mtop mbottom" id="profile-content-mbottom">
+        <div class="col_table_tit clearfix">
+            <h3>{% trans "Other Organizations" %}</h3>
+        </div>
+            <div class="table_style col_table_body">
+            <table cellspacing="0" cellpadding="0">
+            <tr>
+                <th width="80" class="firstTD">{% trans "Current?" %}</th>
+                <th width="230">{% trans "Name" %}</th>
+                <th width="220">{% trans "Address" %}</th>
+                <th width="170">{% trans "City" %}</th>
+                <th>{% trans "State" %}</th>
+            </tr>
+            
+            {% for org in other_orgs %}
+            <tr>
+                <td class="firstTD">
+                </td>
+                <td>{{ org.name }}</td>
+                <td>{{ org.address1 }}{% if org.address2 %}, {{org.address2}}{% endif %}</td>
+                <td>{{ org.city }}</td>
+                <td>{{ org.state }}</td>
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 

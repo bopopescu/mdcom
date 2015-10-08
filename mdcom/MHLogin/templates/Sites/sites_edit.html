@@ -1,0 +1,72 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+    <div style="margin-left:40px; margin-top:-60px;">
+		<p class="header" style="font-size:14px;font-weight:bold;">{% trans "Welcome," %} {{ mhl_user_displayName }}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Current location:" %} <b>{{ current_site.name }}</b> <a href="/Sites/">{% trans "Click here" %}</a> {% trans "to change." %}</p>
+		<p class="header" style="margin-left:0px;margin-top:-13px;">{% trans "Contact phone number:" %} <b>{{ profile.mobile_phone }}</b>. <a href="/Profile/Edit/">{% trans "Click here" %}</a> {% trans "to change." %}</p>
+    </div>
+
+
+{% block content %}
+<div id="sitesEdit" class="ui-corner-all">
+<h2 style="margin-bottom: 5px;">{% trans "Change Current Sites" %}</h2>
+<span style="margin-left:10px;font-size:.8em;color:#999;">
+	{% trans "Of the list of hospitals and sites you are affiliated with, please select the site that you are currently working at." %}
+</span>
+<form action="." method="POST">
+{{ site_form.current }}
+<input type="submit" name="submit" value="{% trans "Submit" %}"  class="submit1" />
+</form>
+
+<br />
+<h2>{% trans "Manage Site Affiliation" %}</h2>
+
+{% comment %}
+<div style="margin-left:30px;margin-bottom:20px;">
+<form action="." method="POST">
+{% trans "Search by" %}
+<select id="searchby" name="searchby"> 
+	<option value="name">{% trans "Name" %}</option>
+	<option value="city">{% trans "City" %}</option>
+	<option value="zip">{% trans "Zipcode" %}</option>
+	<option value="proximity">{% trans "Proximity (miles)" %}</option>
+</select>
+<input type="text" name="searchbyvalue"/>
+<input type="submit" name="submit_search_criteria" value= "Search for Sites/Hospitals" />
+</form>
+</div>
+{% endcomment %}
+
+<form action="." method="POST">
+<table border="0">
+<tr><td id="affiliation_form">
+{{ affiliation_form.record_key }}
+{{ affiliation_form.site_list }}
+</td><td style="padding-left: 15px;width:300px;margin-left:10px;margin-top:5px;font-size:.8em;color:#999;">
+
+{% comment %}
+<p>{% trans "Use this field to select the various hospitals or sites you work at or otherwise do business at. Hold down control (command/apple on Macs) to select mutliple." %}</p>
+{{siteForm.sites.help_text}}
+{% endcomment %}
+{% if affiliation_form.site_list.errors %}
+<span class="error_description" style="font-size:13px; color: red;">{% trans "Error:" %} {{affiliation_form.site_list.errors}}</span>
+{% endif %}
+<br /><br />
+</td></tr>
+</table>
+<br />
+<input type="submit" name="submit" value="{% trans "Submit" %}" />
+
+</form>
+
+{% comment %}
+<form action="." method="POST">
+{{ new_affiliation_form.new_sites_list }}
+{{ new_affiliation_form.sites }}
+<input type="submit" name="submit" value="{% trans "Submit" %}" />
+</form>
+{% endcomment%}
+
+</div>
+{% endblock %}

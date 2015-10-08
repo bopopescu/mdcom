@@ -1,0 +1,236 @@
+{% extends "public_base.html" %}
+{% load i18n %}
+
+{% block extrastyle %}
+<style>
+    li {padding-top: 4px; }
+</style>
+{% endblock %}
+
+{% block title %}{% trans "End User License Agreement" %}{% endblock %}
+
+{% block content %}
+
+    <h1>{% trans "End User License Agreement" %}</h1>
+    <h3>
+        {% blocktrans %}
+        This End User License Agreement ("Agreement") is a binding legal contract between you
+        (either an individual or a legal entity) and DoctorCom, Inc. ("DoctorCom").  By downloading,
+        installing, accessing or using the accompanying software (the "Application") you will be 
+        bound by the terms of this Agreement.  If you do not agree to the terms of this Agreement,
+        DoctorCom is not willing to grant you any right to use or access the Application to you.
+        In such event, you may not download, install, access, use or copy the Application.
+        {% endblocktrans %}
+    </h3>
+    <h4>    
+        {% blocktrans %}
+        The Application is licensed to you, not sold. Except for the limited license granted in 
+        this Agreement, DoctorCom and its licensors retain all right, title and interest in the 
+        Application and all proprietary rights in the Application, including copyrights, patents, 
+        trademarks and trade secret rights.  
+        {% endblocktrans %}
+    </h4>    
+
+    <ol>  
+    <li>
+        {% blocktrans %}
+        <strong>Grant of License.</strong>  DoctorCom grants you a revocable, nontransferable 
+        (except as provided below), nonexclusive license to use the object code version of the 
+        Application for use on your mobile device.  
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Limitations On License.</strong>  The license granted to you in this 
+        Agreement is restricted as follows:
+        {% endblocktrans %}
+        <ul>
+        <li>
+            {% blocktrans %}
+            <strong>Limitations on Copying and Distribution.</strong>You may not copy or distribute 
+            the Application except to the extent that copying is necessary to use the Application 
+            for purposes set forth herein.          
+            {% endblocktrans %}
+        </li>
+        <li>
+            {% blocktrans %}
+            <strong>Limitations on Reverse Engineering and Modification.</strong>  You may 
+            not reverse engineer, decompile, disassemble, modify or create works derivative 
+            of the Application.
+            {% endblocktrans %}
+        </li>
+        <li>
+            {% blocktrans %}
+            <strong>Sublicense, Rental and Third Party Use.</strong>  You may not assign, 
+            sublicense, rent, timeshare, loan, lease or otherwise transfer the Application, 
+            or directly or indirectly permit any third party to use or copy the Application. 
+            {% endblocktrans %}
+        </li>
+        <li>
+            {% blocktrans %}
+            <strong>Proprietary Notices.</strong>  You may not remove any proprietary notices 
+            (e.g., copyright and trademark notices) from the Application.        
+            {% endblocktrans %}
+        </li>
+        <li>
+            {% blocktrans %}
+            <strong>Use in Accordance with Documentation.</strong>  All use of the Application 
+            must be in accordance with its then current documentation.
+            {% endblocktrans %}
+        </li>
+        <li>
+            {% blocktrans %}
+            <strong>Compliance with Applicable Law.</strong> You are solely responsible for 
+            ensuring your use of the Application is in compliance with all applicable foreign, 
+            federal, state and local laws, and rules and regulations.          
+            {% endblocktrans %}
+        </li>
+        </ul>
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Account Set-Up.</strong>  You agree to: (a) provide true, accurate, current, 
+        and complete information when registering to use the Application and establishing your
+        account ("Registration Information") and (b) maintain and promptly update the Registration 
+        Information to keep it true, accurate, current, and complete. If you provide any 
+        information that is untrue, inaccurate, not current, or incomplete, or DoctorCom 
+        has reasonable grounds to suspect that such information is untrue, inaccurate, 
+        not current, or incomplete, DoctorCom may suspend or terminate your account. You 
+        are entirely responsible for maintaining the confidentiality of any passwords and 
+        any usage and activities that occur in connection with your account. You agree not
+        to allow others to access your account or utilize your password.
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Fees.</strong>  You agree to pay the license fees for the rights as set forth 
+        in the separate Order Form or similar ordering document provided by DoctorCom describing 
+        the license fees and any other fees owed by you. All fees are non-cancellable and non-refundable.
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Termination.</strong>  This license will automatically terminate in the event 
+        you breach any of its terms.  In the event of a claim of intellectual property infringement 
+        by any third party relating to the Application, DoctorCom may immediately terminate 
+        this Agreement.
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Privacy.</strong>  DoctorCom recognizes the importance of respecting the privacy
+        of those who visit its websites. The DoctorCom <a href="/privacy">Privacy Policy</a> 
+        provides a description of how DoctorCom collects, uses, shares and protects personal 
+        information on its website, as well as the choices and access rights you have in regards 
+        to such personal information.
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Website Terms of Use.</strong>  Your use of the DoctorCom website and services 
+        available through the website are governed by DoctorCom's Website 
+        <a href="/terms">Terms of Use.</a>
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Location-Enabled Features.</strong>  Certain location-enabled functionality
+        made available in the Application is provided by Yahoo Inc. ("Yahoo").  Your use of
+        that functionality is subject to Yahoo's terms and conditions, available at:
+        http://info.yahoo.com/privacy/us/yahoo/location/ (as updated from time to time).  You
+        must exercise your own judgment as to the adequacy and appropriateness of the information.
+        All location-based information is provided entirely "as-is" without warranties of any kind.
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Warranty Disclaimer.</strong>  THE APPLICATION IS PROVIDED ON AN "AS AVAILABLE", 
+        "AS IS" BASIS.  TO THE MAXIMUM EXTENT PERMITTED BY LAW, DOCTORCOM AND ITS LICENSORS 
+        DISCLAIM ALL WARRANTIES WITH RESPECT TO THE APPLICATION, INCLUDING, BUT NOT LIMITED TO, 
+        THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, TITLE, MERCHANTABILITY, QUITE ENJOYMENT, 
+        QUALITY OF INFORMATION, AND FITNESS FOR A PARTICULAR PURPOSE.  DOCTORCOM DOES NOT WARRANT
+        THAT THE APPLICATION WILL MEET YOUR REQUIREMENTS, OR THAT THE OPERATION OF THE APPLICATION 
+        WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT DEFECTS IN THE APPLICATION WILL BE CORRECTED.
+        YOUR WIRELESS CARRIER, THE MANUFACTURER AND RETAILER OF YOUR MOBILE DEVICE, THE DEVELOPER 
+        OF THE OPERATING SYSTEM FOR YOUR MOBILE DEVICE, AND THE OPERATOR OF ANY APPLICATION STORE 
+        OR SIMILAR SERVICE THROUGH WHICH YOU OBTAIN THE APPLICATION (COLLECTIVELY, THE "THIRD PARTIES") 
+        ARE NOT PARTIES TO THIS AGREEMENT AND THEY DO NOT OWN AND ARE NOT RESPONSIBLE FOR THE 
+        APPLICATION.  YOU AGREE (I) THE THIRD PARTIES DISCLAIM ALL WARRANTIES, EXPRESS AND IMPLIED, 
+        WITH RESPECT TO THE APPLICATION, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+        OF NON-INFRINGEMENT, TITLE, MERCHANTABILITY, QUIET ENJOYMENT, QUALITY OF INFORMATION, 
+        AND FITNESS FOR A PARTICULAR PURPOSE; (II) IN NO EVENT WILL THE THIRD PARTIES BE LIABLE 
+        TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, PUNITIVE, EXEMPLARY, INCIDENTAL, 
+        SPECIAL, OR CONSEQUENTIAL DAMAGES (WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), 
+        OR OTHERWISE) ARISING OUT OF THIS AGREEMENT OR THE APPLICATION, EVEN IF THEY HAVE BEEN 
+        ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR LOSSES; (III) IN ANY EVENT, THE MAXIMUM 
+        LIABILITY OF ANY THIRD PARTY FOR ALL CLAIMS (WHETHER IN CONTRACT, TORT (INCLUDING 
+        NEGLIGENCE), OR OTHERWISE) OF EVERY KIND WILL IN NOT EXCEED FIVE DOLLARS ($5.00); 
+        AND (IV) YOU WAIVE ANY AND ALL CLAIMS, NOW KNOWN OR LATER DISCOVERED, THAT YOU MAY HAVE 
+        AGAINST THE THIRD PARTIES ARISING OUT OF THE APPLICATION AND THIS AGREEMENT.
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Medical Disclaimer.</strong> Any content transferred by, or included on, the 
+        Application, including without limitation, text, copy, audio, video, photographs, 
+        illustrations, graphics and other visuals, or any medical information or records is 
+        for informational purposes only and does not constitute professional medical advice, 
+        diagnosis, treatment or recommendations of any kind and should not be used to make 
+        final or determinative medical decisions or treatment decisions. You should always 
+        review and analyze all original medical records or test information prior to providing 
+        professional medical treatment. Reliance on any information appearing on or transferred 
+        to the Application, whether provided by the Company, its content provides, its clients, 
+        or others, is solely at your own risk.
+        {% endblocktrans %}
+    </li>
+    <li>
+        {% blocktrans %}
+        <strong>Limitation Of Liability.</strong>  TO THE MAXIMUM EXTENT PERMITTED BY LAW, 
+        IN NO EVENT WILL DOCTORCOM OR ITS SUPPLIERS/LICENSORS BE LIABLE TO YOU OR ANY THIRD 
+        PARTY FOR ANY DIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, OR INDIRECT DAMAGES 
+        (WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE), WHICH INCLUDE, 
+        WITHOUT LIMITATION, DAMAGES FOR PERSONAL INJURY, LOST PROFITS, LOST DATA AND BUSINESS 
+        INTERRUPTION, ARISING OUT OF THE USE OR INABILITY TO USE THE APPLICATION, EVEN IF 
+        DOCTORCOM HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  IN ANY CASE, THE ENTIRE 
+        LIABILITY OF DOCTORCOM AND ITS SUPPLIERS/LICENSORS UNDER THIS AGREEMENT FOR ALL DAMAGES, 
+        LOSSES, AND CAUSES OF ACTION (WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR 
+        OTHERWISE) IS LIMITED TO THE PAID BY YOU, IF ANY, FOR THE APPLICATION.</br>
+        Some states do not allow the exclusion of incidental or consequential damages, or the 
+        limitation on how long an implied warranty lasts, so some of the above may not apply to you.
+        {% endblocktrans %}
+    </li>
+    <li>                    
+        {% blocktrans %}
+        <strong>General.</strong> This Agreement will be construed, interpreted, and performed 
+        exclusively according to the laws of the State of California, United States of America, 
+        without giving effect to any principles of conflicts of law.  Any action at law or in 
+        equity arising out of or directly or indirectly relating to this Agreement may be instituted 
+        only in the Federal or state courts located in Santa Clara, California. You and DoctorCom 
+        consent and submit to the personal jurisdiction of those courts for the purposes of any 
+        action related to this Agreement, and to extra-territorial service of process. You agree 
+        that regardless of any statute or law to the contrary, any claim or cause of action that 
+        you may have arising out of or related to this Agreement must be filed within one (1) year 
+        after the claim or cause of action arose.  This Agreement constitutes the entire understanding 
+        and agreement between DoctorCom and you with respect to the transactions contemplated in this 
+        Agreement and supersedes all prior or contemporaneous oral or written communications with 
+        respect to the subject matter of this Agreement, all of which are merged in this Agreement.  
+        This Agreement shall not be modified, amended or in any way altered except by an instrument 
+        in writing signed by authorized representatives of both parties.  In the event any provision 
+        of this Agreement is found invalid or unenforceable pursuant to judicial decree, the remainder 
+        of this Agreement will remain valid and enforceable according to its terms.  Any failure by 
+        DoctorCom to strictly enforce any provision of this Agreement will not operate as a waiver 
+        of that provision or any subsequent breach of that provision.  The disclaimers and limitations 
+        of liability will survive any termination or expiration of this Agreement.  This Agreement may 
+        be accepted in electronic form (e.g., by an electronic or other means of demonstrating assent) 
+        and your acceptance will be deemed binding between you and DoctorCom. Neither you nor DoctorCom 
+        will contest the validity or enforceability of this Agreement, including under any applicable 
+        statute of frauds, because it was accepted or signed in electronic form. Electronically 
+        maintained records when produced in hard copy form shall constitute business records and shall 
+        have the same validity as any other generally recognized business records.  
+        <strong>IT IS EXPRESSLY UNDERSTOOD AND AGREED THAT IN THE EVENT ANY REMEDY HEREUNDER IS 
+        DETERMINED TO HAVE FAILED OF ITS ESSENTIAL PURPOSE, ALL LIMITATIONS OF LIABILITY AND 
+        EXCLUSIONS OF DAMAGES WILL REMAIN IN EFFECT.</strong>
+         {% endblocktrans %}
+    </li>                    
+    </ol>    
+{% endblock %}

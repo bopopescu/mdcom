@@ -1,0 +1,90 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Click-2-Call" %} - {{period}}{% endblock %}
+
+{% block content %}
+<p align='right'><a href="/analytics/">{% trans "Analytics Home" %}</a></p>
+
+<STYLE TYPE="text/css">
+BODY
+{
+    font-family:sans-serif;
+    text-align:left;
+    margin:5px;
+    padding:5px;
+}
+</STYLE>
+
+<h1 style="margin:5px;padding:5px; text-align:left;">{% trans "Click-2-Call" %}: {{period}}</h1>
+
+<ul style="margin:5px;padding:5px; text-align:left;">
+{{date_form}}
+</ul>
+
+<p style="margin:5px;padding:5px; text-align:left;"><b>{% trans "Total Call Count" %}: {{call_total}}</b></p>
+
+<table border="0">
+<td>
+    <h2 style="margin:5px;padding:5px; text-align:left;">{% trans "Top 10 Callers" %}</h2>
+    <table border="1">
+        <tr>
+        	<th>{% trans "Name" %}</th>
+        	<th>{% trans "Count" %}</th>
+        </tr>
+        {% for caller in top10_callers %}
+            <tr>
+            	<td>{{caller.0.first_name}} {{caller.0.last_name}}</td>
+            	<td>{{caller.1}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</td>
+<td width="125px">&nbsp;</td>
+<td>
+    <h2 style="margin:5px;padding:5px; text-align:left;">{% trans "Top 10 Called (call recipients)" %}</h2>
+    <table border="1">
+        <tr>
+        	<th>{% trans "Name" %}</th>
+        	<th>{% trans "Count" %}</th>
+        </tr>
+        {% for called in top10_called %}
+            <tr>
+            	<td>{{called.0.first_name}} {{called.0.last_name}}</td>
+            	<td>{{called.1}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</td>
+</table>
+
+<br/><h2 style="margin:5px;padding:5px; text-align:left;">{% trans "Call Data" %}</h2>
+
+<p style="margin:5px;padding:5px; text-align:left;">
+{% blocktrans %}
+Note: Success is defined as connecting the call through to the receiving
+(called) party. Unsuccessful calls will occur when the caller fails to 
+self-identify as a human, or otherwise aborts the call before we attempt to
+connect them to the other party. In other words, failure doesn't necessarily
+imply failure on our part -- just failure for the connection to be completed.
+{% endblocktrans %}
+</p>
+
+<table border="1">
+<tr>
+    <th>{% trans "Caller" %}</th>
+    <th>{% trans "Called" %}</th>
+    <th>{% trans "Date" %}</th>
+    <th>{% trans "Time" %}</th>
+</tr>
+{% for call in calls_detail %}
+    <tr>
+        <td>{{call.0}}</td>
+        <td>{{call.1}}</td>
+        <td>{{call.2}}</td>
+        <td>{{call.3}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

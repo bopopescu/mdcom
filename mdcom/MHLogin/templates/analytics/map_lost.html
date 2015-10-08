@@ -1,0 +1,109 @@
+{% load i18n %}
+
+{% block content %}
+
+<p>
+<div id="lost_clients" style="font-size: 25px; font-weight: bold; vertical-align: text-bottom;">
+</div>
+</p>
+
+<style type="text/css">
+    html { height: 100% }
+    body { height: 90%; margin-left: 20; margin-right: 20; padding: 0 }
+</style>
+
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlx.css">
+<script src="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlx.js"></script>
+<script src="{{STATIC_URL}}js/dhtmlx_pro_full/dhtmlxgrid_hextra.js"></script>
+
+<script type="text/javascript">
+    var titleText = '{% trans "Analytics Mapping - Lost Clients:" %}';
+    /* Initialize controls */
+    function initialize() 
+    {
+        var grid = new dhtmlXGridObject('gridbox');
+        var platform = navigator.platform.toLowerCase(); 
+
+        grid.setHeader("First name,Last name,Mobile,Phone,Email,Latitude,Longitude");
+        grid.setColumnIds("first_name,last_name,mobile_phone,phone,email,lat,longit");
+        grid.setColTypes("ed,ed,ed,ed,ed,ed,ed");
+        grid.enableAutoWidth(true);
+        grid.setColumnMinWidth("75,75,75,75,75,40,40");
+        grid.setColSorting("str,str,str,str,str,str,str");    // set sorting
+        grid.setImagePath("{{STATIC_URL}}js/dhtmlx_pro_full/imgs/");
+        grid.enableTooltips("false");
+        grid.preventIECaching(true);    // for at least Chrome as well
+        grid.attachEvent("onEditCell", function (stage, row, col) 
+        {
+            return (stage != 2) ? true : false;
+        });
+
+        grid.init();
+
+        // add devices as needed, mobiles don't work well with default edit settings
+        if (platform == "ipad" ||  platform == "iphone" || platform == "ipod")
+            grid.enableEditEvents(true, true, false);
+
+        sendLostRequest(grid);
+    }
+
+    /* send the geocode request to the server */
+    function sendGeocodeRequest(grid)
+    {
+        var grid = document.getElementById("gridbox").grid;
+
+        var xmlHttp = new XMLHttpRequest(); 
+        xmlHttp.onreadystatechange = function()
+        {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) 
+            {
+                var resp = eval('(' + xmlHttp.responseText + ')');
+                grid.clearAll();
+                grid.parse(resp.lost, "jsarray");
+                var lc = document.getElementById("lost_clients");
+                lc.innerText = titleText + " " + resp.lost.length;
+                // disable button so we need to refresh to display new lost users
+                document.getElementById("buttongeocode").disabled = true;
+            }
+        }
+        xmlHttp.open("GET", "/analytics/map/get_lost_list/?geocode=true", false);
+        xmlHttp.send(null);
+    }
+
+    /* Helper to send a request message to server and process response */
+    function sendLostRequest(grid)
+    {
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = function()
+        {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) 
+            {
+                var resp = eval('(' + xmlHttp.responseText + ')');
+                grid.parse(resp.lost, "jsarray");
+                var lc = document.getElementById("lost_clients");
+                lc.innerText = titleText + " " + resp.count;
+            }
+        }
+        xmlHttp.open("GET", "/analytics/map/get_lost_list/", false);
+        xmlHttp.send(null);
+    }
+    
+    /* Display error for dataprocessor */
+    function handle_error(obj)
+    {
+        alert('Error: ' + obj.firstChild.data);
+        return false;
+    }
+    
+</script>
+
+<body bgcolor=silver onload="initialize()">
+    <div id="gridbox" style="width:100%;height:75%;background-color:white;overflow:hidden"></div>
+    <div id="button_panel" style="text-align:center;padding:20">
+        <input type="button" value="Geocode" id="buttongeocode" onclick="sendGeocodeRequest()"</input>
+    </div>
+</body>
+
+{% endblock %}
+

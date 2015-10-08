@@ -1,0 +1,11 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div style="width:800px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">
+
+<h2>{% trans "You are now paging" %} {{paged.user.first_name}} {{paged.user.last_name}}.</h2>
+
+</div>
+{% endblock %}
+

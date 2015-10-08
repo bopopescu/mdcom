@@ -1,0 +1,18 @@
+{% load i18n %}
+{% blocktrans %}
+Dear {{name}},
+
+
+Congratulation! {{sender}} created a DoctorCom account for you.
+User name:{{username}}
+Email address:{{email}}
+Please don't worry--you can change your email address and other personal information after you activated your account.
+
+Just click the following link to activate your account.
+{{protocol}}://{{address}}/Active/?activeCode={{code}}&email={{email}}
+
+If you have any issues, please contact us at support@mdcom.com
+
+Best,
+DoctorCom Staff
+{% endblocktrans %}

@@ -1,0 +1,21 @@
+{% extends "Administration/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Invitations" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "User Administration" %}</h2>
+<ul>
+	<li><a href="Physician/New/">{% trans "Add a New Doctor to DoctorCom" %}</a></li>
+	<li><a href="Provider/New/">{% trans "Add a New Provider to DoctorCom" %}</a></li>
+	<li><a href="/dcAdmin/Invitations/">{% trans "Invitations" %}</a></li>
+	<ul>
+		<li><a href="/dcAdmin/Invitations/New/">{% trans "Send an Invitation to Join DoctorCom" %}</a></li>
+	</ul>
+</ul>
+
+<h2>{% trans "System Administration" %}</h2>
+<ul>
+	<li><a href="/admin/">{% trans "System Administration" %}</a></li>
+</ul>
+{% endblock %}

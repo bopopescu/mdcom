@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Scheduler Home" %}</h1>
+
+<h2>{% trans "Events" %}</h2>
+<ul>
+	<li><a href="Schedule/">{% trans "Scheduler" %}</a></li>
+</ul>
+<p><b>{% trans "Note" %}:</b> {% trans "For testing only, use urls below." %}</p>
+
+<h2>{% trans "Scheduler Functions" %}</h2>
+<ul>
+	<li><a href="getEvents/">{% trans "Events List by date range" %}</a></li>
+	<li><a href="getEventsByOncall/">{% trans "Get events by On Call" %}</a></li>
+	<li><a href="getCurrentEvents/">{% trans "Get current Events" %}</a></li>
+	<li><a href="getPrimaryOncall/">{% trans "Get primary Oncall" %}</a></li>
+	<li><a href="scheduleEvent/">{% trans "Schedule New Event" %}</a></li>
+	<li><a href="updateEvent/">{% trans "Update an Event by ID" %}</a></li>
+	<li><a href="deleteEvent/">{% trans "Delete an Event by ID" %}</a></li>
+	<li><a href="rulesCheck/">{% trans "Schedule rules check - call with callgroupid" %}</a></li>
+	<li><a href="bulkNewEvents/">{% trans "Bulk create new events - call with callgroupid" %}</a></li>
+	<li><a href="bulkUpdateEvents/">{% trans "Bulk update events - call with callgroupid" %}</a></li>	
+</ul>
+{% endblock %}

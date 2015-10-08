@@ -1,0 +1,65 @@
+{# extends "Invites/base.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Invitation Home" %}{% endblock %}
+
+{% block customCSS %}
+
+{% endblock %}
+
+{% block content %}
+<div id="inviteHome" style="background-color:white;margin:20px 0;border:1px solid lightgray;padding:30px; text-align:left;" class="ui-corner-all">	
+<h3>{% trans "Pending Invitations" %}</h3>
+<table border="0" cellspacing="10" width="100%">
+<tr class="under">
+	<th class="under" align='left'>{% trans "Recipient" %}</th>
+	<th class="under" align='left'>{% trans "Timestamp" %}</th>
+	{% if user_is_staff %}
+	<th class="under" align='left'>{% trans "Sender" %}</th>
+	<th class="under" align='left'>{% trans "Invitation Code" %}</th>
+	{% endif %}
+	<th class="under" align='left'>{% trans "Resend?" %}</th>
+	<th class="under" align='left'>{% trans "Cancel?" %}</th>
+</tr>
+{% for invite in outstandingInvites%}
+<tr>
+	<td>{{invite.recipient}}</td>
+	<td>{{invite.requestTimestamp}}</td>
+	{% if user_is_staff %}
+		<td>{{invite.sender}}</td>
+		<td>{{invite.code}}</td>
+	{% endif %}
+	<td><a href="Resend/{{invite.id}}/">{% trans "Resend" %}</a></td>
+	<td><a href='javascript:void(0);' onclick='cancelInvitation({{invite.id}});'>{% trans "Cancel" %}</a></td>
+</tr>{% endfor %}
+</table>
+<input type='button' value="{% trans 'Submit a New Invitation' %}" onclick="window.location='New/'" style="margin-left:0px;"/><br/><br/>
+</div>
+<script>
+	function cancelInvitation(id){
+		if(typeof id != 'undefined'){
+			$.comAjax({
+				url:'/Invitations/Check/',
+				type:'POST',
+				data:{inviteID:id},
+				success:function(data,txtStatus){
+					var d = JSON.parse(data);
+					if(d=='ok'){
+						location.href = 'Cancel/'+id;
+					}else{
+						alert('This invitation has been cancelled.');
+						location.reload();
+					}
+				},
+				error:function(){
+					
+				}
+			});
+		}else{
+			alert('There is an error occured.');
+			location.reload();
+		}
+	}
+</script>
+{% endblock %}

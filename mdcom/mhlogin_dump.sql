@@ -1,0 +1,4594 @@
+-- MySQL dump 10.13  Distrib 5.5.31, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: mhlogin
+-- ------------------------------------------------------
+-- Server version	5.5.31-0ubuntu0.12.04.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Billing_billingaccount`
+--
+
+DROP TABLE IF EXISTS `Billing_billingaccount`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Billing_billingaccount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `last_billing_success` datetime DEFAULT NULL,
+  `last_billed_failure` datetime DEFAULT NULL,
+  `status` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `address1` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `address2` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `state` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `nation` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `zip` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `cc_type` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `cc_num` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cc_exp_month` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `cc_exp_year` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `identity_verifier` int(11) DEFAULT NULL,
+  `last_modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Billing_billingaccount_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Billing_billingaccount`
+--
+
+LOCK TABLES `Billing_billingaccount` WRITE;
+/*!40000 ALTER TABLE `Billing_billingaccount` DISABLE KEYS */;
+INSERT INTO `Billing_billingaccount` VALUES (1,3,NULL,NULL,'AR','1372 Wishing Fawn Gate','Trailer 203L','Palo Alto','CA','US','94301','0','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:10'),(2,9,NULL,NULL,'AR','5334 Green Bluff Landing','','Palo Alto','CA','US','94028','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:10'),(3,2,NULL,NULL,'AR','8292 Easy Bear Mews','','Redwood City','CA','US','94304','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:10'),(4,102,NULL,NULL,'AR','32 Colonial Bluff View','','Houston','TX','US','94062','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:11'),(5,69,NULL,NULL,'AR','2059 Umber Prairie Vista','','Redwood City','CA','US','94402','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:11'),(6,104,NULL,NULL,'AR','','','','','US','77004','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:11'),(7,106,NULL,NULL,'AR','','','','','US','77054','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:11'),(8,107,NULL,NULL,'AR','','','','','US','77054','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:11'),(9,110,NULL,NULL,'AR','','','','','US','77019','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:11'),(10,111,NULL,NULL,'AR','','','','','US','94027','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:11'),(11,112,NULL,NULL,'AR','','','','','US','77030','','ccopy_reg\n_reconstructor\np1\n(cMHLogin.Billing.models\nEncryptedString\np2\nc__builtin__\nstr\np3\nS\'c2331af6bd2a540521ebc1f658a2f4bc\'\ntRp4\n.','01','15',NULL,'2010-09-29 15:20:11');
+/*!40000 ALTER TABLE `Billing_billingaccount` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Billing_billingfundsbucket`
+--
+
+DROP TABLE IF EXISTS `Billing_billingfundsbucket`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Billing_billingfundsbucket` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int(11) NOT NULL,
+  `balance` decimal(10,2) NOT NULL,
+  `refill_trigger` decimal(8,2) NOT NULL,
+  `refill_bucket_size` decimal(6,2) NOT NULL,
+  `auto_refill_on` tinyint(1) NOT NULL,
+  `last_modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Billing_billingfundsbucket_account_id` (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Billing_billingfundsbucket`
+--
+
+LOCK TABLES `Billing_billingfundsbucket` WRITE;
+/*!40000 ALTER TABLE `Billing_billingfundsbucket` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Billing_billingfundsbucket` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Billing_billingtransaction`
+--
+
+DROP TABLE IF EXISTS `Billing_billingtransaction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Billing_billingtransaction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int(11) NOT NULL,
+  `gateway` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `gateway_login` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `amount` decimal(7,2) NOT NULL,
+  `sale_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `sale_date` datetime NOT NULL,
+  `product_description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `charge_was_a_debit` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Billing_billingtransaction_account_id` (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Billing_billingtransaction`
+--
+
+LOCK TABLES `Billing_billingtransaction` WRITE;
+/*!40000 ALTER TABLE `Billing_billingtransaction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Billing_billingtransaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Billing_minutesproduct`
+--
+
+DROP TABLE IF EXISTS `Billing_minutesproduct`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Billing_minutesproduct` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int(11) NOT NULL,
+  `current_price_per_50_minutes` decimal(5,2) NOT NULL,
+  `last_modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Billing_minutesproduct_account_id` (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Billing_minutesproduct`
+--
+
+LOCK TABLES `Billing_minutesproduct` WRITE;
+/*!40000 ALTER TABLE `Billing_minutesproduct` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Billing_minutesproduct` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_click2call_log`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_click2call_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_click2call_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `callid` varchar(34) COLLATE utf8_unicode_ci NOT NULL,
+  `caller_id` int(11) NOT NULL,
+  `called_user_id` int(11) DEFAULT NULL,
+  `called_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `current_site_id` int(11) DEFAULT NULL,
+  `timestamp` datetime NOT NULL,
+  `source` varchar(3) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'WEB',
+  `caller_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `connected` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `DoctorCom_click2call_log_caller_id` (`caller_id`),
+  KEY `DoctorCom_click2call_log_called_id` (`called_user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=361 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_click2call_log`
+--
+
+LOCK TABLES `DoctorCom_click2call_log` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_click2call_log` DISABLE KEYS */;
+INSERT INTO `DoctorCom_click2call_log` VALUES (1,'CAd5386767eb78d48eb3a206478cb12e7b',2,3,'',NULL,'2009-11-18 09:16:36','WEB','',0),(2,'CA7d52b470c98505c7119b391225a12b23',2,2,'',NULL,'2009-11-18 12:30:53','WEB','',0),(3,'CAd28c8a61e60f4c8cf0dc9e4fa39c3703',2,33,'',NULL,'2009-11-18 09:32:16','WEB','',0),(4,'CAe152c3f15597a2043623cbbc17333949',2,20,'',NULL,'2009-11-18 12:50:44','WEB','',0),(5,'CA4be63e8d23b81258d8058dfcd5f49202',2,17,'',NULL,'2009-11-18 15:58:18','WEB','',0),(6,'CA428d43191cace39ed5314e209457b8c1',3,3,'',NULL,'2009-11-18 21:19:52','WEB','',0),(7,'CAba579aecec3eb7fe69d29ed6daca67e2',38,2,'',NULL,'2009-11-19 19:31:02','WEB','',0),(8,'CA8b985fa9790b0290921a4b0a0fa4a09a',9,9,'',NULL,'2009-11-20 01:54:44','WEB','',0),(9,'CAd0e2ebe78cf2489b8b8fa280a1ff1fd5',2,2,'',NULL,'2009-11-22 19:15:15','WEB','',0),(10,'CAf4d26345a20161d4490f722dc7c7709c',3,3,'',NULL,'2009-11-25 11:04:37','WEB','',0),(11,'CA32e6ca18af2ad27e2a218530969dfd9f',2,2,'',NULL,'2009-11-25 11:11:59','WEB','',0),(12,'CA69b185c3c6d966cbc141ee898308d22e',2,46,'',NULL,'2009-11-25 11:18:54','WEB','',0),(13,'CA05cfff5e7ed83d8ae5294416dd1050e4',2,2,'',NULL,'2009-11-25 15:27:30','WEB','',0),(14,'CA8693d13d33594b9f0d2ea84395e87d25',2,2,'',NULL,'2009-11-25 15:33:27','WEB','',0),(15,'CAd81bade4083300f56db3f75225247fa2',2,2,'',NULL,'2009-11-25 15:38:10','WEB','',0),(16,'CA881e652ea6935d2b14d3ec73bf3bcf81',2,2,'',NULL,'2009-11-25 16:00:55','WEB','',0),(17,'CA33d22aee8a5fde6a36ce277198f02e06',3,3,'',NULL,'2009-11-25 17:10:50','WEB','',0),(18,'CA6bc88eb01e3d63c030ebee6555bcea57',3,3,'',NULL,'2009-11-25 17:11:24','WEB','',0),(19,'CAa862bd664c3020abf434f6bf396996f6',2,45,'',NULL,'2009-11-26 12:50:09','WEB','',0),(20,'CAccfcb44515255caf025964711250d4ad',2,2,'',NULL,'2009-11-28 13:52:26','WEB','',0),(21,'CA5e8c1f4ba5a6fca7d7cb8b9513806574',56,56,'',NULL,'2009-11-28 19:00:51','WEB','',0),(22,'CA244476c315b556210892bc0b7dfab6aa',2,2,'',NULL,'2009-11-29 15:00:08','WEB','',0),(23,'CAe73693a55c53b4f26277285f6b10dbc2',2,17,'',NULL,'2009-11-29 20:08:31','WEB','',0),(24,'CAdf3dfa353be3c2f0e2a90992ed447885',34,34,'',NULL,'2009-11-29 21:40:57','WEB','',0),(25,'CA65014189b92ad0b52963fa560e446495',36,48,'',NULL,'2009-11-30 08:01:33','WEB','',0),(26,'CA842f0445009c8510049b3546657a26e9',3,3,'',NULL,'2009-11-30 08:27:11','WEB','',0),(27,'CA27ebbf7f3ee277473944bf24c2391ec4',2,2,'',NULL,'2009-11-30 20:01:32','WEB','',0),(28,'CA1dd4ec1c8c7661ab1f2b52311ce469a6',19,19,'',NULL,'2009-12-01 00:32:07','WEB','',0),(29,'CAbc0dc0b0821eaabdc0c032e836d3fbd1',19,19,'',NULL,'2009-11-30 21:33:04','WEB','',0),(30,'CAc2856d039bcd361565382327c76fb45e',19,2,'',NULL,'2009-12-01 00:36:25','WEB','',0),(31,'CA8396bf92bbd43b7ea34901586c1704b4',36,51,'',NULL,'2009-12-03 11:14:39','WEB','',0),(32,'CA78ac6b00c6c4e5c6f2695e8e39aabfde',2,2,'',NULL,'2009-12-04 11:08:32','WEB','',0),(33,'CA3da9dfd26a6bc8acaa9d09e58217dfa3',36,35,'',NULL,'2009-12-07 15:49:06','WEB','',0),(34,'',36,55,'',NULL,'2009-12-07 16:10:00','WEB','',0),(35,'',36,55,'',NULL,'2009-12-07 16:10:19','WEB','',0),(36,'CA4f06138ec3265927c764071176dfc3fa',3,3,'',NULL,'2009-12-07 16:23:05','WEB','',0),(37,'CA02fff501ef06a13f8420f450837d645f',3,3,'',NULL,'2009-12-07 16:56:36','WEB','',0),(38,'CAf2dfcb0a72ae688e17f53ffc2f7ad3ca',3,3,'',NULL,'2009-12-07 16:57:10','WEB','',0),(39,'CAd1df9d7b3521f2aa69af674eb84b017a',2,2,'',NULL,'2009-12-08 08:58:39','WEB','',0),(40,'CAb251e3f0f610327852a610e9bc4b73fd',36,23,'',NULL,'2009-12-08 13:47:29','WEB','',0),(41,'CA007631859aee90963a15fc84b5567fe2',2,33,'',NULL,'2009-12-08 15:35:09','WEB','',0),(42,'CA49453cc0d6d56437b0bb02d70af0952e',2,20,'',NULL,'2009-12-08 14:30:47','WEB','',0),(43,'CA2f2da08295185406f608003d4c6025a0',36,23,'',NULL,'2009-12-09 08:16:12','WEB','',0),(44,'CA2c3c4960e3e4a11ab5bb291d9a7fe8ee',36,36,'',NULL,'2009-12-09 11:19:55','WEB','',0),(45,'CA84381a93b9404b414bf0185f1a1842f1',36,54,'',NULL,'2009-12-09 20:22:26','WEB','',0),(46,'CA562c2affe1676eb6caa1fe38bd7570a9',36,54,'',NULL,'2009-12-11 08:58:44','WEB','',0),(47,'CAd93d45e37e88341b6eb6b23ef884f9b5',32,10,'',NULL,'2009-12-11 09:06:38','WEB','',0),(48,'CAbfdb6a30bbbefe142240f47a7b5e4d67',36,10,'',NULL,'2009-12-11 09:48:13','WEB','',0),(49,'CA7cb71ee7f8cff5d7fd9be044baf16e8c',36,49,'',NULL,'2009-12-11 13:28:27','WEB','',0),(50,'CA51faeea20960da855f85a03d77520b4a',64,64,'',NULL,'2009-12-12 17:43:02','WEB','',0),(51,'CA29a73450ffda6ff783d5dffa2c4b7a5a',64,64,'',NULL,'2009-12-12 17:48:36','WEB','',0),(52,'CAf8f0a0d7432c5d1670d5c00008ef7962',2,29,'',NULL,'2009-12-14 15:43:32','WEB','',0),(53,'CA188c9ed5956392e402a8ca5b0c0a4642',2,45,'',NULL,'2009-12-17 12:12:01','WEB','',0),(54,'CAa406e0d464fed8ec085bf87042e9efd7',2,45,'',NULL,'2009-12-17 13:04:21','WEB','',0),(55,'CA5040801cac4d74614de61616d1a77e3b',36,47,'',NULL,'2010-01-06 10:16:13','WEB','',0),(56,'CA945a9471beb9fb511e66be962d40aa4b',36,12,'',NULL,'2010-01-06 10:33:55','WEB','',0),(57,'CAc2ca1ef64a5d649e63a228a77d9d8698',36,54,'',NULL,'2010-01-06 14:43:09','WEB','',0),(58,'CAa6905ad754d659c349ebdb69d1bddaea',36,54,'',NULL,'2010-01-08 08:06:28','WEB','',0),(59,'CAd8b0f7f69d434d9c85a4fd2fb3ca603e',3,3,'',NULL,'2010-01-08 16:29:07','WEB','',0),(60,'CAb8f60785ab49af12006e1dc33fa10fc1',36,33,'',NULL,'2010-01-13 16:07:54','WEB','',0),(61,'CAa9d736f1d3eaeab8303105cdbf31d08b',2,3,'',NULL,'2010-01-27 10:30:47','WEB','',0),(62,'CAf1d01308994da34a8bf12f3201ee80f8',54,55,'',NULL,'2010-01-27 14:00:37','WEB','',0),(63,'CA994e424781bb5d3e37bb7f7b6aae4504',54,2,'',NULL,'2010-01-27 14:02:16','WEB','',0),(64,'CAb0a795b85c2455c1db3e7258a0045f5f',54,2,'',NULL,'2010-01-27 14:03:45','WEB','',0),(65,'CA5ace18128d30e2723196a087f355f933',2,54,'',NULL,'2010-01-27 14:04:49','WEB','',0),(66,'CA8382ccf23ed10c1454bc6b06094a61bf',3,3,'',NULL,'2010-01-27 14:17:21','WEB','',0),(67,'CA3cf386ec912e680fb368647a73662cc2',3,3,'',NULL,'2010-01-27 16:15:17','WEB','',0),(68,'CAe022b5859cee4fdd2d3f7039c047f1de',2,34,'',NULL,'2010-01-28 13:29:02','WEB','',0),(69,'CA08bfb2d8f1558995324921a15d10a6ad',2,14,'',NULL,'2010-01-28 15:59:31','WEB','',0),(70,'CAf3fc6e766136164eb6ad529167d2f629',2,14,'',NULL,'2010-01-28 16:01:48','WEB','',0),(71,'CAc9297be4716e35872906a339019ebd6c',2,45,'',NULL,'2010-01-28 17:21:54','WEB','',0),(72,'CA54a43f40b4258712db3608259fcaf8e1',3,3,'',NULL,'2010-01-29 07:54:49','WEB','',0),(73,'CA59ac4cd2faf79fbffaef8f82775d0028',3,3,'',NULL,'2010-01-29 07:55:52','WEB','',0),(74,'CAadf84e433d5e1e525b9eed1e970b9221',3,3,'',NULL,'2010-01-29 07:55:50','WEB','',0),(75,'CA3f085fd318b11c5997b9c5c290d0e2a0',2,34,'',NULL,'2010-01-29 11:57:29','WEB','',0),(76,'CAb8c9f4615f2d34b255741edd24b79e05',2,58,'',NULL,'2010-01-29 11:59:10','WEB','',0),(77,'CA4fbc5885ddb33aca26aa39d17bfe8bd3',2,34,'',NULL,'2010-01-29 12:00:06','WEB','',0),(78,'CAc6442bba1f743c99cc8c357cdd6a0b6e',2,34,'',NULL,'2010-01-29 12:03:35','WEB','',0),(79,'CA280852c3d8263df6634c68912d24db14',67,67,'',NULL,'2010-01-29 12:17:33','WEB','',0),(80,'CA0ea5aaae4fb0563d15a2eed3d5347c58',3,2,'',NULL,'2010-01-29 12:21:59','WEB','',0),(81,'CAb1b25711148f4dcb2dd56b8c3d377c00',2,3,'',NULL,'2010-01-29 12:25:15','WEB','',0),(82,'CA1825964cde7c8bee938edefd1e1e5126',3,3,'',NULL,'2010-01-29 13:02:59','WEB','',0),(83,'CA2df6289420d058ed7b00003b16823de6',2,3,'',NULL,'2010-01-30 11:55:46','WEB','',0),(84,'CA7f567cadf818a78a91602c6383d553e9',2,3,'',NULL,'2010-01-30 11:57:09','WEB','',0),(85,'CA09a14e6de81509b5dbc0974e10779388',3,3,'',NULL,'2010-01-30 12:52:24','WEB','',0),(86,'CA7b1d8fceadee548f4efa97f22602a896',3,3,'',NULL,'2010-01-30 12:52:57','WEB','',0),(87,'CAe906d73b1b526e941863bafe4300aacf',9,3,'',NULL,'2010-01-30 13:27:22','WEB','',0),(88,'CAeacb950ff549759ce0f1a68364c6fa8a',3,9,'',NULL,'2010-01-30 13:35:48','WEB','',0),(89,'CAc2a41387022c5960c9186b7956c8e4a5',3,9,'',NULL,'2010-01-30 13:36:59','WEB','',0),(90,'CA87dbcff5e147f56ba1042670cbaf9cca',3,2,'',NULL,'2010-01-30 13:37:59','WEB','',0),(91,'CA449b2c3fd3c88c94cb7e5ef60257de63',3,9,'',NULL,'2010-01-30 13:42:40','WEB','',0),(92,'CAf282aba244047d2a0d11e4d8d9331a92',9,3,'',NULL,'2010-01-30 13:44:15','WEB','',0),(93,'CA825382bd1daf7f2cd138f3ce246415e5',3,9,'',NULL,'2010-01-30 13:45:14','WEB','',0),(94,'CAeda258e02a14a13571d2f2f952f15b6f',9,3,'',NULL,'2010-01-30 13:46:53','WEB','',0),(95,'CA64f2967a1a3c95a40dac52752c8f3604',9,3,'',NULL,'2010-01-30 13:48:19','WEB','',0),(96,'CA437021ff8c4c3456b0aeb16d276e7653',3,9,'',NULL,'2010-01-30 13:54:15','WEB','',0),(97,'CA66eb0de23e9a22cee1eaf381107c54ec',9,3,'',NULL,'2010-01-30 13:55:24','WEB','',0),(98,'CAab5969490e0fc72c37e0cf26323192f1',9,3,'',NULL,'2010-01-30 13:57:19','WEB','',0),(99,'CA4d3be90f53ea3d20075f36fa79ed31fe',9,3,'',NULL,'2010-01-30 13:58:50','WEB','',0),(100,'CAebf35774110216f178f23396a511836c',9,3,'',NULL,'2010-01-30 13:59:48','WEB','',0),(101,'CAfa5ce797c13d5acf7b187a73bc642c86',9,3,'',NULL,'2010-01-30 14:00:54','WEB','',0),(102,'CA6b9ed54fef64cd7a4de4e448c83fd0be',9,3,'',NULL,'2010-01-30 14:02:20','WEB','',0),(103,'CA764c88cfe8c8ca160238b631babd4c8d',9,3,'',NULL,'2010-01-30 14:03:39','WEB','',0),(104,'CAf9b5e058c3ba3657528e121dfa0eb2d6',9,3,'',NULL,'2010-01-30 14:04:48','WEB','',0),(105,'CAe7b12ef5349b57d9b3dd976e68239d99',3,9,'',NULL,'2010-01-30 14:06:58','WEB','',0),(106,'CAfbe97a7daaea05ea76bbdc8a5b2b2863',3,9,'',NULL,'2010-01-30 14:07:33','WEB','',0),(107,'CA49cb51f53b4f8fa5976c5f7a00d85bee',3,9,'',NULL,'2010-01-30 14:08:14','WEB','',0),(108,'CA2ea1dd80cd885b7fb2a2a573d53acca1',3,9,'',NULL,'2010-01-30 14:08:49','WEB','',0),(109,'CA30953f93d45842af6eb90b4b0e66bfae',3,9,'',NULL,'2010-01-30 14:11:00','WEB','',0),(110,'CA612b92a8bff5a4a04241cb58e7824eba',2,3,'',NULL,'2010-02-01 08:50:39','WEB','',0),(111,'CAdb9c1abd2d790f7a4b9f920829546045',2,3,'',NULL,'2010-02-02 13:24:06','WEB','',0),(112,'CA06af32d570e6ca3bb08aae3c2a3dfd7b',2,3,'',NULL,'2010-02-02 13:39:09','WEB','',0),(113,'CA5af9bc6f9ec9e3c81d78f003348d4b4f',2,3,'',NULL,'2010-02-03 08:10:30','WEB','',0),(114,'CA5aa00cc3a3d923d6cf4fa2f0f7c8026d',9,3,'',NULL,'2010-02-03 11:37:09','WEB','',0),(115,'CAaea673a00ad4b44b381f422f58f4c3eb',9,3,'',NULL,'2010-02-03 11:39:34','WEB','',0),(116,'CAfbb75ca1a88b116559f0df48c2e0ab3b',2,54,'',NULL,'2010-02-03 12:35:46','WEB','',0),(117,'CA24810140380d05c4e6ec0fef261db003',2,26,'',NULL,'2010-02-05 16:26:44','WEB','',0),(118,'CA177df7bd6d5dc334c226a62dc1261206',2,3,'',NULL,'2010-02-05 16:28:55','WEB','',0),(119,'CA86ce8a49dcf3e6b9e5cefd1a46ae8aea',2,3,'',NULL,'2010-02-05 16:33:07','WEB','',0),(120,'CAf132c3f11aa3c301d690a6d8ade61134',2,23,'',NULL,'2010-02-05 16:44:33','WEB','',0),(121,'CAa2a1742f4bc97113377094670f5b70d3',2,19,'',NULL,'2010-02-06 11:34:28','WEB','',0),(122,'CAaa505f5b3accf8df3bf5d60fd4a818dd',2,58,'',NULL,'2010-02-06 16:00:07','WEB','',0),(123,'CAfccde1f3c5bfc506ab2c6b0db7f5630e',2,58,'',NULL,'2010-02-06 16:09:47','WEB','',0),(124,'CA110e9c46014da9082071af40fecf12c7',2,23,'',NULL,'2010-02-07 13:46:00','WEB','',0),(125,'CAb354ff91798d10576864f413414fa11f',2,29,'',NULL,'2010-02-08 10:32:12','WEB','',0),(126,'CAa22db0d8e3934d8ec50f476944f64503',3,3,'',NULL,'2010-02-09 19:02:34','WEB','',0),(127,'CA77313bbff8b74644f2a10f0b713c2fcc',2,61,'',NULL,'2010-02-14 15:08:27','WEB','',0),(128,'CA9e5745fff0379bb3742cd180ab084cf9',2,75,'',NULL,'2010-02-14 15:11:00','WEB','',0),(129,'CAc2cdd37fc5f42efbe34fae473ffcbca5',2,75,'',NULL,'2010-02-15 15:23:14','WEB','',0),(130,'CA7eafe45301869cb210b8ae0b4f1b8cb8',2,48,'',NULL,'2010-02-15 15:52:27','WEB','',0),(131,'CA196fdad204adb7cfab736e68114b23b6',2,10,'',NULL,'2010-02-15 19:35:39','WEB','',0),(132,'CA8ab1274e7e2a5419cbf62caf42812c32',2,10,'',NULL,'2010-02-15 19:36:13','WEB','',0),(133,'CAa5091371c8bc08ff6d7a85a782c669a4',2,21,'',NULL,'2010-02-16 11:41:38','WEB','',0),(134,'CAb0e56a654f9b623f14c3601668ab742e',2,75,'',NULL,'2010-02-21 14:57:34','WEB','',0),(135,'CA7cc24bd0c80d11a8cd8b58c31289c6c8',2,40,'',NULL,'2010-02-24 15:04:22','WEB','',0),(136,'CA233b4943db313ebe718e71b0ea420918',2,24,'',NULL,'2010-02-25 13:41:17','WEB','',0),(137,'CAa07d38c1ab9d6bcca685cfa981a9ef9d',3,3,'',NULL,'2010-02-25 15:03:30','WEB','',0),(138,'CAfb518a4d4009d23b63a4fae1f9189f71',69,7,'',NULL,'2010-02-25 18:17:36','WEB','',0),(139,'CA4b0ed2bad24a49d716dab3697611edbd',69,7,'',NULL,'2010-02-25 18:20:48','WEB','',0),(140,'CA25b9af4dc5256aee89a4271e5c2de1aa',28,2,'',NULL,'2010-03-01 12:43:06','WEB','',0),(141,'CA9d46e6ed89ad3f6c06d97bade84310b2',2,40,'',NULL,'2010-03-02 12:41:52','WEB','',0),(142,'CA062e07b5bdf48a90e684b4d5d57cce9c',2,75,'',NULL,'2010-03-02 12:43:28','WEB','',0),(143,'CA7818733b462591f889155ec1ad99f449',2,75,'',NULL,'2010-03-02 12:54:17','WEB','',0),(144,'CAdf741cff6b6d78c45525a5a0c6dc45fb',2,75,'',NULL,'2010-03-04 21:22:27','WEB','',0),(145,'CA16f2447db774648c238567897e6741f0',2,81,'',NULL,'2010-03-05 12:01:41','WEB','',0),(146,'CA267f61aea5f56d463705f7d059a7e7f0',2,31,'',NULL,'2010-03-05 12:42:18','WEB','',0),(147,'CAe7b89519b8c4c5038339f54c04e13404',2,61,'',NULL,'2010-03-05 13:34:41','WEB','',0),(148,'CA50413c177cf7a69c114ed9c8c685de17',51,2,'',NULL,'2010-03-09 11:07:46','WEB','',0),(149,'CA27642168b6b04c6198d91e894f338ee2',2,60,'',NULL,'2010-03-09 12:39:46','WEB','',0),(150,'CAc286ae6ba0d340baf1eb3418856d865c',2,19,'',NULL,'2010-03-09 16:10:29','WEB','',0),(151,'CAa1ebf71b229fb1ec7ab962b5b6c25145',81,2,'',NULL,'2010-03-09 19:17:40','WEB','',0),(152,'CA840926d4cf4458d5bece590d661421d8',2,19,'',NULL,'2010-03-09 19:33:53','WEB','',0),(153,'CA533413f737ef7faf0301653f5a55fea6',32,75,'',NULL,'2010-03-11 11:08:33','WEB','',0),(154,'CAf01d50dab36fbcfd82edd4bc1589aec2',2,75,'',NULL,'2010-03-11 19:23:06','WEB','',0),(155,'CAb9f865e528c11f317c2d2ef2be6afabf',64,20,'',NULL,'2010-03-16 21:23:26','WEB','',0),(156,'CAcac6a920dbb300bfa314aca0dc506e11',2,3,'',NULL,'2010-03-17 18:09:20','WEB','',0),(157,'CA01337a57761981900c1bd2e27c0e9780',2,44,'',NULL,'2010-03-23 17:18:13','WEB','',0),(158,'CA0f81fe6ad151d753274b4d8f069c6049',2,75,'',NULL,'2010-03-24 19:19:29','WEB','',0),(159,'CA6345e4dab9a54449321c2d44cee817d0',9,3,'',NULL,'2010-03-25 15:50:35','WEB','',0),(160,'CA3f275d57f129f0d13126e1f28219336e',32,54,'',NULL,'2010-03-26 08:42:56','WEB','',0),(161,'CAb1b082fb019c918b2351603f5383c521',32,49,'',NULL,'2010-03-26 16:31:19','WEB','',0),(162,'CAd84c67199b759fa13b7c877e6e2f4025',2,33,'',NULL,'2010-03-28 12:27:23','WEB','',0),(163,'CA588890110d2cc5dae3fcd73d7dd8e3c5',2,19,'',NULL,'2010-03-28 17:43:18','WEB','',0),(164,'CA6d7d3de780be33b3a09d6154938bb41d',36,2,'',NULL,'2010-03-29 09:07:52','WEB','',0),(165,'CAee0ee582fd554d29e742ec876ea5e895',2,28,'',NULL,'2010-03-30 13:36:35','WEB','',0),(166,'CAd9d8af92c37a2006ab5ba28f9608e72b',28,2,'',NULL,'2010-03-30 17:06:36','WEB','',0),(167,'CA939c0aadd9e0db4c8b85687bb7eae807',32,47,'',NULL,'2010-03-31 12:39:51','WEB','',0),(168,'CAdd8f0d31b1770d755476bc9cca410135',32,47,'',NULL,'2010-03-31 12:39:20','WEB','',0),(169,'CAf8a64e9d499cb2088075320cc173788d',32,47,'',NULL,'2010-03-31 13:20:34','WEB','',0),(170,'CAd60cdbd5a53a41e5622e0370ffe9eaee',32,61,'',NULL,'2010-03-31 16:31:11','WEB','',0),(171,'CA3cbb4938c6355e3bd7703c14dce538e6',2,73,'',NULL,'2010-04-01 12:53:42','WEB','',0),(172,'CAe606b495fcd564b2db3358961d74e57f',2,75,'',NULL,'2010-04-01 15:55:34','WEB','',0),(173,'CAfcc5572994f852262f52b3a2220d817e',61,2,'',NULL,'2010-04-02 09:42:02','WEB','',0),(174,'CAed2848b8c5fed8f97ce7e22bbf8700ae',2,45,'',NULL,'2010-04-02 15:32:39','WEB','',0),(175,'CA3db046dedbdc946d67f060f8c5ea7447',3,3,'',NULL,'2010-04-03 10:33:42','WEB','',0),(176,'CA119733902836d73c98fae826d3483ade',27,2,'',NULL,'2010-04-05 10:07:51','WEB','',0),(177,'CAdd2031f68f0a410510bc14496f152eaa',22,2,'',NULL,'2010-04-05 12:24:51','WEB','',0),(178,'CAd0bb836392f8ebc45757075586b01eff',94,2,'',NULL,'2010-04-06 12:14:28','WEB','',0),(179,'CAbe5ffbc8b702e26d707c991cd2d66abe',87,88,'',NULL,'2010-04-06 21:19:09','WEB','',0),(180,'CA0ea0b6e414574af8067ac43e99d5eab8',8,8,'',NULL,'2010-04-07 16:38:44','WEB','',0),(181,'CAa574dbc3e81c98aec2c75279517db33e',2,75,'',NULL,'2010-04-08 14:10:41','WEB','',0),(182,'CA7d58ce9a37b032059d5f334c8cc95785',54,2,'',NULL,'2010-04-09 16:56:17','WEB','',0),(183,'CA4ce8812a890d1be1de98f2fa66013747',25,42,'',NULL,'2010-04-10 10:14:42','WEB','',0),(184,'CA680253a84cb2a42c15037b66bedb51ec',25,42,'',NULL,'2010-04-10 10:33:32','WEB','',0),(185,'CAfcee937171cd601891c5744536cb5f14',25,17,'',NULL,'2010-04-10 10:36:52','WEB','',0),(186,'CA03beb1ec367e43e6450fd27b7211b510',25,17,'',NULL,'2010-04-10 14:16:05','WEB','',0),(187,'CAdfc17289caa761b4ce576833746fc194',25,17,'',NULL,'2010-04-11 14:23:11','WEB','',0),(188,'CA87e77b2cd2fdd6f1084aecc92b06263b',2,17,'',NULL,'2010-04-12 17:43:27','WEB','',0),(189,'CAbaa864502a8d410e0db133a9bddd0eb3',25,94,'',NULL,'2010-04-13 11:16:13','WEB','',0),(190,'CAd80b2f92a8ac04eeea96807f81d07e46',25,20,'',NULL,'2010-04-13 12:05:34','WEB','',0),(191,'CA7c93ce115bb8c473abc79031d645e394',25,31,'',NULL,'2010-04-13 16:33:15','WEB','',0),(192,'CAd24f67115ee1202e5fe4a8dd6206f5e0',25,31,'',NULL,'2010-04-13 16:35:00','WEB','',0),(193,'CAfa78cc33e4deca36ad2527f5786169be',49,59,'',NULL,'2010-04-13 17:18:42','WEB','',0),(194,'CA1945f841609c17707733eb59af731873',49,34,'',NULL,'2010-04-13 17:28:43','WEB','',0),(195,'CAb757a68783403ab38b7329fdd855ecfa',49,34,'',NULL,'2010-04-13 17:34:46','WEB','',0),(196,'CA270fa824126346dcded2c794143da44b',2,84,'',NULL,'2010-04-14 16:39:16','WEB','',0),(197,'CA14223ec4e0945ce8de5b9c38cc491da0',2,48,'',NULL,'2010-04-14 13:41:12','WEB','',0),(198,'CAcc2a6d6dc9a2d4eab69eaa1b78aabb08',2,45,'',NULL,'2010-04-14 22:31:23','WEB','',0),(199,'CA7da692ab3370962404d7e31e178cfedc',2,19,'',NULL,'2010-04-14 22:31:18','WEB','',0),(200,'CA417fb88080a8935ba5715af763e7a243',2,19,'',NULL,'2010-04-14 19:34:03','WEB','',0),(201,'CA2c9df08aae39a3f3d08f3582aea5d065',25,58,'',NULL,'2010-04-15 11:20:36','WEB','',0),(202,'CA58e3a433d1c3495c49d5e8cf531bc1c9',25,19,'',NULL,'2010-04-15 10:22:20','WEB','',0),(203,'CA1c8c57e7e1616326795b885c10aca2e5',25,17,'',NULL,'2010-04-15 20:05:29','WEB','',0),(204,'CA6309bd52a6df168a1dc55c7ca04466d3',49,23,'',NULL,'2010-04-15 17:17:08','WEB','',0),(205,'CA31dff0ae42c3830a331f8f237f383be1',36,2,'',NULL,'2010-04-17 08:52:34','WEB','',0),(206,'CA7c1b7b7757c3d20f374b3ffa9b371347',69,2,'',NULL,'2010-04-17 16:06:56','WEB','',0),(207,'CAf508374f991235055070118eb630a5e9',36,44,'',NULL,'2010-04-20 15:35:28','WEB','',0),(208,'CA18ca575c149cb287d19441885749d171',2,2,'',NULL,'2010-04-24 17:07:51','WEB','',0),(209,'CAd36fde50d72043b0b33eba25384b1252',2,75,'',NULL,'2010-04-25 13:33:09','WEB','',0),(210,'CA0ade86757c1983d6421fe71732a09907',2,75,'',NULL,'2010-04-26 17:19:31','WEB','',0),(211,'CA7246ebc898b165831a2dbe0561f43075',2,75,'',NULL,'2010-04-27 20:05:13','WEB','',0),(212,'CA7bfe78ae35801e7f79c561f4218b69d7',2,75,'',NULL,'2010-04-28 12:12:50','WEB','',0),(213,'CA16360e51a0a538306b1bfda4d7c9c117',69,52,'',NULL,'2010-04-30 11:32:29','WEB','',0),(214,'CA5038dd943f5db7aa818cc36c13e03c86',2,44,'',NULL,'2010-05-02 19:51:31','WEB','',0),(215,'CA35085674041058894f907ea50ab090d2',2,75,'',NULL,'2010-05-05 19:25:37','WEB','',0),(216,'CAb82a58dac2e94d5dc8cb46f8ae54761c',2,75,'',NULL,'2010-05-07 11:19:23','WEB','',0),(217,'CA54908d3108bcf8125c256970c7a05933',2,50,'',NULL,'2010-05-07 16:11:45','WEB','',0),(218,'CAf08d4bca104cc82901974842d934658b',2,75,'',NULL,'2010-05-10 19:33:25','WEB','',0),(219,'CA78354b958084fab00b41758d1d692134',2,100,'',NULL,'2010-05-11 10:48:55','WEB','',0),(220,'CA3649586bb34fcb48f132341616b530c9',2,100,'',NULL,'2010-05-11 12:14:32','WEB','',0),(221,'',3,-1,'6503958020',NULL,'2010-05-11 17:54:57','WEB','',0),(222,'CA44835d0abb5610b5413e52998cc85391',3,-1,'5854551869',NULL,'2010-05-11 18:23:11','WEB','',0),(223,'CAd6262dc6ec97dc3102820779446139ce',3,-1,'5854551869',NULL,'2010-05-11 18:26:06','WEB','',0),(224,'CAade5e83b5c3ba7d13d49bb6bbfe88993',2,11,'',NULL,'2010-05-12 10:16:08','WEB','',0),(225,'CA06e55162729f716e13d2135f7febd28a',2,11,'',NULL,'2010-05-12 11:45:16','WEB','',0),(226,'CA392c95f189db7f7bc6460f1887c332ec',2,43,'',NULL,'2010-05-12 12:31:36','WEB','',0),(227,'CAc05a37a65f137ac38d5ef0c0c7be4e0f',2,73,'',NULL,'2010-05-12 12:32:30','WEB','',0),(228,'CA6dfc1f1f7307dd095e9fd4243e4b7d1a',2,100,'',NULL,'2010-05-12 12:44:21','WEB','',0),(229,'CA0fb775f3b9179c77fff2acada80a7783',3,2,'',NULL,'2010-05-12 17:01:50','WEB','',0),(230,'CAf1e9e417e6a87023c4e4be2fd8c081d9',3,2,'',NULL,'2010-05-12 17:02:43','WEB','',0),(231,'CAe38238b03f35d993fafa4bfc8f130465',3,2,'',NULL,'2010-05-12 17:05:13','WEB','',0),(232,'CAdc8a04770145b48545867eccc5a0e062',3,2,'',NULL,'2010-05-12 17:05:37','WEB','',0),(233,'CA061a145bbee0bacf947bf9a1134d7f24',3,2,'',NULL,'2010-05-12 17:06:20','WEB','',0),(234,'CAb1228ef4d28cc2dbedbc07c76c7b1e47',3,2,'',NULL,'2010-05-12 17:07:03','WEB','',0),(235,'CA7439637a5caf6e6fb9529382d80b9228',3,2,'',NULL,'2010-05-12 17:08:12','WEB','',0),(236,'CA7d62b540a4e56d0da64df180f93cd824',3,2,'',NULL,'2010-05-12 17:09:40','WEB','',0),(237,'CA1a3334e6196b522cba64980284a2652d',3,2,'',NULL,'2010-05-12 17:12:35','WEB','',0),(238,'CAbbf700c2d5c86f8bdfe6e386eac6e87b',3,2,'',NULL,'2010-05-12 17:13:26','WEB','',0),(239,'CAcea6463fcec350f274c23012081684e8',102,-1,'2138105359',NULL,'2010-05-12 17:38:43','WEB','',0),(240,'CAeb6f6ad24e0407421e1722bca8545be1',2,11,'',NULL,'2010-05-13 10:53:31','WEB','',0),(241,'CAdd124c6032686669b64d0c26c7809856',2,103,'',NULL,'2010-05-14 11:14:53','WEB','',0),(242,'CA2821a2ae3e4e4e54ad70b86a78126aa9',2,103,'',NULL,'2010-05-14 11:23:24','WEB','',0),(243,'CA0ceb92d8159a6f65435d37e11301a45a',2,103,'',NULL,'2010-05-14 11:35:25','WEB','',0),(244,'CA7000c749b0e53b8c4a2fa53d5d0a5369',102,102,'',NULL,'2010-05-14 13:07:29','WEB','',0),(245,'CAc1c9018b827cb1c283079bde13dab050',2,75,'',NULL,'2010-05-14 15:49:54','WEB','',0),(246,'CA248b1ea51d3ed0d7d4afb564581fb700',2,67,'',NULL,'2010-05-17 13:35:32','WEB','',0),(247,'CAc257a3d24ee82f3fdb48bcd6e6956c3d',2,103,'',NULL,'2010-05-17 13:49:59','WEB','',0),(248,'CA6af371f9f65b9e43400315159146cd7d',2,103,'',NULL,'2010-05-17 21:45:38','WEB','',0),(249,'CA17cf000d7178e992d882f60815534bd8',2,50,'',NULL,'2010-05-19 15:06:57','WEB','',0),(250,'CA1bbb61c8137c1a6765b8dc00418f958e',2,50,'',NULL,'2010-05-19 15:08:19','WEB','',0),(251,'CA79a6b9b2b66b7ab018e91dedd0bb8ceb',104,102,'',NULL,'2010-05-21 14:45:04','WEB','',0),(252,'CA6838d9e5d7bb40c89d52215cf1369445',2,24,'',NULL,'2010-05-22 14:35:53','WEB','',0),(253,'CA771413898407ff88d5b3cb3e372d04cd',2,34,'',NULL,'2010-05-22 14:37:20','WEB','',0),(254,'CAfcbe19b9296e91f85471970e2dd11a3c',2,8,'',NULL,'2010-05-23 18:58:05','WEB','',0),(255,'CAdc079e3b31b113b1d79cd26a0ce63255',2,34,'',NULL,'2010-05-23 18:59:50','WEB','',0),(256,'CA2627fdd8a18a8101c29c0e57b6816777',2,53,'',NULL,'2010-05-23 19:02:22','WEB','',0),(257,'CA805ea237fdea2705ad09d305b550e96e',2,24,'',NULL,'2010-05-23 19:04:19','WEB','',0),(258,'CA36083b8b104dcb20e61ad762a156b92d',2,75,'',NULL,'2010-05-23 19:05:31','WEB','',0),(259,'CA4454abe2c88e4b967e34b44730565c2f',2,21,'',NULL,'2010-05-24 12:50:20','WEB','',0),(260,'CA513dd32a5154766de3919a6cdbf76d5b',2,24,'',NULL,'2010-05-24 12:54:13','WEB','',0),(261,'CAffe017851cc94cc5dc84f37e89d671b0',2,45,'',NULL,'2010-05-24 15:10:30','WEB','',0),(262,'CA890e76f937a271b23b48db2d190255f0',2,45,'',NULL,'2010-05-25 20:11:15','WEB','',0),(263,'CA842f5e2288469eeac07a0d2d461ae136',9,3,'',NULL,'2010-05-27 09:10:29','WEB','',0),(264,'CAd09239845f63120a2ddb40d44158615e',2,73,'',NULL,'2010-05-28 10:35:00','WEB','',0),(265,'CA7d5174b90bdee2fc0ba82287b243b6ef',2,47,'',NULL,'2010-05-28 10:41:02','WEB','',0),(266,'CA656c2f7334bb7d3db3907cd72353ecce',2,44,'',NULL,'2010-05-28 19:37:55','WEB','',0),(267,'CA3a7ea4c71c0346e5dbcd128a7083b77a',2,79,'',NULL,'2010-05-29 12:45:52','WEB','',0),(268,'CA9373cee5156045b3f6478f673e99498b',2,100,'',NULL,'2010-05-30 11:48:49','WEB','',0),(269,'CA71c21d8fb5c4291ba6fbab0cac1c0834',2,76,'',NULL,'2010-05-30 11:53:38','WEB','',0),(270,'CA2af97b08c50e70ee2162c20fd9050eae',2,100,'',NULL,'2010-05-30 11:55:48','WEB','',0),(271,'CAfcf3ab5a08598f109e339792e289573e',2,-1,'6505335384',NULL,'2010-05-30 14:18:29','WEB','',0),(272,'CA69cf9ee6838a48d4a12670b6a22d6473',2,100,'',NULL,'2010-05-31 11:18:20','WEB','',0),(273,'CAc4cda4c3538b3cf43d9cb3eedcbf3f0d',2,76,'',NULL,'2010-05-31 11:20:55','WEB','',0),(274,'CAa8b2fa7156167698a524370b79b91ffd',2,58,'',NULL,'2010-05-31 12:21:59','WEB','',0),(275,'CAb8f772548bcd4836d911c471bf753d8a',2,73,'',NULL,'2010-05-31 12:43:39','WEB','',0),(276,'CAc3888120ea0ab7df5ef09eb2b4c04c4f',2,17,'',NULL,'2010-06-01 11:43:44','WEB','',0),(277,'CAe1f9837285109bfcb234db04390eec1d',3,3,'',NULL,'2010-06-01 23:41:52','WEB','',0),(278,'CA3fb404c1cec9da6d2cf731ad0cced22e',3,-1,'5854556464',NULL,'2010-06-01 23:43:40','WEB','',0),(279,'CAec54d14a96172e5cbfdb1856f8c951b6',3,3,'',NULL,'2010-06-02 00:07:18','WEB','',0),(280,'CA86327d7e6ef0ed338111935d829ba0d6',3,3,'',NULL,'2010-06-02 00:08:38','WEB','',0),(281,'CAed0186233f3f63e6ccf6123527753754',3,3,'',NULL,'2010-06-02 00:09:12','WEB','',0),(282,'CAb9154171f5cf3917ddf0abe780df6960',3,3,'',NULL,'2010-06-02 00:11:15','WEB','',0),(283,'CA72e38318527ceb5e55cd8e777cdfed5e',3,3,'',NULL,'2010-06-02 00:19:25','WEB','',0),(284,'CA625d1fb9a277a64b28ed746a777efebd',3,3,'',NULL,'2010-06-02 00:19:19','WEB','',0),(285,'CA2f28d0fec3290808232d5da564af6b6d',2,75,'',NULL,'2010-06-02 21:27:42','WEB','',0),(286,'CA74c2befc44d769bcb12b1f3265440dd1',2,45,'',NULL,'2010-06-04 13:29:31','WEB','',0),(287,'CA7bd6b8087ca5c8d6b4ddada3a69b5d0e',2,45,'',NULL,'2010-06-04 13:32:01','WEB','',0),(288,'CA4d070ad62f3371d5e781b4998a5ecb5b',2,44,'',NULL,'2010-06-05 11:23:35','WEB','',0),(289,'CA1e77d436bc4a50c2f72bb02385b9ef91',2,11,'',NULL,'2010-06-05 11:25:25','WEB','',0),(290,'CAc21f28d2da6beed394e736b4d997c6f9',25,2,'',NULL,'2010-06-05 13:06:10','WEB','',0),(291,'CAc3c340a152674681f1e9a40e29810262',2,10,'',NULL,'2010-06-06 13:05:46','WEB','',0),(292,'CA69295b77364f90182f06ad964a1d8b9a',2,34,'',NULL,'2010-06-06 19:13:09','WEB','',0),(293,'CAf677b309c23651c4ecda1d5a2d1c56d1',2,-1,'6503765601',NULL,'2010-06-06 19:26:00','WEB','',0),(294,'CA0e267016fb477458abb42d4926778f0f',2,-1,'6503675601',NULL,'2010-06-06 19:27:40','WEB','',0),(295,'CA596db2f0929500d66bf462cbcf1428c1',2,30,'',NULL,'2010-06-07 10:30:49','WEB','',0),(296,'CA164b77e5de559c0f778bce92ec9480f3',2,39,'',NULL,'2010-06-07 10:32:31','WEB','',0),(297,'CAa8d8aa423c8af5ad44203fb5f15e2ab8',28,20,'',NULL,'2010-06-08 15:40:38','WEB','',0),(298,'CAab60ab3beb4e109fa99bfe0a4e0d81df',28,20,'',NULL,'2010-06-08 15:43:04','WEB','',0),(299,'CA2aacaeb24cbbc2a9451a9d7c87a5689f',2,21,'',NULL,'2010-06-15 14:46:48','WEB','',0),(300,'CA74e9db578c06b49213a6ee3d54ba81ea',2,21,'',NULL,'2010-06-15 14:54:18','WEB','',0),(301,'CAec65a83f55893d98e6a580691aec73e6',2,45,'',NULL,'2010-06-16 13:38:48','WEB','',0),(302,'CAf6ba94a7314fd2c8fadb5bbc6d2c7e1c',2,12,'',NULL,'2010-06-17 11:52:04','WEB','',0),(303,'CAf1e3dd0b880f9b0c7ed641f77af02c8b',2,48,'',NULL,'2010-06-17 17:43:41','WEB','',0),(304,'CAd7adc900db7b20882e946f498f3e5b37',2,5,'',NULL,'2010-06-17 18:55:53','WEB','',0),(305,'CA935e7d3fb4f5e46005ee78197c13a754',2,96,'',NULL,'2010-06-18 10:16:45','WEB','',0),(306,'CA27a609231c38753e0d789cc12e30e319',2,57,'',NULL,'2010-06-18 10:20:47','WEB','',0),(307,'CA13d67673c58b55396350d87f095b8a82',2,35,'',NULL,'2010-06-18 13:20:16','WEB','',0),(308,'CAe5047e8e32d01eace373fe2d26551d8f',2,75,'',NULL,'2010-06-21 11:39:32','WEB','',0),(309,'CAdf3491773c002cb253e047dc1a477ad6',2,33,'',NULL,'2010-06-23 13:54:46','WEB','',0),(310,'CAcf6ee7fb0d15056a494bf65ef8fac37b',2,100,'',NULL,'2010-06-23 13:57:04','WEB','',0),(311,'CA408f6d625d01d58855d48ecb721640f4',2,88,'',NULL,'2010-06-24 10:25:44','WEB','',0),(312,'CAdead695383c2353d07aac486fa8fd444',2,100,'',NULL,'2010-06-24 10:26:08','WEB','',0),(313,'CAeecc7bede09f66a63400bf0ba1f86e7f',2,44,'',NULL,'2010-06-26 11:43:22','WEB','',0),(314,'CA908f493b83468f09e9b924fe80f5d145',2,79,'',NULL,'2010-06-26 11:47:11','WEB','',0),(315,'CAab18904d4bb08358ab8d31f66cb7c14e',2,73,'',NULL,'2010-06-26 11:51:45','WEB','',0),(316,'CAc58f6001d68c00c099d4426a3123c377',25,42,'',NULL,'2010-06-27 11:44:35','WEB','',0),(317,'CAf99c4c56aa4a790dccc7e58a8d2fbf0b',2,45,'',NULL,'2010-07-02 10:45:51','WEB','',0),(318,'CA52e726026f9e779c1c59dc42e29a88a5',2,10,'',NULL,'2010-07-06 09:05:18','WEB','',0),(319,'CA2323e895409ced4f63165d6ebd4e1250',2,55,'',NULL,'2010-07-06 19:49:03','WEB','',0),(320,'CAa7c0c85309015d3c24d39d6d941b4987',2,12,'',NULL,'2010-07-08 08:50:21','WEB','',0),(321,'CA36a1d33514a7900b1dc314e8dd0b87ed',2,100,'',NULL,'2010-07-09 12:25:17','WEB','',0),(322,'CA5a5dec33c47b5cb72d5cf6bec5580197',2,56,'',NULL,'2010-07-14 11:16:23','WEB','',0),(323,'CA703e85ff97c49b063a175e7b010b0c28',28,2,'',NULL,'2010-07-14 11:59:46','WEB','',0),(324,'CAa11cc8120ef8276f235c0225d305c817',2,73,'',NULL,'2010-07-15 14:25:26','WEB','',0),(325,'CAba3d08634650ed54ef47ee0d1ba5466a',2,73,'',NULL,'2010-07-15 14:33:32','WEB','',0),(326,'CA162254b717fe2db255f7e9596fd330c6',2,58,'',NULL,'2010-07-15 15:05:27','WEB','',0),(327,'CA3d5b04d910004320f40f24197f5118b2',25,27,'',NULL,'2010-07-18 13:19:16','WEB','',0),(328,'CA036c61642b28b1dc83bb5853d56ef6f6',28,2,'',NULL,'2010-07-19 15:16:37','WEB','',0),(329,'CA762f814d94e6ead4b89da8cc66dfd751',2,100,'',NULL,'2010-07-20 11:26:15','WEB','',0),(330,'CA4eb41eb5b654c4e60100001b7f58186f',27,73,'',NULL,'2010-07-20 13:15:19','WEB','',0),(331,'CAed84d2a4ea51db9cecc537f589c0d2b4',27,78,'',NULL,'2010-07-20 13:26:28','WEB','',0),(332,'CAbfde4410ef6294a234a0410f6db2b94d',27,78,'',NULL,'2010-07-20 13:27:53','WEB','',0),(333,'CA4e688206bb73739853aab38de24cc25a',2,17,'',NULL,'2010-07-30 14:23:59','WEB','',0),(334,'CA6d7f79b4784d3f7c1bf8f51b1bee706c',3,2,'',NULL,'2010-07-30 14:28:12','WEB','',0),(335,'CAc057614033fa18b962de52b973902b94',2,17,'',NULL,'2010-07-30 14:30:48','WEB','',0),(336,'CAc3bbbc378eeacd2ed1ab158cc759e9da',2,17,'',NULL,'2010-07-31 09:01:14','WEB','',0),(337,'CA2ea02ba3801d139f3f8603b43593ea69',2,38,'',NULL,'2010-08-03 13:01:38','WEB','',0),(338,'CA655b1770bd8b529f4e857c432bf4a722',2,78,'',NULL,'2010-08-06 11:15:40','WEB','',0),(339,'CA8f7c92953b28009e6eb987c86808d1f9',28,2,'',NULL,'2010-08-10 12:21:41','WEB','',0),(340,'CA6c233acef0111be37f6666f96b52708b',28,2,'',NULL,'2010-08-11 15:57:31','WEB','',0),(341,'CAbc015fc8e0cf435a8c9968a8d1c0c65a',28,20,'',NULL,'2010-08-17 11:17:38','WEB','',0),(342,'CA18cebb2ab126697e24f46920e8c615ca',28,20,'',NULL,'2010-08-17 11:19:58','WEB','',0),(343,'CA1f679106a906345501586b61be1f1b1f',28,20,'',NULL,'2010-08-18 18:11:01','WEB','',0),(344,'CA2399ded49e404ab8e9b5bfff0b4eaa15',2,97,'',NULL,'2010-08-19 19:51:00','WEB','',0),(345,'CA9ef7c949395d1c9496c16823c15949f4',2,97,'',NULL,'2010-08-20 13:51:34','WEB','',0),(346,'CAd00051397cc0df59ab64edd1112f481d',2,45,'',NULL,'2010-08-25 11:19:42','WEB','',0),(347,'CAac3212601a2df1a0d027445f31a9cfa4',27,53,'',NULL,'2010-08-31 12:52:57','WEB','',0),(348,'CAb52009a9663e3200cf68a4d5c1d0cecb',27,53,'',NULL,'2010-08-31 12:54:23','WEB','',0),(349,'CAe483bcfe71d3e70e8e5349580044f503',2,10,'',NULL,'2010-09-10 09:54:53','WEB','',0),(350,'CAb84a73beccaa9f1fe47108c8345fa01d',2,35,'',NULL,'2010-09-10 10:52:02','WEB','',0),(351,'CAebb537e4c595d82f7d3f64922084c2cf',2,75,'',NULL,'2010-09-11 10:18:26','WEB','',0),(352,'CAb024a4b207056a62f9c78d1ce03841a8',3,9,'',NULL,'2010-09-14 19:00:51','WEB','',0),(353,'CA0e501a5c9ddbdecef1066a22cadd74e9',3,9,'',NULL,'2010-09-14 19:02:32','WEB','',0),(354,'CA5a3973c27fab4fef33d0c177c6f1b8bf',3,9,'',NULL,'2010-09-14 19:03:12','WEB','',0),(355,'CAebb4a7db6bf296cc39fa79ab38082800',2,100,'',NULL,'2010-09-16 10:22:26','WEB','',0),(356,'CA3bf1aa844cb4a95068834f914b6aafa4',32,2,'',NULL,'2010-09-25 13:46:47','WEB','',0),(357,'CAbae94d8d667fbccae2feac6201300c22',32,2,'',NULL,'2010-09-25 13:55:22','WEB','',0),(358,'CAa84e2f810c13ddd5826f8c50031676ab',2,34,'',NULL,'2010-09-26 13:02:09','WEB','',0),(359,'CA12061e63439b28ee43a6d9fba50a7e87',32,50,'',NULL,'2010-09-28 12:13:05','WEB','',0),(360,'CAb550dc982981013c3b5c26b879b34ea1',3,3,'',1,'2010-09-29 08:24:01','WEB','',0);
+/*!40000 ALTER TABLE `DoctorCom_click2call_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_click2call_session`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_click2call_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_click2call_session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `callid` varchar(34) COLLATE utf8_unicode_ci NOT NULL,
+  `caller_id` int(11) NOT NULL,
+  `called_user_id` int(11) DEFAULT NULL,
+  `called_number` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `DoctorCom_click2call_session_caller_id` (`caller_id`),
+  KEY `DoctorCom_click2call_session_called_id` (`called_user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=355 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_click2call_session`
+--
+
+LOCK TABLES `DoctorCom_click2call_session` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_click2call_session` DISABLE KEYS */;
+INSERT INTO `DoctorCom_click2call_session` VALUES (1,'CAd5386767eb78d48eb3a206478cb12e7b',2,3,'','2009-11-18 09:16:36'),(2,'CA7d52b470c98505c7119b391225a12b23',2,2,'','2009-11-18 12:30:53'),(4,'CAe152c3f15597a2043623cbbc17333949',2,20,'','2009-11-18 12:50:44'),(8,'CA8b985fa9790b0290921a4b0a0fa4a09a',9,9,'','2009-11-20 01:54:44'),(9,'CAd0e2ebe78cf2489b8b8fa280a1ff1fd5',2,2,'','2009-11-22 19:15:15'),(11,'CA32e6ca18af2ad27e2a218530969dfd9f',2,2,'','2009-11-25 11:11:59'),(13,'CA05cfff5e7ed83d8ae5294416dd1050e4',2,2,'','2009-11-25 15:27:30'),(14,'CA8693d13d33594b9f0d2ea84395e87d25',2,2,'','2009-11-25 15:33:27'),(15,'CAd81bade4083300f56db3f75225247fa2',2,2,'','2009-11-25 15:38:10'),(16,'CA881e652ea6935d2b14d3ec73bf3bcf81',2,2,'','2009-11-25 16:00:55'),(17,'CA33d22aee8a5fde6a36ce277198f02e06',3,3,'','2009-11-25 17:10:50'),(20,'CAccfcb44515255caf025964711250d4ad',2,2,'','2009-11-28 13:52:25'),(21,'CA5e8c1f4ba5a6fca7d7cb8b9513806574',56,56,'','2009-11-28 19:00:51'),(22,'CA244476c315b556210892bc0b7dfab6aa',2,2,'','2009-11-29 15:00:08'),(24,'CAdf3dfa353be3c2f0e2a90992ed447885',34,34,'','2009-11-29 21:40:56'),(27,'CA27ebbf7f3ee277473944bf24c2391ec4',2,2,'','2009-11-30 20:01:32'),(28,'CA1dd4ec1c8c7661ab1f2b52311ce469a6',19,19,'','2009-12-01 00:32:07'),(32,'CA78ac6b00c6c4e5c6f2695e8e39aabfde',2,2,'','2009-12-04 11:08:32'),(34,'CA4f06138ec3265927c764071176dfc3fa',3,3,'','2009-12-07 16:23:05'),(35,'CA02fff501ef06a13f8420f450837d645f',3,3,'','2009-12-07 16:56:36'),(37,'CAd1df9d7b3521f2aa69af674eb84b017a',2,2,'','2009-12-08 08:58:39'),(39,'CA007631859aee90963a15fc84b5567fe2',2,33,'','2009-12-08 15:35:09'),(41,'CA2f2da08295185406f608003d4c6025a0',36,23,'','2009-12-09 08:16:12'),(60,'CAf1d01308994da34a8bf12f3201ee80f8',54,55,'','2010-01-27 14:00:37'),(61,'CA994e424781bb5d3e37bb7f7b6aae4504',54,2,'','2010-01-27 14:02:16'),(62,'CAb0a795b85c2455c1db3e7258a0045f5f',54,2,'','2010-01-27 14:03:45'),(68,'CAf3fc6e766136164eb6ad529167d2f629',2,14,'','2010-01-28 16:01:48'),(71,'CA59ac4cd2faf79fbffaef8f82775d0028',3,3,'','2010-01-29 07:55:04'),(72,'CAadf84e433d5e1e525b9eed1e970b9221',3,3,'','2010-01-29 07:55:36'),(73,'CA3f085fd318b11c5997b9c5c290d0e2a0',2,34,'','2010-01-29 11:56:46'),(74,'CAb8c9f4615f2d34b255741edd24b79e05',2,58,'','2010-01-29 11:58:20'),(75,'CA4fbc5885ddb33aca26aa39d17bfe8bd3',2,34,'','2010-01-29 11:59:22'),(76,'CAc6442bba1f743c99cc8c357cdd6a0b6e',2,34,'','2010-01-29 12:02:50'),(77,'CA280852c3d8263df6634c68912d24db14',67,67,'','2010-01-29 12:17:04'),(79,'CAb1b25711148f4dcb2dd56b8c3d377c00',2,3,'','2010-01-29 12:24:30'),(81,'CA2df6289420d058ed7b00003b16823de6',2,3,'','2010-01-30 11:55:28'),(82,'CA7f567cadf818a78a91602c6383d553e9',2,3,'','2010-01-30 14:56:50'),(83,'CA09a14e6de81509b5dbc0974e10779388',3,3,'','2010-01-30 12:52:06'),(85,'CAe906d73b1b526e941863bafe4300aacf',9,3,'','2010-01-30 13:26:56'),(92,'CAeda258e02a14a13571d2f2f952f15b6f',9,3,'','2010-01-30 13:46:27'),(93,'CA64f2967a1a3c95a40dac52752c8f3604',9,3,'','2010-01-30 13:47:53'),(95,'CA66eb0de23e9a22cee1eaf381107c54ec',9,3,'','2010-01-30 13:54:58'),(97,'CA4d3be90f53ea3d20075f36fa79ed31fe',9,3,'','2010-01-30 13:58:24'),(98,'CAebf35774110216f178f23396a511836c',9,3,'','2010-01-30 13:59:22'),(99,'CAfa5ce797c13d5acf7b187a73bc642c86',9,3,'','2010-01-30 14:00:28'),(100,'CA6b9ed54fef64cd7a4de4e448c83fd0be',9,3,'','2010-01-30 14:01:54'),(101,'CA764c88cfe8c8ca160238b631babd4c8d',9,3,'','2010-01-30 14:03:13'),(102,'CAf9b5e058c3ba3657528e121dfa0eb2d6',9,3,'','2010-01-30 14:04:23'),(108,'CA612b92a8bff5a4a04241cb58e7824eba',2,3,'','2010-02-01 08:50:21'),(112,'CA5aa00cc3a3d923d6cf4fa2f0f7c8026d',9,3,'','2010-02-03 11:36:33'),(113,'CAaea673a00ad4b44b381f422f58f4c3eb',9,3,'','2010-02-03 11:39:09'),(115,'CA24810140380d05c4e6ec0fef261db003',2,26,'','2010-02-05 16:26:25'),(116,'CA177df7bd6d5dc334c226a62dc1261206',2,3,'','2010-02-05 16:28:36'),(117,'CA86ce8a49dcf3e6b9e5cefd1a46ae8aea',2,3,'','2010-02-05 16:32:49'),(118,'CAf132c3f11aa3c301d690a6d8ade61134',2,23,'','2010-02-05 16:44:14'),(120,'CAaa505f5b3accf8df3bf5d60fd4a818dd',2,58,'','2010-02-06 15:59:48'),(121,'CAfccde1f3c5bfc506ab2c6b0db7f5630e',2,58,'','2010-02-06 16:09:30'),(122,'CA110e9c46014da9082071af40fecf12c7',2,23,'','2010-02-07 13:45:42'),(125,'CA77313bbff8b74644f2a10f0b713c2fcc',2,61,'','2010-02-14 15:08:18'),(136,'CAfb518a4d4009d23b63a4fae1f9189f71',69,7,'','2010-02-25 18:17:12'),(137,'CA4b0ed2bad24a49d716dab3697611edbd',69,7,'','2010-02-25 18:20:23'),(140,'CA062e07b5bdf48a90e684b4d5d57cce9c',2,75,'','2010-03-02 12:42:57'),(154,'CAcac6a920dbb300bfa314aca0dc506e11',2,3,'','2010-03-17 18:08:52'),(166,'CAdd8f0d31b1770d755476bc9cca410135',32,47,'','2010-03-31 12:39:07'),(173,'CA3db046dedbdc946d67f060f8c5ea7447',3,3,'','2010-04-03 10:32:27'),(174,'CA119733902836d73c98fae826d3483ade',27,2,'','2010-04-05 10:07:14'),(177,'CAbe5ffbc8b702e26d707c991cd2d66abe',87,88,'','2010-04-06 21:18:49'),(178,'CA0ea0b6e414574af8067ac43e99d5eab8',8,8,'','2010-04-07 16:38:10'),(180,'CA7d58ce9a37b032059d5f334c8cc95785',54,2,'','2010-04-09 16:56:05'),(189,'CA7c93ce115bb8c473abc79031d645e394',25,31,'','2010-04-13 16:32:58'),(194,'CA270fa824126346dcded2c794143da44b',2,84,'','2010-04-14 13:38:54'),(196,'CAcc2a6d6dc9a2d4eab69eaa1b78aabb08',2,45,'','2010-04-14 22:31:01'),(197,'CA7da692ab3370962404d7e31e178cfedc',2,19,'','2010-04-14 19:31:02'),(206,'CA18ca575c149cb287d19441885749d171',2,2,'','2010-04-24 17:07:14'),(210,'CA7bfe78ae35801e7f79c561f4218b69d7',2,75,'','2010-04-28 12:12:27'),(218,'CA3649586bb34fcb48f132341616b530c9',2,100,'','2010-05-11 12:14:13'),(222,'CA06e55162729f716e13d2135f7febd28a',2,11,'','2010-05-12 11:45:04'),(223,'CA392c95f189db7f7bc6460f1887c332ec',2,43,'','2010-05-12 12:31:14'),(226,'CA0fb775f3b9179c77fff2acada80a7783',3,2,'','2010-05-12 17:01:39'),(227,'CAf1e9e417e6a87023c4e4be2fd8c081d9',3,2,'','2010-05-12 17:02:28'),(240,'CA0ceb92d8159a6f65435d37e11301a45a',2,103,'','2010-05-14 11:35:02'),(244,'CAc257a3d24ee82f3fdb48bcd6e6956c3d',2,103,'','2010-05-17 13:49:35'),(245,'CA6af371f9f65b9e43400315159146cd7d',2,103,'','2010-05-17 21:45:17'),(255,'CA36083b8b104dcb20e61ad762a156b92d',2,75,'','2010-05-23 19:05:12'),(256,'CA4454abe2c88e4b967e34b44730565c2f',2,21,'','2010-05-24 12:49:58'),(260,'CA842f5e2288469eeac07a0d2d461ae136',9,3,'','2010-05-27 09:10:04'),(280,'CA72e38318527ceb5e55cd8e777cdfed5e',3,3,'','2010-06-02 00:19:06'),(281,'CA625d1fb9a277a64b28ed746a777efebd',3,3,'','2010-06-02 00:19:07'),(292,'CA596db2f0929500d66bf462cbcf1428c1',2,30,'','2010-06-07 10:30:27'),(294,'CAa8d8aa423c8af5ad44203fb5f15e2ab8',28,20,'','2010-06-08 15:40:15'),(306,'CAdf3491773c002cb253e047dc1a477ad6',2,33,'','2010-06-23 13:54:21'),(309,'CAdead695383c2353d07aac486fa8fd444',2,100,'','2010-06-24 10:25:49'),(340,'CA1f679106a906345501586b61be1f1b1f',28,20,'','2010-08-18 18:10:32'),(344,'CAac3212601a2df1a0d027445f31a9cfa4',27,53,'','2010-08-31 12:52:45'),(345,'CAb52009a9663e3200cf68a4d5c1d0cecb',27,53,'','2010-08-31 12:54:11'),(350,'CA0e501a5c9ddbdecef1066a22cadd74e9',3,9,'','2010-09-14 19:01:57'),(354,'CAbae94d8d667fbccae2feac6201300c22',32,2,'','2010-09-25 13:55:07');
+/*!40000 ALTER TABLE `DoctorCom_click2call_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_message`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender_id` int(11) NOT NULL,
+  `body` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `reply_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `DoctorCom_message_sender_id` (`sender_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=341 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_message`
+--
+
+LOCK TABLES `DoctorCom_message` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_message` DISABLE KEYS */;
+INSERT INTO `DoctorCom_message` VALUES (1,3,'lorem ipsum d.','2009-10-13 19:43:49',''),(2,3,'lorem ipsum d.','2009-10-13 22:45:50',''),(3,2,'lorem ipsum d.','2009-10-13 22:47:23',''),(4,2,'','2009-10-21 14:55:35',''),(5,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr se.','2009-10-22 14:24:39',''),(6,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy.','2009-10-23 09:03:57',''),(7,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy.','2009-10-23 09:06:48',''),(8,4,'lorem ipsum dolor sit amet consetetur sadipscing.','2009-10-27 18:26:57',''),(9,3,'lorem ipsum dolor sit ame.','2009-11-12 14:04:35',''),(10,7,'lor.','2009-11-13 08:28:37',''),(11,7,'lore.','2009-11-13 08:30:29',''),(12,2,'lorem ipsum dolor sit amet consetetur sadipscing e.','2009-11-13 12:39:52',''),(13,2,'lorem ipsum dolor sit amet consetetur sadipscinga.','2009-11-13 18:01:18',''),(14,2,'lorem ipsum dolor sit amet consetetur sadi.','2009-11-13 18:36:36',''),(15,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr seda.','2009-11-13 19:28:55',''),(16,2,'lorem ipsum dolor sit amet consetetur sad.','2009-11-16 12:58:41',''),(17,2,'lorem ipsum dolor sit amet consetetura.','2009-11-16 13:04:09',''),(18,2,'lorem ipsum dolora.','2009-11-16 16:27:04',''),(19,2,'lorem ipsum dolor sit amet consetetur sad.','2009-11-17 12:43:05',''),(20,2,'lorem ipsum dolor sit.','2009-11-17 14:30:33',''),(21,38,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidun.','2009-11-19 19:15:03',''),(22,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempo.','2009-11-19 19:27:24',''),(23,3,'lor.','2009-11-19 21:39:39',''),(24,3,'lorem.','2009-11-19 19:06:05',''),(25,2,'lorem ipsum dolor sit amet consetetur sadipscing el.','2009-11-21 10:36:41',''),(26,44,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunta.','2009-11-22 16:58:27',''),(27,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr.','2009-11-22 17:13:16',''),(28,29,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2009-11-25 10:04:21',''),(29,29,'lorem ipsum dolor sit amet con.','2009-11-25 10:04:36',''),(30,17,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2009-11-25 10:10:40',''),(31,2,'lorem ipsum dolor sit amet consetetu.','2009-11-25 10:24:49',''),(32,2,'lorem.','2009-11-25 10:38:35',''),(33,3,'lor.','2009-11-25 11:04:55',''),(34,3,'lorem ipsum dolor sit amet consetetur sadips.','2009-11-25 11:05:16',''),(35,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed.','2009-11-25 13:05:47',''),(36,2,'lorem ipsum dolor sit amet consetetur sad.','2009-11-25 13:07:47',''),(37,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonum.','2009-11-25 13:55:55',''),(38,3,'lor.','2009-11-25 17:10:47',''),(39,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eir.','2009-11-25 17:24:21',''),(40,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed d.','2009-11-26 19:13:16',''),(41,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy e.','2009-11-26 23:53:44',''),(42,36,'lorem ipsum dolora.','2009-11-27 09:58:55',''),(43,2,'lorem ipsum dolor sit amet consetetur sadipscing elit.','2009-11-27 12:06:03',''),(44,56,'lorem ipsum dolor sit amet.','2009-11-28 22:03:20',''),(45,54,'lorem ipsum dolor sit amet.','2009-11-28 19:11:13',''),(46,25,'lorem ipsum dolor si.','2009-11-29 14:17:45',''),(47,2,'lorem ipsum dolor sit amet consetetura.','2009-11-30 07:58:52',''),(48,36,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed dia.','2009-11-30 08:03:36',''),(49,29,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2009-11-30 10:28:47',''),(50,2,'lorem i.','2009-11-30 20:01:13',''),(51,19,'lorem ipsum dolor sit amet consetetur s.','2009-11-30 21:31:26',''),(52,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr se.','2009-12-06 19:35:44',''),(53,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmoda.','2009-12-08 12:13:40',''),(54,2,'lorem ipsum dolor sit amet consetetur.','2009-12-08 17:29:55',''),(55,2,'lorem ipsum d.','2009-12-09 15:37:42',''),(56,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2009-12-10 11:03:35',''),(57,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam no.','2009-12-11 12:27:36',''),(58,64,'lore.','2009-12-12 17:41:32',''),(59,64,'lorem ip.','2009-12-12 17:47:13',''),(60,29,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2009-12-13 08:10:30',''),(61,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt.','2009-12-13 12:15:10',''),(62,5,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2009-12-14 09:35:44',''),(63,2,'lorem ipsum dolor sit amet consetetur.','2009-12-17 12:11:34',''),(64,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labor.','2009-12-18 08:46:35',''),(65,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy.','2009-12-27 12:09:24',''),(66,49,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2009-12-31 18:17:15',''),(67,2,'lorem ipsum dolor sit amet consetetur sadi.','2010-01-13 09:56:44',''),(68,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-28 14:36:55',''),(69,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-28 15:09:58',''),(70,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-28 15:12:49',''),(71,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut.','2010-01-28 15:13:54',''),(72,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam non.','2010-01-28 15:44:24',''),(73,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-28 15:44:50',''),(74,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-29 08:42:21',''),(75,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-29 08:43:29',''),(76,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-29 08:44:09',''),(77,3,'lorem ipsum dolor sit amet c.','2010-01-29 08:45:09',''),(78,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-29 08:47:05',''),(79,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-01-29 08:47:53',''),(80,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr.','2010-01-29 13:52:52',''),(81,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-02-02 11:30:39',''),(82,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-02-02 11:31:36',''),(83,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-02-02 11:57:02',''),(84,2,'lor.','2010-02-02 19:38:52',''),(85,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam.','2010-02-04 09:58:09',''),(86,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonu.','2010-02-04 09:58:57',''),(87,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed d.','2010-02-05 16:02:19',''),(88,42,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-02-05 17:00:25',''),(89,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmo.','2010-02-05 18:59:31',''),(90,2,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-02-05 19:00:44',''),(91,2,'lorem ipsum dol.','2010-02-06 16:03:48',''),(92,2,'lorem ipsum dol.','2010-02-07 13:47:59',''),(93,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labor.','2010-02-08 18:12:02',''),(94,29,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-02-09 17:54:03',''),(95,2,'lor.','2010-02-13 14:11:12',''),(96,2,'lor.','2010-02-14 15:33:12',''),(97,2,'lor.','2010-02-15 11:24:17',''),(98,2,'lorem ipsum dolor s.','2010-02-15 19:39:35',''),(99,2,'lorem ipsum dolor sit amet consetetur sadi.','2010-02-15 17:38:07',''),(100,2,'lorem ipsum dolor sit amet consetetur sadi.','2010-02-16 11:39:54',''),(101,2,'lorem ipsum dolor sit amet consetet.','2010-02-17 15:33:10',''),(102,2,'lorem ipsum dolor sit amet consetet.','2010-02-25 13:09:31',''),(103,2,'lorem ipsum dolor sit amet conse.','2010-02-25 13:13:14',''),(104,3,'lor.','2010-02-25 15:03:33',''),(105,3,'lorem ipsum dolor sit amet consetetura.','2010-02-25 15:04:15',''),(106,3,'lor.','2010-02-27 11:52:03',''),(107,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invid.','2010-02-27 11:53:08',''),(108,2,'lorem ipsum dolor sit amet conset.','2010-02-27 12:23:43',''),(109,3,'lor.','2010-02-28 12:55:29',''),(110,3,'lorem ipsum dolora.','2010-02-28 13:00:06',''),(111,3,'lorem i.','2010-02-28 15:53:51',''),(112,2,'lorem ipsum dolor sit amet consetetur sadipscin.','2010-02-28 17:59:11',''),(113,2,'lor.','2010-03-01 07:40:07',''),(114,2,'lorema.','2010-03-01 12:41:28',''),(115,2,'lorem ipsum dolo.','2010-03-01 13:34:55',''),(116,2,'lorem ipsum dolor sit amet c.','2010-03-01 13:37:15',''),(117,28,'lorem ipsum dolor sit amet consetetur sad.','2010-03-01 14:31:17',''),(118,2,'lorem ipsum dolor s.','2010-03-01 14:38:44',''),(119,2,'lorem ipsum dolor sit amet consetetur sadips.','2010-03-05 10:16:24',''),(120,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr.','2010-03-05 10:22:56',''),(121,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam.','2010-03-06 11:49:50',''),(122,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempora.','2010-03-06 13:17:22',''),(123,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidun.','2010-03-06 15:14:09',''),(124,25,'lorem ipsum do.','2010-03-06 15:24:39',''),(125,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmo.','2010-03-07 09:49:32',''),(126,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod.','2010-03-07 14:06:58',''),(127,2,'lorem ipsum dolor sit amet consetetur sadipscing e.','2010-03-07 14:34:11',''),(128,55,'lorem ipsum dolor sit amet consetetur sadipscing eli.','2010-03-08 07:22:15',''),(129,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dol.','2010-03-08 07:23:55',''),(130,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor.','2010-03-08 08:51:21',''),(131,2,'lorem ipsum dolor sit amet consetetur s.','2010-03-09 16:03:20',''),(132,2,'lorem ipsum dolor sit amet.','2010-03-09 16:14:43',''),(133,2,'lorem ipsum dolor sit amet consetetur sadip.','2010-03-09 19:11:30',''),(134,2,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-03-10 14:25:37',''),(135,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod t.','2010-03-11 10:59:00',''),(136,2,'lorem ipsum dolor sit amet consetet.','2010-03-11 12:12:09',''),(137,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonu.','2010-03-11 17:19:41',''),(138,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam non.','2010-03-11 18:55:56',''),(139,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat s.','2010-03-12 08:06:17',''),(140,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmoda.','2010-03-12 10:35:05',''),(141,2,'lor.','2010-03-17 17:01:11',''),(142,2,'lor.','2010-03-17 17:03:19',''),(143,2,'lor.','2010-03-17 17:18:24',''),(144,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempo.','2010-03-22 11:58:47',''),(145,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed di.','2010-03-23 09:37:37',''),(146,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidu.','2010-03-24 14:30:02',''),(147,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonum.','2010-03-25 08:33:44',''),(148,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam n.','2010-03-29 10:26:30',''),(149,28,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-03-30 08:40:39',''),(150,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-03-30 15:17:12',''),(151,2,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-03-31 12:58:08',''),(152,2,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-03-31 12:58:20',''),(153,28,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-03-31 15:29:28',''),(154,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erata.','2010-04-01 08:04:53',''),(155,2,'lorem ipsum dolor sit ame.','2010-04-01 12:45:03',''),(156,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut.','2010-04-02 11:08:47',''),(157,2,'lor.','2010-04-03 10:29:31',''),(158,22,'lore.','2010-04-05 12:26:45',''),(159,27,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliq.','2010-04-05 12:45:08',''),(160,2,'lorem ipsum dolor sit amet consetetur sadips.','2010-04-07 15:05:52',''),(161,2,'lorem ipsum dolor sit amet consetetur s.','2010-04-07 16:29:01',''),(162,2,'lorem ipsum dolor sit amet consetetur sadi.','2010-04-09 10:50:56',''),(163,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed.','2010-04-09 11:12:46',''),(164,54,'lorem ipsum dolor sit amet conset.','2010-04-09 17:01:10',''),(165,25,'lorem ipsum dolor sit amet conset.','2010-04-10 10:16:52',''),(166,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempo.','2010-04-13 06:53:22',''),(167,2,'lor.','2010-04-13 07:57:37',''),(168,2,'lor.','2010-04-13 09:12:04',''),(169,2,'lor.','2010-04-13 15:11:36',''),(170,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor.','2010-04-14 19:29:20',''),(171,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor.','2010-04-15 08:17:15',''),(172,28,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed d.','2010-04-16 16:25:28',''),(173,50,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore.','2010-05-01 14:26:28',''),(174,2,'lorem ipsum dolor sit.','2010-05-01 14:29:42',''),(175,2,'lorem ipsum dolora.','2010-05-05 10:17:50',''),(176,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diama.','2010-05-05 17:42:30',''),(177,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr seda.','2010-05-11 14:53:33',''),(178,2,'lorem.','2010-05-11 14:54:35',''),(179,3,'lorem ipsum dolor sit amet consetetur sad.','2010-05-11 14:57:47',''),(180,2,'lor.','2010-05-11 14:57:52',''),(181,3,'lorema.','2010-05-11 14:58:22',''),(182,3,'lor.','2010-05-11 21:18:52',''),(183,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr se.','2010-05-12 07:59:38',''),(184,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed dia.','2010-05-12 08:08:48',''),(185,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirm.','2010-05-12 08:13:10',''),(186,3,'lor.','2010-05-12 08:30:05',''),(187,3,'lo.','2010-05-12 08:30:31',''),(188,2,'lorem.','2010-05-12 08:40:49',''),(189,9,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam.','2010-05-12 08:43:01',''),(190,3,'lorem ipsum dolor sit amet consetetur sadipscing e.','2010-05-12 08:46:44',''),(191,9,'lorem ipsum dolor sit amet consetetur.','2010-05-12 08:55:38',''),(192,3,'lorem ipsuma.','2010-05-12 08:56:32',''),(193,3,'lor.','2010-05-12 09:56:58',''),(194,3,'lo.','2010-05-12 10:00:06',''),(195,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed.','2010-05-12 12:20:35',''),(196,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed.','2010-05-12 12:21:11',''),(197,3,'lor.','2010-05-12 12:23:52',''),(198,2,'lor.','2010-05-12 13:20:34',''),(199,3,'lorem ipsuma.','2010-05-12 13:21:05',''),(200,69,'lorem i.','2010-05-12 13:22:24',''),(201,9,'lorem ipsum dolor sit am.','2010-05-12 13:28:36',''),(202,69,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut la.','2010-05-12 13:39:53',''),(203,2,'lorem ipsu.','2010-05-12 13:40:46',''),(204,69,'lorem.','2010-05-12 13:41:59',''),(205,3,'lorem ip.','2010-05-12 13:44:14',''),(206,9,'lorem ipsum dolo.','2010-05-12 13:44:46',''),(207,9,'lorem ipsum dolor sit amet co.','2010-05-12 13:50:45',''),(208,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat s.','2010-05-12 14:14:19',''),(209,3,'lorem ipsu.','2010-05-12 14:41:44',''),(210,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invid.','2010-05-12 16:17:16',''),(211,102,'lor.','2010-05-12 17:42:29',''),(212,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy ei.','2010-05-12 19:30:24',''),(213,3,'lorem ipsum dolor.','2010-05-12 19:31:18',''),(214,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor inv.','2010-05-18 07:58:26',''),(215,2,'lorem ipsum dolor sit amet conset.','2010-05-18 09:35:59',''),(216,20,'lorem ipsum dolora.','2010-05-18 09:36:38',''),(217,102,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua a.','2010-05-18 17:10:03',''),(218,50,'lorem ipsum dolor sit amet consetetur s.','2010-05-19 15:01:19',''),(219,2,'lorem ipsum dolora.','2010-05-19 15:04:09',''),(220,50,'lorem ipsum dolor sit amet consetetura.','2010-05-19 15:10:01',''),(221,2,'lorem ipsum dolor sit amet c.','2010-05-19 15:10:55',''),(222,50,'l.','2010-05-19 15:11:55',''),(223,2,'lorem ipsum dolor sit a.','2010-05-20 20:29:19',''),(224,102,'lorem ipsum dolor sit amet consetetur sa.','2010-05-20 21:41:47',''),(225,2,'lorem ipsum dolo.','2010-05-20 21:49:51',''),(226,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt uta.','2010-05-20 21:50:52',''),(227,102,'lorem ipsum dolor sit.','2010-05-21 12:54:23',''),(228,7,'lorem ipsum dolora.','2010-05-21 13:03:45',''),(229,104,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed d.','2010-05-21 14:36:54',''),(230,102,'lorem ipsum dolor sit amet.','2010-05-25 21:05:43',''),(231,102,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt.','2010-05-26 19:17:32',''),(232,108,'lorem ipsum dolor sit amet co.','2010-05-26 19:18:05',''),(233,108,'lorem ipsum dolor.','2010-05-26 19:18:11',''),(234,102,'lorem ipsum dolor sit amet consetetur sadipscing.','2010-05-28 16:46:03',''),(235,109,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at ver.','2010-05-28 17:02:35',''),(236,102,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tem.','2010-05-28 17:04:04',''),(237,102,'lor.','2010-05-31 21:38:20',''),(238,3,'lorem i.','2010-06-01 23:41:02',''),(239,2,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-06-03 11:57:44',''),(240,63,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at vero eos et accusam et justo duo dolores et ea rebum stet clita kasd gubergren no sea takimata sanctus est lorem ipsum dolor sit amet lorem ips.','2010-06-03 21:42:01',''),(241,63,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat se.','2010-06-03 21:43:04',''),(242,38,'lorem ipsum dolor sit amet consetetur s.','2010-06-03 21:44:38',''),(243,3,'lorem ipsum do.','2010-06-08 16:44:19',''),(244,3,'lorema.','2010-06-08 16:45:20',''),(245,102,'lorema.','2010-06-09 19:21:41',''),(246,63,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirm.','2010-06-14 11:08:47',''),(247,3,'lorem ipsum dolor sit amet consetetur sadi.','2010-06-15 13:02:36',''),(248,2,'lorem ipsum dolor sit amet conset.','2010-06-15 14:48:15',''),(249,2,'lor.','2010-06-15 14:55:53',''),(250,2,'lorem ipsum dolor.','2010-06-15 15:23:29',''),(251,2,'lorem ipsum dolor sit a.','2010-06-15 15:34:15',''),(252,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy ei.','2010-06-17 17:22:12',''),(253,2,'lorem i.','2010-06-18 13:30:57',''),(254,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmo.','2010-06-28 09:55:01',''),(255,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmo.','2010-06-28 09:55:32',''),(256,10,'.','2010-06-28 10:00:39',''),(257,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumya.','2010-06-28 12:20:01',''),(258,69,'lorem ipsum dolor sit amet co.','2010-06-28 12:21:10',''),(259,2,'lo.','2010-06-28 12:21:55',''),(260,69,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor i.','2010-06-28 12:27:13',''),(261,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor i.','2010-07-05 08:31:37',''),(262,10,'.','2010-07-05 08:41:40',''),(263,2,'lorem ipsum dolor sit amet consetetur sadipscing el.','2010-07-06 13:11:49',''),(264,41,'lorem ipsum.','2010-07-06 13:13:48',''),(265,2,'lorem ipsuma.','2010-07-06 19:56:57',''),(266,55,'lorem ipsuma.','2010-07-06 19:58:06',''),(267,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diama.','2010-07-08 09:02:18',''),(268,12,'lorem ipsum dolor sit.','2010-07-08 12:45:38',''),(269,2,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-07-08 13:10:24',''),(270,12,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eir.','2010-07-08 20:49:07',''),(271,2,'lorem ipsum dol.','2010-07-08 20:50:05',''),(272,2,'lorem ipsum dolor sit amet conse.','2010-07-12 19:40:06',''),(273,2,'lorem ipsuma.','2010-07-13 20:41:42',''),(274,60,'lorem ipsum dolor sit amet consetetu.','2010-07-13 22:53:52',''),(275,2,'lorem.','2010-07-14 07:22:31',''),(276,2,'lorem ipsum dolo.','2010-07-14 11:17:14',''),(277,2,'lorem ipsum dolor sit amet consetet.','2010-07-15 12:25:37',''),(278,41,'lor.','2010-07-15 12:27:55',''),(279,2,'lorem ipsum dolor sit amet.','2010-07-15 16:04:03',''),(280,28,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at ver.','2010-07-19 15:17:30',''),(281,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam n.','2010-07-24 10:08:51',''),(282,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua ata.','2010-07-24 10:16:07',''),(283,10,'l.','2010-07-24 11:43:44',''),(284,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy.','2010-07-30 09:17:33',''),(285,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunta.','2010-07-30 14:33:06',''),(286,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidun.','2010-08-03 18:40:10',''),(287,2,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-08-04 16:12:43',''),(288,48,'lo.','2010-08-04 16:16:04',''),(289,2,'lorem ipsu.','2010-08-04 16:44:57',''),(290,2,'lorem ipsum dolor sit amet consetetur sadi.','2010-08-06 09:04:52',''),(291,13,'lor.','2010-08-06 09:05:29',''),(292,2,'lorem ipsum dolor sit amet conse.','2010-08-06 11:17:22',''),(293,103,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-08-12 11:12:00',''),(294,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy e.','2010-08-12 11:13:18',''),(295,2,'lorem ipsum dolor sita.','2010-08-12 11:13:38',''),(296,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirm.','2010-08-15 09:00:48',''),(297,10,'lorema.','2010-08-16 09:51:51',''),(298,2,'lorem ipsum dolor sit amet consetetura.','2010-08-19 10:50:25',''),(299,2,'lorem ipsum dolor sit amet consetetur sadipscing elitra.','2010-08-19 11:12:52',''),(300,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy.','2010-08-19 13:43:15',''),(301,48,'lorem ipsum dolor sit amet consetetu.','2010-08-19 14:01:18',''),(302,2,'l.','2010-08-19 14:01:40',''),(303,48,'lorem ipsum dolor sit amet consetetur sadi.','2010-08-19 16:02:31',''),(304,2,'lorem ipsum dolor sit amet.','2010-08-19 16:04:04',''),(305,95,'lorem ipsum dolor sit amet consetetur sadipscing.','2010-08-19 18:52:15',''),(306,2,'l.','2010-08-19 18:52:49',''),(307,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolor.','2010-08-19 19:55:47',''),(308,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod te.','2010-08-21 12:44:03',''),(309,2,'lorem ipsum dolor sit amet consetetur.','2010-08-21 13:50:51',''),(310,48,'lo.','2010-08-21 14:46:09',''),(311,2,'lorem ipsum dolor sit amet consetetur sadipsc.','2010-08-23 09:33:19',''),(312,10,'lo.','2010-08-23 09:55:25',''),(313,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam n.','2010-08-24 12:52:43',''),(314,14,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptuaa.','2010-08-24 13:20:07',''),(315,14,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyama.','2010-08-24 13:20:07',''),(316,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr s.','2010-08-25 11:27:28',''),(317,45,'lo.','2010-08-25 13:17:54',''),(318,2,'lorem ipsuma.','2010-08-25 13:18:48',''),(319,27,'lorem ipsum dolora.','2010-08-31 12:55:30',''),(320,2,'lorem ipsum do.','2010-09-10 08:14:00',''),(321,10,'lorem ipsum dolo.','2010-09-10 12:10:37',''),(322,2,'lorem ipsum dolor sit amet c.','2010-09-10 12:13:39',''),(323,27,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.','2010-09-13 10:48:39',''),(324,39,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed.','2010-09-13 11:07:18',''),(325,39,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eir.','2010-09-13 11:08:18',''),(326,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr.','2010-09-14 17:15:21',''),(327,17,'lorem ipsum dolor sit amet consetetur sad.','2010-09-14 17:19:53',''),(328,2,'lorem ipsum dolor sit amet conse.','2010-09-16 10:24:14',''),(329,2,'lorem ipsum dolor sit amet c.','2010-09-16 10:47:11',''),(330,2,'lorem ipsum dolor sit am.','2010-09-16 10:53:49',''),(331,2,'lorem ipsum dolor sit amet consetetur sadipscing el.','2010-09-17 09:57:44',''),(332,3,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at.','2010-09-20 10:19:51',''),(333,2,'lorem ipsum dolor sit amet consete.','2010-09-23 20:38:32',''),(334,54,'lorem ipsum dol.','2010-09-23 20:42:16',''),(335,2,'lorem ipsum dolor sit amet consetetur sadipscin.','2010-09-23 20:43:37',''),(336,2,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam.','2010-09-24 09:11:28',''),(337,2,'lorem ipsum dolor sit a.','2010-09-25 11:10:10',''),(338,2,'lorem ipsum dolor sit amet consetetur sadipscing elit.','2010-09-26 21:52:35',''),(339,32,'lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at vero eos et accusam e.','2010-09-28 11:49:26',''),(340,3,'lor.','2010-09-29 08:23:28','');
+/*!40000 ALTER TABLE `DoctorCom_message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_message_user_recipients`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_message_user_recipients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_message_user_recipients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `mhluser_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `message_id` (`message_id`,`mhluser_id`),
+  KEY `mhluser_id_refs_user_ptr_id_4969198a81a86c57` (`mhluser_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=358 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_message_user_recipients`
+--
+
+LOCK TABLES `DoctorCom_message_user_recipients` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_message_user_recipients` DISABLE KEYS */;
+INSERT INTO `DoctorCom_message_user_recipients` VALUES (1,1,2),(2,2,2),(3,3,3),(4,4,3),(5,5,3),(6,6,4),(7,7,4),(8,8,2),(9,9,2),(10,9,3),(11,10,7),(12,11,7),(13,12,2),(14,13,2),(15,14,2),(16,15,2),(17,16,2),(18,17,2),(19,18,2),(20,19,17),(21,20,2),(22,21,2),(23,22,2),(24,22,38),(25,23,3),(26,24,3),(27,25,26),(28,26,2),(29,27,44),(30,28,35),(31,29,2),(32,30,2),(33,31,30),(34,32,17),(35,33,3),(36,34,2),(37,34,3),(38,35,2),(39,36,32),(40,37,17),(41,38,3),(42,39,2),(43,40,52),(44,41,50),(45,41,53),(46,42,2),(47,43,12),(48,44,56),(49,45,2),(50,46,25),(51,47,49),(52,48,48),(53,49,19),(54,50,2),(55,51,2),(56,51,19),(57,52,61),(58,53,8),(59,54,2),(60,55,2),(61,56,2),(63,57,39),(62,57,41),(64,58,64),(65,59,64),(66,60,19),(68,60,29),(67,60,51),(69,61,44),(70,62,17),(71,63,46),(72,64,10),(73,65,23),(74,66,20),(75,66,60),(76,67,17),(77,68,2),(78,69,32),(79,70,3),(80,71,2),(81,72,29),(82,73,3),(83,74,3),(84,75,3),(85,76,3),(86,77,3),(87,78,3),(88,79,3),(89,80,33),(90,81,3),(91,82,3),(92,83,3),(93,84,2),(94,85,2),(95,86,2),(96,87,66),(97,88,2),(98,88,10),(99,89,23),(100,90,42),(101,91,58),(102,92,23),(103,93,48),(104,94,49),(105,95,72),(106,96,75),(107,97,75),(108,98,2),(109,99,2),(110,100,21),(111,101,50),(112,102,24),(113,103,73),(114,104,3),(115,105,2),(116,106,3),(117,107,2),(118,108,34),(119,109,3),(120,110,3),(121,111,3),(122,112,17),(123,113,2),(124,114,28),(125,115,73),(126,116,21),(127,117,2),(128,118,28),(129,119,34),(130,120,41),(131,121,54),(132,122,54),(133,123,27),(134,124,2),(135,125,84),(136,126,39),(137,127,83),(138,128,2),(139,129,55),(140,130,10),(141,131,19),(142,132,60),(143,133,81),(144,134,12),(145,135,75),(146,136,67),(147,137,55),(148,138,23),(149,139,10),(150,140,40),(151,141,2),(152,142,2),(153,143,2),(154,144,60),(155,145,17),(156,146,20),(157,147,54),(158,148,19),(159,149,2),(160,150,94),(161,151,31),(162,152,31),(163,153,35),(164,154,96),(165,155,73),(166,156,40),(167,157,2),(168,158,2),(169,159,33),(170,160,19),(171,161,8),(172,162,14),(173,163,42),(174,164,2),(175,165,42),(176,166,19),(177,167,2),(178,168,2),(179,169,2),(180,170,2),(181,170,19),(182,171,2),(183,171,19),(184,172,2),(185,173,2),(187,174,5),(186,174,50),(188,175,2),(189,175,20),(190,176,50),(191,177,2),(192,177,3),(193,178,3),(194,179,2),(195,180,3),(196,181,2),(197,182,3),(198,183,102),(199,184,9),(200,185,2),(201,186,3),(202,187,3),(203,188,3),(204,189,3),(205,190,9),(206,191,3),(207,192,9),(208,193,3),(209,194,3),(210,195,49),(211,196,49),(212,197,2),(213,198,3),(214,198,69),(215,199,2),(216,200,2),(217,201,3),(218,202,2),(219,203,69),(220,204,2),(221,205,9),(222,206,3),(223,207,2),(224,207,3),(225,208,2),(226,209,3),(227,210,50),(228,211,102),(229,212,2),(230,213,3),(231,214,50),(232,215,20),(233,216,2),(234,217,104),(235,218,2),(236,219,50),(237,220,2),(238,221,50),(239,222,2),(240,223,102),(241,224,2),(242,225,102),(243,226,34),(244,227,106),(245,228,7),(246,229,102),(247,230,107),(248,231,108),(249,232,102),(250,233,102),(251,234,109),(252,235,102),(253,236,109),(254,237,102),(255,238,3),(256,239,19),(257,240,38),(258,241,58),(259,242,63),(260,243,3),(261,244,3),(262,245,112),(263,246,38),(264,247,9),(265,248,0),(266,249,0),(267,250,0),(268,251,0),(269,252,12),(270,253,28),(271,254,10),(272,255,10),(273,256,2),(274,257,69),(275,258,2),(276,259,69),(277,260,2),(278,261,10),(279,262,2),(280,263,41),(281,264,2),(282,265,55),(283,266,2),(284,267,12),(285,268,2),(286,269,19),(287,270,2),(288,271,12),(289,272,56),(290,273,60),(291,274,2),(292,275,60),(293,276,56),(294,277,41),(295,278,2),(296,279,17),(297,280,2),(298,281,10),(299,282,96),(300,283,32),(301,284,17),(302,285,17),(303,286,19),(304,287,48),(305,288,2),(306,289,48),(307,290,13),(308,291,2),(309,292,78),(310,293,2),(311,294,103),(312,295,103),(313,296,94),(314,297,2),(315,298,69),(316,299,95),(317,300,48),(318,301,2),(319,302,48),(320,303,2),(321,304,48),(322,305,2),(323,306,95),(324,307,97),(325,308,97),(326,309,48),(327,310,2),(328,311,10),(329,312,2),(330,313,14),(331,314,2),(332,315,2),(333,316,45),(334,317,2),(335,318,45),(336,319,53),(337,320,10),(338,321,2),(339,322,27),(340,323,39),(341,324,27),(342,325,27),(343,326,17),(344,327,2),(345,328,100),(346,329,19),(347,330,100),(348,331,100),(349,332,2),(350,333,54),(351,334,2),(352,335,54),(353,336,42),(354,337,29),(355,338,34),(356,339,2),(357,340,3);
+/*!40000 ALTER TABLE `DoctorCom_message_user_recipients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_messagelog`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_messagelog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_messagelog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `message_recipient_id` int(11) NOT NULL,
+  `success` tinyint(1) NOT NULL,
+  `confirmation` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `twilio_sid` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `twilio_status` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `body_fragment` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `resend_of_id` int(11) DEFAULT NULL,
+  `current_site_id` int(11) DEFAULT NULL,
+  `tx_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `rx_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `tx_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `rx_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `DoctorCom_messagelog_message_id` (`message_id`),
+  KEY `DoctorCom_messagelog_message_recipient_id` (`message_recipient_id`),
+  KEY `DoctorCom_messagelog_twilio_sid` (`twilio_sid`),
+  KEY `DoctorCom_messagelog_resend_of_id` (`resend_of_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=361 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_messagelog`
+--
+
+LOCK TABLES `DoctorCom_messagelog` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_messagelog` DISABLE KEYS */;
+INSERT INTO `DoctorCom_messagelog` VALUES (1,1,2,1,'3614961493\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2009-10-13 19:43:50'),(2,2,2,1,'3614963820\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2009-10-13 22:45:51'),(3,3,3,1,'3614965996\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Julian Cameron','2009-10-13 22:47:24'),(4,5,3,1,'3640867208\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Julian Cameron','2009-10-22 14:24:40'),(5,6,4,0,'Must specify phoneNumber(s)\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Eric Melendez','2009-10-23 09:03:58'),(6,7,4,1,'3642853020\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Eric Melendez','2009-10-23 09:06:48'),(7,8,2,1,'3655930979\r\n','','','',NULL,NULL,'8004664411','8004664411','Eric Melendez','Morris Kelley','2009-10-27 18:26:57'),(8,9,2,1,'3704484376\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2009-11-12 14:04:36'),(9,9,3,1,'3704484396\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2009-11-12 14:04:36'),(10,10,7,0,'Must specify phoneNumber(s)\r\n','','','',NULL,NULL,'8004664411','8004664411','Jaime Savage','Jaime Savage','2009-11-13 08:28:37'),(11,11,7,1,'3706215412\r\n','','','',NULL,NULL,'8004664411','8004664411','Jaime Savage','Jaime Savage','2009-11-13 08:30:29'),(12,12,2,1,'3707511816\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-13 12:39:53'),(13,13,2,1,'3707932906\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-13 18:01:18'),(14,14,2,1,'3708007662\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-13 18:36:36'),(15,15,2,1,'3708116946\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-13 19:28:56'),(16,16,2,1,'3715603182\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-16 12:58:41'),(17,17,2,1,'3715617847\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-16 13:04:09'),(18,18,2,1,'3716016668\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-16 16:27:05'),(19,19,17,0,'Must specify phoneNumber(s)\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Darrell Clayton','2009-11-17 12:43:06'),(20,20,2,1,'3718750192\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-17 14:30:34'),(21,21,2,1,'3725164321\r\n','','','',NULL,NULL,'8004664411','8004664411','Erin Watkins','Morris Kelley','2009-11-19 19:15:06'),(22,22,2,1,'3725190528\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-19 19:27:25'),(23,22,38,1,'3725190537\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Erin Watkins','2009-11-19 19:27:25'),(24,23,3,1,'3725423193\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2009-11-19 21:39:39'),(25,24,3,1,'3725454823\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2009-11-19 19:06:05'),(26,25,26,1,'3730641526\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Eduardo Vega','2009-11-21 10:36:41'),(27,26,2,1,'3734015456\r\n','','','',NULL,NULL,'8004664411','8004664411','Lewis Mcfadden','Morris Kelley','2009-11-22 16:58:27'),(28,27,44,1,'3734047907\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Lewis Mcfadden','2009-11-22 17:13:16'),(29,28,35,0,'3742150229+3742150240\r\n','','','',NULL,NULL,'8004664411','8004664411','Darryl Sparks','Edna Cote','2009-11-25 10:04:21'),(30,29,2,1,'3742151086\r\n','','','',NULL,NULL,'8004664411','8004664411','Darryl Sparks','Morris Kelley','2009-11-25 10:04:36'),(31,30,2,0,'3742170168+3742170172\r\n','','','',NULL,NULL,'8004664411','8004664411','Darrell Clayton','Morris Kelley','2009-11-25 10:10:40'),(32,31,30,1,'3742210929\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Isabella Cote','2009-11-25 10:24:49'),(33,32,17,1,'3742252710\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Darrell Clayton','2009-11-25 10:38:35'),(34,33,3,1,'3742333067\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2009-11-25 11:04:56'),(35,34,2,1,'3742334050\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2009-11-25 11:05:16'),(36,34,3,1,'3742334062\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2009-11-25 11:05:16'),(37,35,2,1,'3742916045\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Morris Kelley','2009-11-25 13:05:47'),(38,36,32,1,'3742921298\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Willard Wooten','2009-11-25 13:07:47'),(39,37,17,1,'3743058120\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Darrell Clayton','2009-11-25 13:55:56'),(40,38,3,1,'3743576369\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2009-11-25 17:10:47'),(41,39,2,1,'3743598592\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2009-11-25 17:24:21'),(42,40,52,1,'3753570016\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Tommy Booth','2009-11-26 19:13:16'),(43,41,50,1,'3753679816\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Roberto Russo','2009-11-26 23:53:44'),(44,41,53,1,'3753679822\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Melisa Leblanc','2009-11-26 23:53:45'),(45,42,2,1,'3755945058\r\n','','','',NULL,NULL,'8004664411','8004664411','Randall Ayala','Morris Kelley','2009-11-27 09:58:56'),(46,43,12,1,'3756543813\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Joshua Mcdonald','2009-11-27 12:06:03'),(47,44,56,1,'3760273460\r\n','','','',NULL,NULL,'8004664411','8004664411','Todd Doyle','Todd Doyle','2009-11-28 22:03:21'),(48,45,2,1,'3760286422\r\n','','','',NULL,NULL,'8004664411','8004664411','Jeri Marshall','Morris Kelley','2009-11-28 19:11:14'),(49,46,25,1,'3762292399\r\n','','','',NULL,NULL,'8004664411','8004664411','Everett Brooks','Everett Brooks','2009-11-29 14:17:46'),(50,47,49,1,'3763885524\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Dave Mathews','2009-11-30 07:58:52'),(51,48,48,1,'3763921347\r\n','','','',NULL,NULL,'8004664411','8004664411','Randall Ayala','Douglas Dillon','2009-11-30 08:03:36'),(52,49,19,0,'-1+3764320223\r\n','','','',NULL,NULL,'8004664411','8004664411','Darryl Sparks','Byron Daniels','2009-11-30 10:28:49'),(53,50,2,1,'3765946825\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-11-30 20:01:16'),(54,51,2,1,'3766056831\r\n','','','',NULL,NULL,'8004664411','8004664411','Byron Daniels','Morris Kelley','2009-11-30 21:31:27'),(55,51,19,1,'3766056852\r\n','','','',NULL,NULL,'8004664411','8004664411','Byron Daniels','Byron Daniels','2009-11-30 21:31:28'),(56,52,61,1,'3785877662\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Everett Cannon','2009-12-06 19:35:45'),(57,53,8,1,'3792666150\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Seth Trujillo','2009-12-08 12:13:41'),(58,54,2,1,'3793969564\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-12-08 17:29:56'),(59,55,2,1,'3797021120\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2009-12-09 15:37:43'),(60,56,2,0,'3799148214+3799148224\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2009-12-10 11:03:36'),(61,57,39,1,'3803925227\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Ralph Clements','2009-12-11 12:27:36'),(62,57,41,1,'3803925273\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Twila Salas','2009-12-11 12:27:36'),(63,58,64,1,'3807807891\r\n','','','',NULL,NULL,'8004664411','8004664411','Dwight Pruitt','Dwight Pruitt','2009-12-12 17:41:34'),(64,59,64,1,'3807816453\r\n','','','',NULL,NULL,'8004664411','8004664411','Dwight Pruitt','Dwight Pruitt','2009-12-12 17:47:14'),(65,60,19,0,'3808890319+3808890324\r\n','','','',NULL,NULL,'8004664411','8004664411','Darryl Sparks','Byron Daniels','2009-12-13 08:10:31'),(66,60,29,0,'3808890339+3808890343\r\n','','','',NULL,NULL,'8004664411','8004664411','Darryl Sparks','Darryl Sparks','2009-12-13 08:10:31'),(67,60,51,0,'3808890353+3808890356\r\n','','','',NULL,NULL,'8004664411','8004664411','Darryl Sparks','Daniel Medina','2009-12-13 08:10:33'),(68,61,44,1,'3809702993\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Lewis Mcfadden','2009-12-13 12:15:11'),(69,62,17,0,'3811758983+3811759024\r\n','','','',NULL,NULL,'8004664411','8004664411','Tim Bishop','Darrell Clayton','2009-12-14 09:35:45'),(70,63,46,1,'3821818803\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Carla Carney','2009-12-17 12:11:35'),(71,64,10,1,'3824934031\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leonard Rodriquez','2009-12-18 08:46:36'),(72,65,23,1,'3857077602\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Lucinda Frazier','2009-12-27 12:09:25'),(73,66,20,0,'-1+3872723570\r\n','','','',NULL,NULL,'8004664411','8004664411','Dave Mathews','Marla Salazar','2009-12-31 18:17:17'),(74,66,60,0,'-1+3872723588\r\n','','','',NULL,NULL,'8004664411','8004664411','Dave Mathews','Kevin Albert','2009-12-31 18:17:17'),(75,67,17,1,'3915812039\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Darrell Clayton','2010-01-13 09:56:44'),(76,68,2,0,'-1+3972817613\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Morris Kelley','2010-01-28 14:36:56'),(77,69,32,0,'-1+3972901798\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Willard Wooten','2010-01-28 15:09:59'),(78,70,3,0,'-1+3972909348\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Julian Cameron','2010-01-28 15:12:50'),(79,71,2,1,'3972911779\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-01-28 15:13:55'),(80,72,29,1,'3972988825\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Darryl Sparks','2010-01-28 15:44:24'),(81,73,3,0,'-1+-1+-1+-1+3972989745\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-01-28 15:44:52'),(82,74,3,0,'-1+3974953357+3974953383+3974953390\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-01-29 08:42:22'),(83,75,3,0,'-1+3974959666\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-01-29 08:43:30'),(84,76,3,0,'-1+3974961614+3974961621\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-01-29 08:44:10'),(85,77,3,1,'3974964070\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-01-29 08:45:10'),(86,78,3,0,'3974969439+3974969452+3974969461\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-01-29 08:47:08'),(87,79,3,0,'-1+3974971753+3974971759\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-01-29 08:47:53'),(88,80,33,1,'3976094915\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Billy Hopkins','2010-01-29 13:52:52'),(89,81,3,0,'3988285604+3988285623\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-02-02 11:30:40'),(90,82,3,0,'3988293405+3988293419+3988293445+3988293456\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-02-02 11:31:37'),(91,83,3,0,'3988381658+3988381670+3988381684+3988381694\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-02-02 11:57:03'),(92,84,2,1,'3989563184\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-02-02 19:38:52'),(93,85,2,1,'3995383915\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-02-04 09:58:10'),(94,86,2,1,'3995386132\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-02-04 09:58:57'),(95,87,66,1,'4000850321\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Jack Buchanan','2010-02-05 16:02:19'),(96,88,2,0,'4000989404+4000989408\r\n','','','',NULL,NULL,'8004664411','8004664411','Brooke Boone','Morris Kelley','2010-02-05 17:00:25'),(97,88,10,0,'4000989417+4000989437\r\n','','','',NULL,NULL,'8004664411','8004664411','Brooke Boone','Leonard Rodriquez','2010-02-05 17:00:26'),(98,89,23,1,'4001201820\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Lucinda Frazier','2010-02-05 18:59:32'),(99,90,42,1,'4001203665\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Brooke Boone','2010-02-05 19:00:44'),(100,91,58,1,'4004169525\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Clyde Delgado','2010-02-06 16:03:48'),(101,92,23,1,'4006883327\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Lucinda Frazier','2010-02-07 13:48:00'),(102,93,48,1,'4011872126\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Douglas Dillon','2010-02-08 18:12:02'),(103,94,49,0,'4016168031+4016168032\r\n','','','',NULL,NULL,'8004664411','8004664411','Darryl Sparks','Dave Mathews','2010-02-09 17:54:04'),(104,95,72,1,'4032375829\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Ivan Copeland','2010-02-13 14:11:12'),(105,96,75,1,'4035493292\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Ron Herman','2010-02-14 15:33:13'),(106,97,75,1,'4037922157\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Ron Herman','2010-02-15 11:24:17'),(107,98,2,1,'4038809894\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-02-15 19:39:36'),(108,99,2,1,'4038921519\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-02-15 17:38:07'),(109,100,21,1,'4041314751\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Geraldine Workman','2010-02-16 11:39:54'),(110,101,50,1,'4044850886\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Roberto Russo','2010-02-17 15:33:11'),(111,102,24,1,'4070223738\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Virgil Reid','2010-02-25 13:09:32'),(112,103,73,1,'4070232398\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leon Mathis','2010-02-25 13:13:15'),(113,104,3,1,'4070506299\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-02-25 15:03:34'),(114,105,2,1,'4070507989\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-02-25 15:04:16'),(115,106,3,1,'4077342199\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-02-27 11:52:04'),(116,107,2,1,'4077346110\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-02-27 11:53:08'),(117,108,34,1,'4077461147\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Carlos Herring','2010-02-27 12:23:44'),(118,109,3,0,'-1\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-02-28 12:55:30'),(119,110,3,0,'-1\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-02-28 13:00:06'),(120,111,3,1,'4080750515\r\n','','','',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-02-28 15:53:51'),(121,112,17,1,'4080977442\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Darrell Clayton','2010-02-28 17:59:12'),(122,113,2,1,'4082289852\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-03-01 07:40:08'),(123,114,28,1,'4083554237\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Terrance Stephens','2010-03-01 12:41:28'),(124,115,73,1,'4083737295\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leon Mathis','2010-03-01 13:34:56'),(125,116,21,1,'4083743226\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Geraldine Workman','2010-03-01 13:37:15'),(126,117,2,1,'4083899001\r\n','','','',NULL,NULL,'8004664411','8004664411','Terrance Stephens','Morris Kelley','2010-03-01 14:31:17'),(127,118,28,1,'4083916771\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Terrance Stephens','2010-03-01 14:38:44'),(128,119,34,1,'4097926385\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Carlos Herring','2010-03-05 10:16:25'),(129,120,41,1,'4097949837\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Twila Salas','2010-03-05 10:22:56'),(130,121,54,1,'4102361996\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeri Marshall','2010-03-06 11:49:51'),(131,122,54,1,'4102664456\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeri Marshall','2010-03-06 13:17:22'),(132,123,27,1,'4102924771\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Fran Richmond','2010-03-06 15:14:10'),(133,124,2,1,'4102948554\r\n','','','',NULL,NULL,'8004664411','8004664411','Everett Brooks','Morris Kelley','2010-03-06 15:24:39'),(134,125,84,1,'4104629221\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Bessie Hatfield','2010-03-07 09:49:33'),(135,126,39,1,'4105564942\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Ralph Clements','2010-03-07 14:06:59'),(136,127,83,1,'4105639621\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Enrique Massey','2010-03-07 14:34:11'),(137,128,2,1,'4107261437\r\n','','','',NULL,NULL,'8004664411','8004664411','Martin Gardner','Morris Kelley','2010-03-08 07:22:16'),(138,129,55,1,'4107264293\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Martin Gardner','2010-03-08 07:23:55'),(139,130,10,1,'4107477352\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leonard Rodriquez','2010-03-08 08:51:22'),(140,131,19,1,'4112118274\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-03-09 16:03:20'),(141,132,60,1,'4112143633\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Kevin Albert','2010-03-09 16:14:43'),(142,133,81,1,'4112523384\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Andy Cortez','2010-03-09 19:11:31'),(143,134,12,1,'4115238469\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Joshua Mcdonald','2010-03-10 14:25:38'),(144,135,75,1,'4117909629\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Ron Herman','2010-03-11 10:59:00'),(145,136,67,1,'4118522406\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jorge Dale','2010-03-11 12:12:09'),(146,137,55,1,'4119411164\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Martin Gardner','2010-03-11 17:19:41'),(147,138,23,1,'4119595275\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Lucinda Frazier','2010-03-11 18:55:56'),(148,139,10,0,'4121194539+4121194544\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Leonard Rodriquez','2010-03-12 08:06:17'),(149,140,40,1,'4122381832\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Javier Lambert','2010-03-12 10:35:05'),(150,141,2,1,'4145613841\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-03-17 17:01:12'),(151,142,2,1,'4145625307\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-03-17 17:03:20'),(152,143,2,1,'4145689985\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-03-17 17:18:25'),(153,144,60,1,'4170539946\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Kevin Albert','2010-03-22 11:58:48'),(154,145,17,1,'4173795101\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Darrell Clayton','2010-03-23 09:37:37'),(155,146,20,1,'4179071338\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Marla Salazar','2010-03-24 14:30:13'),(156,147,54,1,'4181575354\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Jeri Marshall','2010-03-25 08:33:45'),(157,148,19,1,'4197759419\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-03-29 10:26:30'),(158,149,2,0,'4200988505+4200988519\r\n','','','',NULL,NULL,'8004664411','8004664411','Terrance Stephens','Morris Kelley','2010-03-30 08:40:40'),(159,150,94,0,'4202559098+4202559105\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Luz Hansen','2010-03-30 15:17:13'),(160,151,31,1,'4206342825\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Joyce Logan','2010-03-31 12:58:09'),(161,152,31,1,'4206343896\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Joyce Logan','2010-03-31 12:58:20'),(162,153,35,0,'4207181156+4207181185+4207181191\r\n','','','',NULL,NULL,'8004664411','8004664411','Terrance Stephens','Edna Cote','2010-03-31 15:29:29'),(163,154,96,0,'4209752391+4209752402\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Casandra Buckley','2010-04-01 08:04:57'),(164,155,73,1,'4211462650\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leon Mathis','2010-04-01 12:45:04'),(165,156,40,1,'4215220390\r\n','','','',NULL,NULL,'8004664411','8004664411','Willard Wooten','Javier Lambert','2010-04-02 11:08:47'),(166,157,2,1,'4219544334\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-04-03 10:29:31'),(167,158,2,1,'4231525049\r\n','','','',NULL,NULL,'8004664411','8004664411','Bernard Gregory','Morris Kelley','2010-04-05 12:26:46'),(168,159,33,0,'4231836450+4231836468\r\n','','','',NULL,NULL,'8004664411','8004664411','Fran Richmond','Billy Hopkins','2010-04-05 12:45:09'),(169,160,19,1,'4297582589\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-04-07 15:05:53'),(170,161,8,1,'4297830500\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Seth Trujillo','2010-04-07 16:29:01'),(171,162,14,1,'4304795922\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Wendy Forbes','2010-04-09 10:50:57'),(172,163,42,1,'4305023157\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Brooke Boone','2010-04-09 11:12:46'),(173,164,2,1,'4308438998\r\n','','','',NULL,NULL,'8004664411','8004664411','Jeri Marshall','Morris Kelley','2010-04-09 17:01:10'),(174,165,42,1,'4311240569\r\n','','','',NULL,NULL,'8004664411','8004664411','Everett Brooks','Brooke Boone','2010-04-10 10:16:53'),(175,166,19,1,'4321234065\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-04-13 06:53:24'),(176,167,2,1,'4321364439\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-04-13 07:57:37'),(177,168,2,1,'4321636735\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-04-13 09:12:06'),(178,169,2,1,'4323047178\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-04-13 15:11:37'),(179,170,2,1,'4327597908\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-04-14 19:29:21'),(180,170,19,1,'4327597928\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-04-14 19:29:21'),(181,171,2,1,'4329083656\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-04-15 08:17:15'),(182,171,19,1,'4329083662\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-04-15 08:17:15'),(183,172,2,0,'4335607324+4335607344+4335607348\r\n','','','',NULL,NULL,'8004664411','8004664411','Terrance Stephens','Morris Kelley','2010-04-16 16:25:30'),(184,173,2,1,'4401336049\r\n','','','',NULL,NULL,'8004664411','8004664411','Roberto Russo','Morris Kelley','2010-05-01 14:26:29'),(185,174,5,1,'4401345892\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Tim Bishop','2010-05-01 14:29:42'),(186,174,50,1,'4401345905\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Roberto Russo','2010-05-01 14:29:43'),(187,175,2,1,'4416327010\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Morris Kelley','2010-05-05 10:17:50'),(188,175,20,1,'4416327027\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Marla Salazar','2010-05-05 10:17:51'),(189,176,50,1,'4420138821\r\n','','','',NULL,NULL,'8004664411','8004664411','Morris Kelley','Roberto Russo','2010-05-05 17:42:31'),(190,177,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invi.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-11 14:53:33'),(191,177,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invi.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-05-11 14:53:34'),(192,178,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sad.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Julian Cameron','2010-05-11 14:54:35'),(193,179,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumya.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-11 14:57:48'),(194,180,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur s.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Julian Cameron','2010-05-11 14:57:53'),(195,181,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetu.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-11 14:58:23'),(196,182,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conset.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-05-11 21:18:53'),(197,183,102,0,'','SM1234567890','SE','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Petra Miranda','2010-05-12 07:59:39'),(198,184,9,0,'','SM1234567890','SE','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidun.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Edgar Everett','2010-05-12 08:08:48'),(199,185,2,0,'','SM1234567890','SE','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore e.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-12 08:13:11'),(200,186,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conset.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-05-12 08:30:06'),(201,187,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conse.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-05-12 08:30:32'),(202,188,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sad.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Julian Cameron','2010-05-12 08:40:50'),(203,189,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunta.',NULL,NULL,'8004664411','8004664411','Edgar Everett','Julian Cameron','2010-05-12 08:43:02'),(204,190,9,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod te.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Edgar Everett','2010-05-12 08:46:45'),(205,191,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonu.',NULL,NULL,'8004664411','8004664411','Edgar Everett','Julian Cameron','2010-05-12 08:55:38'),(206,192,9,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadi.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Edgar Everett','2010-05-12 08:56:32'),(207,193,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conset.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-05-12 09:56:59'),(208,194,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conse.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-05-12 10:00:07'),(209,197,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conset.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-12 12:23:52'),(210,198,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur s.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Julian Cameron','2010-05-12 13:20:35'),(211,198,69,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur s.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeffrey Rodgers','2010-05-12 13:20:35'),(212,199,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadi.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-12 13:21:05'),(213,200,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetura.',NULL,NULL,'8004664411','8004664411','Jeffrey Rodgers','Morris Kelley','2010-05-12 13:22:24'),(214,201,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitra.',NULL,NULL,'8004664411','8004664411','Edgar Everett','Julian Cameron','2010-05-12 13:28:37'),(215,202,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e.',NULL,NULL,'8004664411','8004664411','Jeffrey Rodgers','Morris Kelley','2010-05-12 13:39:54'),(216,203,69,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipsci.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeffrey Rodgers','2010-05-12 13:40:47'),(217,204,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetu.',NULL,NULL,'8004664411','8004664411','Jeffrey Rodgers','Morris Kelley','2010-05-12 13:42:00'),(218,205,9,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetura.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Edgar Everett','2010-05-12 13:44:15'),(219,206,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscin.',NULL,NULL,'8004664411','8004664411','Edgar Everett','Julian Cameron','2010-05-12 13:44:46'),(220,207,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed d.',NULL,NULL,'8004664411','8004664411','Edgar Everett','Morris Kelley','2010-05-12 13:50:46'),(221,207,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed d.',NULL,NULL,'8004664411','8004664411','Edgar Everett','Julian Cameron','2010-05-12 13:50:46'),(222,208,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua a.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-12 14:14:19'),(223,208,2,0,'','SM1234567890','SU','lorem ipsum dolor.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-12 14:14:20'),(224,209,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sa.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-05-12 14:41:45'),(225,210,50,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquy.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Roberto Russo','2010-05-12 16:17:18'),(226,211,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur s.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Petra Miranda','2010-05-12 17:42:29'),(227,212,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-05-12 19:30:24'),(228,213,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscin.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-05-12 19:31:19'),(229,214,50,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliq.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Roberto Russo','2010-05-18 07:58:27'),(230,215,20,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonum.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Marla Salazar','2010-05-18 09:35:59'),(231,216,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing el.',NULL,NULL,'8004664411','8004664411','Marla Salazar','Morris Kelley','2010-05-18 09:36:39'),(232,217,104,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Jeff Villarreal','2010-05-18 17:10:04'),(233,217,104,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipsc.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Jeff Villarreal','2010-05-18 17:10:05'),(234,218,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy ei.',NULL,NULL,'8004664411','8004664411','Roberto Russo','Morris Kelley','2010-05-19 15:01:20'),(235,219,50,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Roberto Russo','2010-05-19 15:04:10'),(236,220,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy e.',NULL,NULL,'8004664411','8004664411','Roberto Russo','Morris Kelley','2010-05-19 15:10:02'),(237,221,50,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diama.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Roberto Russo','2010-05-19 15:10:55'),(238,222,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetet.',NULL,NULL,'8004664411','8004664411','Roberto Russo','Morris Kelley','2010-05-19 15:11:56'),(239,223,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr seda.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Petra Miranda','2010-05-20 20:29:20'),(240,224,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmo.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Morris Kelley','2010-05-20 21:41:47'),(241,225,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing eli.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Petra Miranda','2010-05-20 21:49:52'),(242,226,34,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Carlos Herring','2010-05-20 21:50:52'),(243,227,106,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr se.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Ester Jensen','2010-05-21 12:54:23'),(244,228,7,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitra.',NULL,NULL,'8004664411','8004664411','Jaime Savage','Jaime Savage','2010-05-21 13:03:45'),(245,229,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidu.',NULL,NULL,'8004664411','8004664411','Jeff Villarreal','Petra Miranda','2010-05-21 14:36:54'),(246,230,107,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed dia.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Marcy Haynes','2010-05-25 21:05:43'),(247,231,108,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyama.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Gene Bradley','2010-05-26 19:17:32'),(248,232,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam.',NULL,NULL,'8004664411','8004664411','Gene Bradley','Petra Miranda','2010-05-26 19:18:05'),(249,233,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing el.',NULL,NULL,'8004664411','8004664411','Gene Bradley','Petra Miranda','2010-05-26 19:18:11'),(250,234,109,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Lea Spence','2010-05-28 16:46:03'),(251,235,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at ver.',NULL,NULL,'8004664411','8004664411','Lea Spence','Petra Miranda','2010-05-28 17:02:36'),(252,235,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadips.',NULL,NULL,'8004664411','8004664411','Lea Spence','Petra Miranda','2010-05-28 17:02:36'),(253,236,109,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore mag.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Lea Spence','2010-05-28 17:04:04'),(254,237,102,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur s.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Petra Miranda','2010-05-31 21:38:20'),(255,238,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-06-01 23:41:03'),(256,239,19,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tem.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-06-03 11:57:45'),(257,240,38,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua ata.',NULL,NULL,'8004664411','8004664411','Rosie Carroll','Erin Watkins','2010-06-03 21:42:02'),(258,240,38,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua a.',NULL,NULL,'8004664411','8004664411','Rosie Carroll','Erin Watkins','2010-06-03 21:42:02'),(259,240,38,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetet.',NULL,NULL,'8004664411','8004664411','Rosie Carroll','Erin Watkins','2010-06-03 21:42:02'),(260,241,58,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at ve.',NULL,NULL,'8004664411','8004664411','Rosie Carroll','Clyde Delgado','2010-06-03 21:43:05'),(261,241,58,0,'','SM1234567890','SU','lorem ipsum dolor s.',NULL,NULL,'8004664411','8004664411','Rosie Carroll','Clyde Delgado','2010-06-03 21:43:05'),(262,242,63,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy e.',NULL,NULL,'8004664411','8004664411','Erin Watkins','Rosie Carroll','2010-06-03 21:44:38'),(263,243,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadips.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-06-08 16:44:20'),(264,244,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetu.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-06-08 16:45:21'),(265,245,112,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadi.',NULL,NULL,'8004664411','8004664411','Petra Miranda','Joann Martin','2010-06-09 19:21:41'),(266,246,38,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et d.',NULL,NULL,'8004664411','8004664411','Rosie Carroll','Erin Watkins','2010-06-14 11:08:48'),(267,247,9,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy e.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Edgar Everett','2010-06-15 13:02:37'),(268,252,12,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et do.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Joshua Mcdonald','2010-06-17 17:22:13'),(269,253,28,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadip.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Terrance Stephens','2010-06-18 13:30:57'),(270,254,10,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolor.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leonard Rodriquez','2010-06-28 09:55:02'),(271,255,10,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolor.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leonard Rodriquez','2010-06-28 09:55:33'),(272,256,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consete.',NULL,NULL,'8004664411','8004664411','Leonard Rodriquez','Morris Kelley','2010-06-28 10:00:40'),(273,257,69,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore eta.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeffrey Rodgers','2010-06-28 12:20:01'),(274,258,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed d.',NULL,NULL,'8004664411','8004664411','Jeffrey Rodgers','Morris Kelley','2010-06-28 12:21:11'),(275,259,69,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetura.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeffrey Rodgers','2010-06-28 12:21:56'),(276,260,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore mag.',NULL,NULL,'8004664411','8004664411','Jeffrey Rodgers','Morris Kelley','2010-06-28 12:27:14'),(277,261,10,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna al.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leonard Rodriquez','2010-07-05 08:31:38'),(278,262,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consete.',NULL,NULL,'8004664411','8004664411','Leonard Rodriquez','Morris Kelley','2010-07-05 08:41:40'),(279,263,41,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor in.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Twila Salas','2010-07-06 13:11:49'),(280,265,55,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Martin Gardner','2010-07-06 19:56:57'),(281,267,12,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut lab.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Joshua Mcdonald','2010-07-08 09:02:19'),(282,268,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitra.',NULL,NULL,'8004664411','8004664411','Joshua Mcdonald','Morris Kelley','2010-07-08 12:45:38'),(283,269,19,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tem.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-07-08 13:10:24'),(284,270,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et d.',NULL,NULL,'8004664411','8004664411','Joshua Mcdonald','Morris Kelley','2010-07-08 20:49:08'),(285,271,12,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing el.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Joshua Mcdonald','2010-07-08 20:50:05'),(286,272,56,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonu.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Todd Doyle','2010-07-12 19:40:07'),(287,273,60,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Kevin Albert','2010-07-13 20:41:43'),(288,274,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam no.',NULL,NULL,'8004664411','8004664411','Kevin Albert','Morris Kelley','2010-07-13 22:53:53'),(289,275,60,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sad.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Kevin Albert','2010-07-14 07:22:31'),(290,276,56,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing eli.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Todd Doyle','2010-07-14 11:17:15'),(291,277,41,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumya.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Twila Salas','2010-07-15 12:25:37'),(292,278,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consete.',NULL,NULL,'8004664411','8004664411','Twila Salas','Morris Kelley','2010-07-15 12:27:55'),(293,279,17,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed dia.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Darrell Clayton','2010-07-15 16:04:04'),(294,280,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at v.',NULL,NULL,'8004664411','8004664411','Terrance Stephens','Morris Kelley','2010-07-19 15:17:31'),(295,280,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing e.',NULL,NULL,'8004664411','8004664411','Terrance Stephens','Morris Kelley','2010-07-19 15:17:31'),(296,281,10,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labo.',NULL,NULL,'8004664411','8004664411','Willard Wooten','Leonard Rodriquez','2010-07-24 10:08:51'),(297,282,96,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at v.',NULL,NULL,'8004664411','8004664411','Willard Wooten','Casandra Buckley','2010-07-24 10:16:08'),(298,282,96,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadi.',NULL,NULL,'8004664411','8004664411','Willard Wooten','Casandra Buckley','2010-07-24 10:16:08'),(299,283,32,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetet.',NULL,NULL,'8004664411','8004664411','Leonard Rodriquez','Willard Wooten','2010-07-24 11:43:45'),(300,284,17,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et.',NULL,NULL,'8004664411','8004664411','Willard Wooten','Darrell Clayton','2010-07-30 09:17:33'),(301,285,17,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Darrell Clayton','2010-07-30 14:33:06'),(302,286,19,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-08-03 18:40:11'),(303,287,48,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tem.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Douglas Dillon','2010-08-04 16:12:44'),(304,288,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conset.',NULL,NULL,'8004664411','8004664411','Douglas Dillon','Morris Kelley','2010-08-04 16:16:04'),(305,289,48,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipsci.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Douglas Dillon','2010-08-04 16:44:58'),(306,290,13,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmoda.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Concetta Slater','2010-08-06 09:04:53'),(307,291,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetura.',NULL,NULL,'8004664411','8004664411','Concetta Slater','Morris Kelley','2010-08-06 09:05:29'),(308,292,78,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonu.',NULL,NULL,'8004664411','8004664411','Morris Kelley','John Mclaughlin','2010-08-06 11:17:22'),(309,293,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirm.',NULL,NULL,'8004664411','8004664411','Naomi Hurley','Morris Kelley','2010-08-12 11:12:01'),(310,294,103,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et d.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Naomi Hurley','2010-08-12 11:13:18'),(311,295,103,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Naomi Hurley','2010-08-12 11:13:39'),(312,296,94,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolo.',NULL,NULL,'8004664411','8004664411','Willard Wooten','Luz Hansen','2010-08-15 09:00:49'),(313,297,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sa.',NULL,NULL,'8004664411','8004664411','Leonard Rodriquez','Morris Kelley','2010-08-16 09:51:52'),(314,298,69,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eir.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeffrey Rodgers','2010-08-19 10:50:25'),(315,299,95,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidu.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Ollie Velez','2010-08-19 11:12:52'),(316,300,48,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Douglas Dillon','2010-08-19 13:43:16'),(317,301,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam non.',NULL,NULL,'8004664411','8004664411','Douglas Dillon','Morris Kelley','2010-08-19 14:01:18'),(318,302,48,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Douglas Dillon','2010-08-19 14:01:41'),(319,303,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy ei.',NULL,NULL,'8004664411','8004664411','Douglas Dillon','Morris Kelley','2010-08-19 16:02:31'),(320,304,48,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed dia.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Douglas Dillon','2010-08-19 16:04:04'),(321,305,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tem.',NULL,NULL,'8004664411','8004664411','Ollie Velez','Morris Kelley','2010-08-19 18:52:16'),(322,306,95,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Ollie Velez','2010-08-19 18:52:49'),(323,307,97,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam volup.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Delia Prince','2010-08-19 19:55:48'),(324,308,97,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore ma.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Delia Prince','2010-08-21 12:44:03'),(325,309,48,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy ei.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Douglas Dillon','2010-08-21 13:50:52'),(326,310,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conset.',NULL,NULL,'8004664411','8004664411','Douglas Dillon','Morris Kelley','2010-08-21 14:46:09'),(327,311,10,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tem.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leonard Rodriquez','2010-08-23 09:33:20'),(328,312,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetu.',NULL,NULL,'8004664411','8004664411','Leonard Rodriquez','Morris Kelley','2010-08-23 09:55:26'),(329,313,14,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labo.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Wendy Forbes','2010-08-24 12:52:44'),(330,314,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at ve.',NULL,NULL,'8004664411','8004664411','Wendy Forbes','Morris Kelley','2010-08-24 13:20:08'),(331,315,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at v.',NULL,NULL,'8004664411','8004664411','Wendy Forbes','Morris Kelley','2010-08-24 13:20:08'),(332,314,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur s.',NULL,NULL,'8004664411','8004664411','Wendy Forbes','Morris Kelley','2010-08-24 13:20:08'),(333,315,2,0,'','SM1234567890','SU','lorem ipsum dolor.',NULL,NULL,'8004664411','8004664411','Wendy Forbes','Morris Kelley','2010-08-24 13:20:08'),(334,316,45,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidun.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Alberto Vincent','2010-08-25 11:27:29'),(335,317,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetu.',NULL,NULL,'8004664411','8004664411','Alberto Vincent','Morris Kelley','2010-08-25 13:17:54'),(336,318,45,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Alberto Vincent','2010-08-25 13:18:49'),(337,319,53,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscinga.',NULL,NULL,'8004664411','8004664411','Fran Richmond','Melisa Leblanc','2010-08-31 12:55:31'),(338,320,10,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing e.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Leonard Rodriquez','2010-09-10 08:14:02'),(339,321,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing e.',NULL,NULL,'8004664411','8004664411','Leonard Rodriquez','Morris Kelley','2010-09-10 12:10:38'),(340,322,27,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diama.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Fran Richmond','2010-09-10 12:13:40'),(341,323,39,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptu.',NULL,NULL,'8004664411','8004664411','Fran Richmond','Ralph Clements','2010-09-13 10:48:39'),(342,324,27,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunta.',NULL,NULL,'8004664411','8004664411','Ralph Clements','Fran Richmond','2010-09-13 11:07:19'),(343,325,27,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dol.',NULL,NULL,'8004664411','8004664411','Ralph Clements','Fran Richmond','2010-09-13 11:08:19'),(344,326,17,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invid.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Darrell Clayton','2010-09-14 17:15:21'),(345,327,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmo.',NULL,NULL,'8004664411','8004664411','Darrell Clayton','Morris Kelley','2010-09-14 17:19:54'),(346,328,100,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonu.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Guy Thomas','2010-09-16 10:24:15'),(347,329,19,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diama.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Byron Daniels','2010-09-16 10:47:11'),(348,330,100,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed d.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Guy Thomas','2010-09-16 10:53:49'),(349,331,100,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor in.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Guy Thomas','2010-09-17 09:57:45'),(350,332,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at ve.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-09-20 10:19:52'),(351,332,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetura.',NULL,NULL,'8004664411','8004664411','Julian Cameron','Morris Kelley','2010-09-20 10:19:52'),(352,333,54,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeri Marshall','2010-09-23 20:38:32'),(353,334,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscinga.',NULL,NULL,'8004664411','8004664411','Jeri Marshall','Morris Kelley','2010-09-23 20:42:16'),(354,335,54,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempo.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Jeri Marshall','2010-09-23 20:43:37'),(355,336,42,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut la.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Brooke Boone','2010-09-24 09:11:28'),(356,337,29,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr seda.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Darryl Sparks','2010-09-25 11:10:11'),(357,338,34,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invi.',NULL,NULL,'8004664411','8004664411','Morris Kelley','Carlos Herring','2010-09-26 21:52:36'),(358,339,2,0,'','SM1234567890','FA','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat sed diam volupt.',NULL,NULL,'8004664411','8004664411','Willard Wooten','Morris Kelley','2010-09-28 11:49:27'),(359,339,2,0,'','SM1234567890','SU','lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy e.',NULL,NULL,'8004664411','8004664411','Willard Wooten','Morris Kelley','2010-09-28 11:49:27'),(360,340,3,0,'','SM1234567890','SU','lorem ipsum dolor sit amet conset.',NULL,1,'8004664411','8004664411','Julian Cameron','Julian Cameron','2010-09-29 08:23:29');
+/*!40000 ALTER TABLE `DoctorCom_messagelog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_messagetemp`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_messagetemp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_messagetemp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `body` varchar(140) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `DoctorCom_messagetemp_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=507 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_messagetemp`
+--
+
+LOCK TABLES `DoctorCom_messagetemp` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_messagetemp` DISABLE KEYS */;
+INSERT INTO `DoctorCom_messagetemp` VALUES (1,3,'','2010-09-29 15:19:50'),(2,3,'','2010-09-29 15:19:50'),(3,2,'','2010-09-29 15:19:50'),(4,3,'','2010-09-29 15:19:50'),(5,2,'','2010-09-29 15:19:50'),(6,2,'','2010-09-29 15:19:50'),(7,2,'','2010-09-29 15:19:50'),(8,2,'','2010-09-29 15:19:50'),(9,2,'','2010-09-29 15:19:50'),(10,2,'','2010-09-29 15:19:50'),(11,2,'','2010-09-29 15:19:50'),(12,2,'','2010-09-29 15:19:50'),(13,2,'','2010-09-29 15:19:50'),(14,2,'','2010-09-29 15:19:50'),(15,2,'','2010-09-29 15:19:50'),(16,2,'','2010-09-29 15:19:50'),(17,3,'','2010-09-29 15:19:50'),(18,3,'','2010-09-29 15:19:50'),(19,4,'','2010-09-29 15:19:50'),(20,3,'','2010-09-29 15:19:50'),(21,2,'','2010-09-29 15:19:50'),(22,2,'','2010-09-29 15:19:50'),(23,4,'','2010-09-29 15:19:50'),(24,2,'','2010-09-29 15:19:50'),(25,2,'','2010-09-29 15:19:50'),(26,3,'','2010-09-29 15:19:50'),(27,3,'','2010-09-29 15:19:50'),(28,2,'','2010-09-29 15:19:50'),(29,2,'','2010-09-29 15:19:50'),(30,2,'','2010-09-29 15:19:50'),(31,2,'','2010-09-29 15:19:50'),(32,2,'','2010-09-29 15:19:50'),(33,7,'','2010-09-29 15:19:50'),(34,7,'','2010-09-29 15:19:50'),(35,2,'','2010-09-29 15:19:50'),(36,2,'','2010-09-29 15:19:50'),(37,2,'','2010-09-29 15:19:50'),(38,2,'','2010-09-29 15:19:50'),(39,2,'','2010-09-29 15:19:50'),(40,2,'','2010-09-29 15:19:50'),(41,2,'','2010-09-29 15:19:50'),(42,2,'','2010-09-29 15:19:50'),(43,2,'','2010-09-29 15:19:50'),(44,2,'','2010-09-29 15:19:50'),(45,2,'','2010-09-29 15:19:50'),(46,2,'','2010-09-29 15:19:50'),(47,2,'','2010-09-29 15:19:50'),(48,2,'','2010-09-29 15:19:50'),(49,2,'','2010-09-29 15:19:50'),(50,2,'','2010-09-29 15:19:50'),(51,2,'','2010-09-29 15:19:50'),(52,2,'','2010-09-29 15:19:50'),(53,2,'','2010-09-29 15:19:50'),(54,2,'','2010-09-29 15:19:50'),(55,2,'','2010-09-29 15:19:50'),(56,2,'','2010-09-29 15:19:50'),(57,2,'','2010-09-29 15:19:50'),(58,2,'','2010-09-29 15:19:50'),(59,2,'','2010-09-29 15:19:50'),(60,2,'','2010-09-29 15:19:50'),(61,2,'','2010-09-29 15:19:51'),(62,2,'','2010-09-29 15:19:51'),(63,2,'','2010-09-29 15:19:51'),(64,2,'','2010-09-29 15:19:51'),(65,2,'','2010-09-29 15:19:51'),(66,2,'','2010-09-29 15:19:51'),(67,2,'','2010-09-29 15:19:51'),(68,2,'','2010-09-29 15:19:51'),(69,2,'','2010-09-29 15:19:51'),(70,2,'','2010-09-29 15:19:51'),(71,2,'','2010-09-29 15:19:51'),(72,2,'','2010-09-29 15:19:51'),(73,2,'','2010-09-29 15:19:51'),(74,2,'','2010-09-29 15:19:51'),(75,2,'','2010-09-29 15:19:51'),(76,2,'','2010-09-29 15:19:51'),(77,2,'','2010-09-29 15:19:51'),(78,2,'','2010-09-29 15:19:51'),(79,2,'','2010-09-29 15:19:51'),(80,2,'','2010-09-29 15:19:51'),(81,29,'','2010-09-29 15:19:51'),(82,2,'','2010-09-29 15:19:51'),(83,24,'','2010-09-29 15:19:51'),(84,24,'','2010-09-29 15:19:51'),(85,2,'','2010-09-29 15:19:51'),(86,2,'','2010-09-29 15:19:51'),(87,2,'','2010-09-29 15:19:51'),(88,2,'','2010-09-29 15:19:51'),(89,2,'','2010-09-29 15:19:51'),(90,2,'','2010-09-29 15:19:51'),(91,2,'','2010-09-29 15:19:51'),(92,2,'','2010-09-29 15:19:51'),(93,2,'','2010-09-29 15:19:51'),(94,38,'','2010-09-29 15:19:51'),(95,2,'','2010-09-29 15:19:51'),(96,3,'','2010-09-29 15:19:51'),(97,3,'','2010-09-29 15:19:51'),(98,9,'','2010-09-29 15:19:51'),(99,2,'','2010-09-29 15:19:51'),(100,44,'','2010-09-29 15:19:51'),(101,44,'','2010-09-29 15:19:51'),(102,2,'','2010-09-29 15:19:51'),(103,2,'','2010-09-29 15:19:51'),(104,2,'','2010-09-29 15:19:51'),(105,29,'','2010-09-29 15:19:51'),(106,29,'','2010-09-29 15:19:51'),(107,17,'','2010-09-29 15:19:51'),(108,2,'','2010-09-29 15:19:51'),(109,2,'','2010-09-29 15:19:51'),(110,2,'','2010-09-29 15:19:51'),(111,2,'','2010-09-29 15:19:51'),(112,2,'','2010-09-29 15:19:51'),(113,3,'','2010-09-29 15:19:51'),(114,3,'','2010-09-29 15:19:51'),(115,2,'','2010-09-29 15:19:51'),(116,2,'','2010-09-29 15:19:51'),(117,2,'','2010-09-29 15:19:51'),(118,2,'','2010-09-29 15:19:51'),(119,2,'','2010-09-29 15:19:51'),(120,32,'','2010-09-29 15:19:51'),(121,2,'','2010-09-29 15:19:51'),(122,2,'','2010-09-29 15:19:51'),(123,32,'','2010-09-29 15:19:51'),(124,3,'','2010-09-29 15:19:51'),(125,3,'','2010-09-29 15:19:51'),(126,2,'','2010-09-29 15:19:51'),(127,2,'','2010-09-29 15:19:51'),(128,2,'','2010-09-29 15:19:51'),(129,2,'','2010-09-29 15:19:51'),(130,2,'','2010-09-29 15:19:51'),(131,2,'','2010-09-29 15:19:51'),(132,2,'','2010-09-29 15:19:51'),(133,2,'','2010-09-29 15:19:51'),(134,36,'','2010-09-29 15:19:51'),(135,2,'','2010-09-29 15:19:52'),(136,2,'','2010-09-29 15:19:52'),(137,2,'','2010-09-29 15:19:52'),(138,2,'','2010-09-29 15:19:52'),(139,2,'','2010-09-29 15:19:52'),(140,2,'','2010-09-29 15:19:52'),(141,56,'','2010-09-29 15:19:52'),(142,54,'','2010-09-29 15:19:52'),(143,25,'','2010-09-29 15:19:52'),(144,25,'','2010-09-29 15:19:52'),(145,2,'','2010-09-29 15:19:52'),(146,34,'','2010-09-29 15:19:52'),(147,34,'','2010-09-29 15:19:52'),(148,2,'','2010-09-29 15:19:52'),(149,36,'','2010-09-29 15:19:52'),(150,29,'','2010-09-29 15:19:52'),(151,2,'','2010-09-29 15:19:52'),(152,19,'','2010-09-29 15:19:52'),(153,2,'','2010-09-29 15:19:52'),(154,2,'','2010-09-29 15:19:52'),(155,3,'','2010-09-29 15:19:52'),(156,2,'','2010-09-29 15:19:52'),(157,2,'','2010-09-29 15:19:52'),(158,2,'','2010-09-29 15:19:52'),(159,2,'','2010-09-29 15:19:52'),(160,2,'','2010-09-29 15:19:52'),(161,2,'','2010-09-29 15:19:52'),(162,2,'','2010-09-29 15:19:52'),(163,2,'','2010-09-29 15:19:52'),(164,2,'','2010-09-29 15:19:52'),(165,2,'','2010-09-29 15:19:52'),(166,2,'','2010-09-29 15:19:52'),(167,2,'','2010-09-29 15:19:52'),(168,2,'','2010-09-29 15:19:52'),(169,3,'','2010-09-29 15:19:52'),(170,2,'','2010-09-29 15:19:52'),(171,2,'','2010-09-29 15:19:52'),(172,2,'','2010-09-29 15:19:52'),(173,2,'','2010-09-29 15:19:52'),(174,32,'','2010-09-29 15:19:52'),(175,32,'','2010-09-29 15:19:52'),(176,32,'','2010-09-29 15:19:52'),(177,32,'','2010-09-29 15:19:52'),(178,2,'','2010-09-29 15:19:52'),(179,64,'','2010-09-29 15:19:52'),(180,64,'','2010-09-29 15:19:52'),(181,29,'','2010-09-29 15:19:52'),(182,2,'','2010-09-29 15:19:52'),(183,5,'','2010-09-29 15:19:52'),(184,2,'','2010-09-29 15:19:52'),(185,2,'','2010-09-29 15:19:52'),(186,2,'','2010-09-29 15:19:52'),(187,2,'','2010-09-29 15:19:52'),(188,49,'','2010-09-29 15:19:52'),(189,2,'','2010-09-29 15:19:52'),(190,2,'','2010-09-29 15:19:52'),(191,25,'','2010-09-29 15:19:52'),(192,9,'','2010-09-29 15:19:52'),(193,32,'','2010-09-29 15:19:52'),(194,32,'','2010-09-29 15:19:52'),(195,32,'','2010-09-29 15:19:52'),(196,2,'','2010-09-29 15:19:52'),(197,2,'','2010-09-29 15:19:52'),(198,3,'','2010-09-29 15:19:52'),(199,32,'','2010-09-29 15:19:52'),(200,3,'','2010-09-29 15:19:52'),(201,2,'','2010-09-29 15:19:52'),(202,2,'','2010-09-29 15:19:52'),(203,3,'','2010-09-29 15:19:52'),(204,3,'','2010-09-29 15:19:52'),(205,3,'','2010-09-29 15:19:52'),(206,3,'','2010-09-29 15:19:52'),(207,3,'','2010-09-29 15:19:52'),(208,3,'','2010-09-29 15:19:52'),(209,2,'','2010-09-29 15:19:53'),(210,3,'','2010-09-29 15:19:53'),(211,3,'','2010-09-29 15:19:53'),(212,3,'','2010-09-29 15:19:53'),(213,2,'','2010-09-29 15:19:53'),(214,2,'','2010-09-29 15:19:53'),(215,3,'','2010-09-29 15:19:53'),(216,3,'','2010-09-29 15:19:53'),(217,2,'','2010-09-29 15:19:53'),(218,2,'','2010-09-29 15:19:53'),(219,2,'','2010-09-29 15:19:53'),(220,2,'','2010-09-29 15:19:53'),(221,32,'','2010-09-29 15:19:53'),(222,42,'','2010-09-29 15:19:53'),(223,2,'','2010-09-29 15:19:53'),(224,2,'','2010-09-29 15:19:53'),(225,2,'','2010-09-29 15:19:53'),(226,2,'','2010-09-29 15:19:53'),(227,2,'','2010-09-29 15:19:53'),(228,2,'','2010-09-29 15:19:53'),(229,29,'','2010-09-29 15:19:53'),(230,29,'','2010-09-29 15:19:53'),(231,29,'','2010-09-29 15:19:53'),(232,3,'','2010-09-29 15:19:53'),(233,2,'','2010-09-29 15:19:53'),(234,75,'','2010-09-29 15:19:53'),(235,2,'','2010-09-29 15:19:53'),(236,2,'','2010-09-29 15:19:53'),(237,2,'','2010-09-29 15:19:53'),(238,2,'','2010-09-29 15:19:53'),(239,2,'','2010-09-29 15:19:53'),(240,2,'','2010-09-29 15:19:53'),(241,2,'','2010-09-29 15:19:53'),(242,2,'','2010-09-29 15:19:53'),(243,2,'','2010-09-29 15:19:53'),(244,9,'','2010-09-29 15:19:53'),(245,2,'','2010-09-29 15:19:53'),(246,2,'','2010-09-29 15:19:53'),(247,3,'','2010-09-29 15:19:53'),(248,3,'','2010-09-29 15:19:53'),(249,2,'','2010-09-29 15:19:53'),(250,2,'','2010-09-29 15:19:53'),(251,29,'','2010-09-29 15:19:53'),(252,29,'','2010-09-29 15:19:53'),(253,3,'','2010-09-29 15:19:53'),(254,3,'','2010-09-29 15:19:53'),(255,3,'','2010-09-29 15:19:53'),(256,3,'','2010-09-29 15:19:53'),(257,3,'','2010-09-29 15:19:53'),(258,3,'','2010-09-29 15:19:53'),(259,2,'','2010-09-29 15:19:53'),(260,3,'','2010-09-29 15:19:53'),(261,3,'','2010-09-29 15:19:53'),(262,3,'','2010-09-29 15:19:53'),(263,2,'','2010-09-29 15:19:53'),(264,2,'','2010-09-29 15:19:53'),(265,2,'','2010-09-29 15:19:53'),(266,2,'','2010-09-29 15:19:53'),(267,2,'','2010-09-29 15:19:53'),(268,28,'','2010-09-29 15:19:53'),(269,2,'','2010-09-29 15:19:53'),(270,2,'','2010-09-29 15:19:53'),(271,2,'','2010-09-29 15:19:53'),(272,2,'','2010-09-29 15:19:53'),(273,2,'','2010-09-29 15:19:53'),(274,2,'','2010-09-29 15:19:53'),(275,2,'','2010-09-29 15:19:53'),(276,2,'','2010-09-29 15:19:53'),(277,2,'','2010-09-29 15:19:53'),(278,25,'','2010-09-29 15:19:53'),(279,2,'','2010-09-29 15:19:53'),(280,2,'','2010-09-29 15:19:53'),(281,2,'','2010-09-29 15:19:53'),(282,55,'','2010-09-29 15:19:54'),(283,2,'','2010-09-29 15:19:54'),(284,2,'','2010-09-29 15:19:54'),(285,2,'','2010-09-29 15:19:54'),(286,2,'','2010-09-29 15:19:54'),(287,2,'','2010-09-29 15:19:54'),(288,2,'','2010-09-29 15:19:54'),(289,2,'','2010-09-29 15:19:54'),(290,2,'','2010-09-29 15:19:54'),(291,32,'','2010-09-29 15:19:54'),(292,2,'','2010-09-29 15:19:54'),(293,3,'','2010-09-29 15:19:54'),(294,32,'','2010-09-29 15:19:54'),(295,32,'','2010-09-29 15:19:54'),(296,32,'','2010-09-29 15:19:54'),(297,32,'','2010-09-29 15:19:54'),(298,64,'','2010-09-29 15:19:54'),(299,2,'','2010-09-29 15:19:54'),(300,2,'','2010-09-29 15:19:54'),(301,2,'','2010-09-29 15:19:54'),(302,2,'','2010-09-29 15:19:54'),(303,32,'','2010-09-29 15:19:54'),(304,32,'','2010-09-29 15:19:54'),(305,32,'','2010-09-29 15:19:54'),(306,32,'','2010-09-29 15:19:54'),(307,2,'','2010-09-29 15:19:54'),(308,32,'','2010-09-29 15:19:54'),(309,2,'','2010-09-29 15:19:54'),(310,28,'','2010-09-29 15:19:54'),(311,2,'','2010-09-29 15:19:54'),(312,3,'','2010-09-29 15:19:54'),(313,2,'','2010-09-29 15:19:54'),(314,28,'','2010-09-29 15:19:54'),(315,2,'','2010-09-29 15:19:54'),(316,2,'','2010-09-29 15:19:54'),(317,2,'','2010-09-29 15:19:54'),(318,2,'','2010-09-29 15:19:54'),(319,86,'','2010-09-29 15:19:54'),(320,32,'','2010-09-29 15:19:54'),(321,2,'','2010-09-29 15:19:54'),(322,2,'','2010-09-29 15:19:54'),(323,22,'','2010-09-29 15:19:54'),(324,27,'','2010-09-29 15:19:54'),(325,2,'','2010-09-29 15:19:54'),(326,2,'','2010-09-29 15:19:54'),(327,2,'','2010-09-29 15:19:54'),(328,8,'','2010-09-29 15:19:54'),(329,2,'','2010-09-29 15:19:54'),(330,2,'','2010-09-29 15:19:54'),(331,2,'','2010-09-29 15:19:54'),(332,2,'','2010-09-29 15:19:54'),(333,54,'','2010-09-29 15:19:54'),(334,25,'','2010-09-29 15:19:54'),(335,25,'','2010-09-29 15:19:54'),(336,2,'','2010-09-29 15:19:54'),(337,2,'','2010-09-29 15:19:54'),(338,2,'','2010-09-29 15:19:54'),(339,2,'','2010-09-29 15:19:54'),(340,2,'','2010-09-29 15:19:54'),(341,2,'','2010-09-29 15:19:54'),(342,2,'','2010-09-29 15:19:54'),(343,28,'','2010-09-29 15:19:54'),(344,2,'','2010-09-29 15:19:54'),(345,2,'','2010-09-29 15:19:54'),(346,50,'','2010-09-29 15:19:54'),(347,2,'','2010-09-29 15:19:54'),(348,2,'','2010-09-29 15:19:54'),(349,2,'','2010-09-29 15:19:54'),(350,2,'','2010-09-29 15:19:54'),(351,2,'','2010-09-29 15:19:54'),(352,2,'','2010-09-29 15:19:54'),(353,2,'','2010-09-29 15:19:54'),(354,2,'','2010-09-29 15:19:54'),(355,2,'','2010-09-29 15:19:54'),(356,2,'','2010-09-29 15:19:54'),(357,3,'','2010-09-29 15:19:54'),(358,2,'','2010-09-29 15:19:55'),(359,2,'','2010-09-29 15:19:55'),(360,2,'','2010-09-29 15:19:55'),(361,2,'','2010-09-29 15:19:55'),(362,3,'','2010-09-29 15:19:55'),(363,3,'','2010-09-29 15:19:55'),(364,9,'','2010-09-29 15:19:55'),(365,9,'','2010-09-29 15:19:55'),(366,3,'','2010-09-29 15:19:55'),(367,2,'','2010-09-29 15:19:55'),(368,2,'','2010-09-29 15:19:55'),(369,2,'','2010-09-29 15:19:55'),(370,2,'','2010-09-29 15:19:55'),(371,2,'','2010-09-29 15:19:55'),(372,2,'','2010-09-29 15:19:55'),(373,3,'','2010-09-29 15:19:55'),(374,3,'','2010-09-29 15:19:55'),(375,2,'','2010-09-29 15:19:55'),(376,3,'','2010-09-29 15:19:55'),(377,3,'','2010-09-29 15:19:55'),(378,3,'','2010-09-29 15:19:55'),(379,3,'','2010-09-29 15:19:55'),(380,9,'','2010-09-29 15:19:55'),(381,3,'','2010-09-29 15:19:55'),(382,3,'','2010-09-29 15:19:55'),(383,69,'','2010-09-29 15:19:55'),(384,69,'','2010-09-29 15:19:55'),(385,3,'','2010-09-29 15:19:55'),(386,9,'','2010-09-29 15:19:55'),(387,3,'','2010-09-29 15:19:55'),(388,3,'','2010-09-29 15:19:55'),(389,2,'','2010-09-29 15:19:55'),(390,3,'','2010-09-29 15:19:55'),(391,3,'','2010-09-29 15:19:55'),(392,2,'','2010-09-29 15:19:55'),(393,102,'','2010-09-29 15:19:55'),(394,3,'','2010-09-29 15:19:55'),(395,3,'','2010-09-29 15:19:55'),(396,2,'','2010-09-29 15:19:55'),(397,2,'','2010-09-29 15:19:55'),(398,2,'','2010-09-29 15:19:55'),(399,2,'','2010-09-29 15:19:55'),(400,102,'','2010-09-29 15:19:55'),(401,2,'','2010-09-29 15:19:55'),(402,2,'','2010-09-29 15:19:55'),(403,2,'','2010-09-29 15:19:55'),(404,2,'','2010-09-29 15:19:55'),(405,102,'','2010-09-29 15:19:55'),(406,7,'','2010-09-29 15:19:55'),(407,7,'','2010-09-29 15:19:55'),(408,104,'','2010-09-29 15:19:55'),(409,102,'','2010-09-29 15:19:55'),(410,102,'','2010-09-29 15:19:55'),(411,102,'','2010-09-29 15:19:55'),(412,3,'','2010-09-29 15:19:55'),(413,3,'','2010-09-29 15:19:55'),(414,3,'','2010-09-29 15:19:55'),(415,2,'','2010-09-29 15:19:55'),(416,2,'','2010-09-29 15:19:55'),(417,63,'','2010-09-29 15:19:55'),(418,63,'','2010-09-29 15:19:55'),(419,3,'','2010-09-29 15:19:55'),(420,2,'','2010-09-29 15:19:55'),(421,28,'','2010-09-29 15:19:55'),(422,28,'','2010-09-29 15:19:55'),(423,28,'','2010-09-29 15:19:55'),(424,28,'','2010-09-29 15:19:55'),(425,28,'','2010-09-29 15:19:55'),(426,28,'','2010-09-29 15:19:55'),(427,28,'','2010-09-29 15:19:55'),(428,28,'','2010-09-29 15:19:55'),(429,3,'','2010-09-29 15:19:55'),(430,3,'','2010-09-29 15:19:55'),(431,102,'','2010-09-29 15:19:56'),(432,63,'','2010-09-29 15:19:56'),(433,3,'','2010-09-29 15:19:56'),(434,2,'','2010-09-29 15:19:56'),(435,2,'','2010-09-29 15:19:56'),(436,2,'','2010-09-29 15:19:56'),(437,2,'','2010-09-29 15:19:56'),(438,2,'','2010-09-29 15:19:56'),(439,3,'','2010-09-29 15:19:56'),(440,3,'','2010-09-29 15:19:56'),(441,2,'','2010-09-29 15:19:56'),(442,3,'','2010-09-29 15:19:56'),(443,3,'','2010-09-29 15:19:56'),(444,3,'','2010-09-29 15:19:56'),(445,2,'','2010-09-29 15:19:56'),(446,2,'','2010-09-29 15:19:56'),(447,2,'','2010-09-29 15:19:56'),(448,2,'','2010-09-29 15:19:56'),(449,2,'','2010-09-29 15:19:56'),(450,2,'','2010-09-29 15:19:56'),(451,2,'','2010-09-29 15:19:56'),(452,2,'','2010-09-29 15:19:56'),(453,2,'','2010-09-29 15:19:56'),(454,2,'','2010-09-29 15:19:56'),(455,2,'','2010-09-29 15:19:56'),(456,2,'','2010-09-29 15:19:56'),(457,2,'','2010-09-29 15:19:56'),(458,2,'','2010-09-29 15:19:56'),(459,2,'','2010-09-29 15:19:56'),(460,2,'','2010-09-29 15:19:56'),(461,2,'','2010-09-29 15:19:56'),(462,2,'','2010-09-29 15:19:56'),(463,28,'','2010-09-29 15:19:56'),(464,32,'','2010-09-29 15:19:56'),(465,32,'','2010-09-29 15:19:56'),(466,32,'','2010-09-29 15:19:56'),(467,32,'','2010-09-29 15:19:56'),(468,2,'','2010-09-29 15:19:56'),(469,2,'','2010-09-29 15:19:56'),(470,2,'','2010-09-29 15:19:56'),(471,2,'','2010-09-29 15:19:56'),(472,2,'','2010-09-29 15:19:56'),(473,2,'','2010-09-29 15:19:56'),(474,32,'','2010-09-29 15:19:56'),(475,2,'','2010-09-29 15:19:56'),(476,10,'','2010-09-29 15:19:56'),(477,2,'','2010-09-29 15:19:56'),(478,2,'','2010-09-29 15:19:56'),(479,2,'','2010-09-29 15:19:56'),(480,2,'','2010-09-29 15:19:56'),(481,2,'','2010-09-29 15:19:56'),(482,2,'','2010-09-29 15:19:56'),(483,2,'','2010-09-29 15:19:56'),(484,2,'','2010-09-29 15:19:56'),(485,2,'','2010-09-29 15:19:56'),(486,2,'','2010-09-29 15:19:56'),(487,27,'','2010-09-29 15:19:56'),(488,2,'','2010-09-29 15:19:56'),(489,2,'','2010-09-29 15:19:56'),(490,27,'','2010-09-29 15:19:56'),(491,2,'','2010-09-29 15:19:56'),(492,2,'','2010-09-29 15:19:56'),(493,2,'','2010-09-29 15:19:56'),(494,2,'','2010-09-29 15:19:56'),(495,2,'','2010-09-29 15:19:56'),(496,2,'','2010-09-29 15:19:56'),(497,2,'','2010-09-29 15:19:56'),(498,3,'','2010-09-29 15:19:56'),(499,2,'','2010-09-29 15:19:56'),(500,2,'','2010-09-29 15:19:56'),(501,2,'','2010-09-29 15:19:56'),(502,2,'','2010-09-29 15:19:56'),(503,2,'','2010-09-29 15:19:56'),(504,32,'','2010-09-29 15:19:56'),(505,3,'','2010-09-29 15:19:57'),(506,3,'','2010-09-29 15:19:57');
+/*!40000 ALTER TABLE `DoctorCom_messagetemp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_messagetemp_user_recipients`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_messagetemp_user_recipients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_messagetemp_user_recipients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `messagetemp_id` int(11) NOT NULL,
+  `mhluser_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `messagetemp_id` (`messagetemp_id`,`mhluser_id`),
+  KEY `mhluser_id_refs_user_ptr_id_3237f3ba9284a4f7` (`mhluser_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_messagetemp_user_recipients`
+--
+
+LOCK TABLES `DoctorCom_messagetemp_user_recipients` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_messagetemp_user_recipients` DISABLE KEYS */;
+/*!40000 ALTER TABLE `DoctorCom_messagetemp_user_recipients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_pagerlog`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_pagerlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_pagerlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pager_id` int(11) DEFAULT NULL,
+  `paged_id` int(11) NOT NULL,
+  `current_site_id` int(11) DEFAULT NULL,
+  `callback` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `DoctorCom_pagerlog_pager_id` (`pager_id`),
+  KEY `DoctorCom_pagerlog_paged_id` (`paged_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_pagerlog`
+--
+
+LOCK TABLES `DoctorCom_pagerlog` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_pagerlog` DISABLE KEYS */;
+INSERT INTO `DoctorCom_pagerlog` VALUES (1,3,2,NULL,'8004664411','2010-09-29 15:20:10'),(2,3,2,NULL,'8004664411','2010-09-29 15:20:10'),(3,3,3,NULL,'8004664411','2010-09-29 15:20:10'),(4,2,72,NULL,'8004664411','2010-09-29 15:20:10'),(5,2,72,NULL,'8004664411','2010-09-29 15:20:10'),(6,2,2,NULL,'8004664411','2010-09-29 15:20:10'),(7,2,72,NULL,'8004664411','2010-09-29 15:20:10'),(8,2,72,NULL,'8004664411','2010-09-29 15:20:10'),(9,2,72,NULL,'8004664411','2010-09-29 15:20:10'),(10,2,2,NULL,'8004664411','2010-09-29 15:20:10'),(11,2,21,NULL,'8004664411','2010-09-29 15:20:10'),(12,3,2,NULL,'8004664411','2010-09-29 15:20:10'),(13,32,20,NULL,'8004664411','2010-09-29 15:20:10'),(14,32,80,NULL,'8004664411','2010-09-29 15:20:10'),(15,2,44,NULL,'8004664411','2010-09-29 15:20:10');
+/*!40000 ALTER TABLE `DoctorCom_pagerlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `DoctorCom_siteanalytics`
+--
+
+DROP TABLE IF EXISTS `DoctorCom_siteanalytics`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DoctorCom_siteanalytics` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dateoflog` date NOT NULL,
+  `site_id` int(11) DEFAULT NULL,
+  `countPage` int(11) NOT NULL,
+  `countMessage` int(11) NOT NULL,
+  `countClick2Call` int(11) NOT NULL,
+  `lastUpdate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dateoflog` (`dateoflog`,`site_id`),
+  KEY `DoctorCom_siteanalytics_idx` (`site_id`),
+  CONSTRAINT `site_id_refs_id_const` FOREIGN KEY (`site_id`) REFERENCES `MHLSites_site` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `DoctorCom_siteanalytics`
+--
+
+LOCK TABLES `DoctorCom_siteanalytics` WRITE;
+/*!40000 ALTER TABLE `DoctorCom_siteanalytics` DISABLE KEYS */;
+INSERT INTO `DoctorCom_siteanalytics` VALUES (1,'2010-09-29',1,0,1,1,'2010-09-29 08:23:38');
+/*!40000 ALTER TABLE `DoctorCom_siteanalytics` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `IVR_anssvcdlfailure`
+--
+
+DROP TABLE IF EXISTS `IVR_anssvcdlfailure`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `IVR_anssvcdlfailure` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practice_id` int(11) NOT NULL,
+  `error_timestamp` datetime NOT NULL,
+  `resolved` tinyint(1) NOT NULL,
+  `resolution_timestamp` datetime DEFAULT NULL,
+  `failure_type` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'DL',
+  `post_data` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `call_sid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `caller` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `called` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `recording_url` longtext COLLATE utf8_unicode_ci,
+  `callback_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `error_message_uuid` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `resolution_message_uuid` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `IVR_anssvcdlfailure`
+--
+
+LOCK TABLES `IVR_anssvcdlfailure` WRITE;
+/*!40000 ALTER TABLE `IVR_anssvcdlfailure` DISABLE KEYS */;
+/*!40000 ALTER TABLE `IVR_anssvcdlfailure` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `IVR_anssvcdlfailureactivitylog`
+--
+
+DROP TABLE IF EXISTS `IVR_anssvcdlfailureactivitylog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `IVR_anssvcdlfailureactivitylog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `call_sid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `action` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `error_data` longtext COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `IVR_anssvcdlfailureactivitylog`
+--
+
+LOCK TABLES `IVR_anssvcdlfailureactivitylog` WRITE;
+/*!40000 ALTER TABLE `IVR_anssvcdlfailureactivitylog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `IVR_anssvcdlfailureactivitylog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `IVR_callevent`
+--
+
+DROP TABLE IF EXISTS `IVR_callevent`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `IVR_callevent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `callSID` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `event` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IVR_callevent_callSID` (`callSID`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `IVR_callevent`
+--
+
+LOCK TABLES `IVR_callevent` WRITE;
+/*!40000 ALTER TABLE `IVR_callevent` DISABLE KEYS */;
+INSERT INTO `IVR_callevent` VALUES (1,'CA5497c1e5be8c6ac83f28ef43a9172bb2','V_AFL','2010-07-21 13:37:38'),(2,'CAb1b3dd07622672fe6f5fcd7eba8b72b0','V_ASU','2010-07-21 13:38:13'),(3,'CA925cbd49ac6a47f5b7235ab3c49efb71','V_ASU','2010-07-23 13:01:38'),(4,'CAc3bbbc378eeacd2ed1ab158cc759e9da','C_ACC','2010-07-31 08:59:05'),(5,'CAf2b2287a284d704fb68cfc8fecbc694e','C_ACC','2010-08-16 09:44:28'),(6,'CA9ef7c949395d1c9496c16823c15949f4','C_ACC','2010-08-20 13:44:56'),(7,'CA10576872980776ebd5e6d967a3bb330a','V_NMG','2010-08-24 13:37:21'),(8,'CA2ca11b094691ac9f28f5114194f4ec4e','V_ASU','2010-08-25 11:20:12'),(9,'CA2ca11b094691ac9f28f5114194f4ec4e','V_NMP','2010-08-25 11:20:22'),(10,'CA2ca11b094691ac9f28f5114194f4ec4e','V_MDL','2010-08-25 11:21:08'),(11,'CAe483bcfe71d3e70e8e5349580044f503','C_ACC','2010-09-10 09:53:16'),(12,'CA4027e3d97ea4a6352d2a0c1d7c03bac1','C_ACC','2010-09-14 18:58:10'),(13,'CA5a3973c27fab4fef33d0c177c6f1b8bf','C_ACC','2010-09-14 19:03:08'),(14,'CA3bf1aa844cb4a95068834f914b6aafa4','C_ACC','2010-09-25 13:46:00'),(15,'CAa6d80dc6ac40e6922769cb7a5ce09b7d','V_ASU','2010-09-29 08:24:25');
+/*!40000 ALTER TABLE `IVR_callevent` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `IVR_calleventtarget`
+--
+
+DROP TABLE IF EXISTS `IVR_calleventtarget`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `IVR_calleventtarget` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `event_id` int(11) NOT NULL,
+  `target_type_id` int(11) NOT NULL,
+  `target_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `event_id` (`event_id`),
+  KEY `IVR_calleventtarget_target_type_id` (`target_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `IVR_calleventtarget`
+--
+
+LOCK TABLES `IVR_calleventtarget` WRITE;
+/*!40000 ALTER TABLE `IVR_calleventtarget` DISABLE KEYS */;
+INSERT INTO `IVR_calleventtarget` VALUES (1,7,45,11),(2,9,45,11),(3,10,45,11);
+/*!40000 ALTER TABLE `IVR_calleventtarget` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `IVR_calllog`
+--
+
+DROP TABLE IF EXISTS `IVR_calllog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `IVR_calllog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `caller_type_id` int(11) DEFAULT NULL,
+  `caller_id` int(10) unsigned DEFAULT NULL,
+  `caller_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `called_type_id` int(11) DEFAULT NULL,
+  `called_id` int(10) unsigned DEFAULT NULL,
+  `called_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `caller_spoken_name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `callSID` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `call_connected` tinyint(1) NOT NULL,
+  `c2c_entry_id` int(11) DEFAULT NULL,
+  `call_duration` int(11) DEFAULT NULL,
+  `timestamp` datetime NOT NULL,
+  `call_source` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `callSID` (`callSID`),
+  KEY `IVR_calllog_caller_type_id` (`caller_type_id`),
+  KEY `IVR_calllog_called_type_id` (`called_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `IVR_calllog`
+--
+
+LOCK TABLES `IVR_calllog` WRITE;
+/*!40000 ALTER TABLE `IVR_calllog` DISABLE KEYS */;
+INSERT INTO `IVR_calllog` VALUES (1,NULL,NULL,'5854556464',15,3,'6502623982','','CA075db22e389ccb97aebe0ba745df3975',0,NULL,NULL,'2010-05-21 11:47:27',NULL),(2,NULL,NULL,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE1980dea2d81e5dcbb1eb6a4f04878604','CA4d15f05f9cd271325855ca2a935b3e88',0,NULL,NULL,'2010-05-21 11:47:53',NULL),(3,NULL,NULL,'5854556464',15,3,'6502623982','','CAb64011bfb2adbd5b27ce318e379d8f4d',0,NULL,NULL,'2010-05-21 11:48:20',NULL),(4,NULL,NULL,'5854556464',15,3,'6502623982','','CAd29890d712ed7cc304b08bdbd959f613',0,NULL,NULL,'2010-05-21 11:48:32',NULL),(5,NULL,NULL,'5854556464',15,3,'6502623982','','CAcd0f200f5bab52085bce0510f002adb0',0,NULL,NULL,'2010-05-21 11:48:46',NULL),(6,15,106,'8475338940',15,106,'7134876993','','CA058b57553160e1c1589153d38484b7c9',0,NULL,NULL,'2010-05-21 12:03:27',NULL),(7,15,106,'8475338940',15,106,'7134876993','','CAe1aa451a3e6c1db3063e78f9c9d8b38c',0,NULL,NULL,'2010-05-21 12:03:48',NULL),(8,NULL,NULL,'5854556464',15,106,'7134876993','','CA9462bc6ed4220a45dd8a74665f8063f2',0,NULL,NULL,'2010-05-21 12:14:22',NULL),(9,NULL,NULL,'7378742833',15,7,'6502623364','','CA3f2e43bf03f62d743cabc2d715a47368',0,NULL,NULL,'2010-05-21 12:57:31',NULL),(10,NULL,NULL,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE75fd7128a9653dfa7ac1bb4cfbac8bb0','CAc9d95f799c60c0b5632e448d42b61039',0,NULL,NULL,'2010-05-21 13:11:52',NULL),(11,NULL,NULL,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE73245d098d7673420bf569827e0cf88f','CA7b11c540f1bf01df037f2cfdcd01ada3',0,NULL,NULL,'2010-05-21 13:12:19',NULL),(12,NULL,NULL,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE9a97807c877c8e6ff1f36a7ed0772210','CA0fea5cf1d030dc5ef7da1357edbe64b4',0,NULL,NULL,'2010-05-21 13:12:49',NULL),(13,NULL,NULL,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REba96fd682deca62eb5f137fe6aaddb87','CAfcd61e25c7853196788e3734d411a9b4',0,NULL,NULL,'2010-05-21 13:13:06',NULL),(14,NULL,NULL,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE7c891d8569a7f4978b859f1754dcfe22','CAe57fd0c56f261d5d72e586943bc9d8f7',0,NULL,NULL,'2010-05-21 13:13:24',NULL),(15,NULL,NULL,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REc4d65ddfd11f0654d34dd22bd2f85bfe','CA5666ba056ce6e4af77e69417ae543b0d',0,NULL,NULL,'2010-05-21 13:21:03',NULL),(16,NULL,NULL,'7134863442',15,104,'7134876951','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REae947fd8470dc6dcc92547fb40b2508c','CA9bd56bfb85897129601c1f1e05cc400c',1,NULL,NULL,'2010-05-21 14:32:47',NULL),(17,NULL,NULL,'7134863442',15,104,'7134876951','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE6262bf2928b12fa21ae8870cea2a3df8','CA9a7f056ac7fe5310ba73fda730cc9e86',1,NULL,NULL,'2010-05-21 14:34:41',NULL),(18,NULL,NULL,'7134863442',15,104,'7134876951','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REb0d870698107069d3f39cfc64e71027e','CA9d146f014d41293e3993a7f2b8ebd7d0',0,NULL,NULL,'2010-05-21 14:36:32',NULL),(19,15,104,'7132035248',15,104,'7134876951','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REf30cd3d4a83439a1e5191b41957982ba','CA9d88556b4c3a0c19e854dcd24abac376',0,NULL,NULL,'2010-05-22 07:24:03',NULL),(20,15,104,'7132035248',15,104,'7134876951','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE863c47d07a250658b81901d6fff39485','CA6ee1cd7e65ea23e1beb02d83a19fe657',0,NULL,NULL,'2010-05-22 07:24:36',NULL),(21,15,104,'7132035248',15,104,'7134876951','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REdbf66e488740a506630bed0f621001b1','CAad42d780ebd417f27faeae762804cf42',0,NULL,NULL,'2010-05-22 07:25:25',NULL),(22,15,104,'7132035248',15,104,'7134876951','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE0af95d3c66dd8d7e154581d9b3d9f23a','CA5a17eb486d7132709d6b497a354afafd',0,NULL,NULL,'2010-05-22 07:26:04',NULL),(23,15,3,'5854556464',15,3,'6502623982','','CA535e16c1929209055f220f5c1ac69bc4',0,NULL,NULL,'2010-05-22 15:23:54',NULL),(24,15,3,'5854556464',15,3,'6502623982','','CA18e7a01128182204a3781d30b0b30c72',0,NULL,NULL,'2010-05-22 15:24:16',NULL),(25,15,3,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE862f46ee2315702df154b3ef595f26f3','CA77941cb8ae4ba92b16c672f35c969920',0,NULL,NULL,'2010-05-22 15:24:42',NULL),(26,15,3,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE862f46ee2315702df154b3ef595f26f3','CA9f3c6ca158865bacf7194de6220ebf89',0,NULL,NULL,'2010-05-22 15:29:45',NULL),(27,15,3,'5854556464',15,3,'6502623982','','CAc0e51cde8804101b454f4e1e3e217e09',0,NULL,NULL,'2010-05-22 17:31:16',NULL),(28,15,3,'5854556464',15,3,'6502623982','','CA17afce2699b7050d25470f787991b646',0,NULL,NULL,'2010-05-22 17:33:00',NULL),(29,15,3,'5854556464',15,3,'6502623982','','CA54c6884016a19753e4ae2b4805830526',0,NULL,NULL,'2010-05-22 17:37:17',NULL),(30,NULL,NULL,'7378742833',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE4b5af046d526ae026cf1f5954141bf71','CA2d589eb1b3de63d0cb0d4f23471d06fa',0,NULL,NULL,'2010-05-23 08:57:47',NULL),(31,NULL,NULL,'7378742833',15,2,'6502623714','','CA64d133896f3deafc5c8b5d373451f468',0,NULL,NULL,'2010-05-23 08:58:41',NULL),(32,NULL,NULL,'7378742833',15,2,'6502623714','','CAf12f7ac13784660280d16ab0e0b156b2',0,NULL,NULL,'2010-05-23 09:00:46',NULL),(33,15,2,'6502780804',15,2,'6502623714','','CA2cbd10983bd6314781222e3fc3537384',0,NULL,NULL,'2010-05-23 09:02:12',NULL),(34,15,2,'6502780804',15,2,'6502623714','','CA971c70753b273928f95f6cff094876bc',0,NULL,NULL,'2010-05-23 09:04:19',NULL),(35,15,2,'6502780804',15,2,'6502623714','','CA0d91f85adcf3b2d6bbdcb29c72d72e6a',0,NULL,NULL,'2010-05-23 09:14:17',NULL),(36,NULL,NULL,'7378742833',15,2,'6502623714','','CAf4f7715c276d928385f24059d3ce08a8',0,NULL,NULL,'2010-05-23 19:00:50',NULL),(37,15,24,'6502708787',15,2,'6502623714','','CAec71ff550d0916df34337beea17d7a7d',0,NULL,NULL,'2010-05-24 11:22:59',NULL),(38,NULL,NULL,'5854551869',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REe847fd96a24459e3a8a4be396dfe1e93','CA09d9ff7ac0ad50cc4e7e6a285a3bb6ae',1,NULL,NULL,'2010-05-25 08:13:48',NULL),(39,NULL,NULL,'7378742833',15,9,'6502623734','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE2cbbceb14956e08534e527fc9e7609e4','CA6a7168e8bccf18073362dd2511240c0e',0,NULL,NULL,'2010-05-25 16:27:10',NULL),(40,NULL,NULL,'7378742833',15,9,'6502623734','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REf488fe2c93586ad024b11074fe98b423','CA53efeac5d80c8da1b2a1763fd0710221',0,NULL,NULL,'2010-05-25 16:31:44',NULL),(41,NULL,NULL,'7378742833',15,9,'6502623734','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE3b2d7e2fea780d9a622b13dd3a285f70','CA60776f26fdca8968910b59758d84bd1f',0,NULL,NULL,'2010-05-25 16:33:31',NULL),(42,NULL,NULL,'5854556464',15,3,'6502623982','','CA649c1c03d1cac6398832a482c353f7ca',0,NULL,NULL,'2010-05-25 16:57:31',NULL),(43,NULL,NULL,'5854551869',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REb430d2ac8320195b406fd5ed2f8264c6','CA1dc3c561cb437c0115b53f857a140977',0,NULL,NULL,'2010-05-25 16:57:46',NULL),(44,NULL,NULL,'7378742833',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE74ab43313aabf0bbb2622cd38f1e0d8a','CAe05cb16b4f7abe014609323914356a55',1,NULL,NULL,'2010-05-25 20:18:10',NULL),(45,NULL,NULL,'5854556464',15,9,'6502623734','','CAd46d5b2113aa14fac1cf4a73442149f8',0,NULL,NULL,'2010-05-27 09:55:06',NULL),(46,NULL,NULL,'5854556464',15,9,'6502623734','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE7b896731975dbd3e5fb572d0344bbe50','CAf2a361b4d4c7df01dbc9456a4c31d133',1,NULL,NULL,'2010-05-27 09:56:31',NULL),(47,NULL,NULL,'5854556464',15,9,'6502623734','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE503d8d72c9377139971a18b7fe13ac89','CAbfba8db0aa0174288459f390fe4688c9',0,NULL,NULL,'2010-05-27 09:57:16',NULL),(48,NULL,NULL,'5854556464',15,9,'6502623734','','CA9472ecc7df446ae0823b4a2902abb4db',0,NULL,NULL,'2010-05-27 09:57:44',NULL),(49,NULL,NULL,'5854556464',15,9,'6502623734','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE9ae04bfd96e073dd916e34d0e6d59ed0','CA95f06fc845a44a2bfdaa84d898d08e89',1,NULL,NULL,'2010-05-27 13:51:02',NULL),(50,NULL,NULL,'6504935951',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE9d7664ebba999e06c4e51e71719c5c58','CA4c1d056c74097abaabd5f7f98dac19c7',1,NULL,NULL,'2010-05-28 10:36:17',NULL),(51,15,102,'2138105359',15,102,'8322058710','','CAb8da69b9a39a37b704092afb72c7ab79',0,NULL,NULL,'2010-05-31 10:29:59',NULL),(52,NULL,NULL,'6504935951',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REaeff4ce2fb2e31c2906c66558a5effb2','CA5dba30bd2522b5ca19fa865bc18fbef8',1,NULL,NULL,'2010-05-31 12:44:24',NULL),(53,NULL,NULL,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE0ee6a4a43f693cea2e7da96f1697bb01','CAec54d14a96172e5cbfdb1856f8c951b6',1,NULL,NULL,'2010-06-02 00:06:50',NULL),(54,15,3,'5854556464',15,3,'6502623982','','CA53acce0ec6c5b080acf7106b8dec2ed4',0,NULL,NULL,'2010-06-02 00:08:10',NULL),(55,15,3,'5854556464',15,3,'6502623982','','CA86327d7e6ef0ed338111935d829ba0d6',0,NULL,NULL,'2010-06-02 00:08:33',NULL),(56,15,3,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE862f46ee2315702df154b3ef595f26f3','CAed0186233f3f63e6ccf6123527753754',1,NULL,NULL,'2010-06-02 00:08:56',NULL),(57,15,3,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE862f46ee2315702df154b3ef595f26f3','CAb9154171f5cf3917ddf0abe780df6960',1,NULL,NULL,'2010-06-02 00:10:59',NULL),(58,15,2,'6502780804',15,75,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA2f28d0fec3290808232d5da564af6b6d',0,NULL,NULL,'2010-06-02 21:26:52',NULL),(59,15,2,'6502780804',15,45,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA74c2befc44d769bcb12b1f3265440dd1',1,NULL,NULL,'2010-06-04 13:28:44',NULL),(60,15,45,'6502072402',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8402127af089c2df4f87d342e16fde43','CA8aa34731c98c27c12fd26145ea95ca1b',0,NULL,NULL,'2010-06-04 13:30:00',NULL),(61,15,2,'6502780804',15,45,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA7bd6b8087ca5c8d6b4ddada3a69b5d0e',1,NULL,NULL,'2010-06-04 13:30:06',NULL),(62,15,2,'6502780804',15,44,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA4d070ad62f3371d5e781b4998a5ecb5b',0,NULL,NULL,'2010-06-05 11:22:54',NULL),(63,15,2,'6502780804',15,11,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA1e77d436bc4a50c2f72bb02385b9ef91',0,NULL,NULL,'2010-06-05 11:24:40',NULL),(64,15,11,'4083481903',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE121ecdaeb0c843cc0313e541ebcbe7f5','CA20bb6b4732a5aa70e6ab0763c58dd782',1,NULL,NULL,'2010-06-05 11:56:21',NULL),(65,15,25,'6505335907',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE6783253027e9432b6cae014f423a2c70','CAc21f28d2da6beed394e736b4d997c6f9',1,NULL,NULL,'2010-06-05 13:04:54',NULL),(66,15,2,'6502780804',15,10,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAc3c340a152674681f1e9a40e29810262',0,NULL,NULL,'2010-06-06 13:05:09',NULL),(67,15,2,'6502780804',15,34,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA69295b77364f90182f06ad964a1d8b9a',0,NULL,NULL,'2010-06-06 19:12:27',NULL),(68,NULL,NULL,'6503435075',15,25,'6507205996','','CAb760650cd98b5ce7439b3b6c7bbc21c3',0,NULL,NULL,'2010-06-07 09:54:49',NULL),(69,NULL,NULL,'6503435075',15,25,'6507205996','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REd81eebbb929146152d9d29f66fc252c3','CA2c1a36e8770c6ef5f0ffd0dc9f1c04de',0,NULL,NULL,'2010-06-07 09:55:09',NULL),(70,15,2,'6502780804',15,39,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA164b77e5de559c0f778bce92ec9480f3',1,NULL,NULL,'2010-06-07 10:31:11',NULL),(71,15,28,'4152902682',15,20,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE27c75d2f666eb035548859877def0463','CAab60ab3beb4e109fa99bfe0a4e0d81df',1,NULL,NULL,'2010-06-08 15:41:41',NULL),(72,NULL,NULL,'6503435075',15,25,'6507205996','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE5854d9e6e75e2042f42d61b62b53453d','CA601382f73899e783ece48e6eb375a571',0,NULL,NULL,'2010-06-14 11:57:50',NULL),(73,15,2,'6502780804',15,21,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA2aacaeb24cbbc2a9451a9d7c87a5689f',1,NULL,NULL,'2010-06-15 14:45:58',NULL),(74,15,2,'6502780804',15,21,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA74e9db578c06b49213a6ee3d54ba81ea',1,NULL,NULL,'2010-06-15 14:53:40',NULL),(75,15,2,'6502780804',15,45,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAec65a83f55893d98e6a580691aec73e6',0,NULL,NULL,'2010-06-16 13:38:10',NULL),(76,15,2,'6502780804',15,12,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAf6ba94a7314fd2c8fadb5bbc6d2c7e1c',0,NULL,NULL,'2010-06-17 11:51:23',NULL),(77,15,2,'6502780804',15,48,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAf1e3dd0b880f9b0c7ed641f77af02c8b',0,NULL,NULL,'2010-06-17 17:43:05',NULL),(78,15,2,'6502780804',15,5,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAd7adc900db7b20882e946f498f3e5b37',0,NULL,NULL,'2010-06-17 18:55:23',NULL),(79,15,2,'6502780804',15,96,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA935e7d3fb4f5e46005ee78197c13a754',0,NULL,NULL,'2010-06-18 10:16:06',NULL),(80,15,2,'6502780804',15,57,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA27a609231c38753e0d789cc12e30e319',1,NULL,NULL,'2010-06-18 10:17:44',NULL),(81,15,2,'6502780804',15,35,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA13d67673c58b55396350d87f095b8a82',1,NULL,NULL,'2010-06-18 13:18:25',NULL),(82,NULL,NULL,'7135348908',15,110,'7134875963','','CA418eaea62c3fe02bcecd59892bd86887',0,NULL,NULL,'2010-06-20 07:25:35',NULL),(83,15,2,'6502780804',15,75,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAe5047e8e32d01eace373fe2d26551d8f',1,NULL,NULL,'2010-06-21 11:30:03',NULL),(84,NULL,NULL,'4159137394',15,28,'6507205966','','CA31d28c9de7191704610a956e7498b888',0,NULL,NULL,'2010-06-21 11:33:50',NULL),(85,15,2,'6502780804',15,100,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAcf6ee7fb0d15056a494bf65ef8fac37b',1,NULL,NULL,'2010-06-23 13:55:41',NULL),(86,15,2,'6502780804',15,88,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA408f6d625d01d58855d48ecb721640f4',1,NULL,NULL,'2010-06-24 10:24:22',NULL),(87,NULL,NULL,'3044478989',15,28,'6507205966','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE31b739f273ba876a306d79c4932f74ae','CA0848974631686ba816fa03efb04c19c9',0,NULL,NULL,'2010-06-24 10:49:58',NULL),(88,15,2,'6502780804',15,44,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAeecc7bede09f66a63400bf0ba1f86e7f',1,NULL,NULL,'2010-06-26 11:40:21',NULL),(89,15,2,'6502780804',15,79,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA908f493b83468f09e9b924fe80f5d145',1,NULL,NULL,'2010-06-26 11:45:22',NULL),(90,15,2,'6502780804',15,73,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAab18904d4bb08358ab8d31f66cb7c14e',1,NULL,NULL,'2010-06-26 11:49:44',NULL),(91,15,79,'4158162033',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE320ace08d561c0b6f391735f1ef29743','CA3abefc5e3c37bade1cbf679b869faa5b',1,NULL,NULL,'2010-06-26 12:24:17',NULL),(92,15,25,'6505335907',15,42,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REc513b8109e63403b13b15347b5024c25','CAc58f6001d68c00c099d4426a3123c377',0,NULL,NULL,'2010-06-27 11:43:39',NULL),(93,NULL,NULL,'7378742833',15,110,'7134875963','','CA7c8cf5a48e6b990ef3c1bb80c35a60e7',0,NULL,NULL,'2010-06-28 04:28:18',NULL),(94,NULL,NULL,'3049739898',15,102,'8322058710','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE5e1408745d44c8c5b006050ac6e629ee','CA125ad467780442a3740762aee5dae7a7',0,NULL,NULL,'2010-06-29 14:46:27',NULL),(95,NULL,NULL,'7378742833',15,110,'7134875963','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE08ec77c6210b885fe5d468ff46b02893','CA0434b60e12859d1ecb457f35525db650',0,NULL,NULL,'2010-06-29 15:53:28',NULL),(96,NULL,NULL,'7138221661',15,110,'7134875963','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REe0257e5a82f0881ad8ca44d1c69e262e','CA076b807b5146548ff816474076158b0c',0,NULL,NULL,'2010-06-30 08:47:08',NULL),(97,NULL,NULL,'7378742833',15,110,'7134875963','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE0510b84c8c81b55095c5c129bfbcda83','CA094450712ec593915f61ccd8f2829bf8',0,NULL,NULL,'2010-07-01 14:30:03',NULL),(98,NULL,NULL,'3049739898',15,25,'6507205996','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE77e832fe5a2926b1fd5de8e2889aadb3','CA3ebd2da0adedc8522dd814d58d1d1fb4',0,NULL,NULL,'2010-07-01 14:36:32',NULL),(99,NULL,NULL,'7138221661',15,110,'7134875963','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REa6d0d2b5eab36b370a260397bde53cf1','CA89b134675ff29e46bd5c82dfe450c396',0,NULL,NULL,'2010-07-01 15:59:29',NULL),(100,15,2,'6502780804',15,45,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAf99c4c56aa4a790dccc7e58a8d2fbf0b',0,NULL,NULL,'2010-07-02 10:45:18',NULL),(101,15,2,'6502780804',15,10,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA52e726026f9e779c1c59dc42e29a88a5',1,NULL,NULL,'2010-07-06 09:02:56',NULL),(102,NULL,NULL,'7378742833',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE46fac5844d8b92c50e3c6492af4b7f4c','CA49c6dbde1ec717112ac06640db6e8dce',0,NULL,NULL,'2010-07-06 13:20:31',NULL),(103,NULL,NULL,'6502613584',15,2,'6502623714','','CAbdca92df73376eeabc683753435d0eb2',0,NULL,NULL,'2010-07-06 13:46:56',NULL),(104,NULL,NULL,'6502613572',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REa3d1c154043fb6e10aeaf6a3f980ed6f','CAccc9f39c27365bf8aa7d5990f2a1d88a',1,NULL,NULL,'2010-07-06 13:47:32',NULL),(105,NULL,NULL,'7378742833',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE7692a5a01ffe4dab08d045f471a15d88','CAa69751854ccd27b65ea5c7f0020e3fd3',1,NULL,NULL,'2010-07-06 13:50:51',NULL),(106,15,2,'6502780804',15,55,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA2323e895409ced4f63165d6ebd4e1250',1,NULL,NULL,'2010-07-06 19:46:45',NULL),(107,15,3,'5854556464',15,3,'6502623982','','CAf3152741e7f8523d78e76bea60575171',0,NULL,NULL,'2010-07-07 09:50:04',NULL),(108,15,2,'6502780804',15,12,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAa7c0c85309015d3c24d39d6d941b4987',0,NULL,NULL,'2010-07-08 08:49:42',NULL),(109,NULL,NULL,'9493796000',15,106,'7134876993','','CAca361202b352ea3f8ce2481ed5a6800f',0,NULL,NULL,'2010-07-09 07:43:18',NULL),(110,15,2,'6502780804',15,100,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA36a1d33514a7900b1dc314e8dd0b87ed',0,NULL,NULL,'2010-07-09 12:24:45',NULL),(111,15,2,'6502780804',15,56,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA5a5dec33c47b5cb72d5cf6bec5580197',0,NULL,NULL,'2010-07-14 11:15:40',NULL),(112,15,28,'4152902682',15,2,'6502623714','','CA703e85ff97c49b063a175e7b010b0c28',0,NULL,NULL,'2010-07-14 11:58:54',NULL),(113,15,2,'6502780804',15,73,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAa11cc8120ef8276f235c0225d305c817',0,NULL,NULL,'2010-07-15 14:24:59',NULL),(114,15,2,'6502780804',15,73,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAba3d08634650ed54ef47ee0d1ba5466a',1,NULL,NULL,'2010-07-15 14:29:00',NULL),(115,15,2,'6502780804',15,58,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA162254b717fe2db255f7e9596fd330c6',0,NULL,NULL,'2010-07-15 15:04:54',NULL),(116,15,3,'5854556464',15,3,'6502623982','','CA6ff6a4dfd042c23d3499a4ce6e829221',0,NULL,NULL,'2010-07-17 11:29:37',NULL),(117,15,3,'5854556464',15,3,'6502623982','','CA1a235a6d38761d74d218f5b4be8d929f',0,NULL,NULL,'2010-07-17 11:32:11',NULL),(118,15,3,'5854556464',15,3,'6502623982','','CA285b3df675422cea7af2feea756084e6',0,NULL,NULL,'2010-07-17 12:01:09',NULL),(119,15,25,'6505335907',15,27,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REc649cfeea379b60273594a075ef3f3d0','CA3d5b04d910004320f40f24197f5118b2',0,NULL,NULL,'2010-07-18 13:17:41',NULL),(120,15,28,'4152902682',15,2,'6502623714','','CA036c61642b28b1dc83bb5853d56ef6f6',0,NULL,NULL,'2010-07-19 15:15:43',NULL),(121,NULL,NULL,'9072008669',15,32,'6509241946','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REa424ade26dbf91f5b13ea43d64060da9','CAcd66130eef10719b48e24d580ff8a95e',0,NULL,NULL,'2010-07-19 19:32:39',NULL),(122,15,2,'6502780804',15,100,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA762f814d94e6ead4b89da8cc66dfd751',1,NULL,NULL,'2010-07-20 11:24:07',NULL),(123,NULL,NULL,'4088295139',15,73,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE355991e7a35199bfda9ae0e6d05e7d2e','CA4eb41eb5b654c4e60100001b7f58186f',0,NULL,NULL,'2010-07-20 13:14:14',NULL),(124,NULL,NULL,'4088295139',15,78,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REafc1921dc81c55d395dfbe45be7e2fff','CAed84d2a4ea51db9cecc537f589c0d2b4',0,NULL,NULL,'2010-07-20 13:26:20',NULL),(125,NULL,NULL,'4088295139',15,78,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8149c95c62965025f5c93255b52b28b5','CAbfde4410ef6294a234a0410f6db2b94d',0,NULL,NULL,'2010-07-20 13:26:48',NULL),(126,NULL,NULL,'7134731515',15,107,'7134876928','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE2d111f2008acd1bd74e709d8b9497c85','CAcd6fc5082c319581bfac7acce466e735',0,NULL,NULL,'2010-07-20 13:49:44',NULL),(127,15,107,'2816398185',15,107,'7134876928','','CA3b29a843f84abc6a79a983f8d3392223',0,NULL,NULL,'2010-07-20 14:07:36',NULL),(128,15,107,'2816398185',15,107,'7134876928','','CA24f93c176eea4e6b88304b6cba1eab3f',0,NULL,NULL,'2010-07-20 14:12:08',NULL),(129,15,3,'5854556464',15,3,'6502623982','','CA5497c1e5be8c6ac83f28ef43a9172bb2',0,NULL,1,'2010-07-21 13:37:28',NULL),(130,15,3,'5854556464',15,3,'6502623982','','CAb1b3dd07622672fe6f5fcd7eba8b72b0',0,NULL,1,'2010-07-21 13:38:07',NULL),(131,NULL,NULL,'7134731515',15,107,'7134876928','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE846b8c40193e85eff87ee8251af7adba','CA842174dea94ec0f1d0beae72584d26bf',0,NULL,2,'2010-07-22 12:40:48',NULL),(132,15,3,'5854556464',15,3,'6502623982','','CA925cbd49ac6a47f5b7235ab3c49efb71',0,NULL,1,'2010-07-23 13:01:32',NULL),(133,NULL,NULL,'7134731515',15,107,'7134876928','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE9a3ff8345f07bb12deb8de93395c9b97','CAdffe63adf6e73ed9f58b2361c77f7988',0,NULL,2,'2010-07-28 11:42:56',NULL),(134,15,3,'5854556464',15,2,'6502623714','','CA6d7f79b4784d3f7c1bf8f51b1bee706c',0,334,NULL,'2010-07-30 14:27:51',NULL),(135,15,2,'6502780804',15,17,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAc057614033fa18b962de52b973902b94',0,335,NULL,'2010-07-30 14:30:11',NULL),(136,15,17,'4158300315',15,2,'6502623714','','CA08a6d692623498ed7da81aff30c25af6',0,NULL,1,'2010-07-30 14:30:51',NULL),(137,15,2,'6502780804',15,17,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAc3bbbc378eeacd2ed1ab158cc759e9da',1,336,NULL,'2010-07-31 08:58:37',NULL),(138,15,2,'6502780804',15,38,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA2ea02ba3801d139f3f8603b43593ea69',0,337,NULL,'2010-08-03 13:01:03',NULL),(139,NULL,NULL,'4082474900',15,2,'6502623714','','CA73165bc87bdff6b5dd387a20dd2f93ce',0,NULL,1,'2010-08-04 15:30:36',NULL),(140,NULL,NULL,'4157062425',15,2,'6502623714','','CAc7384985d9eea4b600e48d0a61e21b35',0,NULL,1,'2010-08-04 17:11:22',NULL),(141,NULL,NULL,'6503695811',15,2,'6502623714','','CA6a38c4b13eeef0cc491c7620059afb72',0,NULL,1,'2010-08-05 19:13:14',NULL),(142,15,2,'6502780804',15,78,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA655b1770bd8b529f4e857c432bf4a722',0,338,NULL,'2010-08-06 11:14:59',NULL),(143,NULL,NULL,'6503655851',15,2,'6502623714','','CA0f120c7bcd0b0bf229034e4905053138',0,NULL,1,'2010-08-06 11:18:46',NULL),(144,NULL,NULL,'7342179988',15,28,'6507205966','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE7c3d052e9d82e5213b34881cfe8739f5','CA3304d4393e34181174e13145ea36f91a',0,NULL,1,'2010-08-10 11:03:15',NULL),(145,NULL,NULL,'7342179988',15,25,'6507205996','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE3c551fd19f6e285e159238cf15070948','CA1c2282b124f805351b28ff89634cfaaf',0,NULL,1,'2010-08-10 11:39:08',NULL),(146,15,28,'4152902682',15,2,'6502623714','','CA8f7c92953b28009e6eb987c86808d1f9',0,339,NULL,'2010-08-10 12:20:46',NULL),(147,15,28,'4152902682',15,2,'6502623714','','CA6c233acef0111be37f6666f96b52708b',0,340,NULL,'2010-08-11 15:56:15',NULL),(148,NULL,NULL,'6503695811',15,2,'6502623714','','CAb4a52baadb20e895d32fad493bdf0ef4',0,NULL,1,'2010-08-14 10:30:11',NULL),(149,NULL,NULL,'6502613584',15,10,'6509249887','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REec133f6d9a2ad928507e649d58829d55','CAf2b2287a284d704fb68cfc8fecbc694e',1,NULL,1,'2010-08-16 09:43:55',NULL),(150,15,28,'4152902682',15,20,'','','CAbc015fc8e0cf435a8c9968a8d1c0c65a',0,341,NULL,'2010-08-17 11:17:29',NULL),(151,15,28,'4152902682',15,20,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8ac6b363fad1642b58285f1f7177a8fe','CA18cebb2ab126697e24f46920e8c615ca',0,342,NULL,'2010-08-17 11:18:39',NULL),(152,NULL,NULL,'2159448989',15,28,'6507205966','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE90200a0b43fcf858ce3b2c209322c968','CAf5585dd9b35bd943337e565b255bc6fd',0,NULL,1,'2010-08-19 12:05:34',NULL),(153,15,2,'6502780804',15,97,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA2399ded49e404ab8e9b5bfff0b4eaa15',0,344,NULL,'2010-08-19 19:50:16',NULL),(154,15,2,'6502780804',15,97,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CA9ef7c949395d1c9496c16823c15949f4',1,345,NULL,'2010-08-20 13:44:32',NULL),(155,15,61,'6503240700',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE535979290cd12e61b670f501b1e0893a','CA10576872980776ebd5e6d967a3bb330a',0,NULL,2,'2010-08-24 13:36:15',NULL),(156,15,2,'6502780804',15,45,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAd00051397cc0df59ab64edd1112f481d',0,346,NULL,'2010-08-25 11:19:09',NULL),(157,15,2,'6502780804',15,2,'6502623714','','CA2ca11b094691ac9f28f5114194f4ec4e',0,NULL,2,'2010-08-25 11:19:59',NULL),(158,NULL,NULL,'4149629898',15,10,'6509249887','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REcb4a160914d71dd0ef739aeba0bceb01','CA53c39823988a580ab29806d10b7f8929',0,NULL,1,'2010-08-31 16:19:15',NULL),(159,NULL,NULL,'2145067160',15,107,'7134876928','','CA0ded7fffee3f77e2fbc62a2e3dcdbc56',0,NULL,1,'2010-09-03 18:12:39',NULL),(160,NULL,NULL,'2145067160',15,107,'7134876928','','CA86d5b1115bfdbee57fa6e6f3189f4240',0,NULL,1,'2010-09-08 18:33:02',NULL),(161,NULL,NULL,'2145067160',15,107,'7134876928','','CAa92056990d8431436bf26b7365621c7e',0,NULL,1,'2010-09-09 13:22:58',NULL),(162,15,2,'6502780804',15,10,'6509249887','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAe483bcfe71d3e70e8e5349580044f503',1,349,NULL,'2010-09-10 09:52:50',NULL),(163,15,2,'6502780804',15,35,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAb84a73beccaa9f1fe47108c8345fa01d',0,350,NULL,'2010-09-10 10:51:29',NULL),(164,15,2,'6502780804',15,75,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAebb537e4c595d82f7d3f64922084c2cf',0,351,NULL,'2010-09-11 10:18:06',NULL),(165,NULL,NULL,'3192741902',15,110,'7134875963','','CA295259e2c85c24dc00146ca3a551e9ea',0,NULL,1,'2010-09-13 08:24:15',NULL),(166,NULL,NULL,'2145067160',15,107,'7134876928','','CAe7cafe34fa80991edaf02b02a21964a8',0,NULL,1,'2010-09-13 10:44:07',NULL),(167,NULL,NULL,'3192741902',15,110,'7134875963','','CAe5677d60dcd27295d8df817110dfb4f4',0,NULL,1,'2010-09-13 18:08:33',NULL),(168,NULL,NULL,'3192741902',15,110,'7134875963','','CA069b54f9483e725ca8c76f5e43586881',0,NULL,1,'2010-09-14 08:58:32',NULL),(169,NULL,NULL,'2145067160',15,107,'7134876928','','CA14e5deba1787ff5df19fe0fa3cf19d7b',0,NULL,1,'2010-09-14 09:24:31',NULL),(170,NULL,NULL,'3192741902',15,110,'7134875963','','CA18c78cca4590ec8e995493acd82d8ffe',0,NULL,1,'2010-09-14 18:31:38',NULL),(171,NULL,NULL,'5854551869',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE77e3b982cc67843c4677fe1504f233f4','CA4027e3d97ea4a6352d2a0c1d7c03bac1',1,NULL,1,'2010-09-14 18:57:41',NULL),(172,15,3,'5854556464',15,9,'6502623734','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE862f46ee2315702df154b3ef595f26f3','CAb024a4b207056a62f9c78d1ce03841a8',0,352,NULL,'2010-09-14 19:00:36',NULL),(173,15,3,'5854556464',15,9,'6502623734','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE862f46ee2315702df154b3ef595f26f3','CA5a3973c27fab4fef33d0c177c6f1b8bf',1,354,NULL,'2010-09-14 19:02:53',NULL),(174,NULL,NULL,'3192741902',15,110,'7134875963','','CA0f69c984fc67daa4a0a816ecd1574ac7',0,NULL,1,'2010-09-15 06:57:23',NULL),(175,NULL,NULL,'5164535507',15,107,'7134876928','','CAa9ac0b93a0f0d59131774783e538faba',0,NULL,1,'2010-09-15 08:17:13',NULL),(176,NULL,NULL,'3192741902',15,110,'7134875963','','CAc9abcd8076073720d39b8e51606fdaeb',0,NULL,1,'2010-09-15 13:40:16',NULL),(177,NULL,NULL,'5164535507',15,107,'7134876928','','CA5760c6a8af6d1fe1162ff5be70360c8f',0,NULL,1,'2010-09-15 18:53:53',NULL),(178,15,2,'6502780804',15,100,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAebb4a7db6bf296cc39fa79ab38082800',0,355,NULL,'2010-09-16 10:21:53',NULL),(179,NULL,NULL,'3192741902',15,110,'7134875963','','CA0184b108de0d39998c7b6778386ad4f9',0,NULL,1,'2010-09-16 12:01:09',NULL),(180,NULL,NULL,'5164535507',15,107,'7134876928','','CAa362199140038e12d05d1099f0394e9d',0,NULL,1,'2010-09-16 17:39:25',NULL),(181,NULL,NULL,'3192741902',15,110,'7134875963','','CA096a8f8812af7b75fddb8d76265779d3',0,NULL,1,'2010-09-16 18:07:49',NULL),(182,NULL,NULL,'3192741902',15,110,'7134875963','','CA0703810318a052e531e6bf862f17415f',0,NULL,1,'2010-09-17 08:19:09',NULL),(183,NULL,NULL,'5164535507',15,107,'7134876928','','CA5ab03d8e29bab85cde9a33f2c6ff4800',0,NULL,1,'2010-09-17 09:37:52',NULL),(184,NULL,NULL,'3192741902',15,110,'7134875963','','CA40bf8953b4dba53ca61a1a41b338c788',0,NULL,1,'2010-09-17 14:51:37',NULL),(185,NULL,NULL,'5164535507',15,107,'7134876928','','CAd97abe631cb2a7c6a51c7826af7ee37a',0,NULL,1,'2010-09-17 17:19:58',NULL),(186,NULL,NULL,'5164535507',15,107,'7134876928','','CAe229ee0344e1b677e820018dbc10adaf',0,NULL,1,'2010-09-18 11:32:58',NULL),(187,NULL,NULL,'5164535507',15,107,'7134876928','','CAeb2a4daf0778e71ba1760b3e43e88b46',0,NULL,1,'2010-09-20 11:41:56',NULL),(188,NULL,NULL,'5164535507',15,107,'7134876928','','CA920ab0efa35ae017203516ff40e222c6',0,NULL,1,'2010-09-21 08:21:38',NULL),(189,NULL,NULL,'3192741902',15,110,'7134875963','','CA733c7cf8ad1ed5190dd0db9137c9ff43',0,NULL,1,'2010-09-21 10:58:11',NULL),(190,NULL,NULL,'5164535507',15,107,'7134876928','','CAf7fc897393a3355ff9df4d3656d78d59',0,NULL,1,'2010-09-21 18:39:09',NULL),(191,NULL,NULL,'3192741902',15,110,'7134875963','','CAc370c2cdd210d5cf7f6fd1f8f50aab02',0,NULL,1,'2010-09-21 18:40:15',NULL),(192,NULL,NULL,'5164535507',15,107,'7134876928','','CA1eb5957fa6ff7b5d15622923d9986bfb',0,NULL,1,'2010-09-22 08:50:21',NULL),(193,NULL,NULL,'6019512263',15,104,'7134876951','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REd29b037a831353667213099844ed3748','CA49b3669e156c5ca863fee3d667fed137',0,NULL,1,'2010-09-22 12:50:56',NULL),(194,NULL,NULL,'6019512263',15,104,'7134876951','','CA7a487f8e3bbefbb178d5440968cf4e8e',0,NULL,1,'2010-09-22 12:51:19',NULL),(195,NULL,NULL,'5164535507',15,107,'7134876928','','CA721fc15c8fe3cd5de585bd9af1b48e35',0,NULL,1,'2010-09-23 10:39:22',NULL),(196,NULL,NULL,'5164535507',15,107,'7134876928','','CAf40131b5596a4ecc4b6a39f4bcd6f623',0,NULL,1,'2010-09-23 18:19:12',NULL),(197,NULL,NULL,'3192427345',15,110,'7134875963','','CA28f669777954cca2c4ec4261f1c6c09f',0,NULL,1,'2010-09-24 08:35:14',NULL),(198,NULL,NULL,'5164535507',15,107,'7134876928','','CA1f6203dc73be7ed496a22b89c6c20372',0,NULL,1,'2010-09-24 09:22:59',NULL),(199,NULL,NULL,'3192427345',15,110,'7134875963','','CA516e1298686745ca2281d2ef61ec240e',0,NULL,1,'2010-09-24 17:57:32',NULL),(200,NULL,NULL,'5164535507',15,107,'7134876928','','CA0b747ab5947c0a5061577b42e43d8210',0,NULL,1,'2010-09-25 12:44:15',NULL),(201,15,32,'6505337138',15,2,'6502623714','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE78d74e99679dfdf81f083c9d6a1787d0','CA3bf1aa844cb4a95068834f914b6aafa4',1,356,NULL,'2010-09-25 13:45:32',NULL),(202,15,2,'6502780804',15,34,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE8a1bc0981a6360980a200d69ef248670','CAa84e2f810c13ddd5826f8c50031676ab',0,358,NULL,'2010-09-26 13:01:35',NULL),(203,NULL,NULL,'3192427345',15,110,'7134875963','','CA7f52a8f7982d4dfdb80bad4148303ad2',0,NULL,1,'2010-09-27 08:59:23',NULL),(204,NULL,NULL,'7139438833',15,110,'7134875963','','CA3c4b722a25ec8e026830852adc2ce299',0,NULL,1,'2010-09-28 08:47:50',NULL),(205,15,32,'6505337138',15,50,'','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/REe9b5efe9f057ce5e2cb38dd0045854c0','CA12061e63439b28ee43a6d9fba50a7e87',0,359,NULL,'2010-09-28 12:12:28',NULL),(206,NULL,NULL,'5164535507',15,107,'7134876928','','CA41a39abd9d3df4c84c980b56518cc8c6',0,NULL,1,'2010-09-28 16:43:29',NULL),(207,15,3,'5854556464',15,3,'6502623982','http://api.twilio.com/2008-08-01/Accounts/AC0d586a0cd63a017a15042803b749fa3f/Recordings/RE862f46ee2315702df154b3ef595f26f3','CAb550dc982981013c3b5c26b879b34ea1',0,360,NULL,'2010-09-29 08:23:54',NULL),(208,15,3,'5854556464',15,3,'6502623982','','CAa6d80dc6ac40e6922769cb7a5ce09b7d',0,NULL,1,'2010-09-29 08:24:20',NULL);
+/*!40000 ALTER TABLE `IVR_calllog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `IVR_ivr_prompt`
+--
+
+DROP TABLE IF EXISTS `IVR_ivr_prompt`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `IVR_ivr_prompt` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practice_location_id` int(11) NOT NULL,
+  `prompt` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `prompt_verbage` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `practice_location_id` (`practice_location_id`,`prompt`),
+  KEY `IVR_ivr_prompt_366c0f3e` (`practice_location_id`),
+  CONSTRAINT `practice_location_id_refs_id_24231ea2` FOREIGN KEY (`practice_location_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `IVR_ivr_prompt`
+--
+
+LOCK TABLES `IVR_ivr_prompt` WRITE;
+/*!40000 ALTER TABLE `IVR_ivr_prompt` DISABLE KEYS */;
+/*!40000 ALTER TABLE `IVR_ivr_prompt` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `IVR_vmbox_config`
+--
+
+DROP TABLE IF EXISTS `IVR_vmbox_config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `IVR_vmbox_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `owner_type_id` int(11) NOT NULL,
+  `owner_id` int(10) unsigned NOT NULL,
+  `pin` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `greeting` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `config_complete` tinyint(1) NOT NULL,
+  `notification_email` tinyint(1) NOT NULL,
+  `notification_sms` int(1) DEFAULT '1',
+  `notification_page` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `IVR_vmbox_config_owner_type_id` (`owner_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `IVR_vmbox_config`
+--
+
+LOCK TABLES `IVR_vmbox_config` WRITE;
+/*!40000 ALTER TABLE `IVR_vmbox_config` DISABLE KEYS */;
+INSERT INTO `IVR_vmbox_config` VALUES (1,15,3,'sha1$897f2$8cefb2926080697739931932d56cbde2c36b7a82','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,0,1,1),(2,15,9,'sha1$3d6fc$045d001724c444172f1a2645dd8a01b914817bac','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(3,15,2,'sha1$466d9$058c9039538fb580edd9027fa38238e42690e503','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,0,1,1),(4,15,102,'sha1$41708$5126effd42586ae2e4bf84996fb3e08bb7ca2e96','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,0,1,1),(5,15,69,'sha1$127a6$1d498144d4ed568bb10bc5a5f2f95a91c5b4c3c5','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(6,15,104,'sha1$5a8f6$f5ab844fa0d4cbd760084e05e05902fc8196b5fb','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(8,15,106,'sha1$bff02$46d33d320abaf70535587f22c97a1cc9c3c4c950','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(9,15,71,'sha1$cf483$fc6f9304eb61aa0fb2592efcf65baeaef3051c6c','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(10,15,7,'sha1$f36b4$315153fb595697af195b3956da938a27731c32bc','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(11,15,107,'sha1$50531$b2d288045796258bba51fb42159db46fe281bd66','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,0,1,1),(12,15,110,'sha1$33a82$f08e95f65d75a09afc4a158dab1080a538280ced','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(13,15,63,'sha1$a4667$da6f29db20414776b3b1b710fe113a58fe7ed202','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(14,15,25,'sha1$8e7d0$ff97d361c98034ef65e8ac71c2708806b7173f33','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(15,15,28,'sha1$b1e74$cfcff314ab08cfba5efdebf47e52d65d10c371fe','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(16,15,111,'sha1$bc168$a3db1f700082788efedf5a0b4e8a06d72df0b71b','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(17,15,112,'sha1$0efbc$e7af447da8b0d2179f32032fe3977b233b61b521','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(18,15,32,'sha1$895f7$93344a4b48495415133f67a7deaad91007cc05db','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(19,15,27,'sha1$f0028$bc4981b3e207879597824744b59b259f830e639d','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1),(20,15,10,'sha1$927df$f2eacf69874a331c5e3bb3d27de59447f522e406','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,1,1);
+/*!40000 ALTER TABLE `IVR_vmbox_config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `IVR_vmmessage`
+--
+
+DROP TABLE IF EXISTS `IVR_vmmessage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `IVR_vmmessage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `owner_type_id` int(11) NOT NULL,
+  `owner_id` int(10) unsigned NOT NULL,
+  `callerID` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `recording` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `deleted` tinyint(1) NOT NULL,
+  `read_flag` tinyint(1) NOT NULL,
+  `read_timestamp` datetime DEFAULT NULL,
+  `timestamp` datetime NOT NULL,
+  `answeringservice` tinyint(1) NOT NULL,
+  `callbacknumber` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IVR_vmmessage_owner_type_id` (`owner_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `IVR_vmmessage`
+--
+
+LOCK TABLES `IVR_vmmessage` WRITE;
+/*!40000 ALTER TABLE `IVR_vmmessage` DISABLE KEYS */;
+INSERT INTO `IVR_vmmessage` VALUES (1,15,3,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,1,'2010-05-22 17:37:41','2010-05-21 11:48:27',0,''),(2,15,3,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,1,'2010-05-22 17:37:56','2010-05-21 11:48:40',0,''),(3,15,104,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,NULL,'2010-05-21 14:37:34',0,''),(4,15,104,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,NULL,'2010-05-22 07:26:46',0,''),(5,15,2,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,1,'2010-05-23 09:06:25','2010-05-23 08:59:00',0,''),(6,15,9,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,NULL,'2010-05-25 16:32:43',0,''),(7,15,9,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,NULL,'2010-05-25 16:34:13',0,''),(8,15,75,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,NULL,'2010-06-02 21:27:42',0,''),(9,15,44,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',0,0,NULL,'2010-06-05 11:23:34',0,''),(10,15,107,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,1,'2010-07-20 14:13:46','2010-07-20 13:51:56',0,''),(11,15,2,'8004664411','http://api.twilio.com/2008-08-01/Accounts/AC087cabfd0a453a05acceb2810c100f69/Recordings/REf8afc497f43d8e1e9bc229a415ebe100',1,1,'2010-08-25 11:20:22','2010-08-24 13:37:21',0,'');
+/*!40000 ALTER TABLE `IVR_vmmessage` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Invites_invitation`
+--
+
+DROP TABLE IF EXISTS `Invites_invitation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Invites_invitation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `recipient` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `userType` int(11) NOT NULL,
+  `typeVerified` tinyint(1) NOT NULL,
+  `createGroupPractice` tinyint(1) NOT NULL,
+  `assignGroupPractice_id` int(11) DEFAULT NULL,
+  `createPractice` tinyint(1) NOT NULL,
+  `assignPractice_id` int(11) DEFAULT NULL,
+  `identityVerified` int(1) DEFAULT '0',
+  `requestTimestamp` datetime NOT NULL,
+  `testFlag` tinyint(1) NOT NULL,
+  `org_id` int(11) DEFAULT NULL,
+  `org_role` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`),
+  KEY `Invites_invitation_sender_id` (`sender_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Invites_invitation`
+--
+
+LOCK TABLES `Invites_invitation` WRITE;
+/*!40000 ALTER TABLE `Invites_invitation` DISABLE KEYS */;
+INSERT INTO `Invites_invitation` VALUES (2,'YFXN3YNM',2,'FMcclain58@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-04-08 21:06:22',0,NULL,NULL),(3,'Y5Q9ZAN9',2,'BBrown810@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-04-09 15:22:16',0,NULL,NULL),(9,'DTJGBMQ3',2,'LSlater589@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-05-13 16:58:19',0,NULL,NULL),(17,'QKQJCTY9',102,'CCervantes768@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-05-17 12:37:33',0,NULL,NULL),(19,'7DBUPGS8',102,'SClay685@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-05-18 19:17:52',0,NULL,NULL),(20,'BMQNFD3L',102,'DBritt230@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-05-18 20:21:11',0,NULL,NULL),(21,'SKWJERC7',102,'RPotts969@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-05-19 11:07:19',0,NULL,NULL),(29,'9E8QT4CS',102,'JLuna369@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-05-20 21:57:21',0,NULL,NULL),(33,'YSP433VV',102,'TWarren304@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-05-24 21:57:11',0,NULL,NULL),(39,'ZBMA4G3D',2,'WFord274@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-06-03 08:00:49',0,NULL,NULL),(42,'47CKF5QK',2,'GSchneider515@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-06-09 19:49:14',0,NULL,NULL),(43,'YHR9U9RJ',2,'GGiles614@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-06-10 08:31:17',0,NULL,NULL),(44,'BBJL3BK7',102,'SBlair976@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-06-15 14:24:51',0,NULL,NULL),(45,'Y7FF7XDL',2,'JDaniel402@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-07-07 07:10:50',0,NULL,NULL),(47,'HJ7PEHWN',2,'EMorton322@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-08-21 13:41:43',0,NULL,NULL),(48,'VRF5QR47',2,'PSnyder796@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-09-10 13:16:59',0,NULL,NULL),(49,'UFJLEDQZ',2,'AMaynard915@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-09-15 06:35:19',0,NULL,NULL),(50,'BG4KRLFR',2,'DOdonnell443@myhealthincorporated.com',0,0,0,NULL,0,NULL,0,'2010-09-26 22:02:28',0,NULL,NULL);
+/*!40000 ALTER TABLE `Invites_invitation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Invites_invitationlog`
+--
+
+DROP TABLE IF EXISTS `Invites_invitationlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Invites_invitationlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(8) CHARACTER SET utf8 NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `recipient` varchar(75) CHARACTER SET utf8 NOT NULL,
+  `userType` int(11) NOT NULL,
+  `typeVerified` tinyint(1) NOT NULL,
+  `requestTimestamp` datetime NOT NULL,
+  `canceller_id` int(11) DEFAULT NULL,
+  `responseTimestamp` datetime NOT NULL,
+  `createdUser_id` int(11) DEFAULT NULL,
+  `createdPractice_id` int(11) DEFAULT NULL,
+  `testFlag` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Invites_invitationlog_sender_id` (`sender_id`),
+  KEY `Invites_invitationlog_canceller_id` (`canceller_id`),
+  KEY `Invites_invitationlog_createdUser_id` (`createdUser_id`),
+  KEY `createdPractice_id_refs_id_7086dae5` (`createdPractice_id`),
+  CONSTRAINT `createdPractice_id_refs_id_7086dae5` FOREIGN KEY (`createdPractice_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Invites_invitationlog`
+--
+
+LOCK TABLES `Invites_invitationlog` WRITE;
+/*!40000 ALTER TABLE `Invites_invitationlog` DISABLE KEYS */;
+INSERT INTO `Invites_invitationlog` VALUES (1,'FFZPMR4Q',3,'MClark650@myhealthincorporated.com',1,0,'2010-04-16 15:47:52',3,'2010-04-16 15:48:45',NULL,NULL,1),(2,'J7D8GQ8S',2,'RHill763@myhealthincorporated.com',0,0,'2010-05-09 12:38:39',2,'2010-05-11 15:33:43',NULL,NULL,0),(3,'JZSKJDQY',2,'JBishop723@myhealthincorporated.com',0,0,'2010-05-09 12:33:17',NULL,'2010-05-11 15:40:43',102,NULL,0),(4,'GCQAXURC',2,'TNewman803@myhealthincorporated.com',0,0,'2010-05-06 19:25:04',NULL,'2010-05-11 23:56:41',103,NULL,0),(5,'GNS3BKFB',3,'JShaw887@myhealthincorporated.com',0,0,'2010-05-11 21:07:57',3,'2010-05-14 07:40:59',NULL,NULL,0),(6,'CHW5FC7U',3,'RAlford771@myhealthincorporated.com',1,0,'2010-05-14 07:42:56',3,'2010-05-14 07:43:06',NULL,NULL,0),(7,'Z8QHFUY4',3,'LShields42@myhealthincorporated.com',0,0,'2010-05-14 07:41:02',3,'2010-05-14 07:43:11',NULL,NULL,0),(8,'DJHJWATQ',3,'BCurry15@myhealthincorporated.com',0,0,'2010-05-14 07:47:11',3,'2010-05-14 07:47:16',NULL,NULL,0),(9,'LBXEXYCS',3,'MCalderon664@myhealthincorporated.com',0,0,'2010-05-14 07:54:08',3,'2010-05-14 07:54:13',NULL,NULL,0),(10,'UMRLSQFC',102,'BKnight649@myhealthincorporated.com',0,0,'2010-05-17 09:45:24',NULL,'2010-05-18 13:55:41',104,NULL,0),(11,'H557JSZF',3,'AMack235@myhealthincorporated.com',0,0,'2010-05-20 08:42:45',3,'2010-05-20 11:46:18',NULL,NULL,0),(12,'8QCBMBSU',3,'LWeaver705@myhealthincorporated.com',0,0,'2010-05-20 11:45:12',3,'2010-05-20 11:46:23',NULL,NULL,0),(13,'WQHM7EZH',9,'LGoodman24@myhealthincorporated.com',0,0,'2010-05-20 08:48:48',9,'2010-05-20 17:11:12',NULL,NULL,0),(15,'RRR77ETY',102,'MReese970@myhealthincorporated.com',0,0,'2010-05-20 21:38:39',NULL,'2010-05-21 11:56:33',106,NULL,0),(16,'NTH9Q5GS',3,'RMiddleton630@myhealthincorporated.com',0,0,'2010-05-20 17:47:49',2,'2010-05-22 13:32:25',NULL,NULL,0),(17,'U5BULWLZ',102,'BAlbert150@myhealthincorporated.com',0,0,'2010-05-16 21:20:01',NULL,'2010-05-25 17:04:48',107,NULL,0),(18,'3BK7L5Z8',102,'ERios876@myhealthincorporated.com',0,0,'2010-05-20 21:39:07',NULL,'2010-05-26 08:15:08',108,NULL,0),(19,'7EU44DN3',102,'CDelacruz813@myhealthincorporated.com',0,0,'2010-05-24 21:09:32',NULL,'2010-05-28 10:15:31',109,NULL,0),(20,'NPJLZR3B',102,'KNeal457@myhealthincorporated.com',0,0,'2010-05-31 09:59:36',NULL,'2010-05-31 10:19:41',110,NULL,0),(21,'5AMG4VDJ',9,'HMolina88@myhealthincorporated.com',0,0,'2010-06-01 18:30:11',9,'2010-06-01 18:31:25',NULL,NULL,0),(22,'S8J8W3X7',2,'LBray911@myhealthincorporated.com',0,0,'2010-05-20 22:08:21',2,'2010-06-03 08:01:08',NULL,NULL,0),(23,'DX7AKW8E',2,'BLyons106@myhealthincorporated.com',0,0,'2010-04-08 21:03:48',2,'2010-06-03 08:01:18',NULL,NULL,0),(24,'D9MZ9DLP',9,'CBurt468@myhealthincorporated.com',0,0,'2010-06-01 18:44:45',9,'2010-06-07 09:52:17',NULL,NULL,0),(25,'HKLQYRM5',9,'ARivas488@myhealthincorporated.com',0,0,'2010-06-02 08:17:44',9,'2010-06-07 09:53:29',NULL,NULL,0),(26,'ZT7KCQKW',2,'GMay45@myhealthincorporated.com',0,0,'2010-05-17 13:46:39',NULL,'2010-06-08 20:35:00',111,NULL,0),(27,'CEAD837E',102,'EBaker58@myhealthincorporated.com',0,0,'2010-05-16 21:38:02',NULL,'2010-06-09 18:57:55',112,NULL,0),(28,'ZGACPEP9',102,'LChapman536@myhealthincorporated.com',0,0,'2010-05-31 10:00:22',NULL,'2010-06-11 16:46:21',113,NULL,0),(29,'RCLV8UV3',2,'JBender250@myhealthincorporated.com',0,0,'2010-06-06 16:33:12',NULL,'2010-06-15 11:41:37',114,NULL,0),(30,'V4NKCGGV',3,'RSpears360@myhealthincorporated.com',1,0,'2010-06-05 13:30:56',2,'2010-06-23 15:53:54',NULL,NULL,1),(31,'KQT4XDL4',2,'COrtega747@myhealthincorporated.com',0,0,'2010-07-09 13:14:16',NULL,'2010-08-21 23:44:25',115,NULL,0),(32,'GHMNBAAV',102,'MSampson893@myhealthincorporated.com',0,0,'2010-05-24 21:48:35',NULL,'2010-08-29 22:32:26',116,NULL,0);
+/*!40000 ALTER TABLE `Invites_invitationlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `KMS_adminprivatekey`
+--
+
+DROP TABLE IF EXISTS `KMS_adminprivatekey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `KMS_adminprivatekey` (
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `object_type_id` int(11) NOT NULL,
+  `object_id` int(10) unsigned NOT NULL,
+  `key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`uuid`),
+  KEY `object_type_id_refs_id_a738f6a6` (`object_type_id`),
+  CONSTRAINT `object_type_id_refs_id_a738f6a6` FOREIGN KEY (`object_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `KMS_adminprivatekey`
+--
+
+LOCK TABLES `KMS_adminprivatekey` WRITE;
+/*!40000 ALTER TABLE `KMS_adminprivatekey` DISABLE KEYS */;
+/*!40000 ALTER TABLE `KMS_adminprivatekey` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `KMS_ivr_privatekey`
+--
+
+DROP TABLE IF EXISTS `KMS_ivr_privatekey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `KMS_ivr_privatekey` (
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `invalid_key` tinyint(1) NOT NULL,
+  `object_type_id` int(11) NOT NULL,
+  `object_id` int(11) NOT NULL,
+  PRIMARY KEY (`uuid`),
+  UNIQUE KEY `object_type_id` (`object_type_id`,`object_id`,`owner_id`),
+  KEY `owner_id_refs_id_b357906` (`owner_id`),
+  CONSTRAINT `object_type_id_refs_id_ee8b8496` FOREIGN KEY (`object_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `owner_id_refs_id_b357906` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `KMS_ivr_privatekey`
+--
+
+LOCK TABLES `KMS_ivr_privatekey` WRITE;
+/*!40000 ALTER TABLE `KMS_ivr_privatekey` DISABLE KEYS */;
+/*!40000 ALTER TABLE `KMS_ivr_privatekey` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `KMS_ivr_rsakeypair`
+--
+
+DROP TABLE IF EXISTS `KMS_ivr_rsakeypair`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `KMS_ivr_rsakeypair` (
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `keypair` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `grandfathered` tinyint(1) NOT NULL,
+  PRIMARY KEY (`uuid`),
+  KEY `owner_id_refs_id_aeb883a1` (`owner_id`),
+  CONSTRAINT `owner_id_refs_id_aeb883a1` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `KMS_ivr_rsakeypair`
+--
+
+LOCK TABLES `KMS_ivr_rsakeypair` WRITE;
+/*!40000 ALTER TABLE `KMS_ivr_rsakeypair` DISABLE KEYS */;
+/*!40000 ALTER TABLE `KMS_ivr_rsakeypair` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `KMS_ivr_rsapubkey`
+--
+
+DROP TABLE IF EXISTS `KMS_ivr_rsapubkey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `KMS_ivr_rsapubkey` (
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `public_key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `key_pair_id` varchar(36) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`uuid`),
+  KEY `owner_id_refs_id_d01d5d35` (`owner_id`),
+  CONSTRAINT `owner_id_refs_id_d01d5d35` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `KMS_ivr_rsapubkey`
+--
+
+LOCK TABLES `KMS_ivr_rsapubkey` WRITE;
+/*!40000 ALTER TABLE `KMS_ivr_rsapubkey` DISABLE KEYS */;
+/*!40000 ALTER TABLE `KMS_ivr_rsapubkey` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `KMS_privatekey`
+--
+
+DROP TABLE IF EXISTS `KMS_privatekey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `KMS_privatekey` (
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `object_type_id` int(11) NOT NULL,
+  `object_id` int(10) unsigned NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `invalid_key` tinyint(1) NOT NULL,
+  PRIMARY KEY (`uuid`),
+  UNIQUE KEY `object_type_id` (`object_type_id`,`object_id`,`owner_id`),
+  KEY `object_type_id_refs_id_4cb7085a` (`object_type_id`),
+  KEY `owner_id_refs_id_7126f66a` (`owner_id`),
+  CONSTRAINT `object_type_id_refs_id_4cb7085a` FOREIGN KEY (`object_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `owner_id_refs_id_7126f66a` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `KMS_privatekey`
+--
+
+LOCK TABLES `KMS_privatekey` WRITE;
+/*!40000 ALTER TABLE `KMS_privatekey` DISABLE KEYS */;
+/*!40000 ALTER TABLE `KMS_privatekey` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `KMS_rsakeypair`
+--
+
+DROP TABLE IF EXISTS `KMS_rsakeypair`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `KMS_rsakeypair` (
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `keypair` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `grandfathered` tinyint(1) NOT NULL,
+  `ivr_key_id` varchar(36) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`uuid`),
+  UNIQUE KEY `owner_id` (`owner_id`),
+  UNIQUE KEY `owner_id_2` (`owner_id`),
+  KEY `ivr_key_id_refs_uuid_47f88d2d` (`ivr_key_id`),
+  CONSTRAINT `ivr_key_id_refs_uuid_47f88d2d` FOREIGN KEY (`ivr_key_id`) REFERENCES `KMS_ivr_rsakeypair` (`uuid`),
+  CONSTRAINT `owner_id_refs_id_cee9009f` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `KMS_rsakeypair`
+--
+
+LOCK TABLES `KMS_rsakeypair` WRITE;
+/*!40000 ALTER TABLE `KMS_rsakeypair` DISABLE KEYS */;
+/*!40000 ALTER TABLE `KMS_rsakeypair` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `KMS_rsapubkey`
+--
+
+DROP TABLE IF EXISTS `KMS_rsapubkey`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `KMS_rsapubkey` (
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `public_key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `ivr_key_id` varchar(36) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `key_pair_id` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`uuid`),
+  UNIQUE KEY `owner_id` (`owner_id`),
+  UNIQUE KEY `key_pair_id` (`key_pair_id`),
+  UNIQUE KEY `owner_id_2` (`owner_id`),
+  UNIQUE KEY `key_pair_id_2` (`key_pair_id`),
+  KEY `ivr_key_id_refs_uuid_60c9222d` (`ivr_key_id`),
+  CONSTRAINT `ivr_key_id_refs_uuid_60c9222d` FOREIGN KEY (`ivr_key_id`) REFERENCES `KMS_ivr_rsapubkey` (`uuid`),
+  CONSTRAINT `key_pair_id_refs_uuid_50b6a9b9` FOREIGN KEY (`key_pair_id`) REFERENCES `KMS_rsakeypair` (`uuid`),
+  CONSTRAINT `owner_id_refs_id_b22a1f2d` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `KMS_rsapubkey`
+--
+
+LOCK TABLES `KMS_rsapubkey` WRITE;
+/*!40000 ALTER TABLE `KMS_rsapubkey` DISABLE KEYS */;
+/*!40000 ALTER TABLE `KMS_rsapubkey` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `KMS_securetestmessage`
+--
+
+DROP TABLE IF EXISTS `KMS_securetestmessage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `KMS_securetestmessage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `owner_id` int(11) DEFAULT NULL,
+  `ciphertext` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
+  KEY `owner_id_refs_id_48bc83f1` (`owner_id`),
+  CONSTRAINT `owner_id_refs_id_48bc83f1` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `KMS_securetestmessage`
+--
+
+LOCK TABLES `KMS_securetestmessage` WRITE;
+/*!40000 ALTER TABLE `KMS_securetestmessage` DISABLE KEYS */;
+/*!40000 ALTER TABLE `KMS_securetestmessage` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Logs_loginevent`
+--
+
+DROP TABLE IF EXISTS `Logs_loginevent`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Logs_loginevent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp` datetime NOT NULL,
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `remote_ip` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `success` tinyint(1) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Logs_loginevent_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Logs_loginevent`
+--
+
+LOCK TABLES `Logs_loginevent` WRITE;
+/*!40000 ALTER TABLE `Logs_loginevent` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Logs_loginevent` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Logs_logoutevent`
+--
+
+DROP TABLE IF EXISTS `Logs_logoutevent`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Logs_logoutevent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Logs_logoutevent_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Logs_logoutevent`
+--
+
+LOCK TABLES `Logs_logoutevent` WRITE;
+/*!40000 ALTER TABLE `Logs_logoutevent` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Logs_logoutevent` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLCallGroups_callgroup`
+--
+
+DROP TABLE IF EXISTS `MHLCallGroups_callgroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLCallGroups_callgroup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `team` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `number_selection` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLCallGroups_callgroup`
+--
+
+LOCK TABLES `MHLCallGroups_callgroup` WRITE;
+/*!40000 ALTER TABLE `MHLCallGroups_callgroup` DISABLE KEYS */;
+INSERT INTO `MHLCallGroups_callgroup` VALUES (1,'TestCallGroup1','',NULL);
+/*!40000 ALTER TABLE `MHLCallGroups_callgroup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLCallGroups_callgroupmember`
+--
+
+DROP TABLE IF EXISTS `MHLCallGroups_callgroupmember`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLCallGroups_callgroupmember` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `call_group_id` int(11) DEFAULT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `alt_provider` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `call_group_id` (`call_group_id`,`member_id`),
+  UNIQUE KEY `call_group_id_2` (`call_group_id`,`member_id`),
+  KEY `MHLCallGroups_callgroupmember_3999cf1a` (`call_group_id`),
+  KEY `MHLCallGroups_callgroupmember_56e38b98` (`member_id`),
+  CONSTRAINT `call_group_id_refs_id_5f8db307` FOREIGN KEY (`call_group_id`) REFERENCES `MHLCallGroups_callgroup` (`id`),
+  CONSTRAINT `member_id_refs_mhluser_ptr_id_1d6b0f8d` FOREIGN KEY (`member_id`) REFERENCES `MHLUsers_provider` (`mhluser_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLCallGroups_callgroupmember`
+--
+
+LOCK TABLES `MHLCallGroups_callgroupmember` WRITE;
+/*!40000 ALTER TABLE `MHLCallGroups_callgroupmember` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLCallGroups_callgroupmember` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLCallGroups_callgroupmemberpending`
+--
+
+DROP TABLE IF EXISTS `MHLCallGroups_callgroupmemberpending`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLCallGroups_callgroupmemberpending` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `call_group_id` int(11) DEFAULT NULL,
+  `practice_id` int(11) DEFAULT NULL,
+  `from_user_id` int(11) NOT NULL,
+  `to_user_id` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `resent_time` datetime DEFAULT NULL,
+  `accept_status` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLCallGroups_callgroupmemberpending`
+--
+
+LOCK TABLES `MHLCallGroups_callgroupmemberpending` WRITE;
+/*!40000 ALTER TABLE `MHLCallGroups_callgroupmemberpending` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLCallGroups_callgroupmemberpending` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLCallGroups_specialty`
+--
+
+DROP TABLE IF EXISTS `MHLCallGroups_specialty`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLCallGroups_specialty` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `practice_location_id` int(11) NOT NULL,
+  `number_selection` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `MHLCallGroups_specialty_366c0f3e` (`practice_location_id`),
+  CONSTRAINT `practice_location_id_refs_id_7b190ed3` FOREIGN KEY (`practice_location_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLCallGroups_specialty`
+--
+
+LOCK TABLES `MHLCallGroups_specialty` WRITE;
+/*!40000 ALTER TABLE `MHLCallGroups_specialty` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLCallGroups_specialty` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLCallGroups_specialty_call_groups`
+--
+
+DROP TABLE IF EXISTS `MHLCallGroups_specialty_call_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLCallGroups_specialty_call_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `specialty_id` int(11) NOT NULL,
+  `callgroup_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `specialty_id` (`specialty_id`,`callgroup_id`),
+  KEY `callgroup_id_refs_id_18a4a044` (`callgroup_id`),
+  CONSTRAINT `callgroup_id_refs_id_18a4a044` FOREIGN KEY (`callgroup_id`) REFERENCES `MHLCallGroups_callgroup` (`id`),
+  CONSTRAINT `specialty_id_refs_id_94e355d` FOREIGN KEY (`specialty_id`) REFERENCES `MHLCallGroups_specialty` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLCallGroups_specialty_call_groups`
+--
+
+LOCK TABLES `MHLCallGroups_specialty_call_groups` WRITE;
+/*!40000 ALTER TABLE `MHLCallGroups_specialty_call_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLCallGroups_specialty_call_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLFavorite_favorite`
+--
+
+DROP TABLE IF EXISTS `MHLFavorite_favorite`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLFavorite_favorite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `object_type_id` int(11) NOT NULL,
+  `object_id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `object_type_id` (`object_type_id`,`object_id`,`owner_id`),
+  KEY `owner_id_refs_user_ptr_id_e8884dd6` (`owner_id`),
+  CONSTRAINT `owner_id_refs_user_ptr_id_e8884dd6` FOREIGN KEY (`owner_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`),
+  CONSTRAINT `object_type_id_refs_id_ffc11cb9` FOREIGN KEY (`object_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLFavorite_favorite`
+--
+
+LOCK TABLES `MHLFavorite_favorite` WRITE;
+/*!40000 ALTER TABLE `MHLFavorite_favorite` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLFavorite_favorite` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLGroups_mhlgroup`
+--
+
+DROP TABLE IF EXISTS `MHLGroups_mhlgroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLGroups_mhlgroup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLGroups_mhlgroup`
+--
+
+LOCK TABLES `MHLGroups_mhlgroup` WRITE;
+/*!40000 ALTER TABLE `MHLGroups_mhlgroup` DISABLE KEYS */;
+INSERT INTO `MHLGroups_mhlgroup` VALUES (7,'Atherton Neurology, Menlo Park, CA'),(3,'California Cancer Care'),(6,'Cardiovascular Medicine - Redwood City'),(16,'CEP - Sequoia ER - Redwood City, CA'),(14,'Digestive Care Medical Center - San Carlos CA'),(1,'Endovascular Surgery - San Jose, CA'),(4,'Joint Options - Redwood City, CA'),(13,'O\'Holleran and O\'Holleran MDs '),(19,'PAMF Nephrology'),(11,'Peninsula Gastroenterology Medical Group'),(10,'Peninsula Urology'),(21,'Redwood City Women\'s Health'),(9,'Redwood Pulmonary Medical Associates, Redwood City, CA'),(25,'Santa Cruz Pulmonary Medical Group'),(18,'Sequoia Anesth. Consultants, Redwood City,CA'),(2,'Sequoia Hospitalists - Redwood City'),(17,'Sequoia OB/GYN, Redwood City, CA'),(20,'Sequoia Orthopedic Group'),(15,'Sequoia Radiation Oncology - Redwood City, CA'),(12,'Sequoia Radiologists'),(5,'Silicon Valley Cardiology'),(22,'Stanford Cancer Center'),(23,'Strong Orthopedics'),(24,'The Village Doctor'),(8,'Valley Medical Oncology Consultants - Redwood City');
+/*!40000 ALTER TABLE `MHLGroups_mhlgroup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLGroups_mhlgroupmember`
+--
+
+DROP TABLE IF EXISTS `MHLGroups_mhlgroupmember`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLGroups_mhlgroupmember` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `join_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`group_id`),
+  KEY `MHLGroups_mhlgroupmember_user_id` (`user_id`),
+  KEY `MHLGroups_mhlgroupmember_group_id` (`group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLGroups_mhlgroupmember`
+--
+
+LOCK TABLES `MHLGroups_mhlgroupmember` WRITE;
+/*!40000 ALTER TABLE `MHLGroups_mhlgroupmember` DISABLE KEYS */;
+INSERT INTO `MHLGroups_mhlgroupmember` VALUES (1,2,2,'2009-10-21 15:05:31'),(3,27,2,'2009-11-17 21:38:23'),(4,7,3,'2009-11-12 19:53:44'),(5,5,4,'2009-11-12 19:54:11'),(6,6,4,'2009-11-12 19:54:11'),(7,10,2,'2009-11-13 12:43:29'),(8,11,8,'2009-11-13 16:24:36'),(9,12,8,'2009-11-13 16:30:57'),(10,13,2,'2009-11-13 17:21:47'),(11,14,7,'2009-11-13 17:59:35'),(12,15,6,'2009-11-13 15:17:03'),(13,17,2,'2009-11-14 00:27:29'),(14,20,2,'2009-11-16 14:15:13'),(15,19,10,'2009-11-16 14:23:35'),(16,21,5,'2009-11-16 18:08:30'),(17,22,5,'2009-11-16 21:21:33'),(18,23,11,'2009-11-16 18:27:54'),(19,25,12,'2009-11-16 21:43:10'),(20,28,11,'2009-11-17 21:46:03'),(21,30,9,'2009-11-18 09:20:41'),(22,32,12,'2009-11-18 09:48:33'),(23,33,5,'2009-11-18 06:52:25'),(25,34,13,'2009-11-18 21:20:53'),(26,36,12,'2009-11-18 21:36:39'),(27,38,9,'2009-11-18 18:54:59'),(28,39,5,'2009-11-19 08:06:51'),(29,40,5,'2009-11-19 11:12:55'),(30,41,5,'2009-11-19 08:18:54'),(31,42,2,'2009-11-20 12:55:40'),(32,43,6,'2009-11-20 13:03:56'),(33,46,7,'2009-11-26 18:41:50'),(34,47,9,'2009-11-26 18:46:44'),(35,49,14,'2009-11-26 18:58:27'),(36,50,11,'2009-11-26 19:03:03'),(37,51,10,'2009-11-26 19:06:39'),(38,54,6,'2009-11-28 20:06:45'),(39,57,3,'2009-11-30 08:02:38'),(40,58,13,'2009-11-30 08:08:02'),(41,59,5,'2009-11-30 08:13:37'),(42,60,14,'2009-12-02 21:41:04'),(44,61,7,'2009-12-06 19:32:35'),(45,63,15,'2009-12-10 23:24:48'),(46,64,16,'2009-12-10 20:34:02'),(48,65,17,'2010-01-29 10:07:41'),(49,68,17,'2010-01-29 10:07:41'),(50,69,3,'2010-02-02 18:49:52'),(51,70,18,'2010-02-02 19:01:25'),(52,71,16,'2010-02-02 19:12:27'),(53,74,5,'2010-02-10 18:27:35'),(54,75,6,'2010-02-10 18:32:49'),(55,76,11,'2010-03-01 07:20:38'),(56,77,19,'2010-03-01 07:27:01'),(57,48,20,'2010-03-02 15:49:37'),(58,79,20,'2010-03-02 15:54:28'),(59,66,21,'2010-03-02 15:58:18'),(60,80,21,'2010-03-02 16:01:05'),(61,81,5,'2010-03-05 11:58:24'),(62,84,9,'2010-03-07 09:42:56'),(63,86,22,'2010-03-07 19:56:34'),(64,87,19,'2010-03-08 22:35:45'),(65,88,19,'2010-03-08 22:42:03'),(66,92,23,'2010-03-26 07:24:09'),(67,95,17,'2010-03-30 15:25:12'),(68,96,3,'2010-04-01 08:01:32'),(69,97,24,'2010-04-02 10:15:00'),(70,98,24,'2010-04-02 10:15:00'),(71,8,25,'2010-04-08 20:33:42');
+/*!40000 ALTER TABLE `MHLGroups_mhlgroupmember` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_accessnumber`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_accessnumber`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_accessnumber` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practice_id` int(11) NOT NULL,
+  `description` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `practice_id_refs_id_cb985732` (`practice_id`),
+  CONSTRAINT `practice_id_refs_id_cb985732` FOREIGN KEY (`practice_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_accessnumber`
+--
+
+LOCK TABLES `MHLPractices_accessnumber` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_accessnumber` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_accessnumber` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_accountactivecode`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_accountactivecode`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_accountactivecode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sender` int(11) NOT NULL,
+  `recipient` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `userType` int(11) NOT NULL,
+  `requestTimestamp` datetime NOT NULL,
+  `practice_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_accountactivecode`
+--
+
+LOCK TABLES `MHLPractices_accountactivecode` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_accountactivecode` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_accountactivecode` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_log_association`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_log_association`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_log_association` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `association_id` int(11) NOT NULL,
+  `from_user_id` int(11) NOT NULL,
+  `to_user_id` int(11) NOT NULL,
+  `practice_location_id` int(11) NOT NULL,
+  `action_user_id` int(11) NOT NULL,
+  `action` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `MHLPractices_log_association_8b4ff41f` (`from_user_id`),
+  KEY `MHLPractices_log_association_ceab885c` (`to_user_id`),
+  KEY `MHLPractices_log_association_366c0f3e` (`practice_location_id`),
+  KEY `MHLPractices_log_association_26679921` (`action_user_id`),
+  CONSTRAINT `action_user_id_refs_user_ptr_id_5e1510eb` FOREIGN KEY (`action_user_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`),
+  CONSTRAINT `from_user_id_refs_user_ptr_id_5e1510eb` FOREIGN KEY (`from_user_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`),
+  CONSTRAINT `practice_location_id_refs_id_ce1bd814` FOREIGN KEY (`practice_location_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `to_user_id_refs_user_ptr_id_5e1510eb` FOREIGN KEY (`to_user_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_log_association`
+--
+
+LOCK TABLES `MHLPractices_log_association` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_log_association` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_log_association` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_log_org_association`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_log_org_association`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_log_org_association` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `association_id` int(11) NOT NULL,
+  `from_practicelocation_id` int(11) NOT NULL,
+  `to_practicelocation_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `action_user_id` int(11) NOT NULL,
+  `action` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `create_time` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `from_practicelocation_id_refs_id_5571d403` (`from_practicelocation_id`),
+  KEY `to_practicelocation_id_refs_id_5571d403` (`to_practicelocation_id`),
+  CONSTRAINT `from_practicelocation_id_refs_id_5571d403` FOREIGN KEY (`from_practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `to_practicelocation_id_refs_id_5571d403` FOREIGN KEY (`to_practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_log_org_association`
+--
+
+LOCK TABLES `MHLPractices_log_org_association` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_log_org_association` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_log_org_association` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_organizationrelationship`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_organizationrelationship`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_organizationrelationship` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `organization_id` int(11) NOT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `create_time` int(10) unsigned NOT NULL,
+  `billing_flag` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `organization_id` (`organization_id`,`parent_id`),
+  KEY `parent_id_refs_id_580b63ac` (`parent_id`),
+  CONSTRAINT `organization_id_refs_id_580b63ac` FOREIGN KEY (`organization_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `parent_id_refs_id_580b63ac` FOREIGN KEY (`parent_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_organizationrelationship`
+--
+
+LOCK TABLES `MHLPractices_organizationrelationship` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_organizationrelationship` DISABLE KEYS */;
+INSERT INTO `MHLPractices_organizationrelationship` VALUES (1,-1,NULL,1363169712,NULL),(2,1,-1,1363169712,NULL);
+/*!40000 ALTER TABLE `MHLPractices_organizationrelationship` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_organizationsetting`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_organizationsetting`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_organizationsetting` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `can_have_answering_service` tinyint(1) NOT NULL DEFAULT '0',
+  `can_be_billed` tinyint(1) NOT NULL DEFAULT '0',
+  `display_in_contact_list_tab` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_luxury_logo` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_member_organization` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_physician` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_nppa` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_medical_student` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_staff` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_manager` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_nurse` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_dietician` tinyint(1) NOT NULL DEFAULT '0',
+  `can_have_tech_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_organizationsetting`
+--
+
+LOCK TABLES `MHLPractices_organizationsetting` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_organizationsetting` DISABLE KEYS */;
+INSERT INTO `MHLPractices_organizationsetting` VALUES (-1,1,1,0,0,0,1,1,1,1,1,1,1,1,0),(1,1,1,0,0,0,1,1,1,1,1,1,1,1,0),(2,1,1,0,0,0,1,1,1,1,1,1,1,1,0),(3,1,1,0,0,0,1,1,1,1,1,1,1,1,0),(4,1,1,1,1,1,1,1,1,1,1,1,1,1,0);
+/*!40000 ALTER TABLE `MHLPractices_organizationsetting` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_organizationtype`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_organizationtype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_organizationtype` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `is_public` tinyint(1) NOT NULL DEFAULT '0',
+  `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `organization_setting_id` int(11) NOT NULL,
+  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
+  UNIQUE KEY `name` (`name`),
+  KEY `organization_setting_id_refs_id_3be3c2ea` (`organization_setting_id`),
+  CONSTRAINT `organization_setting_id_refs_id_3be3c2ea` FOREIGN KEY (`organization_setting_id`) REFERENCES `MHLPractices_organizationsetting` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_organizationtype`
+--
+
+LOCK TABLES `MHLPractices_organizationtype` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_organizationtype` DISABLE KEYS */;
+INSERT INTO `MHLPractices_organizationtype` VALUES (-1,'8fe57c2f5ede4d96bb25827c1005f7ee','System',0,'default type',-1,0),(1,'1fe57c2f5ede4d96bb25827c1005f7ee','Practice',1,'',1,0),(2,'2fe57c2f5ede4d96bb25827c1005f7ee','Group Practice',1,'',2,0),(3,'3fe57c2f5ede4d96bb25827c1005f7ee','Hospital',1,'',3,0),(4,'4fe57c2f5ede4d96bb25827c1005f7ee','Association',1,'',4,0);
+/*!40000 ALTER TABLE `MHLPractices_organizationtype` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_organizationtype_subs`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_organizationtype_subs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_organizationtype_subs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_organizationtype_id` int(11) NOT NULL,
+  `to_organizationtype_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `from_organizationtype_id` (`from_organizationtype_id`,`to_organizationtype_id`),
+  KEY `to_organizationtype_id_refs_id_45f93918` (`to_organizationtype_id`),
+  CONSTRAINT `from_organizationtype_id_refs_id_45f93918` FOREIGN KEY (`from_organizationtype_id`) REFERENCES `MHLPractices_organizationtype` (`id`),
+  CONSTRAINT `to_organizationtype_id_refs_id_45f93918` FOREIGN KEY (`to_organizationtype_id`) REFERENCES `MHLPractices_organizationtype` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_organizationtype_subs`
+--
+
+LOCK TABLES `MHLPractices_organizationtype_subs` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_organizationtype_subs` DISABLE KEYS */;
+INSERT INTO `MHLPractices_organizationtype_subs` VALUES (1,-1,1),(2,-1,2),(3,-1,3),(4,-1,4),(5,2,1),(6,3,1),(7,3,2),(8,4,4);
+/*!40000 ALTER TABLE `MHLPractices_organizationtype_subs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_pending_association`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_pending_association`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_pending_association` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_user_id` int(11) NOT NULL,
+  `to_user_id` int(11) NOT NULL,
+  `practice_location_id` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `resent_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `MHLPractices_pending_association_8b4ff41f` (`from_user_id`),
+  KEY `MHLPractices_pending_association_ceab885c` (`to_user_id`),
+  KEY `MHLPractices_pending_association_366c0f3e` (`practice_location_id`),
+  CONSTRAINT `from_user_id_refs_user_ptr_id_1c8126cc` FOREIGN KEY (`from_user_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`),
+  CONSTRAINT `practice_location_id_refs_id_1c9b820b` FOREIGN KEY (`practice_location_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `to_user_id_refs_user_ptr_id_1c8126cc` FOREIGN KEY (`to_user_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_pending_association`
+--
+
+LOCK TABLES `MHLPractices_pending_association` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_pending_association` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_pending_association` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_pending_org_association`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_pending_org_association`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_pending_org_association` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_practicelocation_id` int(11) NOT NULL,
+  `to_practicelocation_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `create_time` int(10) unsigned NOT NULL,
+  `resent_time` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `from_practicelocation_id_refs_id_d243e8c` (`from_practicelocation_id`),
+  KEY `to_practicelocation_id_refs_id_d243e8c` (`to_practicelocation_id`),
+  CONSTRAINT `from_practicelocation_id_refs_id_d243e8c` FOREIGN KEY (`from_practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `to_practicelocation_id_refs_id_d243e8c` FOREIGN KEY (`to_practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_pending_org_association`
+--
+
+LOCK TABLES `MHLPractices_pending_org_association` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_pending_org_association` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_pending_org_association` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_practiceholidays`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_practiceholidays`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_practiceholidays` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practice_location_id` int(11) NOT NULL,
+  `name` varchar(34) COLLATE utf8_unicode_ci NOT NULL,
+  `designated_day` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `MHLPractices_practiceholidays_366c0f3e` (`practice_location_id`),
+  CONSTRAINT `practice_location_id_refs_id_435c6723` FOREIGN KEY (`practice_location_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_practiceholidays`
+--
+
+LOCK TABLES `MHLPractices_practiceholidays` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_practiceholidays` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_practiceholidays` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_practicehours`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_practicehours`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_practicehours` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practice_location_id` int(11) NOT NULL,
+  `day_of_week` int(11) NOT NULL,
+  `open` time NOT NULL,
+  `close` time NOT NULL,
+  `lunch_start` time NOT NULL,
+  `lunch_duration` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `MHLPractices_practicehours_366c0f3e` (`practice_location_id`),
+  CONSTRAINT `practice_location_id_refs_id_7dbd62f4` FOREIGN KEY (`practice_location_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_practicehours`
+--
+
+LOCK TABLES `MHLPractices_practicehours` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_practicehours` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_practicehours` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_practicelocation`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_practicelocation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_practicelocation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practice_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `practice_address1` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `practice_address2` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `practice_phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `practice_city` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `practice_state` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `practice_zip` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `practice_lat` double NOT NULL,
+  `practice_longit` double NOT NULL,
+  `mdcom_phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `mdcom_phone_sid` varchar(34) COLLATE utf8_unicode_ci NOT NULL,
+  `time_zone` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `call_group_id` int(11) DEFAULT NULL,
+  `pin` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name_greeting` longtext COLLATE utf8_unicode_ci,
+  `greeting_closed` longtext COLLATE utf8_unicode_ci,
+  `greeting_lunch` longtext COLLATE utf8_unicode_ci,
+  `config_complete` tinyint(1) DEFAULT NULL,
+  `practice_photo` varchar(100) COLLATE utf8_unicode_ci DEFAULT '',
+  `skip_to_rmsg` tinyint(1) NOT NULL DEFAULT '0',
+  `gen_msg` tinyint(1) NOT NULL,
+  `backline_phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT '',
+  `logo_position` int(11) DEFAULT '0',
+  `logo_size` int(11) DEFAULT '0',
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `create_date` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `short_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT '',
+  `organization_type_id` int(11) DEFAULT NULL,
+  `organization_setting_id` int(11) DEFAULT NULL,
+  `delete_flag` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `practice_name` (`practice_name`),
+  KEY `call_group_id_refs_id_7ace645a` (`call_group_id`),
+  KEY `organization_setting_id_refs_id_641732d1` (`organization_setting_id`),
+  KEY `organization_type_id_refs_id_6ef32e00` (`organization_type_id`),
+  CONSTRAINT `call_group_id_refs_id_7ace645a` FOREIGN KEY (`call_group_id`) REFERENCES `MHLCallGroups_callgroup` (`id`),
+  CONSTRAINT `organization_setting_id_refs_id_641732d1` FOREIGN KEY (`organization_setting_id`) REFERENCES `MHLPractices_organizationsetting` (`id`),
+  CONSTRAINT `organization_type_id_refs_id_6ef32e00` FOREIGN KEY (`organization_type_id`) REFERENCES `MHLPractices_organizationtype` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_practicelocation`
+--
+
+LOCK TABLES `MHLPractices_practicelocation` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_practicelocation` DISABLE KEYS */;
+INSERT INTO `MHLPractices_practicelocation` VALUES (-1,'DC system','','','','','','',0,0,'','','',NULL,'','','','',0,'',0,1,'',0,0,NULL,'2013-01-30 15:38:06',1,'',-1,NULL,0),(1,'TestPractice1','555 Bryant St #715','','8002464411','Palo Alto','CA','94301',37.445368,-122.16076,'8002464411','asdf','America/Los_Angeles',1,'','','','',0,'',0,0,'',0,0,'','0000-00-00 00:00:00',1,'',1,NULL,0);
+/*!40000 ALTER TABLE `MHLPractices_practicelocation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_practicelocation_call_groups`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_practicelocation_call_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_practicelocation_call_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practicelocation_id` int(11) NOT NULL,
+  `callgroup_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `practicelocation_id` (`practicelocation_id`,`callgroup_id`),
+  KEY `callgroup_id_refs_id_6346189c` (`callgroup_id`),
+  CONSTRAINT `callgroup_id_refs_id_6346189c` FOREIGN KEY (`callgroup_id`) REFERENCES `MHLCallGroups_callgroup` (`id`),
+  CONSTRAINT `practicelocation_id_refs_id_7005108d` FOREIGN KEY (`practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_practicelocation_call_groups`
+--
+
+LOCK TABLES `MHLPractices_practicelocation_call_groups` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_practicelocation_call_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_practicelocation_call_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLPractices_practicelocation_member_orgs`
+--
+
+DROP TABLE IF EXISTS `MHLPractices_practicelocation_member_orgs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLPractices_practicelocation_member_orgs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_practicelocation_id` int(11) NOT NULL,
+  `to_practicelocation_id` int(11) NOT NULL,
+  `create_time` int(10) unsigned NOT NULL,
+  `billing_flag` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `from_practicelocation_id` (`from_practicelocation_id`,`to_practicelocation_id`),
+  KEY `to_practicelocation_id_refs_id_2fbacf88` (`to_practicelocation_id`),
+  CONSTRAINT `from_practicelocation_id_refs_id_2fbacf88` FOREIGN KEY (`from_practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `to_practicelocation_id_refs_id_2fbacf88` FOREIGN KEY (`to_practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLPractices_practicelocation_member_orgs`
+--
+
+LOCK TABLES `MHLPractices_practicelocation_member_orgs` WRITE;
+/*!40000 ALTER TABLE `MHLPractices_practicelocation_member_orgs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLPractices_practicelocation_member_orgs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLSites_hospital`
+--
+
+DROP TABLE IF EXISTS `MHLSites_hospital`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLSites_hospital` (
+  `site_ptr_id` int(11) NOT NULL,
+  PRIMARY KEY (`site_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLSites_hospital`
+--
+
+LOCK TABLES `MHLSites_hospital` WRITE;
+/*!40000 ALTER TABLE `MHLSites_hospital` DISABLE KEYS */;
+INSERT INTO `MHLSites_hospital` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24);
+/*!40000 ALTER TABLE `MHLSites_hospital` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLSites_site`
+--
+
+DROP TABLE IF EXISTS `MHLSites_site`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLSites_site` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `address1` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `address2` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `state` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `zip` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `lat` double DEFAULT NULL,
+  `long` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `longit` double NOT NULL,
+  `short_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLSites_site`
+--
+
+LOCK TABLES `MHLSites_site` WRITE;
+/*!40000 ALTER TABLE `MHLSites_site` DISABLE KEYS */;
+INSERT INTO `MHLSites_site` VALUES (1,'Sequoia Hospital - Redwood City','170 Alameda de Las Pulgas','','Redwood City','CA','94062-2751',37.481054,'',-122.253526,''),(2,'Dominican Hospital - Santa Cruz','1555 Soquel Dr','','Santa Cruz','CA','95065-1705',36.988343,'',-121.984168,''),(3,'Community Hospital of Los Gatos','815 Pollard Rd','','Los Gatos','CA','95032-1438',37.262111,'',-121.970083,''),(4,'Regional Medical Center of San Jose','225 N Jackson Ave','','San Jose','CA','95116-1603',37.362998,'',-121.848062,''),(5,'Good Samaritan - San Jose','2425 Samaritan Dr','','San Jose','CA','95124-3908',37.25113,'',-121.947314,''),(6,'O\'Connor Hospital - San Jose','2105 Forest Ave','','San Jose','CA','95128-1425',37.327219,'',-121.937358,''),(7,'El Camino Hospital - Mountain View','2500 Grant Rd','','Mountain View','CA','94040-4302',37.36903,'',-122.078088,''),(8,'Mills Peninsula','100 S San Mateo Dr','','San Mateo','CA','94401-3805',37.565796,'',-122.325748,''),(9,'Seton Medical Center - Daly City','1900 Sullivan Ave','','Daly City','CA','94015-2200',37.680531,'',-122.473066,''),(10,'UCSF - San Francisco','505 Parnassus Ave','','San Francisco','CA','94143-2204',37.763362,'',-122.45831,''),(11,'San Francisco General Hospital','2789 25th St, Ste 2028','','San Francisco','CA','94110-3516',37.751632,'',-122.406,''),(12,'Texas MedClinic','8341 Agora Pky','','Selma','TX','78154',29.573887,'',-98.324397,''),(13,'Scripps Memorial - Encinitas','354 Santa Fe Dr','','Encinitas','CA','92024-5142',33.036321,'',-117.284287,''),(14,'Stanford University Hospital','300 Pasteur Dr','','Stanford','CA','94305-2200',37.433258,'',-122.177365,''),(15,'Strong Memorial','601 Elmwood Ave','','Rochester','NY','14642-0001',43.124256,'',-77.623448,''),(16,'Methodist Hospital - Houston','6565 Fannin St','','Houston','TX','77030-2703',29.710258,'',-95.400222,''),(17,'Ben Taub General Hospital Houston','1504 Taub Loop','','Houston','TX','77030-1608',29.712555,'',-95.393908,''),(18,'St Luke\'s Episcopal - Houston','6620 Main St','','Houston','TX','77030-2305',29.709955,'',-95.402304,''),(19,'Texas Children\'s Hospital','6621 Fannin St','','Houston','TX','77030-2303',29.709261,'',-95.400972,''),(20,'Michael Debakey VA','2002 Holcombe Blvd','','Houston','TX','77030-4211',29.706011,'',-95.389672,''),(21,'Rochester General Hospital','1425 Portland Ave','','Rochester','NY','14621-3001',43.192152,'',-77.584583,''),(22,'Scripps Memorial La Jolla','9888 Genesee Ave','','La Jolla','CA','92037-1205',32.884957,'',-117.222779,''),(23,'Sutter Delta','3901 Lone Tree Way','','Antioch','CA','94509',37.982351,'',-121.805428,''),(24,'St Francis Memorial Hospital San Francisco','900 Hyde St','','San Francisco','CA','94109-4806',37.789232,'',-122.416929,'');
+/*!40000 ALTER TABLE `MHLSites_site` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_administrator`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_administrator`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_administrator` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_administrator`
+--
+
+LOCK TABLES `MHLUsers_administrator` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_administrator` DISABLE KEYS */;
+INSERT INTO `MHLUsers_administrator` VALUES (2,2),(1,3),(3,9);
+/*!40000 ALTER TABLE `MHLUsers_administrator` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_broker`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_broker`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_broker` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `office_address1` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_address2` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_phone` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `office_city` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_state` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `office_zip` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `office_lat` double DEFAULT NULL,
+  `office_longit` double DEFAULT NULL,
+  `pager` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pager_extension` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `pager_confirmed` tinyint(1) NOT NULL,
+  `mdcom_phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `mdcom_phone_sid` varchar(34) COLLATE utf8_unicode_ci NOT NULL,
+  `forward_other` tinyint(1) NOT NULL,
+  `forward_mobile` tinyint(1) NOT NULL,
+  `forward_office` tinyint(1) NOT NULL,
+  `forward_vmail` tinyint(1) NOT NULL,
+  `forward_voicemail` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'MO',
+  `forward_anssvc` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'VM',
+  `current_practice_id` int(11) DEFAULT NULL,
+  `status_verified` tinyint(1) DEFAULT NULL,
+  `status_verifier_id` int(11) DEFAULT NULL,
+  `clinical_clerk` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `mhlusers_broker_ibfk_1` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_broker`
+--
+
+LOCK TABLES `MHLUsers_broker` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_broker` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_broker` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_broker_licensure_states`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_broker_licensure_states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_broker_licensure_states` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `broker_id` int(11) NOT NULL,
+  `states_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `broker_id` (`broker_id`,`states_id`),
+  KEY `states_id_refs_id_1` (`states_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_broker_licensure_states`
+--
+
+LOCK TABLES `MHLUsers_broker_licensure_states` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_broker_licensure_states` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_broker_licensure_states` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_dietician`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_dietician`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_dietician` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  CONSTRAINT `user_id_refs_id_1c2a96fb` FOREIGN KEY (`user_id`) REFERENCES `MHLUsers_officestaff` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_dietician`
+--
+
+LOCK TABLES `MHLUsers_dietician` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_dietician` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_dietician` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_eventlog`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_eventlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_eventlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `event` varchar(2000) COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `staff` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `staff_type` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `sent_message` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `MHLUsers_eventlog_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_eventlog`
+--
+
+LOCK TABLES `MHLUsers_eventlog` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_eventlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_eventlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_mhluser`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_mhluser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_mhluser` (
+  `user_ptr_id` int(11) NOT NULL,
+  `gender` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `mobile_phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `address1` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `address2` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `state` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `zip` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `lat` double DEFAULT NULL,
+  `longit` double DEFAULT NULL,
+  `photo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email_confirmed` tinyint(1) NOT NULL,
+  `mobile_confirmed` tinyint(1) NOT NULL,
+  `tos_accepted` tinyint(1) NOT NULL,
+  `billing_account_accepted` tinyint(1) NOT NULL,
+  `force_pass_change` tinyint(1) NOT NULL,
+  `password_change_time` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `skill` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `time_setting` int(11) DEFAULT '0',
+  `time_zone` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `partner_creator_id` int(11) DEFAULT NULL,
+  `public_notes` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `refer_to_manager` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`user_ptr_id`),
+  UNIQUE KEY `uk_user_uuid` (`uuid`),
+  KEY `partner_creator_id_refs_id_2275a059` (`partner_creator_id`),
+  CONSTRAINT `partner_creator_id_refs_id_2275a059` FOREIGN KEY (`partner_creator_id`) REFERENCES `Partners_partner` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_mhluser`
+--
+
+LOCK TABLES `MHLUsers_mhluser` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_mhluser` DISABLE KEYS */;
+INSERT INTO `MHLUsers_mhluser` VALUES (2,'M','','8004664411','8292 Easy Bear Mews','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328dc2dab0e11e2b7ab001c425a2923',NULL,'',1),(3,'M','8004664411','8004664411','1372 Wishing Fawn Gate','Trailer 203L','Palo Alto','CA','94301',37.442994,-122.152324,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328dd87ab0e11e2b7ab001c425a2923',NULL,'',1),(4,'M','','8004664411','2221 Crystal Cider Way','','Selma','TX','78154',29.574768,-98.282016,'',1,1,0,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328ddacab0e11e2b7ab001c425a2923',NULL,'',1),(5,'M','','8004664411','6780 Lost Hills Court','','Redwood City','CA','94063',37.484668,-122.215136,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328ddcaab0e11e2b7ab001c425a2923',NULL,'',1),(6,'F','8004664411','8004664411','7820 Velvet Sky Way','','Redwood City','CA','94063',37.484668,-122.215136,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328dde6ab0e11e2b7ab001c425a2923',NULL,'',1),(7,'M','','8004664411','9832 Rocky Willow Circle','','San Mateo','CA','94402',37.551325,-122.331944,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328de03ab0e11e2b7ab001c425a2923',NULL,'',1),(8,'M','8004664411','8004664411','6663 Hidden River Vale','Floor 133','Santa Cruz','CA','95062',36.972002,-121.990579,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328de1eab0e11e2b7ab001c425a2923',NULL,'',1),(9,'M','8004664411','8004664411','5334 Green Bluff Landing','','Palo Alto','CA','94301',37.442994,-122.152324,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328de38ab0e11e2b7ab001c425a2923',NULL,'',1),(10,'M','','8004664411','6249 Indian Leaf Manor','','Redwood City','CA','94305',37.425607,-122.166471,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328de53ab0e11e2b7ab001c425a2923',NULL,'',1),(11,'M','','8004664411','4531 Dewy Shadow Grove','Lot L187','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328de6eab0e11e2b7ab001c425a2923',NULL,'',1),(12,'M','','8004664411','2975 Shady Goose Run','Lot V2','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328de89ab0e11e2b7ab001c425a2923',NULL,'',1),(13,'F','','8004664411','2413 Easy Brook Jetty','','Redwood City','CA','95043',36.506608,-121.051042,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328dea4ab0e11e2b7ab001c425a2923',NULL,'',1),(14,'F','','8004664411','7726 Amber Beacon Crest','','Redwood City','CA','95403',38.481527,-122.748765,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328debfab0e11e2b7ab001c425a2923',NULL,'',1),(15,'M','','','307 Lazy River Isle','Building 600E','Redwood City, CA','CA','94062',37.451718,-122.266912,'',1,0,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328dedaab0e11e2b7ab001c425a2923',NULL,'',1),(16,'F','','','3121 Crystal Willow Trail','','Mountain View','CA','94040',37.386298,-122.090479,'',1,0,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328def6ab0e11e2b7ab001c425a2923',NULL,'',1),(17,'M','','8004664411','3730 Misty Mountain Grove','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328df11ab0e11e2b7ab001c425a2923',NULL,'',1),(18,'M','','','1440 Middle Bluff Hollow','','Redwood City','CA','94062',37.451718,-122.266912,'',1,0,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328df2cab0e11e2b7ab001c425a2923',NULL,'',1),(19,'M','8004664411','8004664411','9825 Sunny Elk Trace','','Atherton','CA','94027',37.457724,-122.199125,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328df49ab0e11e2b7ab001c425a2923',NULL,'',1),(20,'F','','8004664411','8966 Golden Berry Pike','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328df64ab0e11e2b7ab001c425a2923',NULL,'',1),(21,'F','','8004664411','6797 Harvest Blossom Park','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328df80ab0e11e2b7ab001c425a2923',NULL,'',1),(22,'M','','8004664411','5323 Emerald Leaf Trace','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328df9bab0e11e2b7ab001c425a2923',NULL,'',1),(23,'F','8004664411','8004664411','4952 Golden Pond Vista','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328dfb6ab0e11e2b7ab001c425a2923',NULL,'',1),(24,'M','','8004664411','5115 Sleepy Island Point','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328dfd0ab0e11e2b7ab001c425a2923',NULL,'',1),(25,'M','8004664411','8004664411','6087 Lazy Panda Estates','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328dfebab0e11e2b7ab001c425a2923',NULL,'',1),(26,'M','','8004664411','1811 Golden Pony Farms','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e007ab0e11e2b7ab001c425a2923',NULL,'',1),(27,'F','8004664411','8004664411','9479 Sleepy Prairie Arbor','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e022ab0e11e2b7ab001c425a2923',NULL,'',1),(28,'M','','8004664411','2132 Umber View Gardens','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e03dab0e11e2b7ab001c425a2923',NULL,'',1),(29,'M','8004664411','8004664411','4764 Gentle Fox Ridge','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e058ab0e11e2b7ab001c425a2923',NULL,'',1),(30,'F','','8004664411','5706 Rustic Treasure Court','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e074ab0e11e2b7ab001c425a2923',NULL,'',1),(31,'F','','8004664411','9753 Old Timber Landing','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e08fab0e11e2b7ab001c425a2923',NULL,'',1),(32,'M','8004664411','8004664411','9316 Fallen Anchor Meadow','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e0aaab0e11e2b7ab001c425a2923',NULL,'',1),(33,'M','','8004664411','9163 Blue Grove Corner','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e0c5ab0e11e2b7ab001c425a2923',NULL,'',1),(34,'M','','8004664411','1694 Lazy Creek Place','','San Carlos','CA','94070',37.497558,-122.267337,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e0e0ab0e11e2b7ab001c425a2923',NULL,'',1),(35,'F','','8004664411','6159 Quiet Quail Path','','San Carlos','CA','94070',37.497558,-122.267337,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e0faab0e11e2b7ab001c425a2923',NULL,'',1),(36,'M','','8004664411','5129 Umber Timber Park','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e116ab0e11e2b7ab001c425a2923',NULL,'',1),(37,'M','','8004664411','3022 Broad Mountain Swale','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e131ab0e11e2b7ab001c425a2923',NULL,'',1),(38,'F','8004664411','8004664411','2849 Amber Rabbit Avenue','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e14cab0e11e2b7ab001c425a2923',NULL,'',1),(39,'M','','8004664411','9918 Velvet River Cove','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e167ab0e11e2b7ab001c425a2923',NULL,'',1),(40,'M','','8004664411','5460 Thunder Cider Estates','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e182ab0e11e2b7ab001c425a2923',NULL,'',1),(41,'F','','8004664411','7362 Easy View Swale','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e19dab0e11e2b7ab001c425a2923',NULL,'',1),(42,'F','','8004664411','429 Pleasant Hills View','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e1bdab0e11e2b7ab001c425a2923',NULL,'',1),(43,'M','','8004664411','8337 Stony Anchor Park','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e1d9ab0e11e2b7ab001c425a2923',NULL,'',1),(44,'M','8004664411','8004664411','9825 Honey Blossom Place','Pier 243','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e1f5ab0e11e2b7ab001c425a2923',NULL,'',1),(45,'M','','8004664411','1233 Hazy Prairie Grove','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e210ab0e11e2b7ab001c425a2923',NULL,'',1),(46,'F','','8004664411','4558 Lost Pond Knoll','','Menlo Park','CA','94054',37.454697,-122.177909,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e22bab0e11e2b7ab001c425a2923',NULL,'',1),(47,'F','','8004664411','9968 Golden River Landing','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e246ab0e11e2b7ab001c425a2923',NULL,'',1),(48,'M','','8004664411','5853 Honey Brook Grove','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e262ab0e11e2b7ab001c425a2923',NULL,'',1),(49,'M','','8004664411','8253 Wishing Pioneer Landing','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e27eab0e11e2b7ab001c425a2923',NULL,'',1),(50,'M','','8004664411','9899 Dewy Cider Path','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e299ab0e11e2b7ab001c425a2923',NULL,'',1),(51,'M','','8004664411','916 Cotton Pine Path','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e2b4ab0e11e2b7ab001c425a2923',NULL,'',1),(52,'M','','8004664411','5040 Burning Leaf Valley','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e30cab0e11e2b7ab001c425a2923',NULL,'',1),(53,'F','','8004664411','9286 Cotton Zephyr Way','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e329ab0e11e2b7ab001c425a2923',NULL,'',1),(54,'F','','8004664411','6954 Sleepy Cloud Place','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e346ab0e11e2b7ab001c425a2923',NULL,'',1),(55,'M','','8004664411','8593 Middle Berry Manor','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e361ab0e11e2b7ab001c425a2923',NULL,'',1),(56,'M','8004664411','8004664411','7054 Heather Anchor Bend','Front 161','Belmont','CA','94403',37.53331,-122.309119,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e37eab0e11e2b7ab001c425a2923',NULL,'',1),(57,'F','','8004664411','1733 Round Autumn Ridge','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e39bab0e11e2b7ab001c425a2923',NULL,'',1),(58,'M','','8004664411','5288 Grand Island View','','Redwood City','CA','94062',37.47816,-122.235679,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e3b7ab0e11e2b7ab001c425a2923',NULL,'',1),(59,'M','','8004664411','3725 Dusty Nectar Round','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e3e4ab0e11e2b7ab001c425a2923',NULL,'',1),(60,'M','','8004664411','3795 Clear Prairie Acres','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e401ab0e11e2b7ab001c425a2923',NULL,'',1),(61,'M','8004664411','8004664411','9304 Round Grove Avenue','Suite 57','Menlo Park','CA','94025',37.453596,-122.180845,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e41dab0e11e2b7ab001c425a2923',NULL,'',1),(62,'M','','8004664411','8127 Gentle Autumn Valley','','Encinitas','CA','92024',33.054177,-117.267566,'',1,1,1,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e438ab0e11e2b7ab001c425a2923',NULL,'',1),(63,'F','','8004664411','3116 Hidden Log Woods','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e453ab0e11e2b7ab001c425a2923',NULL,'',1),(64,'M','8004664411','8004664411','1707 Colonial Spring Dale','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e46eab0e11e2b7ab001c425a2923',NULL,'',1),(65,'M','','','2980 Pleasant Leaf Round','','Redwood City','CA','94062',37.451718,-122.266912,'',1,0,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e48aab0e11e2b7ab001c425a2923',NULL,'',1),(66,'M','','8004664411','8187 Lost Embers Vista','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e4a5ab0e11e2b7ab001c425a2923',NULL,'',1),(67,'M','','8004664411','724 Hidden Embers Highlands','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e4c1ab0e11e2b7ab001c425a2923',NULL,'',1),(68,'F','','8004664411','4459 Round Timber Circle','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e4ddab0e11e2b7ab001c425a2923',NULL,'',1),(69,'M','8004664411','8004664411','2059 Umber Prairie Vista','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e4f8ab0e11e2b7ab001c425a2923',NULL,'',1),(70,'M','','','935 Shady Branch Dale','','Redwood City','CA','94062',37.451718,-122.266912,'',1,0,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e514ab0e11e2b7ab001c425a2923',NULL,'',1),(71,'M','8004664411','8004664411','5979 Emerald Embers Terrace','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e52fab0e11e2b7ab001c425a2923',NULL,'',1),(72,'M','','8004664411','2663 Umber Elk Way','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e54bab0e11e2b7ab001c425a2923',NULL,'',1),(73,'M','','8004664411','8417 Quaking Robin Promenade','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e566ab0e11e2b7ab001c425a2923',NULL,'',1),(74,'M','','8004664411','8906 Misty View Highlands','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e581ab0e11e2b7ab001c425a2923',NULL,'',1),(75,'M','','8004664411','3003 Green Treasure Manor','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e59cab0e11e2b7ab001c425a2923',NULL,'',1),(76,'F','','8004664411','2438 Rustic Butterfly Valley','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e5b8ab0e11e2b7ab001c425a2923',NULL,'',1),(77,'M','','8004664411','9888 Heather Forest Trail','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e5d2ab0e11e2b7ab001c425a2923',NULL,'',1),(78,'M','','8004664411','1097 Indian Goose Farms','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e5f0ab0e11e2b7ab001c425a2923',NULL,'',1),(79,'F','','8004664411','540 Cotton Forest Place','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e60bab0e11e2b7ab001c425a2923',NULL,'',1),(80,'F','','','2826 Noble Rabbit Point','','Redwood City','CA','94062',37.451718,-122.266912,'',1,0,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e626ab0e11e2b7ab001c425a2923',NULL,'',1),(81,'M','','8004664411','1811 Quiet Butterfly Acres','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e648ab0e11e2b7ab001c425a2923',NULL,'',1),(83,'M','','8004664411','6724 Stony Goose Chase','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e665ab0e11e2b7ab001c425a2923',NULL,'',1),(84,'F','','8004664411','7713 Quiet Autumn Ledge','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e682ab0e11e2b7ab001c425a2923',NULL,'',1),(85,'M','','','1997 Round Oak Acres','','Redwood City','CA','94061',37.462897,-122.232026,'',1,0,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e69eab0e11e2b7ab001c425a2923',NULL,'',1),(86,'M','','8004664411','8404 Gentle Bear Circle','','Stanford','CA','94305',37.425607,-122.166471,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e6b9ab0e11e2b7ab001c425a2923',NULL,'',1),(87,'M','8004664411','8004664411','5137 Cinder Branch Dale','','Palo Alto','CA','94304',37.433167,-122.17383,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e6d5ab0e11e2b7ab001c425a2923',NULL,'',1),(88,'M','','8004664411','5538 Stony Rabbit Grove','','Palo Alto','CA','94305',37.425607,-122.166471,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e6f1ab0e11e2b7ab001c425a2923',NULL,'',1),(92,'M','','','9100 Quiet Brook Meadow','','Rochester','NY','14642',43.1555,-77.616033,'',1,0,0,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e70dab0e11e2b7ab001c425a2923',NULL,'',1),(94,'F','8004664411','8004664411','4281 Cotton Prairie Round','Office 311','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e72aab0e11e2b7ab001c425a2923',NULL,'',1),(95,'F','','8004664411','9978 Golden Hickory Gate','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e745ab0e11e2b7ab001c425a2923',NULL,'',1),(96,'F','','8004664411','9928 Blue River Manor','','Redwood City','CA','94062',37.451718,-122.266912,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e760ab0e11e2b7ab001c425a2923',NULL,'',1),(97,'F','','8004664411','2682 Round Dale Terrace','','Woodside','CA','94062-2443',37.429031,-122.252143,'',1,1,0,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e77cab0e11e2b7ab001c425a2923',NULL,'',1),(98,'','','8004664411','6798 Round Bear Mews','','Woodside','CA','94062-2443',37.429031,-122.252143,'',1,1,0,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e798ab0e11e2b7ab001c425a2923',NULL,'',1),(99,'F','','8004664411','6517 Rustic Gate Pike','','Woodside','CA','94028-7928',37.380201,-122.194742,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e7b4ab0e11e2b7ab001c425a2923',NULL,'',1),(100,'M','','8004664411','9833 Sleepy Rise Estates','','Redwood City','CA','94062-2751',37.481054,-122.253526,'',1,1,0,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e7d0ab0e11e2b7ab001c425a2923',NULL,'',1),(101,'M','','8004664411','179 Amber Butterfly Ridge','','Redwood City','CA','94062-2751',37.481054,-122.253526,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e7ecab0e11e2b7ab001c425a2923',NULL,'',1),(102,'F','','8004664411','32 Colonial Bluff View','','Houston','TX','77030',29.707148,-95.400551,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e807ab0e11e2b7ab001c425a2923',NULL,'',1),(103,'F','','8004664411','2585 Cotton Grove Bend','','Redwood City','CA','94062-2751',37.481054,-122.253526,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e823ab0e11e2b7ab001c425a2923',NULL,'',1),(104,'M','','8004664411','6564 Lost Lagoon Chase','','Houston','TX','77030-2305',29.709955,-95.402304,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e83eab0e11e2b7ab001c425a2923',NULL,'',1),(106,'F','','8004664411','7904 Burning Bear Run','','Houston','TX','77030-2303',29.709261,-95.400972,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e85aab0e11e2b7ab001c425a2923',NULL,'',1),(107,'F','','8004664411','2508 Heather Pioneer Orchard','','Houston','TX','77030-1608',29.712555,-95.393908,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e876ab0e11e2b7ab001c425a2923',NULL,'',1),(108,'M','','8004664411','907 Misty Bluff Chase','','Houston','TX','77030-1608',29.712555,-95.393908,'',1,1,1,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e891ab0e11e2b7ab001c425a2923',NULL,'',1),(109,'F','','8004664411','3256 Burning Pine Path','','Houston','TX','77030-2703',29.710258,-95.400222,'',1,1,1,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e8adab0e11e2b7ab001c425a2923',NULL,'',1),(110,'F','','8004664411','6598 Indian Deer Cove','','Houston','TX','77030-1608',29.712555,-95.393908,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e8c8ab0e11e2b7ab001c425a2923',NULL,'',1),(111,'F','','8004664411','7895 Lost Shadow Swale','','Redwood City','CA','94062-2751',37.481054,-122.253526,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e8e5ab0e11e2b7ab001c425a2923',NULL,'',1),(112,'F','','8004664411','420 Dewy Brook Ledge','','Houston','TX','77030-2303',29.709261,-95.400972,'',1,1,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e900ab0e11e2b7ab001c425a2923',NULL,'',1),(113,'F','','8004664411','7271 Rustic Leaf Valley','','Houston','TX','77030-1608',29.712555,-95.393908,'',1,1,1,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e91bab0e11e2b7ab001c425a2923',NULL,'',1),(114,'F','','8004664411','792 Sleepy Willow Farms','','La Jolla','CA','92037-1205',32.884957,-117.222779,'',1,1,0,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e937ab0e11e2b7ab001c425a2923',NULL,'',1),(115,'M','','8004664411','555 Pleasant Pioneer Grove','Trailer Q615','Mountain View','CA','94040-4104',37.386298,-122.090479,'',1,1,0,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e954ab0e11e2b7ab001c425a2923',NULL,'',1),(116,'M','','8004664411','1050 Shady Pine Valley','','Houston','TX','77030-3411',29.707148,-95.400551,'',1,1,1,0,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e970ab0e11e2b7ab001c425a2923',NULL,'',1),(117,'M','','','555 Bryant St #715','','Palo Alto','CA','94301',37.445368,-122.16076,'',1,0,1,1,0,'1970-01-01 00:00:00',NULL,0,NULL,'2328e98cab0e11e2b7ab001c425a2923',NULL,'',1);
+/*!40000 ALTER TABLE `MHLUsers_mhluser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_np_pa`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_np_pa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_np_pa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_np_pa`
+--
+
+LOCK TABLES `MHLUsers_np_pa` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_np_pa` DISABLE KEYS */;
+INSERT INTO `MHLUsers_np_pa` VALUES (1,6),(2,18),(3,21),(4,30),(5,41),(6,43),(7,84),(8,101),(9,114);
+/*!40000 ALTER TABLE `MHLUsers_np_pa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_nurse`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_nurse`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_nurse` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  CONSTRAINT `user_id_refs_id_5bb31f1c` FOREIGN KEY (`user_id`) REFERENCES `MHLUsers_officestaff` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_nurse`
+--
+
+LOCK TABLES `MHLUsers_nurse` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_nurse` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_nurse` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_office_manager`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_office_manager`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_office_manager` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `practice_id` int(11) NOT NULL,
+  `manager_role` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_user_practice` (`user_id`,`practice_id`),
+  KEY `practice_id_refs_id_27d8fceb` (`practice_id`),
+  CONSTRAINT `practice_id_refs_id_27d8fceb` FOREIGN KEY (`practice_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `user_id_refs_id_39d3d8e` FOREIGN KEY (`user_id`) REFERENCES `MHLUsers_officestaff` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_office_manager`
+--
+
+LOCK TABLES `MHLUsers_office_manager` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_office_manager` DISABLE KEYS */;
+INSERT INTO `MHLUsers_office_manager` VALUES (1,1,1,1);
+/*!40000 ALTER TABLE `MHLUsers_office_manager` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_officestaff`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_officestaff`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_officestaff` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `office_address1` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_address2` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `office_city` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_state` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `office_zip` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `pager` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pager_extension` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `pager_confirmed` tinyint(1) NOT NULL,
+  `current_site_id` int(11) DEFAULT NULL,
+  `current_practice_id` int(11) DEFAULT NULL,
+  `caller_anssvc` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `MHLUsers_officestaff_403f60f` (`user_id`),
+  KEY `MHLUsers_officestaff_6fb53dfb` (`current_site_id`),
+  KEY `MHLUsers_officestaff_7287c005` (`current_practice_id`),
+  CONSTRAINT `current_practice_id_refs_id_c3364b2` FOREIGN KEY (`current_practice_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `current_site_id_refs_id_c4a40e5` FOREIGN KEY (`current_site_id`) REFERENCES `MHLSites_site` (`id`),
+  CONSTRAINT `user_id_refs_user_ptr_id_4ca93c41` FOREIGN KEY (`user_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_officestaff`
+--
+
+LOCK TABLES `MHLUsers_officestaff` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_officestaff` DISABLE KEYS */;
+INSERT INTO `MHLUsers_officestaff` VALUES (1,117,'','','','','','','','',0,NULL,1,'');
+/*!40000 ALTER TABLE `MHLUsers_officestaff` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_officestaff_practices`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_officestaff_practices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_officestaff_practices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `officestaff_id` int(11) NOT NULL,
+  `practicelocation_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `officestaff_id` (`officestaff_id`,`practicelocation_id`),
+  KEY `practicelocation_id_refs_id_251881c5` (`practicelocation_id`),
+  CONSTRAINT `officestaff_id_refs_id_68ab8b9e` FOREIGN KEY (`officestaff_id`) REFERENCES `MHLUsers_officestaff` (`id`),
+  CONSTRAINT `practicelocation_id_refs_id_251881c5` FOREIGN KEY (`practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_officestaff_practices`
+--
+
+LOCK TABLES `MHLUsers_officestaff_practices` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_officestaff_practices` DISABLE KEYS */;
+INSERT INTO `MHLUsers_officestaff_practices` VALUES (1,1,1);
+/*!40000 ALTER TABLE `MHLUsers_officestaff_practices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_officestaff_sites`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_officestaff_sites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_officestaff_sites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `officestaff_id` int(11) NOT NULL,
+  `site_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `officestaff_id` (`officestaff_id`,`site_id`),
+  KEY `site_id_refs_id_74ca7d42` (`site_id`),
+  CONSTRAINT `officestaff_id_refs_id_79f40988` FOREIGN KEY (`officestaff_id`) REFERENCES `MHLUsers_officestaff` (`id`),
+  CONSTRAINT `site_id_refs_id_74ca7d42` FOREIGN KEY (`site_id`) REFERENCES `MHLSites_site` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_officestaff_sites`
+--
+
+LOCK TABLES `MHLUsers_officestaff_sites` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_officestaff_sites` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_officestaff_sites` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_passwordresetlog`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_passwordresetlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_passwordresetlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `reset` tinyint(1) NOT NULL,
+  `resolved` tinyint(1) NOT NULL,
+  `requestor_id` int(11) DEFAULT NULL,
+  `requestor_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `request_timestamp` datetime NOT NULL,
+  `code` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `reset_ip` char(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_timestamp` datetime DEFAULT NULL,
+  `servicer_id` int(11) DEFAULT NULL,
+  `servicer_ip` char(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `resolution_timestamp` datetime DEFAULT NULL,
+  `security_answers_count` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id_refs_id_b92fcbcf` (`user_id`),
+  KEY `requestor_id_refs_id_b92fcbcf` (`requestor_id`),
+  KEY `servicer_id_refs_id_b92fcbcf` (`servicer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_passwordresetlog`
+--
+
+LOCK TABLES `MHLUsers_passwordresetlog` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_passwordresetlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_passwordresetlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_patient`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_patient`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_patient` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `room_number` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `care_type` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_patient`
+--
+
+LOCK TABLES `MHLUsers_patient` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_patient` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_patient` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_physician`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_physician`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_physician` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `specialty` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `accepting_new_patients` tinyint(1) NOT NULL,
+  `staff_type` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_physician`
+--
+
+LOCK TABLES `MHLUsers_physician` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_physician` DISABLE KEYS */;
+INSERT INTO `MHLUsers_physician` VALUES (1,2,'HO',1,'AT'),(3,4,'MP',0,'AT'),(4,5,'OS',1,'AT'),(5,7,'HE',1,'AT'),(6,8,'PL',1,'AT'),(7,11,'HE',1,'AT'),(8,12,'HE',1,'AT'),(9,10,'IM',1,'AT'),(10,13,'IM',1,'AT'),(11,14,'NU',1,'AT'),(12,15,'CM',1,'AT'),(13,16,'AN',1,'AT'),(14,17,'IM',1,'AT'),(15,19,'UR',1,'AT'),(16,20,'IM',1,'AT'),(17,22,'CM',1,'AT'),(18,23,'GA',1,'AT'),(19,24,'OP',1,'AT'),(20,25,'RA',1,'AT'),(21,26,'PL',1,'AT'),(22,9,'IM',1,'AT'),(23,27,'IM',1,'AT'),(24,28,'GA',1,'AT'),(25,29,'NE',1,'AT'),(26,31,'PL',1,'AT'),(27,32,'RA',1,'AT'),(28,33,'CH',1,'AT'),(29,34,'GS',1,'AT'),(30,35,'IM',1,'AT'),(31,36,'RA',1,'AT'),(32,37,'CT',1,'AT'),(33,38,'PL',1,'AT'),(34,39,'CH',1,'AT'),(35,40,'CH',1,'AT'),(36,42,'IM',1,'AT'),(37,44,'VS',1,'AT'),(38,45,'IM',1,'AT'),(39,46,'NU',1,'AT'),(40,47,'PL',1,'AT'),(41,48,'OS',1,'AT'),(42,49,'GA',1,'AT'),(43,50,'GA',1,'AT'),(44,51,'UR',1,'AT'),(45,52,'OG',1,'AT'),(46,53,'GS',1,'AT'),(47,54,'CH',1,'AT'),(48,55,'IM',1,'AT'),(49,56,'NE',1,'AT'),(50,57,'ON',1,'AT'),(51,58,'GS',1,'AT'),(52,59,'CH',1,'AT'),(53,60,'GA',1,'AT'),(54,3,'AC',1,'AT'),(55,61,'NU',1,'AT'),(56,62,'ER',1,'AT'),(57,63,'RO',1,'AT'),(58,64,'ER',1,'AT'),(59,65,'OG',1,'AT'),(60,66,'OG',1,'AT'),(61,67,'IM',1,'AT'),(62,68,'OG',1,'AT'),(63,69,'HE',1,'AT'),(64,70,'AN',1,'AT'),(65,71,'ER',1,'AT'),(66,72,'IM',1,'AT'),(67,73,'ID',1,'AT'),(68,74,'CM',1,'AT'),(69,75,'CM',1,'AT'),(70,76,'GA',1,'AT'),(71,77,'NE',1,'AT'),(72,78,'NU',1,'AT'),(73,79,'OS',1,'AT'),(74,80,'OG',1,'AT'),(75,81,'CH',1,'AT'),(76,83,'OP',1,'AT'),(77,85,'PR',1,'AT'),(78,87,'NE',1,'AT'),(79,88,'NE',1,'AT'),(80,86,'HE',1,'AT'),(82,92,'OS',1,'AT'),(83,94,'PL',1,'AT'),(84,95,'OG',1,'AT'),(85,96,'HE',1,'AT'),(86,97,'IM',0,'AT'),(87,98,'IM',0,'AT'),(88,99,'GO',1,'AT'),(89,100,'IR',1,'AT'),(90,102,'PD',1,''),(91,103,'NE',1,'AT'),(92,104,'',0,''),(94,106,'',0,''),(95,107,'',0,''),(96,108,'OS',0,''),(97,109,'',0,''),(98,110,'',0,''),(99,111,'OG',1,'AT'),(100,112,'',0,''),(101,113,'',0,''),(102,115,'NS',1,'AT'),(103,116,'',0,'');
+/*!40000 ALTER TABLE `MHLUsers_physician` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_physiciangroup`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_physiciangroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_physiciangroup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_physiciangroup`
+--
+
+LOCK TABLES `MHLUsers_physiciangroup` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_physiciangroup` DISABLE KEYS */;
+INSERT INTO `MHLUsers_physiciangroup` VALUES (2,'California Cancer Care'),(1,'Joint Options - Redwood City, CA');
+/*!40000 ALTER TABLE `MHLUsers_physiciangroup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_physiciangroupmembers`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_physiciangroupmembers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_physiciangroupmembers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `physician_id` int(11) NOT NULL,
+  `physician_group_id` int(11) NOT NULL,
+  `joined_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `MHLUsers_physiciangroupmembers_physician_id` (`physician_id`),
+  KEY `MHLUsers_physiciangroupmembers_physician_group_id` (`physician_group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_physiciangroupmembers`
+--
+
+LOCK TABLES `MHLUsers_physiciangroupmembers` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_physiciangroupmembers` DISABLE KEYS */;
+INSERT INTO `MHLUsers_physiciangroupmembers` VALUES (1,4,1,'2009-11-12 10:57:42');
+/*!40000 ALTER TABLE `MHLUsers_physiciangroupmembers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_provider`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_provider`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_provider` (
+  `mhluser_ptr_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `office_address1` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_address2` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_phone` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `office_city` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `office_state` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `office_zip` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `office_lat` double DEFAULT NULL,
+  `office_longit` double DEFAULT NULL,
+  `pager` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pager_extension` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `pager_confirmed` tinyint(1) NOT NULL,
+  `mdcom_phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `mdcom_phone_sid` varchar(34) COLLATE utf8_unicode_ci NOT NULL,
+  `forward_other` tinyint(1) NOT NULL,
+  `forward_mobile` tinyint(1) NOT NULL,
+  `forward_office` tinyint(1) NOT NULL,
+  `forward_vmail` tinyint(1) NOT NULL,
+  `forward_voicemail` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'MO',
+  `forward_anssvc` varchar(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'VM',
+  `current_site_id` int(11) DEFAULT NULL,
+  `current_practice_id` int(11) DEFAULT NULL,
+  `clinical_clerk` tinyint(1) NOT NULL,
+  `status_verified` tinyint(1) DEFAULT NULL,
+  `status_verifier_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`mhluser_ptr_id`),
+  KEY `MHLUsers_provider_current_site_id` (`current_site_id`),
+  KEY `MHLUsers_provider_user_id` (`user_id`),
+  KEY `MHLUsers_provider_7287c005` (`current_practice_id`),
+  CONSTRAINT `current_practice_id_refs_id_738a5196` FOREIGN KEY (`current_practice_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_provider`
+--
+
+LOCK TABLES `MHLUsers_provider` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_provider` DISABLE KEYS */;
+INSERT INTO `MHLUsers_provider` VALUES (2,2,'4712 Merry Elk Stead','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'8004664411','PN5da955d86331731b5da222524c1ca06d',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(3,3,'9062 Pleasant Bear Dale','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PNa7a5fd612c762134eac793f8fd75422f',0,1,0,0,'MO','VM',1,NULL,1,0,NULL),(4,4,'4581 Rocky Goose Cove','','','Selma','TX','78154',29.573887,-98.324397,'','',0,'','',0,1,0,0,'MO','VM',12,NULL,0,NULL,NULL),(5,5,'6545 Old Blossom Orchard','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(6,6,'5300 Gentle Autumn Crest','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(7,7,'9450 Heather Leaf Cove','Hangar 313','8004664411','Redwood City','CA','94062-2832',37.478489,-122.254935,'','',0,'8004664411','PNa8835019b6db32c230c10693d302f992',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(8,8,'3725 Sleepy Island Park','','','Santa Cruz','CA','95065-1705',36.988343,-121.984168,'','',0,'','',0,1,0,0,'MO','VM',2,NULL,0,NULL,NULL),(9,9,'5594 Heather Lake Trace','','8004664411','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PNa3a7cdd235cf453cb02da0f164d5617e',0,1,0,0,'MO','VM',1,NULL,1,0,NULL),(10,10,'6962 Golden Hickory Glen','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'8004664411','PN212740c062acb52bd0e57938ba7a93e6',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(11,11,'9866 Shady Beacon Corner','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(12,12,'911 Umber Gate Grove','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(13,13,'7523 Dusty Pioneer Glen','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(14,14,'4378 Jagged Horse Vale','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(15,15,'7975 Jagged Barn Path','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(16,16,'5305 Sleepy Nectar Round','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(17,17,'5598 Honey Horse Ridge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(18,18,'6020 Noble Robin Bend','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(19,19,'6301 Stony Spring Isle','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(20,20,'5463 Middle Blossom Farms','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(21,21,'3083 Grand Robin Nook','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(22,22,'7905 Harvest Apple Orchard','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(23,23,'5799 Clear Pond Glen','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(24,24,'9130 Little Island Gardens','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(25,25,'6838 Quiet Blossom Falls','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PN0e1a4aa41a3bbcdceed22cbeccec5edd',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(26,26,'2589 Cotton Autumn Highlands','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(27,27,'8420 Clear Timber Grove','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'8004664411','PN757d8973e1a3a677d1bc01fee17eddb2',1,0,0,0,'MO','VM',1,NULL,0,NULL,NULL),(28,28,'2984 Emerald Bluff Valley','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PNeedda8a7ce7e3a2febcf71f89edb56a2',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(29,29,'6641 Quiet View Pike','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(30,30,'4741 Noble Anchor Vale','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(31,31,'2961 Stony Rise Dell','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(32,32,'6959 Golden Gate Gardens','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PN549bebe442d91de443d28875ba479f4d',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(33,33,'9245 Rocky Lake Avenue','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(34,34,'3786 Harvest Panda Manor','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(35,35,'9390 Middle Butterfly Gate','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(36,36,'5861 Hazy Branch Gate','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(37,37,'4933 Grand Sky Point','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(38,38,'4713 Gentle Shadow Gardens','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(39,39,'4226 Little Lagoon Trace','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(40,40,'5541 Honey Forest Vista','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(41,41,'657 Emerald Embers Gardens','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(42,42,'8850 Jagged Willow Orchard','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(43,43,'1561 Cotton Deer Vale','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(44,44,'9591 Bright Quail Mews','','8004664411','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(45,45,'5302 Broad Creek View','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(46,46,'8887 Umber Panda Edge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(47,47,'9863 Sunny Shadow Edge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(48,48,'231 Blue Pond Stead','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(49,49,'6790 Velvet Goose Highlands','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(50,50,'2856 Emerald Willow Place','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(51,51,'292 Quiet Brook Court','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(52,52,'3724 Gentle Elk Canyon','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(53,53,'9489 Middle Grove Hollow','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(54,54,'5207 Cotton View Round','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(55,55,'4825 Silent Quail Ledge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(56,56,'5772 Foggy Log Vale','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(57,57,'5125 Cotton Creek Gardens','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(58,58,'1397 Quiet Apple Hollow','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(59,59,'9845 Merry Embers Acres','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(60,60,'3931 Easy Pioneer Knoll','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(61,61,'2961 Umber Willow Isle','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(62,62,'551 Clear Fawn Woods','','','Encinitas','CA','92024-5142',33.036321,-117.284287,'','',0,'','',0,1,0,0,'MO','VM',13,NULL,0,NULL,NULL),(63,63,'9430 Amber Rise Crest','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PN5c4bdd6e09d4ed6dc86e175828e954b8',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(64,64,'74 Hidden Timber Ridge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(65,65,'9553 Little Oak Place','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(66,66,'8445 Broad Spring Way','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(67,67,'1739 Bright Log Trace','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(68,68,'7408 Sunny Dale Circle','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(69,69,'5248 Umber Grove Place','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PN57d8fafdc360885ec3c19390b861b843',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(70,70,'8055 Silver Fox Way','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(71,71,'9759 Old Robin Terrace','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PN1905eade1da6a1891db26db53303dc21',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(72,72,'8210 Harvest Rise Edge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(73,73,'6764 Amber Pine Ledge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(74,74,'9714 Quaking Pine Nook','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(75,75,'9783 Shady Mountain Point','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(76,76,'5193 Velvet Embers Farms','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(77,77,'9303 Colonial Log Bank','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(78,78,'9880 Green River Bank','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(79,79,'4276 Harvest Nectar Stead','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(80,80,'3744 Tawny Willow Woods','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(81,81,'7840 Cotton Log Nook','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(83,83,'5623 Thunder Bluff Woods','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(84,84,'8922 Umber Hills Woods','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(85,85,'2222 Indian Fox Mews','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(86,86,'237 Silver Log Arbor','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(87,87,'3054 Amber Treasure Glen','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'8004664411','',1,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(88,88,'4027 Rocky Sky Glade','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(92,92,'457 Amber Anchor Ridge','','','Rochester','NY','14642-0001',43.124256,-77.623448,'','',0,'','',0,1,0,0,'MO','VM',15,NULL,0,NULL,NULL),(94,94,'4817 Little View Court','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(95,95,'6079 Velvet Oak Ledge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(96,96,'6272 Green Bear Bank','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,NULL,NULL),(97,97,'2682 Round Dale Terrace','','','Woodside','CA','94062-2443',37.429031,-122.252143,'','',0,'','',0,1,0,0,'MO','VM',NULL,NULL,0,NULL,NULL),(98,98,'6798 Round Bear Mews','','','Woodside','CA','94062-2443',37.429031,-122.252143,'','',0,'','',0,1,0,0,'MO','VM',NULL,NULL,0,NULL,NULL),(99,99,'6517 Rustic Gate Pike','','','Woodside','CA','94028-7928',37.380201,-122.194742,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,0,NULL),(100,100,'9833 Sleepy Rise Estates','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,0,NULL),(101,101,'179 Amber Butterfly Ridge','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,0,NULL),(102,102,'4249 Cotton Zephyr Ridge','','','Houston','TX','77030-2303',29.709261,-95.400972,'','',0,'8004664411','PN5021d47f40d4c0a07dadc35fda905dc4',0,1,0,0,'MO','VM',19,NULL,1,0,NULL),(103,103,'2585 Cotton Grove Bend','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'','',0,1,0,0,'MO','VM',1,NULL,0,0,NULL),(104,104,'6564 Lost Lagoon Chase','','','Houston','TX','77030-2305',29.709955,-95.402304,'','',0,'8004664411','PNeaf6f12c23f4137269cce08811552837',0,1,0,0,'MO','VM',18,NULL,1,0,NULL),(106,106,'7904 Burning Bear Run','','','Houston','TX','77030-2303',29.709261,-95.400972,'','',0,'8004664411','PN8656f4f97251bbad37e9e93481e5d93a',0,1,0,0,'MO','VM',19,NULL,1,0,NULL),(107,107,'2508 Heather Pioneer Orchard','','','Houston','TX','77030-1608',29.712555,-95.393908,'','',0,'8004664411','PNe93d44260d23d1889a583be8744aaf14',0,1,0,0,'MO','VM',17,NULL,1,0,NULL),(108,108,'907 Misty Bluff Chase','','','Houston','TX','77030-1608',29.712555,-95.393908,'','',0,'','',0,0,0,0,'MO','VM',17,NULL,1,0,NULL),(109,109,'3256 Burning Pine Path','','','Houston','TX','77030-2703',29.710258,-95.400222,'','',0,'','',0,0,0,0,'MO','VM',16,NULL,1,0,NULL),(110,110,'6598 Indian Deer Cove','','','Houston','TX','77030-1608',29.712555,-95.393908,'','',0,'8004664411','PN9f1fdb87e120d740952525b9c147a1e2',0,1,0,0,'MO','VM',17,NULL,1,0,NULL),(111,111,'7895 Lost Shadow Swale','','','Redwood City','CA','94062-2751',37.481054,-122.253526,'','',0,'8004664411','PN2f75707c03096924dd87b710945c2dff',0,0,0,0,'MO','VM',1,NULL,0,0,NULL),(112,112,'420 Dewy Brook Ledge','','','Houston','TX','77030-2303',29.709261,-95.400972,'','',0,'8004664411','PNbeba3eabd42c90ce667d7a2d9aa7e195',0,0,0,0,'MO','VM',19,NULL,1,0,NULL),(113,113,'7271 Rustic Leaf Valley','','','Houston','TX','77030-1608',29.712555,-95.393908,'','',0,'','',0,0,0,0,'MO','VM',17,NULL,1,0,NULL),(114,114,'792 Sleepy Willow Farms','','','La Jolla','CA','92037-1205',32.884957,-117.222779,'','',0,'','',0,0,0,0,'MO','VM',22,NULL,0,0,NULL),(115,115,'9219 Middle Pond Swale','Space 148P','','Mountain View','CA','94040-4104',37.36876,-122.081864,'','',0,'','',0,0,0,0,'MO','VM',NULL,NULL,0,0,NULL),(116,116,'8032 Cinder Mountain Stead','','','Houston','TX','77030-3411',29.710719,-95.396692,'','',0,'','',0,0,0,0,'MO','VM',20,NULL,1,0,NULL);
+/*!40000 ALTER TABLE `MHLUsers_provider` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_provider_licensure_states`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_provider_licensure_states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_provider_licensure_states` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `provider_id` int(11) NOT NULL,
+  `states_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `provider_id` (`provider_id`,`states_id`),
+  KEY `states_id_refs_id_575041d` (`states_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_provider_licensure_states`
+--
+
+LOCK TABLES `MHLUsers_provider_licensure_states` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_provider_licensure_states` DISABLE KEYS */;
+INSERT INTO `MHLUsers_provider_licensure_states` VALUES (109,2,4),(108,2,33),(189,3,4),(190,3,7),(188,3,9),(187,3,16),(3,4,44),(4,5,4),(5,6,4),(161,7,4),(116,8,4),(192,9,4),(11,10,4),(12,11,4),(13,12,4),(14,13,4),(15,14,4),(16,15,4),(17,16,4),(18,17,4),(19,18,4),(20,19,4),(21,20,4),(22,21,4),(111,22,4),(24,23,4),(25,24,4),(26,25,4),(27,26,4),(28,27,4),(29,28,4),(30,29,4),(31,30,4),(32,31,4),(33,32,4),(34,33,4),(35,34,4),(36,35,4),(37,36,4),(38,37,4),(39,38,4),(40,39,4),(41,40,4),(42,41,4),(44,42,4),(45,43,4),(46,44,4),(47,45,4),(48,46,4),(49,47,4),(50,48,4),(51,49,4),(52,50,4),(53,51,4),(54,52,4),(55,53,4),(56,54,4),(57,55,4),(58,56,4),(59,57,4),(60,58,4),(61,59,4),(62,60,4),(63,61,4),(64,62,4),(65,63,4),(66,64,4),(67,65,4),(68,66,4),(69,67,4),(70,68,4),(71,69,4),(72,70,4),(73,71,4),(74,72,4),(75,73,4),(76,74,4),(77,75,4),(78,76,4),(79,77,4),(80,78,4),(81,79,4),(82,80,4),(83,83,4),(84,84,4),(85,85,4),(107,86,4),(113,87,4),(88,88,4),(99,92,33),(112,94,4),(101,95,4),(106,96,4),(110,98,4),(117,99,4),(119,100,4),(121,101,4),(183,111,4),(185,113,3),(186,115,4);
+/*!40000 ALTER TABLE `MHLUsers_provider_licensure_states` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_provider_practices`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_provider_practices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_provider_practices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `provider_id` int(11) NOT NULL,
+  `practicelocation_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `provider_id` (`provider_id`,`practicelocation_id`),
+  KEY `practicelocation_id_refs_id_67d3d8cf` (`practicelocation_id`),
+  CONSTRAINT `practicelocation_id_refs_id_67d3d8cf` FOREIGN KEY (`practicelocation_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `provider_id_refs_mhluser_ptr_id_3232ca4e` FOREIGN KEY (`provider_id`) REFERENCES `MHLUsers_provider` (`mhluser_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_provider_practices`
+--
+
+LOCK TABLES `MHLUsers_provider_practices` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_provider_practices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_provider_practices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_provider_sites`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_provider_sites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_provider_sites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `provider_id` int(11) NOT NULL,
+  `site_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `provider_id` (`provider_id`,`site_id`),
+  KEY `site_id_refs_id_2b25c47b467d8d9a` (`site_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_provider_sites`
+--
+
+LOCK TABLES `MHLUsers_provider_sites` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_provider_sites` DISABLE KEYS */;
+INSERT INTO `MHLUsers_provider_sites` VALUES (337,2,1),(336,2,16),(338,2,18),(323,3,1),(7,4,12),(155,5,1),(11,6,1),(12,7,1),(96,8,1),(97,8,2),(330,9,1),(331,9,16),(332,9,17),(333,9,18),(334,9,19),(335,9,20),(146,10,1),(61,11,1),(34,12,1),(148,13,1),(19,14,1),(20,15,1),(22,16,1),(43,17,1),(24,18,1),(91,19,1),(92,19,5),(93,19,7),(144,20,1),(157,21,1),(29,22,1),(30,23,1),(31,24,1),(32,25,1),(68,26,1),(147,27,1),(164,28,1),(165,28,7),(49,29,1),(50,30,1),(51,31,1),(52,32,1),(53,33,1),(54,34,1),(55,35,1),(57,36,1),(58,37,1),(59,37,10),(60,38,1),(62,39,1),(63,40,1),(64,41,1),(145,42,1),(104,43,1),(149,44,1),(118,45,1),(71,46,1),(72,47,1),(74,48,1),(75,49,1),(76,50,1),(102,51,1),(79,52,1),(80,53,1),(81,54,1),(82,55,1),(83,56,1),(85,57,1),(86,58,1),(103,59,1),(94,60,1),(99,61,1),(100,62,13),(105,63,1),(106,64,1),(107,65,1),(108,66,1),(109,67,1),(116,68,1),(139,69,1),(141,70,1),(142,70,14),(143,71,1),(156,72,1),(151,73,1),(152,74,1),(154,75,1),(158,76,1),(159,76,7),(160,77,1),(161,77,14),(162,78,1),(166,79,1),(167,80,1),(170,81,1),(171,83,1),(172,84,1),(173,85,1),(191,86,1),(190,86,8),(192,86,14),(176,87,1),(177,87,14),(178,88,1),(179,88,14),(186,92,15),(187,94,1),(188,95,1),(189,96,1),(199,99,1),(200,100,1),(206,101,1),(207,101,7),(205,101,8),(209,102,16),(210,102,17),(211,102,18),(212,102,19),(213,102,20),(216,103,1),(223,104,16),(224,104,17),(225,104,18),(226,104,19),(227,104,20),(246,106,16),(247,106,17),(248,106,18),(249,106,19),(250,106,20),(263,107,16),(264,107,17),(265,107,18),(266,107,19),(267,107,20),(315,108,16),(316,108,17),(317,108,18),(318,108,19),(319,108,20),(273,109,16),(274,109,17),(275,109,18),(276,109,19),(277,109,20),(278,110,16),(279,110,17),(280,110,18),(281,110,19),(282,110,20),(286,111,1),(287,112,16),(288,112,17),(289,112,18),(290,112,19),(291,112,20),(310,113,16),(311,113,17),(312,113,18),(313,113,19),(314,113,20),(297,114,22),(320,115,1),(321,115,7),(322,116,20);
+/*!40000 ALTER TABLE `MHLUsers_provider_sites` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_quicksignupuser`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_quicksignupuser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_quicksignupuser` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  CONSTRAINT `user_id_refs_user_ptr_id_3284355f` FOREIGN KEY (`user_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_quicksignupuser`
+--
+
+LOCK TABLES `MHLUsers_quicksignupuser` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_quicksignupuser` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_quicksignupuser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_regional_manager`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_regional_manager`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_regional_manager` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `office_mgr_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `office_mgr_id_refs_id_fe7416bc` (`office_mgr_id`),
+  CONSTRAINT `office_mgr_id_refs_id_fe7416bc` FOREIGN KEY (`office_mgr_id`) REFERENCES `MHLUsers_office_manager` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_regional_manager`
+--
+
+LOCK TABLES `MHLUsers_regional_manager` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_regional_manager` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_regional_manager` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_securityquestions`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_securityquestions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_securityquestions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `security_question1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `security_question2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `security_question3` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `security_answer1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `security_answer2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `security_answer3` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `MHLUsers_securityquesions_403f60f` (`user_id`),
+  CONSTRAINT `user_id_refs_id_69151772` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_securityquestions`
+--
+
+LOCK TABLES `MHLUsers_securityquestions` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_securityquestions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_securityquestions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_states`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_states`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_states` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nation` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `state` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nation` (`nation`,`state`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_states`
+--
+
+LOCK TABLES `MHLUsers_states` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_states` DISABLE KEYS */;
+INSERT INTO `MHLUsers_states` VALUES (2,'US','AK'),(1,'US','AL'),(3,'US','AZ'),(4,'US','CA'),(5,'US','CO'),(6,'US','CT'),(8,'US','DC'),(7,'US','DE'),(9,'US','FL'),(10,'US','GA'),(11,'US','GU'),(12,'US','HI'),(16,'US','IA'),(13,'US','ID'),(14,'US','IL'),(15,'US','IN'),(17,'US','KS'),(18,'US','KY'),(19,'US','LA'),(22,'US','MA'),(21,'US','MD'),(20,'US','ME'),(23,'US','MI'),(24,'US','MN'),(26,'US','MO'),(25,'US','MS'),(27,'US','MT'),(34,'US','NC'),(35,'US','ND'),(28,'US','NE'),(30,'US','NH'),(31,'US','NJ'),(32,'US','NM'),(29,'US','NV'),(33,'US','NY'),(36,'US','OH'),(37,'US','OK'),(38,'US','OR'),(39,'US','PA'),(40,'US','RI'),(41,'US','SC'),(42,'US','SD'),(43,'US','TN'),(44,'US','TX'),(45,'US','UT'),(47,'US','VA'),(46,'US','VT'),(48,'US','WA'),(50,'US','WI'),(49,'US','WV'),(51,'US','WY');
+/*!40000 ALTER TABLE `MHLUsers_states` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MHLUsers_userprofile`
+--
+
+DROP TABLE IF EXISTS `MHLUsers_userprofile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MHLUsers_userprofile` (
+  `mhluser_ptr_id` int(11) NOT NULL,
+  PRIMARY KEY (`mhluser_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MHLUsers_userprofile`
+--
+
+LOCK TABLES `MHLUsers_userprofile` WRITE;
+/*!40000 ALTER TABLE `MHLUsers_userprofile` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MHLUsers_userprofile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_callbacklog`
+--
+
+DROP TABLE IF EXISTS `Messaging_callbacklog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_callbacklog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `message_id_refs_id_c99e10a7` (`message_id`),
+  CONSTRAINT `message_id_refs_id_c99e10a7` FOREIGN KEY (`message_id`) REFERENCES `Messaging_message` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_callbacklog`
+--
+
+LOCK TABLES `Messaging_callbacklog` WRITE;
+/*!40000 ALTER TABLE `Messaging_callbacklog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_callbacklog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_message`
+--
+
+DROP TABLE IF EXISTS `Messaging_message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `sender_id` int(11) DEFAULT NULL,
+  `urgent` tinyint(1) NOT NULL,
+  `draft` tinyint(1) NOT NULL,
+  `send_timestamp` int(10) unsigned NOT NULL,
+  `sender_site_id` int(11) DEFAULT NULL,
+  `subject` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `related_message_id` int(11) DEFAULT NULL,
+  `related_message_relation` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `_resolved_by_id` int(11) DEFAULT NULL,
+  `resolution_timestamp` int(10) unsigned NOT NULL,
+  `message_type` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `callback_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `vmstatus` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `thread_uuid` varchar(36) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
+  KEY `sender_id_refs_id_64bc6b2f` (`sender_id`),
+  KEY `sender_site_id_refs_id_2ea09f80` (`sender_site_id`),
+  KEY `related_message_id_refs_id_7d50de25` (`related_message_id`),
+  CONSTRAINT `related_message_id_refs_id_7d50de25` FOREIGN KEY (`related_message_id`) REFERENCES `Messaging_message` (`id`),
+  CONSTRAINT `sender_id_refs_id_64bc6b2f` FOREIGN KEY (`sender_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `sender_site_id_refs_id_2ea09f80` FOREIGN KEY (`sender_site_id`) REFERENCES `MHLSites_site` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_message`
+--
+
+LOCK TABLES `Messaging_message` WRITE;
+/*!40000 ALTER TABLE `Messaging_message` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_message_ccs`
+--
+
+DROP TABLE IF EXISTS `Messaging_message_ccs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_message_ccs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `message_id` (`message_id`,`user_id`),
+  KEY `user_id_refs_id_c94d2ff5` (`user_id`),
+  CONSTRAINT `message_id_refs_id_460f5cff` FOREIGN KEY (`message_id`) REFERENCES `Messaging_message` (`id`),
+  CONSTRAINT `user_id_refs_id_c94d2ff5` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_message_ccs`
+--
+
+LOCK TABLES `Messaging_message_ccs` WRITE;
+/*!40000 ALTER TABLE `Messaging_message_ccs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_message_ccs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_message_recipients`
+--
+
+DROP TABLE IF EXISTS `Messaging_message_recipients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_message_recipients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `message_id` (`message_id`,`user_id`),
+  KEY `user_id_refs_id_50340d5b` (`user_id`),
+  CONSTRAINT `message_id_refs_id_40620127` FOREIGN KEY (`message_id`) REFERENCES `Messaging_message` (`id`),
+  CONSTRAINT `user_id_refs_id_50340d5b` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_message_recipients`
+--
+
+LOCK TABLES `Messaging_message_recipients` WRITE;
+/*!40000 ALTER TABLE `Messaging_message_recipients` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_message_recipients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_messageactionhistory`
+--
+
+DROP TABLE IF EXISTS `Messaging_messageactionhistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_messageactionhistory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `type` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `message_id` (`message_id`,`user_id`,`type`),
+  KEY `user_id_refs_id_881ccf4` (`user_id`),
+  CONSTRAINT `message_id_refs_id_645244b0` FOREIGN KEY (`message_id`) REFERENCES `Messaging_message` (`id`),
+  CONSTRAINT `user_id_refs_id_881ccf4` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_messageactionhistory`
+--
+
+LOCK TABLES `Messaging_messageactionhistory` WRITE;
+/*!40000 ALTER TABLE `Messaging_messageactionhistory` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_messageactionhistory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_messageattachment`
+--
+
+DROP TABLE IF EXISTS `Messaging_messageattachment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_messageattachment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `filename` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `url` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `encrypted` tinyint(1) NOT NULL,
+  `content_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `encoding` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `charset` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `suffix` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `size` int(10) unsigned NOT NULL,
+  `metadata` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`),
+  KEY `message_id_refs_id_612a95dc` (`message_id`),
+  CONSTRAINT `message_id_refs_id_612a95dc` FOREIGN KEY (`message_id`) REFERENCES `Messaging_message` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_messageattachment`
+--
+
+LOCK TABLES `Messaging_messageattachment` WRITE;
+/*!40000 ALTER TABLE `Messaging_messageattachment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_messageattachment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_messageattachmentdicom`
+--
+
+DROP TABLE IF EXISTS `Messaging_messageattachmentdicom`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_messageattachmentdicom` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `attachment_id` int(11) NOT NULL,
+  `jpg_count` int(10) unsigned NOT NULL,
+  `xml_count` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `attachment_id` (`attachment_id`),
+  CONSTRAINT `attachment_id_refs_id_6a53f952` FOREIGN KEY (`attachment_id`) REFERENCES `Messaging_messageattachment` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_messageattachmentdicom`
+--
+
+LOCK TABLES `Messaging_messageattachmentdicom` WRITE;
+/*!40000 ALTER TABLE `Messaging_messageattachmentdicom` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_messageattachmentdicom` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_messagebody`
+--
+
+DROP TABLE IF EXISTS `Messaging_messagebody`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_messagebody` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `body` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `message_id_refs_id_788c3b3d` (`message_id`),
+  CONSTRAINT `message_id_refs_id_788c3b3d` FOREIGN KEY (`message_id`) REFERENCES `Messaging_message` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_messagebody`
+--
+
+LOCK TABLES `Messaging_messagebody` WRITE;
+/*!40000 ALTER TABLE `Messaging_messagebody` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_messagebody` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_messagebodyuserstatus`
+--
+
+DROP TABLE IF EXISTS `Messaging_messagebodyuserstatus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_messagebodyuserstatus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `msg_body_id` int(11) NOT NULL,
+  `read_flag` tinyint(1) NOT NULL,
+  `read_timestamp` int(10) unsigned NOT NULL,
+  `delete_flag` tinyint(1) NOT NULL,
+  `delete_timestamp` int(10) unsigned NOT NULL,
+  `resolution_flag` tinyint(1) NOT NULL,
+  `resolution_timestamp` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`msg_body_id`),
+  KEY `user_id_refs_id_85f28ac8` (`user_id`),
+  KEY `msg_body_id_refs_id_44cde74` (`msg_body_id`),
+  CONSTRAINT `msg_body_id_refs_id_44cde74` FOREIGN KEY (`msg_body_id`) REFERENCES `Messaging_messagebody` (`id`),
+  CONSTRAINT `user_id_refs_id_85f28ac8` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_messagebodyuserstatus`
+--
+
+LOCK TABLES `Messaging_messagebodyuserstatus` WRITE;
+/*!40000 ALTER TABLE `Messaging_messagebodyuserstatus` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_messagebodyuserstatus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Messaging_messagerefer`
+--
+
+DROP TABLE IF EXISTS `Messaging_messagerefer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Messaging_messagerefer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_id` int(11) NOT NULL,
+  `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `middle_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `gender` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `phone_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `alternative_phone_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `insurance_id` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `insurance_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_sendfax` tinyint(1) NOT NULL,
+  `status` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `uuid` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `refer_pdf` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `refer_jpg` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `refuse_reason` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `secondary_insurance_id` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `secondary_insurance_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tertiary_insurance_id` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tertiary_insurance_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `practice_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `messaging_messagerefer_ibfk_1` (`message_id`),
+  KEY `practicelocation_messagerefer_ibfk_1` (`practice_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Messaging_messagerefer`
+--
+
+LOCK TABLES `Messaging_messagerefer` WRITE;
+/*!40000 ALTER TABLE `Messaging_messagerefer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Messaging_messagerefer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `NumberProvisioner_numberpool`
+--
+
+DROP TABLE IF EXISTS `NumberProvisioner_numberpool`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NumberProvisioner_numberpool` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `number_sid` varchar(34) CHARACTER SET utf8 NOT NULL,
+  `area_code` varchar(3) CHARACTER SET utf8 NOT NULL,
+  `prefix` varchar(3) CHARACTER SET utf8 NOT NULL,
+  `line_number` varchar(4) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `area_code` (`area_code`,`prefix`,`line_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `NumberProvisioner_numberpool`
+--
+
+LOCK TABLES `NumberProvisioner_numberpool` WRITE;
+/*!40000 ALTER TABLE `NumberProvisioner_numberpool` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NumberProvisioner_numberpool` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Partners_partner`
+--
+
+DROP TABLE IF EXISTS `Partners_partner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Partners_partner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mhluser_id` int(11) NOT NULL,
+  `partner_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `permission` int(11) NOT NULL,
+  `token` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `api_secret` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mhluser_id` (`mhluser_id`),
+  UNIQUE KEY `partner_name` (`partner_name`),
+  CONSTRAINT `mhluser_id_refs_user_ptr_id_3778c4a7` FOREIGN KEY (`mhluser_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Partners_partner`
+--
+
+LOCK TABLES `Partners_partner` WRITE;
+/*!40000 ALTER TABLE `Partners_partner` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Partners_partner` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Partners_partneraccounts`
+--
+
+DROP TABLE IF EXISTS `Partners_partneraccounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Partners_partneraccounts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `partner_id` int(11) NOT NULL,
+  `mhluser_id` int(11) NOT NULL,
+  `joined_time` datetime NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `partner_id` (`partner_id`,`mhluser_id`),
+  KEY `mhluser_id_refs_user_ptr_id_69bdb5a9` (`mhluser_id`),
+  CONSTRAINT `mhluser_id_refs_user_ptr_id_69bdb5a9` FOREIGN KEY (`mhluser_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`),
+  CONSTRAINT `partner_id_refs_id_fbf3287` FOREIGN KEY (`partner_id`) REFERENCES `Partners_partner` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Partners_partneraccounts`
+--
+
+LOCK TABLES `Partners_partneraccounts` WRITE;
+/*!40000 ALTER TABLE `Partners_partneraccounts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Partners_partneraccounts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Partners_partnerip`
+--
+
+DROP TABLE IF EXISTS `Partners_partnerip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Partners_partnerip` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `partner_id` int(11) NOT NULL,
+  `ip_address` char(15) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `joined_time` datetime NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `partner_id_refs_id_6647046a` (`partner_id`),
+  CONSTRAINT `partner_id_refs_id_6647046a` FOREIGN KEY (`partner_id`) REFERENCES `Partners_partner` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Partners_partnerip`
+--
+
+LOCK TABLES `Partners_partnerip` WRITE;
+/*!40000 ALTER TABLE `Partners_partnerip` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Partners_partnerip` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Partners_partnerlog`
+--
+
+DROP TABLE IF EXISTS `Partners_partnerlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Partners_partnerlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `partner_id` int(11) DEFAULT NULL,
+  `mhluser_id` int(11) DEFAULT NULL,
+  `request_ip` char(15) COLLATE utf8_unicode_ci NOT NULL,
+  `request_api` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `status_code` int(11) NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `error_no` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `partner_id_refs_id_51a7012e` (`partner_id`),
+  KEY `mhluser_id_refs_user_ptr_id_3cdaaf5e` (`mhluser_id`),
+  CONSTRAINT `mhluser_id_refs_user_ptr_id_3cdaaf5e` FOREIGN KEY (`mhluser_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`),
+  CONSTRAINT `partner_id_refs_id_51a7012e` FOREIGN KEY (`partner_id`) REFERENCES `Partners_partner` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Partners_partnerlog`
+--
+
+LOCK TABLES `Partners_partnerlog` WRITE;
+/*!40000 ALTER TABLE `Partners_partnerlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Partners_partnerlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `SMS_senderlookup`
+--
+
+DROP TABLE IF EXISTS `SMS_senderlookup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SMS_senderlookup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `mapped_user_id` int(11) DEFAULT NULL,
+  `number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mapped_user_id` (`mapped_user_id`,`number`),
+  KEY `user_id_refs_user_ptr_id_ccb7f4b2` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `SMS_senderlookup`
+--
+
+LOCK TABLES `SMS_senderlookup` WRITE;
+/*!40000 ALTER TABLE `SMS_senderlookup` DISABLE KEYS */;
+/*!40000 ALTER TABLE `SMS_senderlookup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Sales_products`
+--
+
+DROP TABLE IF EXISTS `Sales_products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Sales_products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `code` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `price` decimal(20,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`),
+  UNIQUE KEY `code_2` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Sales_products`
+--
+
+LOCK TABLES `Sales_products` WRITE;
+/*!40000 ALTER TABLE `Sales_products` DISABLE KEYS */;
+INSERT INTO `Sales_products` VALUES (1,'File-Sharing','fsh_srv',50.00),(2,'Skilled Nursing Facility Messaging & Telephony','snf_msg',200.00),(3,'Set-Up Fee','set_up',50.00),(4,'Answering Service','ans_ser',55.00);
+/*!40000 ALTER TABLE `Sales_products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Sales_salesleads`
+--
+
+DROP TABLE IF EXISTS `Sales_salesleads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Sales_salesleads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practice` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `region` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `salestype` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `rep_id` int(11) DEFAULT NULL,
+  `contact` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `website` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `date_contact` date NOT NULL,
+  `date_appt` date NOT NULL,
+  `price` decimal(20,2) NOT NULL,
+  `stage` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `notes` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `address` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `date_of_billing` date DEFAULT NULL,
+  `date_of_training` date DEFAULT NULL,
+  `source` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `rep_id_refs_user_ptr_id_f204fa1` (`rep_id`),
+  CONSTRAINT `rep_id_refs_user_ptr_id_f204fa1` FOREIGN KEY (`rep_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Sales_salesleads`
+--
+
+LOCK TABLES `Sales_salesleads` WRITE;
+/*!40000 ALTER TABLE `Sales_salesleads` DISABLE KEYS */;
+INSERT INTO `Sales_salesleads` VALUES (1,'new practice 1','NorthWest','',3,'Dr. Gonzo','','gonzo@test.org','','2012-07-23','2012-07-23',355.02,'0','','',NULL,NULL,''),(2,'new practice 2','East','M',2,'Bill Blazejowski','','','','2012-07-24','2012-07-23',26555.01,'0','','','2012-07-23',NULL,''),(3,'new practice 3','South','M',71,'Dr. Bob','','','','2012-07-23','2012-07-23',100.00,'0','','',NULL,NULL,''),(4,'new practice 4','MidWest','M',2,'','408-555-1212','mj@midwest.com','','2012-07-23','2012-07-23',155.00,'0','','',NULL,NULL,''),(5,'new practice 5','','',3,'Mary Jane','415-555-1212','','','2012-07-24','2012-07-24',200.02,'0','','',NULL,NULL,''),(9,'new practice 6','SouthWest','M',2,'','','sw@medical.edu','www.medical.edu','2012-07-24','2012-07-24',100.01,'0','','',NULL,NULL,''),(16,'new practice 7','NorthEast','D',71,'Christina','','','','2012-07-24','2012-07-24',100.02,'0','','',NULL,NULL,''),(20,'new practice 8','SouthEast','M',71,'Dr. Vogel','','','','2012-07-24','2012-07-24',300.01,'0','','',NULL,NULL,'');
+/*!40000 ALTER TABLE `Sales_salesleads` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Sales_salesperson`
+--
+
+DROP TABLE IF EXISTS `Sales_salesperson`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Sales_salesperson` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Sales_salesperson`
+--
+
+LOCK TABLES `Sales_salesperson` WRITE;
+/*!40000 ALTER TABLE `Sales_salesperson` DISABLE KEYS */;
+INSERT INTO `Sales_salesperson` VALUES (1,71);
+/*!40000 ALTER TABLE `Sales_salesperson` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Sales_salesproduct`
+--
+
+DROP TABLE IF EXISTS `Sales_salesproduct`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Sales_salesproduct` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `is_active` tinyint(1) NOT NULL,
+  `lead_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `quoted_price` decimal(20,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lead_id_refs_id_57a65f7b` (`lead_id`),
+  KEY `product_id_refs_id_898f7730` (`product_id`),
+  CONSTRAINT `lead_id_refs_id_57a65f7b` FOREIGN KEY (`lead_id`) REFERENCES `Sales_salesleads` (`id`),
+  CONSTRAINT `product_id_refs_id_898f7730` FOREIGN KEY (`product_id`) REFERENCES `Sales_products` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Sales_salesproduct`
+--
+
+LOCK TABLES `Sales_salesproduct` WRITE;
+/*!40000 ALTER TABLE `Sales_salesproduct` DISABLE KEYS */;
+INSERT INTO `Sales_salesproduct` VALUES (1,1,1,1,100.00),(2,1,2,1,100.00),(3,1,3,1,100.00),(4,1,1,2,200.00),(5,1,2,2,4200.00),(6,0,3,2,200.00),(7,1,1,3,55.02),(8,1,2,3,22255.01),(9,0,3,3,55.00),(10,1,4,1,100.00),(11,0,4,2,200.00),(12,1,4,3,55.00),(13,0,5,1,100.00),(14,1,5,2,200.02),(15,0,5,3,55.00),(25,1,9,1,100.00),(26,0,9,2,200.00),(27,1,9,3,0.01),(46,1,16,1,100.02),(47,0,16,2,200.00),(48,0,16,3,55.00),(58,1,20,1,100.00),(59,1,20,2,200.00),(60,1,20,3,0.01);
+/*!40000 ALTER TABLE `Sales_salesproduct` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Scheduler_evententry`
+--
+
+DROP TABLE IF EXISTS `Scheduler_evententry`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Scheduler_evententry` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `callGroup_id` int(11) NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `startDate` datetime NOT NULL,
+  `endDate` datetime NOT NULL,
+  `eventType` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `oncallPerson_id` int(11) NOT NULL,
+  `oncallLevel` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `oncallStatus` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `creator_id` int(11) NOT NULL,
+  `creationdate` datetime NOT NULL,
+  `lastupdate` datetime NOT NULL,
+  `eventStatus` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `notifyState` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `whoCanModify` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `checkString` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `callGroup_id_refs_id_6b1d7edf` (`callGroup_id`),
+  KEY `oncallPerson_id_refs_id_b55a8f2` (`oncallPerson_id`),
+  KEY `creator_id_refs_id_b55a8f2` (`creator_id`),
+  CONSTRAINT `callGroup_id_refs_id_6b1d7edf` FOREIGN KEY (`callGroup_id`) REFERENCES `MHLCallGroups_callgroup` (`id`),
+  CONSTRAINT `creator_id_refs_id_b55a8f2` FOREIGN KEY (`creator_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `oncallPerson_id_refs_id_b55a8f2` FOREIGN KEY (`oncallPerson_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Scheduler_evententry`
+--
+
+LOCK TABLES `Scheduler_evententry` WRITE;
+/*!40000 ALTER TABLE `Scheduler_evententry` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Scheduler_evententry` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Validates_validation`
+--
+
+DROP TABLE IF EXISTS `Validates_validation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Validates_validation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `type` int(11) DEFAULT NULL,
+  `applicant` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `recipient` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `sent_time` datetime NOT NULL,
+  `validate_locked_time` datetime DEFAULT NULL,
+  `validate_success_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Validates_validation`
+--
+
+LOCK TABLES `Validates_validation` WRITE;
+/*!40000 ALTER TABLE `Validates_validation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Validates_validation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Validates_validationlog`
+--
+
+DROP TABLE IF EXISTS `Validates_validationlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Validates_validationlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `validation_id` int(11) NOT NULL,
+  `code_input` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `validate_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `validation_id_refs_id_const` (`validation_id`),
+  CONSTRAINT `validation_id_refs_id_const` FOREIGN KEY (`validation_id`) REFERENCES `Validates_validation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Validates_validationlog`
+--
+
+LOCK TABLES `Validates_validationlog` WRITE;
+/*!40000 ALTER TABLE `Validates_validationlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Validates_validationlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `analytics_click2calldailysummary`
+--
+
+DROP TABLE IF EXISTS `analytics_click2calldailysummary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `analytics_click2calldailysummary` (
+  `dateoflog` date NOT NULL,
+  `countSuccess` int(11) NOT NULL,
+  `countFailure` int(11) NOT NULL,
+  `calcdate` datetime NOT NULL,
+  PRIMARY KEY (`dateoflog`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analytics_click2calldailysummary`
+--
+
+LOCK TABLES `analytics_click2calldailysummary` WRITE;
+/*!40000 ALTER TABLE `analytics_click2calldailysummary` DISABLE KEYS */;
+INSERT INTO `analytics_click2calldailysummary` VALUES ('2010-09-16',1,0,'2010-09-29 08:24:40'),('2010-09-17',0,0,'2010-09-29 08:24:40'),('2010-09-18',0,0,'2010-09-29 08:24:40'),('2010-09-19',0,0,'2010-09-29 08:24:40'),('2010-09-20',0,0,'2010-09-29 08:24:40'),('2010-09-21',0,0,'2010-09-29 08:24:40'),('2010-09-22',0,0,'2010-09-29 08:24:40'),('2010-09-23',0,0,'2010-09-29 08:24:40'),('2010-09-24',0,0,'2010-09-29 08:24:40'),('2010-09-25',2,0,'2010-09-29 08:24:40'),('2010-09-26',1,0,'2010-09-29 08:24:40'),('2010-09-27',0,0,'2010-09-29 08:24:40'),('2010-09-28',1,0,'2010-09-29 08:24:40'),('2010-09-29',1,0,'2010-09-29 08:45:23');
+/*!40000 ALTER TABLE `analytics_click2calldailysummary` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `analytics_invitedailysummary`
+--
+
+DROP TABLE IF EXISTS `analytics_invitedailysummary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `analytics_invitedailysummary` (
+  `dateoflog` date NOT NULL,
+  `countTotal` int(11) NOT NULL,
+  `countCanceled` int(11) NOT NULL,
+  `calcdate` datetime NOT NULL,
+  PRIMARY KEY (`dateoflog`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analytics_invitedailysummary`
+--
+
+LOCK TABLES `analytics_invitedailysummary` WRITE;
+/*!40000 ALTER TABLE `analytics_invitedailysummary` DISABLE KEYS */;
+INSERT INTO `analytics_invitedailysummary` VALUES ('2010-09-23',0,0,'2010-09-29 08:31:05'),('2010-09-24',0,0,'2010-09-29 08:31:04'),('2010-09-25',0,0,'2010-09-29 08:31:04'),('2010-09-26',1,0,'2010-09-29 08:31:04'),('2010-09-27',0,0,'2010-09-29 08:31:04'),('2010-09-28',0,0,'2010-09-29 08:31:04'),('2010-09-29',0,0,'2010-09-29 08:31:04');
+/*!40000 ALTER TABLE `analytics_invitedailysummary` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `analytics_messagedailysummary`
+--
+
+DROP TABLE IF EXISTS `analytics_messagedailysummary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `analytics_messagedailysummary` (
+  `dateoflog` date NOT NULL,
+  `countSuccess` int(11) NOT NULL,
+  `countFailure` int(11) NOT NULL,
+  `calcdate` datetime NOT NULL,
+  PRIMARY KEY (`dateoflog`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analytics_messagedailysummary`
+--
+
+LOCK TABLES `analytics_messagedailysummary` WRITE;
+/*!40000 ALTER TABLE `analytics_messagedailysummary` DISABLE KEYS */;
+INSERT INTO `analytics_messagedailysummary` VALUES ('2010-09-16',0,3,'2010-09-29 08:24:40'),('2010-09-17',0,1,'2010-09-29 08:24:40'),('2010-09-18',0,0,'2010-09-29 08:24:40'),('2010-09-19',0,0,'2010-09-29 08:24:40'),('2010-09-20',0,2,'2010-09-29 08:24:40'),('2010-09-21',0,0,'2010-09-29 08:24:40'),('2010-09-22',0,0,'2010-09-29 08:24:40'),('2010-09-23',0,3,'2010-09-29 08:24:40'),('2010-09-24',0,1,'2010-09-29 08:24:40'),('2010-09-25',0,1,'2010-09-29 08:24:40'),('2010-09-26',0,1,'2010-09-29 08:24:40'),('2010-09-27',0,0,'2010-09-29 08:24:40'),('2010-09-28',0,2,'2010-09-29 08:24:40'),('2010-09-29',0,1,'2010-09-29 08:45:23');
+/*!40000 ALTER TABLE `analytics_messagedailysummary` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `analytics_pagerdailysummary`
+--
+
+DROP TABLE IF EXISTS `analytics_pagerdailysummary`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `analytics_pagerdailysummary` (
+  `dateoflog` date NOT NULL,
+  `countSuccess` int(11) NOT NULL,
+  `calcdate` datetime NOT NULL,
+  PRIMARY KEY (`dateoflog`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analytics_pagerdailysummary`
+--
+
+LOCK TABLES `analytics_pagerdailysummary` WRITE;
+/*!40000 ALTER TABLE `analytics_pagerdailysummary` DISABLE KEYS */;
+INSERT INTO `analytics_pagerdailysummary` VALUES ('2010-09-16',0,'2010-09-29 08:24:40'),('2010-09-17',0,'2010-09-29 08:24:40'),('2010-09-18',0,'2010-09-29 08:24:40'),('2010-09-19',0,'2010-09-29 08:24:40'),('2010-09-20',0,'2010-09-29 08:24:40'),('2010-09-21',0,'2010-09-29 08:24:40'),('2010-09-22',0,'2010-09-29 08:24:40'),('2010-09-23',0,'2010-09-29 08:24:40'),('2010-09-24',0,'2010-09-29 08:24:40'),('2010-09-25',0,'2010-09-29 08:24:40'),('2010-09-26',0,'2010-09-29 08:24:40'),('2010-09-27',0,'2010-09-29 08:24:40'),('2010-09-28',0,'2010-09-29 08:24:40'),('2010-09-29',0,'2010-09-29 08:45:23');
+/*!40000 ALTER TABLE `analytics_pagerdailysummary` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `analytics_salesleads`
+--
+
+DROP TABLE IF EXISTS `analytics_salesleads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `analytics_salesleads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `practice` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `salestype` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `rep` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `contact` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `website` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `date_contact` date NOT NULL,
+  `date_appt` date NOT NULL,
+  `price` decimal(20,2) NOT NULL,
+  `interest` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `notes` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `address` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `region` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analytics_salesleads`
+--
+
+LOCK TABLES `analytics_salesleads` WRITE;
+/*!40000 ALTER TABLE `analytics_salesleads` DISABLE KEYS */;
+INSERT INTO `analytics_salesleads` VALUES (1,'Generic Practice','Paying','M','Alec trebeck','Mary Hotchinks','408-555-1212','jsm@hotmail.com','www.cnn.com','2012-06-18','2012-06-18',0.00,'0','Some notes...\n','123 Main St.\nPalo Alto, CA\n','Midwest'),(2,'Drug Collection Analytics','Training','D','Bob Barker','John Doe','650-555-1212','jdoe@gmail.com','www.priceisright.com','2012-06-18','2012-06-18',0.00,'10','','','South/TX'),(3,'Crescent City research','Lead','M','Skip Douglas','Martha Stewart','','','none yet','2012-06-18','2012-06-18',0.00,'20','','','California'),(29,'Northwest Passage','Inactive','M','Marie','empty','415-555-1212','','\"none\"','2012-06-19','2012-06-19',0.00,'0','notes2','','Northwest'),(30,'new practice 5','Lead','M','Bob Newhart','Joe Montana','','','','2012-06-20','2012-06-20',0.00,'0','','','Wyoming'),(31,'new practice 6','Lead','','','','','','','2012-06-20','2012-06-20',0.00,'0','','','');
+/*!40000 ALTER TABLE `analytics_salesleads` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+INSERT INTO `auth_group` VALUES (1,'Readonly Admin'),(2,'Tech Admin');
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `group_id` (`group_id`,`permission_id`),
+  KEY `permission_id_refs_id_4de83ca7792de1` (`permission_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+INSERT INTO `auth_group_permissions` VALUES (8,1,2),(6,1,5),(9,1,8),(7,1,11),(16,1,14),(116,1,17),(117,1,20),(1,1,23),(49,1,26),(51,1,29),(86,1,32),(85,1,35),(91,1,38),(102,1,44),(99,1,47),(93,1,50),(87,1,53),(98,1,56),(100,1,59),(101,1,62),(90,1,65),(22,1,71),(21,1,74),(65,1,77),(66,1,80),(92,1,86),(20,1,92),(14,1,95),(15,1,98),(94,1,101),(89,1,104),(95,1,107),(23,1,110),(128,1,113),(129,1,116),(124,1,119),(125,1,122),(126,1,125),(127,1,128),(40,1,131),(39,1,134),(37,1,137),(108,1,140),(107,1,143),(31,1,146),(32,1,149),(10,1,152),(13,1,155),(11,1,158),(12,1,161),(120,1,164),(35,1,167),(36,1,170),(105,1,173),(19,1,179),(24,1,182),(33,1,185),(34,1,188),(38,1,191),(53,1,194),(59,1,197),(58,1,200),(57,1,203),(56,1,206),(54,1,209),(52,1,212),(60,1,215),(55,1,218),(122,1,221),(121,1,224),(123,1,227),(48,1,230),(45,1,233),(42,1,236),(41,1,239),(47,1,242),(44,1,245),(46,1,248),(43,1,251),(50,1,254),(77,1,260),(76,1,263),(84,1,266),(83,1,269),(82,1,272),(79,1,275),(72,1,278),(70,1,281),(71,1,284),(75,1,287),(78,1,290),(74,1,293),(80,1,296),(73,1,299),(96,1,304),(103,1,307),(88,1,311),(104,1,314),(97,1,317),(106,1,320),(112,1,323),(113,1,326),(114,1,329),(109,1,332),(110,1,335),(111,1,338),(118,1,341),(119,1,344),(25,1,347),(5,1,350),(2,1,353),(4,1,356),(3,1,359),(61,1,362),(64,1,365),(62,1,368),(63,1,371),(115,1,374),(130,1,377),(131,1,380),(67,1,383),(68,1,386),(69,1,389),(18,1,392),(17,1,395),(26,1,398),(27,1,401),(28,1,404),(29,1,407),(30,1,410),(132,2,4),(133,2,5),(134,2,6),(163,2,37),(165,2,38),(166,2,39),(182,2,43),(183,2,44),(184,2,45),(179,2,46),(180,2,47),(181,2,48),(170,2,49),(171,2,50),(172,2,51),(167,2,85),(168,2,86),(169,2,87),(173,2,100),(174,2,101),(175,2,102),(159,2,103),(160,2,104),(161,2,105),(176,2,106),(177,2,107),(178,2,108),(188,2,172),(189,2,173),(190,2,174),(153,2,265),(154,2,266),(155,2,267),(150,2,268),(151,2,269),(152,2,270),(147,2,271),(148,2,272),(149,2,273),(162,2,301),(164,2,302),(191,2,309),(156,2,310),(157,2,311),(158,2,312),(185,2,313),(186,2,314),(187,2,315),(135,2,382),(136,2,383),(137,2,384),(138,2,385),(139,2,386),(140,2,387),(141,2,388),(142,2,389),(143,2,390);
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_message`
+--
+
+DROP TABLE IF EXISTS `auth_message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `message` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `auth_message_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_message`
+--
+
+LOCK TABLES `auth_message` WRITE;
+/*!40000 ALTER TABLE `auth_message` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `content_type_id` (`content_type_id`,`codename`),
+  KEY `auth_permission_content_type_id` (`content_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=412 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add permission',1,'add_permission'),(2,'Can change permission',1,'change_permission'),(3,'Can delete permission',1,'delete_permission'),(4,'Can add group',2,'add_group'),(5,'Can change group',2,'change_group'),(6,'Can delete group',2,'delete_group'),(7,'Can add user',3,'add_user'),(8,'Can change user',3,'change_user'),(9,'Can delete user',3,'delete_user'),(10,'Can add message',4,'add_message'),(11,'Can change message',4,'change_message'),(12,'Can delete message',4,'delete_message'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add site',7,'add_site'),(20,'Can change site',7,'change_site'),(21,'Can delete site',7,'delete_site'),(22,'Can add log entry',8,'add_logentry'),(23,'Can change log entry',8,'change_logentry'),(24,'Can delete log entry',8,'delete_logentry'),(25,'Can add login event',9,'add_loginevent'),(26,'Can change login event',9,'change_loginevent'),(27,'Can delete login event',9,'delete_loginevent'),(28,'Can add logout event',10,'add_logoutevent'),(29,'Can change logout event',10,'change_logoutevent'),(30,'Can delete logout event',10,'delete_logoutevent'),(31,'Can add site',11,'add_site'),(32,'Can change site',11,'change_site'),(33,'Can delete site',11,'delete_site'),(34,'Can add hospital',12,'add_hospital'),(35,'Can change hospital',12,'change_hospital'),(36,'Can delete hospital',12,'delete_hospital'),(37,'Can add mhl user',13,'add_mhluser'),(38,'Can change mhl user',13,'change_mhluser'),(39,'Can delete mhl user',13,'delete_mhluser'),(43,'Can add provider',15,'add_provider'),(44,'Can change provider',15,'change_provider'),(45,'Can delete provider',15,'delete_provider'),(46,'Can add physician',16,'add_physician'),(47,'Can change physician',16,'change_physician'),(48,'Can delete physician',16,'delete_physician'),(49,'Can add nurse',17,'add_nurse'),(50,'Can change nurse',17,'change_nurse'),(51,'Can delete nurse',17,'delete_nurse'),(52,'Can add administrator',18,'add_administrator'),(53,'Can change administrator',18,'change_administrator'),(54,'Can delete administrator',18,'delete_administrator'),(55,'Can add patient',19,'add_patient'),(56,'Can change patient',19,'change_patient'),(57,'Can delete patient',19,'delete_patient'),(58,'Can add physician group',20,'add_physiciangroup'),(59,'Can change physician group',20,'change_physiciangroup'),(60,'Can delete physician group',20,'delete_physiciangroup'),(61,'Can add physician group members',21,'add_physiciangroupmembers'),(62,'Can change physician group members',21,'change_physiciangroupmembers'),(63,'Can delete physician group members',21,'delete_physiciangroupmembers'),(64,'Can add event log',22,'add_eventlog'),(65,'Can change event log',22,'change_eventlog'),(66,'Can delete event log',22,'delete_eventlog'),(70,'Can add message temp',24,'add_messagetemp'),(71,'Can change message temp',24,'change_messagetemp'),(72,'Can delete message temp',24,'delete_messagetemp'),(73,'Can add message log',25,'add_messagelog'),(74,'Can change message log',25,'change_messagelog'),(75,'Can delete message log',25,'delete_messagelog'),(76,'Can add mhl group',26,'add_mhlgroup'),(77,'Can change mhl group',26,'change_mhlgroup'),(78,'Can delete mhl group',26,'delete_mhlgroup'),(79,'Can add mhl group member',27,'add_mhlgroupmember'),(80,'Can change mhl group member',27,'change_mhlgroupmember'),(81,'Can delete mhl group member',27,'delete_mhlgroupmember'),(85,'Can add NP/PA',29,'add_np_pa'),(86,'Can change NP/PA',29,'change_np_pa'),(87,'Can delete NP/PA',29,'delete_np_pa'),(91,'Can add click2 call_ log',31,'add_click2call_log'),(92,'Can change click2 call_ log',31,'change_click2call_log'),(93,'Can delete click2 call_ log',31,'delete_click2call_log'),(94,'Can add contact',32,'add_contact'),(95,'Can change contact',32,'change_contact'),(96,'Can delete contact',32,'delete_contact'),(97,'Can add forgot password',33,'add_forgotpassword'),(98,'Can change forgot password',33,'change_forgotpassword'),(99,'Can delete forgot password',33,'delete_forgotpassword'),(100,'Can add office_ manager',34,'add_office_manager'),(101,'Can change office_ manager',34,'change_office_manager'),(102,'Can delete office_ manager',34,'delete_office_manager'),(103,'Can add dietician',35,'add_dietician'),(104,'Can change dietician',35,'change_dietician'),(105,'Can delete dietician',35,'delete_dietician'),(106,'Can add Office Staff',36,'add_officestaff'),(107,'Can change Office Staff',36,'change_officestaff'),(108,'Can delete Office Staff',36,'delete_officestaff'),(109,'Can add pager log',37,'add_pagerlog'),(110,'Can change pager log',37,'change_pagerlog'),(111,'Can delete pager log',37,'delete_pagerlog'),(112,'Can add twilio call gather test',38,'add_twiliocallgathertest'),(113,'Can change twilio call gather test',38,'change_twiliocallgathertest'),(114,'Can delete twilio call gather test',38,'delete_twiliocallgathertest'),(115,'Can add twilio record test',39,'add_twiliorecordtest'),(116,'Can change twilio record test',39,'change_twiliorecordtest'),(117,'Can delete twilio record test',39,'delete_twiliorecordtest'),(118,'Can add convergent test',40,'add_convergenttest'),(119,'Can change convergent test',40,'change_convergenttest'),(120,'Can delete convergent test',40,'delete_convergenttest'),(121,'Can add doctor com c2c test',41,'add_doctorcomc2ctest'),(122,'Can change doctor com c2c test',41,'change_doctorcomc2ctest'),(123,'Can delete doctor com c2c test',41,'delete_doctorcomc2ctest'),(124,'Can add doctor com pager test',42,'add_doctorcompagertest'),(125,'Can change doctor com pager test',42,'change_doctorcompagertest'),(126,'Can delete doctor com pager test',42,'delete_doctorcompagertest'),(127,'Can add doctor com sms test',43,'add_doctorcomsmstest'),(128,'Can change doctor com sms test',43,'change_doctorcomsmstest'),(129,'Can delete doctor com sms test',43,'delete_doctorcomsmstest'),(130,'Can add vm message',45,'add_vmmessage'),(131,'Can change vm message',45,'change_vmmessage'),(132,'Can delete vm message',45,'delete_vmmessage'),(133,'Can add vm box_ config',46,'add_vmbox_config'),(134,'Can change vm box_ config',46,'change_vmbox_config'),(135,'Can delete vm box_ config',46,'delete_vmbox_config'),(136,'Can add call log',47,'add_calllog'),(137,'Can change call log',47,'change_calllog'),(138,'Can delete call log',47,'delete_calllog'),(139,'Can add number pool',48,'add_numberpool'),(140,'Can change number pool',48,'change_numberpool'),(141,'Can delete number pool',48,'delete_numberpool'),(142,'Can add states',49,'add_states'),(143,'Can change states',49,'change_states'),(144,'Can delete states',49,'delete_states'),(145,'Can add invitation',50,'add_invitation'),(146,'Can change invitation',50,'change_invitation'),(147,'Can delete invitation',50,'delete_invitation'),(148,'Can add invitation log',51,'add_invitationlog'),(149,'Can change invitation log',51,'change_invitationlog'),(150,'Can delete invitation log',51,'delete_invitationlog'),(151,'Can add billing account',44,'add_billingaccount'),(152,'Can change billing account',44,'change_billingaccount'),(153,'Can delete billing account',44,'delete_billingaccount'),(154,'Can add minutes product',52,'add_minutesproduct'),(155,'Can change minutes product',52,'change_minutesproduct'),(156,'Can delete minutes product',52,'delete_minutesproduct'),(157,'Can add billing funds bucket',53,'add_billingfundsbucket'),(158,'Can change billing funds bucket',53,'change_billingfundsbucket'),(159,'Can delete billing funds bucket',53,'delete_billingfundsbucket'),(160,'Can add billing transaction',54,'add_billingtransaction'),(161,'Can change billing transaction',54,'change_billingtransaction'),(162,'Can delete billing transaction',54,'delete_billingtransaction'),(163,'Can add sender lookup',55,'add_senderlookup'),(164,'Can change sender lookup',55,'change_senderlookup'),(165,'Can delete sender lookup',55,'delete_senderlookup'),(166,'Can add call event',56,'add_callevent'),(167,'Can change call event',56,'change_callevent'),(168,'Can delete call event',56,'delete_callevent'),(169,'Can add call event target',57,'add_calleventtarget'),(170,'Can change call event target',57,'change_calleventtarget'),(171,'Can delete call event target',57,'delete_calleventtarget'),(172,'Can add salesperson',58,'add_salesperson'),(173,'Can change salesperson',58,'change_salesperson'),(174,'Can delete salesperson',58,'delete_salesperson'),(178,'Can add click2 call_ action log',77,'add_click2call_actionlog'),(179,'Can change click2 call_ action log',77,'change_click2call_actionlog'),(180,'Can delete click2 call_ action log',77,'delete_click2call_actionlog'),(181,'Can add site analytics',64,'add_siteanalytics'),(182,'Can change site analytics',64,'change_siteanalytics'),(183,'Can delete site analytics',64,'delete_siteanalytics'),(184,'Can add ans svc dl failure',78,'add_anssvcdlfailure'),(185,'Can change ans svc dl failure',78,'change_anssvcdlfailure'),(186,'Can delete ans svc dl failure',78,'delete_anssvcdlfailure'),(187,'Can add ans svc dl failure activity log',79,'add_anssvcdlfailureactivitylog'),(188,'Can change ans svc dl failure activity log',79,'change_anssvcdlfailureactivitylog'),(189,'Can delete ans svc dl failure activity log',79,'delete_anssvcdlfailureactivitylog'),(190,'Can add iv r_ prompt',80,'add_ivr_prompt'),(191,'Can change iv r_ prompt',80,'change_ivr_prompt'),(192,'Can delete iv r_ prompt',80,'delete_ivr_prompt'),(193,'Can add message',71,'add_message'),(194,'Can change message',71,'change_message'),(195,'Can delete message',71,'delete_message'),(196,'Can add message recipient',81,'add_messagerecipient'),(197,'Can change message recipient',81,'change_messagerecipient'),(198,'Can delete message recipient',81,'delete_messagerecipient'),(199,'Can add message cc',82,'add_messagecc'),(200,'Can change message cc',82,'change_messagecc'),(201,'Can delete message cc',82,'delete_messagecc'),(202,'Can add message body user status',72,'add_messagebodyuserstatus'),(203,'Can change message body user status',72,'change_messagebodyuserstatus'),(204,'Can delete message body user status',72,'delete_messagebodyuserstatus'),(205,'Can add message body',73,'add_messagebody'),(206,'Can change message body',73,'change_messagebody'),(207,'Can delete message body',73,'delete_messagebody'),(208,'Can add message attachment',74,'add_messageattachment'),(209,'Can change message attachment',74,'change_messageattachment'),(210,'Can delete message attachment',74,'delete_messageattachment'),(211,'Can add callback log',83,'add_callbacklog'),(212,'Can change callback log',83,'change_callbacklog'),(213,'Can delete callback log',83,'delete_callbacklog'),(214,'Can add message refer',84,'add_messagerefer'),(215,'Can change message refer',84,'change_messagerefer'),(216,'Can delete message refer',84,'delete_messagerefer'),(217,'Can add message attachment dicom',85,'add_messageattachmentdicom'),(218,'Can change message attachment dicom',85,'change_messageattachmentdicom'),(219,'Can delete message attachment dicom',85,'delete_messageattachmentdicom'),(220,'Can add speech config',86,'add_speechconfig'),(221,'Can change speech config',86,'change_speechconfig'),(222,'Can delete speech config',86,'delete_speechconfig'),(223,'Can add neospeech config',87,'add_neospeechconfig'),(224,'Can change neospeech config',87,'change_neospeechconfig'),(225,'Can delete neospeech config',87,'delete_neospeechconfig'),(226,'Can add voice clip',88,'add_voiceclip'),(227,'Can change voice clip',88,'change_voiceclip'),(228,'Can delete voice clip',88,'delete_voiceclip'),(229,'Can add secure test message',66,'add_securetestmessage'),(230,'Can change secure test message',66,'change_securetestmessage'),(231,'Can delete secure test message',66,'delete_securetestmessage'),(232,'Can add private key',67,'add_privatekey'),(233,'Can change private key',67,'change_privatekey'),(234,'Can delete private key',67,'delete_privatekey'),(235,'Can add iv r_ private key',89,'add_ivr_privatekey'),(236,'Can change iv r_ private key',89,'change_ivr_privatekey'),(237,'Can delete iv r_ private key',89,'delete_ivr_privatekey'),(238,'Can add admin private key',68,'add_adminprivatekey'),(239,'Can change admin private key',68,'change_adminprivatekey'),(240,'Can delete admin private key',68,'delete_adminprivatekey'),(241,'Can add rsa pub key',69,'add_rsapubkey'),(242,'Can change rsa pub key',69,'change_rsapubkey'),(243,'Can delete rsa pub key',69,'delete_rsapubkey'),(244,'Can add iv r_rsa pub key',90,'add_ivr_rsapubkey'),(245,'Can change iv r_rsa pub key',90,'change_ivr_rsapubkey'),(246,'Can delete iv r_rsa pub key',90,'delete_ivr_rsapubkey'),(247,'Can add rsa key pair',70,'add_rsakeypair'),(248,'Can change rsa key pair',70,'change_rsakeypair'),(249,'Can delete rsa key pair',70,'delete_rsakeypair'),(250,'Can add iv r_rsa key pair',91,'add_ivr_rsakeypair'),(251,'Can change iv r_rsa key pair',91,'change_ivr_rsakeypair'),(252,'Can delete iv r_rsa key pair',91,'delete_ivr_rsakeypair'),(253,'Can add Log File',10,'add_logfiles'),(254,'Can change Log File',10,'change_logfiles'),(255,'Can delete Log File',10,'delete_logfiles'),(259,'Can add organization type',93,'add_organizationtype'),(260,'Can change organization type',93,'change_organizationtype'),(261,'Can delete organization type',93,'delete_organizationtype'),(262,'Can add organization setting',94,'add_organizationsetting'),(263,'Can change organization setting',94,'change_organizationsetting'),(264,'Can delete organization setting',94,'delete_organizationsetting'),(265,'Can add practice location',95,'add_practicelocation'),(266,'Can change practice location',95,'change_practicelocation'),(267,'Can delete practice location',95,'delete_practicelocation'),(268,'Can add practice hours',96,'add_practicehours'),(269,'Can change practice hours',96,'change_practicehours'),(270,'Can delete practice hours',96,'delete_practicehours'),(271,'Can add practice holidays',76,'add_practiceholidays'),(272,'Can change practice holidays',76,'change_practiceholidays'),(273,'Can delete practice holidays',76,'delete_practiceholidays'),(274,'Can add pending_ association',97,'add_pending_association'),(275,'Can change pending_ association',97,'change_pending_association'),(276,'Can delete pending_ association',97,'delete_pending_association'),(277,'Can add log_ association',98,'add_log_association'),(278,'Can change log_ association',98,'change_log_association'),(279,'Can delete log_ association',98,'delete_log_association'),(280,'Can add access number',99,'add_accessnumber'),(281,'Can change access number',99,'change_accessnumber'),(282,'Can delete access number',99,'delete_accessnumber'),(283,'Can add account active code',100,'add_accountactivecode'),(284,'Can change account active code',100,'change_accountactivecode'),(285,'Can delete account active code',100,'delete_accountactivecode'),(286,'Can add organization relationship',101,'add_organizationrelationship'),(287,'Can change organization relationship',101,'change_organizationrelationship'),(288,'Can delete organization relationship',101,'delete_organizationrelationship'),(289,'Can add organization type subs',102,'add_organizationtypesubs'),(290,'Can change organization type subs',102,'change_organizationtypesubs'),(291,'Can delete organization type subs',102,'delete_organizationtypesubs'),(292,'Can add organization member orgs',103,'add_organizationmemberorgs'),(293,'Can change organization member orgs',103,'change_organizationmemberorgs'),(294,'Can delete organization member orgs',103,'delete_organizationmemberorgs'),(295,'Can add pending_ org_ association',104,'add_pending_org_association'),(296,'Can change pending_ org_ association',104,'change_pending_org_association'),(297,'Can delete pending_ org_ association',104,'delete_pending_org_association'),(298,'Can add log_ org_ association',105,'add_log_org_association'),(299,'Can change log_ org_ association',105,'change_log_org_association'),(300,'Can delete log_ org_ association',105,'delete_log_org_association'),(301,'Can use smartphone app',13,'access_smartphone'),(302,'Can transfer incoming calls',13,'can_call_transfer'),(303,'Can add Partner',106,'add_partner'),(304,'Can change Partner',106,'change_partner'),(305,'Can delete Partner',106,'delete_partner'),(306,'Can add quick signup user',107,'add_quicksignupuser'),(307,'Can change quick signup user',107,'change_quicksignupuser'),(308,'Can delete quick signup user',107,'delete_quicksignupuser'),(309,'Sales/Leads executive',58,'sales_executive'),(310,'Can add broker',108,'add_broker'),(311,'Can change broker',108,'change_broker'),(312,'Can delete broker',108,'delete_broker'),(313,'Can add Regional Manager',109,'add_regional_manager'),(314,'Can change Regional Manager',109,'change_regional_manager'),(315,'Can delete Regional Manager',109,'delete_regional_manager'),(316,'Can add password reset log',110,'add_passwordresetlog'),(317,'Can change password reset log',110,'change_passwordresetlog'),(318,'Can delete password reset log',110,'delete_passwordresetlog'),(319,'Can add security questions',111,'add_securityquestions'),(320,'Can change security questions',111,'change_securityquestions'),(321,'Can delete security questions',111,'delete_securityquestions'),(322,'Can add products',112,'add_products'),(323,'Can change products',112,'change_products'),(324,'Can delete products',112,'delete_products'),(325,'Can add sales leads',113,'add_salesleads'),(326,'Can change sales leads',113,'change_salesleads'),(327,'Can delete sales leads',113,'delete_salesleads'),(328,'Can add sales product',114,'add_salesproduct'),(329,'Can change sales product',114,'change_salesproduct'),(330,'Can delete sales product',114,'delete_salesproduct'),(331,'Can add Partner Accounts',115,'add_partneraccounts'),(332,'Can change Partner Accounts',115,'change_partneraccounts'),(333,'Can delete Partner Accounts',115,'delete_partneraccounts'),(334,'Can add Partner IP',116,'add_partnerip'),(335,'Can change Partner IP',116,'change_partnerip'),(336,'Can delete Partner IP',116,'delete_partnerip'),(337,'Can add partner log',117,'add_partnerlog'),(338,'Can change partner log',117,'change_partnerlog'),(339,'Can delete partner log',117,'delete_partnerlog'),(340,'Can add smart phone assn',118,'add_smartphoneassn'),(341,'Can change smart phone assn',118,'change_smartphoneassn'),(342,'Can delete smart phone assn',118,'delete_smartphoneassn'),(343,'Can add smart phone assn log',119,'add_smartphoneassnlog'),(344,'Can change smart phone assn log',119,'change_smartphoneassnlog'),(345,'Can delete smart phone assn log',119,'delete_smartphoneassnlog'),(346,'Can add follow ups',65,'add_followups'),(347,'Can change follow ups',65,'change_followups'),(348,'Can delete follow ups',65,'delete_followups'),(349,'Can add pager daily summary',60,'add_pagerdailysummary'),(350,'Can change pager daily summary',60,'change_pagerdailysummary'),(351,'Can delete pager daily summary',60,'delete_pagerdailysummary'),(352,'Can add click2 call daily summary',61,'add_click2calldailysummary'),(353,'Can change click2 call daily summary',61,'change_click2calldailysummary'),(354,'Can delete click2 call daily summary',61,'delete_click2calldailysummary'),(355,'Can add message daily summary',62,'add_messagedailysummary'),(356,'Can change message daily summary',62,'change_messagedailysummary'),(357,'Can delete message daily summary',62,'delete_messagedailysummary'),(358,'Can add invite daily summary',63,'add_invitedailysummary'),(359,'Can change invite daily summary',63,'change_invitedailysummary'),(360,'Can delete invite daily summary',63,'delete_invitedailysummary'),(361,'Can add call group',120,'add_callgroup'),(362,'Can change call group',120,'change_callgroup'),(363,'Can delete call group',120,'delete_callgroup'),(364,'Can add specialty',121,'add_specialty'),(365,'Can change specialty',121,'change_specialty'),(366,'Can delete specialty',121,'delete_specialty'),(367,'Can add Call Group Member',122,'add_callgroupmember'),(368,'Can change Call Group Member',122,'change_callgroupmember'),(369,'Can delete Call Group Member',122,'delete_callgroupmember'),(370,'Can add call group member pending',123,'add_callgroupmemberpending'),(371,'Can change call group member pending',123,'change_callgroupmemberpending'),(372,'Can delete call group member pending',123,'delete_callgroupmemberpending'),(373,'Can add event entry',124,'add_evententry'),(374,'Can change event entry',124,'change_evententry'),(375,'Can delete event entry',124,'delete_evententry'),(376,'Can add validation',125,'add_validation'),(377,'Can change validation',125,'change_validation'),(378,'Can delete validation',125,'delete_validation'),(379,'Can add validation log',126,'add_validationlog'),(380,'Can change validation log',126,'change_validationlog'),(381,'Can delete validation log',126,'delete_validationlog'),(382,'Can add organization',127,'add_organization'),(383,'Can change organization',127,'change_organization'),(384,'Can delete organization',127,'delete_organization'),(385,'Can add organization_ member',128,'add_organization_member'),(386,'Can change organization_ member',128,'change_organization_member'),(387,'Can delete organization_ member',128,'delete_organization_member'),(388,'Can add pending_ organization',129,'add_pending_organization'),(389,'Can change pending_ organization',129,'change_pending_organization'),(390,'Can delete pending_ organization',129,'delete_pending_organization'),(391,'Can add user vault',130,'add_uservault'),(392,'Can change user vault',130,'change_uservault'),(393,'Can delete user vault',130,'delete_uservault'),(394,'Can add payment log',131,'add_paymentlog'),(395,'Can change payment log',131,'change_paymentlog'),(396,'Can delete payment log',131,'delete_paymentlog'),(397,'Can add Account',132,'add_account'),(398,'Can change Account',132,'change_account'),(399,'Can delete Account',132,'delete_account'),(400,'Can add Account Transaction',133,'add_accounttransaction'),(401,'Can change Account Transaction',133,'change_accounttransaction'),(402,'Can delete Account Transaction',133,'delete_accounttransaction'),(403,'Can add Failed Charge Transaction',134,'add_failedtransaction'),(404,'Can change Failed Charge Transaction',134,'change_failedtransaction'),(405,'Can delete Failed Charge Transaction',134,'delete_failedtransaction'),(406,'Can add Invoice',135,'add_invoice'),(407,'Can change Invoice',135,'change_invoice'),(408,'Can delete Invoice',135,'delete_invoice'),(409,'Can add Subscription',136,'add_subscription'),(410,'Can change Subscription',136,'change_subscription'),(411,'Can delete Subscription',136,'delete_subscription');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `last_login` datetime NOT NULL,
+  `date_joined` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+INSERT INTO `auth_user` VALUES (2,'admin','Morris','Kelley','mkelley2@myhealthincorporated.com','sha1$5b287$60ca3a51a6c9a862398b1f132c21f8beee98b16b',1,1,1,'2012-11-20 12:19:58','2009-10-13 19:12:10'),(3,'jcameron3','Julian','Cameron','jcameron3@myhealthincorporated.com','sha1$8dfb6$6ae82ad1b0ed86fbad43f76a68955c177cd23799',1,1,1,'2010-09-29 15:19:28','2009-10-13 19:38:37'),(4,'emelendez4','Eric','Melendez','emelendez4@myhealthincorporated.com','sha1$00dcc$8d418bc7173f70614e1cde451808b53c87774a9f',0,1,0,'2009-10-27 18:24:44','2009-10-22 18:20:42'),(5,'tbishop5','Tim','Bishop','tbishop5@myhealthincorporated.com','sha1$46168$e38cc426e4350fb19d0298efc877621e911f5bea',0,1,0,'2009-12-14 09:33:58','2009-11-12 10:43:00'),(6,'rchambers6','Robert','Chambers','rchambers6@myhealthincorporated.com','sha1$e0f5f$af9846c4b5db5d526ef0a050d788e8358fb8da4e',0,1,0,'2009-11-26 12:10:02','2009-11-12 10:45:28'),(7,'jsavage7','Jaime','Savage','jsavage7@myhealthincorporated.com','sha1$78f40$beae8292a74f69a7568f9e4eed8bcfd08cdc2113',0,1,0,'2010-05-21 12:52:04','2009-11-12 13:58:07'),(8,'strujillo8','Seth','Trujillo','strujillo8@myhealthincorporated.com','sha1$efb84$ee4620fb139b8b43c8e92179f71a3b64b4424591',0,1,0,'2010-04-07 16:30:14','2009-11-13 11:02:52'),(9,'eeverett9','Edgar','Everett','eeverett9@myhealthincorporated.com','sha1$f1d87$e80b11bf5da57df4ee424c9e1e6b7f69835e11d0',1,1,1,'2010-09-26 10:14:06','2009-11-13 12:38:46'),(10,'lrodriquez10','Leonard','Rodriquez','lrodriquez10@myhealthincorporated.com','sha1$59011$75a33d858c51672727bbf6ae0048c28073a2d82d',0,1,0,'2010-08-16 09:28:47','2009-11-13 12:40:50'),(11,'jneal11','Jose','Neal','jneal11@myhealthincorporated.com','sha1$7d1e0$80c3ef61a58a3b7ba2d28cd5f048f7753cc9474b',0,1,0,'2009-11-13 13:22:10','2009-11-13 13:22:10'),(12,'jmcdonald12','Joshua','Mcdonald','jmcdonald12@myhealthincorporated.com','sha1$a3c29$796fe9a7acb3906d5363914ce5138498622f9f94',0,1,0,'2009-11-13 13:28:51','2009-11-13 13:28:51'),(13,'cslater13','Concetta','Slater','cslater13@myhealthincorporated.com','sha1$54de3$dac0a99c04e985e1364b4ae86a1125e4cbf3e1c9',0,1,0,'2010-05-04 17:22:54','2009-11-13 17:11:12'),(14,'wforbes14','Wendy','Forbes','wforbes14@myhealthincorporated.com','sha1$2ed99$87777cab1b1f651cbc624966487a51b8be4a8350',0,1,0,'2009-12-28 12:00:02','2009-11-13 17:48:02'),(15,'jkeller15','Jason','Keller','jkeller15@myhealthincorporated.com','sha1$f5242$827f4e93a4137d3820df14f10e92bea2f4d5907e',0,1,0,'2009-11-13 18:09:19','2009-11-13 18:09:19'),(16,'ealvarez16','Eve','Alvarez','ealvarez16@myhealthincorporated.com','sha1$d18db$1d8dd11255237761a3a3fedb390dd4e6853cbbca',0,1,0,'2009-11-13 20:35:10','2009-11-13 20:35:10'),(17,'dclayton17','Darrell','Clayton','dclayton17@myhealthincorporated.com','sha1$ce89f$633dc68282cfc301fad9b93c2f45aa6275addf2e',0,1,0,'2009-11-25 10:05:24','2009-11-13 21:25:14'),(18,'hlopez18','Harry','Lopez','hlopez18@myhealthincorporated.com','sha1$862fd$451980dcc1ab439cdd393b4093180dc1868bc3da',0,1,0,'2009-11-16 09:01:34','2009-11-16 09:01:34'),(19,'bdaniels19','Byron','Daniels','bdaniels19@myhealthincorporated.com','sha1$956ac$47582ef47ea7fd522c14a96cddee11ff0f76473b',0,1,0,'2009-12-01 07:33:40','2009-11-16 09:06:19'),(20,'msalazar20','Marla','Salazar','msalazar20@myhealthincorporated.com','sha1$0b963$31642a10d8da5862ca1c6aed2f475a7058e56f08',0,1,0,'2010-05-12 11:49:15','2009-11-16 14:12:05'),(21,'gworkman21','Geraldine','Workman','gworkman21@myhealthincorporated.com','sha1$2e353$0b745511ae84896d5a6f2419ce5d513effb470b9',0,1,0,'2010-02-16 14:47:27','2009-11-16 18:00:23'),(22,'bgregory22','Bernard','Gregory','bgregory22@myhealthincorporated.com','sha1$c257f$69a2001e163488aab39d16d17e46ba22715ef85f',0,1,0,'2010-04-05 12:23:39','2009-11-16 18:16:53'),(23,'lfrazier23','Lucinda','Frazier','lfrazier23@myhealthincorporated.com','sha1$c026a$fa2fa61d06c2917eb9c6616bae4fd13825ae3053',0,1,0,'2010-02-06 14:41:52','2009-11-16 18:25:53'),(24,'vreid24','Virgil','Reid','vreid24@myhealthincorporated.com','sha1$589b1$8d5e71d8a029155dc7d606ca2ad155309105cf7f',0,1,0,'2009-11-18 12:35:23','2009-11-16 18:32:23'),(25,'ebrooks25','Everett','Brooks','ebrooks25@myhealthincorporated.com','sha1$b43d7$70cb50fd291912378b3ee9f30d80f2a9c0ccdda8',0,1,0,'2010-07-18 13:14:46','2009-11-16 21:40:56'),(26,'evega26','Eduardo','Vega','evega26@myhealthincorporated.com','sha1$40807$97e71534ce0703bbfbd119c2985605447259a69e',0,1,0,'2009-11-17 08:03:53','2009-11-17 08:03:53'),(27,'frichmond27','Fran','Richmond','frichmond27@myhealthincorporated.com','sha1$40e72$80a67aac15bcaaedef263578cec6df90f69b678b',0,1,0,'2010-09-13 10:46:12','2009-11-17 21:31:34'),(28,'tstephens28','Terrance','Stephens','tstephens28@myhealthincorporated.com','sha1$db9f7$9d693893638a489c9dc76833a77325fbf50eecb1',0,1,0,'2010-08-11 15:55:41','2009-11-17 21:41:08'),(29,'dsparks29','Darryl','Sparks','dsparks29@myhealthincorporated.com','sha1$4b84b$d1e689158fbb2471f00bf3516296291b4762847f',0,1,0,'2010-02-27 11:14:51','2009-11-17 21:51:55'),(30,'icote30','Isabella','Cote','icote30@myhealthincorporated.com','sha1$e428d$bf697785a0209c48b1a24c33d455360e1b4facac',0,1,0,'2009-11-18 08:57:53','2009-11-18 09:12:58'),(31,'jlogan31','Joyce','Logan','jlogan31@myhealthincorporated.com','sha1$0b93f$4dffb15f2ff210274d67b81e6da16ad259005ef4',0,1,0,'2009-11-18 09:39:55','2009-11-18 09:39:55'),(32,'wwooten32','Willard','Wooten','wwooten32@myhealthincorporated.com','sha1$b7265$c3d6d4a38a9cceda10f7fc65175f1446d9c610c2',0,1,0,'2010-09-28 11:38:16','2009-11-18 09:45:56'),(33,'bhopkins33','Billy','Hopkins','bhopkins33@myhealthincorporated.com','sha1$d5c9f$1f5fa99dd8e486263d22c1b28aa87616a7649ae3',0,1,0,'2009-11-18 12:28:24','2009-11-18 09:50:10'),(34,'cherring34','Carlos','Herring','cherring34@myhealthincorporated.com','sha1$ebd1e$fac4c60bd3657b3f414aaefc10fb37022e5637c6',0,1,0,'2010-02-28 12:21:19','2009-11-18 18:17:00'),(35,'ecote35','Edna','Cote','ecote35@myhealthincorporated.com','sha1$79be9$105ddf03aef00900935b20b8ca28ff69776cded3',0,1,0,'2009-11-18 21:25:44','2009-11-18 21:25:44'),(36,'rayala36','Randall','Ayala','rayala36@myhealthincorporated.com','sha1$3760b$c667cf9e5a9c49b1e4fda40247134acd042dfcd4',0,1,0,'2010-05-17 16:10:05','2009-11-18 21:33:48'),(37,'jhuff37','Joel','Huff','jhuff37@myhealthincorporated.com','sha1$495b0$226bdb6321be837b9a9728a07d03d87f28eca6f5',0,1,0,'2009-11-18 21:44:37','2009-11-18 21:44:37'),(38,'ewatkins38','Erin','Watkins','ewatkins38@myhealthincorporated.com','sha1$aa2b5$6b8c2d226a3c2959c0fabedac12ad63631cb7b25',0,1,0,'2010-03-13 10:38:51','2009-11-18 21:52:55'),(39,'rclements39','Ralph','Clements','rclements39@myhealthincorporated.com','sha1$45a26$991cafb2994eb46dcedad7a1a7f7bf43192f3de0',0,1,0,'2009-11-19 08:04:43','2009-11-19 08:04:43'),(40,'jlambert40','Javier','Lambert','jlambert40@myhealthincorporated.com','sha1$b899d$8bbfda793d57f1dc25cf7f9b50eb81999a60599a',0,1,0,'2009-11-19 08:10:50','2009-11-19 08:10:50'),(41,'tsalas41','Twila','Salas','tsalas41@myhealthincorporated.com','sha1$50663$f599e7b6f808424c0307ad3eaa87e24f3316f0f3',0,1,0,'2009-11-19 08:16:52','2009-11-19 08:16:52'),(42,'bboone42','Brooke','Boone','bboone42@myhealthincorporated.com','sha1$806c9$f5b4bb4ce24a14f9cf8c44264bda2fae313a5b44',0,1,0,'2010-02-05 16:49:04','2009-11-20 12:53:36'),(43,'jgraham43','Joshua','Graham','jgraham43@myhealthincorporated.com','sha1$877ff$3f3cf771c503968e7b91b9e9ddcbe629f7cbc041',0,1,0,'2009-12-02 20:13:52','2009-11-20 13:02:24'),(44,'lmcfadden44','Lewis','Mcfadden','lmcfadden44@myhealthincorporated.com','sha1$db35b$42a5f5e7694f41a29f8e178b97748d1023203200',0,1,0,'2009-11-22 14:03:00','2009-11-20 13:07:19'),(45,'avincent45','Alberto','Vincent','avincent45@myhealthincorporated.com','sha1$f53e8$d143f25176f825317f5c1bc0c7b3ce1bc93dc942',0,1,0,'2009-11-23 20:13:05','2009-11-23 20:13:05'),(46,'ccarney46','Carla','Carney','ccarney46@myhealthincorporated.com','sha1$e6437$4126f5b7f2aa2ca5734e3137bf6fa2eff16a171b',0,1,0,'2009-11-25 11:15:53','2009-11-25 11:15:53'),(47,'thamilton47','Tonya','Hamilton','thamilton47@myhealthincorporated.com','sha1$063ac$7efc4a089e9f4b4240c8fef1e31732cc1f5f0088',0,1,0,'2010-02-14 17:43:31','2009-11-26 18:43:14'),(48,'ddillon48','Douglas','Dillon','ddillon48@myhealthincorporated.com','sha1$17efc$69fb149279e9ff32ad79f97891ff75bace1b6c57',0,1,0,'2009-11-26 18:49:53','2009-11-26 18:49:53'),(49,'dmathews49','Dave','Mathews','dmathews49@myhealthincorporated.com','sha1$844e7$9dda95d82545d2ecc8b9cd2def76bc1f4e54e284',0,1,0,'2010-04-13 17:18:01','2009-11-26 18:55:11'),(50,'rrusso50','Roberto','Russo','rrusso50@myhealthincorporated.com','sha1$475a7$4a7fd761869c173770a2e1be4f8d7b692e3f40c8',0,1,0,'2010-05-01 14:23:25','2009-11-26 22:01:07'),(51,'dmedina51','Daniel','Medina','dmedina51@myhealthincorporated.com','sha1$fa53a$d629b292074fb66cb9f87b6d61024981ae068dcf',0,1,0,'2010-03-09 11:04:10','2009-11-26 19:04:51'),(52,'tbooth52','Tommy','Booth','tbooth52@myhealthincorporated.com','sha1$cc9db$49b8a719de7cc1fe91b25c91134ffb062e48d96f',0,1,0,'2009-11-26 19:10:22','2009-11-26 19:10:22'),(53,'mleblanc53','Melisa','Leblanc','mleblanc53@myhealthincorporated.com','sha1$266e7$e5c3d03809c205ebe7b00a27e224092c4baf11bc',0,1,0,'2009-11-26 19:13:52','2009-11-26 19:13:52'),(54,'jmarshall54','Jeri','Marshall','jmarshall54@myhealthincorporated.com','sha1$b0986$f07c2da76abbf88350ef6b2e00622c23423a4756',0,1,0,'2010-04-09 16:54:16','2009-11-28 17:04:27'),(55,'mgardner55','Martin','Gardner','mgardner55@myhealthincorporated.com','sha1$ba5f4$35cf32bd3d391199bf2b902e0996fc49b56df679',0,1,0,'2010-03-08 07:16:45','2009-11-28 17:09:03'),(56,'tdoyle56','Todd','Doyle','tdoyle56@myhealthincorporated.com','sha1$06db3$b7e562656f53b412ada95109c0b1233179703d46',0,1,0,'2009-11-28 19:01:56','2009-11-28 17:13:39'),(57,'pstuart57','Patsy','Stuart','pstuart57@myhealthincorporated.com','sha1$27318$4615061e8b6a44b47d1e9dbce321c4f747e0ed80',0,1,0,'2009-11-30 07:59:43','2009-11-30 07:59:43'),(58,'cdelgado58','Clyde','Delgado','cdelgado58@myhealthincorporated.com','sha1$1d730$21ddbf4854483018fe46afe021f0bab8eb48df85',0,1,0,'2009-11-30 08:05:31','2009-11-30 08:05:31'),(59,'apayne59','Arnold','Payne','apayne59@myhealthincorporated.com','sha1$e957b$578c7459e1aebe6e577cd61306dc2bd3e4234227',0,1,0,'2009-11-30 08:11:51','2009-11-30 08:11:51'),(60,'kalbert60','Kevin','Albert','kalbert60@myhealthincorporated.com','sha1$2d89d$108232b2e7ad2288aebe3140aa01b97534a55625',0,1,0,'2009-12-07 12:26:43','2009-12-02 21:37:31'),(61,'ecannon61','Everett','Cannon','ecannon61@myhealthincorporated.com','sha1$48525$ab913b757b6ca1b3292e51ec8e7e6fba5a726d40',0,1,0,'2010-04-02 09:26:49','2009-12-06 19:28:12'),(62,'tmcgowan62','Tommy','Mcgowan','tmcgowan62@myhealthincorporated.com','sha1$5d842$4d5f0a5577d243e9e6a51ec17bd67ede1d39430b',0,1,0,'2010-01-03 19:30:19','2009-12-06 19:39:48'),(63,'rcarroll63','Rosie','Carroll','rcarroll63@myhealthincorporated.com','sha1$a1178$0227cbbea919c18e83857b25a7372470299e7f47',0,1,0,'2010-06-03 21:38:52','2009-12-10 23:22:07'),(64,'dpruitt64','Dwight','Pruitt','dpruitt64@myhealthincorporated.com','sha1$fea6a$6d2e273abfb6ca6807ab2ec02ac2cf328c9bfaf7',0,1,0,'2010-03-16 21:18:20','2009-12-10 20:29:42'),(65,'lryan65','Lewis','Ryan','lryan65@myhealthincorporated.com','sha1$67fb1$4acf6d66656e3edf8497a3b9a73467959ad49e77',0,1,0,'2009-12-10 20:38:38','2009-12-10 20:38:38'),(66,'jbuchanan66','Jack','Buchanan','jbuchanan66@myhealthincorporated.com','sha1$866e2$c84f880b59745f76c762502ab32c7b2208fad4e6',0,1,0,'2010-01-28 09:45:37','2010-01-28 09:45:37'),(67,'jdale67','Jorge','Dale','jdale67@myhealthincorporated.com','sha1$dd313$5c413401f04e5f835d457312be08bdc79b668c13',0,1,0,'2010-01-29 12:19:23','2010-01-28 09:50:05'),(68,'dcollier68','Dollie','Collier','dcollier68@myhealthincorporated.com','sha1$8e52c$b89a022b1bea2120f4f01f7d80d332da71ff08ce',0,1,0,'2010-01-29 09:55:54','2010-01-29 09:55:54'),(69,'jrodgers69','Jeffrey','Rodgers','jrodgers69@myhealthincorporated.com','sha1$7720e$73c290ce38b111c34d0113bc8b3fb2aed1389a99',0,1,0,'2010-06-26 15:03:52','2010-02-02 18:44:35'),(70,'csoto70','Cory','Soto','csoto70@myhealthincorporated.com','sha1$c6973$69344c73ca788d56cc704303d2726a6dfd0bf0ef',0,1,0,'2010-02-02 18:58:39','2010-02-02 18:58:39'),(71,'aburke71','Aaron','Burke','aburke71@myhealthincorporated.com','sha1$0a489$90ea347e43405ec5b135619853ef192cc6ae12c5',0,1,0,'2010-05-21 12:29:41','2010-02-02 19:08:07'),(72,'icopeland72','Ivan','Copeland','icopeland72@myhealthincorporated.com','sha1$f0f7a$122503566f9e4a0bc46837216d60fe39b139e36d',0,1,0,'2010-02-03 13:01:20','2010-02-03 13:01:20'),(73,'lmathis73','Leon','Mathis','lmathis73@myhealthincorporated.com','sha1$41f44$e934a6a050dba3a276fa9f1139e5e0defcb72905',0,1,0,'2010-02-05 09:13:34','2010-02-05 09:13:34'),(74,'dharrison74','Derek','Harrison','dharrison74@myhealthincorporated.com','sha1$6e006$1181ef19472488f1632b891772a8bd0a8faa71fd',0,1,0,'2010-02-10 18:25:11','2010-02-10 18:25:11'),(75,'rherman75','Ron','Herman','rherman75@myhealthincorporated.com','sha1$1524b$239c2884c21ccbfd91e75cfeb6ddce533b1cb9d0',0,1,0,'2010-02-14 15:17:12','2010-02-10 18:30:43'),(76,'ifigueroa76','Iris','Figueroa','ifigueroa76@myhealthincorporated.com','sha1$ab786$5bbb3f91c75855b4eb64bab893b624bae6c6f7ca',0,1,0,'2010-03-01 07:17:33','2010-03-01 07:17:33'),(77,'brandolph77','Bruce','Randolph','brandolph77@myhealthincorporated.com','sha1$661f8$8d87cfdaac3905a26d94045b57a0ba9f8c1a4035',0,1,0,'2010-03-13 11:18:03','2010-03-01 07:24:05'),(78,'jmclaughlin78','John','Mclaughlin','jmclaughlin78@myhealthincorporated.com','sha1$22fc1$6ab805234898a5f582c11c7899b00281d926cf5d',0,1,0,'2010-03-01 07:32:30','2010-03-01 07:32:30'),(79,'shanson79','Sheri','Hanson','shanson79@myhealthincorporated.com','sha1$a0d99$27f468fa068417f99f1d442e1cd5e7b4ca4b0b29',0,1,0,'2010-03-02 15:52:40','2010-03-02 15:52:40'),(80,'tvang80','Tami','Vang','tvang80@myhealthincorporated.com','sha1$55178$31e220aea93f51430cdd660af91b7707fa1fda6e',0,1,0,'2010-03-02 15:58:22','2010-03-02 15:58:22'),(81,'acortez81','Andy','Cortez','acortez81@myhealthincorporated.com','sha1$d8d2e$56b7eb2e58a00ee73cab2f14fec4e97e2a56f85b',0,1,0,'2010-03-09 10:51:06','2010-03-05 11:55:36'),(83,'emassey83','Enrique','Massey','emassey83@myhealthincorporated.com','sha1$bac22$eb28345a627329c3f7c6df9ab1e2072144255f7e',0,1,0,'2010-03-07 23:00:32','2010-03-07 09:36:25'),(84,'bhatfield84','Bessie','Hatfield','bhatfield84@myhealthincorporated.com','sha1$5975e$676fc8dc6a66f49adb80f387d34b0d6aba2fe320',0,1,0,'2010-03-07 09:40:15','2010-03-07 09:40:15'),(85,'fstanton85','Frederick','Stanton','fstanton85@myhealthincorporated.com','sha1$f80eb$110673592e9ab1cfd3ca7ac29324c4f335a46dc2',0,1,0,'2010-03-07 09:44:17','2010-03-07 09:44:17'),(86,'msanford86','Marvin','Sanford','msanford86@myhealthincorporated.com','sha1$496ac$2d3d679558a14f9ed61ac1cffe08c73dddc0720b',0,1,0,'2010-04-01 21:25:26','2010-03-07 19:53:35'),(87,'ljenkins87','Lawrence','Jenkins','ljenkins87@myhealthincorporated.com','sha1$7ce35$b4187bacbbd14b1d86e33ad1fd13c701b635a12f',0,1,0,'2010-04-06 21:17:01','2010-03-08 22:31:10'),(88,'ethomas88','Eugene','Thomas','ethomas88@myhealthincorporated.com','sha1$8ca9f$b1bde5af0318bb47c35e20a46cd0df880713b205',0,1,0,'2010-03-13 18:09:18','2010-03-08 22:37:58'),(92,'cleblanc92','Clayton','Leblanc','cleblanc92@myhealthincorporated.com','sha1$b6a39$f54f992a006610d68a8cc2873313f12a17fc88c1',0,1,0,'2010-03-26 07:27:39','2010-03-26 07:10:25'),(94,'lhansen94','Luz','Hansen','lhansen94@myhealthincorporated.com','sha1$8fcd1$9d6a15a7a068246671c1e06fa8c21198f1669a5a',0,1,0,'2010-04-06 12:12:36','2010-03-30 15:07:05'),(95,'ovelez95','Ollie','Velez','ovelez95@myhealthincorporated.com','sha1$fe64f$a277d8260543a6d37055ae7dba36b48cb5c4c4de',0,1,0,'2010-03-30 15:19:51','2010-03-30 15:19:51'),(96,'cbuckley96','Casandra','Buckley','cbuckley96@myhealthincorporated.com','sha1$ec29a$221a9381eeebbf3ce2e55155cd2d71bad4da0f7b',0,1,0,'2010-04-01 12:04:05','2010-04-01 08:00:32'),(97,'dprince97','Delia','Prince','dprince97@myhealthincorporated.com','sha1$a95a2$e86aa4a2679b7f9b1b9fa02ba2789ed8dd5b9209',0,1,0,'2010-04-02 10:10:29','2010-04-02 10:10:29'),(98,'sjohnson98','Sue','Johnson','sjohnson98@myhealthincorporated.com','sha1$391b8$6f1226a088c332acfb2aaa2cd4f76a32ff938a79',0,1,0,'2010-04-02 10:14:12','2010-04-02 10:14:12'),(99,'bcompton99','Beulah','Compton','bcompton99@myhealthincorporated.com','sha1$bb83f$1ff026de515d14ed2304ea7a6ca48b7c87a89556',0,1,0,'2010-04-08 20:53:34','2010-04-08 20:53:34'),(100,'gthomas100','Guy','Thomas','gthomas100@myhealthincorporated.com','sha1$65deb$a9fe2f94757e24f9fd16b3adc97c11251730670c',0,1,0,'2010-04-08 20:57:46','2010-04-08 20:57:46'),(101,'mreynolds101','Michael','Reynolds','mreynolds101@myhealthincorporated.com','sha1$4d920$e9f5a80b6399143390c453819cfa304b07c32eb4',0,1,0,'2010-04-09 10:39:59','2010-04-08 21:00:16'),(102,'pmiranda102','Petra','Miranda','pmiranda102@myhealthincorporated.com','sha1$22ded$c45393a032ad99df0930ebbac0e8309d8118302a',0,1,0,'2010-09-16 19:12:47','2010-05-11 15:37:57'),(103,'nhurley103','Naomi','Hurley','nhurley103@myhealthincorporated.com','sha1$b6df7$573cffa496822ebb3516711556192c69a9974c51',0,1,0,'2010-05-12 00:01:59','2010-05-11 23:51:25'),(104,'jvillarreal104','Jeff','Villarreal','jvillarreal104@myhealthincorporated.com','sha1$33dff$08d9560de54225909fec68559c9eae5963a79d54',0,1,0,'2010-05-21 14:17:47','2010-05-18 13:55:09'),(106,'ejensen106','Ester','Jensen','ejensen106@myhealthincorporated.com','sha1$ce4af$aaf224e07caf3a5c14539f76f145e3a221d8c3be',0,1,0,'2010-05-21 11:56:54','2010-05-21 11:55:52'),(107,'mhaynes107','Marcy','Haynes','mhaynes107@myhealthincorporated.com','sha1$b7c04$4a64c4dcb2d49852e91f35499b30e7aa0d065520',0,1,0,'2010-05-25 17:41:52','2010-05-25 17:03:50'),(108,'gbradley108','Gene','Bradley','gbradley108@myhealthincorporated.com','sha1$ed036$1e08921fa39673421f472eae3a6fe4bea65a066b',0,1,0,'2010-05-26 08:15:25','2010-05-26 08:14:26'),(109,'lspence109','Lea','Spence','lspence109@myhealthincorporated.com','sha1$89983$39360204c0d142ff65482d2c536480e7820e33aa',0,1,0,'2010-05-28 10:15:42','2010-05-28 10:14:27'),(110,'jcompton110','Jeannie','Compton','jcompton110@myhealthincorporated.com','sha1$a3f20$79e78a6cda06dab1c723ec32979fb63fc170a8ee',0,1,0,'2010-05-31 10:19:50','2010-05-31 10:19:20'),(111,'dmann111','Doris','Mann','dmann111@myhealthincorporated.com','sha1$41d08$05c06211320c65fe84a28d4992b610e354f80226',0,1,0,'2010-06-08 20:35:18','2010-06-08 20:34:11'),(112,'jmartin112','Joann','Martin','jmartin112@myhealthincorporated.com','sha1$31191$1c82661341f8e5a615403e4a6367f517028cd302',0,1,0,'2010-06-09 18:58:19','2010-06-09 18:57:27'),(113,'lhyde113','Lorie','Hyde','lhyde113@myhealthincorporated.com','sha1$f8fc7$34c537a2dff55b769e3335c2570784491eca6cec',0,1,0,'2010-06-11 16:46:56','2010-06-11 16:45:41'),(114,'kwebb114','Kelli','Webb','kwebb114@myhealthincorporated.com','sha1$56753$78a06abe5f925855ec3fbafe70b52c03e1a08016',0,1,0,'2010-06-15 11:40:20','2010-06-15 11:40:20'),(115,'ctrujillo115','Claude','Trujillo','ctrujillo115@myhealthincorporated.com','sha1$5a656$f0b6a9a2aeec463978eae7581a92da4278536981',0,1,0,'2010-08-21 23:41:43','2010-08-21 23:41:43'),(116,'jhorne116','Johnnie','Horne','jhorne116@myhealthincorporated.com','sha1$abb2b$9198e08a8d0bc78ee247646d144c03a890334db5',0,1,0,'2010-08-29 22:32:40','2010-08-29 22:31:58'),(117,'PracticeMgr','Practice','Manager1','pmgr@myhealthincorporated.com','sha1$c44c3$7fb90587c5be5f39102aacfc373d099d75f1db95',1,1,1,'2011-02-11 15:02:13','2011-02-11 14:46:47');
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`group_id`),
+  KEY `group_id_refs_id_321a8efef0ee9890` (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`permission_id`),
+  KEY `permission_id_refs_id_6d7fb3c2067e79cb` (`permission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contactme_contact`
+--
+
+DROP TABLE IF EXISTS `contactme_contact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contactme_contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `company_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `msg` longtext COLLATE utf8_unicode_ci,
+  `ip_address` char(15) COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contactme_contact`
+--
+
+LOCK TABLES `contactme_contact` WRITE;
+/*!40000 ALTER TABLE `contactme_contact` DISABLE KEYS */;
+INSERT INTO `contactme_contact` VALUES (1,'Randolph','Chen','Nephrology','bruindoc@gmail.com','6504004552','','98.234.111.107','2009-11-28 18:59:39'),(2,'Eric ','Lovell','Coastline Emergency Physicians','erlovell123@yahoo.com','7604204468','I\'ll try this!','75.32.243.163','2009-12-04 15:01:12'),(3,'Ariel','Marks','','am@arielmarks.com','650 465 7444','','162.135.0.6','2010-01-29 16:01:47'),(4,'Robert','Pavy','','rnpavy@sbcglobal.net','6503655850','','67.124.90.8','2010-03-04 21:00:41'),(5,'Melodie','Johnson','Melodie Johnson','melodiejohnson556@gmail.com','000-000-0000','Increase traffic to your website\r\n\r\nWe would like to get your website on first page of Google.\r\n\r\nAll of our processes use the most ethical \"white hat\" Search Engine Optimization techniques that will not get your website banned or penalized.\r\nPlease reply and I would be happy to send you a proposal.\r\n','122.160.99.22','2010-03-19 10:16:22'),(6,'John','Gorczyca','','john_gorczyca@urmc.rochester.edu','','','128.151.71.18','2010-03-25 10:38:22'),(7,'John','Gorczyca','','john_gorczyca@urmc.rochester.edu','','','128.151.71.18','2010-03-25 10:40:07'),(8,'Charles','Gates','Charles Gates','charlesgatessd@gmail.com','','We are interested to increase traffic to your website, please get back to us in order to discuss the possibility in further detail.','122.163.116.17','2010-04-12 04:32:55'),(9,'Robert','Meyer','ComputerFlashCards','robertnmeyer2010@gmail.com','(415) 350-0809','','69.181.45.228','2010-05-27 11:53:38'),(10,'Paula','Tucker','Marketing Company','patricknortonisd@gmail.com','','We are a leading India based SEO company providing the best search engine optimization services. We act as your business partner and helps you reach your business goals. We promote websites no matter who you are - a huge company with thousands of employees, a small business or a professional who offers professional / consulting services. Let us know if you are interested and we will get back to you with more details.','122.163.115.56','2010-06-17 05:50:59'),(11,'Troy','Egan','Troy Egan','traviscrane008@gmail.com','000-000-0000','Do you wish you could increase your online leads?  We have helped a lot of businesses thrive in this market and we can help you!  Simply hit reply and I’ll share with you the cost and the benefits.\r\n','122.162.2.171','2010-07-22 19:46:08'),(12,'Brett','Babb','Brett Babb','backyjack22@gmail.com','','Do you wish you could increase your online leads?  We have helped a lot of businesses thrive in this market and we can help you!  Simply hit reply and I’ll share with you the cost and the benefits.\r\n','122.163.119.53','2010-08-06 04:22:00'),(13,'Brett ','Babb','Marketing Company','becky6655@gmail.com','0120120120','Do you wish you could increase your online leads?  We have helped a lot of businesses thrive in this market and we can help you!  Simply hit reply and I’ll share with you the cost and the benefits.\r\n','122.163.47.210','2010-08-14 04:25:11'),(14,'Paula ','Tucker','','patrick.nortoni01@gmail.com','','We noticed that you are not at the top of the search engines for a number of your key terms. We have helped companies similar to yours to achieve top organic rankings. Please reply to this message and we will prepare a special proposal for you, to show you how we can achieve similar results for you.','122.161.139.224','2010-09-09 23:10:49'),(15,'Bradley','Graw','SOAR','bradley.graw@gmail.com','4157062425','','76.126.210.120','2010-09-25 17:22:43');
+/*!40000 ALTER TABLE `contactme_contact` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contactme_forgotpassword`
+--
+
+DROP TABLE IF EXISTS `contactme_forgotpassword`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contactme_forgotpassword` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `company_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `msg` longtext COLLATE utf8_unicode_ci,
+  `ip_address` char(15) COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contactme_forgotpassword`
+--
+
+LOCK TABLES `contactme_forgotpassword` WRITE;
+/*!40000 ALTER TABLE `contactme_forgotpassword` DISABLE KEYS */;
+INSERT INTO `contactme_forgotpassword` VALUES (1,'Brian','Kim','MyHealth, Inc.','bkim@myhealthinc.com','5854556464','This is a test of the password reset system.','98.122.165.49','2009-11-17 22:53:25'),(2,'Ariel','Marks','','am@arielmarks.com','650 465 7444','','162.135.0.6','2010-01-29 16:18:48'),(3,'Ariel','Marks','','am@arielmarks.com','650 465 7444','','162.135.0.6','2010-02-01 16:19:34'),(4,'Jimmy','Jims','','rdutta27@yahoo.com','','','99.4.123.13','2010-05-02 15:21:25'),(5,'Jenny','Lee','','jennyilee.md@gmail.com','','','162.135.0.6','2010-06-16 14:10:36'),(6,'Roger ','Kao','Digestive Care Associates','rogkao@gmail.com','773-343-7885','','67.169.42.237','2010-07-13 22:11:35');
+/*!40000 ALTER TABLE `contactme_forgotpassword` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `object_id` longtext COLLATE utf8_unicode_ci,
+  `object_repr` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_user_id` (`user_id`),
+  KEY `django_admin_log_content_type_id` (`content_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=396 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_admin_log`
+--
+
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (6,'2009-10-13 22:37:53',2,3,'None','bmhkim',3,''),(7,'2009-10-13 19:41:39',2,15,'3','Brian Kim',1,''),(8,'2009-10-13 22:42:44',3,15,'3','Brian Kim',2,'Changed address1, address2, city, zip, email_confirmed, office_address1, office_address2, office_phone, office_city and office_zip.'),(9,'2009-10-13 19:42:49',2,16,'2','Brian Kim',1,''),(10,'2009-10-13 22:43:04',2,16,'2','Brian Kim',2,'Changed staff_type.'),(11,'2009-10-13 22:45:07',3,15,'2','Michael Eiffert',2,'Changed mobile_phone.'),(12,'2009-10-21 11:45:40',2,12,'3','Community Hospital of Los Gatos',1,''),(13,'2009-10-21 11:48:27',2,12,'4','Regional Medical Center of San Jose',1,''),(14,'2009-10-21 11:51:02',2,12,'5','Good Samaritan - San Jose',1,''),(15,'2009-10-21 11:51:29',2,12,'2','Dominican Hospital - Santa Cruz',2,'Changed name.'),(16,'2009-10-21 11:51:52',2,12,'1','Sequoia Hospital - Redwood City',2,'Changed name.'),(17,'2009-10-21 11:54:10',2,12,'6','O\'Connor Hospital - San Jose',1,''),(18,'2009-10-21 11:56:36',2,12,'7','El Camino Hospital - Mountain View',1,''),(19,'2009-10-21 12:03:19',2,12,'8','Mills Peninsula',1,''),(20,'2009-10-21 12:05:01',2,12,'9','Seton Medical Center - Daly City',1,''),(21,'2009-10-21 12:08:14',2,12,'10','UCSF - San Francisco',1,''),(22,'2009-10-21 12:11:02',2,12,'11','San Francisco General Hospital',1,''),(23,'2009-10-21 15:00:15',2,26,'1','Endovascular Surgery - San Jose, CA',1,''),(24,'2009-10-21 15:04:32',2,26,'2','Sequoia Hospitalists - Redwood City',1,''),(25,'2009-10-21 15:05:31',2,27,'1','Michael Eiffert in group Sequoia Hospitalists - Redwood City',1,''),(26,'2009-10-21 15:06:08',2,27,'2','Brian Kim in group Sequoia Hospitalists - Redwood City',1,''),(27,'2009-10-22 18:20:30',2,12,'12','Texas MedClinic',1,''),(28,'2009-10-22 18:22:09',2,15,'4','James Murray',1,''),(29,'2009-10-22 18:23:15',2,3,'4','jmurray',2,'Changed email and password.'),(30,'2009-10-22 18:25:30',2,3,'4','jmurray',2,'No fields changed.'),(31,'2009-10-23 08:35:40',2,16,'3','James Murray',1,''),(32,'2009-10-23 08:37:56',2,16,'3','James Murray',2,'Changed specialty.'),(33,'2009-11-12 10:42:28',2,20,'1','Joint Options - Redwood City, CA',1,''),(34,'2009-11-12 10:45:28',2,15,'5','John Nelligan',1,''),(35,'2009-11-12 13:47:39',2,15,'6','Liza Reichenberger',1,''),(36,'2009-11-12 10:48:52',2,16,'4','John Nelligan',1,''),(37,'2009-11-12 13:55:00',2,20,'2','California Cancer Care',1,''),(38,'2009-11-12 10:57:42',2,21,'1','John Nelligan group: Joint Options - Redwood City, CA',1,''),(39,'2009-11-12 11:22:55',2,15,'7','Bradley Ekstrand',1,''),(40,'2009-11-12 11:25:09',2,16,'5','Bradley Ekstrand',1,''),(41,'2009-11-12 14:05:21',3,3,'3','bkim',2,'Changed username.'),(42,'2009-11-12 14:32:25',3,26,'2','Sequoia Hospitalists - Redwood City',2,'Deleted mhl group member \"Brian Kim in group Sequoia Hospitalists - Redwood City\".'),(43,'2009-11-12 14:32:32',3,26,'2','Sequoia Hospitalists - Redwood City',2,'Added mhl group member \"Brian Kim in group Sequoia Hospitalists - Redwood City\".'),(44,'2009-11-12 19:53:44',2,26,'3','California Cancer Care',1,''),(45,'2009-11-12 19:54:11',2,26,'4','Joint Options - Redwood City, CA',1,''),(46,'2009-11-12 16:54:31',2,29,'1','Liza Reichenberger',1,''),(47,'2009-11-12 21:53:14',2,26,'5','Silicon Valley Cardiology',1,''),(48,'2009-11-12 18:55:07',2,26,'6','Cardiovascular Medicine - Redwood City',1,''),(49,'2009-11-13 13:13:02',2,26,'7','Atherton Neurology, Menlo Park, CA',1,''),(50,'2009-11-13 11:06:43',2,15,'8','Paul Godin',1,''),(51,'2009-11-13 14:07:24',2,16,'6','Paul Godin',1,''),(52,'2009-11-13 12:39:50',3,15,'9','Rana Dutta',1,''),(53,'2009-11-13 12:42:23',2,15,'10','Steve Vaughan',1,''),(54,'2009-11-13 15:43:14',2,3,'10','svaughan',2,'No fields changed.'),(55,'2009-11-13 12:43:29',2,26,'2','Sequoia Hospitalists - Redwood City',2,'Added mhl group member \"Steve Vaughan in group Sequoia Hospitalists - Redwood City\".'),(56,'2009-11-13 16:21:43',2,26,'8','Valley Medical Oncology Consultants - Redwood City',1,''),(57,'2009-11-13 16:23:45',2,15,'11','Byron Wilson',1,''),(58,'2009-11-13 16:24:36',2,26,'8','Valley Medical Oncology Consultants - Redwood City',2,'Added mhl group member \"Byron Wilson in group Valley Medical Oncology Consultants - Redwood City\".'),(59,'2009-11-13 13:28:42',2,16,'7','Byron Wilson',1,''),(60,'2009-11-13 16:30:23',2,15,'12','Shane Dormady',1,''),(61,'2009-11-13 16:30:39',2,16,'8','Shane Dormady',1,''),(62,'2009-11-13 16:30:57',2,26,'8','Valley Medical Oncology Consultants - Redwood City',2,'Added mhl group member \"Shane Dormady in group Valley Medical Oncology Consultants - Redwood City\".'),(63,'2009-11-13 16:41:18',2,16,'9','Steve Vaughan',1,''),(64,'2009-11-13 17:12:43',2,15,'13',' ',1,''),(65,'2009-11-13 14:17:47',2,3,'13','npakdaman',2,'Changed first_name and last_name.'),(66,'2009-11-13 17:21:23',2,16,'10','Neda  Pakdaman',1,''),(67,'2009-11-13 17:21:47',2,26,'2','Sequoia Hospitalists - Redwood City',2,'Added mhl group member \"Neda  Pakdaman in group Sequoia Hospitalists - Redwood City\".'),(68,'2009-11-13 17:25:26',2,26,'9','Redwood Pulmonary Medical Associates, Redwood City, CA',1,''),(69,'2009-11-13 17:57:11',2,15,'14','Dhira Khosla',1,''),(70,'2009-11-13 14:58:41',2,16,'11','Dhira Khosla',1,''),(71,'2009-11-13 17:59:35',2,26,'7','Atherton Neurology, Menlo Park, CA',2,'Added mhl group member \"Dhira Khosla in group Atherton Neurology, Menlo Park, CA\".'),(72,'2009-11-13 15:13:15',2,15,'15','Bruce Mcauley',1,''),(73,'2009-11-13 15:16:13',2,16,'12','Bruce Mcauley',1,''),(74,'2009-11-13 15:17:03',2,26,'6','Cardiovascular Medicine - Redwood City',2,'Added mhl group member \"Bruce Mcauley in group Cardiovascular Medicine - Redwood City\".'),(75,'2009-11-13 20:23:41',2,3,'13','npakdaman',2,'Changed email.'),(76,'2009-11-13 20:37:26',2,15,'16','Mylene Matti',1,''),(77,'2009-11-13 20:38:06',2,16,'13','Mylene Matti',1,''),(78,'2009-11-14 00:26:54',2,15,'17','David Pusateri',1,''),(79,'2009-11-14 00:27:13',2,16,'14','David Pusateri',1,''),(80,'2009-11-14 00:27:29',2,26,'2','Sequoia Hospitalists - Redwood City',2,'Added mhl group member \"David Pusateri in group Sequoia Hospitalists - Redwood City\".'),(81,'2009-11-16 09:03:02',2,15,'18','Wilson Kee',1,''),(82,'2009-11-16 09:03:21',2,29,'2','Wilson Kee',1,''),(83,'2009-11-16 09:09:04',2,15,'19',' ',1,''),(84,'2009-11-16 09:09:44',2,3,'19','dbruno',2,'Changed first_name and last_name.'),(85,'2009-11-16 09:10:08',2,16,'15','Dieter Bruno',1,''),(86,'2009-11-16 14:14:08',2,15,'20','Denise Brown',1,''),(87,'2009-11-16 14:14:34',2,16,'16','Denise Brown',1,''),(88,'2009-11-16 14:15:13',2,26,'2','Sequoia Hospitalists - Redwood City',2,'Added mhl group member \"Denise Brown in group Sequoia Hospitalists - Redwood City\".'),(89,'2009-11-16 14:22:49',2,3,'10','svaughan',2,'Changed email.'),(90,'2009-11-16 14:23:35',2,26,'10','Peninsula Urology',1,''),(91,'2009-11-16 18:01:45',2,15,'21','Amy  Fenton',1,''),(92,'2009-11-16 18:02:13',2,29,'3','Amy  Fenton',1,''),(93,'2009-11-16 18:08:30',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Amy  Fenton in group Silicon Valley Cardiology\".'),(94,'2009-11-16 18:19:04',2,15,'22','Rob Patrawala',1,''),(95,'2009-11-16 18:19:51',2,16,'17','Rob Patrawala',1,''),(96,'2009-11-16 21:21:33',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Rob Patrawala in group Silicon Valley Cardiology\".'),(97,'2009-11-16 21:26:51',2,15,'23','Cynthia Leung',1,''),(98,'2009-11-16 21:27:12',2,16,'18','Cynthia Leung',1,''),(99,'2009-11-16 18:27:54',2,26,'11','Peninsula Gastroenterology Medical Group',1,''),(100,'2009-11-16 18:34:23',2,15,'24','L. Scott Feiler',1,''),(101,'2009-11-16 18:34:42',2,16,'19','L. Scott Feiler',1,''),(102,'2009-11-16 18:42:23',2,15,'25','Richard Wheat',1,''),(103,'2009-11-16 21:43:10',2,26,'12','Sequoia Radiologists',1,''),(104,'2009-11-16 18:43:35',2,16,'20','Richard Wheat',1,''),(105,'2009-11-16 18:46:59',2,3,'12','sdormady',2,'Changed email.'),(106,'2009-11-17 11:07:20',2,15,'26','Bernhard Votteri',1,''),(107,'2009-11-17 08:07:44',2,16,'21','Bernhard Votteri',1,''),(108,'2009-11-17 08:40:54',2,15,'12','Shane Dormady',2,'Changed mobile_phone.'),(109,'2009-11-17 08:59:30',3,16,'22','Rana Dutta',1,''),(110,'2009-11-17 21:20:59',2,15,'20','Denise Brown',2,'Changed mobile_phone.'),(111,'2009-11-17 21:21:54',2,15,'19','Dieter Bruno',2,'Changed mobile_phone.'),(112,'2009-11-17 21:23:29',2,15,'8','Paul Godin',2,'Changed mobile_phone.'),(113,'2009-11-17 21:24:11',2,15,'10','Steve Vaughan',2,'Changed mobile_phone.'),(114,'2009-11-17 21:24:47',2,15,'17','David Pusateri',2,'Changed mobile_phone.'),(115,'2009-11-17 21:25:21',2,15,'13','Neda  Pakdaman',2,'Changed mobile_phone.'),(116,'2009-11-17 21:31:24',2,26,'2','Sequoia Hospitalists - Redwood City',2,'No fields changed.'),(117,'2009-11-17 21:32:54',2,15,'27','Joanna Lin',1,''),(118,'2009-11-17 21:33:14',2,16,'23','Joanna Lin',1,''),(119,'2009-11-17 21:38:23',2,26,'2','Sequoia Hospitalists - Redwood City',2,'Changed user for mhl group member \"Joanna Lin in group Sequoia Hospitalists - Redwood City\".'),(120,'2009-11-17 21:43:54',2,15,'28','Daniel Rengstorff',1,''),(121,'2009-11-17 21:44:28',2,16,'24','Daniel Rengstorff',1,''),(122,'2009-11-17 21:46:03',2,26,'11','Peninsula Gastroenterology Medical Group',2,'Added mhl group member \"Daniel Rengstorff in group Peninsula Gastroenterology Medical Group\".'),(123,'2009-11-17 21:46:37',2,15,'28','Daniel Rengstorff',2,'No fields changed.'),(124,'2009-11-17 21:53:00',2,15,'29','Phillip Ng',1,''),(125,'2009-11-18 00:53:28',2,15,'29','Phillip Ng',2,'Changed mobile_phone.'),(126,'2009-11-18 00:53:46',2,16,'25','Phillip Ng',1,''),(127,'2009-11-18 09:14:38',2,15,'30','Judy Sullivan',1,''),(128,'2009-11-18 09:15:07',2,29,'4','Judy Sullivan',1,''),(129,'2009-11-18 09:20:41',2,26,'9','Redwood Pulmonary Medical Associates, Redwood City, CA',2,'Added mhl group member \"Judy Sullivan in group Redwood Pulmonary Medical Associates, Redwood City, CA\".'),(130,'2009-11-18 09:42:00',2,15,'31','Sigal Tene',1,''),(131,'2009-11-18 06:42:24',2,16,'26','Sigal Tene',1,''),(132,'2009-11-18 09:47:31',2,15,'32','Michael Hollett',1,''),(133,'2009-11-18 06:48:06',2,16,'27','Michael Hollett',1,''),(134,'2009-11-18 09:48:33',2,26,'12','Sequoia Radiologists',2,'Added mhl group member \"Michael Hollett in group Sequoia Radiologists\".'),(135,'2009-11-18 06:51:22',2,15,'33','Edward Anderson',1,''),(136,'2009-11-18 09:52:07',2,16,'28','Edward Anderson',1,''),(137,'2009-11-18 06:52:25',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Edward Anderson in group Silicon Valley Cardiology\".'),(138,'2009-11-18 10:39:14',3,26,'2','Sequoia Hospitalists - Redwood City',2,'Added mhl group member \"Brian Kim in group Sequoia Hospitalists - Redwood City\".'),(139,'2009-11-18 10:39:44',3,26,'2','Sequoia Hospitalists - Redwood City',2,'Deleted mhl group member \"Brian Kim in group Sequoia Hospitalists - Redwood City\".'),(140,'2009-11-18 21:19:27',2,15,'34','John OHolleran',1,''),(141,'2009-11-18 21:19:49',2,16,'29','John OHolleran',1,''),(142,'2009-11-18 21:20:53',2,26,'13','O\'Holleran and O\'Holleran MDs ',1,''),(143,'2009-11-18 18:23:28',2,3,'34','joholleran',2,'Changed email.'),(144,'2009-11-18 18:27:53',2,15,'35','Charlotte Gonzales',1,''),(145,'2009-11-18 21:28:12',2,16,'30','Charlotte Gonzales',1,''),(146,'2009-11-18 18:35:19',2,15,'36','Vincent Burke',1,''),(147,'2009-11-18 21:35:51',2,16,'31','Vincent Burke',1,''),(148,'2009-11-18 21:36:20',2,15,'36','Vincent Burke',2,'Changed mobile_phone.'),(149,'2009-11-18 21:36:39',2,26,'12','Sequoia Radiologists',2,'Added mhl group member \"Vincent Burke in group Sequoia Radiologists\".'),(150,'2009-11-18 21:48:11',2,15,'37','David Jablons',1,''),(151,'2009-11-18 21:48:40',2,16,'32','David Jablons',1,''),(152,'2009-11-18 21:54:21',2,15,'38','Melissa  Lim',1,''),(153,'2009-11-18 21:54:43',2,16,'33','Melissa  Lim',1,''),(154,'2009-11-18 18:54:59',2,26,'9','Redwood Pulmonary Medical Associates, Redwood City, CA',2,'Added mhl group member \"Melissa  Lim in group Redwood Pulmonary Medical Associates, Redwood City, CA\".'),(155,'2009-11-18 21:59:18',2,15,'11','Byron Wilson',2,'Changed mobile_phone.'),(156,'2009-11-19 08:06:25',2,15,'39','Donald StClaire',1,''),(157,'2009-11-19 08:06:51',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Donald StClaire in group Silicon Valley Cardiology\".'),(158,'2009-11-19 08:08:55',2,3,'39','dstclaire',2,'No fields changed.'),(159,'2009-11-19 08:09:54',2,16,'34','Donald StClaire',1,''),(160,'2009-11-19 08:12:19',2,15,'40','Nellis Smith',1,''),(161,'2009-11-19 08:12:36',2,16,'35','Nellis Smith',1,''),(162,'2009-11-19 11:12:55',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Nellis Smith in group Silicon Valley Cardiology\".'),(163,'2009-11-19 08:16:36',2,3,'40','nsmith',2,'No fields changed.'),(164,'2009-11-19 08:18:12',2,15,'41','Kaya Moore',1,''),(165,'2009-11-19 08:18:30',2,29,'5','Kaya Moore',1,''),(166,'2009-11-19 08:18:54',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Kaya Moore in group Silicon Valley Cardiology\".'),(167,'2009-11-19 08:20:56',2,3,'41','kmoore',2,'No fields changed.'),(168,'2009-11-20 12:54:48',2,15,'42','Kristin Gershfield',1,''),(169,'2009-11-20 12:55:11',2,16,'36','Kristin Gershfield',1,''),(170,'2009-11-20 12:55:40',2,26,'2','Sequoia Hospitalists - Redwood City',2,'Added mhl group member \"Kristin Gershfield in group Sequoia Hospitalists - Redwood City\".'),(171,'2009-11-20 13:00:06',2,3,'42','kgershfield',2,'No fields changed.'),(172,'2009-11-20 13:03:26',2,15,'43','Matthew Dillon',1,''),(173,'2009-11-20 13:03:56',2,26,'6','Cardiovascular Medicine - Redwood City',2,'Added mhl group member \"Matthew Dillon in group Cardiovascular Medicine - Redwood City\".'),(174,'2009-11-20 13:04:18',2,29,'6','Matthew Dillon',1,''),(175,'2009-11-20 13:06:48',2,3,'43','mdillon',2,'No fields changed.'),(176,'2009-11-20 13:09:03',2,15,'44','James Zimmerman',1,''),(177,'2009-11-20 13:09:22',2,16,'37','James Zimmerman',1,''),(178,'2009-11-20 10:15:15',2,3,'44','zim',2,'No fields changed.'),(179,'2009-11-21 10:34:34',2,15,'26','Bernhard Votteri',2,'Changed mobile_phone.'),(180,'2009-11-23 20:14:14',2,15,'45','Peter Bullock',1,''),(181,'2009-11-23 20:14:32',2,15,'45','Peter Bullock',2,'Changed mobile_phone.'),(182,'2009-11-23 20:14:49',2,16,'38','Peter Bullock',1,''),(183,'2009-11-25 11:17:32',2,15,'46','Ellyn Bush',1,''),(184,'2009-11-25 11:17:52',2,16,'39','Ellyn Bush',1,''),(185,'2009-11-26 18:41:50',2,26,'7','Atherton Neurology, Menlo Park, CA',2,'Added mhl group member \"Ellyn Bush in group Atherton Neurology, Menlo Park, CA\".'),(186,'2009-11-26 18:45:12',2,15,'47','Anita Chandrasena',1,''),(187,'2009-11-26 18:45:47',2,16,'40','Anita Chandrasena',1,''),(188,'2009-11-26 18:46:44',2,26,'9','Redwood Pulmonary Medical Associates, Redwood City, CA',2,'Added mhl group member \"Anita Chandrasena in group Redwood Pulmonary Medical Associates, Redwood City, CA\".'),(189,'2009-11-26 18:51:15',2,15,'48','Duc Nguyen',1,''),(190,'2009-11-26 18:51:48',2,15,'48','Duc Nguyen',2,'Changed mobile_phone.'),(191,'2009-11-26 18:52:12',2,16,'41','Duc Nguyen',1,''),(192,'2009-11-26 18:56:25',2,15,'49','Scott Levenson',1,''),(193,'2009-11-26 18:56:48',2,16,'42','Scott Levenson',1,''),(194,'2009-11-26 18:58:27',2,26,'14','Digestive Care Medical Center - San Carlos CA',1,''),(195,'2009-11-26 19:02:22',2,15,'50','James Torosis',1,''),(196,'2009-11-26 19:02:46',2,16,'43','James Torosis',1,''),(197,'2009-11-26 19:03:03',2,26,'11','Peninsula Gastroenterology Medical Group',2,'Added mhl group member \"James Torosis in group Peninsula Gastroenterology Medical Group\".'),(198,'2009-11-26 19:05:50',2,15,'51','Chris Threatt',1,''),(199,'2009-11-26 19:06:24',2,16,'44','Chris Threatt',1,''),(200,'2009-11-26 19:06:39',2,26,'10','Peninsula Urology',2,'Added mhl group member \"Chris Threatt in group Peninsula Urology\".'),(201,'2009-11-26 19:07:35',2,3,'51','cthreatt',2,'Changed email.'),(202,'2009-11-26 19:11:11',2,15,'52','Gary Toig',1,''),(203,'2009-11-26 19:11:31',2,15,'52','Gary Toig',2,'Changed mobile_phone.'),(204,'2009-11-26 19:11:52',2,16,'45','Gary Toig',1,''),(205,'2009-11-26 19:15:11',2,15,'53','Jean Gillon',1,''),(206,'2009-11-26 19:15:34',2,16,'46','Jean Gillon',1,''),(207,'2009-11-28 17:05:49',2,15,'54','Mara Giattina',1,''),(208,'2009-11-28 17:06:22',2,16,'47','Mara Giattina',1,''),(209,'2009-11-28 20:06:45',2,26,'6','Cardiovascular Medicine - Redwood City',2,'Added mhl group member \"Mara Giattina in group Cardiovascular Medicine - Redwood City\".'),(210,'2009-11-28 17:10:29',2,15,'55','Gary Aron',1,''),(211,'2009-11-28 20:10:51',2,16,'48','Gary Aron',1,''),(212,'2009-11-28 17:15:23',2,15,'56','Randolph Chen',1,''),(213,'2009-11-28 20:15:49',2,16,'49','Randolph Chen',1,''),(214,'2009-11-30 08:00:54',2,15,'57','Jennifer Brown',1,''),(215,'2009-11-30 08:01:19',2,16,'50','Jennifer Brown',1,''),(216,'2009-11-30 08:02:11',2,15,'57','Jennifer Brown',2,'Changed mobile_phone.'),(217,'2009-11-30 08:02:38',2,26,'3','California Cancer Care',2,'Added mhl group member \"Jennifer Brown in group California Cancer Care\".'),(218,'2009-11-30 08:07:13',2,15,'58','Michael OHolleran',1,''),(219,'2009-11-30 08:07:44',2,16,'51','Michael OHolleran',1,''),(220,'2009-11-30 08:08:02',2,26,'13','O\'Holleran and O\'Holleran MDs ',2,'Added mhl group member \"Michael OHolleran in group O\'Holleran and O\'Holleran MDs \".'),(221,'2009-11-30 08:12:46',2,15,'59','Bruce Benedick',1,''),(222,'2009-11-30 08:13:08',2,16,'52','Bruce Benedick',1,''),(223,'2009-11-30 08:13:37',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Bruce Benedick in group Silicon Valley Cardiology\".'),(224,'2009-12-01 12:02:27',3,16,'None','Brian Kim',3,''),(225,'2009-12-01 12:02:45',3,34,'1','Brian Kim',1,''),(226,'2009-12-02 21:40:11',2,15,'60','Roger Kao',1,''),(227,'2009-12-02 21:40:40',2,16,'53','Roger Kao',1,''),(228,'2009-12-02 21:41:04',2,26,'14','Digestive Care Medical Center - San Carlos CA',2,'Added mhl group member \"Roger Kao in group Digestive Care Medical Center - San Carlos CA\".'),(229,'2009-12-03 11:42:04',3,18,'1','Brian Kim',1,''),(230,'2009-12-03 16:32:24',3,16,'54','Brian Kim',1,''),(231,'2009-12-03 13:33:15',3,27,'43','Brian Kim in group Sequoia Hospitalists - Redwood City',1,''),(232,'2009-12-03 13:34:31',3,27,'None','Brian Kim in group Sequoia Hospitalists - Redwood City',3,''),(233,'2009-12-04 09:29:59',2,15,'8','Paul Godin',2,'Changed sites.'),(234,'2009-12-06 19:30:55',2,15,'61','MArk Saleh',1,''),(235,'2009-12-06 22:31:35',2,16,'55','MArk Saleh',1,''),(236,'2009-12-06 22:32:08',2,15,'61','Mark Saleh',2,'Changed first_name.'),(237,'2009-12-06 19:32:35',2,26,'7','Atherton Neurology, Menlo Park, CA',2,'Added mhl group member \"Mark Saleh in group Atherton Neurology, Menlo Park, CA\".'),(238,'2009-12-06 19:38:21',2,7,'2','Scripps Memorial - Encinitas',1,''),(239,'2009-12-06 19:39:26',2,12,'13','Scripps Memorial - Encinitas',1,''),(240,'2009-12-06 19:42:16',2,15,'62','Eric  Lovell',1,''),(241,'2009-12-06 22:42:51',2,16,'56','Eric  Lovell',1,''),(242,'2009-12-08 13:23:35',3,15,'2','Michael Eiffert',2,'Changed pager.'),(243,'2009-12-10 23:08:48',2,15,'51','Chris Threatt',2,'Changed mobile_phone.'),(244,'2009-12-10 20:14:23',2,15,'59','Bruce Benedick',2,'Changed mobile_phone.'),(245,'2009-12-10 20:17:58',2,15,'43','Matthew Dillon',2,'Changed mobile_phone.'),(246,'2009-12-10 23:23:27',2,15,'63','Lisa  Boohar',1,''),(247,'2009-12-10 20:23:52',2,16,'57','Lisa  Boohar',1,''),(248,'2009-12-10 23:24:48',2,26,'15','Sequoia Radiation Oncology - Redwood City, CA',1,''),(249,'2009-12-10 20:29:00',2,26,'16','CEP - Sequoia ER - Redwood City, CA',1,''),(250,'2009-12-10 23:32:01',2,15,'64','George Oldham',1,''),(251,'2009-12-10 20:32:42',2,16,'58','George Oldham',1,''),(252,'2009-12-10 20:34:02',2,26,'16','CEP - Sequoia ER - Redwood City, CA',2,'Added mhl group member \"George Oldham in group CEP - Sequoia ER - Redwood City, CA\".'),(253,'2009-12-10 20:40:18',2,15,'65','Andrew Liu',1,''),(254,'2009-12-10 20:40:59',2,16,'59','Andrew Liu',1,''),(255,'2009-12-20 18:59:39',3,18,'2','Michael Eiffert',1,''),(256,'2010-01-28 09:48:06',2,15,'66','John Hoff',1,''),(257,'2010-01-28 09:48:33',2,16,'60','John Hoff',1,''),(258,'2010-01-28 09:51:43',2,15,'67','Hailing Fei',1,''),(259,'2010-01-28 09:52:07',2,16,'61','Hailing Fei',1,''),(260,'2010-01-28 15:11:18',9,27,'47','Rana Dutta in group Sequoia Hospitalists - Redwood City',1,''),(261,'2010-01-29 09:57:53',2,15,'68','Elaine Chien',1,''),(262,'2010-01-29 09:58:30',2,16,'62','Elaine Chien',1,''),(263,'2010-01-29 10:07:41',2,26,'17','Sequoia OB/GYN, Redwood City, CA',1,''),(264,'2010-01-29 10:43:08',2,15,'45','Peter Bullock',2,'Changed pager_extension.'),(265,'2010-01-29 10:44:20',2,15,'45','Peter Bullock',2,'Changed pager and pager_extension.'),(266,'2010-01-29 10:46:25',2,20,'3','Sequoia Anesthesia Consultants, Redwood City, CA',1,''),(267,'2010-01-29 10:49:20',2,20,'None','Sequoia Anesthesia Consultants, Redwood City, CA',3,''),(268,'2010-01-30 13:37:15',3,15,'2','Michael Eiffert',2,'Changed mobile_phone.'),(269,'2010-01-30 13:38:11',3,15,'2','Michael Eiffert',2,'Changed mobile_phone.'),(270,'2010-01-30 13:40:22',3,15,'3','Brian Kim',2,'Changed phone and mobile_phone.'),(271,'2010-01-30 13:40:27',3,15,'9','Rana Dutta',2,'Changed phone and mobile_phone.'),(272,'2010-01-30 13:43:34',3,15,'9','Rana Dutta',2,'Changed mobile_phone.'),(273,'2010-01-30 13:43:43',3,15,'3','Brian Kim',2,'Changed mobile_phone.'),(274,'2010-02-02 18:46:44',2,15,'69','Kent Adler',1,''),(275,'2010-02-02 18:47:02',2,16,'63','Kent Adler',1,''),(276,'2010-02-02 18:49:52',2,26,'3','California Cancer Care',2,'Added mhl group member \"Kent Adler in group California Cancer Care\".'),(277,'2010-02-02 18:56:55',2,26,'18','Sequoia Anesth. Consultants, Redwood City,CA',1,''),(278,'2010-02-02 18:58:25',2,15,'69','Kent Adler',2,'Changed sites.'),(279,'2010-02-02 19:00:11',2,15,'70','Jeffrey Shapiro',1,''),(280,'2010-02-02 19:00:43',2,16,'64','Jeffrey Shapiro',1,''),(281,'2010-02-02 19:01:25',2,26,'18','Sequoia Anesth. Consultants, Redwood City,CA',2,'Added mhl group member \"Jeffrey Shapiro in group Sequoia Anesth. Consultants, Redwood City,CA\".'),(282,'2010-02-02 19:07:27',2,12,'14','Stanford University Hospital',1,''),(283,'2010-02-02 19:07:57',2,15,'70','Jeffrey Shapiro',2,'Changed sites.'),(284,'2010-02-02 19:11:11',2,15,'71','Ariel Marks',1,''),(285,'2010-02-02 19:11:52',2,16,'65','Ariel Marks',1,''),(286,'2010-02-02 19:12:27',2,26,'16','CEP - Sequoia ER - Redwood City, CA',2,'Added mhl group member \"Ariel Marks in group CEP - Sequoia ER - Redwood City, CA\".'),(287,'2010-02-02 19:42:11',2,15,'20','Denise Brown',2,'Changed pager.'),(288,'2010-02-02 19:42:48',2,15,'42','Kristin Gershfield',2,'Changed pager.'),(289,'2010-02-02 19:43:59',2,26,'2','Sequoia Hospitalists - Redwood City',2,'Deleted mhl group member \"Rana Dutta in group Sequoia Hospitalists - Redwood City\".'),(290,'2010-02-02 19:44:09',2,26,'2','Sequoia Hospitalists - Redwood City',2,'No fields changed.'),(291,'2010-02-02 19:44:39',2,15,'10','Steve Vaughan',2,'Changed pager.'),(292,'2010-02-02 19:45:23',2,15,'27','Joanna Lin',2,'Changed pager.'),(293,'2010-02-02 19:45:57',2,15,'13','Neda  Pakdaman',2,'Changed pager.'),(294,'2010-02-02 19:47:04',2,15,'44','James Zimmerman',2,'Changed pager.'),(295,'2010-02-03 13:02:47',2,15,'72','Mofiz Haque',1,''),(296,'2010-02-03 13:03:13',2,16,'66','Mofiz Haque',1,''),(297,'2010-02-05 09:15:46',2,15,'73','Stanley Deresinski',1,''),(298,'2010-02-05 09:16:29',2,16,'67','Stanley Deresinski',1,''),(299,'2010-02-10 18:26:28',2,15,'74','Gregory Engel',1,''),(300,'2010-02-10 18:26:51',2,16,'68','Gregory Engel',1,''),(301,'2010-02-10 18:27:35',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Gregory Engel in group Silicon Valley Cardiology\".'),(302,'2010-02-10 18:32:07',2,15,'75','Dennis Sheehan',1,''),(303,'2010-02-10 18:32:26',2,16,'69','Dennis Sheehan',1,''),(304,'2010-02-10 18:32:49',2,26,'6','Cardiovascular Medicine - Redwood City',2,'Added mhl group member \"Dennis Sheehan in group Cardiovascular Medicine - Redwood City\".'),(305,'2010-02-10 18:33:29',2,15,'75','Dennis Sheehan',2,'Changed mobile_phone.'),(306,'2010-02-12 16:24:30',2,15,'5','John Nelligan',2,'Changed mobile_phone.'),(307,'2010-02-13 14:10:51',2,15,'72','Mofiz Haque',2,'Changed mobile_phone.'),(308,'2010-02-16 11:37:33',2,15,'21','Amy  Fenton',2,'Changed mobile_phone and pager.'),(309,'2010-03-01 07:14:45',2,26,'19','PAMF Nephrology',1,''),(310,'2010-03-01 07:19:30',2,15,'76','Vicky Yang',1,''),(311,'2010-03-01 07:19:54',2,16,'70','Vicky Yang',1,''),(312,'2010-03-01 07:20:38',2,26,'11','Peninsula Gastroenterology Medical Group',2,'Added mhl group member \"Vicky Yang in group Peninsula Gastroenterology Medical Group\".'),(313,'2010-03-01 07:26:00',2,15,'77','Graham Rodwell',1,''),(314,'2010-03-01 07:26:23',2,16,'71','Graham Rodwell',1,''),(315,'2010-03-01 07:27:01',2,26,'19','PAMF Nephrology',2,'Added mhl group member \"Graham Rodwell in group PAMF Nephrology\".'),(316,'2010-03-01 07:33:39',2,15,'78','Robert Pavy',1,''),(317,'2010-03-01 07:34:10',2,16,'72','Robert Pavy',1,''),(318,'2010-03-01 12:40:48',2,15,'28','Daniel Rengstorff',2,'Changed mobile_phone.'),(319,'2010-03-02 15:49:37',2,26,'20','Sequoia Orthopedic Group',1,''),(320,'2010-03-02 15:54:09',2,15,'79','Arati Dundar',1,''),(321,'2010-03-02 15:54:28',2,26,'20','Sequoia Orthopedic Group',2,'Added mhl group member \"Arati Dundar in group Sequoia Orthopedic Group\".'),(322,'2010-03-02 15:57:16',2,16,'73','Arati Dundar',1,''),(323,'2010-03-02 15:58:18',2,26,'21','Redwood City Women\'s Health',1,''),(324,'2010-03-02 16:00:17',2,15,'80','Julie OCallahan',1,''),(325,'2010-03-02 16:00:49',2,16,'74','Julie OCallahan',1,''),(326,'2010-03-02 16:01:05',2,26,'21','Redwood City Women\'s Health',2,'Added mhl group member \"Julie OCallahan in group Redwood City Women\'s Health\".'),(327,'2010-03-02 16:02:36',2,3,'80','jocall',2,'No fields changed.'),(328,'2010-03-05 11:57:32',2,15,'81','Hardwin Mead',1,''),(329,'2010-03-05 11:57:59',2,16,'75','Hardwin Mead',1,''),(330,'2010-03-05 11:58:24',2,26,'5','Silicon Valley Cardiology',2,'Added mhl group member \"Hardwin Mead in group Silicon Valley Cardiology\".'),(333,'2010-03-07 09:37:31',2,15,'83','James Tearse',1,''),(334,'2010-03-07 09:38:21',2,16,'76','James Tearse',1,''),(335,'2010-03-07 09:42:18',2,15,'84','Donna Nguyen',1,''),(336,'2010-03-07 09:42:38',2,29,'7','Donna Nguyen',1,''),(337,'2010-03-07 09:42:56',2,26,'9','Redwood Pulmonary Medical Associates, Redwood City, CA',2,'Added mhl group member \"Donna Nguyen in group Redwood Pulmonary Medical Associates, Redwood City, CA\".'),(338,'2010-03-07 09:46:06',2,15,'85','Michael Papalian',1,''),(339,'2010-03-07 09:46:41',2,16,'77','Michael Papalian',1,''),(340,'2010-03-07 19:55:50',2,15,'86','Eric Humke',1,''),(341,'2010-03-07 19:56:34',2,26,'22','Stanford Cancer Center',1,''),(342,'2010-03-08 22:34:36',2,15,'87','Toby Gottheiner',1,''),(343,'2010-03-08 22:35:26',2,16,'78','Toby Gottheiner',1,''),(344,'2010-03-08 22:35:45',2,26,'19','PAMF Nephrology',2,'Added mhl group member \"Toby Gottheiner in group PAMF Nephrology\".'),(345,'2010-03-08 22:40:49',2,15,'88','Luis Alvarez',1,''),(346,'2010-03-08 22:41:12',2,16,'79','Luis Alvarez',1,''),(347,'2010-03-08 22:42:03',2,26,'19','PAMF Nephrology',2,'Added mhl group member \"Luis Alvarez in group PAMF Nephrology\".'),(348,'2010-03-09 06:54:19',2,16,'80','Eric Humke',1,''),(349,'2010-03-09 07:03:00',2,26,'22','Stanford Cancer Center',2,'No fields changed.'),(350,'2010-03-26 06:37:15',2,12,'15','Strong Memorial',1,''),(351,'2010-03-26 06:37:45',2,26,'23','Strong Orthopedics',1,''),(353,'2010-03-26 06:46:31',3,3,'89','jgorczyca',3,''),(354,'2010-03-26 06:52:54',3,3,'90','jgorczyca',3,''),(355,'2010-03-26 07:24:09',2,26,'23','Strong Orthopedics',2,'Added mhl group member \"John Gorczyca in group Strong Orthopedics\".'),(356,'2010-03-26 07:28:14',3,15,'92','John Gorczyca',2,'Changed tos_accepted.'),(357,'2010-03-26 07:56:55',3,3,'91','jdoe',3,''),(358,'2010-03-26 08:02:08',3,3,'93','jdoe',3,''),(359,'2010-03-30 15:25:12',2,26,'17','Sequoia OB/GYN, Redwood City, CA',2,'Added mhl group member \"Jessica Wong in group Sequoia OB/GYN, Redwood City, CA\".'),(360,'2010-04-01 08:01:32',2,26,'3','California Cancer Care',2,'Added mhl group member \"Karen Chee in group California Cancer Care\".'),(361,'2010-04-02 10:15:00',2,26,'24','The Village Doctor',1,''),(362,'2010-04-08 20:33:42',2,26,'25','Santa Cruz Pulmonary Medical Group',1,''),(363,'2010-04-08 20:59:09',2,15,'100','Paul  Cipriano',2,'Changed sites.'),(364,'2010-04-08 21:01:17',2,15,'101','Edward Hahm',1,''),(365,'2010-04-08 21:01:35',2,29,'8','Edward Hahm',1,''),(366,'2010-04-09 11:37:41',3,15,'101','Edward Hahm',2,'Changed user.'),(367,'2010-04-29 13:25:49',3,18,'3','Rana Dutta',1,''),(368,'2010-05-09 13:52:54',2,12,'16','Methodist Hospital - Houston',1,''),(369,'2010-05-09 13:54:08',2,12,'17','Ben Taub General Hospital Houston',1,''),(370,'2010-05-09 14:25:53',2,12,'18','St Luke\'s Episcopal - Houston',1,''),(371,'2010-05-09 14:26:57',2,12,'19','Texas Children\'s Hospital',1,''),(372,'2010-05-09 14:28:34',2,12,'20','Michael Debakey VA',1,''),(373,'2010-05-14 10:46:44',2,15,'103','Jenny Lee',2,'Changed current_site and sites.'),(374,'2010-05-20 18:45:08',9,16,'93','rana-test dutta-test',3,''),(375,'2010-05-20 18:45:27',9,44,'7','rana-test dutta-test',3,''),(376,'2010-05-20 18:46:04',9,15,'105','rana-test dutta-test',3,''),(377,'2010-05-21 08:33:16',2,12,'21','Rochester General Hospital',1,''),(378,'2010-05-21 11:40:05',3,15,'3','Brian Kim',2,'Changed mdcom_phone.'),(379,'2010-05-21 11:44:20',3,15,'3','Brian Kim',2,'Changed mdcom_phone.'),(380,'2010-05-21 11:44:47',3,15,'3','Brian Kim',2,'Changed mobile_phone, phone and pager.'),(381,'2010-05-21 11:48:12',3,15,'3','Brian Kim',2,'Changed forward_other and forward_vmail.'),(382,'2010-05-21 11:58:34',3,15,'3','Brian Kim',2,'Changed mdcom_phone.'),(383,'2010-05-21 12:02:46',3,15,'3','Brian Kim',2,'Changed mdcom_phone.'),(384,'2010-05-25 16:37:43',9,15,'9','Rana Dutta',2,'Changed clinical_clerk.'),(385,'2010-06-07 09:27:12',2,12,'22','Scripps Memorial La Jolla',1,''),(386,'2010-06-10 09:16:57',2,12,'23','Sutter Delta',1,''),(387,'2010-06-10 16:03:38',2,12,'24','St Francis Hospital San Francisco',1,''),(388,'2010-06-10 16:03:56',2,12,'24','St Francis Memorial Hospital San Francisco',2,'Changed name.'),(389,'2010-06-16 09:13:25',3,15,'113','Victoria Williams',2,'Changed clinical_clerk.'),(390,'2010-06-16 09:13:36',3,15,'108','Andrew Parker',2,'Changed clinical_clerk.'),(391,'2010-08-20 14:21:30',2,3,'97','psangani',2,'Changed email.'),(392,'2010-09-14 19:00:07',3,13,'9','Rana Dutta',2,'Changed mobile_phone and address2.'),(393,'2010-09-14 19:01:29',3,15,'3','Brian Kim',2,'Changed clinical_clerk.'),(394,'2010-09-14 19:01:52',3,15,'9','Rana Dutta',2,'Changed forward_mobile and forward_other.'),(395,'2010-09-14 19:04:12',3,15,'9','Rana Dutta',2,'Changed mobile_phone, address2, forward_mobile and forward_other.');
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_braintree_paymentlog`
+--
+
+DROP TABLE IF EXISTS `django_braintree_paymentlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_braintree_paymentlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `amount` decimal(7,2) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `transaction_id` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id_refs_id_354c4cc` (`user_id`),
+  CONSTRAINT `user_id_refs_id_354c4cc` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_braintree_paymentlog`
+--
+
+LOCK TABLES `django_braintree_paymentlog` WRITE;
+/*!40000 ALTER TABLE `django_braintree_paymentlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_braintree_paymentlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_braintree_uservault`
+--
+
+DROP TABLE IF EXISTS `django_braintree_uservault`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_braintree_uservault` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `vault_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  UNIQUE KEY `vault_id` (`vault_id`),
+  CONSTRAINT `user_id_refs_id_2fb69280` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_braintree_uservault`
+--
+
+LOCK TABLES `django_braintree_uservault` WRITE;
+/*!40000 ALTER TABLE `django_braintree_uservault` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_braintree_uservault` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `app_label` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `app_label` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'permission','auth','permission'),(2,'group','auth','group'),(3,'user','auth','user'),(4,'message','auth','message'),(5,'content type','contenttypes','contenttype'),(6,'session','sessions','session'),(7,'site','sites','site'),(8,'log entry','admin','logentry'),(9,'login event','Logs','loginevent'),(10,'logout event','Logs','logoutevent'),(11,'site','MHLSites','site'),(12,'hospital','MHLSites','hospital'),(13,'mhl user','MHLUsers','mhluser'),(15,'provider','MHLUsers','provider'),(16,'physician','MHLUsers','physician'),(17,'nurse','MHLUsers','nurse'),(18,'administrator','MHLUsers','administrator'),(19,'patient','MHLUsers','patient'),(20,'physician group','MHLUsers','physiciangroup'),(21,'physician group members','MHLUsers','physiciangroupmembers'),(22,'event log','MHLUsers','eventlog'),(24,'message temp','DoctorCom','messagetemp'),(25,'message log','DoctorCom','messagelog'),(26,'mhl group','MHLGroups','mhlgroup'),(27,'mhl group member','MHLGroups','mhlgroupmember'),(29,'NP/PA','MHLUsers','np_pa'),(31,'click2 call_ log','DoctorCom','click2call_log'),(32,'contact','contactme','contact'),(33,'forgot password','contactme','forgotpassword'),(34,'office_ manager','MHLUsers','office_manager'),(35,'dietician','MHLUsers','dietician'),(36,'Office Staff','MHLUsers','officestaff'),(37,'pager log','DoctorCom','pagerlog'),(38,'twilio call gather test','tests','twiliocallgathertest'),(39,'twilio record test','tests','twiliorecordtest'),(40,'convergent test','tests','convergenttest'),(41,'doctor com c2c test','tests','doctorcomc2ctest'),(42,'doctor com pager test','tests','doctorcompagertest'),(43,'doctor com sms test','tests','doctorcomsmstest'),(44,'billing account','Billing','billingaccount'),(45,'vm message','IVR','vmmessage'),(46,'vm box_ config','IVR','vmbox_config'),(47,'call log','IVR','calllog'),(48,'number pool','NumberProvisioner','numberpool'),(49,'states','MHLUsers','states'),(50,'invitation','Invites','invitation'),(51,'invitation log','Invites','invitationlog'),(52,'minutes product','Billing','minutesproduct'),(53,'billing funds bucket','Billing','billingfundsbucket'),(54,'billing transaction','Billing','billingtransaction'),(55,'sender lookup','SMS','senderlookup'),(56,'call event','IVR','callevent'),(57,'call event target','IVR','calleventtarget'),(58,'salesperson','MHLUsers','salesperson'),(60,'pager daily summary','analytics','pagerdailysummary'),(61,'click2 call daily summary','analytics','click2calldailysummary'),(62,'message daily summary','analytics','messagedailysummary'),(63,'invite daily summary','analytics','invitedailysummary'),(64,'site analytics','DoctorCom','siteanalytics'),(65,'follow ups','followup','followups'),(66,'secure test message','KMS','securetestmessage'),(67,'private key','KMS','privatekey'),(68,'admin private key','KMS','adminprivatekey'),(69,'rsa pub key','KMS','rsapubkey'),(70,'rsa key pair','KMS','rsakeypair'),(71,'message','Messaging','message'),(72,'message body user status','Messaging','messagebodyuserstatus'),(73,'message body','Messaging','messagebody'),(74,'message attachment','Messaging','messageattachment'),(76,'practice holidays','MHLPractices','practiceholidays'),(77,'click2 call_ action log','DoctorCom','click2call_actionlog'),(78,'ans svc dl failure','IVR','anssvcdlfailure'),(79,'ans svc dl failure activity log','IVR','anssvcdlfailureactivitylog'),(80,'iv r_ prompt','IVR','ivr_prompt'),(81,'message recipient','Messaging','messagerecipient'),(82,'message cc','Messaging','messagecc'),(83,'callback log','Messaging','callbacklog'),(84,'message refer','Messaging','messagerefer'),(85,'message attachment dicom','Messaging','messageattachmentdicom'),(86,'speech config','speech','speechconfig'),(87,'neospeech config','speech','neospeechconfig'),(88,'voice clip','speech','voiceclip'),(89,'iv r_ private key','KMS','ivr_privatekey'),(90,'iv r_rsa pub key','KMS','ivr_rsapubkey'),(91,'iv r_rsa key pair','KMS','ivr_rsakeypair'),(92,'Log File','Logs','logfiles'),(93,'organization type','MHLPractices','organizationtype'),(94,'organization setting','MHLPractices','organizationsetting'),(95,'practice location','MHLPractices','practicelocation'),(96,'practice hours','MHLPractices','practicehours'),(97,'pending_ association','MHLPractices','pending_association'),(98,'log_ association','MHLPractices','log_association'),(99,'access number','MHLPractices','accessnumber'),(100,'account active code','MHLPractices','accountactivecode'),(101,'organization relationship','MHLPractices','organizationrelationship'),(102,'organization type subs','MHLPractices','organizationtypesubs'),(103,'organization member orgs','MHLPractices','organizationmemberorgs'),(104,'pending_ org_ association','MHLPractices','pending_org_association'),(105,'log_ org_ association','MHLPractices','log_org_association'),(106,'Partner','MHLUsers','partner'),(107,'quick signup user','MHLUsers','quicksignupuser'),(108,'broker','MHLUsers','broker'),(109,'Regional Manager','MHLUsers','regional_manager'),(110,'password reset log','MHLUsers','passwordresetlog'),(111,'security questions','MHLUsers','securityquestions'),(112,'products','Sales','products'),(113,'sales leads','Sales','salesleads'),(114,'sales product','Sales','salesproduct'),(115,'Partner Accounts','Partners','partneraccounts'),(116,'Partner IP','Partners','partnerip'),(117,'partner log','Partners','partnerlog'),(118,'smart phone assn','smartphone','smartphoneassn'),(119,'smart phone assn log','smartphone','smartphoneassnlog'),(120,'call group','MHLCallGroups','callgroup'),(121,'specialty','MHLCallGroups','specialty'),(122,'Call Group Member','MHLCallGroups','callgroupmember'),(123,'call group member pending','MHLCallGroups','callgroupmemberpending'),(124,'event entry','Scheduler','evententry'),(125,'validation','Validates','validation'),(126,'validation log','Validates','validationlog'),(127,'organization','MHLOrg','organization'),(128,'organization_ member','MHLOrg','organization_member'),(129,'pending_ organization','MHLOrg','pending_organization'),(130,'user vault','django_braintree','uservault'),(131,'payment log','django_braintree','paymentlog'),(132,'Account','genbilling','account'),(133,'Account Transaction','genbilling','accounttransaction'),(134,'Failed Charge Transaction','genbilling','failedtransaction'),(135,'Invoice','genbilling','invoice'),(136,'Subscription','genbilling','subscription');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `session_data` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `expire_date` datetime NOT NULL,
+  PRIMARY KEY (`session_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_session`
+--
+
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('558e3e6b63ab8306db2919efbd573266','NDBjNmZlNjViNzNiZTk5Y2RlOTFiYmExZjFkNjAzNWQyY2I4YzU4MzqAAn1xAShVDV9hdXRoX3Vz\nZXJfaWSKAQJVFHBhc3N3b3JkX2NoYW5nZV90aW1lY2RhdGV0aW1lCmRhdGV0aW1lCnECVQoHsgEB\nAAAAAAAAhVJxA1USX2F1dGhfdXNlcl9iYWNrZW5kVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tl\nbmRzLk1vZGVsQmFja2VuZFULTUhMX1VzZXJJRHN9cQQoVQlQaHlzaWNpYW6KAQFVDUFkbWluaXN0\ncmF0b3KKAQJVB01ITFVzZXKKAQJVCFByb3ZpZGVyigECdVUDa2V5VSxkV1JtVGplYUZzMUVSazlt\nc2lqYWhsNW51MXBldUdaVitQQXB1cjh1QUtvPXUu\n','2012-12-04 12:20:14');
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_site`
+--
+
+DROP TABLE IF EXISTS `django_site`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_site` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_site`
+--
+
+LOCK TABLES `django_site` WRITE;
+/*!40000 ALTER TABLE `django_site` DISABLE KEYS */;
+INSERT INTO `django_site` VALUES (1,'example.com','example.com'),(2,'Scripps Memorial - Encinitas','Scripps Memorial - Encinitas');
+/*!40000 ALTER TABLE `django_site` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `doctorcom_click2call_actionlog`
+--
+
+DROP TABLE IF EXISTS `doctorcom_click2call_actionlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `doctorcom_click2call_actionlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `click2call_log_id` int(11) NOT NULL,
+  `action` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `click2call_log_id_refs_id_7e052c49` (`click2call_log_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `doctorcom_click2call_actionlog`
+--
+
+LOCK TABLES `doctorcom_click2call_actionlog` WRITE;
+/*!40000 ALTER TABLE `doctorcom_click2call_actionlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `doctorcom_click2call_actionlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `followup_followups`
+--
+
+DROP TABLE IF EXISTS `followup_followups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `followup_followups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `done` tinyint(1) NOT NULL,
+  `priority` int(11) NOT NULL,
+  `task` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `due_date` datetime DEFAULT NULL,
+  `completion_date` datetime DEFAULT NULL,
+  `deleted` tinyint(1) NOT NULL,
+  `note` longtext COLLATE utf8_unicode_ci,
+  `content_type_id` int(11) DEFAULT NULL,
+  `object_id` int(10) unsigned DEFAULT NULL,
+  `update_timestamp` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `followup_followups_user_id` (`user_id`),
+  KEY `followup_followups_content_type_id` (`content_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `followup_followups`
+--
+
+LOCK TABLES `followup_followups` WRITE;
+/*!40000 ALTER TABLE `followup_followups` DISABLE KEYS */;
+INSERT INTO `followup_followups` VALUES (1,3,0,5,'Test item','2010-09-14 18:58:30','2010-09-16 00:00:00',NULL,1,'',NULL,NULL,'1970-01-01 00:00:00'),(2,3,1,5,'Followup on: asdfasdf...5432`1','2010-09-14 18:58:52','2010-09-14 00:00:00','2010-09-14 18:59:02',1,'lorem ipsum.',25,255,'1970-01-01 00:00:00'),(4,9,0,5,'buy some milk','2010-09-14 20:42:05','2010-09-14 00:00:00',NULL,0,'',NULL,NULL,'1970-01-01 00:00:00'),(5,3,0,5,'wefwef','2010-09-16 13:33:33','2010-09-20 00:00:00',NULL,0,'',NULL,NULL,'1970-01-01 00:00:00'),(6,3,0,5,'chrome test','2010-09-16 13:49:10','2010-09-15 00:00:00',NULL,0,'',NULL,NULL,'1970-01-01 00:00:00'),(7,2,0,5,'test','2010-09-16 16:02:06','2010-09-17 00:00:00',NULL,1,'',NULL,NULL,'1970-01-01 00:00:00');
+/*!40000 ALTER TABLE `followup_followups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `genbilling_account`
+--
+
+DROP TABLE IF EXISTS `genbilling_account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `genbilling_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_no` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `status` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `last_bill_date` datetime DEFAULT NULL,
+  `last_payment_state` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `created_on` datetime NOT NULL,
+  `last_modified` datetime NOT NULL,
+  `practice_group_new_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account_no` (`account_no`),
+  UNIQUE KEY `owner_id` (`owner_id`),
+  UNIQUE KEY `practice_group_new_id` (`practice_group_new_id`),
+  CONSTRAINT `owner_id_refs_id_fc9e2ad` FOREIGN KEY (`owner_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `practice_group_new_id_refs_id_081b30fc` FOREIGN KEY (`practice_group_new_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `genbilling_account`
+--
+
+LOCK TABLES `genbilling_account` WRITE;
+/*!40000 ALTER TABLE `genbilling_account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `genbilling_account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `genbilling_accounttransaction`
+--
+
+DROP TABLE IF EXISTS `genbilling_accounttransaction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `genbilling_accounttransaction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int(11) NOT NULL,
+  `reference_no` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `tx_type` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `amount` decimal(8,2) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `period_start` int(11) NOT NULL,
+  `period_end` int(11) NOT NULL,
+  `memo` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `reference_no` (`reference_no`),
+  KEY `genbilling_accounttransaction_6f2fe10e` (`account_id`),
+  CONSTRAINT `account_id_refs_id_3ce922f0` FOREIGN KEY (`account_id`) REFERENCES `genbilling_account` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `genbilling_accounttransaction`
+--
+
+LOCK TABLES `genbilling_accounttransaction` WRITE;
+/*!40000 ALTER TABLE `genbilling_accounttransaction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `genbilling_accounttransaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `genbilling_failedtransaction`
+--
+
+DROP TABLE IF EXISTS `genbilling_failedtransaction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `genbilling_failedtransaction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `accounttransaction_id` int(11) NOT NULL,
+  `response_code` int(11) NOT NULL,
+  `message` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `genbilling_failedtransaction_4db48d0b` (`accounttransaction_id`),
+  CONSTRAINT `accounttransaction_id_refs_id_393839f4` FOREIGN KEY (`accounttransaction_id`) REFERENCES `genbilling_accounttransaction` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `genbilling_failedtransaction`
+--
+
+LOCK TABLES `genbilling_failedtransaction` WRITE;
+/*!40000 ALTER TABLE `genbilling_failedtransaction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `genbilling_failedtransaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `genbilling_invoice`
+--
+
+DROP TABLE IF EXISTS `genbilling_invoice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `genbilling_invoice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `accounttransaction_id` int(11) NOT NULL,
+  `paid` tinyint(1) NOT NULL,
+  `failed` tinyint(1) NOT NULL,
+  `paymentlog_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `accounttransaction_id` (`accounttransaction_id`),
+  UNIQUE KEY `paymentlog_id` (`paymentlog_id`),
+  CONSTRAINT `accounttransaction_id_refs_id_2e3b5bc2` FOREIGN KEY (`accounttransaction_id`) REFERENCES `genbilling_accounttransaction` (`id`),
+  CONSTRAINT `paymentlog_id_refs_id_2f9f07e6` FOREIGN KEY (`paymentlog_id`) REFERENCES `django_braintree_paymentlog` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `genbilling_invoice`
+--
+
+LOCK TABLES `genbilling_invoice` WRITE;
+/*!40000 ALTER TABLE `genbilling_invoice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `genbilling_invoice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `genbilling_subscription`
+--
+
+DROP TABLE IF EXISTS `genbilling_subscription`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `genbilling_subscription` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `price` decimal(20,2) NOT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `created_on` datetime NOT NULL,
+  `last_modified` datetime NOT NULL,
+  `practice_location_id` int(11) DEFAULT NULL,
+  `practice_group_new_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `genbilling_subscription_44bdf3ee` (`product_id`),
+  KEY `genbilling_subscription_366c0f3e` (`practice_location_id`),
+  KEY `practice_group_new_id_refs_id_da5b35d9` (`practice_group_new_id`),
+  CONSTRAINT `practice_group_new_id_refs_id_da5b35d9` FOREIGN KEY (`practice_group_new_id`) REFERENCES `MHLPractices_practicelocation` (`id`),
+  CONSTRAINT `practice_location_id_refs_id_3f99c184` FOREIGN KEY (`practice_location_id`) REFERENCES `MHLPractices_practicelocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `genbilling_subscription`
+--
+
+LOCK TABLES `genbilling_subscription` WRITE;
+/*!40000 ALTER TABLE `genbilling_subscription` DISABLE KEYS */;
+/*!40000 ALTER TABLE `genbilling_subscription` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `logtailer_filter`
+--
+
+DROP TABLE IF EXISTS `logtailer_filter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logtailer_filter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
+  `regex` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logtailer_filter`
+--
+
+LOCK TABLES `logtailer_filter` WRITE;
+/*!40000 ALTER TABLE `logtailer_filter` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logtailer_filter` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `logtailer_logfile`
+--
+
+DROP TABLE IF EXISTS `logtailer_logfile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logtailer_logfile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logtailer_logfile`
+--
+
+LOCK TABLES `logtailer_logfile` WRITE;
+/*!40000 ALTER TABLE `logtailer_logfile` DISABLE KEYS */;
+INSERT INTO `logtailer_logfile` VALUES (1,'geocode','/workspace/mdcom/MHLogin/logfiles/utils/geocode.log');
+/*!40000 ALTER TABLE `logtailer_logfile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `logtailer_logsclipboard`
+--
+
+DROP TABLE IF EXISTS `logtailer_logsclipboard`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logtailer_logsclipboard` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
+  `notes` longtext COLLATE utf8_unicode_ci,
+  `logs` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `log_file_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `logtailer_logsclipboard_29dd0a2d` (`log_file_id`),
+  CONSTRAINT `log_file_id_refs_id_af50890a` FOREIGN KEY (`log_file_id`) REFERENCES `logtailer_logfile` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logtailer_logsclipboard`
+--
+
+LOCK TABLES `logtailer_logsclipboard` WRITE;
+/*!40000 ALTER TABLE `logtailer_logsclipboard` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logtailer_logsclipboard` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `remotelog_application`
+--
+
+DROP TABLE IF EXISTS `remotelog_application`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `remotelog_application` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `remotelog_application_a951d5d6` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `remotelog_application`
+--
+
+LOCK TABLES `remotelog_application` WRITE;
+/*!40000 ALTER TABLE `remotelog_application` DISABLE KEYS */;
+INSERT INTO `remotelog_application` VALUES (1,'analytics','analytics'),(2,'geocode','geocode');
+/*!40000 ALTER TABLE `remotelog_application` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `remotelog_logmessage`
+--
+
+DROP TABLE IF EXISTS `remotelog_logmessage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `remotelog_logmessage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `application_id` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `remote_ip` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `remote_host` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `levelno` int(11) NOT NULL,
+  `levelname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `module` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `filename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pathname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `funcName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `lineno` int(11) NOT NULL,
+  `msg` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `exc_info` longtext COLLATE utf8_unicode_ci,
+  `exc_text` longtext COLLATE utf8_unicode_ci,
+  `args` longtext COLLATE utf8_unicode_ci,
+  `threadName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `thread` double NOT NULL,
+  `created` double NOT NULL,
+  `process` int(11) NOT NULL,
+  `relativeCreated` double NOT NULL,
+  `msecs` double NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `remotelog_logmessage_398529ef` (`application_id`),
+  CONSTRAINT `application_id_refs_id_12f0475f` FOREIGN KEY (`application_id`) REFERENCES `remotelog_application` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `remotelog_logmessage`
+--
+
+LOCK TABLES `remotelog_logmessage` WRITE;
+/*!40000 ALTER TABLE `remotelog_logmessage` DISABLE KEYS */;
+/*!40000 ALTER TABLE `remotelog_logmessage` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `smartphone_smartphoneassn`
+--
+
+DROP TABLE IF EXISTS `smartphone_smartphoneassn`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `smartphone_smartphoneassn` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `device_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `device_serial` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `platform` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `secret` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `secret_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `password_reset` tinyint(1) NOT NULL,
+  `db_secret` longtext COLLATE utf8_unicode_ci,
+  `db_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `push_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_type` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `device_id` (`device_id`),
+  KEY `user_id_refs_user_ptr_id_577fbcca` (`user_id`),
+  CONSTRAINT `user_id_refs_user_ptr_id_577fbcca` FOREIGN KEY (`user_id`) REFERENCES `MHLUsers_mhluser` (`user_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `smartphone_smartphoneassn`
+--
+
+LOCK TABLES `smartphone_smartphoneassn` WRITE;
+/*!40000 ALTER TABLE `smartphone_smartphoneassn` DISABLE KEYS */;
+/*!40000 ALTER TABLE `smartphone_smartphoneassn` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `smartphone_smartphoneassnlog`
+--
+
+DROP TABLE IF EXISTS `smartphone_smartphoneassnlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `smartphone_smartphoneassnlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `device_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `serial` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `requesting_ip` char(15) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `action` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `smartphone_smartphoneassnlog`
+--
+
+LOCK TABLES `smartphone_smartphoneassnlog` WRITE;
+/*!40000 ALTER TABLE `smartphone_smartphoneassnlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `smartphone_smartphoneassnlog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `speech_neospeechconfig`
+--
+
+DROP TABLE IF EXISTS `speech_neospeechconfig`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `speech_neospeechconfig` (
+  `speechconfig_ptr_id` int(11) NOT NULL,
+  `server` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `server_port` int(10) unsigned NOT NULL,
+  `status_port` int(10) unsigned NOT NULL,
+  `admin_port` int(10) unsigned NOT NULL,
+  `voice_id` int(11) NOT NULL,
+  `encoding` int(11) NOT NULL,
+  `volume` int(10) unsigned NOT NULL DEFAULT '100',
+  `speed` int(10) unsigned NOT NULL DEFAULT '100',
+  `pitch` int(10) unsigned NOT NULL DEFAULT '100',
+  PRIMARY KEY (`speechconfig_ptr_id`),
+  CONSTRAINT `speechconfig_ptr_id_refs_id_d76601be` FOREIGN KEY (`speechconfig_ptr_id`) REFERENCES `speech_speechconfig` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `speech_neospeechconfig`
+--
+
+LOCK TABLES `speech_neospeechconfig` WRITE;
+/*!40000 ALTER TABLE `speech_neospeechconfig` DISABLE KEYS */;
+/*!40000 ALTER TABLE `speech_neospeechconfig` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `speech_speechconfig`
+--
+
+DROP TABLE IF EXISTS `speech_speechconfig`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `speech_speechconfig` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `spoken_lang` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `speech_speechconfig`
+--
+
+LOCK TABLES `speech_speechconfig` WRITE;
+/*!40000 ALTER TABLE `speech_speechconfig` DISABLE KEYS */;
+/*!40000 ALTER TABLE `speech_speechconfig` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `speech_voiceclip`
+--
+
+DROP TABLE IF EXISTS `speech_voiceclip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `speech_voiceclip` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `config_id` int(11) NOT NULL,
+  `filename` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `checksum` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `spoken_text` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `access_count` int(10) unsigned NOT NULL,
+  `access_date` datetime NOT NULL,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `config_id_refs_id_b570042e` (`config_id`),
+  CONSTRAINT `config_id_refs_id_b570042e` FOREIGN KEY (`config_id`) REFERENCES `speech_speechconfig` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `speech_voiceclip`
+--
+
+LOCK TABLES `speech_voiceclip` WRITE;
+/*!40000 ALTER TABLE `speech_voiceclip` DISABLE KEYS */;
+/*!40000 ALTER TABLE `speech_voiceclip` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tests_convergenttest`
+--
+
+DROP TABLE IF EXISTS `tests_convergenttest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tests_convergenttest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tester_id` int(11) NOT NULL,
+  `message` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `confirmations` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `success` int(11) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tests_convergenttest_tester_id` (`tester_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tests_convergenttest`
+--
+
+LOCK TABLES `tests_convergenttest` WRITE;
+/*!40000 ALTER TABLE `tests_convergenttest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tests_convergenttest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tests_doctorcomc2ctest`
+--
+
+DROP TABLE IF EXISTS `tests_doctorcomc2ctest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tests_doctorcomc2ctest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tester_id` int(11) NOT NULL,
+  `call_id` int(11) DEFAULT NULL,
+  `success` int(11) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tests_doctorcomc2ctest_tester_id` (`tester_id`),
+  KEY `tests_doctorcomc2ctest_call_id` (`call_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tests_doctorcomc2ctest`
+--
+
+LOCK TABLES `tests_doctorcomc2ctest` WRITE;
+/*!40000 ALTER TABLE `tests_doctorcomc2ctest` DISABLE KEYS */;
+INSERT INTO `tests_doctorcomc2ctest` VALUES (1,3,137,0,'2010-02-25 15:03:04');
+/*!40000 ALTER TABLE `tests_doctorcomc2ctest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tests_doctorcompagertest`
+--
+
+DROP TABLE IF EXISTS `tests_doctorcompagertest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tests_doctorcompagertest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tester_id` int(11) NOT NULL,
+  `page_id` int(11) DEFAULT NULL,
+  `success` int(11) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tests_doctorcompagertest_tester_id` (`tester_id`),
+  KEY `tests_doctorcompagertest_page_id` (`page_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tests_doctorcompagertest`
+--
+
+LOCK TABLES `tests_doctorcompagertest` WRITE;
+/*!40000 ALTER TABLE `tests_doctorcompagertest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tests_doctorcompagertest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tests_doctorcomsmstest`
+--
+
+DROP TABLE IF EXISTS `tests_doctorcomsmstest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tests_doctorcomsmstest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tester_id` int(11) NOT NULL,
+  `message_id` int(11) DEFAULT NULL,
+  `success` int(11) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tests_doctorcomsmstest_tester_id` (`tester_id`),
+  KEY `tests_doctorcomsmstest_message_id` (`message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tests_doctorcomsmstest`
+--
+
+LOCK TABLES `tests_doctorcomsmstest` WRITE;
+/*!40000 ALTER TABLE `tests_doctorcomsmstest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tests_doctorcomsmstest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tests_twiliocallgathertest`
+--
+
+DROP TABLE IF EXISTS `tests_twiliocallgathertest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tests_twiliocallgathertest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tester_id` int(11) NOT NULL,
+  `callid` varchar(34) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `debug_data` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `success` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tests_twiliocallgathertest_tester_id` (`tester_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tests_twiliocallgathertest`
+--
+
+LOCK TABLES `tests_twiliocallgathertest` WRITE;
+/*!40000 ALTER TABLE `tests_twiliocallgathertest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tests_twiliocallgathertest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tests_twiliorecordtest`
+--
+
+DROP TABLE IF EXISTS `tests_twiliorecordtest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tests_twiliorecordtest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tester_id` int(11) NOT NULL,
+  `callid` varchar(34) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `recordingurl` longtext COLLATE utf8_unicode_ci,
+  `debug_data` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tests_twiliorecordtest_tester_id` (`tester_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tests_twiliorecordtest`
+--
+
+LOCK TABLES `tests_twiliorecordtest` WRITE;
+/*!40000 ALTER TABLE `tests_twiliorecordtest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tests_twiliorecordtest` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2013-07-09 15:35:05

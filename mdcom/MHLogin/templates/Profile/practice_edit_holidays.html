@@ -1,0 +1,31 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="practiceHolidayEdit" class="ui-corner-all">
+	<h3>{% trans "Office Holidays" %}</h3>
+	<form method="post">
+	    <table class='tableProfile' cellspacing='0' cellpadding='0' width='700'>
+	    	<tr>
+	    		<th width='150'><label for="id_name">{% trans "Name:" %}</label></th>
+	    		<td width='250'>{{ form.name}}</td>
+	    		<td width='250'>&nbsp;</td>
+	    	</tr>
+	    	<tr>
+	    		<th><label for="id_designated_day_month">{% trans "Designated day:" %}</label></th>
+	    		<td>
+	    			{{ form.designated_day}}
+	    		</td>
+	    		<td>
+	    			{%if form.designated_day.errors%}
+	    			{{ form.designated_day.errors}}
+	    			{%else%}
+	    			&nbsp;
+	    			{%endif%}
+	    		</td>
+	    	</tr>
+		</table>
+	<input type="submit" value="{% trans 'Submit' %}">
+	</form>
+</div>
+{% endblock %}

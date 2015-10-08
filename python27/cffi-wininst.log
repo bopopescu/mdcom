@@ -1,0 +1,138 @@
+*** Installation started 2013/05/29 19:38 ***
+Source: C:\Users\mwang.KADA\Downloads\cffi-0.6.win32-py2.7.exe
+999 Root Key: HKEY_LOCAL_MACHINE
+020 Reg DB Key: [Software\Microsoft\Windows\CurrentVersion\Uninstall]cffi-py2.7
+040 Reg DB Value: [Software\Microsoft\Windows\CurrentVersion\Uninstall\cffi-py2.7]DisplayName=Python 2.7 cffi-0.6
+040 Reg DB Value: [Software\Microsoft\Windows\CurrentVersion\Uninstall\cffi-py2.7]UninstallString="C:\Python27\Removecffi.exe" -u "C:\Python27\cffi-wininst.log"
+200 File Copy: C:\Python27\Lib\site-packages\_cffi_backend.pyd
+100 Made Dir: C:\Python27\Lib\site-packages\cffi
+200 File Copy: C:\Python27\Lib\site-packages\cffi\api.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\backend_ctypes.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\commontypes.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\cparser.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\ffiplatform.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\gc_weakref.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\model.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\vengine_cpy.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\vengine_gen.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\verifier.py
+200 File Copy: C:\Python27\Lib\site-packages\cffi\__init__.py
+100 Made Dir: C:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info
+200 File Copy: C:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\dependency_links.txt
+200 File Copy: C:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\not-zip-safe
+200 File Copy: C:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\PKG-INFO
+200 File Copy: C:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\requires.txt
+200 File Copy: C:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\SOURCES.txt
+200 File Copy: C:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\top_level.txt
+200 File Copy: C:\Python27\Lib\site-packages\cffi\__init__.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\verifier.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\vengine_gen.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\vengine_cpy.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\model.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\gc_weakref.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\ffiplatform.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\cparser.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\commontypes.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\backend_ctypes.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\api.pyc
+200 File Copy: C:\Python27\Lib\site-packages\cffi\__init__.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\verifier.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\vengine_gen.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\vengine_cpy.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\model.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\gc_weakref.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\ffiplatform.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\cparser.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\commontypes.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\backend_ctypes.pyo
+200 File Copy: C:\Python27\Lib\site-packages\cffi\api.pyo
+*** Installation started 2013/07/18 11:25 ***
+Source: C:\Users\dlu\Downloads\cffi-0.6.win32-py2.7.exe
+999 Root Key: HKEY_LOCAL_MACHINE
+020 Reg DB Key: [Software\Microsoft\Windows\CurrentVersion\Uninstall]cffi-py2.7
+040 Reg DB Value: [Software\Microsoft\Windows\CurrentVersion\Uninstall\cffi-py2.7]DisplayName=Python 2.7 cffi-0.6
+040 Reg DB Value: [Software\Microsoft\Windows\CurrentVersion\Uninstall\cffi-py2.7]UninstallString="D:\Python27\Removecffi.exe" -u "D:\Python27\cffi-wininst.log"
+200 File Copy: D:\Python27\Lib\site-packages\cffi\api.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\backend_ctypes.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\commontypes.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\cparser.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\ffiplatform.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\gc_weakref.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\model.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_cpy.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_gen.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\verifier.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\__init__.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\dependency_links.txt
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\not-zip-safe
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\PKG-INFO
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\requires.txt
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\SOURCES.txt
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\top_level.txt
+200 File Copy: D:\Python27\Lib\site-packages\cffi\__init__.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\verifier.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_gen.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_cpy.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\model.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\gc_weakref.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\ffiplatform.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\cparser.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\commontypes.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\backend_ctypes.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\api.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\__init__.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\verifier.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_gen.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_cpy.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\model.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\gc_weakref.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\ffiplatform.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\cparser.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\commontypes.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\backend_ctypes.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\api.pyo
+*** Installation started 2013/07/18 11:25 ***
+Source: C:\Users\dlu\Downloads\cffi-0.6.win32-py2.7.exe
+999 Root Key: HKEY_LOCAL_MACHINE
+040 Reg DB Value: [Software\Microsoft\Windows\CurrentVersion\Uninstall\cffi-py2.7]DisplayName=Python 2.7 cffi-0.6
+040 Reg DB Value: [Software\Microsoft\Windows\CurrentVersion\Uninstall\cffi-py2.7]UninstallString="D:\Python27\Removecffi.exe" -u "D:\Python27\cffi-wininst.log"
+200 File Copy: D:\Python27\Lib\site-packages\_cffi_backend.pyd
+200 File Copy: D:\Python27\Lib\site-packages\cffi\api.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\backend_ctypes.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\commontypes.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\cparser.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\ffiplatform.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\gc_weakref.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\model.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_cpy.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_gen.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\verifier.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi\__init__.py
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\dependency_links.txt
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\not-zip-safe
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\PKG-INFO
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\requires.txt
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\SOURCES.txt
+200 File Copy: D:\Python27\Lib\site-packages\cffi-0.6-py2.7.egg-info\top_level.txt
+200 File Copy: D:\Python27\Lib\site-packages\cffi\__init__.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\verifier.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_gen.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_cpy.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\model.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\gc_weakref.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\ffiplatform.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\cparser.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\commontypes.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\backend_ctypes.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\api.pyc
+200 File Copy: D:\Python27\Lib\site-packages\cffi\__init__.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\verifier.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_gen.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\vengine_cpy.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\model.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\gc_weakref.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\ffiplatform.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\cparser.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\commontypes.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\backend_ctypes.pyo
+200 File Copy: D:\Python27\Lib\site-packages\cffi\api.pyo

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows total_count="{{ total }}" pos="{{ pos }}">
+{% for i in data %}
+    <row id="{{ i.id }}" style="{{i.style}}">
+        <cell>{{ i.is_active }}</cell>
+        <cell>{{ i.product.description }} </cell>
+        <cell>{{ i.product.price }}</cell>
+        <cell>{{ i.quoted_price }}</cell>
+    </row>
+{% endfor %}
+</rows>
+

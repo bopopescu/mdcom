@@ -1,0 +1,6 @@
+You've received a DoctorCom voicemail from {{caller}} on {%now "l, F jS"%} at {%now "g:i a"%}
+
+To check your voicemail box, just call your DoctorCom number from your mobile phone. If you haven't set up your voicemail box, you'll be prompted to do so first. Otherwise, just enter your PIN and follow the voice prompts to play your messages.
+
+
+You received this email because your voicemail notification preferences are set to deliver by email. To change your notification preferences, log into your DoctorCom account and in the 'Account' pull-down menu, choose 'Settings'.

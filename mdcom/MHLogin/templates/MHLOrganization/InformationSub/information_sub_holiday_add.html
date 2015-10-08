@@ -1,0 +1,37 @@
+{% load i18n %}
+
+{% include "MHLOrganization/InformationSub/org_sub_js.html" %}
+{% include "MHLOrganization/includes/organization_tabs.html" %}
+
+<div class="org-tab-content">
+	<div id="practiceHolidayEdit" class="ui-corner-all">
+		<div>
+			<input id="ivrBack" type="button" value="Back">
+		</div>
+		<h3>{% trans "Office Holidays" %}</h3>
+		<form id="holidayForm" method="post">
+			<input type="hidden" id="holiday_id" name="holiday_id" value="{{holiday_id}}"/>
+		    <table class='tableProfile' cellspacing='0' cellpadding='0' width='700'>
+		    	<tr>
+		    		<th width='150'><label for="id_name">{% trans "Name:" %}</label></th>
+		    		<td width='250'>{{ form.name}}</td>
+		    		<td width='250'>&nbsp;</td>
+		    	</tr>
+		    	<tr>
+		    		<th><label for="id_designated_day_month">{% trans "Designated day:" %}</label></th>
+		    		<td>
+		    			{{ form.designated_day}}
+		    		</td>
+		    		<td>
+		    			{%if form.designated_day.errors%}
+		    			{{ form.designated_day.errors }}
+		    			{%else%}
+		    			&nbsp;
+		    			{%endif%}
+		    		</td>
+		    	</tr>
+			</table>
+		<input id="holidaySave" type="button" value="{% trans 'Submit' %}">
+		</form>
+	</div>
+</div>

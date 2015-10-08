@@ -1,0 +1,42 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}New Invitation{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+
+{% if isCancel %}
+<h1>{% trans "Cancel Invitation" %}</h1>
+<h3>{% trans "Are you sure you want to cancel the following invitation?" %}</h3>
+{% else %}
+<h1>{% trans "Resend Invitation" %}</h1>
+<div class="errorlist">{{err}}</div>
+<h3>{% trans "Are you sure you want to resend the following invitation?" %}</h3>
+{% endif %}
+<table class='dcAdminTable' cellspacing='0' cellpadding='0'>
+<tr>
+    <th>{% trans "Recipient" %}</th>
+    <th>{% trans "Timestamp" %}</th>
+    <th>{% trans "User Type" %}</th>
+    <th>{% trans "Verified?" %}</th>
+    <th>{% trans "Inviter" %}</th>
+</tr>
+<tr>
+    <td>{{invite.recipient}}</td>
+    <td>{{invite.requestTimestamp|date:"m/d/Y H:i"}}</td>
+    <td>{{invite.get_userType_display}}</td>
+    <td>{% if invite.typeVerified %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
+    <td>{{invite.sender.first_name}} {{invite.sender.last_name}}</td>
+</tr>
+</table>
+<form action="." method="POST" class='cancelConfirm'>
+    <a href="/dcAdmin/Brokers/">{% trans "No" %}</a>|<input type="submit" value='{% trans "Yes" %}' />
+</form>
+</div>
+{% endblock %}

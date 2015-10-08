@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.3  (Unix)">
+	<META NAME="CREATED" CONTENT="20071022;7211900">
+	<META NAME="CHANGEDBY" CONTENT="Kurt Vogel">
+	<META NAME="CHANGED" CONTENT="20120508;17421300">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in; direction: ltr; color: #000000; widows: 0; orphans: 0 }
+		P.western { font-family: "Times New Roman", serif; font-size: 11pt; so-language: en-US }
+		P.cjk { font-family: "Tahoma"; font-size: 11pt; so-language: zxx }
+		P.ctl { font-family: "Tahoma"; font-size: 12pt; so-language: zxx }
+		H1 { margin-bottom: 0.08in; direction: ltr; color: #000000; widows: 0; orphans: 0 }
+		H1.western { font-family: "Arial", sans-serif; font-size: 12pt; so-language: en-US }
+		H1.cjk { font-family: "MS Mincho"; font-size: 12pt; so-language: zxx }
+		H1.ctl { font-family: "Tahoma"; font-size: 16pt; so-language: zxx }
+		H2 { margin-top: 0.08in; margin-bottom: 0.04in; direction: ltr; color: #000000; widows: 0; orphans: 0; text-decoration: underline }
+		H2.western { font-family: "Arial", sans-serif; font-size: 10pt; so-language: en-US; font-style: normal }
+		H2.cjk { font-family: "MS Mincho"; font-size: 10pt; so-language: zxx; font-style: normal }
+		H2.ctl { font-family: "Tahoma"; font-size: 14pt; so-language: zxx; font-style: italic }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" TEXT="#000000" DIR="LTR">
+<P ALIGN=CENTER STYLE="margin-top: 0.17in; page-break-after: avoid"><FONT FACE="Arial, sans-serif"><FONT SIZE=5><B>DoctorCom
+Map Analytics Design Document</B></FONT></FONT></P>
+<P ALIGN=CENTER STYLE="margin-left: 1in; margin-right: 1in; margin-top: 0.04in; margin-bottom: 0.04in">
+<FONT FACE="Arial Bold, sans-serif"><FONT SIZE=2><B>Mapping Analytics
+provides internal functionality using Google Maps API to display
+client locations, relationships, and filters.</B></FONT></FONT></P>
+<H1 CLASS="western">Overview</H1>
+<P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">The purpose
+of this document explains the mapping feature in detail for
+administrators and sales employees.  </FONT>
+</P>
+<P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Mapping
+client data provides:</FONT></P>
+<OL>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Quick
+	visual summary of client locations.</FONT></P>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Relationships
+	between clients on the map, who communicates with who.</FONT></P>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">The
+	mapping analytics builds on the database of user data we currently
+	store about each client.  </FONT>
+	</P>
+</OL>
+<H1 CLASS="western">Requirements</H1>
+<P CLASS="western">The following items are requirements for the
+DoctorCom mapping feature.</P>
+<OL>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Admin
+	access to DoctorCom website.</FONT></P>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Internet
+	access for access to Google Mapping API.</FONT></P>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Client
+	web browser must support Javascript 1.5 or later</FONT></P>
+	<OL>
+		<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Optional
+		client web browser must support HTML 5 for current location. </FONT><FONT SIZE=2 STYLE="font-size: 11pt"><SPAN STYLE="font-style: normal"><SPAN STYLE="font-weight: normal">
+		 </SPAN></SPAN></FONT>
+		</P>
+	</OL>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Secure
+	HTTPS communication to server and HIPPA compliant.</FONT></P>
+	<OL>
+		<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">All
+		client private messages and emails are encrypted, only client
+		location and relationships are indicated in analytics. <SPAN STYLE="font-style: normal"><SPAN STYLE="font-weight: normal">
+		</SPAN></SPAN></FONT>
+		</P>
+	</OL>
+</OL>
+<P CLASS="western">Out of scope:</P>
+<OL>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Future
+	feature requests and bug fixes.</FONT></P>
+</OL>
+<H1 CLASS="western">Customer/Client Usage</H1>
+<P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">This feature
+is only available to Administration for internal tracking of our
+clients.</FONT></P>
+<H1 CLASS="western">Design</H1>
+<P CLASS="western">The analytics mapping design is built upon the
+Google Maps API and the existing data stored about clients in the
+database.  Google API provides the visual map and plotting of user
+data (eg. pins) where the current client practices either a hospital,
+office, or both.  Along with the marking for each client on the map a
+detailed synopsis of each client is displayed when the Administrator
+clicks on the client data.  When hovering the mouse over a client on
+the map their full name along with title is displayed. 
+</P>
+<P CLASS="western">The design relies heavily on Javascript on the
+front end on the web browser.  The backend is handled by Django
+requests to our MySQL database.  
+</P>
+<H2 CLASS="western" STYLE="font-weight: normal">Internals:</H2>
+<UL>
+	<LI><P CLASS="western">How client locations are plotted on the
+	Google Map.  When a client creates or updates their information
+	including address a request goes out to Google to get their
+	address(es) converted into latitude and longitude coordinates. 
+	These coordinates are then stored in the database as a cache so that
+	plotting them on the map is fast.  When a user updates their profile
+	including and address change their corresponding latitude and
+	longitude values are automatically updated.</P>
+	<LI><P CLASS="western">How current location is determined.  If the
+	client wishes and their web browser supports HTML5 the current
+	location is also plotted.  This can be useful when traveling and
+	using a smartphone or tablet type device.</P>
+	<LI><P CLASS="western">How filtering is done.  An administrator may
+	only want to see physicians or physicians of a certain type, or
+	physicians within 100 mile radius of the current location, for
+	example.  Filtering is provided by Javascript sending events back to
+	the server with requests on choice of filter.</P>
+	<LI><P CLASS="western">Relationships are indicated by connecting
+	lines between clients.  No personal information is shown or known by
+	administrators.  Since connections can make the map cluttered this
+	filter is off by default. When on and zoomed out minimal connecting
+	lines are shown.</P>
+</UL>
+<P CLASS="western"><BR><BR>
+</P>
+<H2 CLASS="western" STYLE="font-weight: normal">Future additional
+features:</H2>
+<P CLASS="western" STYLE="font-weight: normal"><BR><BR>
+</P>
+<P CLASS="western" STYLE="font-weight: normal">TBD.</P>
+<H1 CLASS="western">Implementation</H1>
+<P CLASS="western">Implementation is divided into two parts: client
+side and server side.</P>
+<UL>
+	<LI><P CLASS="western">Client side implementation is in Javascript
+	and HTML.  Before the mapping analytics pages are rendered on the
+	client the server uses in conjunction: Python's Django, MySQL, and
+	templates to generate the Javascript page sent to the client.</P>
+	<LI><P CLASS="western">Server side implementation is in Python 2.6
+	using Django as the database interface to MySQL.  The web server
+	runs Apache on the Linux platform. 
+	</P>
+</UL>
+<P CLASS="western">The analytics map page is lightweight in that it
+knows nothing about the database.  All it is given is user name,
+phone, address, and latitude and longitude coordinates.  The queries
+are all done server side and minimal data is sent over the wire
+between the client and server.</P>
+<H1 CLASS="western">Testing</H1>
+<P CLASS="western">Testing is performed with real world data. 
+Latitude and longitude coordinates are generated from actual
+addresses and those coordinates back into addresses.  For invalid
+addresses or if a client did not enter in an address the default
+location is coordinate 0,0.  
+</P>
+<P CLASS="western">TODO: For clients with invalid addresses we should
+log on the screen a message indicating this warning.   
+</P>
+<H1 CLASS="western">Compatibility and Dependencies</H1>
+<P CLASS="western">No compatibility issues at this time as long as
+requirements are met on the client side.  Server side dependencies
+are the responsibility of the developers.</P>
+<H1 CLASS="western">Documentation</H1>
+<P CLASS="western">What documentation needs to be updated on the web
+site?  What samples need to be updated?  What wiki docs (public or
+internal) need to be changed.  List them here (with JIRAs if broken
+out).</P>
+<H1 CLASS="western">Issues 
+</H1>
+<OL>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Warning
+	for clients with invalid or empty addresses instead of pinning them
+	at location 0,0 which is in the equatorial region of Africa. </FONT>
+	</P>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Different
+	pins for doctors, managers, office staff, hospitals.</FONT></P>
+	<LI><P CLASS="western"><FONT SIZE=2 STYLE="font-size: 11pt">Enhance
+	performance by making Django query only return user data displayed
+	on client side.</FONT></P>
+</OL>
+<H1 CLASS="western">Future Directions</H1>
+<P CLASS="western">This section lists future ways this feature/task
+could be extended even further either to address issues with the
+current design that could not be addressed within the scope of this
+release, or just wild ideas that came up while thinking about the
+feature.  
+</P>
+<P CLASS="western">Often, this section will include items defined
+above in the “Out of scope” section.  Items here may refer to
+JIRAs recording future extensions if they exist.  
+</P>
+<H1 CLASS="western">Alternative Approaches</H1>
+<P CLASS="western">This section lists alternative design or
+implementation choices that were considered but rejected.  This is
+helpful during the design process to a reviewer of this design note
+to know that an approach was at least considered but rejected for
+some reason and why.  It is also helpful at a future date when
+someone (field, customer, new developer) asks why a feature was
+implemented in a particular way. 
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<H1 CLASS="western" STYLE="margin-top: 0in">Mapping Analytics in
+action: Screenshots</H1>
+<P CLASS="western">The following screenshots show the different style
+of maps currently provided.  Also clicking on a client's location
+will bring up their address and important numbers.</P>
+<P CLASS="western"><SPAN ID="Frame4" DIR="LTR" STYLE="float: left; width: 6.93in; height: 6.29in; border: none; padding: 0in; background: #ffffff">
+	<P STYLE="margin-top: 0.08in"><IMG SRC="analytics_map_html_946b7ec.png" NAME="graphics1" ALIGN=LEFT WIDTH=100% BORDER=0><BR CLEAR=LEFT><FONT SIZE=3><I>Illustration
+	1: Basic map showing client locations.</I></FONT></P>
+</SPAN><BR CLEAR=LEFT><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><SPAN ID="Frame5" DIR="LTR" STYLE="float: left; width: 6.93in; height: 6.29in; border: none; padding: 0in; background: #ffffff">
+	<P STYLE="margin-top: 0.08in"><IMG SRC="analytics_map_html_15c30486.png" NAME="graphics2" ALIGN=LEFT WIDTH=100% BORDER=0><BR CLEAR=LEFT><FONT SIZE=3><I>Illustration
+	2: Terrain map showing client locations.</I></FONT></P>
+</SPAN><BR CLEAR=LEFT><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><SPAN ID="Frame6" DIR="LTR" STYLE="float: left; width: 6.93in; height: 6.27in; border: none; padding: 0in; background: #ffffff">
+	<P STYLE="margin-top: 0.08in"><IMG SRC="analytics_map_html_76d92c7c.png" NAME="graphics3" ALIGN=LEFT WIDTH=100% BORDER=0><BR CLEAR=LEFT><FONT SIZE=3><I>Illustration
+	3: Satellite map showing client locations.</I></FONT></P>
+</SPAN><BR CLEAR=LEFT><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<DIV TYPE=FOOTER>
+	<P STYLE="margin-top: 0.31in; margin-bottom: 0in"><FONT SIZE=2><I>Last
+	updated: <SDFIELD TYPE=DOCINFO SUBTYPE=CHANGE FORMAT=AUTHOR>Kurt Vogel</SDFIELD>		Page
+	<SDFIELD TYPE=PAGE SUBTYPE=RANDOM FORMAT=PAGE></SDFIELD>/<SDFIELD TYPE=DOCSTAT SUBTYPE=PAGE FORMAT=ARABIC>6</SDFIELD></I></FONT></P>
+</DIV>
+</BODY>
+</HTML>

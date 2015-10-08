@@ -1,0 +1,80 @@
+{% load i18n %}
+
+<div class="content">
+{% if org_count > 0 %}
+	<div class="text8 text9">{% trans "We found " %} {{org_count}} {% trans " organization match this condition." %}</div>
+	<div class="text8 text4 text10">{% trans "Please choose one organization and then click send button." %}</div>
+	<table id="org_result_table" class="result_table" width="100%" cellpadding="0" cellspacing="0">
+		{% for org in org_list %}
+		<tr org_id="{{org.id}}" onclick="setSelect(this)">
+			<td class="photo {% if forloop.first %} first{% endif %}">
+				<img style="max-width:100px; max-height:30px;" src="{{org.practice_photo}}">
+			</td>
+			<td class="name {% if forloop.first %} first{% endif %}">
+				{{org.practice_name}}&nbsp;
+			</td>
+			<td class="address {% if forloop.first %} first{% endif %}">
+				{{org.practice_address1}} {{org.practice_city}} {{org.practice_state}} {{org.practice_zip}}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<div class="no_records">
+		{% trans "We can not find any organization matching the conditions." %}
+	</div>
+{% endif%}
+</div>
+
+<div class="buttons">
+	{% if org_count %}
+	<input type="button" id="inviteStep3" class="org_inf_btn" value="{% trans 'Send' %}">
+	{% endif %}
+	<input type="button" id="backToSearch" class="org_inf_btn" value="{% trans 'Back' %}">
+</div>
+
+<script>
+$(function(){
+	{% if org_count > 0%}
+		var oTable1 = $('#org_result_table').dataTable({
+			"aoColumns": [
+				{"bSearchable": false},
+				{"bSearchable": false},
+				{"bSearchable": false},
+			],
+			"sPaginationType": "full_numbers",
+			"bSort": false,
+			"sDom": 'rtp<"clear">'
+		});
+	{% endif %}
+
+	$("#backToSearch").click(function(){
+		$("#search_org_result").hide();
+		$("#search_org_panel").show();
+	});
+
+	$("#inviteStep3").click(function(){
+		var sel_org_id = $("#org_result_table tr[selected='selected']").attr("org_id");
+		if (sel_org_id) {
+			$.comAjax({
+				url: "/Organization/MemberOrg/InviteStep3/",
+				type:'POST',
+				data: {"sel_org_id": sel_org_id},
+				success:function(data, status){
+					$("#search_org_result").hide();
+					$("#congratulation_panel").html(data);
+					$("#congratulation_panel").show();
+				}
+			});
+		} else {
+			alert('{% trans "Please chose one organization." %}');
+		}
+	});
+});
+
+function setSelect(obj) {
+	$("#org_result_table tr").removeAttr("selected").removeClass("selected");
+	var jObj = $(obj);
+	jObj.attr("selected", 'selected').addClass("selected");
+}
+</script>

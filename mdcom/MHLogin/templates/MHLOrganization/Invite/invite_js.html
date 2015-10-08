@@ -1,0 +1,381 @@
+{% load i18n %}
+<script>
+	$(function(){
+		InvitationRefresh();
+	});
+
+	function InvitationRefresh(){
+		getDoctorcomInvitation();
+		getPracticeRequest();
+	}
+
+	function getDoctorcomInvitation(index){
+		if(index == undefined){
+			index = 0;
+		}
+
+		$.comAjax({
+			url:'/Organization/Member/AJAX/getInvitations/',
+			data: {index: index},
+			success:function(data, textStatus){
+				if(textStatus == 'success'){
+					$('.staffer-bottom  .requests-content .requests').html(data.html);
+					$('.staffer-bottom .switch .prev').attr('class', 'prev').addClass(data.prev_class);
+					$('.staffer-bottom .switch .next').attr('class', 'next').addClass(data.next_class);
+					$('.staffer-bottom .switch .prev').attr('index', data.index);
+					$('.staffer-bottom .switch .next').attr('index', data.index);
+
+					if (!data.prev_class){
+						$('.staffer-bottom .switch .prev').unbind('click').click(function(){
+							var index =parseInt($(this).attr('index'))-1
+							getDoctorcomInvitation(index);
+						});
+					}
+
+					if (!data.next_class){
+						$('.staffer-bottom .switch .next').unbind('click').click(function(){
+							var index =parseInt($(this).attr('index'))+1
+							getDoctorcomInvitation(index);
+						});
+					}
+
+					$('.staffer-bottom .requests-content .requests .resend').unbind('click').click(function(){
+						var id = $(this).parent().attr("rid");
+						var name = $(this).parent().parent().find('.user-name').text();
+						var html = '';
+						html += '<div class="text">{% trans "Note to Recipient: (Optional)" %}</div>';
+						html += '<textarea name="msg" id="id_msg"></textarea><br />';
+						html += '<div class="text1">{% trans "Are you sure you would like to resend the invitation to " %}'+name+'?</div>'; 
+						var msg = $('#id_msg').val();
+						showSimpleDialog({
+							title: '{% trans "Resend Invitation" %}',
+							content: html,
+							height:265,
+							dc_buttons: {
+								'Yes': {
+									'click': function() {
+										$( this ).dialog( "close" );
+										resendDoctorInvitation(id, msg);
+									},
+									'text': '{% trans "Yes" %}',
+									'class': 'positive-btn'
+								},
+								'{% trans "No" %}': function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
+					});
+				
+					//cancel one invitation
+					$('.staffer-bottom .requests-content .requests .cancel').unbind('click').click(function(){ //TODO
+						var type = $(this).parent().attr("type");
+						var name = $(this).parent().parent().find('.user-name').text();
+						var html = '{% trans "Are you sure you want to rescind the invitation to %s?" %}'.sprintf(name);
+						showSimpleDialog({
+							title: '{% trans "Cancel Invitation" %}',
+							content: html,
+							dc_buttons: {
+								'Yes': {
+									'click': function() {
+										$( this ).dialog( "close" );
+										$.comAjax({
+											url:'/Organization/Member/AJAX/cancelInvitation/',
+											data:{
+												type:type,
+												email:name
+											},
+											type:'POST',
+											success:function(data, txtStatus){
+												if(txtStatus=='success'){
+													$('#inviteDialog').dialog('close');
+													//initData();
+													getDoctorcomInvitation(index);
+												}
+											},
+											error:function(data, txtStatus){
+												alert(MESSAGE.STAFFHOME_CANCEL_INVITATION_AJAX_ERROR);
+											}
+										});
+									},
+									'text': '{% trans "Yes" %}',
+									'class': 'positive-btn'
+								},
+								'{% trans "No" %}': function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
+					});
+				}
+			},
+			error:function(data, textStatus){
+				if(data.status!=200){
+					alert(MESSAGE.STAFFHOME_GET_INVITATION_AJAX_ERROR);
+				}
+			}
+		});
+	};
+
+	function getPracticeRequest(index){
+		if(index == undefined){
+			index = 0;
+		}
+
+		$.comAjax({
+			url:'/Organization/Member/AJAX/GetInvitePending/',
+			type:'POST',
+			data: {index: index},
+			success:function(data, textStatus){
+				if(textStatus == 'success'){
+					$('.staffer-top .requests-content .requests').html(data.html);
+					$('.staffer-top .switch .prev').attr('class', 'prev').addClass(data.prev_class);
+					$('.staffer-top .switch .next').attr('class', 'next').addClass(data.next_class);
+					$('.staffer-top .switch .prev').attr('index', data.index);
+					$('.staffer-top .switch .next').attr('index', data.index);
+
+					if (!data.prev_class){
+						$('.staffer-top .switch .prev').unbind('click').click(function(){
+							var index =parseInt($(this).attr('index'))-1
+							getPracticeRequest(index);
+						});
+					}
+
+					if (!data.next_class){
+						$('.staffer-top .switch .next').unbind('click').click(function(){
+							var index =parseInt($(this).attr('index'))+1
+							getPracticeRequest(index);
+						});
+					}
+
+					$('.staffer-top .requests-content .requests .reject').unbind('click').click(function(){
+						var assoc_id = $(this).parent().attr('assoc_id');
+						var name = $(this).parent().parent().find('.name .text').text().replace(',',' ');
+						var html = '{% trans "Are you sure you would like to reject the join request from %s?" %}'.sprintf(name);
+						showSimpleDialog({
+							title: '{% trans "Reject" %}',
+							content: html,
+							dc_buttons: {
+								'Reject': {
+									'click': function() {
+										$( this ).dialog( "close" );
+										rejectPracticeJoin(assoc_id);
+									},
+									'text': '{% trans "Reject" %}',
+									'class': 'positive-btn'
+								},
+								'{% trans "Cancel" %}': function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
+					});
+
+					$('.staffer-top .requests-content .requests .accept').unbind('click').click(function(){
+						var assoc_id = $(this).parent().attr('assoc_id');
+						var pract_id = $(this).parent().attr('pract_id');
+						var name = $(this).parent().parent().find('.name .text').text().replace(',',' ');
+
+						var html = '{% trans "Are you sure you would like to accept the request from %s?" %}'.sprintf(name);
+						showSimpleDialog({
+							title: '{% trans "Accept" %}',
+							content: html,
+							dc_buttons: {
+								'Accept': {
+									'click': function() {
+										$( this ).dialog( "close" );
+										acceptPracticeJoin(assoc_id);
+									},
+									'text': '{% trans "Accept" %}',
+									'class': 'positive-btn'
+								},
+								'{% trans "Cancel" %}': function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
+					});
+
+					$('.staffer-top .requests-content .requests .resend').unbind('click').click(function(){
+						var assoc_id = $(this).parent().attr('assoc_id');
+						var pract_id = $(this).parent().attr('pract_id');
+						var name = $(this).parent().parent().find('.name .text').text().replace(',',' ');
+						var html = '{% trans "Are you sure you would like to resend the invitation to %s?" %}'.sprintf(name);
+						showSimpleDialog({
+							title: '{% trans "Resend" %}',
+							content: html,
+							dc_buttons: {
+								'Resend': {
+									'click': function() {
+										$( this ).dialog( "close" );
+										resendJoinRequest(assoc_id);
+									},
+									'text': '{% trans "Resend" %}',
+									'class': 'positive-btn'
+								},
+								'{% trans "Cancel" %}': function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
+					});
+					
+					$('.staffer-top .requests-content .requests .cancel').unbind('click').click(function(){
+						var assoc_id = $(this).parent().attr('assoc_id');
+						var pract_id = $(this).parent().attr('pract_id');
+						var name = $(this).parent().parent().find('.name .text').text().replace(',',' ');
+						var html = '{% trans "Are you sure you would like to withdraw the invitation to %s?" %}'.sprintf(name);
+						showSimpleDialog({
+							title: '{% trans "Cancel" %}',
+							content: html,
+							dc_buttons: {
+								'Withdraw': {
+									'click': function() {
+										$( this ).dialog( "close" );
+										cancelJoinRequest(assoc_id);
+									},
+									'text': '{% trans "Withdraw" %}',
+									'class': 'positive-btn'
+								},
+								'{% trans "Cancel" %}': function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
+					});
+				}
+			},
+			error:function(data, textStatus){
+				if(data.status!=200){
+					alert(MESSAGE.STAFFHOME_GET_PRACTICE_AJAX_ERROR);
+				}
+			}
+		});
+	};
+
+rejectPracticeJoin=function(id){
+	$.comAjax({
+		url:'/Organization/Member/AJAX/rejectAssociation/',
+		type:'POST',
+		data:{
+			assoc_id:id
+		},
+		success:function(data, txtStatus){
+			if(txtStatus=='success'){
+				if(data['err']){
+					alert(data['err']);
+				}else{
+					getPracticeRequest();
+				}
+			}
+		},
+		error:function(data, txtStatus){
+			if(data.status!=200){
+				alert(MESSAGE.STAFFHOME_REJECT_PRACTICE_AJAX_ERROR);
+			}
+		}
+	});
+};
+
+acceptPracticeJoin=function(id){
+	$.comAjax({
+		url:'/Organization/Member/AJAX/addProviderToPractice/',
+		type:'POST',
+		data:{
+			assoc_id:id
+		},
+		success:function(data, txtStatus){
+			if(txtStatus=='success'){
+				if(data['err']){
+					alert(data['err']);
+				}else{
+					getPracticeRequest();
+					if (window.getAndShowMemberProviders) {
+						getAndShowMemberProviders();
+					}
+				}
+			}
+		},
+		error:function(data, txtStatus){
+			if(data.status!=200){
+				alert(MESSAGE.STAFFHOME_ACCEPT_PRACTICE_AJAX_ERROR);
+			}
+		}
+	});
+};
+
+resendDoctorInvitation=function(id, msg){
+	$.comAjax({
+		url:'/Organization/Member/AJAX/resendInvitation/',
+		data:{
+			id:id,
+			msg:msg
+		},
+		type:'POST',
+		success:function(data, txtStatus){
+			if(txtStatus=='success'){
+				var d = JSON.parse(data);
+				if(d.err=='ok'){
+					$('#inviteDialog').dialog('close');
+					//initData();
+				}else{
+					alert(d.err);
+				}
+			}
+		},
+		error:function(data, txtStats){
+			if(data.status!=200){
+				$('#inviteDialog').dialog('close');
+				alert(MESSAGE.STAFFHOME_RESEND_INVITATION_AJAX_ERROR);
+			}
+		}
+	});
+};
+
+//resend request
+resendJoinRequest=function(id){
+	$.comAjax({
+		url:'/Organization/Member/AJAX/resendAssociation/',
+		type:'POST',
+		data:{
+			assoc_id:id
+		},
+		success:function(data, txtStatus){
+			if(txtStatus=='success'){
+				if(data['err']){
+					alert(data['err']);
+				}else{
+					getPracticeRequest();
+				}
+			}
+		},
+		error:function(data, txtStatus){
+			if(data.status!=200){
+				alert(MESSAGE.STAFFHOME_RESEND_PRACTICE_AJAX_ERROR);
+			}
+		}
+	});
+};
+
+//cancel request
+cancelJoinRequest=function(id){
+	$.comAjax({
+		url:'/Organization/Member/AJAX/removeAssociation/',
+		type:'POST',
+		data:{
+			assoc_id:id
+		},
+		success:function(data, txtStatus){
+			if(txtStatus=='success'){
+				getPracticeRequest();
+			}
+		},
+		error:function(data, txtStatus){
+			if(data.status!=200){
+				alert(MESSAGE.STAFFHOME_CANCEL_PRACITCE_AJAX_ERROR);
+			}
+		}
+	});
+};
+
+</script>

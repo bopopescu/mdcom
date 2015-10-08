@@ -1,0 +1,14 @@
+{% load i18n %}
+<p class="nav_bar"><a href="/Messages/New/">{% trans "New Message" %}</a></p>
+<hr class="nav_bar"/>
+<h2 class="nav_bar">{% trans "Current Location" %}</h2>
+<p class="nav_bar">
+{% if current_site %}
+	{{ current_site.name }}
+{% else %}
+	(None)
+{% endif %}
+</p>
+<p class="nav_bar">
+<a href="/Sites/">{% trans "Change?" %}</a>
+</p>

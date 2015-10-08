@@ -1,0 +1,20 @@
+{% load i18n %}
+{%comment%}
+		<div id="forwarding" class="ui-corner-all"; style="border:1px solid lightblue; width:650px;height:60px;background-color:#F8FFFF;padding:5px;margin-left:-10px;margin-bottom:-10px;">
+			<p style="margin-top:-1px;padding:3px;padding-left:7px;color:#FFF;" class="ui-corner-all ui-widget-header">
+				{% trans "DoctorCom Number" %}: {{ mdcom_phone }}, {% trans "Forwards to" %}:  &nbsp;<span id="forwarding_result">{{fwd_val}}</span></p>	
+			<form id="fwd_form">
+				{% ifnotequal mobile_phone '(none)' %}
+				<input type="radio" name="fwd_radio" value="mobile" checked="{{fwd_mobile}}"/>{% trans "Mobile" %}: {{ mobile_phone }},
+				{% endifnotequal %}
+				{% ifnotequal office_phone '(none)' %}
+				<input type="radio" name="fwd_radio" value="office" checked="{{fwd_office}}"/>{% trans "Office" %}: {{ office_phone }},
+				{% endifnotequal %}
+				{% ifnotequal other_phone '(none)' %}
+				<input type="radio" name="fwd_radio" value="other" checked="{{fwd_other}}"/>{% trans "Other" %}: {{ other_phone }},
+				{% endifnotequal %}
+				<input type="radio" name="fwd_radio" value="vmail" checked="{{fwd_vmail}}"/>{% trans "Voicemail" %}
+			</form>
+		</div>
+{%endcomment%}
+{{fwd_val}}

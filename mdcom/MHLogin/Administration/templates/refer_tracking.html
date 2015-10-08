@@ -1,0 +1,200 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block title %}Brokers{% endblock %}
+
+{% block customJS %}
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.pagination.js"></script>
+<script type="text/javascript">
+    var DATE_FORMAT={
+            'de':'yy-mm-dd',
+            'en-us':'mm/dd/yy'
+        };
+        var Constant = {};
+        Constant.LANGUAGE_CODE = "{{LANGUAGE_CODE}}";
+        if (!Constant.LANGUAGE_CODE) {
+            Constant.LANGUAGE_CODE = 'en-us';
+        }
+        Constant.TIME_ZONE = Constant.LANGUAGE_CODE;
+
+    $(document).ready(function(){
+        $("#id_period_from").attr("maxlength",10).css({"ime-mode":"disabled","width":"80px"}).datepicker({
+            showOn: 'both',
+            buttonImage: '{{STATIC_URL}}img/calendar.gif',
+            buttonImageOnly: true,
+            minDate: new Date(1970, 1-1, 1),
+            width: 100,
+            dateFormat: DATE_FORMAT[Constant.TIME_ZONE]
+            });
+        $("#id_period_to").attr("maxlength",10).css({"ime-mode":"disabled","width":"80px"}).datepicker({
+            showOn: 'both',
+            buttonImage: '{{STATIC_URL}}img/calendar.gif',
+            buttonImageOnly: true,
+            minDate: new Date(1970, 1-1, 1),
+            width: 100,
+            dateFormat: DATE_FORMAT[Constant.TIME_ZONE]
+        });
+        
+        
+        var $radios = $('input:radio[name=period_type]');
+        if($('#id_period_radio').val() == 0){
+            $radios.filter('[value=0]').attr('checked', true);
+        } else {
+            $radios.filter('[value=1]').attr('checked', true);
+        }
+        
+        $radios.change(function() {
+            radioVal = $("input:radio[name='period_type']:checked").val()
+            $('#id_period_radio').val(radioVal);
+        });
+
+        $('#id_period_type').change(function(){
+            $radios.filter('[value=0]').attr('checked', true);
+            $('#id_period_radio').val(0);
+            $('#referTrackingForm').submit();
+        });
+
+        InitReferData(0);
+        $("#referTable_pagation .selectPagePer select").change(function(){
+            InitReferData(0);
+        });
+    });
+    
+    function showDetail (id) {
+        var form_url = '/dcAdmin/ReferTrackingDetail/'+id;
+        $('#referTrackingForm').attr("action", form_url)
+        $('#referTrackingForm').submit();
+    }
+
+    function pageselectRefersCallback(page_id, jq) { 
+        InitReferData(page_id); 
+    }
+
+    function InitReferData(pageIndex) {
+        var referCount = 0;
+        var items_per_page = $("#referTable_pagation .selectPagePer option:selected").val();
+        var id_period_type = $('#id_period_type').val();
+        var id_period_radio = $('#id_period_radio').val();
+        var id_period_from = $('#id_period_from').val();
+        var id_period_to = $('#id_period_to').val();
+
+        var tbody = "";
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: '/dcAdmin/ReferTracking/Ajax/',
+            data: {
+                    'page_index':(pageIndex + 1),
+                    'items_per_page':items_per_page,
+                    'period_type':id_period_type,
+                    'period_radio':id_period_radio,
+                    'period_from':id_period_from,
+                    'period_to':id_period_to
+                  },
+            success: function(data) { 
+                    referCount = data.referCount;
+                    $.each(data.refers, function(i,refer){
+                        if(i%2==1){
+                            tbody += '<tr>'
+                        } else {
+                            tbody += '<tr class="odd">'
+                        }
+                        tbody += '<td>'+refer.name+'</td>'
+                        tbody += '<td><a href="javascript:void(0);" onclick="showDetail('+refer.id+')">'+refer.count+'</a></td>'
+                        tbody += '</tr>'
+                    });
+                    $('#referTable tbody').html(tbody);
+                    $('#refer_count').html(referCount);
+                    $("#referTable_pagation .pagniation").pagination(referCount, {
+                        callback: pageselectRefersCallback, 
+                        prev_text: '<',
+                        next_text: '>',
+                        items_per_page: items_per_page,
+                        num_display_entries: 5,
+                        current_page: pageIndex,
+                        num_edge_entries: 0
+                    });
+                    $('.pagination a').attr({'href':'javascript:void(0)'});
+                }
+            });
+        }
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+
+<div class="brokerTitle">
+    {% trans "Search Conditions:" %}
+</div>
+<form id="referTrackingForm" enctype="multipart/form-data" action="{% if ACTION %}{{ACTION}}{% else %}.{% endif %}" method="POST">
+    <table class="brokerSearchTable">
+        <tr>
+            <th align="left" width='60px'>{% trans "Period:" %}</th>
+            <td align="left" width='300px'>
+                {{form.period_radio}}
+                <input type="radio" name="period_type" value="0" >
+                    {{form.period_type}}
+                </input>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <th >&nbsp;</th>
+            <td>
+                <input type="radio" name="period_type" value="1" >
+                    {% trans "From" %}&nbsp;{{form.period_from}}&nbsp;
+                    {% trans "To" %}&nbsp;{{form.period_to}} 
+                </input>
+            </td>
+            <td colspan="2">
+            <input type='submit' value='{% trans "Apply" %}' />
+            </td>
+        </tr>
+    </table>
+    
+</form>
+<h2>{% trans "Refers" %}</h2>
+<table id='referTable' class='brokerTable' cellspacing='0' cellpadding='0' width="60%">
+    <thead>
+        <tr>
+            <th align="left">{% trans "Recipient" %}</th>
+            <th align="left">{% trans "Counts" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div id="referTable_pagation_count"  class="pagation_nav_left">
+    {% trans "Total:" %} <span id="refer_count"></span>&nbsp;{% trans "person(s)" %} 
+</div>
+<div id="referTable_pagation"  class="pagation_nav">
+    <table>
+        <tr>
+            <td><div class="pagniation"></div></td>
+            <td>
+                <div class="selectPagePer">
+                    <select>
+                        <option value="10" selected="selected">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>{% trans "per page" %}</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="clear:both;"></div>
+</div>
+{% endblock %} 

@@ -1,0 +1,12 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block sidebar %}
+
+{% comment %}Don't show side bar if not Administrator{% endcomment %}
+{% if 'Administrator' in sender_types %}
+{{block.super}}
+{% endif %}
+
+{% endblock %}
+

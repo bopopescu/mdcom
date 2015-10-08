@@ -1,0 +1,177 @@
+
+
+body {
+	/*padding-top: 110px;*/ /* related to the bar_nav padding-top value */
+	/*padding-left: 141px;*/ /* Left bar is 126 pixels wide */
+	
+	background-image: url("../img/background_navbar.gif");
+	background-repeat: repeat-y;
+}
+
+a {
+	border: 0px;
+}
+img {
+	border: 0px;
+}
+
+
+
+/* Box divs */
+div.boxy {
+	position: relative;
+	border: 1px #757575 solid;
+	padding: 7px;
+	padding-top: 43px;
+	margin: 0px;
+	margin-bottom: 0px;
+}
+div.boxy_head {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 30px;
+	width: 100%
+}
+div.boxy_headCopy {
+	position: absolute;
+	bottom: -1px;
+	left: 7px;
+	
+	padding: 5px;
+	padding-bottom: 6px;
+	padding-left: 7px;
+	padding-right: 6px;
+}
+div.boxy_headStroke_top {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 1px;
+}
+div.boxy_headStroke_bottom {
+	position: absolute;
+	top: 37px;
+	left: 0px;
+	width: 100%;
+	height: 1px;
+}
+
+/* Box tables */
+div.table {
+	padding: 0px;
+	padding-top: 30px;
+	margin: 0px;
+}
+div.table table {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	
+	border-collapse: collapse;
+}
+div.table tr {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+div.table tr.alt {
+	background-color: #f0f6ff;
+	
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+div.table td {
+	border: 0px;
+	padding: 4px 10px 4px 10px;
+	margin: 0px;
+	
+	border: 1px #909090 solid;
+}
+td.top {
+	vertical-align: top;
+}
+div.table th {
+	background-color: #b0c1d9;
+	
+	border: 0px;
+	padding: 4px 10px 4px 10px;
+	margin: 0px;
+	
+	border: 1px #909090 solid;
+	border-top: 0px;
+}
+div.table td.error {
+	background-color: #ffaaaa;
+}
+
+
+
+
+/* Top bar styles */
+div#bar_top {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 66px;
+}
+div#bar_top_bottomStroke {
+	position: absolute;
+	top: 66px;
+	left: 0px;
+	width: 100%;
+	height: 1px;
+	
+	background-color: #808080;
+}
+div#logo_drcom {
+	position: absolute;
+	top: 13px;
+	right: 50px;
+}
+div#nav_main {
+	position: absolute;
+	top: 26px;
+	left: 46px;
+}
+div#copy_welcome {
+	position: absolute;
+	top: 75px;
+	right: 270px;
+}
+
+/* Nav bar styles */
+div#bar_nav {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 105px;
+	
+	padding: 15px;
+	padding-top: 110px; /* Related to the body padding-top value */
+	/*padding-top: 81px; /* Related to the body padding-top value */
+}
+div#bar_nav_topStroke {
+	position: absolute;
+	top: 67px;
+	left: 0px;
+	height: 1px;
+	width: 135px;
+	background-color: #b9b9b9;
+}
+
+
+/* Branding div */
+div#branding {
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 60px;
+	
+	text-align: center;
+}
+
+

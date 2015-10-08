@@ -1,0 +1,26 @@
+{% load i18n %}
+
+{% if prefer_logo %}
+<div id="footer_logo_panel">
+    <div class="poweredby">
+        {% trans "Powered by" %}
+    </div>
+    <a class="logo" href="/">
+        <img src="{{STATIC_URL}}img/logo.gif">
+    </a>
+</div>
+{% endif %}
+
+<div id="footer">
+    <p>
+        {% if debug %}
+        <a href="/user_agent/">{% trans "UA" %}</a> | 
+        {% endif %}
+        <a href="/Support/Contact/">{% trans "Support" %}</a> |
+        <a href="/privacy/">{% trans "Privacy Policy" %}</a> |
+        <a href="/terms/">{% trans "Terms of Service" %}</a> | 
+        {% trans "Copyright" %} &#169; {{request.SERVER_TIME_YEAR}} 
+        {% trans "DoctorCom" %}&reg; {% trans "Inc. All rights reserved." %}
+        <a class='fright'>{{SERVERVERSION}}</a>
+    </p>
+</div>

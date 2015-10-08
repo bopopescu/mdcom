@@ -1,0 +1,330 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block title %}Brokers{% endblock %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+{% endblock %}
+
+{% block customJS %}
+
+<style>
+.ac_results li {
+    width:100%;
+    padding:0;
+}
+</style>
+
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.pagination.js"></script>
+<script type="text/javascript">
+    var DATE_FORMAT={
+            'de':'yy-mm-dd',
+            'en-us':'mm/dd/yy'
+        };
+        var Constant = {};
+        Constant.LANGUAGE_CODE = "{{LANGUAGE_CODE}}";
+        if (!Constant.LANGUAGE_CODE) {
+            Constant.LANGUAGE_CODE = 'en-us';
+        }
+        Constant.TIME_ZONE = Constant.LANGUAGE_CODE;
+
+    $(document).ready(function(){
+        $("#id_period_from").attr("maxlength",10).css({"ime-mode":"disabled","width":"80px"}).datepicker({
+            showOn: 'both',
+            buttonImage: '{{STATIC_URL}}img/calendar.gif',
+            buttonImageOnly: true,
+            minDate: new Date(1970, 1-1, 1),
+            width: 80,
+            dateFormat: DATE_FORMAT[Constant.TIME_ZONE]
+            });
+        $("#id_period_to").attr("maxlength",10).css({"ime-mode":"disabled","width":"80px"}).datepicker({
+            showOn: 'both',
+            buttonImage: '{{STATIC_URL}}img/calendar.gif',
+            buttonImageOnly: true,
+            minDate: new Date(1970, 1-1, 1),
+            width: 80,
+            dateFormat: DATE_FORMAT[Constant.TIME_ZONE]
+        });
+
+        InitCallData(0);
+        InitMsgData(0);
+        
+        $("#callTable_pagation .selectPagePer select").change(function(){
+            InitCallData(0); 
+        });
+
+        $("#msgTable_pagation .selectPagePer select").change(function(){
+            InitMsgData(0); 
+        });
+
+        $("#id_broker_to").autocomplete("/Search/User/AJAX/New", {
+            dataType: "json",
+            delay:333, 
+            matchContains:true, 
+            width:180, 
+            max:15,
+            minChars: 3,
+            formatItem: function(row) { 
+                return row;
+            },
+            parse: function(data) {
+                var parsed = [];
+                if(data.length==2) {
+                    if(data[0]=="ok") {
+                        var rows = data[1];
+                        for (var i = 0; i < rows.length; i++) {
+                            var row = rows[i];
+                            if (row) {
+                                parsed[parsed.length] = { data: row[1] ,value:row[0]};
+                            }
+                        }
+                        if(parsed.length==0) {
+                            parsed[0] = { data: "No records found.", value: '' };
+                        }
+                    }
+                }
+                return parsed;
+            }
+        }).result(function(event, data, result) { 
+            $("#id_broker_to").val(data);
+        });
+
+    });
+    
+    function pageselectMsgsCallback(page_id, jq) { 
+        InitMsgData(page_id); 
+    }
+    
+    function InitMsgData(pageIndex) {
+        var msgCount = 0;
+        var items_per_page = $("#msgTable_pagation .selectPagePer option:selected").val();
+        var direction = $('input[@name="directions"]:checked').val();
+        var id_broker_from = $('#id_broker_from').val();
+        var id_broker_to = $('#id_broker_to').val();
+        var id_period_from = $('#id_period_from').val();
+        var id_period_to = $('#id_period_to').val();
+        var tbody = "";
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/dcAdmin/BrokerTracking/Ajax/message/',
+            data: {
+                    'page_index':(pageIndex + 1),
+                    'items_per_page':items_per_page,
+                    'directions':direction,
+                    'broker_from':id_broker_from,
+                    'broker_to':id_broker_to,
+                    'period_from':id_period_from,
+                    'period_to':id_period_to
+                  },
+            success: function(data) { 
+                msgCount = data.messageCount;
+                $.each(data.messages, function(i,message){
+                    if(i%2==1){
+                        tbody += '<tr>'
+                    } else {
+                        tbody += '<tr class="odd">'
+                    }
+                    tbody += '<td>'+message.time+'</td>'
+                    tbody += '<td style="width:300px;">'+message.sender+'</td>'
+                    tbody += '<td style="width:300px;">'+message.recipients+'</td>'
+                    tbody += '</tr>'
+                });
+                $('#msgTable tbody').html(tbody);
+                $('#message_count').html(msgCount);
+                $("#msgTable_pagation .pagniation").pagination(msgCount, {
+                    callback: pageselectMsgsCallback, 
+                    prev_text: '<',
+                    next_text: '>',
+                    items_per_page: items_per_page,
+                    num_display_entries: 5,
+                    current_page: pageIndex,
+                    num_edge_entries: 0
+                });
+                $('.pagination a').attr({'href':'javascript:void(0)'});
+            }
+        });
+    }
+
+    function pageselectCallsCallback(page_id, jq) { 
+        InitCallData(page_id); 
+    }
+
+    function InitCallData(pageIndex) {
+        var callCount = 0;
+        var items_per_page = $("#callTable_pagation .selectPagePer option:selected").val();
+        var direction = $('input[@name="directions"]:checked').val();
+        var id_broker_from = $('#id_broker_from').val();
+        var id_broker_to = $('#id_broker_to').val();
+        var id_period_from = $('#id_period_from').val();
+        var id_period_to = $('#id_period_to').val();
+
+        var tbody = "";
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/dcAdmin/BrokerTracking/Ajax/call/',
+            data: {
+                    'page_index':(pageIndex + 1),
+                    'items_per_page':items_per_page,
+                    'directions':direction,
+                    'broker_from':id_broker_from,
+                    'broker_to':id_broker_to,
+                    'period_from':id_period_from,
+                    'period_to':id_period_to
+                  },
+            success: function(data) { 
+                callCount = data.callCount;
+                $.each(data.calls, function(i,call){
+                    if(i%2==1){
+                        tbody += '<tr>'
+                    } else {
+                        tbody += '<tr class="odd">'
+                    }
+                    tbody += '<td style="width:200px;">'+call.datetime+'</td>'
+                    tbody += '<td>'+call.duration+'</td>'
+                    tbody += '<td style="width:200px;">'+call.caller+'</td>'
+                    tbody += '<td style="width:200px;">'+call.called+'</td>'
+                    tbody += '</tr>'
+                });
+                $('#callTable tbody').html(tbody);
+                $('#call_count').html(callCount);
+                $("#callTable_pagation .pagniation").pagination(callCount, {
+                    callback: pageselectCallsCallback, 
+                    prev_text: '<',
+                    next_text: '>',
+                    items_per_page: items_per_page,
+                    num_display_entries: 5,
+                    current_page: pageIndex,
+                    num_edge_entries: 0
+                });
+                $('.pagination a').attr({'href':'javascript:void(0)'});
+            }
+        });
+    }
+    
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="dc_nav">
+<a href="/dcAdmin/">DCAdmin</a> > 
+<a href="/dcAdmin/Brokers/">{% trans "Brokers/Contractors" %}</a>
+</div>
+<div id='dcAdmin_home' class="ui-corner-all">
+
+<div class="brokerTitle">
+    {% trans "Search Conditions:" %}
+</div>
+<form id="brokerQuery" enctype="multipart/form-data" action="{% if ACTION %}{{ACTION}}{% else %}.?user_id={{broker_user_id}}{% endif %}" method="POST">
+    <table class="brokerSearchTable">
+        <tr>
+            <th class="width1" align="left">{% trans "Broker:" %}</th>
+            <td> {{form.broker_from}} </td>
+        </tr>
+        <tr>
+            <th class="width1" align="left">{% trans "Directions:" %}</th>
+            <td> {{form.directions}} </td>
+        </tr>
+        <tr>
+            <th class="width1" align="left">{% trans "Only show user:" %}</th>
+            <td> {{form.broker_to}} </td>
+        </tr>
+        <tr>
+            <th class="width1" align="left">{% trans "Period:" %}</th>
+            <td>{% trans "From:" %}&nbsp;{{form.period_from}}
+            &nbsp;{% trans "To:" %}&nbsp;{{form.period_to}} </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            <input type='submit' value='{% trans "Apply" %}' />
+            {% if form.default_broker_from %}
+                {{form.default_broker_from}}
+            {% endif %}
+            <a href="/dcAdmin/BrokerTracking/?user_id={{broker_user_id}}">{% trans "Reset to default" %}</a></td>
+        </tr>
+    </table>
+    
+</form>
+<h2>{% trans "Ads" %}</h2>
+<table id='msgTable' class='brokerTable' cellspacing='0' cellpadding='0' width="60%">
+    <thead>
+        <tr>
+            <th align="left">{% trans "Date Time" %}</th>
+            <th align="left" style="width: 300px;">{% trans "From" %}</th>
+            <th align="left" style="width: 300px;">{% trans "To" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div id="msgTable_pagation_count"  class="pagation_nav_left">
+    {% trans "Total:" %} <span id="message_count"></span>&nbsp;{% trans "Ad(s)" %}
+</div>
+<div id="msgTable_pagation"  class="pagation_nav">
+    <table>
+        <tr>
+            <td><div class="pagniation"></div></td>
+            <td>
+                <div class="selectPagePer">
+                    <select>
+                        <option value="10" selected="selected">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>{% trans "per page" %}</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="clear:both;"></div>
+
+<h2>{% trans "Calls" %}</h2>
+<table id='callTable' class='brokerTable' cellspacing='0' cellpadding='0' width="60%">
+    <thead>
+        <tr>
+            <th align='left' style="width: 200px;">{% trans "Date Time" %}</th>
+            <th align='left'>{% trans "Duration" %}</th>
+            <th align='left' style="width: 200px;">{% trans "From" %}</th>
+            <th align='left' style="width: 200px;">{% trans "To" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+<div id="callTable_pagation_count"  class="pagation_nav_left">
+    {% trans "Total:" %} <span id="call_count"></span>&nbsp;{% trans "call(s)" %}
+</div>
+
+<div id="callTable_pagation"  class="pagation_nav">
+    <table>
+        <tr>
+            <td><div class="pagniation"></div></td>
+            <td>
+                <div class="selectPagePer">
+                    <select>
+                        <option value="10" selected="selected">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>{% trans "per page" %}</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="brokerCreate">
+    <a href="/dcAdmin/Invitations/New/?userType=300">{% trans "Create a new invitation" %}</a>
+</div>
+</div>
+{% endblock %} 

@@ -1,0 +1,219 @@
+{# extends "base_short_new.html" #}
+{% extends "base_new.html" %}
+{% load i18n %}
+{% block customCSS %}
+
+{% endblock %}
+
+{% block customJS %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jquery.uploaderProgress.css" />
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.uploadProgress.js"></script>
+{%include 'includes/jquery.validate.html'%}
+<script type="text/javascript">
+var ioerror = "{{ioerror}}";
+var autoSendMsg = false;
+var dialogWait = null;
+$(document).ready(function(){
+    if (ioerror) {
+        alert("Sorry, there was an error saving the file. Please upload file again.");
+    }
+
+    $("tr:odd").removeClass("odd");
+
+    $("#id_upload_area").multiUploadProgress({
+            "after_upload":"sendMsgAfterUpload",
+            "before_abort_upload":"setManualSendMsgAndCloseWin",
+            "max_upload_size":{{MAX_UPLOAD_SIZE}}
+        });
+
+    var msgNewFrmValidator = $("#msgNewFrm").validate({
+        rules: {
+            body: {
+                required:true,
+                maxlength: 10240
+            },
+            subject: {maxlength: 1024}
+        },
+        messages: {
+            body: {
+                required: '{% trans "Message text is required." %}',
+                maxlength: '{% trans "Message text maxlength is 10k." %}'
+            },
+            subject: '{% trans "Message text maxlength is 1k." %}'
+        },
+        meta: "validate",
+        onfocusout: false,
+        onkeyup: false,
+        onsubmit: false,
+        //submitHandler:function(form){
+        //    dialogWait = jWait({height:150,title:"Sending message",message:"Sending message..."});
+        //    setTimeout(function(){
+        //        form.submit();
+        //    },1000);
+        //},
+        invalidHandler:function(form, validator) {
+            return;
+        }
+    });
+
+    $("#msgNewFrm").bind('submit', function() {
+        var file_clone = $("#id_file").clone(true);
+        file_clone.val("");
+        $("#id_file").replaceWith(file_clone);
+    });
+
+    $("#id_subject").bind('keydown', function(event) {
+            if(event.keyCode==13||event.which==13){return false;}
+    });
+
+    $("#id_send").click(function(){
+        var valid = msgNewFrmValidator.form();
+        if (valid) {
+            var canSend = sendMsgCheck();
+            if (!canSend) {
+                autoSendMsg=true;
+                dialogWait = jWait({
+                        title: "Waiting for file uploading...",
+                        message: "We will send this message after all files have been uploaded.",
+                        cancelFunc:setManualSendMsg
+                    });
+            } else {
+                submitMsgNewFrm();
+            }
+        }
+    });
+});
+
+function sendMsgAfterUpload() {
+    if (sendMsgCheck()&&autoSendMsg) {
+        if (dialogWait) {
+            dialogWait.dialog("close");
+        }
+        submitMsgNewFrm();
+    }
+}
+
+function submitMsgNewFrm() {
+    dialogWait = jWait({height:100,title:"Sending message",message:"Sending message...",cancelEnable:false});
+    setTimeout(function(){
+        $("#msgNewFrm").submit();
+    },1000);        
+}
+
+function setManualSendMsg() {
+    autoSendMsg = false;
+}
+
+function setManualSendMsgAndCloseWin() {
+    if (dialogWait) {
+        dialogWait.dialog("close");
+    }
+    setManualSendMsg();
+}
+
+function sendMsgCheck() {
+    var canSend = true;
+    $('iframe').each(function(){
+        var formObj = $(this).contents().find("form");
+        if (formObj&&formObj.length>0&&formObj.attr("upload")) {
+            canSend = false;
+            return false;
+        }
+    }); 
+    return canSend;
+}
+</script>
+
+
+{% endblock %}
+
+{% block content %}
+    <!--<div style="margin-left:40px; margin-top:-60px;">        
+        <p class="header" style="font-size:14px;font-weight:bold;">Welcome, {{ mhl_user_displayName }}</p>
+        <p class="header" style="margin-left:0px;margin-top:-13px;">Current location: <b>{{ current_site.name }}</b> <a href="/Sites/">Click here</a> to change.</p>
+    </div>-->
+<!--<div style="width:600px; background-color:white;padding:15px;margin-left:20px;border:1px solid lightgray;" class="ui-corner-all">-->
+<div id="msgNewFrm_container" class="ui-corner-all">    
+<form id="msgNewFrm" enctype="multipart/form-data" action="{% if ACTION %}{{ACTION}}{% else %}.{% endif %}" method="POST" style="width:880px;text-align:left;">
+<!--{{form.errors}}-->
+
+
+<div class="message_row">
+    <div class="message_cell_left">
+        Recipient:
+    </div> 
+    <div class="message_cell_right" id="id_recipient_div">
+        {{user_recipient_name}}{{form.user_recipient}}{{form.user_recipients}}
+    </div>
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left">
+        {% trans "Subject:" %}
+    </div>
+    <div class="message_cell_right">
+        <div style="width:120px;">
+            {{form.subject}}{{form.subject.errors}}
+        </div>
+    </div>
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left">
+        {% trans "Share a file:" %}
+    </div>
+    <div class="message_cell_right">
+        <div id="id_upload_area">
+            <div id="id_file_list_area">
+                {% for file in file_list %}
+                    <div class="upload_panel">
+                        <div>
+                        {{file.file_display_name}}{% trans "uploaded successfully." %}&nbsp;&nbsp;&nbsp;
+                        <input type="hidden" name="file_saved_name" value="{{file.file_saved_name}}"/>
+                        <input type="hidden" name="file_display_name" value="{{file.file_display_name}}"/>
+                        <input type="hidden" name="file_charset" value="{{file.file_charset}}"/>    
+                        <input type="hidden" name="file_size" value="{{file.file_size}}"/>
+                        <a class="delete_attachment" href="javascript:void(null);" onclick="deleteAttachment(this);">{% trans "Delete" %}</a>
+                        </div>
+                    </div>
+                {% endfor %}    
+            </div>         
+        </div>
+    </div>
+</div>
+
+<div>
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left1">
+        {% trans "Message text:" %}
+    </div>
+    <div class="message_cell_right1">
+        &nbsp;
+    </div>     
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left1">
+        &nbsp;
+    </div>
+    <div class="message_cell_right1">
+        {{form.body}}
+        {{form.body.errors}}    
+    </div>     
+</div>
+
+<div class="message_row">
+    <div class="message_cell_left1">
+        &nbsp;
+    </div>
+    <div class="message_cell_right1">
+        <input id="id_send" type="button" name="Submit" value='{% trans "Send Msg" %}' class="enable_btn"/>
+    </div>     
+</div>
+
+</form>
+{{ recipientsform.as_p }}
+</div>
+{% endblock %}

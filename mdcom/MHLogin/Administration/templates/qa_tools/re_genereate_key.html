@@ -1,0 +1,47 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block customImports %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dcAdminStyle.css"/>
+
+<style type="text/css">
+table tr:hover {background: none repeat scroll 0 0 #F6F7FF;}
+table tr td {width: 440px;}
+</style>
+
+<script type="text/javascript">
+	$(function(){
+		$("#generate").click(function(){
+			var user_id_from = $("#id_user_id_from").val();
+			var user_id_to = $("#id_user_id_to").val();
+			var user_name = $("#id_user_name").val();
+			if (!user_id_from && !user_id_to && !user_name) {
+				alert("If you do not enter anything, system will re-generate key for all users in the system.");
+			}
+			if (confirm("Be careful. If you re-generate user's key, then his previous messages can not be opened.\nDo you really want to?")) {
+				$.ui.wait.start();
+				$("#genereate_key_form").submit();
+			}
+		});
+	})
+</script>
+
+{% endblock %}
+
+{% block title %}{% trans "Re-Generate User Keys" %}{% endblock %}
+
+{% block content %}
+<div id="dc_nav"><a href="/dcAdmin/">DCAdmin</a></div>
+<div id='dcAdmin_home' class="ui-corner-all">
+<h1>{% trans "Re-Generate User Key" %}</h1>
+
+	<form id="genereate_key_form" action="." method="POST">
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="button" id="generate" name="generate" value="{% trans "Generate" %}"/>
+	</form>
+</div>
+
+{% endblock %}

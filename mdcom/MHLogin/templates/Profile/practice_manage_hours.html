@@ -1,0 +1,222 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="practiceManagerHours" class="ui-corner-all">
+	<div>
+		<h3>{% trans "Office Open Hours" %}</h3>
+		<p>{% trans "Please note:" %}
+			<ul>
+				<li>{% trans "To indicate that the office is closed on a weekday, clear the box for the weekday's open time. All other fields for the weekday will be automatically cleared." %}</li>
+				<li>{% trans "To indicate that the office doesn't close for lunch, enter 0 minutes." %}</li>
+			</ul>
+		</p>
+		
+		<form action='.' method="post">
+			<table class='tableProfile' cellspacing='0' cellpadding='0' width='100%'>
+				<tr>
+					<th align='left'>{% trans "Day" %}</th>
+					<th align='center'>{% trans "Open" %}</th>
+					<th align='center'>{% trans "Close" %}</th>
+					<th align='center'>{% trans "Lunch Start" %}</th>
+					<th align='center'>{% trans "Lunch Duration" %}</th>
+				</tr>
+				{% for hours in hourslist %}
+				<tr>
+					<td width='20px'>{{ hours.day }}</td>
+					<td align='center'>
+						{{ hours.form.errors.open }}
+						<script>
+							if(Constant.TIME_SETTING==1){//24
+								document.write('<input type="text" id="id_open" value="{{ hours.form.open.value|time:"H:i" }}" name="open">');
+							}else{//12
+								document.write('<input type="text" id="id_open" value="{{ hours.form.open.value|time:"h:i A" }}" name="open">');
+							}
+						</script>
+					</td>
+					<td align='center'>
+						{{ hours.form.errors.close }}
+						<script>
+							if(Constant.TIME_SETTING==1){//24
+								document.write('<input type="text" id="id_close" value="{{ hours.form.close.value|time:"H:i" }}" name="close">');
+							}else{//12
+								document.write('<input type="text" id="id_close" value="{{ hours.form.close.value|time:"h:i A" }}" name="close">');
+							}
+						</script>
+					<td align='center'>
+						{{ hours.form.errors.lunch_start }}
+						<script>
+							if(Constant.TIME_SETTING==1){//24
+								document.write('<input type="text" id="id_lunch_start" value="{{ hours.form.lunch_start.value|time:"H:i" }}" name="lunch_start">');
+							}else{//12
+								document.write('<input type="text" id="id_lunch_start" value="{{ hours.form.lunch_start.value|time:"h:i A" }}" name="lunch_start">');
+							}
+						</script>
+					<td align='center'>
+						{{ hours.form.errors.lunch_duration }}{{ hours.form.lunch_duration }}
+				</tr>
+				{% endfor %}
+			</table>
+		<input type="submit" value="Update" class='profileFormSubmit' onclick='submitForm(); return false;' />
+		</form>
+		<p>{% trans "Practice Located in" %} {{office_time_zone}} {% trans "Time_Zone." %}</p>
+	</div>
+</div>
+<script>
+	$(function(){
+		if(Constant.TIME_SETTING==1){ //
+			var html = '<div class="help_text">HH:MM 24 hour format</div>';
+		}else{
+			var html = '<div class="help_text">hh:mm am/pm 12 hour format</div>';
+		}
+		$('.tableProfile td input').after(html);
+		$('input[name="lunch_duration"]').parent().find('.help_text').remove();
+		$('input[name="lunch_duration"]').after('<div class="help_text">In minutes</div>');
+	});
+	
+	function submitForm(){
+		var form = document.forms[0];
+		var str = '';
+		str = validateOpen() + validateClose() + validateLunch() + validateLunchDuration();
+		if(str){
+			alert(str);
+		}else{
+			form.submit();
+		}
+	}
+	
+	function validateOpen(){
+		var s = '';
+		$('.tableProfile input[name="open"]').each(function(){
+			var val = $(this).val();
+			var hour = parseInt(val.split(':')[0],10);
+			if(hour==0&&Constant.TIME_SETTING==0){
+				s = 'Open time hour must be between 1 and 12';
+				return false;
+			}
+			if(val!='' && !testVal(val)){
+				s = 'Please input valid open time format.\n';
+				return false;
+			}
+		});
+		return s;
+	}
+	
+	function validateClose(){
+		var s = '';
+		$('.tableProfile input[name="close"]').each(function(){
+			var open = $(this).parent().parent().find('td').eq(1).find('input').val();
+			var val = $(this).val();
+			var hour = parseInt(val.split(':')[0],10);
+			if(hour==0&&Constant.TIME_SETTING==0){
+				s += 'Close time hour must be between 1 and 12';
+			}
+			if(open && val){
+				if(compareTime(open,val)){
+					s += 'Close time must later than open time';
+				}
+			}
+			
+			if(val!='' && !testVal(val)){
+				s = 'Please input valid close time format.\n';
+				return false;
+			}
+		});
+		return s;
+	}
+	
+	function validateLunch(){
+		var s = '';
+		$('.tableProfile input[name="lunch_start"]').each(function(){
+			var open = $(this).parent().parent().find('td').eq(1).find('input').val();
+			var close = $(this).parent().parent().find('td').eq(2).find('input').val();
+			var val = $(this).val();
+			var hour = parseInt(val.split(':')[0],10);
+			if(hour==0&&Constant.TIME_SETTING==0){
+				s += 'Lunch time hour must be between 1 and 12';
+			}
+			if(open&&close&&val){
+				if(lunchTimeBetween(open,close,val)){
+					s += 'Lunch time must between open time and close time.';
+				}
+			}
+			
+			if(val!='' && !testVal(val)){
+				s = 'Please input valid lunch start time.\n';
+				return false;
+			}
+		});
+		return s;
+	}
+	
+	function validateLunchDuration(){
+		var s = '';
+		$('.tableProfile input[name="lunch_duration"]').each(function(){
+			var val = $(this).val();
+			if(isNaN(val)){
+				s = 'Please input valid lunch duration number.\n';
+				return false;
+			}
+		});
+		return s;
+	}
+	
+	function testVal(val){
+		var h24E = /^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$/;
+		var h12E = /^([01][0-9]:[0-5][0-9]\s)([aApP][mM])$/;
+		
+		if(Constant.TIME_SETTING==1){//24
+			return h24E.test(val);
+		}else{
+			return h12E.test(val);
+		}
+	}
+	
+	function compareTime(open,close){
+		var b = false;
+		if(Constant.TIME_SETTING==1){ //24
+			var oH = parseInt(open.split(':')[0],10);
+			var oM = parseInt(open.split(':')[1],10);
+			var cH = parseInt(close.split(':')[0],10);
+			var cM = parseInt(close.split(':')[1],10);
+			if(cH < oH){
+				b = true;
+			}
+			if(cH == oH && cM < oM){
+				b = true;
+			}
+		}else{
+			var oA = open.split(' ')[1];
+			var oT = open.split(' ')[0];
+			var oH = parseInt(oT.split(':')[0],10);
+			var oM = parseInt(oT.split(':')[1],10);
+			
+			var cA = close.split(' ')[1];
+			var cT = close.split(' ')[0];
+			var cH = parseInt(cT.split(':')[0],10);
+			var cM = parseInt(cT.split(':')[1],10);
+			if(typeof cA == 'undefined' || typeof oA == 'undefined'){
+				return false;
+			}
+			if((cA=='am'||cA=='AM')&&(oA=='pm'||oA=='PM')){
+				b = true;
+			}
+			if(cA.toLowerCase() == oA.toLowerCase()){
+				if(cH < oH){
+					b = true;
+				}
+				if(cH == oH && cM < oM){
+					b = true;
+				}
+			}
+		}
+		return b;
+	}
+	
+	function lunchTimeBetween(open,close,lunch){
+		var b = false;
+		return b;
+	}
+	
+</script>
+{% endblock %}

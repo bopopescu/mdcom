@@ -1,0 +1,57 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Messages" %} - {{period}}{% endblock %}
+
+{% block content %}
+<h1>{% trans "Messages" %}: {{period}}</h1>
+
+{% if show_change_timeslice %}
+{{change_timeslice_form}}
+{% endif %}
+
+<p><b>{% trans "Total Message Count" %}: {{message_total}}</b></p>
+
+<table border="0">
+<tr><td>
+
+<h2>{% trans "Top 10 senders" %}</h2>
+<table border="1">
+<tr>
+	<th>{% trans "Name" %}</th>
+	<th>{% trans "Count" %}</th>
+</tr>
+{% for sender in top10_senders %}
+<tr>
+	<td>{{sender.0.first_name}} {{sender.0.last_name}}</td>
+	<td>{{sender.1}}</td>
+</tr>
+{% endfor %}
+</table>
+
+</td><td width="25px">&nbsp;</td><td>
+
+<h2>{% trans "Top 10 receivers" %}</h2>
+<table border="1">
+<tr>
+	<th>{% trans "Name" %}</th>
+	<th>{% trans "Count" %}</th>
+</tr>
+{% for receiver in top10_receivers %}
+<tr>
+	<td>{{receiver.0.first_name}} {{receiver.0.last_name}}</td>
+	<td>{{receiver.1}}</td>
+</tr>
+{% endfor %}
+</table>
+
+</td></tr></table>
+
+<h2>{% trans "CSV Message Data" %}</h2>
+
+{% trans "sender,receiver,date,time" %}<br />
+{% for message in messages_detail %}
+{{message.0}},{{message.1}},{{message.2}},{{message.3}}<br />
+{% endfor %}
+
+{% endblock %}

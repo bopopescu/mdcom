@@ -1,0 +1,17 @@
+{% load i18n %}
+<html>
+<body>
+<h1>{% trans "Data Sanitation" %}</h1>
+
+<p style="font-size: 125%; font-family: sans-serif;">{% trans "This function resets all database information." %} <b><i><span style="color:#990000">{% trans "ARE YOU SURE YOU WISH TO DO THIS?" %}</span></i></b></p>
+
+<form action="." method="POST">
+<p>{% trans "Please type the phrase 'YES, I AM ABSOLUTELY SURE.' below." %}<br />
+{{form.confirmationString}}<br />
+<span style="color:#ff0000;">{{form.confirmationString.errors}}</span>
+</p>
+<p><input type="submit" value='{% trans "Confirm" %}' /></p>
+</form>
+
+</body>
+</html>

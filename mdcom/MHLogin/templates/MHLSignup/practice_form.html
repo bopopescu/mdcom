@@ -1,0 +1,32 @@
+{% extends "base_signup.html" %}
+{% load i18n %}
+
+{% block content %}
+{% if step_count %}
+<p>{% trans "Step" %} {{ step }} {% trans "of" %} {{ step_count }}</p>
+{% endif %}
+<form action="." method="post">{% csrf_token %}
+{{form.non_field_errors|linebreaksbr}}
+<table class='registerFormTable'>
+{%comment%}
+{{ form }}
+{%endcomment%}
+<tr><th>{{form.practice_name.label}}{% if form.practice_name.errors %}<br />{{form.practice_name.errors}}{% endif %}</th><td>{{form.practice_name}}</td></tr>
+<tr><th>{{form.practice_address1.label}}{% if form.practice_address1.errors %}<br />{{form.practice_address1.errors}}{% endif %}</th><td>{{form.practice_address1}}</td></tr>
+<tr><th>{{form.practice_address2.label}}{% if form.practice_address2.errors %}<br />{{form.practice_address2.errors}}{% endif %}</th><td>{{form.practice_address2}}</td></tr>
+<tr><th>{{form.practice_city.label}}{% if form.practice_city.errors %}<br />{{form.practice_city.errors}}{% endif %}</th><td>{{form.practice_city}}</td></tr>
+<tr><th>{{form.practice_state.label}}{% if form.practice_state.errors %}<br />{{form.practice_state.errors}}{% endif %}</th><td>{{form.practice_state}}</td></tr>
+<tr><th>{{form.practice_zip.label}}{% if form.practice_zip.errors %}<br />{{form.practice_zip.errors}}{% endif %}</th><td>{{form.practice_zip}}</td></tr>
+<tr><th>{{form.office_phone.label}}{% if form.office_phone.errors %}<br />{{form.office_phone.errors}}{% endif %}</th><td>{{form.office_phone}}</td></tr>
+<tr><th>{{form.time_zone.label}}{% if form.time_zone.errors %}<br />{{form.time_zone.errors}}{% endif %}</th><td>{{form.time_zone}}</td></tr>
+{% if form.show_use_zip %}
+<tr><th>{{form.use_zip.label}}{% if form.show_use_zip.errors %}<br />{{form.show_use_zip.errors}}{% endif %}</th><td>{{form.use_zip}}</td></tr>
+{% endif %}
+</table>
+<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+{{ previous_fields|safe }}
+<div class="submit">
+<input type="submit" class='submit' value='{% trans "Submit" %}'>
+</div>
+</form>
+{% endblock %}

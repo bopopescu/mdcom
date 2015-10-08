@@ -1,0 +1,126 @@
+.clear{ clear:both;}
+.redstar{ color:red; display:inline-block; height:34px; line-height:34px; vertical-align:middle; margin-left:5px;}
+img{ max-width:100%;}
+#main .head{ font-size:3em; color:#454545; background: url("../img/dots-brown.png") repeat-x scroll left bottom transparent; padding-bottom:30px;}
+#main .head .text{ float:left;}
+#main .head span{ font-size:0.5em; color:#999b9a}
+#main .signup{ width:960px; margin:0 auto;}
+#main .signup .content{ margin-top:20px;}
+#main .signup .content.success{ height:320px;}
+#main .signup .content .content-left{ float:left; padding-bottom:40px; width:50%;}
+#main .signup .content .content-left .img{ width:450px; height:250px; background:url(../../img/signup-logo.png) no-repeat;}
+#main .signup .content .content-left .text{ text-align:center; font-size:1.3em; color:#00A4A7; font-family:lobster-1,lobster-2,sans-serif,helvetica,arial;}
+#main .signup .content .content-right{ float:right; width:50%;}
+#main .signup .content .content-right p{ font-size:1.25em; color:#999b9a;}
+#main .signup .content .content-right label{ color:#454545; font-weight:bold;}
+#main .signup .content .content-right label.error{ color:red; width:250px;}
+#main .signup .content .content-right li label{ width:31%;}
+#main .signup .content .content-right li input{ width:61%;}
+#main .signup .content .content-right li label.error{ left:32%; top:37px;}
+#main .signup .content select{ background:#FAFAFA; color:#454545; height:36px; line-height:36px; padding:6px 0; font-size:1.5em;}
+#main .signup .content select option{ background:#FAFAFA; color:#454545;}
+#main .signup .content li input[type='password'],#main .signup .content li input[type='text']
+		{ background:#FAFAFA; height:36px; line-height:36px;}
+#registerFrom li input{ width:55%;}
+/*#getDoctorNumber li input,#registerStaff li input,#registerProvider li input{ width:30%;}*/
+input{ width:30%; font-size:1.5em; color:#454545;}
+#main .signup .content .submit{ text-align:left; margin-top:10px;}
+#main .signup .content .submit .submit{ background:url(../../img/sign-up-blue.png) no-repeat; border:0; box-shadow:none; border-radius:0; width:120px; height:35px; text-align:center; color:#fff; font-family:Lobster; font-size:1.8em; margin:0;}
+#back{ background:url(../../img/sign-up-gray.png) no-repeat; border:0; box-shadow:none; border-radius:0; width:120px; height:35px; margin-right:40px; color:#fff; font-family:Lobster;}
+#main .signup .content li ul.errorlist{ margin:0;}
+#main .signup .content li ul.errorlist li{ width:450px;}
+#main .signup .content .physician .listUI{ margin:0; margin-top:-15px;}
+#main .signup .content .physician .listUI2{ margin:0; margin-top:7px;}
+#main .signup .content .physician .listUI li{ height:30px; line-height:30px; margin:0; padding-left:6px;}
+#main .signup .content .physician .listUI li .name{ float:left; font-size:16px; font-weight:bold; margin-right:8px;}
+#main .signup .content .physician .listUI li .del{ width:20px; height:20px; background:url(../../img/delItem.png) no-repeat; float:left; cursor:pointer; margin-top:5px;}
+#main .signup .content .physician .addIcon{ width:28px; height:28px; background:url(../../img/addItem.png) no-repeat; display:inline-block; line-height:42px; vertical-align:middle; cursor:pointer;}
+#main .signup .content .physician .inputText{ width:390px; margin-right:10px; background:#FAFAFA;}
+#main .signup .content .physician .title{ font-size:1em; color:#010101; font-weight:bold; margin:10px 0;}
+#main .signup .content .loading{ float:left; width:24px; height:24px; background:url(../../img/loadinfo_d3.gif) no-repeat; position:absolute; left:370px; top:6px;}
+#main .signup .content .physician .sites-form{ float:left; width:48%; position:relative;}
+#main .signup .content .physician .sites-form .sitesList{ position:absolute; left:0; top:35px; z-index:10;}
+#main .signup .content .physician .sites-form .sitesList ul{ margin:0; background:#fafafa; box-shadow:1px 1px 3px #C1C1BA inset; border-radius:5px solid #c0c0b8;}
+#main .signup .content .physician .sites-form .sitesList ul li{ cursor:pointer; margin:0; padding:5px 0 0 10px; color:#000; font-size:19.5px; width:385px;}
+#main .signup .content .physician .sites-form .sitesList ul li.bottonLi{ height:3px;}
+#main .signup .content .physician .sites-form .sitesList ul li:hover{ color:#f00;}
+#main .signup .content .physician .license-sites .statesList{ position:absolute; left:0; top:35px; z-index:10;}
+#main .signup .content .physician .license-sites .statesList ul{ margin:0; width:395px; background:#fafafa; box-shadow:1px 1px 3px #C1C1BA inset; border-radius:5px solid #c0c0b8;}
+#main .signup .content .physician .license-sites .statesList ul li{ cursor:pointer; height:20px; margin:0; padding:5px 0 0 10px; color:#000; font-size:19px;}
+#main .signup .content .physician .license-sites .statesList ul li.bottonLi{ height:5px;}
+#main .signup .content .physician .license-sites .statesList ul li:hover{ color:#f00;}
+#main .signup .content .physician .license-site{ margin-top:-15px; margin-bottom:0px;}
+#main .signup .content .physician .sites-text{ color:#454545;}
+#main .signup .content .physician .license-sites{ position:relative;}
+#main .signup .content .physician .license-sites,#main .signup .content .physician .specia-content,#main .signup .content .physician .type-form,
+#main .signup .content .physician .current-sites-form{ float:left; width:48%;}
+#main .signup .content .physician .current-sites{ margin-top:-5px;}
+#main .signup .content .physician .current-sites-text{ color:#454545;}
+#main .signup .content .physician .option{ color:#454545;}
+#main .signup .content .physician .accept-patient{ height:25px; margin-botom:50px;}
+#main .signup .content .physician .accept-patient .title{ display:inline-block; cursor:pointer;}
+#main .signup .content .physician .sites-content,
+#main .signup .content .physician .current-sites-content,
+#main .signup .content .physician .specialty,
+#main .signup .content .physician .staff-type,
+#main .signup .content .physician .accept-patient{ margin-bottom:20px;}
+#main .signup .success-img{ float:left; width:8%; height:28px; background:url(../../img/sign-success.png) no-repeat; margin-left:20px; margin-top:10px;}
+#main .signup .content .success-text{ width:90%; color:#454545; font-size:1.25em;font-weight:bold;}
+#main .signup .content .success-text a{ color:#0e8769; text-decoration:underline;}
+#main .signup .content .success-text .item{ margin:0; margin-bottom:10px; font-size:1.25em; line-height:30px; font-weight:bold; text-align:left;}
+#main .signup .content .success-text .item.black{ color:black; font-size:1.3em;}
+#main .signup .content .signin{ width:100px;}
+#main .signup .content .buttons{ width:100px; margin:0 auto;}
+#main .signup .content .registerStaffForm li label.error{ width:900px;}
+#main li{ list-style:none; width:100%; margin-bottom:25px; position:relative;}
+#main li label{ width:19%; font-size:1em; color:#454545; padding:0; height:34px; line-height:34px; cursor:default; font-weight:bold;}
+#main li label.error{ position:absolute; left:192px; top:35px; color:red; width:800px;}
+#main li.gender{ }
+#main li.gender ul{ width:30.7%; height:35px; margin:0; display:inline-block; vertical-align:middle; margin-top:-3px;}
+#main li.gender ul li{ float:left; width:80px;}
+#main li.gender ul li label{ width:90px;}
+#main li.gender ul li.star{ padding-top:5px;}
+#main li.gender ul li label .button{ width:15px; height:30px; display:inline-block;}
+#main li.gender ul li label .text{ width:60px; height:30px; display:inline-block; vertical-align:bottom; line-height:30px;}
+#main li.gender input{ width:10px; background:none; border:0; vertical-align:middle;}
+#main .privacyPolicy{ margin-bottom:40px;}
+#main .privacyPolicy .text
+{ height:150px; overflow-y:scroll; overflow-x:none; margin-top:15px; color:#454545; background: none repeat scroll 0 0 #FAFAFA;border-color: #C0C0B8 #F0EDDE #F0EDDE #C0C0B8;border-radius: 3px 3px 3px 3px;border-width: 1px;box-shadow: 1px 1px 3px #C1C1BA inset;border-style: solid; padding:20px 0 0 20px;}
+#main .privacyPolicy .text h3{ background:none; color:#536A93;}
+#main .privacyPolicy .text li{ color:#536A93; margin:0; padding-bottom:8px;}
+#main .privacyPolicy p{ font-weight:normal; color:#536A93;}
+#main .privacyPolicy input{ height:15px; margin-right:5px;}
+#main .privacyPolicy span{ cursor:pointer; color:#454545; font-weight: bold;}
+#main .privacyPolicy a{ color:#999; text-decoration:underline;}
+.defaultFont input{ width:14%; font-size:16px; color:#ccc; font-weight:bold;}
+.inputFont input{ width:14%;}
+.inputFont input[name='last_name']{ margin-left:7px;}
+.defaultFont input[name='last_name']{ margin-left:7px;}
+#acceptPolicy{ width:20px;}
+#id_staff_type,#id_licensed_states{ margin-right:21px;}
+#id_specialty{ margin-right:24px;}
+#id_accepting_new_patients{ vertical-align:middle; width:20px;}
+#id_licensed_states,#id_sites{ min-height:220px;}
+#registerFrom .submit{ float:right;}
+#registerFrom ul.errorlist{ width:410px;}
+#main .signup .content .physician ul.errorlist{ margin:0;}
+#main .signup .content .physician ul.errorlist li{ width:500px;}
+#registerProvider li label.error{ width:700px;}
+#activeCode .input-label{ }
+#id_time_zone,#id_practice_state,#id_state,#id_user_type,#id_gender{ width:30.8%;}
+#main .signup .content .physician select{ width:400px; padding:0;}
+#main .signup .content .info{ color:#454545; width:90%; line-height:30px; font-size:1.25em; font-weight:bold;}
+#main .signup .content h3{ color:#454545;}
+#activeCode li label{ width:155px;}
+#activeCode li label.error{ left:160px;}
+#inputSites,#inputLicensed{ color:#ccc;}
+#inputSites.orange,#inputLicensed.orange{ color:#FF7E42;}
+#inputSites.black,#inputLicensed.black{ color:#000;}
+/* iPad [portrait + landscape] */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	#main .signup{ width:90%;}
+	#main .signup .content .content-right li input{ width:55%;}
+	#main .signup .content .content-right li label{ width:130px;}
+	#activeCode li label{ width:115px;}
+	#activeCode li label.error{ left:120px;}
+}

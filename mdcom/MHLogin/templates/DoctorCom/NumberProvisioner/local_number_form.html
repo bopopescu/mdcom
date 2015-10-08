@@ -1,0 +1,21 @@
+{% load i18n %}
+<p class="info">{% trans "In order to provision your unique DoctorCom virtual phone number, please enter in your desired 3-digit area code and a PIN number for voicemail access. The PIN must be numeric and between 4 to 8 digits." %}</p> 
+<p class="info">{% trans "Once you click on the submit button, a number will be allocated to you." %}</p>
+
+<form id="form" method="POST" action=".">
+<table class="contentTable" style="width:700px;table-layout:fixed;word-break: break-all; word-wrap: break-word;">
+{% for field in form %}
+<tr height="40">
+	<th style="width:180px;">{{field.label_tag}}</th>
+    <td style="width:90px;">{{ field }} {% if not field.field.required %}(optional){% endif %}<span style="color:#999999; font-size:83%">{{field.help_text}}</span></td>
+	<td style="width:400px; color:red; margin:0px;padding:0px;">{{ field.errors }}</td>
+</tr>
+{% endfor %}
+</table>
+<p>
+	<input type="button" value='{% trans "Submit" %}' onClick="submitForm();">
+	{% if debug %}
+	<input type="button" value='{% trans "Submit (debug)" %}' onClick="submitForm();">
+	{% endif %}
+</p>
+</form>

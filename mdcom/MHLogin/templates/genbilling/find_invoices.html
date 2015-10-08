@@ -1,0 +1,23 @@
+{% extends "base_new.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<form action="/billing/invoice_list/" method="POST">
+<div id='billingView' class="ui-corner-all">
+<h2>
+Find Invoices
+</h2>
+Enter Begin Period (YYYYMM, ex 201209)
+<input type="text" name="begin_period">
+<br>
+<input type="submit" value="Search">
+</form>
+</div>
+<table border='0' width="800">
+<tr><td><a href="/billing/billing_menu/">Back to Customer Account Management Menu<a></td></tr>
+</table>
+
+     
+{% endblock %}
+

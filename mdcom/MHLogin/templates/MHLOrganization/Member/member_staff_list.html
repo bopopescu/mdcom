@@ -1,0 +1,115 @@
+{% load i18n %}
+
+<div class="org-search-result">
+	<table class="org_table" width="100%" cellspacing="0" cellpadding="0">
+	{% if datas %}
+		<tr class="title">
+			<th>{% trans "Name"%}</th>
+			<th>{% trans "Role"%}</th>
+			<th>{% trans "Status"%}</th>
+			<th>{% trans "Last Login"%}</th>
+			<th>{% trans "Smart Phone"%}</th>
+			<th></th>
+		</tr>
+		{% for data in datas %}
+		<tr class="{% if forloop.last %}last{% else %}not-last{% endif %}">
+			<td class="staffer-name" title="{{ data.name }}">
+				<div class="inner-name">
+					{{ data.name }}<span class = "staffer-gray">({{ data.user_type }})</span>
+				</div>
+			</td>
+			<td>
+				{% if data.can_change_this_role %}
+					<select class="role-change" onchange="changeStaffMemberRole(this, {{data.pk}})">
+					{% for opt in data.role_options %}
+						<option value="{{opt.0}}" {%if opt.0 == data.role %}selected="true"{%endif%}>{{opt.1}}</option>
+					{% endfor %}
+					</select>
+				{% else %}
+					{{ data.role_display }}
+				{% endif %}
+			</td>
+			<td>
+				{% if data.status %}
+					{% trans 'Active' %}
+				{% else %}
+					{% trans 'Pending' %}
+				{% endif %}
+			</td>
+			<td>{{ data.last_login }}&nbsp;</td>
+			<td>
+				<select class="smartphone-change" onchange="changeStaffSmartphone(this, {{data.pk}})" index="0">
+					{% for opt in smart_phone_options %}
+						<option value="{{opt.0}}" {%if opt.0 == data.smartphone %}selected="true"{%endif%}>{{opt.1}}</option>
+					{% endfor %}
+				</select>
+			</td>
+			<td>
+				{% if data.can_remove %}
+					<div class="delete" onclick="removeMemberStaff({{ data.pk }}, '{{ data.name }}');">&nbsp;</div>
+				{% endif%}
+				&nbsp;
+			</td>
+		</tr>
+		{% endfor %}
+	{% else %}
+	<tr class="no-data">
+		<td><h3>{% trans "Currently, no providers are registered." %}</h3></td>
+	</tr>
+	{% endif %}
+	</table>
+</div>
+{% if datas %}
+<div id="memberStaffListPagation" class="pagation_panel pagation_panel2">
+	<table>
+		<tr>
+			<td><div class="pagniation"></div></td>
+		</tr>
+	</table>
+</div>
+{% endif %}
+
+<script>
+	var memberStaffPagationCallback = function(index){
+		getAndShowMemberStaff(index);
+	};
+
+	function showMemberStaffPagination(){
+		var index = {{index}};
+		var count = {{count}};
+		var total_count = {{total_count}};
+		$('#memberStaffListPagation .pagniation').pagination(total_count ,{
+				callback:memberStaffPagationCallback,
+				current_page: index,
+				items_per_page: count,
+				num_edge_entries:1,
+				num_edge_entries: 3,
+				num_display_entries: 3,
+				prev_text:"",
+				next_text:"",
+				href_none:true
+			}
+		);
+	}
+
+	$(function(){
+		showMemberStaffPagination();
+	});
+
+	function changeStaffMemberRole(obj, pk) {
+		var jObj = $(obj);
+		var newRole = jObj.val();
+		$.comAjax({
+			url:'/Organization/Member/AJAX/ChangeRole/',
+			type:'POST',
+			data:{
+				pk:pk,
+				newRole: newRole
+			},
+			success:function(data,txtStatus){
+				getAndShowMemberStaff({{index}});
+			},
+			error:function(){}
+		});
+	}
+</script>

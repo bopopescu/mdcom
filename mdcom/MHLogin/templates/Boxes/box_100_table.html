@@ -1,0 +1,13 @@
+<!-- additional available classes: boxy_left, boxy_right for float:left and right -->
+<div class="boxy table" style="width: 100%; {% if float %}float: {{float}};{% endif %}">
+<div class="boxy_head">
+<img src="{{STATIC_URL}}img/background_boxytop.gif" width="100%" height="100%" />
+<div class="boxy_headCopy">{{header}}</div>
+</div> <!-- End <div class="boxy_head"> -->
+<div class="boxy_headStroke_top"></div>
+<div class="boxy_headStroke_bottom"></div>
+
+{% block content %}{{content|safe}}{% endblock %}
+
+</div> <!-- End <div class="boxy"> -->
+

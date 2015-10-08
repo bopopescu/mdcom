@@ -1,0 +1,11 @@
+{% load i18n %}
+{% blocktrans %}
+Dear {{email}},
+
+We're sorry, but your {{type}} Invitation with invitation code {{code}} has been revoked. This could happen if your invitation sat unused for too long, or if the person who sent the invitation either did so erroneously, or if some of the invitation settings were incorrect. If you'd like to request an invitation, please go to:
+
+https://{{server_address}}/contact/
+
+Best,
+DoctorCom Staff
+{% endblocktrans %}

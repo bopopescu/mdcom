@@ -1,0 +1,32 @@
+div#idNavBar_welcomeCopy {
+	color: #ebebeb;
+}
+
+div#applicationBar_topStroke {
+	background-color: #888888;
+}
+
+a.plain {
+	color: black;
+}
+
+
+p.nav_bar {
+	color: #cccccc;
+}
+h2.nav_bar {
+	color: #cccccc;
+}
+p.nav_bar a:link {
+	color: #cccccc;
+}
+p.nav_bar a:visited {
+	color: #cccccc;
+}
+p.nav_bar a:active {
+	color: #cccccc;
+}
+
+td.error {
+	background-color: #ffaaaa;
+}

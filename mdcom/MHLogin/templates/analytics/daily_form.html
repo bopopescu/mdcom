@@ -1,0 +1,8 @@
+{% load i18n %}
+<table border="1"><tr><td>
+<h2>{% trans "Change Day" %}</h2>
+<form method="POST" action=".">
+	{{ change_form.as_p }}
+	<input type="submit" value='{% trans "Change" %}' />
+</form>
+</td></tr></table>

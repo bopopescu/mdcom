@@ -1,0 +1,18 @@
+
+{% extends "public_base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{% trans "Password change complete" %}{% endblock %}
+
+{% block content %}
+
+<p>
+{% trans "Password successfully reset!" %}
+<br/><br/>
+{% trans "Your new password can be used on the " %}
+<a href="{% url 'MHLogin.MHLogin_Main.views.login_user' %}">{% trans "login page" %}</a>
+{% trans "by clicking 'Sign In'." %}
+</p>
+
+{% endblock %}
