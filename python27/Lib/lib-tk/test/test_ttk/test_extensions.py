@@ -49,13 +49,13 @@ class LabeledScaleTest(unittest.TestCase):
 
 
     def test_initialization(self):
-        # master passing
+        # main passing
         x = ttk.LabeledScale()
-        self.assertEqual(x.master, Tkinter._default_root)
+        self.assertEqual(x.main, Tkinter._default_root)
         x.destroy()
-        master = Tkinter.Frame()
-        x = ttk.LabeledScale(master)
-        self.assertEqual(x.master, master)
+        main = Tkinter.Frame()
+        x = ttk.LabeledScale(main)
+        self.assertEqual(x.main, main)
         x.destroy()
 
         # variable initialization/passing
@@ -166,17 +166,17 @@ class LabeledScaleTest(unittest.TestCase):
         x.wait_visibility()
         x.update()
 
-        width, height = x.master.winfo_width(), x.master.winfo_height()
+        width, height = x.main.winfo_width(), x.main.winfo_height()
         width_new, height_new = width * 2, height * 2
 
         x.value = 3
         x.update()
-        x.master.wm_geometry("%dx%d" % (width_new, height_new))
+        x.main.wm_geometry("%dx%d" % (width_new, height_new))
         self.assertEqual(int(x.label.place_info()['x']),
             x.scale.coords()[0])
 
         # Reset geometry
-        x.master.wm_geometry("%dx%d" % (width, height))
+        x.main.wm_geometry("%dx%d" % (width, height))
         x.destroy()
 
 

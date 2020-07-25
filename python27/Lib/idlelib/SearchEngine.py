@@ -84,7 +84,7 @@ class SearchEngine:
         if col >= 0:
             msg = msg + "\nOffset: " + str(col)
         tkMessageBox.showerror("Regular expression error",
-                               msg, master=self.root)
+                               msg, main=self.root)
 
     def setcookedpat(self, pat):
         if self.isre():

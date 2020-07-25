@@ -10,7 +10,7 @@ def get_tk_root():
         root = None
 
     if root is None:
-        # create a new master only if there isn't one already
+        # create a new main only if there isn't one already
         root = Tkinter.Tk()
 
     return root

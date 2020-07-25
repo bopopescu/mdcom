@@ -645,7 +645,7 @@ class EditorWindow(object):
             tkMessageBox.showerror(
                 "No filename",
                 "This buffer has no associated filename",
-                master=self.text)
+                main=self.text)
             self.text.focus_set()
             return None
         head, tail = os.path.split(filename)
@@ -1089,7 +1089,7 @@ class EditorWindow(object):
     def get_var_obj(self, name, vartype=None):
         var = self.tkinter_vars.get(name)
         if not var and vartype:
-            # create a Tkinter variable object with self.text as master:
+            # create a Tkinter variable object with self.text as main:
             self.tkinter_vars[name] = var = vartype(self.text)
         return var
 
@@ -1135,7 +1135,7 @@ class EditorWindow(object):
         text = self.text
         if self.get_tabwidth() != newtabwidth:
             pixels = text.tk.call("font", "measure", text["font"],
-                                  "-displayof", text.master,
+                                  "-displayof", text.main,
                                   "n" * newtabwidth)
             text.configure(tabs=pixels)
 

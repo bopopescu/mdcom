@@ -959,9 +959,9 @@ class TreeviewTest(unittest.TestCase):
                 "invoked.")
 
         success = []
-        commands = self.tv.master._tclCommands
+        commands = self.tv.main._tclCommands
         self.tv.heading('#0', command=str(self.tv.heading('#0', command=None)))
-        self.assertEqual(commands, self.tv.master._tclCommands)
+        self.assertEqual(commands, self.tv.main._tclCommands)
         simulate_heading_click(5, 5)
         if not success:
             self.fail("The command associated to the treeview heading wasn't "

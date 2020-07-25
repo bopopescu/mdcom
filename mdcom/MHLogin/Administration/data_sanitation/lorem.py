@@ -1705,7 +1705,7 @@ then the bird said nevermore
 
 startled at the stillness broken by reply so aptly spoken
 doubtless said i what it utters is its only stock and store
-caught from some unhappy master whom unmerciful disaster
+caught from some unhappy main whom unmerciful disaster
 followed fast and followed faster till his songs one burden bore
 till the dirges of his hope that melancholy burden bore
 of nevernevermore 

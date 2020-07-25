@@ -1,14 +1,14 @@
 import unittest
 import Tkinter
 from test.test_support import requires, run_unittest
-from ttk import setup_master
+from ttk import setup_main
 
 requires('gui')
 
 class TextTest(unittest.TestCase):
 
     def setUp(self):
-        self.root = setup_master()
+        self.root = setup_main()
         self.text = Tkinter.Text(self.root)
 
     def tearDown(self):

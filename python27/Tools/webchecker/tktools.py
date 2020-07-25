@@ -13,7 +13,7 @@ def install_keybindings(root):
     root.bind_class('Entry', '<Control-u>', _clear_entry_widget)
 
 
-def make_toplevel(master, title=None, class_=None):
+def make_toplevel(main, title=None, class_=None):
     """Create a Toplevel widget.
 
     This is a shortcut for a Toplevel() instantiation plus calls to
@@ -22,16 +22,16 @@ def make_toplevel(master, title=None, class_=None):
     """
 
     if class_:
-        widget = Toplevel(master, class_=class_)
+        widget = Toplevel(main, class_=class_)
     else:
-        widget = Toplevel(master)
+        widget = Toplevel(main)
     if title:
         widget.title(title)
         widget.iconname(title)
     return widget
 
-def set_transient(widget, master, relx=0.5, rely=0.3, expose=1):
-    """Make an existing toplevel widget transient for a master.
+def set_transient(widget, main, relx=0.5, rely=0.3, expose=1):
+    """Make an existing toplevel widget transient for a main.
 
     The widget must exist but should not yet have been placed; in
     other words, this should be called after creating all the
@@ -39,16 +39,16 @@ def set_transient(widget, master, relx=0.5, rely=0.3, expose=1):
     """
 
     widget.withdraw() # Remain invisible while we figure out the geometry
-    widget.transient(master)
+    widget.transient(main)
     widget.update_idletasks() # Actualize geometry information
-    if master.winfo_ismapped():
-        m_width = master.winfo_width()
-        m_height = master.winfo_height()
-        m_x = master.winfo_rootx()
-        m_y = master.winfo_rooty()
+    if main.winfo_ismapped():
+        m_width = main.winfo_width()
+        m_height = main.winfo_height()
+        m_x = main.winfo_rootx()
+        m_y = main.winfo_rooty()
     else:
-        m_width = master.winfo_screenwidth()
-        m_height = master.winfo_screenheight()
+        m_width = main.winfo_screenwidth()
+        m_height = main.winfo_screenheight()
         m_x = m_y = 0
     w_width = widget.winfo_reqwidth()
     w_height = widget.winfo_reqheight()
@@ -275,15 +275,15 @@ def make_labeled_form_entry(parent, label, entrywidth=20, entryheight=1,
     return entry, frame, label
 
 
-def make_double_frame(master=None, class_=None, name=None, relief=RAISED,
+def make_double_frame(main=None, class_=None, name=None, relief=RAISED,
                       borderwidth=1):
     """Create a pair of frames suitable for 'hosting' a dialog."""
     if name:
-        if class_: frame = Frame(master, class_=class_, name=name)
-        else: frame = Frame(master, name=name)
+        if class_: frame = Frame(main, class_=class_, name=name)
+        else: frame = Frame(main, name=name)
     else:
-        if class_: frame = Frame(master, class_=class_)
-        else: frame = Frame(master)
+        if class_: frame = Frame(main, class_=class_)
+        else: frame = Frame(main)
     top = Frame(frame, name="topframe", relief=relief,
                 borderwidth=borderwidth)
     bottom = Frame(frame, name="bottomframe")
@@ -296,7 +296,7 @@ def make_double_frame(master=None, class_=None, name=None, relief=RAISED,
     return frame, top, bottom
 
 
-def make_group_frame(master, name=None, label=None, fill=Y,
+def make_group_frame(main, name=None, label=None, fill=Y,
                      side=None, expand=None, font=None):
     """Create nested frames with a border and optional label.
 
@@ -307,11 +307,11 @@ def make_group_frame(master, name=None, label=None, fill=Y,
 
     """
     font = font or "-*-helvetica-medium-r-normal-*-*-100-*-*-*-*-*-*"
-    outer = Frame(master, borderwidth=2, relief=GROOVE)
+    outer = Frame(main, borderwidth=2, relief=GROOVE)
     outer.pack(expand=expand, fill=fill, side=side)
     if label:
         Label(outer, text=label, font=font, anchor=W).pack(fill=X)
-    inner = Frame(master, borderwidth='1m', name=name)
+    inner = Frame(main, borderwidth='1m', name=name)
     inner.pack(expand=1, fill=BOTH, in_=outer)
     inner.forget = outer.forget
     return inner
